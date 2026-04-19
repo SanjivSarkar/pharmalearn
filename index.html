@@ -15,6 +15,8 @@
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <!-- Content registry (must be first) -->
   <script src="js/content.js"></script>
@@ -38,79 +40,162 @@
 <div id="reading-bar" class="reading-progress-bar" style="width:0%"></div>
 
 <!-- ═══════════════════════════════════════════════════════
-     ACCESS REQUEST GATE
+     ACCESS GATE — Two-panel premium design
 ═══════════════════════════════════════════════════════ -->
-<div x-show="showOtpGate" class="fixed inset-0 z-[300] flex items-center justify-center p-4"
-     style="background:rgba(8,8,20,0.96);backdrop-filter:blur(20px);">
-  <div style="width:100%;max-width:440px;background:var(--bg-elevated);border:1px solid rgba(99,102,241,0.35);border-radius:20px;padding:40px;box-shadow:0 32px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04);animation:fadeUp .35s ease">
+<div x-show="showAccessGate" x-cloak class="auth-gate">
 
-    <!-- PAL Logo + branding -->
-    <div style="text-align:center;margin-bottom:32px">
-      <div style="display:inline-block;margin-bottom:18px">
-        <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- LEFT PANEL — brand / features -->
+  <div class="auth-panel-left">
+    <div class="auth-left-inner">
+
+      <!-- Logo -->
+      <div class="auth-logo-block">
+        <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="palg-gate" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#6366f1"/>
-              <stop offset="0.5" stop-color="#8b5cf6"/>
-              <stop offset="1" stop-color="#06b6d4"/>
+            <linearGradient id="palg-al" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#818cf8"/>
+              <stop offset="0.5" stop-color="#a78bfa"/>
+              <stop offset="1" stop-color="#38bdf8"/>
             </linearGradient>
           </defs>
-          <rect width="64" height="64" rx="18" fill="url(#palg-gate)"/>
-          <circle cx="52" cy="14" r="5" fill="rgba(255,255,255,0.18)"/>
-          <circle cx="14" cy="52" r="4" fill="rgba(255,255,255,0.14)"/>
-          <circle cx="48" cy="50" r="2.5" fill="rgba(255,255,255,0.12)"/>
-          <text x="32" y="41" text-anchor="middle" fill="white" font-size="22" font-weight="900"
-            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-1">PAL</text>
+          <rect width="52" height="52" rx="15" fill="url(#palg-al)"/>
+          <circle cx="42" cy="10" r="4" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="10" cy="42" r="3" fill="rgba(255,255,255,0.16)"/>
+          <circle cx="40" cy="40" r="2" fill="rgba(255,255,255,0.12)"/>
+          <text x="26" y="33" text-anchor="middle" fill="white" font-size="17" font-weight="900"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-0.5">PAL</text>
         </svg>
+        <div class="auth-logo-text">
+          <span class="auth-logo-title">PAL</span>
+          <span class="auth-logo-sub">Pharma Analytics Library</span>
+        </div>
       </div>
-      <h1 style="font-size:1.5rem;font-weight:800;color:var(--text-primary);margin-bottom:4px;letter-spacing:-.4px">Pharma Analytics Library</h1>
-      <p style="color:var(--text-secondary);font-size:13px;line-height:1.5">Request access to the definitive pharma analytics learning platform</p>
+
+      <!-- Headline -->
+      <div class="auth-headline">
+        <h1>The definitive pharma analytics learning platform</h1>
+        <p>Master the full spectrum — from molecule to market, data science to decision science.</p>
+      </div>
+
+      <!-- Features -->
+      <div class="auth-features">
+        <div class="auth-feature-row">
+          <span class="auth-feature-dot" style="background:#6366f1"></span>
+          <span class="auth-feature-text">52 chapters across 6 expert-curated domains</span>
+        </div>
+        <div class="auth-feature-row">
+          <span class="auth-feature-dot" style="background:#8b5cf6"></span>
+          <span class="auth-feature-text">Commercial analytics, market access &amp; pricing</span>
+        </div>
+        <div class="auth-feature-row">
+          <span class="auth-feature-dot" style="background:#0ea5e9"></span>
+          <span class="auth-feature-text">Real-world evidence &amp; medical affairs</span>
+        </div>
+        <div class="auth-feature-row">
+          <span class="auth-feature-dot" style="background:#10b981"></span>
+          <span class="auth-feature-text">Data science, ML, and pharma data engineering</span>
+        </div>
+        <div class="auth-feature-row">
+          <span class="auth-feature-dot" style="background:#f59e0b"></span>
+          <span class="auth-feature-text">Interactive quizzes, XP system &amp; learning roadmap</span>
+        </div>
+      </div>
+
+      <!-- Footer quote -->
+      <p class="auth-left-footer">"Built by practitioners, for practitioners."</p>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL — form / states -->
+  <div class="auth-panel-right">
+
+    <!-- Mobile logo (only shown on small screens) -->
+    <div class="auth-mobile-logo">
+      <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="palg-mob" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6366f1"/>
+            <stop offset="1" stop-color="#06b6d4"/>
+          </linearGradient>
+        </defs>
+        <rect width="36" height="36" rx="10" fill="url(#palg-mob)"/>
+        <text x="18" y="24" text-anchor="middle" fill="white" font-size="12" font-weight="900"
+          font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-0.5">PAL</text>
+      </svg>
+      <span style="font-weight:800;font-size:16px;color:var(--text-primary)">Pharma Analytics Library</span>
     </div>
 
-    <!-- Request form -->
-    <div x-show="!accessSent">
-      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px">
+    <!-- ── STATE: FORM ─────────────────────────────── -->
+    <div x-show="accessStep === 'form'">
+      <h2 class="auth-panel-title">Request Access</h2>
+      <p class="auth-panel-sub">Fill in your details — the admin will send you a magic link.</p>
+
+      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:20px">
         <div>
-          <label class="label-sm">Full Name</label>
+          <label class="auth-label">Full Name</label>
           <input x-model="accessName" type="text" placeholder="e.g. Sarah Chen"
-            class="search-input" style="width:100%" @keyup.enter="requestAccess()">
+            class="auth-input" @keyup.enter="requestAccess()">
         </div>
         <div>
-          <label class="label-sm">Email Address</label>
-          <input x-model="accessEmail" type="email" placeholder="your@company.com"
-            class="search-input" style="width:100%" @keyup.enter="requestAccess()">
+          <label class="auth-label">Work Email</label>
+          <input x-model="accessEmail" type="email" placeholder="you@company.com"
+            class="auth-input" @keyup.enter="requestAccess()">
         </div>
         <div>
-          <label class="label-sm" style="display:flex;align-items:center;gap:6px">
+          <label class="auth-label" style="display:flex;align-items:center;gap:6px">
             Organization
             <span style="font-size:10px;color:var(--text-muted);font-weight:400;text-transform:none;letter-spacing:0">optional</span>
           </label>
-          <input x-model="accessOrg" type="text" placeholder="e.g. Pfizer, BCG, Novartis"
-            class="search-input" style="width:100%" @keyup.enter="requestAccess()">
+          <input x-model="accessOrg" type="text" placeholder="e.g. Pfizer, IQVIA, BCG"
+            class="auth-input" @keyup.enter="requestAccess()">
         </div>
       </div>
-      <div x-show="accessError" x-text="accessError"
-        style="color:#f87171;font-size:12px;margin-bottom:14px;padding:10px 14px;background:rgba(239,68,68,0.08);border-radius:8px;border:1px solid rgba(239,68,68,0.2)"></div>
-      <button @click="requestAccess()" :disabled="accessLoading" class="btn btn-primary" style="width:100%;height:44px;font-size:14px;font-weight:600">
-        <span x-text="accessLoading ? 'Opening email…' : 'Request Access →'"></span>
+
+      <div x-show="accessError" x-text="accessError" class="auth-error-msg"></div>
+
+      <button @click="requestAccess()" :disabled="accessLoading" class="auth-cta">
+        <span x-show="!accessLoading">Request Access →</span>
+        <span x-show="accessLoading" style="display:flex;align-items:center;gap:8px">
+          <span class="auth-spinner"></span> Sending…
+        </span>
       </button>
-      <p style="text-align:center;margin-top:14px;font-size:11px;color:var(--text-muted);line-height:1.6">
-        Access is approved by <strong style="color:var(--text-secondary)">sanjivkumarsarkar@gmail.com</strong><br>
-        Your email client will open to send the request
+
+      <p class="auth-footnote">
+        Reviewed by <strong style="color:var(--text-secondary)">sanjivkumarsarkar@gmail.com</strong>.
+        You'll receive a personalised access link by email.
       </p>
     </div>
 
-    <!-- Success state -->
-    <div x-show="accessSent" style="text-align:center">
-      <div style="width:56px;height:56px;border-radius:50%;background:rgba(16,185,129,0.15);border:2px solid #10b981;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:22px">✓</div>
-      <h3 style="font-size:1.15rem;font-weight:700;color:var(--text-primary);margin-bottom:8px">Request Sent!</h3>
-      <p style="color:var(--text-secondary);font-size:13px;margin-bottom:28px;line-height:1.6">
-        Your request was sent to the admin via email. You'll hear back at
-        <strong x-text="accessEmail" style="color:var(--text-primary)"></strong>.
+    <!-- ── STATE: PENDING ─────────────────────────── -->
+    <div x-show="accessStep === 'pending'" style="text-align:center">
+      <div class="auth-pending-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
+      <h3 style="font-size:1.2rem;font-weight:800;color:var(--text-primary);margin-bottom:8px">Request Submitted</h3>
+      <p style="color:var(--text-secondary);font-size:13px;line-height:1.65;margin-bottom:24px">
+        Your request is pending admin approval. Once approved, you'll receive a magic link at:
       </p>
-      <button @click="enterPlatform()" class="btn btn-primary" style="width:100%;height:44px;font-size:14px;font-weight:600">
-        Enter PAL →
+      <div class="auth-email-badge" x-text="accessEmail"></div>
+      <div class="auth-info-box">
+        <strong style="color:var(--text-primary)">What happens next?</strong><br>
+        The admin reviews requests daily and will email you a one-click access link. Check your inbox (and spam folder).
+      </div>
+      <button @click="resetAccessRequest()" class="auth-cta" style="background:transparent;border:1px solid var(--border);color:var(--text-secondary);margin-top:8px">
+        ← Submit a different request
       </button>
+    </div>
+
+    <!-- ── STATE: VERIFYING ───────────────────────── -->
+    <div x-show="accessStep === 'verifying'" style="text-align:center;padding:20px 0">
+      <div style="display:flex;justify-content:center;margin-bottom:24px">
+        <div style="width:40px;height:40px;border:3px solid rgba(99,102,241,.2);border-top-color:#6366f1;border-radius:50%;animation:spin .8s linear infinite"></div>
+      </div>
+      <h3 style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:8px">Verifying your access link…</h3>
+      <p style="color:var(--text-muted);font-size:13px">This takes just a moment.</p>
+      <div x-show="accessError" x-text="accessError" class="auth-error-msg" style="margin-top:16px;text-align:left"></div>
     </div>
 
   </div>
@@ -411,17 +496,13 @@
           </div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <template x-for="(item, i) in pharmaNews" :key="i">
-              <a :href="item.url" target="_blank" rel="noopener"
-                style="text-decoration:none;display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:12px;border:1px solid var(--border);background:var(--bg-elevated);transition:all .15s;cursor:pointer"
-                @mouseenter="$el.style.borderColor='var(--accent)';$el.style.background='var(--accent-dim)'"
-                @mouseleave="$el.style.borderColor='var(--border)';$el.style.background='var(--bg-elevated)'">
-                <div style="width:26px;height:26px;border-radius:6px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent);flex-shrink:0"
-                  x-text="i+1"></div>
+              <a :href="item.url" target="_blank" rel="noopener" class="news-item">
+                <span class="news-rank" x-text="(i+1).toString().padStart(2,'0')"></span>
                 <div style="flex:1;min-width:0">
-                  <div style="font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical" x-text="item.title"></div>
-                  <div style="font-size:11px;color:var(--text-muted);margin-top:3px" x-text="item.source + ' · ' + item.date"></div>
+                  <div class="news-title" x-text="item.title"></div>
+                  <div class="news-meta" x-text="item.source + ' · ' + item.date"></div>
                 </div>
-                <span style="font-size:13px;color:var(--text-muted);flex-shrink:0">↗</span>
+                <span style="font-size:13px;color:var(--text-muted);flex-shrink:0;padding-top:2px">↗</span>
               </a>
             </template>
           </div>

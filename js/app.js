@@ -1,6 +1,56 @@
-// PharmaLearn — Application Logic
+// PAL — Pharma Analytics Library
 (function() {
   'use strict';
+
+  // ─── Auth Config (update these for EmailJS) ───────────────────────────────
+  // Sign up free at emailjs.com → create a Gmail service → create a template
+  // Template variables: requester_name, requester_email, requester_org,
+  //   request_time, approval_url, mailto_approval
+  const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz456'
+  const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // from EmailJS Account → API Keys
+  const ADMIN_SECRET = 'PAL-HMAC-SECRET-2025';     // change to something private
+
+  // ─── HMAC token helpers (Web Crypto API) ─────────────────────────────────
+  async function makeHmacKey() {
+    return crypto.subtle.importKey(
+      'raw', new TextEncoder().encode(ADMIN_SECRET),
+      { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']
+    );
+  }
+  function toHex(buf) {
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+  function b64url(str) {
+    return btoa(str).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  }
+  function fromb64url(str) {
+    const pad = (4 - str.length % 4) % 4;
+    return atob(str.replace(/-/g,'+').replace(/_/g,'/') + '='.repeat(pad));
+  }
+
+  async function generateApprovalToken(email, name) {
+    const payload = JSON.stringify({ email, name, ts: Date.now() });
+    const key = await makeHmacKey();
+    const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+    return b64url(payload) + '.' + toHex(sig);
+  }
+
+  async function validateApprovalToken(token) {
+    try {
+      const dot = token.indexOf('.');
+      if (dot === -1) return null;
+      const payloadB64 = token.slice(0, dot);
+      const sigHex     = token.slice(dot + 1);
+      const payload = fromb64url(payloadB64);
+      const data = JSON.parse(payload);
+      if (Date.now() - data.ts > 7 * 24 * 60 * 60 * 1000) return null; // 7-day expiry
+      const key = await makeHmacKey();
+      const expectedSig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+      if (toHex(expectedSig) !== sigHex) return null;
+      return data;
+    } catch(e) { return null; }
+  }
 
   // ─── Storage Helpers ──────────────────────────────────────────────────────
   const store = {
@@ -116,11 +166,11 @@
 
     toast: { show: false, msg: '', type: 'success' },
 
-    showOtpGate: false,
+    showAccessGate: false,
+    accessStep: 'form',   // 'form' | 'pending' | 'verifying'
     accessName: '',
     accessEmail: '',
     accessOrg: '',
-    accessSent: false,
     accessError: '',
     accessLoading: false,
 
@@ -129,20 +179,85 @@
 
     expandedStage: null,
 
-    init() {
+    async init() {
       initProgress();
       this.applyTheme();
-      const otpVerified = store.get('otp_verified', false);
-      if (!otpVerified) {
-        this.showOtpGate = true;
-      } else {
+
+      // ── Handle magic approval link in URL ────────────────────
+      const hash = window.location.hash;
+      if (hash.startsWith('#/auth/')) {
+        this.showAccessGate = true;
+        this.accessStep = 'verifying';
+        const token = hash.slice(7);
+        const result = await validateApprovalToken(token);
+        if (result) {
+          store.set('otp_verified', true);
+          store.set('access_info', result);
+          store.set('access_requested', null);
+          this.showAccessGate = false;
+          this.onboardData.name = result.name || '';
+          window.location.hash = '/home';
+          const user = store.get('user', null);
+          if (!user || !user.name || user.name === 'Learner') {
+            this.showOnboarding = true;
+          }
+          this.showToast('Access granted — welcome to PAL!', 'success');
+        } else {
+          this.accessStep = 'form';
+          this.accessError = 'This access link is invalid or has expired. Please request access again.';
+          window.location.hash = '/home';
+        }
+        this._boot();
+        return;
+      }
+
+      // ── Normal page load ─────────────────────────────────────
+      const verified = store.get('otp_verified', false);
+      if (verified) {
         const user = store.get('user', null);
         if (!user || !user.name || user.name === 'Learner') {
           this.showOnboarding = true;
         }
+      } else {
+        const req = store.get('access_requested', null);
+        if (req && req.email) {
+          this.accessEmail = req.email;
+          this.accessName  = req.name || '';
+          this.accessStep  = 'pending';
+        } else {
+          this.accessStep  = 'form';
+        }
+        this.showAccessGate = true;
       }
+      this._boot();
+    },
+
+    _boot() {
       this.handleRoute();
-      window.addEventListener('hashchange', () => this.handleRoute());
+      window.addEventListener('hashchange', () => {
+        const h = window.location.hash;
+        if (h.startsWith('#/auth/') && !store.get('otp_verified', false)) {
+          const token = h.slice(7);
+          validateApprovalToken(token).then(result => {
+            if (result) {
+              store.set('otp_verified', true);
+              store.set('access_info', result);
+              store.set('access_requested', null);
+              this.showAccessGate = false;
+              window.location.hash = '/home';
+              this.handleRoute();
+              const user = store.get('user', null);
+              if (!user || !user.name || user.name === 'Learner') {
+                this.onboardData.name = result.name || '';
+                this.showOnboarding = true;
+              }
+              this.showToast('Access granted — welcome to PAL!', 'success');
+            }
+          });
+        } else {
+          this.handleRoute();
+        }
+      });
       window.addEventListener('resize', () => {
         if (window.innerWidth <= 1024) this.sidebarOpen = false;
       });
@@ -427,74 +542,115 @@
     },
 
     // ─── Access Request Gate ──────────────────────────────────────────────────
-    requestAccess() {
+    async requestAccess() {
       const name = this.accessName.trim();
       const email = this.accessEmail.trim();
       if (!name) { this.accessError = 'Please enter your full name'; return; }
       if (!email || !email.includes('@') || !email.includes('.')) {
-        this.accessError = 'Please enter a valid email address';
-        return;
+        this.accessError = 'Please enter a valid email address'; return;
       }
       this.accessLoading = true;
       this.accessError = '';
 
-      // Compose and open mailto to notify admin
-      const sub = encodeURIComponent('PAL Access Request — ' + name);
-      const body = encodeURIComponent(
-        'New access request for Pharma Analytics Library (PAL):\n\n' +
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Organization: ' + (this.accessOrg.trim() || '—') + '\n' +
-        'Time: ' + new Date().toLocaleString() + '\n\n' +
-        '---\nReply to this email to grant access.'
+      // Generate HMAC-signed approval token
+      const token = await generateApprovalToken(email, name);
+      const approvalUrl = window.location.origin + window.location.pathname + '#/auth/' + token;
+
+      // Pre-compose the approval mailto (admin forwards to user)
+      const approvalMailBody = encodeURIComponent(
+        'Hi ' + name + ',\n\n' +
+        'Your access to Pharma Analytics Library (PAL) has been approved.\n\n' +
+        'Click the link below to enter:\n\n' + approvalUrl + '\n\n' +
+        'This link expires in 7 days.\n\nBest,\nPAL Admin'
       );
-      window.open('mailto:sanjivkumarsarkar@gmail.com?subject=' + sub + '&body=' + body, '_blank');
+      const approvalMailto = 'mailto:' + email +
+        '?subject=' + encodeURIComponent('Your PAL access has been approved') +
+        '&body=' + approvalMailBody;
 
-      store.set('access_info', { name, email, org: this.accessOrg.trim(), ts: Date.now() });
-      this.accessLoading = false;
-      this.accessSent = true;
-    },
-
-    enterPlatform() {
-      store.set('otp_verified', true);
-      this.showOtpGate = false;
-      if (this.accessName) this.onboardData.name = this.accessName;
-      const user = store.get('user', null);
-      if (!user || !user.name || user.name === 'Learner') {
-        this.showOnboarding = true;
+      // ── Try EmailJS first ─────────────────────────────────────
+      let sent = false;
+      if (typeof emailjs !== 'undefined' && EMAILJS_SERVICE_ID !== 'YOUR_SERVICE_ID') {
+        try {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            requester_name:  name,
+            requester_email: email,
+            requester_org:   this.accessOrg.trim() || 'Not specified',
+            request_time:    new Date().toLocaleString(),
+            approval_url:    approvalUrl,
+            mailto_approval: approvalMailto
+          }, EMAILJS_PUBLIC_KEY);
+          sent = true;
+        } catch(e) { /* fall through to mailto */ }
       }
-      this.showToast('Welcome to PAL — Pharma Analytics Library!', 'success');
+
+      // ── Fallback: open admin mailto directly ──────────────────
+      if (!sent) {
+        const adminSub  = encodeURIComponent('PAL Access Request — ' + name);
+        const adminBody = encodeURIComponent(
+          'New PAL (Pharma Analytics Library) access request:\n\n' +
+          'Name: ' + name + '\nEmail: ' + email +
+          '\nOrg: ' + (this.accessOrg.trim() || '—') +
+          '\nTime: ' + new Date().toLocaleString() +
+          '\n\n━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+          'TO APPROVE — forward the link below to the user\'s email (' + email + '):\n\n' +
+          approvalUrl + '\n\n' +
+          '(Or click Send on the pre-composed email below)\n' +
+          approvalMailto + '\n\n' +
+          '━━━━━━━━━━━━━━━━━━━━━━━━\nThis link expires in 7 days.'
+        );
+        window.open(
+          'mailto:sanjivkumarsarkar@gmail.com?subject=' + adminSub + '&body=' + adminBody,
+          '_blank'
+        );
+      }
+
+      store.set('access_requested', { name, email, org: this.accessOrg.trim(), ts: Date.now() });
+      this.accessLoading = false;
+      this.accessStep = 'pending';
     },
 
-    // ─── Pharma News ─────────────────────────────────────────────────────────
+    resetAccessRequest() {
+      store.set('access_requested', null);
+      this.accessStep  = 'form';
+      this.accessError = '';
+      this.accessName  = '';
+      this.accessEmail = '';
+      this.accessOrg   = '';
+    },
+
+    // ─── Pharma News — Google News RSS via allorigins proxy ──────────────────
     async fetchNews() {
       this.newsLoading = true;
-      const feeds = [
-        { url: 'https://endpts.com/feed/', name: 'Endpoints News' },
-        { url: 'https://www.statnews.com/feed/', name: 'STAT News' },
-        { url: 'https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/pressannouncements/rss.xml', name: 'FDA News' },
-        { url: 'https://www.fiercepharma.com/rss/xml', name: 'FiercePharma' },
-      ];
-      for (const feed of feeds) {
-        try {
-          const controller = new AbortController();
-          const tId = setTimeout(() => controller.abort(), 7000);
-          const url = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed.url) + '&count=5';
-          const res = await fetch(url, { signal: controller.signal });
-          clearTimeout(tId);
-          if (!res.ok) continue;
-          const data = await res.json();
-          if (data.status === 'ok' && data.items && data.items.length > 0) {
-            this.pharmaNews = data.items.slice(0, 5).map(item => ({
-              title: (item.title || '').trim(),
-              url: item.link || '#',
-              date: item.pubDate ? new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '',
-              source: feed.name
-            }));
-            break;
-          }
-        } catch(e) { /* try next feed */ }
-      }
+      try {
+        const feedUrl = 'https://news.google.com/rss/search' +
+          '?q=pharmaceutical+drug+approval+FDA+biotech' +
+          '&hl=en-US&gl=US&ceid=US:en';
+        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(feedUrl);
+        const controller = new AbortController();
+        const tId = setTimeout(() => controller.abort(), 9000);
+        const res = await fetch(proxyUrl, { signal: controller.signal });
+        clearTimeout(tId);
+        if (!res.ok) throw new Error('proxy err');
+        const json = await res.json();
+        if (!json.contents) throw new Error('no content');
+        const xml = new DOMParser().parseFromString(json.contents, 'text/xml');
+        const items = [...xml.querySelectorAll('item')].slice(0, 5);
+        this.pharmaNews = items.map(item => {
+          const raw   = (item.querySelector('title')?.textContent || '').trim();
+          const link  = (item.querySelector('link')?.textContent || '#').trim();
+          const pub   = item.querySelector('pubDate')?.textContent || '';
+          // Google News titles: "Article Title - Source Name"
+          const parts  = raw.split(' - ');
+          const source = parts.length > 1 ? parts.pop().trim() : 'Google News';
+          const title  = parts.join(' - ').trim();
+          return {
+            title,
+            url: link,
+            source,
+            date: pub ? new Date(pub).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''
+          };
+        }).filter(i => i.title);
+      } catch(e) { /* silently fail — UI shows empty state */ }
       this.newsLoading = false;
     },
 
