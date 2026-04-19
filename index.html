@@ -38,6 +38,57 @@
 <div id="reading-bar" class="reading-progress-bar" style="width:0%"></div>
 
 <!-- ═══════════════════════════════════════════════════════
+     OTP VERIFICATION GATE
+═══════════════════════════════════════════════════════ -->
+<div x-show="showOtpGate" class="fixed inset-0 z-[300] flex items-center justify-center p-4"
+     style="background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);">
+  <div class="card w-full max-w-sm p-8" style="border:1px solid var(--accent);animation:fadeUp .3s ease">
+
+    <div class="text-center mb-6">
+      <div style="font-size:48px;margin-bottom:12px">🧬</div>
+      <h2 class="gradient-text" style="font-size:1.6rem;font-weight:800;margin-bottom:6px">PharmaLearn</h2>
+      <p style="color:var(--text-secondary);font-size:13px">Verify your mobile number to get started</p>
+    </div>
+
+    <!-- Step 1: Phone number -->
+    <div x-show="otpStep===1">
+      <label class="label-sm">Mobile Number (with country code)</label>
+      <input x-model="otpPhone" type="tel" placeholder="+1 555 000 0000"
+        class="search-input" style="width:100%;margin-bottom:8px;font-size:14px"
+        @keyup.enter="sendOTP()">
+      <p style="font-size:11px;color:var(--text-muted);margin-bottom:16px">Include country code: +1 (US), +44 (UK), +91 (India)</p>
+      <div x-show="otpError" x-text="otpError" style="color:#ef4444;font-size:12px;margin-bottom:12px;line-height:1.4"></div>
+      <button @click="sendOTP()" :disabled="otpLoading" class="btn btn-primary" style="width:100%;margin-bottom:12px">
+        <span x-text="otpLoading ? 'Sending…' : 'Send Verification Code →'"></span>
+      </button>
+      <div style="text-align:center">
+        <button @click="skipOtp()"
+          style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--text-muted);text-decoration:underline">
+          Skip — explore in demo mode
+        </button>
+      </div>
+      <p style="text-align:center;margin-top:12px;font-size:10px;color:var(--text-muted)">SMS via Textbelt · Free tier: 1 message/day/IP</p>
+    </div>
+
+    <!-- Step 2: Code entry -->
+    <div x-show="otpStep===2">
+      <p style="color:var(--text-secondary);font-size:13px;margin-bottom:20px;line-height:1.5">
+        A 6-digit code was sent to <strong x-text="otpPhone"></strong>. Enter it below.
+      </p>
+      <label class="label-sm">Verification Code</label>
+      <input x-model="otpCode" type="text" inputmode="numeric" maxlength="6"
+        placeholder="000000" class="search-input"
+        style="width:100%;margin-bottom:16px;font-size:1.8rem;letter-spacing:10px;text-align:center;padding:12px"
+        @keyup.enter="verifyOTP()">
+      <div x-show="otpError" x-text="otpError" style="color:#ef4444;font-size:12px;margin-bottom:12px"></div>
+      <button @click="verifyOTP()" class="btn btn-primary" style="width:100%;margin-bottom:10px">Verify & Enter →</button>
+      <button @click="otpStep=1;otpCode='';otpError=''" class="btn btn-ghost" style="width:100%;font-size:12px">← Use different number</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
      ONBOARDING MODAL
 ═══════════════════════════════════════════════════════ -->
 <div x-show="showOnboarding" class="fixed inset-0 z-[200] flex items-center justify-center p-4"
@@ -139,6 +190,12 @@
         title="Library">
         <span class="nav-icon">📚</span>
         <span class="nav-label" x-show="sidebarOpen">Library</span>
+      </button>
+      <button @click="navigate('roadmap')"
+        :class="page==='roadmap'?'nav-item active':'nav-item'"
+        title="Roadmap">
+        <span class="nav-icon">⟶</span>
+        <span class="nav-label" x-show="sidebarOpen">Roadmap</span>
       </button>
       <button @click="navigate('search')"
         :class="page==='search'?'nav-item active':'nav-item'"
@@ -281,6 +338,40 @@
             </div>
           </div>
         </template>
+
+        <!-- Pharma News -->
+        <div style="margin-bottom:32px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+            <h2 class="section-heading" style="margin-bottom:0">Today in Pharma</h2>
+            <div style="display:flex;align-items:center;gap:8px">
+              <div x-show="newsLoading" style="font-size:11px;color:var(--text-muted)">Loading…</div>
+              <button x-show="!newsLoading" @click="fetchNews()"
+                style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--text-muted);padding:4px 8px;border-radius:6px"
+                @mouseenter="$el.style.color='var(--accent)'" @mouseleave="$el.style.color='var(--text-muted)'">↻ Refresh</button>
+            </div>
+          </div>
+          <div x-show="!pharmaNews.length && !newsLoading"
+            style="color:var(--text-muted);font-size:13px;padding:20px;text-align:center;border:1px dashed var(--border);border-radius:12px">
+            News unavailable.
+            <button @click="fetchNews()" style="color:var(--accent);background:none;border:none;cursor:pointer;font-size:13px">Retry</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <template x-for="(item, i) in pharmaNews" :key="i">
+              <a :href="item.url" target="_blank" rel="noopener"
+                style="text-decoration:none;display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:12px;border:1px solid var(--border);background:var(--bg-elevated);transition:all .15s;cursor:pointer"
+                @mouseenter="$el.style.borderColor='var(--accent)';$el.style.background='var(--accent-dim)'"
+                @mouseleave="$el.style.borderColor='var(--border)';$el.style.background='var(--bg-elevated)'">
+                <div style="width:26px;height:26px;border-radius:6px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent);flex-shrink:0"
+                  x-text="i+1"></div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical" x-text="item.title"></div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:3px" x-text="item.source + ' · ' + item.date"></div>
+                </div>
+                <span style="font-size:13px;color:var(--text-muted);flex-shrink:0">↗</span>
+              </a>
+            </template>
+          </div>
+        </div>
 
         <!-- Domain cards -->
         <h2 class="section-heading">All Domains</h2>
@@ -737,6 +828,122 @@
             </div>
           </div>
         </template>
+
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           ROADMAP
+      ══════════════════════════════════════════ -->
+      <div x-show="page==='roadmap'">
+        <h1 style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:6px">Learning Roadmap</h1>
+        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:28px">The end-to-end pharma analytics journey — from molecule to market, powered by data. Click any stage to explore chapters.</p>
+
+        <!-- Pipeline title -->
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+          <div style="height:2px;flex:1;background:linear-gradient(to right,#6366f1,#0ea5e9,#10b981,#f59e0b,#6366f1)"></div>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);white-space:nowrap">Drug Development Pipeline</span>
+          <div style="height:2px;flex:1;background:linear-gradient(to left,#6366f1,#0ea5e9,#10b981,#f59e0b,#6366f1)"></div>
+        </div>
+
+        <!-- Vertical timeline -->
+        <div style="position:relative;padding-left:44px;margin-bottom:40px">
+          <!-- Timeline spine -->
+          <div style="position:absolute;left:15px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,#6366f1 0%,#8b5cf6 20%,#0ea5e9 40%,#10b981 60%,#f59e0b 80%,#6366f1 100%)"></div>
+
+          <template x-for="(stage, idx) in roadmapStages" :key="stage.id">
+            <div style="margin-bottom:16px;position:relative">
+              <!-- Timeline node dot -->
+              <div style="position:absolute;left:-35px;top:16px;width:14px;height:14px;border-radius:50%;border:2.5px solid"
+                :style="`border-color:${stage.color};background:var(--bg-base);box-shadow:0 0 0 3px ${stage.color}30`"></div>
+
+              <!-- Stage card -->
+              <div class="card" @click="expandedStage = expandedStage===stage.id ? null : stage.id"
+                style="cursor:pointer;transition:all .15s"
+                :style="expandedStage===stage.id ? `border-color:${stage.color}` : ''"
+                @mouseenter="$el.style.borderColor=stage.color" @mouseleave="$el.style.borderColor=expandedStage===stage.id?stage.color:'var(--border)'">
+                <div style="display:flex;align-items:center;gap:14px">
+                  <div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0"
+                    :style="`background:${stage.color}20`" x-text="stage.icon"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:14px;font-weight:700;color:var(--text-primary)" x-text="stage.label"></div>
+                    <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;line-height:1.4" x-text="stage.desc"></div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+                    <span style="font-size:11px;font-weight:600;padding:3px 9px;border-radius:12px;white-space:nowrap"
+                      :style="`background:${stage.color}20;color:${stage.color}`"
+                      x-text="stage.chapters.length + (stage.chapters.length===1?' chapter':' chapters')"></span>
+                    <span style="font-size:16px;color:var(--text-muted);transition:transform .2s;display:inline-block"
+                      :style="expandedStage===stage.id?'transform:rotate(90deg)':''">›</span>
+                  </div>
+                </div>
+
+                <!-- Expanded chapters list -->
+                <div x-show="expandedStage===stage.id" x-transition
+                  style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+                  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px">
+                    <template x-for="cid in stage.chapters" :key="cid">
+                      <template x-if="getChapter(cid)">
+                        <div @click.stop="navigate('chapter', cid)"
+                          style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;border:1px solid var(--border);cursor:pointer;background:var(--bg-elevated);transition:all .15s"
+                          @mouseenter="$el.style.borderColor=stage.color;$el.style.background=stage.color+'15'"
+                          @mouseleave="$el.style.borderColor='var(--border)';$el.style.background='var(--bg-elevated)'">
+                          <span style="font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;flex-shrink:0"
+                            :style="`background:${stage.color}20;color:${stage.color}`" x-text="cid"></span>
+                          <span style="font-size:12px;font-weight:600;color:var(--text-primary);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+                            x-text="getChapter(cid).title"></span>
+                          <span style="font-size:14px;flex-shrink:0" :style="`color:${stage.color}`">→</span>
+                        </div>
+                      </template>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <!-- Enabling Capabilities -->
+        <div style="padding:24px;border-radius:16px;border:2px dashed var(--border);background:var(--bg-elevated)">
+          <h2 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);text-align:center;margin-bottom:20px">Enabling Capabilities — Foundation for All Stages</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+            <template x-for="enabler in roadmapEnablers" :key="enabler.label">
+              <div class="card" @click="expandedStage = expandedStage===enabler.label ? null : enabler.label"
+                style="cursor:pointer;text-align:center;padding:20px"
+                :style="expandedStage===enabler.label ? `border-color:${enabler.color}` : ''"
+                @mouseenter="$el.style.borderColor=enabler.color" @mouseleave="$el.style.borderColor=expandedStage===enabler.label?enabler.color:'var(--border)'">
+                <div style="font-size:30px;margin-bottom:10px" x-text="enabler.icon"></div>
+                <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:6px" x-text="enabler.label"></div>
+                <div style="font-size:12px;color:var(--text-secondary);margin-bottom:14px;line-height:1.5" x-text="enabler.desc"></div>
+
+                <!-- Collapsed: show chapter count -->
+                <div x-show="expandedStage!==enabler.label">
+                  <span style="font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px"
+                    :style="`background:${enabler.color}20;color:${enabler.color}`">
+                    View <span x-text="enabler.chapters.length"></span> Chapters →
+                  </span>
+                </div>
+
+                <!-- Expanded: chapter list -->
+                <div x-show="expandedStage===enabler.label" x-transition
+                  style="text-align:left;display:flex;flex-direction:column;gap:6px">
+                  <template x-for="cid in enabler.chapters" :key="cid">
+                    <template x-if="getChapter(cid)">
+                      <div @click.stop="navigate('chapter', cid)"
+                        style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);cursor:pointer;background:var(--bg-elevated);transition:all .15s"
+                        @mouseenter="$el.style.borderColor=enabler.color;$el.style.background=enabler.color+'15'"
+                        @mouseleave="$el.style.borderColor='var(--border)';$el.style.background='var(--bg-elevated)'">
+                        <span style="font-size:10px;font-weight:700;min-width:28px;flex-shrink:0" :style="`color:${enabler.color}`" x-text="cid"></span>
+                        <span style="font-size:12px;color:var(--text-primary);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+                          x-text="getChapter(cid).title"></span>
+                        <span :style="`color:${enabler.color}`" style="font-size:14px;flex-shrink:0">→</span>
+                      </div>
+                    </template>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
 
       </div>
 

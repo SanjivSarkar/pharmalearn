@@ -116,12 +116,30 @@
 
     toast: { show: false, msg: '', type: 'success' },
 
+    showOtpGate: false,
+    otpStep: 1,
+    otpPhone: '',
+    otpCode: '',
+    otpSent: '',
+    otpError: '',
+    otpLoading: false,
+
+    pharmaNews: [],
+    newsLoading: false,
+
+    expandedStage: null,
+
     init() {
       initProgress();
       this.applyTheme();
-      const user = store.get('user', null);
-      if (!user || !user.name || user.name === 'Learner') {
-        this.showOnboarding = true;
+      const otpVerified = store.get('otp_verified', false);
+      if (!otpVerified) {
+        this.showOtpGate = true;
+      } else {
+        const user = store.get('user', null);
+        if (!user || !user.name || user.name === 'Learner') {
+          this.showOnboarding = true;
+        }
       }
       this.handleRoute();
       window.addEventListener('hashchange', () => this.handleRoute());
@@ -129,6 +147,7 @@
         if (window.innerWidth <= 1024) this.sidebarOpen = false;
       });
       window.addEventListener('scroll', () => this.updateReadingProgress());
+      this.fetchNews();
     },
 
     handleRoute() {
@@ -138,7 +157,7 @@
       if (route === 'chapter' && parts[1]) {
         this.openChapter(parts[1]);
       } else {
-        this.page = ['home','domains','dashboard','bookmarks','search'].includes(route) ? route : 'home';
+        this.page = ['home','domains','dashboard','bookmarks','search','roadmap'].includes(route) ? route : 'home';
         this.activeChapter = null;
       }
     },
@@ -405,6 +424,112 @@
       this.showOnboarding = false;
       XP.add(50, 'onboarding');
       this.showToast('Welcome to PharmaLearn!', 'success');
+    },
+
+    // ─── OTP Verification ────────────────────────────────────────────────────
+    async sendOTP() {
+      const phone = this.otpPhone.trim();
+      if (!phone || phone.length < 7) {
+        this.otpError = 'Please enter a valid phone number with country code';
+        return;
+      }
+      this.otpLoading = true;
+      this.otpError = '';
+      const code = String(Math.floor(100000 + Math.random() * 900000));
+      this.otpSent = code;
+      try {
+        const res = await fetch('https://textbelt.com/text', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            phone: phone.replace(/\s+/g, ''),
+            message: `PharmaLearn verification code: ${code}. Valid for 10 minutes.`,
+            key: 'textbelt'
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          this.otpStep = 2;
+          this.showToast('Code sent to ' + phone, 'success');
+        } else {
+          this.otpError = 'Could not send SMS. Free tier allows 1 SMS/day per IP. Try "Skip for demo mode" below.';
+        }
+      } catch(e) {
+        this.otpError = 'Network error. Please check connection or use skip below.';
+      }
+      this.otpLoading = false;
+    },
+
+    verifyOTP() {
+      this.otpError = '';
+      if (!this.otpCode.trim()) {
+        this.otpError = 'Please enter the verification code';
+        return;
+      }
+      if (this.otpCode.trim() === this.otpSent) {
+        store.set('otp_verified', true);
+        store.set('otp_phone', this.otpPhone);
+        this.showOtpGate = false;
+        const user = store.get('user', null);
+        if (!user || !user.name || user.name === 'Learner') {
+          this.showOnboarding = true;
+        }
+        this.showToast('Phone verified! Welcome to PharmaLearn.', 'success');
+      } else {
+        this.otpError = 'Incorrect code. Please try again.';
+      }
+    },
+
+    skipOtp() {
+      store.set('otp_verified', true);
+      this.showOtpGate = false;
+      const user = store.get('user', null);
+      if (!user || !user.name || user.name === 'Learner') {
+        this.showOnboarding = true;
+      }
+    },
+
+    // ─── Pharma News ─────────────────────────────────────────────────────────
+    async fetchNews() {
+      this.newsLoading = true;
+      try {
+        const feedUrl = 'https://www.fiercepharma.com/rss/xml';
+        const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&count=5`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.status === 'ok' && data.items && data.items.length) {
+          this.pharmaNews = data.items.slice(0, 5).map(item => ({
+            title: item.title.trim(),
+            url: item.link,
+            date: new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+            source: (data.feed && data.feed.title) || 'FiercePharma'
+          }));
+        }
+      } catch(e) { /* silently fail */ }
+      this.newsLoading = false;
+    },
+
+    // ─── Roadmap ──────────────────────────────────────────────────────────────
+    get roadmapStages() {
+      return [
+        { id:'discovery', label:'Drug Discovery', icon:'🔬', color:'#6366f1', desc:'Target identification, compound screening, hit-to-lead optimization', chapters:['1-1'] },
+        { id:'preclinical', label:'Pre-Clinical Development', icon:'🧪', color:'#6366f1', desc:'In vitro/vivo studies, ADMET profiling, toxicology, IND filing', chapters:['1-2'] },
+        { id:'phase1', label:'Phase I Clinical Trials', icon:'💉', color:'#8b5cf6', desc:'First-in-human safety, PK/PD characterization, dose escalation', chapters:['1-3'] },
+        { id:'phase23', label:'Phase II/III Trials', icon:'📋', color:'#8b5cf6', desc:'Efficacy proof-of-concept, dose-ranging, pivotal randomized trials', chapters:['1-3','1-4'] },
+        { id:'regulatory', label:'Regulatory Submission', icon:'📄', color:'#0ea5e9', desc:'NDA/BLA/MAA dossier, FDA/EMA review, approval strategy & labeling', chapters:['1-5'] },
+        { id:'marketaccess', label:'Market Access & Pricing', icon:'💊', color:'#10b981', desc:'Payer negotiations, HTA, pricing strategy, reimbursement, value dossiers', chapters:['3-1','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9','3-10'] },
+        { id:'launch', label:'Product Launch', icon:'🚀', color:'#0ea5e9', desc:'Commercial readiness, go-to-market strategy, SFE, launch analytics', chapters:['1-6','2-6'] },
+        { id:'commercial', label:'Commercial Operations', icon:'📊', color:'#0ea5e9', desc:'Patient journey analytics, HCP targeting, omnichannel, IC design, forecasting', chapters:['2-1','2-2','2-3','2-4','2-5','2-7','2-8','2-9','2-10','2-11'] },
+        { id:'rwe', label:'Post-Market RWE & Medical Affairs', icon:'🏥', color:'#f59e0b', desc:'Real-world studies, HEOR, medical affairs analytics, safety surveillance', chapters:['4-1','4-2','4-3','4-4','4-5'] },
+        { id:'loe', label:'LOE & Lifecycle Management', icon:'🔄', color:'#6366f1', desc:'Patent cliff strategy, biosimilar competition, indication expansion, LCM', chapters:['1-7'] },
+      ];
+    },
+
+    get roadmapEnablers() {
+      return [
+        { label:'Data Science & ML', icon:'⚙️', color:'#ec4899', desc:'Statistics, ML, causal inference, NLP, deep learning, MLOps for pharma analytics', chapters:['5-1','5-2','5-3','5-4','5-5','5-6','5-7','5-8','5-9','5-10'] },
+        { label:'Data Engineering', icon:'🏗️', color:'#14b8a6', desc:'Modern data stack, Snowflake, Spark, DataOps, streaming, data quality for healthcare', chapters:['6-1','6-2','6-3','6-4','6-5','6-6','6-7','6-8','6-9'] },
+      ];
     },
 
     // ─── Toast ────────────────────────────────────────────────────────────────
