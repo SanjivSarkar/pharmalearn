@@ -644,52 +644,66 @@
       this.accessOrg   = '';
     },
 
-    // ─── Pharma News — FiercePharma RSS (Google News as fallback) ───────────
+    // ─── Pharma News — multi-proxy waterfall ─────────────────────────────────
     async fetchNews() {
       this.newsLoading = true;
-      const proxy = url => 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
 
-      const fetchFeed = async (feedUrl, sourceName) => {
+      // Raw-text fetch with timeout
+      const fetchRaw = async (url, timeoutMs = 10000) => {
         const ctrl = new AbortController();
-        const tid  = setTimeout(() => ctrl.abort(), 9000);
-        const res  = await fetch(proxy(feedUrl), { signal: ctrl.signal });
+        const tid  = setTimeout(() => ctrl.abort(), timeoutMs);
+        const res  = await fetch(url, { signal: ctrl.signal });
         clearTimeout(tid);
-        if (!res.ok) throw new Error('proxy err');
-        const json = await res.json();
-        if (!json.contents) throw new Error('no content');
-        const xml   = new DOMParser().parseFromString(json.contents, 'text/xml');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.text();
+      };
+
+      // Parse RSS XML text → array of news objects
+      const parseXml = (text, fixedSource) => {
+        const xml   = new DOMParser().parseFromString(text, 'text/xml');
         const items = [...xml.querySelectorAll('item')].slice(0, 5);
-        if (!items.length) throw new Error('no items');
         return items.map(item => {
-          const title = (item.querySelector('title')?.textContent || '').trim();
-          let link    = (item.querySelector('link')?.textContent || '').trim();
-          // <link> in RSS sometimes sits between tags; try guid as backup
+          const rawTitle = (item.querySelector('title')?.textContent || '').trim();
+          // <link> sits as text node between tags in some RSS; also try guid
+          let link = '';
+          for (const n of item.childNodes) {
+            if (n.nodeName === 'link') { link = (n.textContent || '').trim(); break; }
+          }
           if (!link) link = item.querySelector('guid')?.textContent?.trim() || '#';
-          const pub   = item.querySelector('pubDate')?.textContent || '';
-          // FiercePharma titles are plain; Google News appends " - Source"
-          const parts  = title.split(' - ');
-          const source = sourceName || (parts.length > 1 ? parts.pop().trim() : 'Fierce Pharma');
-          const clean  = sourceName ? title : parts.join(' - ').trim();
-          return {
-            title: clean,
-            url: link || '#',
-            source,
-            date: pub ? new Date(pub).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''
-          };
+          const pub = item.querySelector('pubDate')?.textContent || '';
+          const date = pub ? new Date(pub).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+          // Google News titles end with " - Source Name"
+          const parts  = rawTitle.split(' - ');
+          const source = fixedSource || (parts.length > 1 ? parts.pop().trim() : 'Pharma News');
+          const title  = fixedSource ? rawTitle : parts.join(' - ').trim();
+          return { title, url: link, source, date };
         }).filter(i => i.title);
       };
 
-      try {
-        // Primary: Fierce Pharma
-        this.pharmaNews = await fetchFeed('https://www.fiercepharma.com/rss/xml', 'Fierce Pharma');
-      } catch(e) {
+      // Proxy builders
+      const corsProxy     = u => `https://corsproxy.io/?${encodeURIComponent(u)}`;
+      const originsRaw    = u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`;
+
+      const FIERCE  = 'https://www.fiercepharma.com/rss/xml';
+      const GNEWS   = 'https://news.google.com/rss/search?q=pharmaceutical+FDA+drug+approval+biotech&hl=en-US&gl=US&ceid=US:en';
+      const STAT    = 'https://www.statnews.com/feed/';
+
+      // Waterfall: try each attempt until we get ≥1 item
+      const attempts = [
+        { proxyFn: corsProxy,  feed: FIERCE, source: 'Fierce Pharma' },
+        { proxyFn: corsProxy,  feed: GNEWS,  source: null },
+        { proxyFn: originsRaw, feed: GNEWS,  source: null },
+        { proxyFn: corsProxy,  feed: STAT,   source: 'STAT News' },
+      ];
+
+      for (const { proxyFn, feed, source } of attempts) {
         try {
-          // Fallback: Google News RSS
-          const gnUrl = 'https://news.google.com/rss/search' +
-            '?q=pharmaceutical+FDA+biotech+drug+approval&hl=en-US&gl=US&ceid=US:en';
-          this.pharmaNews = await fetchFeed(gnUrl, null);
-        } catch(e2) { /* silently fail — UI shows empty state with retry */ }
+          const text  = await fetchRaw(proxyFn(feed));
+          const items = parseXml(text, source);
+          if (items.length) { this.pharmaNews = items; break; }
+        } catch(_) { /* try next */ }
       }
+
       this.newsLoading = false;
     },
 
