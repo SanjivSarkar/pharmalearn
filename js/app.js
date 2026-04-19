@@ -18,6 +18,15 @@
     if (!store.get('user')) store.set('user', { name: 'Learner', role: 'consultant', geo: 'us', level: 'advanced' });
   };
 
+  // ─── Helpers to resolve chapters ─────────────────────────────────────────
+  const allChapters = () => Object.values(window.PL.chapters);
+
+  const getDomainChapters = (domainId) => {
+    const domain = window.PL.domains.find(d => d.id === domainId);
+    if (!domain) return [];
+    return domain.chapters.map(id => window.PL.chapters[id]).filter(Boolean);
+  };
+
   // ─── XP System ───────────────────────────────────────────────────────────
   const XP = {
     add: (pts, reason = '') => {
@@ -56,15 +65,15 @@
       ));
     },
     getDomainPct: (domainId) => {
-      const domain = window.PHARMALEARN.domains.find(d => d.id === domainId);
-      if (!domain) return 0;
-      const scores = domain.chapters_list.map(c => Progress.getMastery(c.id));
+      const chapters = getDomainChapters(domainId);
+      if (!chapters.length) return 0;
+      const scores = chapters.map(c => Progress.getMastery(c.id));
       return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
     },
     getOverall: () => {
-      const all = window.PHARMALEARN.domains.flatMap(d =>
-        d.chapters_list.map(c => Progress.getMastery(c.id))
-      );
+      const chs = allChapters();
+      if (!chs.length) return 0;
+      const all = chs.map(c => Progress.getMastery(c.id));
       return Math.round(all.reduce((a, b) => a + b, 0) / all.length);
     }
   };
@@ -86,47 +95,39 @@
 
   // ─── Alpine.js App Data ───────────────────────────────────────────────────
   window.pharmaApp = () => ({
-    // Navigation
     page: 'home',
-    sidebarOpen: window.innerWidth > 768,
+    sidebarOpen: window.innerWidth > 1024,
     theme: localStorage.getItem('pl_theme') || 'dark',
     searchQuery: '',
     searchResults: [],
 
-    // Chapter state
     activeChapter: null,
     activeSection: 's1',
     readingPct: 0,
     chapterBookmarked: false,
 
-    // Quiz state
-    quiz: { active: false, current: 0, selected: null, submitted: false, score: 0, finished: false, answers: {} },
+    quiz: { active: false, current: 0, selected: null, submitted: false, score: 0, finished: false, answers: {}, questions: [] },
 
-    // Onboarding
+    domainFilter: null,
+
     showOnboarding: false,
     onboardStep: 1,
     onboardData: { name: '', role: 'consultant', geo: 'us', level: 'advanced' },
 
-    // Notification
     toast: { show: false, msg: '', type: 'success' },
 
     init() {
       initProgress();
       this.applyTheme();
-
       const user = store.get('user', null);
       if (!user || !user.name || user.name === 'Learner') {
         this.showOnboarding = true;
       }
-
-      // Hash routing
       this.handleRoute();
       window.addEventListener('hashchange', () => this.handleRoute());
       window.addEventListener('resize', () => {
-        this.sidebarOpen = window.innerWidth > 768;
+        if (window.innerWidth <= 1024) this.sidebarOpen = false;
       });
-
-      // Reading progress tracker
       window.addEventListener('scroll', () => this.updateReadingProgress());
     },
 
@@ -156,8 +157,11 @@
       this.applyTheme();
     },
 
-    // ─── Home ───────────────────────────────────────────────────────────────
-    get domains() { return window.PHARMALEARN.domains; },
+    // ─── Domain/Chapter Data ─────────────────────────────────────────────────
+    get domains() { return window.PL.domains; },
+
+    getDomainChapters(domainId) { return getDomainChapters(domainId); },
+
     get overallProgress() { return Progress.getOverall(); },
     get userXP() { return store.get('xp', { total: 0, streak: 0 }); },
     get userLevel() { return XP.getLevel(); },
@@ -171,20 +175,18 @@
         .sort((a, b) => (b[1].updated || 0) - (a[1].updated || 0))
         .slice(0, 3)
         .map(([id]) => {
-          for (const d of window.PHARMALEARN.domains) {
-            const c = d.chapters_list.find(ch => ch.id === id);
-            if (c) return { ...c, domain: d.title, mastery: Progress.getMastery(id) };
-          }
-          return null;
+          const ch = window.PL.chapters[id];
+          if (!ch) return null;
+          return { ...ch, mastery: Progress.getMastery(id) };
         }).filter(Boolean);
     },
 
     get recommendedChapter() {
-      // Find first available chapter not yet mastered
-      for (const d of window.PHARMALEARN.domains) {
-        for (const c of d.chapters_list) {
-          if (c.available && Progress.getMastery(c.id) < 80) {
-            return { ...c, domain: d.title };
+      for (const d of window.PL.domains) {
+        for (const id of d.chapters) {
+          const ch = window.PL.chapters[id];
+          if (ch && ch.available && Progress.getMastery(id) < 80) {
+            return { ...ch };
           }
         }
       }
@@ -193,7 +195,7 @@
 
     // ─── Chapter ────────────────────────────────────────────────────────────
     openChapter(id) {
-      const ch = window.PHARMALEARN.chapters[id];
+      const ch = window.PL.chapters[id];
       if (!ch) { this.navigate('domains'); return; }
       this.activeChapter = ch;
       this.page = 'chapter';
@@ -203,11 +205,13 @@
       this.readingPct = Progress.get(id).reading || 0;
       XP.add(10, 'chapter_open');
       window.scrollTo(0, 0);
-
-      // Mark as started
       if (Progress.get(id).status === 'not_started') {
         Progress.update(id, { status: 'reading', reading: 5 });
       }
+      // Trigger Prism highlight after Alpine renders
+      this.$nextTick(() => {
+        if (window.Prism) Prism.highlightAll();
+      });
     },
 
     updateReadingProgress() {
@@ -219,10 +223,8 @@
       const viewed = Math.max(0, -rect.top + window.innerHeight);
       const pct = Math.min(100, Math.round((viewed / total) * 100));
       this.readingPct = pct;
-
       const bar = document.getElementById('reading-bar');
       if (bar) bar.style.width = pct + '%';
-
       if (pct > (Progress.get(this.activeChapter.id).reading || 0)) {
         Progress.update(this.activeChapter.id, { reading: pct });
         if (pct >= 90 && Progress.get(this.activeChapter.id).status !== 'completed') {
@@ -230,8 +232,6 @@
           XP.add(25, 'chapter_read');
         }
       }
-
-      // Active TOC item
       if (this.activeChapter.toc) {
         for (const t of [...this.activeChapter.toc].reverse()) {
           const s = document.getElementById(t.id);
@@ -257,11 +257,53 @@
     },
 
     chapterProgress(id) { return Progress.getMastery(id); },
+    chapterStatus(id) { return Progress.get(id).status; },
 
     // ─── Quiz ────────────────────────────────────────────────────────────────
+
+    // Normalize a single question to canonical {text, options:string[], correct:number, explanation}
+    normalizeQuestion(q) {
+      let options, correct;
+      if (q.options && q.options.length > 0 && typeof q.options[0] === 'object') {
+        // Domain 1–5 format: options:[{id:"a",text:"..."}], correct:"b"
+        options = q.options.map(o => o.text || o.label || String(o));
+        const idx = q.options.findIndex(o => o.id === q.correct);
+        correct = idx >= 0 ? idx : 0;
+      } else {
+        // Domain 6 format: options:["string",...], correct:0
+        options = (q.options || []).map(o => String(o));
+        correct = typeof q.correct === 'number' ? q.correct : parseInt(q.correct) || 0;
+      }
+      return {
+        id: q.id || '',
+        text: q.text || q.question || '',
+        options,
+        correct,
+        explanation: q.explanation || ''
+      };
+    },
+
+    // Normalize + shuffle questions and options for a dynamic quiz
+    buildQuiz(questions) {
+      const normalized = questions.map(q => this.normalizeQuestion(q));
+      // Shuffle question order
+      const shuffled = [...normalized].sort(() => Math.random() - 0.5);
+      // Shuffle each question's options while tracking new correct index
+      return shuffled.map(q => {
+        if (!q.options || q.options.length < 2) return q;
+        const order = q.options.map((_, i) => i).sort(() => Math.random() - 0.5);
+        return {
+          ...q,
+          options: order.map(i => q.options[i]),
+          correct: order.indexOf(q.correct)
+        };
+      });
+    },
+
     startQuiz() {
-      this.quiz = { active: true, current: 0, selected: null, submitted: false, score: 0, finished: false, answers: {} };
-      this.showToast('Quiz started — 3 questions', 'info');
+      const questions = this.buildQuiz(this.activeChapter.questions || []);
+      this.quiz = { active: true, current: 0, selected: null, submitted: false, score: 0, finished: false, answers: {}, questions };
+      this.showToast('Quiz started — questions randomized!', 'info');
     },
 
     selectAnswer(optId) {
@@ -270,8 +312,9 @@
     },
 
     submitAnswer() {
-      if (!this.quiz.selected) return;
-      const q = this.activeChapter.questions[this.quiz.current];
+      if (this.quiz.selected === null) return;
+      const q = this.currentQuestion;
+      if (!q) return;
       const correct = this.quiz.selected === q.correct;
       this.quiz.submitted = true;
       this.quiz.answers[this.quiz.current] = { selected: this.quiz.selected, correct };
@@ -279,10 +322,10 @@
     },
 
     nextQuestion() {
-      const total = this.activeChapter.questions.length;
+      const total = (this.quiz.questions || []).length;
       if (this.quiz.current + 1 >= total) {
         this.quiz.finished = true;
-        const pct = Math.round((this.quiz.score / total) * 100);
+        const pct = total > 0 ? Math.round((this.quiz.score / total) * 100) : 0;
         Progress.update(this.activeChapter.id, { quiz: pct, status: pct >= 60 ? 'completed' : 'needs_review' });
         XP.add(25 + (pct >= 80 ? 50 : 0), 'quiz_complete');
         this.showToast(`Quiz complete! ${this.quiz.score}/${total} correct`, pct >= 60 ? 'success' : 'warning');
@@ -294,16 +337,21 @@
     },
 
     get currentQuestion() {
-      if (!this.activeChapter || !this.quiz.active) return null;
-      return this.activeChapter.questions[this.quiz.current];
+      if (!this.activeChapter || !this.quiz.active || !this.quiz.questions) return null;
+      return this.quiz.questions[this.quiz.current] || null;
+    },
+
+    get quizTotal() {
+      return this.quiz.active ? (this.quiz.questions || []).length : (this.activeChapter?.questions || []).length;
     },
 
     optionClass(optId) {
-      if (!this.quiz.submitted) return this.quiz.selected === optId ? 'selected' : '';
+      if (!this.quiz.submitted) return this.quiz.selected === optId ? 'quiz-option selected' : 'quiz-option';
       const q = this.currentQuestion;
-      if (optId === q.correct) return 'correct';
-      if (optId === this.quiz.selected && optId !== q.correct) return 'incorrect';
-      return '';
+      if (!q) return 'quiz-option';
+      if (optId === q.correct) return 'quiz-option correct';
+      if (optId === this.quiz.selected && optId !== q.correct) return 'quiz-option incorrect';
+      return 'quiz-option';
     },
 
     // ─── Search ──────────────────────────────────────────────────────────────
@@ -311,12 +359,11 @@
       const q = this.searchQuery.toLowerCase().trim();
       if (!q) { this.searchResults = []; return; }
       const results = [];
-      for (const d of window.PHARMALEARN.domains) {
-        for (const c of d.chapters_list) {
-          const score = [c.title, ...d.tags].join(' ').toLowerCase();
-          if (score.includes(q)) {
-            results.push({ ...c, domain: d.title, domain_color: d.color });
-          }
+      for (const ch of allChapters()) {
+        const haystack = [ch.title, ch.domain, ...(ch.tags || [])].join(' ').toLowerCase();
+        if (haystack.includes(q)) {
+          const d = window.PL.domains.find(dom => dom.id === ch.domain_id);
+          results.push({ ...ch, domain_color: d ? d.color : '#5b8dee' });
         }
       }
       this.searchResults = results.slice(0, 20);
@@ -331,10 +378,10 @@
 
     // ─── Dashboard ───────────────────────────────────────────────────────────
     get dashboardDomains() {
-      return window.PHARMALEARN.domains.map(d => ({
+      return window.PL.domains.map(d => ({
         ...d,
         progress: Progress.getDomainPct(d.id),
-        chapters_detail: d.chapters_list.map(c => ({
+        chaptersDetail: getDomainChapters(d.id).map(c => ({
           ...c,
           mastery: Progress.getMastery(c.id),
           status: Progress.get(c.id).status
@@ -344,13 +391,11 @@
 
     get weakAreas() {
       const all = [];
-      for (const d of window.PHARMALEARN.domains) {
-        for (const c of d.chapters_list) {
-          const m = Progress.getMastery(c.id);
-          if (m > 0 && m < 60) all.push({ ...c, mastery: m, domain: d.title });
-        }
+      for (const ch of allChapters()) {
+        const m = Progress.getMastery(ch.id);
+        if (m > 0 && m < 60) all.push({ ...ch, mastery: m });
       }
-      return all.slice(0, 3);
+      return all.sort((a,b) => a.mastery - b.mastery).slice(0, 3);
     },
 
     // ─── Onboarding ──────────────────────────────────────────────────────────
@@ -359,7 +404,7 @@
       store.set('user', this.onboardData);
       this.showOnboarding = false;
       XP.add(50, 'onboarding');
-      this.showToast('Welcome to PharmaLearn! 🎉', 'success');
+      this.showToast('Welcome to PharmaLearn!', 'success');
     },
 
     // ─── Toast ────────────────────────────────────────────────────────────────
@@ -369,9 +414,9 @@
     },
 
     // ─── Utilities ────────────────────────────────────────────────────────────
-    getLevelBadge(level) {
+    getLevelClass(level) {
       const map = { 'Beginner': 'tag-green', 'Intermediate': 'tag-yellow', 'Advanced': 'tag-red' };
-      return map[level] || 'tag';
+      return 'tag ' + (map[level] || '');
     },
 
     formatTime(mins) {
@@ -379,9 +424,18 @@
       return Math.floor(mins/60) + 'h ' + (mins%60 ? (mins%60)+'m' : '');
     },
 
-    statusIcon(status) {
-      const map = { 'completed': '✅', 'read': '📖', 'reading': '📂', 'needs_review': '⚠️', 'not_started': '○' };
-      return map[status] || '○';
+    statusDot(status) {
+      const map = { completed: '#10b981', read: '#6366f1', reading: '#f59e0b', needs_review: '#ef4444', not_started: '#374151' };
+      return map[status] || map.not_started;
+    },
+
+    domainColor(domainId) {
+      const d = window.PL.domains.find(dom => dom.id === domainId);
+      return d ? d.color : '#5b8dee';
+    },
+
+    getChapter(id) {
+      return window.PL.chapters[id] || null;
     }
   });
 })();

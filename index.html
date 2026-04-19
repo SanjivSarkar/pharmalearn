@@ -4,733 +4,754 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PharmaLearn — Digital Pharma Analytics Library</title>
-  <meta name="description" content="World-class digital learning platform for pharma analytics, commercial strategy, market access, and data science.">
+  <meta name="description" content="World-class digital learning for pharma analytics, commercial strategy, market access, and data science.">
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind (utilities only — design system in custom.css) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Alpine.js -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <!-- Prism.js for code highlighting -->
+  <!-- Prism.js -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <!-- Content & App -->
+
+  <!-- Content registry (must be first) -->
   <script src="js/content.js"></script>
+  <!-- Domain chapter files -->
+  <script src="js/chapters/domain-1.js"></script>
+  <script src="js/chapters/domain-2.js"></script>
+  <script src="js/chapters/domain-3.js"></script>
+  <script src="js/chapters/domain-4.js"></script>
+  <script src="js/chapters/domain-5.js"></script>
+  <script src="js/chapters/domain-6.js"></script>
+  <!-- App logic -->
+  <script src="js/app.js"></script>
+
   <link rel="stylesheet" href="css/custom.css">
-  <style>
-    [x-cloak] { display: none !important; }
-  </style>
+  <style>[x-cloak]{display:none!important}</style>
 </head>
 
 <body x-data="pharmaApp()" x-init="init()" x-cloak>
 
-<!-- Reading Progress Bar -->
-<div id="reading-bar" class="reading-progress-bar" style="width:0"></div>
+<!-- Reading progress bar -->
+<div id="reading-bar" class="reading-progress-bar" style="width:0%"></div>
 
-<!-- ═══════════════════════════════════════════════════════════
+<!-- ═══════════════════════════════════════════════════════
      ONBOARDING MODAL
-═══════════════════════════════════════════════════════════ -->
-<div x-show="showOnboarding" class="fixed inset-0 z-[200] flex items-center justify-center p-4" style="background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);">
-  <div class="card w-full max-w-lg p-8 fade-in" style="border:1px solid var(--accent);">
-    <div class="text-center mb-6">
-      <div style="font-size:48px;margin-bottom:12px">🧬</div>
-      <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:8px" class="gradient-text">Welcome to PharmaLearn</h2>
-      <p style="color:var(--text-secondary);font-size:14px">The digital pharma analytics library for serious practitioners.</p>
+═══════════════════════════════════════════════════════ -->
+<div x-show="showOnboarding" class="fixed inset-0 z-[200] flex items-center justify-center p-4"
+     style="background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);">
+  <div class="card w-full max-w-md p-8" style="border:1px solid var(--accent);animation:fadeUp .3s ease">
+
+    <div class="text-center mb-8">
+      <div style="font-size:52px;margin-bottom:12px">🧬</div>
+      <h2 class="gradient-text" style="font-size:1.8rem;font-weight:800;margin-bottom:6px">PharmaLearn</h2>
+      <p style="color:var(--text-secondary);font-size:13px">The analytics library for pharma professionals.</p>
     </div>
 
-    <!-- Step 1: Name -->
-    <div x-show="onboardStep === 1">
-      <p style="color:var(--text-secondary);margin-bottom:16px;font-size:14px">Let's personalize your learning experience.</p>
-      <label style="display:block;font-size:13px;color:var(--text-muted);margin-bottom:6px">Your Name</label>
+    <!-- Step 1 -->
+    <div x-show="onboardStep===1">
+      <label class="label-sm">Your Name</label>
       <input x-model="onboardData.name" type="text" placeholder="e.g. Sarah Chen"
-        style="width:100%;background:var(--bg-hover);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text-primary);font-size:15px;outline:none;margin-bottom:20px;"
-        @keyup.enter="onboardStep = 2">
-      <button @click="onboardStep = 2" class="btn btn-primary" style="width:100%">Continue →</button>
+        class="search-input" style="margin-bottom:20px" @keyup.enter="onboardStep=2">
+      <button @click="onboardStep=2" class="btn btn-primary" style="width:100%">Continue →</button>
     </div>
 
-    <!-- Step 2: Role -->
-    <div x-show="onboardStep === 2">
-      <p style="color:var(--text-secondary);margin-bottom:16px;font-size:14px">What best describes your role?</p>
-      <div style="display:grid;gap:10px;margin-bottom:20px;">
-        <template x-for="r in [
-          {id:'consultant',icon:'💼',label:'Consultant / Advisor'},
-          {id:'brand_manager',icon:'📊',label:'Pharma Brand Manager'},
-          {id:'data_scientist',icon:'🤖',label:'Data Scientist / Analyst'},
-          {id:'market_access',icon:'💊',label:'Market Access Lead'},
-          {id:'medical_affairs',icon:'🏥',label:'Medical Affairs'}
-        ]">
-          <div @click="onboardData.role = r.id"
-            :style="`border:2px solid ${onboardData.role===r.id?'var(--accent)':'var(--border)'};background:${onboardData.role===r.id?'var(--accent-dim)':'var(--bg-hover)'}`"
-            style="padding:12px 16px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:all 0.15s;">
-            <span x-text="r.icon" style="font-size:20px"></span>
-            <span x-text="r.label" style="font-size:14px;font-weight:500;color:var(--text-primary)"></span>
+    <!-- Step 2 -->
+    <div x-show="onboardStep===2">
+      <p class="label-sm" style="margin-bottom:12px">Your role</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+        <template x-for="r in [{id:'consultant',icon:'💼',label:'Consultant / Advisor'},{id:'brand_manager',icon:'📊',label:'Brand Manager'},{id:'data_scientist',icon:'🤖',label:'Data Scientist / Analyst'},{id:'market_access',icon:'💊',label:'Market Access Lead'},{id:'medical_affairs',icon:'🏥',label:'Medical Affairs'}]">
+          <div @click="onboardData.role=r.id" class="card-interactive"
+            :style="`border:1.5px solid ${onboardData.role===r.id?'var(--accent)':'var(--border)'}; background:${onboardData.role===r.id?'var(--accent-dim)':'var(--bg-elevated)'}`"
+            style="padding:12px 16px;display:flex;align-items:center;gap:12px">
+            <span x-text="r.icon" style="font-size:18px"></span>
+            <span x-text="r.label" style="font-size:13px;font-weight:500;color:var(--text-primary)"></span>
           </div>
         </template>
       </div>
-      <div style="display:flex;gap:10px;">
-        <button @click="onboardStep = 1" class="btn btn-secondary" style="flex:1">← Back</button>
-        <button @click="onboardStep = 3" class="btn btn-primary" style="flex:2">Continue →</button>
+      <div style="display:flex;gap:10px">
+        <button @click="onboardStep=1" class="btn btn-ghost" style="flex:1">← Back</button>
+        <button @click="onboardStep=3" class="btn btn-primary" style="flex:2">Continue →</button>
       </div>
     </div>
 
-    <!-- Step 3: Geography + Level -->
-    <div x-show="onboardStep === 3">
-      <p style="color:var(--text-secondary);margin-bottom:12px;font-size:14px">Primary geography & experience level</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
-        <template x-for="g in [{id:'us',flag:'🇺🇸',label:'United States'},{id:'eu',flag:'🇪🇺',label:'Europe'},{id:'india',flag:'🇮🇳',label:'India'},{id:'apac',flag:'🌏',label:'APAC/LATAM'}]">
-          <div @click="onboardData.geo = g.id"
-            :style="`border:2px solid ${onboardData.geo===g.id?'var(--accent)':'var(--border)'};background:${onboardData.geo===g.id?'var(--accent-dim)':'var(--bg-hover)'}`"
-            style="padding:10px;border-radius:10px;cursor:pointer;text-align:center;transition:all 0.15s;">
-            <div x-text="g.flag" style="font-size:24px;margin-bottom:4px"></div>
-            <div x-text="g.label" style="font-size:12px;color:var(--text-secondary)"></div>
+    <!-- Step 3 -->
+    <div x-show="onboardStep===3">
+      <p class="label-sm" style="margin-bottom:12px">Your experience level</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+        <template x-for="l in [{id:'beginner',label:'Beginner — New to pharma analytics'},{id:'intermediate',label:'Intermediate — 2-5 years experience'},{id:'advanced',label:'Advanced — 5+ years, deep expertise'}]">
+          <div @click="onboardData.level=l.id" class="card-interactive"
+            :style="`border:1.5px solid ${onboardData.level===l.id?'var(--accent)':'var(--border)'}; background:${onboardData.level===l.id?'var(--accent-dim)':'var(--bg-elevated)'}`"
+            style="padding:12px 16px">
+            <span x-text="l.label" style="font-size:13px;font-weight:500;color:var(--text-primary)"></span>
           </div>
         </template>
       </div>
-      <div style="display:flex;gap:8px;margin-bottom:20px;">
-        <template x-for="l in ['Beginner','Intermediate','Advanced']">
-          <div @click="onboardData.level = l"
-            :style="`border:2px solid ${onboardData.level===l?'var(--accent)':'var(--border)'};background:${onboardData.level===l?'var(--accent-dim)':'var(--bg-hover)'}`"
-            style="flex:1;padding:10px;border-radius:10px;cursor:pointer;text-align:center;font-size:13px;font-weight:500;color:var(--text-primary);transition:all 0.15s;">
-            <span x-text="l"></span>
-          </div>
-        </template>
-      </div>
-      <div style="display:flex;gap:10px;">
-        <button @click="onboardStep = 2" class="btn btn-secondary" style="flex:1">← Back</button>
-        <button @click="completeOnboarding()" class="btn btn-primary" style="flex:2">Start Learning 🚀</button>
+      <div style="display:flex;gap:10px">
+        <button @click="onboardStep=2" class="btn btn-ghost" style="flex:1">← Back</button>
+        <button @click="completeOnboarding()" class="btn btn-primary" style="flex:2">Start Learning →</button>
       </div>
     </div>
+
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     TOAST NOTIFICATION
-═══════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════
+     TOAST
+═══════════════════════════════════════════════════════ -->
 <div x-show="toast.show" x-transition
-  style="position:fixed;bottom:24px;right:24px;z-index:1000;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;min-width:220px;box-shadow:0 8px 32px rgba(0,0,0,0.3);"
-  :style="`background:${toast.type==='success'?'#064e3b':toast.type==='warning'?'#78350f':'#1e293b'};color:${toast.type==='success'?'#34d399':toast.type==='warning'?'#fbbf24':'#94a3b8'};border:1px solid ${toast.type==='success'?'#065f46':toast.type==='warning'?'#92400e':'var(--border)'}`">
-  <span x-text="toast.type==='success'?'✓':toast.type==='warning'?'⚠':'ℹ'"></span>
+  :class="`toast toast-${toast.type}`"
+  style="position:fixed;bottom:24px;right:24px;z-index:300;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:500;min-width:220px;box-shadow:0 8px 32px rgba(0,0,0,0.4)">
   <span x-text="toast.msg"></span>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     SIDEBAR
-═══════════════════════════════════════════════════════════ -->
-<aside class="sidebar" :class="{'sidebar-closed': !sidebarOpen}">
-  <!-- Logo -->
-  <div style="padding:20px 16px 16px;border-bottom:1px solid var(--border);">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-      <div style="width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🧬</div>
-      <div>
-        <div style="font-weight:800;font-size:15px;color:var(--text-primary)">PharmaLearn</div>
-        <div style="font-size:11px;color:var(--text-muted)">Analytics Library</div>
-      </div>
-    </div>
-    <!-- User mini profile -->
-    <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg-hover);border-radius:8px;">
-      <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;" x-text="userName.charAt(0).toUpperCase()"></div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:12px;font-weight:600;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" x-text="userName"></div>
-        <div class="level-badge" style="font-size:10px;padding:1px 8px;" x-text="userLevel.name"></div>
-      </div>
-    </div>
-    <!-- XP bar -->
-    <div style="margin-top:8px;">
-      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-bottom:4px;">
-        <span x-text="`${userXP.total || 0} XP`"></span>
-        <span x-text="userLevel.next ? `Next: ${userLevel.next} XP` : 'Max Level'"></span>
-      </div>
-      <div class="xp-bar"><div class="xp-fill" :style="`width:${userLevel.pct}%`"></div></div>
-    </div>
-  </div>
+<!-- ═══════════════════════════════════════════════════════
+     APP SHELL
+═══════════════════════════════════════════════════════ -->
+<div class="app-shell">
 
-  <!-- Nav -->
-  <nav style="padding:12px 8px;">
-    <div style="font-size:10px;font-weight:700;color:var(--text-muted);padding:4px 8px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px;">Navigation</div>
-    <a @click.prevent="navigate('home')" href="#/home" class="nav-item" :class="{'active': page==='home' && !activeChapter}">
-      <span>🏠</span><span>Home</span>
-    </a>
-    <a @click.prevent="navigate('domains')" href="#/domains" class="nav-item" :class="{'active': page==='domains'}">
-      <span>📚</span><span>All Domains</span>
-    </a>
-    <a @click.prevent="navigate('dashboard')" href="#/dashboard" class="nav-item" :class="{'active': page==='dashboard'}">
-      <span>📈</span><span>My Progress</span>
-    </a>
-    <a @click.prevent="navigate('bookmarks')" href="#/bookmarks" class="nav-item" :class="{'active': page==='bookmarks'}">
-      <span>🔖</span><span>Bookmarks</span>
-      <span x-show="bookmarks.length > 0" x-text="bookmarks.length" style="margin-left:auto;background:var(--accent-dim);color:var(--accent-light);border-radius:10px;padding:1px 7px;font-size:11px;font-weight:600;"></span>
-    </a>
-    <a @click.prevent="navigate('search')" href="#/search" class="nav-item" :class="{'active': page==='search'}">
-      <span>🔍</span><span>Search</span>
-    </a>
+  <!-- ── SIDEBAR ──────────────────────────────────────────── -->
+  <aside :class="sidebarOpen ? 'sidebar' : 'sidebar collapsed'">
 
-    <div style="font-size:10px;font-weight:700;color:var(--text-muted);padding:4px 8px;text-transform:uppercase;letter-spacing:0.1em;margin-top:16px;margin-bottom:4px;">Domains</div>
-    <template x-for="d in domains" :key="d.id">
-      <a @click.prevent="navigate('domains')" href="#/domains" class="nav-item" style="font-size:13px;">
-        <span x-text="d.icon"></span>
-        <span x-text="d.title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
-        <span :style="`margin-left:auto;font-size:10px;color:var(--text-muted)`" x-text="`${getDomainProgress(d.id)}%`"></span>
-      </a>
-    </template>
-  </nav>
-
-  <!-- Theme toggle -->
-  <div style="padding:12px 16px;border-top:1px solid var(--border);margin-top:auto;position:sticky;bottom:0;background:var(--bg-secondary);">
-    <button @click="toggleTheme()" class="btn btn-secondary btn-sm" style="width:100%;">
-      <span x-text="theme==='dark'?'☀️ Light Mode':'🌙 Dark Mode'"></span>
-    </button>
-    <div style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:8px;">
-      🔥 <span x-text="userXP.streak || 0"></span> day streak
-    </div>
-  </div>
-</aside>
-
-<!-- ═══════════════════════════════════════════════════════════
-     MAIN CONTENT AREA
-═══════════════════════════════════════════════════════════ -->
-<div class="main-content" :class="{'main-full': !sidebarOpen}">
-
-  <!-- Top Header Bar -->
-  <header style="position:sticky;top:0;z-index:40;background:var(--bg-primary);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;gap:12px;">
-    <button @click="sidebarOpen = !sidebarOpen" class="btn btn-ghost btn-sm" style="padding:6px;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-
-    <!-- Breadcrumb -->
-    <div style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-muted);">
-      <span @click="navigate('home')" style="cursor:pointer;" :style="`color:${page==='home'&&!activeChapter?'var(--text-primary)':'inherit'}`">Home</span>
-      <template x-if="page==='chapter' && activeChapter">
-        <><span>›</span><span style="color:var(--text-muted)" x-text="activeChapter.domain"></span><span>›</span><span style="color:var(--text-primary);font-weight:500;" x-text="activeChapter.title.length>40?activeChapter.title.substring(0,40)+'…':activeChapter.title"></span></>
-      </template>
-      <template x-if="page!=='home' && page!=='chapter'">
-        <><span>›</span><span style="color:var(--text-primary);font-weight:500;text-transform:capitalize;" x-text="page"></span></>
-      </template>
-    </div>
-
-    <!-- Right side header actions -->
-    <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
-      <template x-if="page==='chapter' && activeChapter">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="font-size:12px;color:var(--text-muted)" x-text="`${readingPct}% read`"></span>
-          <button @click="toggleBookmark()" class="btn btn-ghost btn-sm" :style="`color:${chapterBookmarked?'#fbbf24':'var(--text-muted)'}`">
-            <span x-text="chapterBookmarked?'★':'☆'"></span>
-          </button>
+    <!-- Logo -->
+    <div class="sidebar-logo">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:32px;height:32px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🧬</div>
+        <div x-show="sidebarOpen">
+          <div style="font-weight:800;font-size:15px;color:var(--text-primary);letter-spacing:-.3px">PharmaLearn</div>
+          <div style="font-size:10px;color:var(--text-muted)">Analytics Library</div>
         </div>
-      </template>
-      <button @click="navigate('search')" class="btn btn-ghost btn-sm" style="padding:6px;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sidebar-nav">
+      <button @click="navigate('home')"
+        :class="page==='home'?'nav-item active':'nav-item'"
+        title="Home">
+        <span class="nav-icon">⌂</span>
+        <span class="nav-label" x-show="sidebarOpen">Home</span>
       </button>
-    </div>
-  </header>
+      <button @click="navigate('domains')"
+        :class="page==='domains'||page==='chapter'?'nav-item active':'nav-item'"
+        title="Library">
+        <span class="nav-icon">📚</span>
+        <span class="nav-label" x-show="sidebarOpen">Library</span>
+      </button>
+      <button @click="navigate('search')"
+        :class="page==='search'?'nav-item active':'nav-item'"
+        title="Search">
+        <span class="nav-icon">⌕</span>
+        <span class="nav-label" x-show="sidebarOpen">Search</span>
+      </button>
+      <button @click="navigate('bookmarks')"
+        :class="page==='bookmarks'?'nav-item active':'nav-item'"
+        title="Bookmarks">
+        <span class="nav-icon">◈</span>
+        <span class="nav-label" x-show="sidebarOpen">Bookmarks</span>
+      </button>
+      <button @click="navigate('dashboard')"
+        :class="page==='dashboard'?'nav-item active':'nav-item'"
+        title="Dashboard">
+        <span class="nav-icon">▦</span>
+        <span class="nav-label" x-show="sidebarOpen">Dashboard</span>
+      </button>
+    </nav>
 
-  <!-- ─── HOME PAGE ───────────────────────────────────────────────────────── -->
-  <div x-show="page==='home' && !activeChapter" class="fade-in" style="padding:32px 32px 64px;max-width:1200px;margin:0 auto;">
-
-    <!-- Hero -->
-    <div style="margin-bottom:32px;">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-        <div>
-          <p style="font-size:13px;color:var(--accent-light);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Good Day</p>
-          <h1 style="font-size:2rem;font-weight:800;line-height:1.2;margin-bottom:8px;">
-            Welcome back, <span class="gradient-text" x-text="userName"></span>
-          </h1>
-          <p style="color:var(--text-secondary);font-size:15px;">Your pharma analytics mastery platform. Keep learning.</p>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div class="badge" style="background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.3);">
-            <span class="streak-flame">🔥</span>
-            <span x-text="`${userXP.streak || 0} day streak`"></span>
-          </div>
-          <div class="badge" :style="`background:${userLevel.color}20;color:${userLevel.color};border:1px solid ${userLevel.color}40`">
-            <span>⭐</span>
-            <span x-text="`${userXP.total || 0} XP`"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Overall Progress -->
-    <div class="card" style="padding:24px;margin-bottom:24px;background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(139,92,246,0.05));">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-        <h3 style="font-weight:700;font-size:16px;">Overall Library Progress</h3>
-        <span style="font-size:2rem;font-weight:800;color:var(--accent-light)" x-text="`${overallProgress}%`"></span>
-      </div>
-      <div class="progress-bar" style="height:8px;margin-bottom:20px;"><div class="progress-fill" :style="`width:${overallProgress}%`"></div></div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;">
-        <template x-for="d in domains" :key="d.id">
-          <div style="padding:12px;background:var(--bg-hover);border-radius:8px;">
-            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-              <span x-text="d.icon" style="font-size:16px;"></span>
-              <span style="font-size:12px;font-weight:600;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" x-text="d.title"></span>
-            </div>
-            <div class="progress-bar" style="margin-bottom:4px;"><div class="progress-fill" :style="`width:${getDomainProgress(d.id)}%`"></div></div>
-            <span style="font-size:11px;color:var(--text-muted)" x-text="`${getDomainProgress(d.id)}% complete`"></span>
-          </div>
-        </template>
-      </div>
-    </div>
-
-    <!-- Continue + Recommended -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
-      <!-- Continue Learning -->
-      <div>
-        <h3 style="font-weight:700;font-size:15px;margin-bottom:12px;color:var(--text-secondary);">▶ Continue Learning</h3>
-        <template x-if="recentChapters.length === 0">
-          <div class="card" style="padding:20px;text-align:center;cursor:pointer;" @click="navigate('chapter','2-1')">
-            <div style="font-size:32px;margin-bottom:8px">🚀</div>
-            <p style="color:var(--text-secondary);font-size:14px;">Start your first chapter</p>
-            <button class="btn btn-primary btn-sm" style="margin-top:10px;">Start: Patient Journey Analytics</button>
-          </div>
-        </template>
-        <template x-for="c in recentChapters" :key="c.id">
-          <div class="card" style="padding:16px;margin-bottom:10px;cursor:pointer;" @click="navigate('chapter', c.id)">
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:40px;height:40px;background:var(--accent-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📖</div>
-              <div style="flex:1;min-width:0;">
-                <div style="font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:2px;" x-text="c.title"></div>
-                <div style="font-size:11px;color:var(--text-muted);" x-text="c.domain"></div>
-                <div class="progress-bar" style="margin-top:8px;"><div class="progress-fill" :style="`width:${c.mastery}%`"></div></div>
-              </div>
-              <div style="font-size:13px;font-weight:700;color:var(--accent-light);" x-text="`${c.mastery}%`"></div>
-            </div>
-          </div>
-        </template>
-      </div>
-
-      <!-- Recommended + Stats -->
-      <div>
-        <h3 style="font-weight:700;font-size:15px;margin-bottom:12px;color:var(--text-secondary);">💡 Recommended Next</h3>
-        <div class="card" style="padding:16px;margin-bottom:12px;background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(99,102,241,0.05));border-color:rgba(99,102,241,0.3);">
-          <template x-if="recommendedChapter">
-            <div>
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-                <span class="tag" x-text="recommendedChapter.domain"></span>
-                <span :class="'tag ' + getLevelBadge(recommendedChapter.level)" x-text="recommendedChapter.level"></span>
-              </div>
-              <h4 style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:8px;" x-text="recommendedChapter.title"></h4>
-              <div style="display:flex;align-items:center;justify-content:space-between;">
-                <span style="font-size:12px;color:var(--text-muted);" x-text="`⏱ ${recommendedChapter.mins} min`"></span>
-                <button @click="navigate('chapter', recommendedChapter.id)" class="btn btn-primary btn-sm">Start →</button>
-              </div>
-            </div>
-          </template>
-          <template x-if="!recommendedChapter">
-            <div style="text-align:center;padding:12px;">
-              <div style="font-size:32px;margin-bottom:8px">🏆</div>
-              <p style="font-size:13px;color:var(--text-secondary)">All available chapters explored!</p>
-            </div>
-          </template>
-        </div>
-
-        <!-- Quick stats -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-          <div style="padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;text-align:center;">
-            <div style="font-size:1.5rem;font-weight:800;color:var(--accent-light)" x-text="userXP.total || 0"></div>
-            <div style="font-size:11px;color:var(--text-muted)">Total XP</div>
-          </div>
-          <div style="padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;text-align:center;">
-            <div style="font-size:1.5rem;font-weight:800;color:#34d399" x-text="overallProgress + '%'"></div>
-            <div style="font-size:11px;color:var(--text-muted)">Library Progress</div>
-          </div>
-          <div style="padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;text-align:center;">
-            <div style="font-size:1.5rem;font-weight:800;color:#fbbf24" x-text="bookmarks.length"></div>
-            <div style="font-size:11px;color:var(--text-muted)">Bookmarks</div>
-          </div>
-          <div style="padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:10px;text-align:center;">
-            <div style="font-size:1.5rem;font-weight:800;color:#f87171">🔥 <span x-text="userXP.streak || 0"></span></div>
-            <div style="font-size:11px;color:var(--text-muted)">Day Streak</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Domain Grid -->
-    <h2 style="font-weight:700;font-size:18px;margin-bottom:16px;">📚 All Domains</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
+    <!-- Domain quick links -->
+    <div x-show="sidebarOpen" class="sidebar-section-label">Domains</div>
+    <div x-show="sidebarOpen" style="padding:0 8px">
       <template x-for="d in domains" :key="d.id">
-        <div class="card domain-card" :class="`domain-${d.id}`" style="padding:20px;cursor:pointer;" @click="navigate('domains')">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-            <div style="width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;" :style="`background:${d.color}20`">
-              <span x-text="d.icon"></span>
-            </div>
-            <div>
-              <h3 style="font-weight:700;font-size:15px;color:var(--text-primary)" x-text="d.title"></h3>
-              <div style="font-size:12px;color:var(--text-muted)" x-text="`${d.chapters} chapters`"></div>
-            </div>
-          </div>
-          <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;line-height:1.5;" x-text="d.description"></p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">
-            <template x-for="tag in d.tags.slice(0,3)" :key="tag">
-              <span class="tag" style="font-size:11px;" x-text="tag"></span>
-            </template>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <div class="progress-bar" style="flex:1;margin-right:12px;"><div class="progress-fill" :style="`width:${getDomainProgress(d.id)}%`"></div></div>
-            <span style="font-size:12px;font-weight:600;color:var(--text-muted);white-space:nowrap;" x-text="`${getDomainProgress(d.id)}%`"></span>
-          </div>
-        </div>
+        <button @click="domainFilter=d.id; navigate('domains')"
+          :style="`width:100%;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;border:none;cursor:pointer;font-size:12px;transition:all .15s;text-align:left;background:${domainFilter===d.id?'var(--accent-dim)':'none'};color:${domainFilter===d.id?'var(--accent)':'var(--text-secondary)'}`">
+          <span x-text="d.icon" style="font-size:14px;flex-shrink:0"></span>
+          <span x-text="d.title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+        </button>
       </template>
     </div>
-  </div>
 
-  <!-- ─── DOMAINS PAGE ─────────────────────────────────────────────────────── -->
-  <div x-show="page==='domains' && !activeChapter" class="fade-in" style="padding:32px;max-width:1100px;margin:0 auto;">
-    <h1 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;">All Domains</h1>
-    <p style="color:var(--text-secondary);margin-bottom:28px;font-size:14px;">Browse all 5 domains and 31 chapters across the pharma analytics library.</p>
-    <template x-for="d in domains" :key="d.id">
-      <div style="margin-bottom:32px;">
-        <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);">
-          <div style="width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;" :style="`background:${d.color}20`">
-            <span x-text="d.icon"></span>
+    <!-- User block -->
+    <div class="sidebar-user">
+      <div style="display:flex;align-items:center;gap:10px;min-width:0">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0"
+          x-text="userName.charAt(0).toUpperCase()"></div>
+        <div x-show="sidebarOpen" style="min-width:0">
+          <div style="font-size:13px;font-weight:600;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" x-text="userName"></div>
+          <div style="font-size:11px;color:var(--text-muted)" x-text="userLevel.name + ' · ' + userXP.total + ' XP'"></div>
+        </div>
+      </div>
+      <button x-show="sidebarOpen" @click="toggleTheme()"
+        style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--text-muted);flex-shrink:0"
+        :title="theme==='dark'?'Switch to light':'Switch to dark'"
+        x-text="theme==='dark'?'☀':'☾'"></button>
+    </div>
+
+  </aside>
+
+  <!-- ── MAIN CONTENT ──────────────────────────────────────── -->
+  <div :class="sidebarOpen ? 'main' : 'main expanded'">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <button @click="sidebarOpen=!sidebarOpen" class="btn btn-ghost"
+        style="width:36px;height:36px;padding:0;font-size:18px" title="Toggle sidebar">☰</button>
+
+      <div style="flex:1;max-width:400px">
+        <input type="text" x-model="searchQuery" @input="runSearch()" @keyup.enter="navigate('search')"
+          placeholder="Search chapters, topics, tags…"
+          class="search-input" style="width:100%;font-size:13px">
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <!-- XP badge -->
+        <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--bg-elevated);border-radius:20px;border:1px solid var(--border)">
+          <span style="font-size:13px">⚡</span>
+          <span style="font-size:12px;font-weight:600;color:var(--text-primary)" x-text="userXP.total + ' XP'"></span>
+        </div>
+        <!-- Streak -->
+        <div x-show="userXP.streak > 0"
+          style="display:flex;align-items:center;gap:4px;padding:6px 10px;background:var(--bg-elevated);border-radius:20px;border:1px solid var(--border)">
+          <span style="font-size:13px">🔥</span>
+          <span style="font-size:12px;font-weight:600;color:#f97316" x-text="userXP.streak"></span>
+        </div>
+        <!-- Theme (mobile) -->
+        <button @click="toggleTheme()" class="btn btn-ghost" style="display:none"
+          x-text="theme==='dark'?'☀':'☾'"></button>
+      </div>
+    </header>
+
+    <!-- Page content -->
+    <main class="page-content">
+
+      <!-- ══════════════════════════════════════════
+           HOME
+      ══════════════════════════════════════════ -->
+      <div x-show="page==='home'">
+
+        <!-- Hero -->
+        <div style="margin-bottom:32px">
+          <h1 style="font-size:1.9rem;font-weight:800;color:var(--text-primary);margin-bottom:8px">
+            Good to see you, <span class="gradient-text" x-text="userName"></span>
+          </h1>
+          <p style="color:var(--text-secondary);font-size:14px">37 chapters across 6 domains of pharma analytics excellence.</p>
+        </div>
+
+        <!-- Stats row -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:32px">
+          <div class="stat-card">
+            <div class="stat-value" x-text="overallProgress + '%'"></div>
+            <div class="stat-label">Overall Progress</div>
+            <div class="progress" style="margin-top:10px"><div class="progress-fill" :style="`width:${overallProgress}%`"></div></div>
           </div>
-          <div style="flex:1;">
-            <h2 style="font-weight:800;font-size:1.2rem;color:var(--text-primary)" x-text="d.title"></h2>
-            <p style="font-size:13px;color:var(--text-secondary)" x-text="d.description"></p>
+          <div class="stat-card">
+            <div class="stat-value" x-text="userXP.total"></div>
+            <div class="stat-label">Total XP Earned</div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-size:1.25rem;font-weight:800;" :style="`color:${d.color}`" x-text="`${getDomainProgress(d.id)}%`"></div>
-            <div style="font-size:11px;color:var(--text-muted)">complete</div>
+          <div class="stat-card">
+            <div class="stat-value" x-text="userLevel.name"></div>
+            <div class="stat-label">Current Level</div>
+            <div class="progress" style="margin-top:10px"><div class="progress-fill" :style="`width:${userLevel.pct}%;background:${userLevel.color}`"></div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" x-text="(userXP.streak||0) + ' days'"></div>
+            <div class="stat-label">Learning Streak</div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">
-          <template x-for="c in d.chapters_list" :key="c.id">
-            <div class="card" style="padding:16px;" :class="c.available ? 'cursor-pointer' : ''" @click="c.available && navigate('chapter', c.id)"
-              :style="!c.available ? 'opacity:0.5' : ''">
-              <div style="display:flex;align-items:flex-start;gap:10px;">
-                <div style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;" :style="`background:${d.color}20`">
-                  <span x-text="c.available ? statusIcon(chapterProgress(c.id) > 0 ? 'reading' : 'not_started') : '🔒'"></span>
+
+        <!-- Continue Learning / Recommendation -->
+        <template x-if="recommendedChapter">
+          <div style="margin-bottom:32px">
+            <h2 class="section-heading">Continue Learning</h2>
+            <div class="card card-hover" @click="navigate('chapter', recommendedChapter.id)"
+              style="cursor:pointer;display:flex;align-items:center;gap:20px;padding:20px 24px">
+              <div style="width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0"
+                :style="`background:${domainColor(recommendedChapter.domain_id)}22`"
+                x-text="domains.find(d=>d.id===recommendedChapter.domain_id)?.icon||'📖'"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px" x-text="recommendedChapter.domain"></div>
+                <div style="font-size:15px;font-weight:600;color:var(--text-primary)" x-text="recommendedChapter.title"></div>
+                <div style="display:flex;gap:12px;margin-top:6px">
+                  <span class="tag" x-text="recommendedChapter.level"></span>
+                  <span style="font-size:12px;color:var(--text-muted)" x-text="'⏱ ' + formatTime(recommendedChapter.mins)"></span>
                 </div>
-                <div style="flex:1;min-width:0;">
-                  <div style="font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.4;margin-bottom:6px;" x-text="c.title"></div>
-                  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-                    <span :class="'tag ' + getLevelBadge(c.level)" style="font-size:11px;" x-text="c.level"></span>
-                    <span style="font-size:11px;color:var(--text-muted)" x-text="`⏱ ${c.mins} min`"></span>
-                    <template x-if="!c.available">
-                      <span style="font-size:11px;color:var(--text-muted)">Coming soon</span>
-                    </template>
+              </div>
+              <div style="font-size:20px;color:var(--accent)">→</div>
+            </div>
+          </div>
+        </template>
+
+        <!-- Domain cards -->
+        <h2 class="section-heading">All Domains</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px">
+          <template x-for="d in domains" :key="d.id">
+            <div class="chapter-card" @click="domainFilter=d.id; navigate('domains')" style="cursor:pointer">
+              <div :class="`stripe-${d.id}`" class="card-stripe"></div>
+              <div style="display:flex;align-items:flex-start;gap:14px">
+                <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0"
+                  :style="`background:${d.color}22`" x-text="d.icon"></div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:4px" x-text="d.title"></div>
+                  <div style="font-size:12px;color:var(--text-secondary);line-height:1.4;margin-bottom:12px" x-text="d.description"></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between">
+                    <span style="font-size:12px;color:var(--text-muted)" x-text="d.chapters.length + ' chapters'"></span>
+                    <span style="font-size:12px;font-weight:600;color:var(--accent)">Explore →</span>
                   </div>
-                  <template x-if="c.available && chapterProgress(c.id) > 0">
-                    <div style="margin-top:8px;">
-                      <div class="progress-bar" style="height:3px;"><div class="progress-fill" :style="`width:${chapterProgress(c.id)}%`"></div></div>
+                  <div class="progress" style="margin-top:6px">
+                    <div class="progress-fill" :style="`width:${getDomainProgress(d.id)}%;background:${d.color}`"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <!-- Recent chapters -->
+        <template x-if="recentChapters.length">
+          <div>
+            <h2 class="section-heading">Recently Visited</h2>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <template x-for="ch in recentChapters" :key="ch.id">
+                <div class="card card-hover" @click="navigate('chapter',ch.id)" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px 18px">
+                  <div style="width:8px;height:8px;border-radius:50%;flex-shrink:0" :style="`background:${domainColor(ch.domain_id)}`"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:13px;font-weight:600;color:var(--text-primary)" x-text="ch.title"></div>
+                    <div style="font-size:11px;color:var(--text-muted)" x-text="ch.domain"></div>
+                  </div>
+                  <div style="font-size:12px;font-weight:600;color:var(--accent)" x-text="ch.mastery + '%'"></div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           DOMAINS / LIBRARY
+      ══════════════════════════════════════════ -->
+      <div x-show="page==='domains' && !activeChapter">
+        <h1 style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:6px">Library</h1>
+        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:16px">37 chapters across 6 domains of pharma analytics.</p>
+
+        <!-- Domain filter chips -->
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px">
+          <button @click="domainFilter=null"
+            :style="`padding:6px 16px;border-radius:20px;border:1px solid ${domainFilter===null?'var(--accent)':'var(--border)'};background:${domainFilter===null?'var(--accent-dim)':'none'};color:${domainFilter===null?'var(--accent)':'var(--text-secondary)'};font-size:12px;font-weight:500;cursor:pointer`">
+            All Domains
+          </button>
+          <template x-for="d in domains" :key="d.id">
+            <button @click="domainFilter=d.id"
+              :style="`padding:6px 16px;border-radius:20px;border:1px solid ${domainFilter===d.id?d.color:'var(--border)'};background:${domainFilter===d.id?d.color+'22':'none'};color:${domainFilter===d.id?d.color:'var(--text-secondary)'};font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px`">
+              <span x-text="d.icon"></span>
+              <span x-text="d.title"></span>
+            </button>
+          </template>
+        </div>
+
+        <template x-for="d in (domainFilter ? domains.filter(x=>x.id===domainFilter) : domains)" :key="d.id">
+          <div style="margin-bottom:36px">
+            <!-- Domain header -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
+              <div style="display:flex;align-items:center;gap:12px">
+                <div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0"
+                  :style="`background:${d.color}22`" x-text="d.icon"></div>
+                <div>
+                  <div style="font-size:15px;font-weight:700;color:var(--text-primary)" x-text="d.title"></div>
+                  <div style="font-size:12px;color:var(--text-muted)" x-text="d.chapters.length + ' chapters · ' + getDomainProgress(d.id) + '% complete'"></div>
+                </div>
+              </div>
+              <!-- Start first chapter button -->
+              <button @click.stop="navigate('chapter', d.chapters[0])"
+                :style="`background:${d.color}22;color:${d.color};border:1px solid ${d.color}44;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer`">
+                Start →
+              </button>
+            </div>
+
+            <!-- Chapter list -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px">
+              <template x-for="cid in d.chapters" :key="cid">
+                <div>
+                  <!-- Available chapter -->
+                  <template x-if="getChapter(cid) && getChapter(cid).available">
+                    <div class="chapter-card" @click="navigate('chapter', cid)" style="cursor:pointer;display:flex;flex-direction:column;gap:0">
+                      <div :class="`stripe-${d.id}`" class="card-stripe"></div>
+                      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex:1">
+                        <div style="flex:1;min-width:0">
+                          <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.4px" x-text="'Chapter ' + cid"></div>
+                          <div style="font-size:13px;font-weight:700;color:var(--text-primary);line-height:1.3;margin-bottom:8px"
+                            x-text="getChapter(cid).title"></div>
+                          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">
+                            <span :class="getLevelClass(getChapter(cid).level)" x-text="getChapter(cid).level"></span>
+                            <span class="tag">⏱ <span x-text="formatTime(getChapter(cid).mins)"></span></span>
+                          </div>
+                          <!-- Tags preview -->
+                          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+                            <template x-for="tag in (getChapter(cid).tags||[]).slice(0,3)" :key="tag">
+                              <span style="font-size:10px;padding:2px 7px;border-radius:4px;background:var(--bg-overlay);color:var(--text-muted)" x-text="tag"></span>
+                            </template>
+                          </div>
+                          <div class="progress">
+                            <div class="progress-fill" :style="`width:${chapterProgress(cid)}%;background:${d.color}`"></div>
+                          </div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
+                          <div style="font-size:16px"
+                            :style="`color:${chapterProgress(cid)>=80?'#10b981':'var(--text-muted)'}`"
+                            x-text="chapterProgress(cid)>=80?'✓':'○'"></div>
+                        </div>
+                      </div>
+                      <!-- Read CTA -->
+                      <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+                        <span style="font-size:11px;color:var(--text-muted)" x-text="chapterProgress(cid)>0 ? chapterProgress(cid)+'% mastery' : 'Not started'"></span>
+                        <span :style="`font-size:12px;font-weight:600;color:${d.color}`">
+                          <span x-text="chapterProgress(cid)>0 ? 'Continue →' : 'Read →'"></span>
+                        </span>
+                      </div>
+                    </div>
+                  </template>
+                  <!-- Coming soon chapter (should not appear — all chapters are available) -->
+                  <template x-if="getChapter(cid) && !getChapter(cid).available">
+                    <div class="chapter-card" style="opacity:0.45;cursor:default">
+                      <div :class="`stripe-${d.id}`" class="card-stripe" style="opacity:0.4"></div>
+                      <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px" x-text="'Ch ' + cid"></div>
+                      <div style="font-size:13px;font-weight:600;color:var(--text-secondary)"
+                        x-text="getChapter(cid).title"></div>
+                      <div style="margin-top:8px"><span class="tag">Coming Soon</span></div>
                     </div>
                   </template>
                 </div>
-              </div>
-            </div>
-          </template>
-        </div>
-      </div>
-    </template>
-  </div>
-
-  <!-- ─── CHAPTER PAGE ─────────────────────────────────────────────────────── -->
-  <div x-show="page==='chapter' && activeChapter" class="fade-in">
-    <div style="display:flex;gap:0;max-width:1200px;margin:0 auto;">
-
-      <!-- Chapter main content -->
-      <div style="flex:1;min-width:0;padding:32px 40px 64px;" id="chapter-body">
-        <!-- Chapter header -->
-        <div style="margin-bottom:28px;">
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
-            <span class="tag" x-text="activeChapter?.domain"></span>
-            <span :class="'tag ' + getLevelBadge(activeChapter?.level)" x-text="activeChapter?.level"></span>
-            <span class="tag tag-blue" x-text="`⏱ ${activeChapter?.mins} min`"></span>
-            <span class="tag tag-green" x-text="`Reusability: ${activeChapter?.reusability}`"></span>
-          </div>
-          <h1 style="font-size:2rem;font-weight:800;line-height:1.3;margin-bottom:12px;" x-text="activeChapter?.title"></h1>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            <template x-for="tag in (activeChapter?.tags || [])" :key="tag">
-              <span style="font-size:11px;padding:2px 8px;background:var(--bg-hover);border:1px solid var(--border);border-radius:12px;color:var(--text-muted);" x-text="tag"></span>
-            </template>
-          </div>
-        </div>
-
-        <!-- Learning objectives pill -->
-        <div style="padding:16px 20px;background:var(--accent-dim);border:1px solid rgba(99,102,241,0.3);border-radius:12px;margin-bottom:28px;">
-          <div style="font-size:12px;font-weight:700;color:var(--accent-light);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">📋 Learning Objectives</div>
-          <ol style="padding-left:16px;margin:0;">
-            <template x-for="(obj, i) in (activeChapter?.objectives || [])" :key="i">
-              <li style="font-size:13px;color:var(--text-secondary);margin-bottom:4px;line-height:1.6;" x-text="obj"></li>
-            </template>
-          </ol>
-        </div>
-
-        <!-- Chapter sections -->
-        <div class="chapter-body">
-          <template x-for="section in (activeChapter?.sections || [])" :key="section.id">
-            <div x-html="section.content" style="margin-bottom:8px;"></div>
-          </template>
-        </div>
-
-        <!-- Quiz Section -->
-        <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);" id="s-quiz">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
-            <div>
-              <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:4px;">🧠 Knowledge Check</h2>
-              <p style="font-size:13px;color:var(--text-muted)" x-text="`${activeChapter?.questions?.length || 0} questions · Concepts from this chapter`"></p>
-            </div>
-            <template x-if="!quiz.active && !quiz.finished">
-              <button @click="startQuiz()" class="btn btn-primary">Start Quiz →</button>
-            </template>
-            <template x-if="quiz.finished">
-              <div style="display:flex;gap:8px;">
-                <div :style="`padding:8px 16px;border-radius:8px;font-weight:700;font-size:15px;background:${quiz.score/activeChapter.questions.length>=0.66?'rgba(16,185,129,0.15)':'rgba(239,68,68,0.1)'};color:${quiz.score/activeChapter.questions.length>=0.66?'#34d399':'#f87171'}`">
-                  <span x-text="`${quiz.score}/${activeChapter.questions.length} correct`"></span>
-                </div>
-                <button @click="startQuiz()" class="btn btn-secondary btn-sm">Retry</button>
-              </div>
-            </template>
-          </div>
-
-          <!-- Quiz in progress -->
-          <template x-if="quiz.active && !quiz.finished && currentQuestion">
-            <div class="card" style="padding:24px;">
-              <!-- Progress -->
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-                <span style="font-size:12px;color:var(--text-muted)" x-text="`Question ${quiz.current+1} of ${activeChapter.questions.length}`"></span>
-                <span :class="'tag ' + getLevelBadge(currentQuestion.difficulty)" x-text="currentQuestion.difficulty"></span>
-              </div>
-              <div class="progress-bar" style="margin-bottom:20px;"><div class="progress-fill" :style="`width:${((quiz.current)/(activeChapter.questions.length))*100}%`"></div></div>
-
-              <!-- Question -->
-              <div style="font-size:15px;font-weight:500;color:var(--text-primary);margin-bottom:20px;line-height:1.7;" x-html="currentQuestion.question.replace(/\n/g,'<br>')"></div>
-
-              <!-- Options -->
-              <div>
-                <template x-for="opt in currentQuestion.options" :key="opt.id">
-                  <div @click="selectAnswer(opt.id)" :class="'quiz-option ' + optionClass(opt.id)">
-                    <div style="width:24px;height:24px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;" x-text="opt.id.toUpperCase()"></div>
-                    <span style="font-size:14px;color:var(--text-secondary);line-height:1.5;" x-text="opt.text"></span>
-                  </div>
-                </template>
-              </div>
-
-              <!-- Submit / Explanation -->
-              <template x-if="!quiz.submitted">
-                <button @click="submitAnswer()" :disabled="!quiz.selected" class="btn btn-primary" style="margin-top:16px;" :style="quiz.selected?'':'opacity:0.4;cursor:not-allowed'">Submit Answer</button>
               </template>
-              <template x-if="quiz.submitted">
-                <div>
-                  <div :style="`padding:14px 16px;border-radius:10px;margin-top:16px;border:1px solid ${quiz.answers[quiz.current]?.correct?'var(--success)':'var(--danger)'};background:${quiz.answers[quiz.current]?.correct?'rgba(16,185,129,0.1)':'rgba(239,68,68,0.1)'}`">
-                    <div style="font-weight:700;margin-bottom:6px;" :style="`color:${quiz.answers[quiz.current]?.correct?'#34d399':'#f87171'}`" x-text="quiz.answers[quiz.current]?.correct?'✓ Correct!':'✗ Incorrect'"></div>
-                    <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;" x-text="currentQuestion.explanation"></div>
-                  </div>
-                  <button @click="nextQuestion()" class="btn btn-primary" style="margin-top:12px;" x-text="quiz.current+1 < activeChapter.questions.length ? 'Next Question →' : 'Finish Quiz'"></button>
-                </div>
-              </template>
-            </div>
-          </template>
-        </div>
-
-        <!-- Related chapters -->
-        <div style="margin-top:32px;padding:20px;background:var(--bg-hover);border-radius:12px;">
-          <h3 style="font-weight:700;font-size:14px;margin-bottom:14px;color:var(--text-muted);">🔗 Related Chapters</h3>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;">
-            <template x-for="d in domains" :key="d.id">
-              <template x-for="c in d.chapters_list.filter(ch => ch.available && ch.id !== (activeChapter?.id || ''))" :key="c.id">
-                <button @click="navigate('chapter', c.id)" class="btn btn-secondary btn-sm" x-text="c.title.length>35?c.title.substring(0,35)+'…':c.title"></button>
-              </template>
-            </template>
-          </div>
-        </div>
-      </div>
-
-      <!-- TOC Sidebar (desktop) -->
-      <div style="width:220px;flex-shrink:0;padding:32px 16px;display:none;" id="toc-sidebar" class="lg:block">
-        <div style="position:sticky;top:80px;">
-          <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">On this page</div>
-          <template x-for="item in (activeChapter?.toc || [])" :key="item.id">
-            <div @click="scrollToSection(item.id)"
-              :class="'toc-item ' + (item.level==='h3'?'toc-h3':'') + (activeSection===item.id?' active':'')"
-              x-text="item.title"></div>
-          </template>
-          <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
-            <div style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Progress</div>
-            <div class="progress-bar" style="margin-bottom:6px;"><div class="progress-fill" :style="`width:${readingPct}%`"></div></div>
-            <div style="font-size:12px;color:var(--text-muted)" x-text="`${readingPct}% read`"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ─── SEARCH PAGE ──────────────────────────────────────────────────────── -->
-  <div x-show="page==='search'" class="fade-in" style="padding:32px;max-width:900px;margin:0 auto;">
-    <h1 style="font-size:1.75rem;font-weight:800;margin-bottom:20px;">Search Library</h1>
-    <div style="position:relative;margin-bottom:24px;">
-      <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted)" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input x-model="searchQuery" @input="runSearch()" type="text" placeholder="Search chapters, topics, tools, datasets…" class="search-input">
-    </div>
-
-    <!-- Quick tag filters -->
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
-      <template x-for="tag in ['Oncology','Patient Analytics','Forecasting','Claims Data','ML','Market Access','HTA','LOT Analysis','SQL','Python']" :key="tag">
-        <span @click="searchQuery = tag; runSearch()" class="tag" style="cursor:pointer;font-size:12px;" x-text="tag"></span>
-      </template>
-    </div>
-
-    <!-- Results -->
-    <template x-if="searchResults.length > 0">
-      <div>
-        <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;" x-text="`${searchResults.length} results for '${searchQuery}'`"></p>
-        <template x-for="r in searchResults" :key="r.id">
-          <div class="card" style="padding:16px;margin-bottom:10px;" :class="r.available?'cursor-pointer':''" @click="r.available && navigate('chapter', r.id)">
-            <div style="display:flex;align-items:flex-start;gap:12px;">
-              <div style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;" :style="`background:${r.domain_color||'var(--accent)'}20`">
-                <span x-text="r.available?'📖':'🔒'"></span>
-              </div>
-              <div>
-                <div style="font-size:14px;font-weight:600;color:var(--text-primary);" x-text="r.title"></div>
-                <div style="font-size:12px;color:var(--text-muted);margin-top:4px;" x-text="r.domain"></div>
-                <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
-                  <span :class="'tag ' + getLevelBadge(r.level)" style="font-size:11px;" x-text="r.level"></span>
-                  <span style="font-size:11px;color:var(--text-muted)" x-text="`⏱ ${r.mins} min`"></span>
-                  <template x-if="!r.available"><span class="tag tag-yellow" style="font-size:11px;">Coming Soon</span></template>
-                </div>
-              </div>
             </div>
           </div>
         </template>
       </div>
-    </template>
-    <template x-if="searchQuery && searchResults.length === 0">
-      <div style="text-align:center;padding:40px;color:var(--text-muted);">
-        <div style="font-size:40px;margin-bottom:12px;">🔍</div>
-        <p>No chapters found for "<span x-text="searchQuery"></span>"</p>
-        <p style="font-size:13px;margin-top:8px;">Try a different keyword or browse All Domains</p>
-      </div>
-    </template>
-    <template x-if="!searchQuery">
-      <div style="text-align:center;padding:40px;color:var(--text-muted);">
-        <div style="font-size:40px;margin-bottom:12px;">📚</div>
-        <p>Type a topic, dataset, or concept to search</p>
-        <p style="font-size:13px;margin-top:8px;">Or click a tag above to browse by topic</p>
-      </div>
-    </template>
-  </div>
 
-  <!-- ─── BOOKMARKS PAGE ───────────────────────────────────────────────────── -->
-  <div x-show="page==='bookmarks'" class="fade-in" style="padding:32px;max-width:900px;margin:0 auto;">
-    <h1 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;">Bookmarks</h1>
-    <p style="color:var(--text-secondary);margin-bottom:24px;font-size:14px;" x-text="`${bookmarks.length} saved items`"></p>
-    <template x-if="bookmarks.length === 0">
-      <div style="text-align:center;padding:60px;color:var(--text-muted);">
-        <div style="font-size:48px;margin-bottom:16px">🔖</div>
-        <p style="font-size:16px;margin-bottom:8px;">No bookmarks yet</p>
-        <p style="font-size:13px;">Click ☆ on any chapter to save it here</p>
-        <button @click="navigate('domains')" class="btn btn-primary" style="margin-top:16px;">Browse Chapters</button>
-      </div>
-    </template>
-    <template x-for="b in bookmarks" :key="b.id">
-      <div class="card" style="padding:16px;margin-bottom:10px;">
-        <div style="display:flex;align-items:flex-start;gap:12px;">
-          <div style="width:36px;height:36px;background:var(--accent-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📖</div>
-          <div style="flex:1;">
-            <div style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:4px;" x-text="b.title"></div>
-            <div style="font-size:12px;color:var(--text-muted);" x-text="`Saved ${new Date(b.saved_at).toLocaleDateString()}`"></div>
-          </div>
-          <div style="display:flex;gap:6px;">
-            <button @click="b.chapter_id && navigate('chapter', b.chapter_id)" class="btn btn-secondary btn-sm">Open</button>
-            <button @click="removeBookmark(b.id)" class="btn btn-danger btn-sm">✕</button>
-          </div>
-        </div>
-      </div>
-    </template>
-  </div>
+      <!-- ══════════════════════════════════════════
+           CHAPTER READER
+      ══════════════════════════════════════════ -->
+      <div x-show="page==='chapter' && activeChapter" class="reader-layout">
 
-  <!-- ─── DASHBOARD PAGE ───────────────────────────────────────────────────── -->
-  <div x-show="page==='dashboard'" class="fade-in" style="padding:32px;max-width:1000px;margin:0 auto;">
-    <h1 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;">My Progress Dashboard</h1>
-    <p style="color:var(--text-secondary);margin-bottom:28px;font-size:14px;">Track your mastery across all domains and chapters.</p>
+        <!-- Main reading column -->
+        <div class="reader-body">
 
-    <!-- Summary cards -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:32px;">
-      <div class="card" style="padding:20px;text-align:center;">
-        <div style="font-size:2rem;font-weight:800;color:var(--accent-light)" x-text="`${overallProgress}%`"></div>
-        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Overall Progress</div>
-      </div>
-      <div class="card" style="padding:20px;text-align:center;">
-        <div style="font-size:2rem;font-weight:800;color:#fbbf24" x-text="userXP.total || 0"></div>
-        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Total XP Earned</div>
-      </div>
-      <div class="card" style="padding:20px;text-align:center;">
-        <div style="font-size:2rem;font-weight:800;" :style="`color:${userLevel.color}`" x-text="userLevel.name"></div>
-        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Current Level</div>
-      </div>
-      <div class="card" style="padding:20px;text-align:center;">
-        <div style="font-size:2rem;font-weight:800;color:#f87171">🔥 <span x-text="userXP.streak || 0"></span></div>
-        <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Day Streak</div>
-      </div>
-    </div>
-
-    <!-- Domain progress -->
-    <h2 style="font-weight:700;font-size:16px;margin-bottom:16px;">Domain Mastery</h2>
-    <template x-for="d in dashboardDomains" :key="d.id">
-      <div class="card" style="padding:20px;margin-bottom:14px;">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-          <div style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;" :style="`background:${d.color}20`" x-text="d.icon"></div>
-          <div style="flex:1;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-              <span style="font-weight:700;font-size:14px;" x-text="d.title"></span>
-              <span style="font-weight:800;font-size:14px;" :style="`color:${d.color}`" x-text="`${d.progress}%`"></span>
+          <!-- Breadcrumb + actions -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;gap:12px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted)">
+              <button @click="navigate('domains')" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:12px"
+                @mouseenter="$el.style.color='var(--accent)'" @mouseleave="$el.style.color='var(--text-muted)'">Library</button>
+              <span>›</span>
+              <span x-text="activeChapter?.domain" style="color:var(--text-secondary)"></span>
+              <span>›</span>
+              <span x-text="activeChapter?.title" style="color:var(--text-primary);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px"></span>
             </div>
-            <div class="progress-bar" style="height:6px;"><div class="progress-fill" :style="`width:${d.progress}%`"></div></div>
+            <div style="display:flex;gap:8px">
+              <button @click="toggleBookmark()" class="btn btn-ghost"
+                :style="chapterBookmarked?'color:var(--accent)':''"
+                x-text="chapterBookmarked?'◈ Saved':'◇ Save'"></button>
+            </div>
           </div>
+
+          <!-- Chapter header -->
+          <div style="margin-bottom:28px">
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+              <span x-show="activeChapter" :class="getLevelClass(activeChapter?.level)" x-text="activeChapter?.level"></span>
+              <span class="tag" x-text="formatTime(activeChapter?.mins||0)"></span>
+              <template x-for="tag in (activeChapter?.tags||[]).slice(0,4)" :key="tag">
+                <span class="tag" x-text="tag"></span>
+              </template>
+            </div>
+            <h1 style="font-size:1.7rem;font-weight:800;color:var(--text-primary);line-height:1.2;margin-bottom:12px"
+              x-text="activeChapter?.title"></h1>
+
+            <!-- Objectives -->
+            <div x-show="activeChapter?.objectives?.length" class="callout" style="margin-bottom:0">
+              <div class="callout-title">Learning Objectives</div>
+              <ol style="margin:0;padding-left:18px;color:var(--text-secondary);font-size:13px;line-height:1.7">
+                <template x-for="obj in (activeChapter?.objectives||[])" :key="obj">
+                  <li x-text="obj"></li>
+                </template>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Reading progress -->
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;padding:10px 14px;background:var(--bg-elevated);border-radius:8px;border:1px solid var(--border)">
+            <span style="font-size:12px;color:var(--text-muted)">Reading progress</span>
+            <div class="progress" style="flex:1"><div class="progress-fill" :style="`width:${readingPct}%`"></div></div>
+            <span style="font-size:12px;font-weight:600;color:var(--accent)" x-text="readingPct + '%'"></span>
+          </div>
+
+          <!-- Chapter body -->
+          <div id="chapter-body" class="chapter-body">
+            <template x-for="sec in (activeChapter?.sections||[])" :key="sec.id">
+              <div :id="sec.id" x-html="sec.content"></div>
+            </template>
+          </div>
+
+          <!-- Quiz section -->
+          <div x-show="activeChapter?.questions?.length" style="margin-top:48px">
+            <div style="height:1px;background:var(--border);margin-bottom:32px"></div>
+            <h2 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:6px">Knowledge Check</h2>
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:24px"
+              x-text="(activeChapter?.questions?.length||0) + ' questions · shuffled each attempt'"></p>
+
+            <!-- Pre-quiz state -->
+            <div x-show="!quiz.active">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:var(--bg-elevated);border-radius:12px;border:1px solid var(--border)">
+                <div>
+                  <div style="font-size:14px;font-weight:600;color:var(--text-primary)">Ready to test yourself?</div>
+                  <div style="font-size:12px;color:var(--text-muted);margin-top:2px"
+                    x-text="(activeChapter?.questions?.length||0) + ' questions · shuffled · instant feedback'"></div>
+                </div>
+                <button @click="startQuiz()" class="btn btn-primary">Start Quiz</button>
+              </div>
+            </div>
+
+            <!-- Active quiz -->
+            <div x-show="quiz.active && !quiz.finished">
+              <template x-if="currentQuestion">
+                <div>
+                  <!-- Progress bar -->
+                  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+                    <span style="font-size:12px;color:var(--text-muted)" x-text="'Question ' + (quiz.current+1) + ' of ' + quizTotal"></span>
+                    <div class="progress" style="flex:1">
+                      <div class="progress-fill" :style="`width:${((quiz.current)/(quizTotal||1))*100}%`"></div>
+                    </div>
+                  </div>
+
+                  <!-- Question text -->
+                  <div style="font-size:15px;font-weight:600;color:var(--text-primary);line-height:1.5;margin-bottom:20px"
+                    x-text="currentQuestion.text"></div>
+
+                  <!-- Options -->
+                  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+                    <template x-for="(opt, idx) in currentQuestion.options" :key="idx">
+                      <div :class="optionClass(idx)" @click="selectAnswer(idx)" style="cursor:pointer">
+                        <div class="quiz-letter" x-text="['A','B','C','D'][idx]"></div>
+                        <span x-text="opt"></span>
+                      </div>
+                    </template>
+                  </div>
+
+                  <!-- Explanation -->
+                  <div x-show="quiz.submitted" class="callout info" style="margin-bottom:16px">
+                    <div class="callout-title" x-text="quiz.answers[quiz.current]?.correct ? '✓ Correct!' : '✗ Not quite'"></div>
+                    <p x-text="currentQuestion.explanation" style="color:var(--text-secondary);font-size:13px;margin:0"></p>
+                  </div>
+
+                  <!-- Actions -->
+                  <div style="display:flex;gap:10px">
+                    <button x-show="!quiz.submitted" @click="submitAnswer()"
+                      :disabled="quiz.selected===null"
+                      class="btn btn-primary">Submit Answer</button>
+                    <button x-show="quiz.submitted" @click="nextQuestion()" class="btn btn-primary">
+                      <span x-text="quiz.current+1 < quizTotal ? 'Next Question →' : 'See Results'"></span>
+                    </button>
+                  </div>
+                </div>
+              </template>
+            </div>
+
+            <!-- Quiz results -->
+            <div x-show="quiz.finished" style="text-align:center;padding:32px;background:var(--bg-elevated);border-radius:16px;border:1px solid var(--border)">
+              <div style="font-size:48px;margin-bottom:12px"
+                x-text="quiz.score>=quizTotal*.67?'🏆':'📚'"></div>
+              <div style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:6px"
+                x-text="Math.round(quiz.score/(quizTotal||1)*100) + '%'"></div>
+              <div style="font-size:14px;color:var(--text-secondary);margin-bottom:8px"
+                x-text="quiz.score + ' of ' + quizTotal + ' correct'"></div>
+              <div style="font-size:12px;color:var(--text-muted);margin-bottom:20px">Questions are reshuffled each attempt</div>
+              <button @click="startQuiz()" class="btn btn-primary">Retake Quiz (New Order)</button>
+            </div>
+          </div>
+
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;">
-          <template x-for="c in d.chapters_detail" :key="c.id">
-            <div style="padding:8px 10px;background:var(--bg-hover);border-radius:8px;display:flex;align-items:center;justify-content:space-between;" :class="c.available?'cursor-pointer':''" @click="c.available&&navigate('chapter',c.id)">
-              <span style="font-size:12px;color:var(--text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px" x-text="c.title"></span>
-              <span style="font-size:12px;font-weight:600;margin-left:8px;" :style="`color:${c.mastery>=80?'#34d399':c.mastery>=40?'#fbbf24':'var(--text-muted)'}`" x-text="c.available?`${c.mastery}%`:'🔒'"></span>
+
+        <!-- TOC rail -->
+        <aside class="toc-rail">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:12px">Contents</div>
+          <template x-for="item in (activeChapter?.toc||[])" :key="item.id">
+            <div class="toc-item" :class="activeSection===item.id?'active':''"
+              :style="item.level==='h3'?'padding-left:20px':''"
+              @click="scrollToSection(item.id)">
+              <span x-text="item.title"></span>
+            </div>
+          </template>
+
+          <!-- Mastery -->
+          <div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:8px">Mastery</div>
+            <div style="font-size:1.4rem;font-weight:800;color:var(--accent)" x-text="chapterProgress(activeChapter?.id||'') + '%'"></div>
+            <div class="progress" style="margin-top:6px">
+              <div class="progress-fill" :style="`width:${chapterProgress(activeChapter?.id||'')}%`"></div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- ══════════════════════════════════════════
+           SEARCH
+      ══════════════════════════════════════════ -->
+      <div x-show="page==='search'">
+        <h1 style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:20px">Search</h1>
+        <input type="text" x-model="searchQuery" @input="runSearch()"
+          placeholder="Search by chapter title, topic, tag…"
+          class="search-input" style="width:100%;max-width:540px;font-size:14px;margin-bottom:24px">
+
+        <div x-show="!searchQuery" style="color:var(--text-muted);font-size:14px">Start typing to search across all 31 chapters.</div>
+        <div x-show="searchQuery && !searchResults.length" style="color:var(--text-muted);font-size:14px">No results found.</div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <template x-for="ch in searchResults" :key="ch.id">
+            <div class="card card-hover" @click="navigate('chapter',ch.id)" style="cursor:pointer;display:flex;align-items:center;gap:16px;padding:16px 20px">
+              <div style="width:10px;height:10px;border-radius:50%;flex-shrink:0" :style="`background:${ch.domain_color}`"></div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:13px;font-weight:600;color:var(--text-primary)" x-text="ch.title"></div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:3px" x-text="ch.domain + ' · ' + ch.level + ' · ' + formatTime(ch.mins)"></div>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+                  <template x-for="tag in (ch.tags||[]).slice(0,4)" :key="tag">
+                    <span class="tag" x-text="tag"></span>
+                  </template>
+                </div>
+              </div>
+              <span style="font-size:18px;color:var(--accent)">→</span>
             </div>
           </template>
         </div>
       </div>
-    </template>
 
-    <!-- Weak areas -->
-    <template x-if="weakAreas.length > 0">
-      <div style="margin-top:24px;">
-        <h2 style="font-weight:700;font-size:16px;margin-bottom:14px;">⚠️ Areas to Revisit</h2>
-        <div style="display:grid;gap:10px;">
-          <template x-for="w in weakAreas" :key="w.id">
-            <div class="card" style="padding:14px;display:flex;align-items:center;justify-content:space-between;border-color:rgba(245,158,11,0.3);">
-              <div>
-                <div style="font-size:13px;font-weight:600;" x-text="w.title"></div>
-                <div style="font-size:11px;color:var(--text-muted);" x-text="w.domain"></div>
+      <!-- ══════════════════════════════════════════
+           BOOKMARKS
+      ══════════════════════════════════════════ -->
+      <div x-show="page==='bookmarks'">
+        <h1 style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:6px">Bookmarks</h1>
+        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:24px">Chapters you've saved for quick access.</p>
+
+        <div x-show="!bookmarks.length" style="text-align:center;padding:60px 20px;color:var(--text-muted)">
+          <div style="font-size:40px;margin-bottom:12px">◇</div>
+          <div style="font-size:14px">No bookmarks yet. Open a chapter and click Save.</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <template x-for="bm in bookmarks" :key="bm.id">
+            <div class="card card-hover" style="display:flex;align-items:center;gap:14px;padding:16px 20px">
+              <div @click="navigate('chapter',bm.chapter_id)" style="flex:1;cursor:pointer;min-width:0">
+                <div style="font-size:13px;font-weight:600;color:var(--text-primary)" x-text="bm.title"></div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:3px" x-text="bm.domain"></div>
               </div>
-              <div style="display:flex;align-items:center;gap:10px;">
-                <span style="font-size:12px;color:#fbbf24;font-weight:700" x-text="`${w.mastery}% mastery`"></span>
-                <button @click="navigate('chapter', w.id)" class="btn btn-primary btn-sm">Review</button>
-              </div>
+              <button @click="removeBookmark(bm.id)" class="btn btn-ghost"
+                style="font-size:16px;color:var(--text-muted);flex-shrink:0" title="Remove">×</button>
             </div>
           </template>
         </div>
       </div>
-    </template>
+
+      <!-- ══════════════════════════════════════════
+           DASHBOARD
+      ══════════════════════════════════════════ -->
+      <div x-show="page==='dashboard'">
+        <h1 style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:6px">Dashboard</h1>
+        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:24px">Your learning analytics and progress overview.</p>
+
+        <!-- Summary stats -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:32px">
+          <div class="stat-card">
+            <div class="stat-value" x-text="overallProgress + '%'"></div>
+            <div class="stat-label">Overall Mastery</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" x-text="userXP.total"></div>
+            <div class="stat-label">Total XP</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" x-text="userLevel.name"></div>
+            <div class="stat-label">Level</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" x-text="(userXP.streak||0)"></div>
+            <div class="stat-label">Day Streak</div>
+          </div>
+        </div>
+
+        <!-- XP progress -->
+        <div class="card" style="margin-bottom:24px;padding:20px 24px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <div>
+              <div style="font-size:14px;font-weight:700;color:var(--text-primary)" x-text="userLevel.name"></div>
+              <div style="font-size:12px;color:var(--text-muted)"
+                x-text="userLevel.next ? userXP.total + ' / ' + userLevel.next + ' XP to next level' : 'Max level achieved!'"></div>
+            </div>
+            <div style="font-size:20px" x-text="userXP.total >= 5001 ? '👑' : userXP.total >= 2001 ? '🔮' : userXP.total >= 501 ? '⭐' : '🌱'"></div>
+          </div>
+          <div class="progress" style="height:8px">
+            <div class="progress-fill" :style="`width:${userLevel.pct}%;background:${userLevel.color}`"></div>
+          </div>
+        </div>
+
+        <!-- Domain breakdown -->
+        <h2 class="section-heading">Domain Progress</h2>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
+          <template x-for="d in dashboardDomains" :key="d.id">
+            <div class="card" style="padding:16px 20px">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span x-text="d.icon" style="font-size:18px"></span>
+                  <span style="font-size:13px;font-weight:600;color:var(--text-primary)" x-text="d.title"></span>
+                </div>
+                <span style="font-size:13px;font-weight:700" :style="`color:${d.color}`" x-text="d.progress + '%'"></span>
+              </div>
+              <div class="progress" style="height:6px;margin-bottom:10px">
+                <div class="progress-fill" :style="`width:${d.progress}%;background:${d.color}`"></div>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <template x-for="ch in d.chaptersDetail" :key="ch.id">
+                  <div :title="ch.title"
+                    style="width:32px;height:8px;border-radius:4px;cursor:pointer"
+                    @click="navigate('chapter',ch.id)"
+                    :style="`background:${ch.mastery>=80?d.color:ch.mastery>0?d.color+'88':'var(--bg-overlay)'}`"></div>
+                </template>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <!-- Weak areas -->
+        <template x-if="weakAreas.length">
+          <div>
+            <h2 class="section-heading">Areas to Review</h2>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <template x-for="ch in weakAreas" :key="ch.id">
+                <div class="card card-hover" @click="navigate('chapter',ch.id)" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px 18px">
+                  <div style="width:40px;height:40px;border-radius:8px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--accent);flex-shrink:0"
+                    x-text="ch.mastery + '%'"></div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:13px;font-weight:600;color:var(--text-primary)" x-text="ch.title"></div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:3px" x-text="ch.domain"></div>
+                  </div>
+                  <span style="font-size:18px;color:var(--accent)">→</span>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+
+      </div>
+
+    </main>
   </div>
+</div>
 
-</div><!-- end main-content -->
-
-<!-- App JS -->
-<script src="js/app.js"></script>
 <script>
-  // Re-highlight code blocks when chapter content loads
-  document.addEventListener('alpine:init', () => {
-    // No-op; Prism auto-highlights on load
-  });
-  // Re-run Prism when content updates
+// Trigger Prism highlight after Alpine renders chapter content
+document.addEventListener('alpine:initialized', () => {
   document.addEventListener('DOMContentLoaded', () => {
-    const observer = new MutationObserver(() => {
-      if (typeof Prism !== 'undefined') Prism.highlightAll();
-    });
-    observer.observe(document.getElementById('chapter-body') || document.body, {
-      childList: true, subtree: true
-    });
+    if (window.Prism) Prism.highlightAll();
   });
+});
 </script>
+
 </body>
 </html>
