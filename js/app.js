@@ -10,6 +10,7 @@
   const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz456'
   const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // from EmailJS Account → API Keys
   const ADMIN_SECRET = 'PAL-HMAC-SECRET-2025';     // change to something private
+  const SESSION_EXPIRY_MS = 30 * 24 * 60 * 60 * 1000; // 30 days then re-verify
 
   // ─── HMAC token helpers (Web Crypto API) ─────────────────────────────────
   async function makeHmacKey() {
@@ -214,6 +215,18 @@
       // ── Normal page load ─────────────────────────────────────
       const verified = store.get('otp_verified', false);
       if (verified) {
+        // Check session expiry (30 days)
+        const accessInfo = store.get('access_info', null);
+        const grantedAt  = accessInfo?.ts || 0;
+        if (Date.now() - grantedAt > SESSION_EXPIRY_MS) {
+          store.set('otp_verified', false);
+          store.set('access_info', null);
+          this.accessStep  = 'form';
+          this.accessError = 'Your session has expired after 30 days. Please request a new access link from the admin.';
+          this.showAccessGate = true;
+          this._boot();
+          return;
+        }
         const user = store.get('user', null);
         if (!user || !user.name || user.name === 'Learner') {
           this.showOnboarding = true;
@@ -609,6 +622,19 @@
       this.accessStep = 'pending';
     },
 
+    logout() {
+      store.set('otp_verified', false);
+      store.set('access_info', null);
+      store.set('access_requested', null);
+      this.accessStep   = 'form';
+      this.accessError  = '';
+      this.accessName   = '';
+      this.accessEmail  = '';
+      this.accessOrg    = '';
+      this.showAccessGate = true;
+      window.location.hash = '/home';
+    },
+
     resetAccessRequest() {
       store.set('access_requested', null);
       this.accessStep  = 'form';
@@ -618,39 +644,52 @@
       this.accessOrg   = '';
     },
 
-    // ─── Pharma News — Google News RSS via allorigins proxy ──────────────────
+    // ─── Pharma News — FiercePharma RSS (Google News as fallback) ───────────
     async fetchNews() {
       this.newsLoading = true;
-      try {
-        const feedUrl = 'https://news.google.com/rss/search' +
-          '?q=pharmaceutical+drug+approval+FDA+biotech' +
-          '&hl=en-US&gl=US&ceid=US:en';
-        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(feedUrl);
-        const controller = new AbortController();
-        const tId = setTimeout(() => controller.abort(), 9000);
-        const res = await fetch(proxyUrl, { signal: controller.signal });
-        clearTimeout(tId);
+      const proxy = url => 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
+
+      const fetchFeed = async (feedUrl, sourceName) => {
+        const ctrl = new AbortController();
+        const tid  = setTimeout(() => ctrl.abort(), 9000);
+        const res  = await fetch(proxy(feedUrl), { signal: ctrl.signal });
+        clearTimeout(tid);
         if (!res.ok) throw new Error('proxy err');
         const json = await res.json();
         if (!json.contents) throw new Error('no content');
-        const xml = new DOMParser().parseFromString(json.contents, 'text/xml');
+        const xml   = new DOMParser().parseFromString(json.contents, 'text/xml');
         const items = [...xml.querySelectorAll('item')].slice(0, 5);
-        this.pharmaNews = items.map(item => {
-          const raw   = (item.querySelector('title')?.textContent || '').trim();
-          const link  = (item.querySelector('link')?.textContent || '#').trim();
+        if (!items.length) throw new Error('no items');
+        return items.map(item => {
+          const title = (item.querySelector('title')?.textContent || '').trim();
+          let link    = (item.querySelector('link')?.textContent || '').trim();
+          // <link> in RSS sometimes sits between tags; try guid as backup
+          if (!link) link = item.querySelector('guid')?.textContent?.trim() || '#';
           const pub   = item.querySelector('pubDate')?.textContent || '';
-          // Google News titles: "Article Title - Source Name"
-          const parts  = raw.split(' - ');
-          const source = parts.length > 1 ? parts.pop().trim() : 'Google News';
-          const title  = parts.join(' - ').trim();
+          // FiercePharma titles are plain; Google News appends " - Source"
+          const parts  = title.split(' - ');
+          const source = sourceName || (parts.length > 1 ? parts.pop().trim() : 'Fierce Pharma');
+          const clean  = sourceName ? title : parts.join(' - ').trim();
           return {
-            title,
-            url: link,
+            title: clean,
+            url: link || '#',
             source,
             date: pub ? new Date(pub).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : ''
           };
         }).filter(i => i.title);
-      } catch(e) { /* silently fail — UI shows empty state */ }
+      };
+
+      try {
+        // Primary: Fierce Pharma
+        this.pharmaNews = await fetchFeed('https://www.fiercepharma.com/rss/xml', 'Fierce Pharma');
+      } catch(e) {
+        try {
+          // Fallback: Google News RSS
+          const gnUrl = 'https://news.google.com/rss/search' +
+            '?q=pharmaceutical+FDA+biotech+drug+approval&hl=en-US&gl=US&ceid=US:en';
+          this.pharmaNews = await fetchFeed(gnUrl, null);
+        } catch(e2) { /* silently fail — UI shows empty state with retry */ }
+      }
       this.newsLoading = false;
     },
 

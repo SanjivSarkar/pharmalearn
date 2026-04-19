@@ -53,17 +53,28 @@
         <svg width="52" height="52" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="palg-al" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#818cf8"/>
-              <stop offset="0.5" stop-color="#a78bfa"/>
-              <stop offset="1" stop-color="#38bdf8"/>
+              <stop stop-color="#312e81"/>
+              <stop offset="0.5" stop-color="#4338ca"/>
+              <stop offset="1" stop-color="#0369a1"/>
+            </linearGradient>
+            <linearGradient id="palg-al-line" x1="7" y1="36" x2="45" y2="16" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#a5b4fc"/>
+              <stop offset="1" stop-color="#7dd3fc"/>
             </linearGradient>
           </defs>
-          <rect width="52" height="52" rx="15" fill="url(#palg-al)"/>
-          <circle cx="42" cy="10" r="4" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="10" cy="42" r="3" fill="rgba(255,255,255,0.16)"/>
-          <circle cx="40" cy="40" r="2" fill="rgba(255,255,255,0.12)"/>
-          <text x="26" y="33" text-anchor="middle" fill="white" font-size="17" font-weight="900"
-            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-0.5">PAL</text>
+          <rect width="52" height="52" rx="13" fill="url(#palg-al)"/>
+          <!-- Subtle grid lines -->
+          <line x1="7" y1="38" x2="45" y2="38" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <line x1="7" y1="30" x2="45" y2="30" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <!-- Sparkline chart -->
+          <polyline points="8,36 16,30 24,33 33,19 45,23"
+            fill="none" stroke="url(#palg-al-line)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Peak glow dot -->
+          <circle cx="33" cy="19" r="3.5" fill="rgba(165,180,252,0.25)"/>
+          <circle cx="33" cy="19" r="2" fill="#c7d2fe"/>
+          <!-- PAL label -->
+          <text x="26" y="48.5" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="9.5" font-weight="800"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="2.5">PAL</text>
         </svg>
         <div class="auth-logo-text">
           <span class="auth-logo-title">PAL</span>
@@ -114,13 +125,20 @@
       <svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="palg-mob" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#6366f1"/>
-            <stop offset="1" stop-color="#06b6d4"/>
+            <stop stop-color="#312e81"/>
+            <stop offset="1" stop-color="#0369a1"/>
+          </linearGradient>
+          <linearGradient id="palg-mob-line" x1="4" y1="25" x2="32" y2="11" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#a5b4fc"/>
+            <stop offset="1" stop-color="#7dd3fc"/>
           </linearGradient>
         </defs>
-        <rect width="36" height="36" rx="10" fill="url(#palg-mob)"/>
-        <text x="18" y="24" text-anchor="middle" fill="white" font-size="12" font-weight="900"
-          font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-0.5">PAL</text>
+        <rect width="36" height="36" rx="9" fill="url(#palg-mob)"/>
+        <polyline points="5,25 11,20 17,22 23,13 31,16"
+          fill="none" stroke="url(#palg-mob-line)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="23" cy="13" r="2" fill="#c7d2fe"/>
+        <text x="18" y="33.5" text-anchor="middle" fill="rgba(255,255,255,0.88)" font-size="6.5" font-weight="800"
+          font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="2">PAL</text>
       </svg>
       <span style="font-weight:800;font-size:16px;color:var(--text-primary)">Pharma Analytics Library</span>
     </div>
@@ -213,16 +231,24 @@
         <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="palg-ob" x1="0" y1="0" x2="56" y2="56" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#6366f1"/>
-              <stop offset="0.5" stop-color="#8b5cf6"/>
-              <stop offset="1" stop-color="#06b6d4"/>
+              <stop stop-color="#312e81"/>
+              <stop offset="0.5" stop-color="#4338ca"/>
+              <stop offset="1" stop-color="#0369a1"/>
+            </linearGradient>
+            <linearGradient id="palg-ob-ln" x1="8" y1="40" x2="48" y2="18" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#a5b4fc"/>
+              <stop offset="1" stop-color="#7dd3fc"/>
             </linearGradient>
           </defs>
-          <rect width="56" height="56" rx="16" fill="url(#palg-ob)"/>
-          <circle cx="45" cy="11" r="4" fill="rgba(255,255,255,0.2)"/>
-          <circle cx="12" cy="45" r="3" fill="rgba(255,255,255,0.16)"/>
-          <text x="28" y="36" text-anchor="middle" fill="white" font-size="19" font-weight="900"
-            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-1">PAL</text>
+          <rect width="56" height="56" rx="14" fill="url(#palg-ob)"/>
+          <line x1="8" y1="41" x2="48" y2="41" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <line x1="8" y1="33" x2="48" y2="33" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+          <polyline points="8,39 17,32 26,35 35,20 48,24"
+            fill="none" stroke="url(#palg-ob-ln)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="35" cy="20" r="3.8" fill="rgba(165,180,252,0.2)"/>
+          <circle cx="35" cy="20" r="2.2" fill="#c7d2fe"/>
+          <text x="28" y="52" text-anchor="middle" fill="rgba(255,255,255,0.88)" font-size="10" font-weight="800"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="2.5">PAL</text>
         </svg>
       </div>
       <h2 class="gradient-text" style="font-size:1.7rem;font-weight:800;margin-bottom:4px">Pharma Analytics Library</h2>
@@ -300,14 +326,20 @@
         <svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
           <defs>
             <linearGradient id="palg-sb" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#6366f1"/>
-              <stop offset="1" stop-color="#06b6d4"/>
+              <stop stop-color="#312e81"/>
+              <stop offset="1" stop-color="#0369a1"/>
+            </linearGradient>
+            <linearGradient id="palg-sb-ln" x1="4" y1="24" x2="30" y2="10" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#a5b4fc"/>
+              <stop offset="1" stop-color="#7dd3fc"/>
             </linearGradient>
           </defs>
           <rect width="34" height="34" rx="9" fill="url(#palg-sb)"/>
-          <circle cx="27" cy="7" r="3" fill="rgba(255,255,255,0.22)"/>
-          <text x="17" y="22.5" text-anchor="middle" fill="white" font-size="11.5" font-weight="900"
-            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-0.5">PAL</text>
+          <polyline points="4,24 10,19 16,21 22,12 30,15"
+            fill="none" stroke="url(#palg-sb-ln)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="22" cy="12" r="1.8" fill="#c7d2fe"/>
+          <text x="17" y="32" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="6" font-weight="800"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="2">PAL</text>
         </svg>
         <div x-show="sidebarOpen">
           <div style="font-weight:800;font-size:14px;color:var(--text-primary);letter-spacing:-.3px">PAL</div>
@@ -378,10 +410,15 @@
           <div style="font-size:11px;color:var(--text-muted)" x-text="userLevel.name + ' · ' + userXP.total + ' XP'"></div>
         </div>
       </div>
-      <button x-show="sidebarOpen" @click="toggleTheme()"
-        style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--text-muted);flex-shrink:0"
-        :title="theme==='dark'?'Switch to light':'Switch to dark'"
-        x-text="theme==='dark'?'☀':'☾'"></button>
+      <div x-show="sidebarOpen" style="display:flex;align-items:center;gap:4px;flex-shrink:0">
+        <button @click="toggleTheme()"
+          style="background:none;border:none;cursor:pointer;font-size:15px;color:var(--text-muted);padding:4px 5px;border-radius:6px;transition:color .15s"
+          :title="theme==='dark'?'Switch to light':'Switch to dark'"
+          x-text="theme==='dark'?'☀':'☾'"></button>
+        <button @click="logout()" title="Sign out — requires re-verification"
+          style="background:none;border:none;cursor:pointer;font-size:13px;color:var(--text-muted);padding:4px 5px;border-radius:6px;transition:color .15s;line-height:1"
+          @mouseenter="$el.style.color='#f87171'" @mouseleave="$el.style.color='var(--text-muted)'">⏻</button>
+      </div>
     </div>
 
   </aside>
