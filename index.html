@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PharmaLearn — Digital Pharma Analytics Library</title>
-  <meta name="description" content="World-class digital learning for pharma analytics, commercial strategy, market access, and data science.">
+  <title>PAL — Pharma Analytics Library</title>
+  <meta name="description" content="PAL — Pharma Analytics Library. The definitive learning platform for pharma analytics, commercial strategy, market access, and data science.">
 
   <!-- Tailwind (utilities only — design system in custom.css) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -38,51 +38,79 @@
 <div id="reading-bar" class="reading-progress-bar" style="width:0%"></div>
 
 <!-- ═══════════════════════════════════════════════════════
-     OTP VERIFICATION GATE
+     ACCESS REQUEST GATE
 ═══════════════════════════════════════════════════════ -->
 <div x-show="showOtpGate" class="fixed inset-0 z-[300] flex items-center justify-center p-4"
-     style="background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);">
-  <div class="card w-full max-w-sm p-8" style="border:1px solid var(--accent);animation:fadeUp .3s ease">
+     style="background:rgba(8,8,20,0.96);backdrop-filter:blur(20px);">
+  <div style="width:100%;max-width:440px;background:var(--bg-elevated);border:1px solid rgba(99,102,241,0.35);border-radius:20px;padding:40px;box-shadow:0 32px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04);animation:fadeUp .35s ease">
 
-    <div class="text-center mb-6">
-      <div style="font-size:48px;margin-bottom:12px">🧬</div>
-      <h2 class="gradient-text" style="font-size:1.6rem;font-weight:800;margin-bottom:6px">PharmaLearn</h2>
-      <p style="color:var(--text-secondary);font-size:13px">Verify your mobile number to get started</p>
-    </div>
-
-    <!-- Step 1: Phone number -->
-    <div x-show="otpStep===1">
-      <label class="label-sm">Mobile Number (with country code)</label>
-      <input x-model="otpPhone" type="tel" placeholder="+1 555 000 0000"
-        class="search-input" style="width:100%;margin-bottom:8px;font-size:14px"
-        @keyup.enter="sendOTP()">
-      <p style="font-size:11px;color:var(--text-muted);margin-bottom:16px">Include country code: +1 (US), +44 (UK), +91 (India)</p>
-      <div x-show="otpError" x-text="otpError" style="color:#ef4444;font-size:12px;margin-bottom:12px;line-height:1.4"></div>
-      <button @click="sendOTP()" :disabled="otpLoading" class="btn btn-primary" style="width:100%;margin-bottom:12px">
-        <span x-text="otpLoading ? 'Sending…' : 'Send Verification Code →'"></span>
-      </button>
-      <div style="text-align:center">
-        <button @click="skipOtp()"
-          style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--text-muted);text-decoration:underline">
-          Skip — explore in demo mode
-        </button>
+    <!-- PAL Logo + branding -->
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="display:inline-block;margin-bottom:18px">
+        <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="palg-gate" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1"/>
+              <stop offset="0.5" stop-color="#8b5cf6"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="18" fill="url(#palg-gate)"/>
+          <circle cx="52" cy="14" r="5" fill="rgba(255,255,255,0.18)"/>
+          <circle cx="14" cy="52" r="4" fill="rgba(255,255,255,0.14)"/>
+          <circle cx="48" cy="50" r="2.5" fill="rgba(255,255,255,0.12)"/>
+          <text x="32" y="41" text-anchor="middle" fill="white" font-size="22" font-weight="900"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-1">PAL</text>
+        </svg>
       </div>
-      <p style="text-align:center;margin-top:12px;font-size:10px;color:var(--text-muted)">SMS via Textbelt · Free tier: 1 message/day/IP</p>
+      <h1 style="font-size:1.5rem;font-weight:800;color:var(--text-primary);margin-bottom:4px;letter-spacing:-.4px">Pharma Analytics Library</h1>
+      <p style="color:var(--text-secondary);font-size:13px;line-height:1.5">Request access to the definitive pharma analytics learning platform</p>
     </div>
 
-    <!-- Step 2: Code entry -->
-    <div x-show="otpStep===2">
-      <p style="color:var(--text-secondary);font-size:13px;margin-bottom:20px;line-height:1.5">
-        A 6-digit code was sent to <strong x-text="otpPhone"></strong>. Enter it below.
+    <!-- Request form -->
+    <div x-show="!accessSent">
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:20px">
+        <div>
+          <label class="label-sm">Full Name</label>
+          <input x-model="accessName" type="text" placeholder="e.g. Sarah Chen"
+            class="search-input" style="width:100%" @keyup.enter="requestAccess()">
+        </div>
+        <div>
+          <label class="label-sm">Email Address</label>
+          <input x-model="accessEmail" type="email" placeholder="your@company.com"
+            class="search-input" style="width:100%" @keyup.enter="requestAccess()">
+        </div>
+        <div>
+          <label class="label-sm" style="display:flex;align-items:center;gap:6px">
+            Organization
+            <span style="font-size:10px;color:var(--text-muted);font-weight:400;text-transform:none;letter-spacing:0">optional</span>
+          </label>
+          <input x-model="accessOrg" type="text" placeholder="e.g. Pfizer, BCG, Novartis"
+            class="search-input" style="width:100%" @keyup.enter="requestAccess()">
+        </div>
+      </div>
+      <div x-show="accessError" x-text="accessError"
+        style="color:#f87171;font-size:12px;margin-bottom:14px;padding:10px 14px;background:rgba(239,68,68,0.08);border-radius:8px;border:1px solid rgba(239,68,68,0.2)"></div>
+      <button @click="requestAccess()" :disabled="accessLoading" class="btn btn-primary" style="width:100%;height:44px;font-size:14px;font-weight:600">
+        <span x-text="accessLoading ? 'Opening email…' : 'Request Access →'"></span>
+      </button>
+      <p style="text-align:center;margin-top:14px;font-size:11px;color:var(--text-muted);line-height:1.6">
+        Access is approved by <strong style="color:var(--text-secondary)">sanjivkumarsarkar@gmail.com</strong><br>
+        Your email client will open to send the request
       </p>
-      <label class="label-sm">Verification Code</label>
-      <input x-model="otpCode" type="text" inputmode="numeric" maxlength="6"
-        placeholder="000000" class="search-input"
-        style="width:100%;margin-bottom:16px;font-size:1.8rem;letter-spacing:10px;text-align:center;padding:12px"
-        @keyup.enter="verifyOTP()">
-      <div x-show="otpError" x-text="otpError" style="color:#ef4444;font-size:12px;margin-bottom:12px"></div>
-      <button @click="verifyOTP()" class="btn btn-primary" style="width:100%;margin-bottom:10px">Verify & Enter →</button>
-      <button @click="otpStep=1;otpCode='';otpError=''" class="btn btn-ghost" style="width:100%;font-size:12px">← Use different number</button>
+    </div>
+
+    <!-- Success state -->
+    <div x-show="accessSent" style="text-align:center">
+      <div style="width:56px;height:56px;border-radius:50%;background:rgba(16,185,129,0.15);border:2px solid #10b981;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:22px">✓</div>
+      <h3 style="font-size:1.15rem;font-weight:700;color:var(--text-primary);margin-bottom:8px">Request Sent!</h3>
+      <p style="color:var(--text-secondary);font-size:13px;margin-bottom:28px;line-height:1.6">
+        Your request was sent to the admin via email. You'll hear back at
+        <strong x-text="accessEmail" style="color:var(--text-primary)"></strong>.
+      </p>
+      <button @click="enterPlatform()" class="btn btn-primary" style="width:100%;height:44px;font-size:14px;font-weight:600">
+        Enter PAL →
+      </button>
     </div>
 
   </div>
@@ -96,9 +124,24 @@
   <div class="card w-full max-w-md p-8" style="border:1px solid var(--accent);animation:fadeUp .3s ease">
 
     <div class="text-center mb-8">
-      <div style="font-size:52px;margin-bottom:12px">🧬</div>
-      <h2 class="gradient-text" style="font-size:1.8rem;font-weight:800;margin-bottom:6px">PharmaLearn</h2>
-      <p style="color:var(--text-secondary);font-size:13px">The analytics library for pharma professionals.</p>
+      <div style="display:inline-block;margin-bottom:16px">
+        <svg width="56" height="56" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="palg-ob" x1="0" y1="0" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1"/>
+              <stop offset="0.5" stop-color="#8b5cf6"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+          <rect width="56" height="56" rx="16" fill="url(#palg-ob)"/>
+          <circle cx="45" cy="11" r="4" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="12" cy="45" r="3" fill="rgba(255,255,255,0.16)"/>
+          <text x="28" y="36" text-anchor="middle" fill="white" font-size="19" font-weight="900"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-1">PAL</text>
+        </svg>
+      </div>
+      <h2 class="gradient-text" style="font-size:1.7rem;font-weight:800;margin-bottom:4px">Pharma Analytics Library</h2>
+      <p style="color:var(--text-secondary);font-size:13px">Tell us about yourself to personalise your journey.</p>
     </div>
 
     <!-- Step 1 -->
@@ -169,10 +212,21 @@
     <!-- Logo -->
     <div class="sidebar-logo">
       <div style="display:flex;align-items:center;gap:10px">
-        <div style="width:32px;height:32px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🧬</div>
+        <svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+          <defs>
+            <linearGradient id="palg-sb" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1"/>
+              <stop offset="1" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+          <rect width="34" height="34" rx="9" fill="url(#palg-sb)"/>
+          <circle cx="27" cy="7" r="3" fill="rgba(255,255,255,0.22)"/>
+          <text x="17" y="22.5" text-anchor="middle" fill="white" font-size="11.5" font-weight="900"
+            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="-0.5">PAL</text>
+        </svg>
         <div x-show="sidebarOpen">
-          <div style="font-weight:800;font-size:15px;color:var(--text-primary);letter-spacing:-.3px">PharmaLearn</div>
-          <div style="font-size:10px;color:var(--text-muted)">Analytics Library</div>
+          <div style="font-weight:800;font-size:14px;color:var(--text-primary);letter-spacing:-.3px">PAL</div>
+          <div style="font-size:10px;color:var(--text-muted);letter-spacing:.2px">Pharma Analytics Library</div>
         </div>
       </div>
     </div>
@@ -292,7 +346,7 @@
           <h1 style="font-size:1.9rem;font-weight:800;color:var(--text-primary);margin-bottom:8px">
             Good to see you, <span class="gradient-text" x-text="userName"></span>
           </h1>
-          <p style="color:var(--text-secondary);font-size:14px">37 chapters across 6 domains of pharma analytics excellence.</p>
+          <p style="color:var(--text-secondary);font-size:14px">52 chapters across 6 domains of pharma analytics excellence.</p>
         </div>
 
         <!-- Stats row -->
@@ -424,7 +478,7 @@
       ══════════════════════════════════════════ -->
       <div x-show="page==='domains' && !activeChapter">
         <h1 style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:6px">Library</h1>
-        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:16px">37 chapters across 6 domains of pharma analytics.</p>
+        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:16px">52 chapters across 6 domains of pharma analytics.</p>
 
         <!-- Domain filter chips -->
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px">
@@ -692,7 +746,7 @@
           placeholder="Search by chapter title, topic, tag…"
           class="search-input" style="width:100%;max-width:540px;font-size:14px;margin-bottom:24px">
 
-        <div x-show="!searchQuery" style="color:var(--text-muted);font-size:14px">Start typing to search across all 31 chapters.</div>
+        <div x-show="!searchQuery" style="color:var(--text-muted);font-size:14px">Start typing to search across all 52 chapters.</div>
         <div x-show="searchQuery && !searchResults.length" style="color:var(--text-muted);font-size:14px">No results found.</div>
 
         <div style="display:flex;flex-direction:column;gap:10px">

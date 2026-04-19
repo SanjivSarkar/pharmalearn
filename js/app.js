@@ -117,12 +117,12 @@
     toast: { show: false, msg: '', type: 'success' },
 
     showOtpGate: false,
-    otpStep: 1,
-    otpPhone: '',
-    otpCode: '',
-    otpSent: '',
-    otpError: '',
-    otpLoading: false,
+    accessName: '',
+    accessEmail: '',
+    accessOrg: '',
+    accessSent: false,
+    accessError: '',
+    accessLoading: false,
 
     pharmaNews: [],
     newsLoading: false,
@@ -423,89 +423,78 @@
       store.set('user', this.onboardData);
       this.showOnboarding = false;
       XP.add(50, 'onboarding');
-      this.showToast('Welcome to PharmaLearn!', 'success');
+      this.showToast('Welcome to PAL!', 'success');
     },
 
-    // ─── OTP Verification ────────────────────────────────────────────────────
-    async sendOTP() {
-      const phone = this.otpPhone.trim();
-      if (!phone || phone.length < 7) {
-        this.otpError = 'Please enter a valid phone number with country code';
+    // ─── Access Request Gate ──────────────────────────────────────────────────
+    requestAccess() {
+      const name = this.accessName.trim();
+      const email = this.accessEmail.trim();
+      if (!name) { this.accessError = 'Please enter your full name'; return; }
+      if (!email || !email.includes('@') || !email.includes('.')) {
+        this.accessError = 'Please enter a valid email address';
         return;
       }
-      this.otpLoading = true;
-      this.otpError = '';
-      const code = String(Math.floor(100000 + Math.random() * 900000));
-      this.otpSent = code;
-      try {
-        const res = await fetch('https://textbelt.com/text', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            phone: phone.replace(/\s+/g, ''),
-            message: `PharmaLearn verification code: ${code}. Valid for 10 minutes.`,
-            key: 'textbelt'
-          })
-        });
-        const data = await res.json();
-        if (data.success) {
-          this.otpStep = 2;
-          this.showToast('Code sent to ' + phone, 'success');
-        } else {
-          this.otpError = 'Could not send SMS. Free tier allows 1 SMS/day per IP. Try "Skip for demo mode" below.';
-        }
-      } catch(e) {
-        this.otpError = 'Network error. Please check connection or use skip below.';
-      }
-      this.otpLoading = false;
+      this.accessLoading = true;
+      this.accessError = '';
+
+      // Compose and open mailto to notify admin
+      const sub = encodeURIComponent('PAL Access Request — ' + name);
+      const body = encodeURIComponent(
+        'New access request for Pharma Analytics Library (PAL):\n\n' +
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Organization: ' + (this.accessOrg.trim() || '—') + '\n' +
+        'Time: ' + new Date().toLocaleString() + '\n\n' +
+        '---\nReply to this email to grant access.'
+      );
+      window.open('mailto:sanjivkumarsarkar@gmail.com?subject=' + sub + '&body=' + body, '_blank');
+
+      store.set('access_info', { name, email, org: this.accessOrg.trim(), ts: Date.now() });
+      this.accessLoading = false;
+      this.accessSent = true;
     },
 
-    verifyOTP() {
-      this.otpError = '';
-      if (!this.otpCode.trim()) {
-        this.otpError = 'Please enter the verification code';
-        return;
-      }
-      if (this.otpCode.trim() === this.otpSent) {
-        store.set('otp_verified', true);
-        store.set('otp_phone', this.otpPhone);
-        this.showOtpGate = false;
-        const user = store.get('user', null);
-        if (!user || !user.name || user.name === 'Learner') {
-          this.showOnboarding = true;
-        }
-        this.showToast('Phone verified! Welcome to PharmaLearn.', 'success');
-      } else {
-        this.otpError = 'Incorrect code. Please try again.';
-      }
-    },
-
-    skipOtp() {
+    enterPlatform() {
       store.set('otp_verified', true);
       this.showOtpGate = false;
+      if (this.accessName) this.onboardData.name = this.accessName;
       const user = store.get('user', null);
       if (!user || !user.name || user.name === 'Learner') {
         this.showOnboarding = true;
       }
+      this.showToast('Welcome to PAL — Pharma Analytics Library!', 'success');
     },
 
     // ─── Pharma News ─────────────────────────────────────────────────────────
     async fetchNews() {
       this.newsLoading = true;
-      try {
-        const feedUrl = 'https://www.fiercepharma.com/rss/xml';
-        const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&count=5`;
-        const res = await fetch(url);
-        const data = await res.json();
-        if (data.status === 'ok' && data.items && data.items.length) {
-          this.pharmaNews = data.items.slice(0, 5).map(item => ({
-            title: item.title.trim(),
-            url: item.link,
-            date: new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-            source: (data.feed && data.feed.title) || 'FiercePharma'
-          }));
-        }
-      } catch(e) { /* silently fail */ }
+      const feeds = [
+        { url: 'https://endpts.com/feed/', name: 'Endpoints News' },
+        { url: 'https://www.statnews.com/feed/', name: 'STAT News' },
+        { url: 'https://www.fda.gov/about-fda/contact-fda/stay-informed/rss-feeds/pressannouncements/rss.xml', name: 'FDA News' },
+        { url: 'https://www.fiercepharma.com/rss/xml', name: 'FiercePharma' },
+      ];
+      for (const feed of feeds) {
+        try {
+          const controller = new AbortController();
+          const tId = setTimeout(() => controller.abort(), 7000);
+          const url = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed.url) + '&count=5';
+          const res = await fetch(url, { signal: controller.signal });
+          clearTimeout(tId);
+          if (!res.ok) continue;
+          const data = await res.json();
+          if (data.status === 'ok' && data.items && data.items.length > 0) {
+            this.pharmaNews = data.items.slice(0, 5).map(item => ({
+              title: (item.title || '').trim(),
+              url: item.link || '#',
+              date: item.pubDate ? new Date(item.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '',
+              source: feed.name
+            }));
+            break;
+          }
+        } catch(e) { /* try next feed */ }
+      }
       this.newsLoading = false;
     },
 
