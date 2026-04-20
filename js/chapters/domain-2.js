@@ -1272,7 +1272,7 @@ cpi_growth = 1.15
 
 adjusted = amp_baseline * cpi_growth  # $1150
 inflation_penalty = max(0, amp_current - adjusted)  # $300 per unit additional rebate
-print(f"Inflation penalty per unit: ${inflation_penalty}")
+print(f"Inflation penalty per unit: \${inflation_penalty}")
 # Total Medicaid rebate = 23.1% * $1450 + $300 = $335.05 + $300 = $635.05/unit</code></pre>
 <div class="callout warning"><div class="callout-title">The Price Increase Trap</div><p>Annual WAC increases above CPI compound as inflation penalties. A brand that took aggressive WAC increases in early years can find its Medicaid rebate exceeds 100% of AMP — meaning it pays more in rebates than it receives for Medicaid prescriptions. This is not hypothetical; several large brands have faced this.</p></div>`},
     {id:"s3",content:`<h2 id="s3">Voluntary Rebates & Commercial Formulary Access</h2>
