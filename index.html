@@ -389,15 +389,31 @@
     </nav>
 
     <!-- Domain quick links -->
-    <div x-show="sidebarOpen" class="sidebar-section-label">Domains</div>
-    <div x-show="sidebarOpen" style="padding:0 8px">
-      <template x-for="d in domains" :key="d.id">
+    <div x-show="sidebarOpen" style="padding:0 8px;overflow-y:auto">
+
+      <!-- Group 1: Core Pharma Concepts (domains 1–4) -->
+      <div style="padding:10px 10px 4px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)">Core Pharma Concepts</div>
+      <template x-for="d in domains.filter(d => d.id <= 4)" :key="d.id">
         <button @click="domainFilter=d.id; navigate('domains')"
           :style="`width:100%;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;border:none;cursor:pointer;font-size:12px;transition:all .15s;text-align:left;background:${domainFilter===d.id?'var(--accent-dim)':'none'};color:${domainFilter===d.id?'var(--accent)':'var(--text-secondary)'}`">
           <span x-text="d.icon" style="font-size:14px;flex-shrink:0"></span>
           <span x-text="d.title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
         </button>
       </template>
+
+      <!-- Divider -->
+      <div style="height:1px;background:var(--border);margin:8px 10px"></div>
+
+      <!-- Group 2: Technical Disciplines (domains 5–6) -->
+      <div style="padding:6px 10px 4px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)">Technical Disciplines</div>
+      <template x-for="d in domains.filter(d => d.id > 4)" :key="d.id">
+        <button @click="domainFilter=d.id; navigate('domains')"
+          :style="`width:100%;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;border:none;cursor:pointer;font-size:12px;transition:all .15s;text-align:left;background:${domainFilter===d.id?'var(--accent-dim)':'none'};color:${domainFilter===d.id?'var(--accent)':'var(--text-secondary)'}`">
+          <span x-text="d.icon" style="font-size:14px;flex-shrink:0"></span>
+          <span x-text="d.title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+        </button>
+      </template>
+
     </div>
 
     <!-- User block -->
