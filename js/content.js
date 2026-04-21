@@ -45,8 +45,8 @@ window.PL.domains = [
     title: "Data Science & Analytics Engineering",
     icon: "⚙️",
     color: "#ec4899",
-    description: "Healthcare data, SQL, Python, ML, causal inference, statistics fundamentals, deep learning, NLP & LLMs, and MLOps.",
-    chapters: ["5-1","5-2","5-3","5-4","5-5","5-6","5-7","5-8","5-9","5-10"]
+    description: "Healthcare data, SQL, Python, ML, causal inference, statistics fundamentals, deep learning, NLP & LLMs, MLOps, and AI concepts.",
+    chapters: ["5-1","5-2","5-3","5-4","5-5","5-6","5-7","5-8","5-9","5-10","5-11"]
   },
   {
     id: 6,

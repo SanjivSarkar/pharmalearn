@@ -183,6 +183,15 @@
     async init() {
       initProgress();
       this.applyTheme();
+      // Apply enrichment patches (prepend foundational sections to select chapters)
+      if (window.PL_ENRICHMENT) {
+        for (const [id, patch] of Object.entries(window.PL_ENRICHMENT)) {
+          const ch = window.PL.chapters[id];
+          if (!ch) continue;
+          if (patch.newSections) ch.sections = [...patch.newSections, ...ch.sections];
+          if (patch.newToc)     ch.toc      = [...patch.newToc,      ...ch.toc];
+        }
+      }
 
       // ── Handle magic approval link in URL ────────────────────
       const hash = window.location.hash;
@@ -726,6 +735,7 @@
     get roadmapEnablers() {
       return [
         { label:'Data Science & ML', icon:'⚙️', color:'#ec4899', desc:'Statistics, ML, causal inference, NLP, deep learning, MLOps for pharma analytics', chapters:['5-1','5-2','5-3','5-4','5-5','5-6','5-7','5-8','5-9','5-10'] },
+        { label:'AI Concepts & GenAI', icon:'🤖', color:'#a855f7', desc:'Foundation models, LLMs, prompt engineering, RAG, AI agents, and responsible AI in life sciences', chapters:['5-11'] },
         { label:'Data Engineering', icon:'🏗️', color:'#14b8a6', desc:'Modern data stack, Snowflake, Spark, DataOps, streaming, data quality for healthcare', chapters:['6-1','6-2','6-3','6-4','6-5','6-6','6-7','6-8','6-9'] },
       ];
     },
