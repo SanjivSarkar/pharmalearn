@@ -1073,7 +1073,7 @@
             <div style="margin-top:10px;font-size:11px;color:var(--text-muted)" x-text="userLevel.next ? (userLevel.next - userXP.total) + ' XP to next level' : 'Max level reached'"></div>
           </div>
 
-          <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden" :style="`border-left:3px solid ${userLevel.color}`">
+          <div style="background:var(--bg-surface);border:1px solid var(--border);border-left-width:3px;border-left-style:solid;border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden" :style="`border-left-color:${userLevel.color}`">
             <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px">Current Level</div>
             <div style="font-size:2rem;font-weight:900;letter-spacing:-.04em;line-height:1" :style="`color:${userLevel.color}`" x-text="userLevel.name"></div>
             <div style="margin-top:10px;height:3px;background:var(--bg-overlay);border-radius:2px">
@@ -1100,11 +1100,11 @@
 
               <!-- Domain header -->
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-                <span style="font-size:13px;font-weight:700;color:var(--text-primary)" x-text="d.title"></span>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <span style="font-size:11px;color:var(--text-muted)" x-text="d.chaptersDetail.length + ' chapters'"></span>
-                  <span style="font-size:13px;font-weight:800" :style="`color:${d.color}`" x-text="d.progress + '%'"></span>
+                <div style="display:flex;align-items:center;gap:7px;min-width:0">
+                  <span style="font-size:13px;font-weight:700;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" x-text="d.title"></span>
+                  <span style="font-size:12px;font-weight:800;flex-shrink:0" :style="`color:${d.color}`" x-text="d.progress + '%'"></span>
                 </div>
+                <span style="font-size:11px;color:var(--text-muted);flex-shrink:0;margin-left:8px" x-text="d.chaptersDetail.length + ' chapters'"></span>
               </div>
 
               <!-- Progress bar -->
