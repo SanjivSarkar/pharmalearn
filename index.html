@@ -490,9 +490,7 @@
             <a :href="item.url" target="_blank" rel="noopener" class="ticker-item">
               <span class="ticker-source" x-text="item.source"></span>
               <span class="ticker-title" x-text="item.title"></span>
-              <template x-if="item.date">
-                <span class="ticker-date" x-text="item.date"></span>
-              </template>
+              <span class="ticker-date" x-show="item.date" x-text="item.date"></span>
               <span class="ticker-sep" aria-hidden="true">◆</span>
             </a>
           </template>
@@ -1193,8 +1191,8 @@
             <!-- Chapter grid -->
             <div class="rm-expand-chapters">
               <template x-for="cid in roadmapStages.find(s=>s.id===expandedStage).chapters" :key="cid">
-                <template x-if="getChapter(cid)">
-                  <div class="rm-chapter-pill"
+                <div>
+                  <div x-show="getChapter(cid)" class="rm-chapter-pill"
                     @click="navigate('chapter',cid)"
                     :style="`border-color:${roadmapStages.find(s=>s.id===expandedStage).color}35`"
                     @mouseenter="$el.style.borderColor=roadmapStages.find(s=>s.id===expandedStage).color;$el.style.background=roadmapStages.find(s=>s.id===expandedStage).color+'12'"
@@ -1202,12 +1200,12 @@
                     <span class="rm-chapter-id"
                       :style="`color:${roadmapStages.find(s=>s.id===expandedStage).color}`"
                       x-text="cid"></span>
-                    <span class="rm-chapter-name" x-text="getChapter(cid).title"></span>
-                    <span :class="getLevelClass(getChapter(cid).level)" x-text="getChapter(cid).level"
+                    <span class="rm-chapter-name" x-text="getChapter(cid) && getChapter(cid).title"></span>
+                    <span :class="getChapter(cid) && getLevelClass(getChapter(cid).level)" x-text="getChapter(cid) && getChapter(cid).level"
                       style="font-size:10px;flex-shrink:0"></span>
                     <span style="color:var(--text-muted);font-size:13px;flex-shrink:0;margin-left:auto">→</span>
                   </div>
-                </template>
+                </div>
               </template>
             </div>
           </div>
@@ -1251,17 +1249,17 @@
                 <!-- Expanded chapters -->
                 <div x-show="expandedStage===enabler.label" x-transition class="rm-ec-chapters">
                   <template x-for="cid in enabler.chapters" :key="cid">
-                    <template x-if="getChapter(cid)">
-                      <div class="rm-ec-ch" @click.stop="navigate('chapter',cid)"
+                    <div>
+                      <div x-show="getChapter(cid)" class="rm-ec-ch" @click.stop="navigate('chapter',cid)"
                         @mouseenter="$el.style.background=enabler.color+'15'"
                         @mouseleave="$el.style.background='transparent'">
                         <span style="font-size:10px;font-weight:800;font-family:'JetBrains Mono',monospace;min-width:28px"
                           :style="`color:${enabler.color}`" x-text="cid"></span>
                         <span style="font-size:12.5px;font-weight:600;color:var(--text-primary);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
-                          x-text="getChapter(cid).title"></span>
+                          x-text="getChapter(cid) && getChapter(cid).title"></span>
                         <span style="font-size:13px;color:var(--text-muted);flex-shrink:0">→</span>
                       </div>
-                    </template>
+                    </div>
                   </template>
                 </div>
               </div>
