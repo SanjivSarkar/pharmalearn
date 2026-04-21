@@ -1044,85 +1044,122 @@
            DASHBOARD
       ══════════════════════════════════════════ -->
       <div x-show="page==='dashboard'">
-        <h1 style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:6px">Dashboard</h1>
-        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:24px">Your learning analytics and progress overview.</p>
 
-        <!-- Summary stats -->
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:32px">
-          <div class="stat-card">
-            <div class="stat-value" x-text="overallProgress + '%'"></div>
-            <div class="stat-label">Overall Mastery</div>
+        <!-- Page header -->
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px;gap:12px;flex-wrap:wrap">
+          <div>
+            <p style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:6px;opacity:.8">Your Progress</p>
+            <h1 style="font-size:1.7rem;font-weight:900;color:var(--text-primary);letter-spacing:-.04em;line-height:1.1;margin-bottom:4px">Learning Dashboard</h1>
+            <p style="color:var(--text-secondary);font-size:13px">Track your mastery across all 6 domains and 52 chapters.</p>
           </div>
-          <div class="stat-card">
-            <div class="stat-value" x-text="userXP.total"></div>
-            <div class="stat-label">Total XP</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value" x-text="userLevel.name"></div>
-            <div class="stat-label">Level</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-value" x-text="(userXP.streak||0)"></div>
-            <div class="stat-label">Day Streak</div>
-          </div>
+          <div style="font-size:11px;color:var(--text-muted);text-align:right;padding-bottom:2px"
+            x-text="new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})"></div>
         </div>
 
-        <!-- XP progress -->
-        <div class="card" style="margin-bottom:24px;padding:20px 24px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-            <div>
-              <div style="font-size:14px;font-weight:700;color:var(--text-primary)" x-text="userLevel.name"></div>
-              <div style="font-size:12px;color:var(--text-muted)"
-                x-text="userLevel.next ? userXP.total + ' / ' + userLevel.next + ' XP to next level' : 'Max level achieved!'"></div>
+        <!-- KPI row -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px">
+
+          <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;border-left:3px solid var(--accent);position:relative;overflow:hidden">
+            <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px">Overall Mastery</div>
+            <div style="font-size:2rem;font-weight:900;letter-spacing:-.04em;color:var(--accent);line-height:1" x-text="overallProgress + '%'"></div>
+            <div style="margin-top:10px;height:3px;background:var(--bg-overlay);border-radius:2px">
+              <div style="height:100%;border-radius:2px;background:var(--accent);transition:width .4s" :style="`width:${overallProgress}%`"></div>
             </div>
-            <div style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px" :style="`background:${userLevel.color}18;color:${userLevel.color}`" x-text="userLevel.name"></div>
           </div>
-          <div class="progress" style="height:8px">
-            <div class="progress-fill" :style="`width:${userLevel.pct}%;background:${userLevel.color}`"></div>
+
+          <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;border-left:3px solid #f59e0b;position:relative;overflow:hidden">
+            <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px">Total XP</div>
+            <div style="font-size:2rem;font-weight:900;letter-spacing:-.04em;color:#f59e0b;line-height:1" x-text="userXP.total.toLocaleString()"></div>
+            <div style="margin-top:10px;font-size:11px;color:var(--text-muted)" x-text="userLevel.next ? (userLevel.next - userXP.total) + ' XP to next level' : 'Max level reached'"></div>
           </div>
+
+          <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden" :style="`border-left:3px solid ${userLevel.color}`">
+            <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px">Current Level</div>
+            <div style="font-size:2rem;font-weight:900;letter-spacing:-.04em;line-height:1" :style="`color:${userLevel.color}`" x-text="userLevel.name"></div>
+            <div style="margin-top:10px;height:3px;background:var(--bg-overlay);border-radius:2px">
+              <div style="height:100%;border-radius:2px;transition:width .4s" :style="`width:${userLevel.pct}%;background:${userLevel.color}`"></div>
+            </div>
+          </div>
+
+          <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;border-left:3px solid #f97316;position:relative;overflow:hidden">
+            <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px">Day Streak</div>
+            <div style="font-size:2rem;font-weight:900;letter-spacing:-.04em;color:#f97316;line-height:1" x-text="(userXP.streak||0) + (userXP.streak===1?' day':' days')"></div>
+            <div style="margin-top:10px;font-size:11px;color:var(--text-muted)">Keep it going</div>
+          </div>
+
         </div>
 
-        <!-- Domain breakdown -->
-        <h2 class="section-heading">Domain Progress</h2>
-        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
+        <!-- Domain Progress -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <h2 class="section-heading" style="margin-bottom:0">Domain Progress</h2>
+          <span style="font-size:11px;color:var(--text-muted)">Click a chapter bar to open it</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;margin-bottom:28px">
           <template x-for="d in dashboardDomains" :key="d.id">
-            <div class="card" style="padding:16px 20px">
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-                <div style="display:flex;align-items:center;gap:10px">
-                  <span style="display:inline-block;width:10px;height:10px;border-radius:50%;flex-shrink:0" :style="`background:${d.color}`"></span>
-                  <span style="font-size:13px;font-weight:600;color:var(--text-primary)" x-text="d.title"></span>
+            <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;border-top:2px solid" :style="`border-top-color:${d.color}`">
+
+              <!-- Domain header -->
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                <span style="font-size:13px;font-weight:700;color:var(--text-primary)" x-text="d.title"></span>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:11px;color:var(--text-muted)" x-text="d.chaptersDetail.length + ' chapters'"></span>
+                  <span style="font-size:13px;font-weight:800" :style="`color:${d.color}`" x-text="d.progress + '%'"></span>
                 </div>
-                <span style="font-size:13px;font-weight:700" :style="`color:${d.color}`" x-text="d.progress + '%'"></span>
               </div>
-              <div class="progress" style="height:6px;margin-bottom:10px">
-                <div class="progress-fill" :style="`width:${d.progress}%;background:${d.color}`"></div>
+
+              <!-- Progress bar -->
+              <div style="height:4px;background:var(--bg-overlay);border-radius:2px;margin-bottom:14px">
+                <div style="height:100%;border-radius:2px;transition:width .4s" :style="`width:${d.progress}%;background:${d.color}`"></div>
               </div>
-              <div style="display:flex;flex-wrap:wrap;gap:6px">
+
+              <!-- Chapter dots -->
+              <div style="display:flex;flex-wrap:wrap;gap:5px">
                 <template x-for="ch in d.chaptersDetail" :key="ch.id">
-                  <div :title="ch.title"
-                    style="width:32px;height:8px;border-radius:4px;cursor:pointer"
-                    @click="navigate('chapter',ch.id)"
-                    :style="`background:${ch.mastery>=80?d.color:ch.mastery>0?d.color+'88':'var(--bg-overlay)'}`"></div>
+                  <div :title="ch.title + ' — ' + ch.mastery + '%'"
+                    style="width:24px;height:6px;border-radius:3px;cursor:pointer;transition:opacity .15s"
+                    @click.stop="navigate('chapter',ch.id)"
+                    @mouseenter="$el.style.opacity='.7'"
+                    @mouseleave="$el.style.opacity='1'"
+                    :style="`background:${ch.mastery>=80?d.color:ch.mastery>0?d.color+'66':'var(--bg-overlay)'}`"></div>
                 </template>
               </div>
+
             </div>
           </template>
         </div>
 
-        <!-- Weak areas -->
+        <!-- Areas to Review -->
         <template x-if="weakAreas.length">
           <div>
-            <h2 class="section-heading">Areas to Review</h2>
-            <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+              <h2 class="section-heading" style="margin-bottom:0">Areas to Review</h2>
+              <span style="font-size:11px;color:var(--text-muted)">Chapters with low mastery</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px">
               <template x-for="ch in weakAreas" :key="ch.id">
-                <div class="card card-hover" @click="navigate('chapter',ch.id)" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px 18px">
-                  <div style="width:40px;height:40px;border-radius:8px;background:var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--accent);flex-shrink:0"
-                    x-text="ch.mastery + '%'"></div>
-                  <div style="flex:1;min-width:0">
-                    <div style="font-size:13px;font-weight:600;color:var(--text-primary)" x-text="ch.title"></div>
-                    <div style="font-size:11px;color:var(--text-muted);margin-top:3px" x-text="ch.domain"></div>
+                <div @click="navigate('chapter',ch.id)"
+                  style="display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:all .15s"
+                  @mouseenter="$el.style.borderColor='var(--border-strong)';$el.style.background='var(--bg-elevated)'"
+                  @mouseleave="$el.style.borderColor='var(--border)';$el.style.background='var(--bg-surface)'">
+                  <!-- Mastery ring -->
+                  <div style="flex-shrink:0;position:relative;width:36px;height:36px">
+                    <svg width="36" height="36" viewBox="0 0 36 36">
+                      <circle cx="18" cy="18" r="14" fill="none" stroke="var(--bg-overlay)" stroke-width="3"/>
+                      <circle cx="18" cy="18" r="14" fill="none" :stroke="domainColor(ch.domain_id)" stroke-width="3"
+                        stroke-linecap="round" stroke-dasharray="87.96"
+                        :stroke-dashoffset="87.96 - (87.96 * ch.mastery / 100)"
+                        transform="rotate(-90 18 18)"/>
+                    </svg>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800" :style="`color:${domainColor(ch.domain_id)}`"
+                      x-text="ch.mastery + '%'"></div>
                   </div>
-                  <span style="font-size:18px;color:var(--accent)">→</span>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:13px;font-weight:600;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" x-text="ch.title"></div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:2px" x-text="ch.domain"></div>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="var(--text-muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" y1="10" x2="16" y2="10"/><polyline points="11,5 16,10 11,15"/>
+                  </svg>
                 </div>
               </template>
             </div>
