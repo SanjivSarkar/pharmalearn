@@ -804,7 +804,7 @@
 
     // Latest news filtered to last 3 days, newest first
     get recentNews() {
-      const cutoff = Date.now() - 3 * 24 * 60 * 60 * 1000;
+      const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
       return this.pharmaNews
         .filter(i => i.timestamp === 0 || i.timestamp >= cutoff)
         .sort((a, b) => b.timestamp - a.timestamp)
