@@ -1,45 +1,45 @@
 name: Fetch Pharma News                                                                                 
                                                                                                           
-  on:                                                                                                     
-    schedule:                                                                                             
-      - cron: '0 */6 * * *'                                                                               
-    workflow_dispatch:                                                                                    
+  "on":                                                                                                   
+    schedule:
+      - cron: '0 */6 * * *'
+    workflow_dispatch:
     push:                                                                                                 
-      branches: [main]                                                                                    
+      branches: [main]
       paths:                                                                                              
-        - '.github/workflows/fetch-news.yml'                                                              
+        - '.github/workflows/fetch-news.yml'
                                                                                                           
-  jobs:                                                                                                   
-    fetch:
+  jobs:
+    fetch:                                                                                                
       runs-on: ubuntu-latest
-      permissions:                                                                                        
+      permissions:
         contents: write
-                                                                                                          
-      steps:                                                                                            
+
+      steps:
         - uses: actions/checkout@v4
 
         - name: Fetch RSS feeds and write news.json                                                       
           run: |
             python3 << 'PYEOF'                                                                            
-            import urllib.request                                                                       
+            import urllib.request
             import xml.etree.ElementTree as ET
             import json                                                                                   
             from datetime import datetime, timezone
             from email.utils import parsedate_to_datetime                                                 
-                                                                                                          
+                  
             feeds = [
                                                                                                           
   ('https://news.google.com/rss/search?q=pharma+FDA+drug+approval+biotech+USA&hl=en-US&gl=US&ceid=US:en', 
-  None),
+  None),                                                                                                  
               ('https://news.google.com/rss/search?q=FDA+drug+approval+clinical+trial+United+States&hl=en-
   US&gl=US&ceid=US:en', None),                                                                            
               ('https://news.google.com/rss/search?q=biotech+pharmaceutical+oncology+gene+therapy&hl=en-US
   &gl=US&ceid=US:en', None),                                                                              
               ('https://news.google.com/rss/search?q=pharmaceutical+drug+approval+clinical+trial&hl=en',
   None),                                                                                                  
-              ('https://news.google.com/rss/search?q=drug+discovery+medicine+oncology+vaccine&hl=en',   
+              ('https://news.google.com/rss/search?q=drug+discovery+medicine+oncology+vaccine&hl=en',
   None),                                                                                                  
-              ('https://feeds.reuters.com/reuters/healthNews', 'Reuters Health'),                       
+              ('https://feeds.reuters.com/reuters/healthNews', 'Reuters Health'),
               ('https://www.biopharmadive.com/feeds/news/', 'BioPharma Dive'),                            
               ('https://www.statnews.com/feed/', 'STAT News'),                                            
               ('https://www.fiercepharma.com/rss/xml', 'Fierce Pharma'),                                  
@@ -47,64 +47,64 @@ name: Fetch Pharma News
             ]                                                                                             
                                                                                                           
             HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; PharmaLearnBot/1.0)'}                      
-            items = []                                                                                  
+            items = []
             seen = set()                                                                                  
-                                                                                                        
+                  
             def parse_date(pub):                                                                          
               if not pub:
                 return '', 0                                                                              
-              try:
+              try:                                                                                        
                 dt = parsedate_to_datetime(pub)
                 if dt.tzinfo is None:                                                                     
                   dt = dt.replace(tzinfo=timezone.utc)
-                ts = int(dt.timestamp() * 1000)                                                           
-                date_str = dt.strftime('%b %-d')
+                ts = int(dt.timestamp() * 1000)
+                date_str = dt.strftime('%b %-d')                                                          
                 return date_str, ts                                                                       
-              except Exception:
+              except Exception:                                                                           
                 return '', 0                                                                              
-                                                                                                          
+                  
             for url, fixed_source in feeds:
-              try:                                                                                        
+              try:
                 req = urllib.request.Request(url, headers=HEADERS)
-                with urllib.request.urlopen(req, timeout=20) as r:
-                  text = r.read().decode('utf-8', errors='replace')                                       
-                root = ET.fromstring(text)
-                for item in root.findall('.//item')[:40]:                                                 
-                  title_el = item.find('title')
+                with urllib.request.urlopen(req, timeout=20) as r:                                        
+                  text = r.read().decode('utf-8', errors='replace')
+                root = ET.fromstring(text)                                                                
+                for item in root.findall('.//item')[:40]:
+                  title_el = item.find('title')                                                           
                   if title_el is None:                                                                    
-                    continue                                                                              
-                  raw_title = (title_el.text or '').strip()
+                    continue
+                  raw_title = (title_el.text or '').strip()                                               
                   if not raw_title or len(raw_title) < 6:                                                 
-                    continue                                                                              
-                  link = ''
+                    continue
+                  link = ''                                                                               
                   link_el = item.find('link')                                                             
                   if link_el is not None:
                     link = (link_el.text or '').strip()                                                   
                     if not link and link_el.tail:
                       link = link_el.tail.strip()                                                         
-                  if not link:                                                                            
-                    guid = item.find('guid')
+                  if not link:
+                    guid = item.find('guid')                                                              
                     link = (guid.text or '#').strip() if guid is not None else '#'                        
-                  pub_el = item.find('pubDate')                                                           
-                  pub = (pub_el.text or '').strip() if pub_el is not None else ''
+                  pub_el = item.find('pubDate')
+                  pub = (pub_el.text or '').strip() if pub_el is not None else ''                         
                   date, timestamp = parse_date(pub)                                                       
                   parts = raw_title.split(' - ')
                   if fixed_source:                                                                        
-                    source = fixed_source                                                                 
-                    title = raw_title
-                  else:                                                                                   
+                    source = fixed_source
+                    title = raw_title                                                                     
+                  else:
                     source = parts[-1].strip() if len(parts) > 1 else 'Pharma News'
                     title = ' - '.join(parts[:-1]).strip() if len(parts) > 1 else raw_title               
-                  key = title[:60].lower()                                                                
+                  key = title[:60].lower()
                   if key in seen:                                                                         
-                    continue                                                                              
+                    continue
                   seen.add(key)                                                                           
-                  items.append({'title': title, 'url': link, 'source': source, 'date': date, 'timestamp': 
-  timestamp})
-                print(f'OK  {url}  total={len(items)}')                                                   
+                  items.append({'title': title, 'url': link, 'source': source, 'date': date, 'timestamp':
+  timestamp})                                                                                             
+                print(f'OK  {url}  total={len(items)}')
                 if len(items) >= 40:                                                                      
                   break                                                                                   
-              except Exception as e:                                                                      
+              except Exception as e:
                 print(f'ERR {url}: {e}')                                                                  
                   
             items.sort(key=lambda x: x['timestamp'], reverse=True)
@@ -116,11 +116,11 @@ name: Fetch Pharma News
               json.dump(payload, f, indent=2)                                                             
             print(f'Wrote {len(items)} items to news.json')
             PYEOF                                                                                         
-   
-        - name: Commit news.json if changed                                                               
-          run: |  
-            git config user.name  "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"                          
-            git add news.json
-            git diff --staged --quiet && echo "No changes" || \                                           
+                  
+        - name: Commit news.json if changed
+          run: |
+            git config user.name  "github-actions[bot]"                                                   
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add news.json                                                                             
+            git diff --staged --quiet && echo "No changes" || \
               git commit -m "chore: update pharma news [skip ci]" && git push
