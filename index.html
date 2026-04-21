@@ -39,6 +39,14 @@
 
 <body x-data="pharmaApp()" x-init="init()">
 
+<!-- DEBUG OVERLAY — remove after diagnosis -->
+<div style="position:fixed;bottom:10px;right:10px;background:#dc2626;color:white;padding:8px 12px;z-index:9999;font-size:11px;border-radius:6px;font-family:monospace;pointer-events:none">
+  <div x-text="'page: ' + page"></div>
+  <div x-text="'gate: ' + showAccessGate"></div>
+  <div x-text="'onboard: ' + showOnboarding"></div>
+  <div x-text="'main xcloak: ' + ($el.closest('body').querySelector('main')?.hasAttribute('x-cloak') ? 'YES' : 'no')"></div>
+</div>
+
 <!-- Reading progress bar -->
 <div id="reading-bar" class="reading-progress-bar" style="width:0%"></div>
 
