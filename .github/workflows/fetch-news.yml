@@ -1,15 +1,12 @@
-name: Fetch Pharma News                                                                                 
-                                                                                                          
-  "on":                                                                                                   
+name:Fetch Pharma News "on":                                                                                                  
     schedule:
       - cron: '0 */6 * * *'
     workflow_dispatch:
     push:                                                                                                 
       branches: [main]
       paths:                                                                                              
-        - '.github/workflows/fetch-news.yml'
-                                                                                                          
-  jobs:
+        - '.github/workflows/fetch-news.yml'                                                                                                        
+jobs:
     fetch:                                                                                                
       runs-on: ubuntu-latest
       permissions:
@@ -27,25 +24,13 @@ name: Fetch Pharma News
             from datetime import datetime, timezone
             from email.utils import parsedate_to_datetime                                                 
                   
-            feeds = [
-                                                                                                          
-  ('https://news.google.com/rss/search?q=pharma+FDA+drug+approval+biotech+USA&hl=en-US&gl=US&ceid=US:en', 
-  None),                                                                                                  
-              ('https://news.google.com/rss/search?q=FDA+drug+approval+clinical+trial+United+States&hl=en-
-  US&gl=US&ceid=US:en', None),                                                                            
-              ('https://news.google.com/rss/search?q=biotech+pharmaceutical+oncology+gene+therapy&hl=en-US
-  &gl=US&ceid=US:en', None),                                                                              
-              ('https://news.google.com/rss/search?q=pharmaceutical+drug+approval+clinical+trial&hl=en',
-  None),                                                                                                  
-              ('https://news.google.com/rss/search?q=drug+discovery+medicine+oncology+vaccine&hl=en',
-  None),                                                                                                  
-              ('https://feeds.reuters.com/reuters/healthNews', 'Reuters Health'),
-              ('https://www.biopharmadive.com/feeds/news/', 'BioPharma Dive'),                            
-              ('https://www.statnews.com/feed/', 'STAT News'),                                            
-              ('https://www.fiercepharma.com/rss/xml', 'Fierce Pharma'),                                  
-              ('https://www.medicalnewstoday.com/rss', 'Medical News Today'),                             
-            ]                                                                                             
-                                                                                                          
+            feeds = [('https://news.google.com/rss/search?q=pharma+FDA+drug+approval+biotech+USA&hl=en-US&gl=US&ceid=US:en', 
+  None),('https://news.google.com/rss/search?q=FDA+drug+approval+clinical+trial+United+States&hl=en-
+  US&gl=US&ceid=US:en', None),('https://news.google.com/rss/search?q=biotech+pharmaceutical+oncology+gene+therapy&hl=en-US
+  &gl=US&ceid=US:en', None),('https://news.google.com/rss/search?q=pharmaceutical+drug+approval+clinical+trial&hl=en',
+  None),('https://news.google.com/rss/search?q=drug+discovery+medicine+oncology+vaccine&hl=en',
+  None),('https://feeds.reuters.com/reuters/healthNews', 'Reuters Health'),('https://www.biopharmadive.com/feeds/news/', 'BioPharma Dive'),('https://www.statnews.com/feed/', 'STAT News'),('https://www.fiercepharma.com/rss/xml', 'Fierce Pharma'),('https://www.medicalnewstoday.com/rss', 'Medical News Today'),                             
+            ]
             HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; PharmaLearnBot/1.0)'}                      
             items = []
             seen = set()                                                                                  
