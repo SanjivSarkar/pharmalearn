@@ -480,56 +480,90 @@
       <!-- ══════════════════════════════════════════
            HOME
       ══════════════════════════════════════════ -->
-      <div x-show="page==='home'">
+      <div x-show="page==='home'" class="fade-up">
 
         <!-- Hero -->
-        <div style="margin-bottom:32px">
-          <h1 style="font-size:1.9rem;font-weight:800;color:var(--text-primary);margin-bottom:8px">
-            Good to see you, <span class="gradient-text" x-text="userName"></span>
-          </h1>
-          <p style="color:var(--text-secondary);font-size:14px">52 chapters across 6 domains of pharma analytics excellence.</p>
+        <div class="home-hero" style="margin-bottom:28px">
+          <div style="position:relative">
+            <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--accent);opacity:.8;margin-bottom:10px">
+              Welcome back
+            </p>
+            <h1 style="font-size:2.1rem;font-weight:900;color:var(--text-primary);margin-bottom:8px;letter-spacing:-.04em;line-height:1.1">
+              <span x-text="userName"></span><span style="color:var(--text-muted)">.</span>
+            </h1>
+            <p style="color:var(--text-secondary);font-size:14px;line-height:1.6;max-width:480px">
+              52 chapters across 6 domains — from molecule to market, powered by data science.
+            </p>
+          </div>
         </div>
 
         <!-- Stats row -->
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:32px">
-          <div class="stat-card">
-            <div class="stat-value" x-text="overallProgress + '%'"></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:32px">
+
+          <div class="stat-card" style="--stat-accent:linear-gradient(90deg,#6366f1,#818cf8)">
+            <div class="stat-bg-glow" style="--stat-glow:rgba(99,102,241,.12)"></div>
+            <span class="stat-icon">📈</span>
+            <div class="stat-value gradient-text" x-text="overallProgress + '%'"></div>
             <div class="stat-label">Overall Progress</div>
-            <div class="progress" style="margin-top:10px"><div class="progress-fill" :style="`width:${overallProgress}%`"></div></div>
+            <div class="progress" style="margin-top:10px">
+              <div class="progress-fill" :style="`width:${overallProgress}%`"></div>
+            </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-value" x-text="userXP.total"></div>
-            <div class="stat-label">Total XP Earned</div>
+
+          <div class="stat-card" style="--stat-accent:linear-gradient(90deg,#f59e0b,#fbbf24)">
+            <div class="stat-bg-glow" style="--stat-glow:rgba(245,158,11,.1)"></div>
+            <span class="stat-icon">⚡</span>
+            <div class="stat-value" style="color:var(--warning)" x-text="userXP.total.toLocaleString()"></div>
+            <div class="stat-label">XP Earned</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-value" x-text="userLevel.name"></div>
+
+          <div class="stat-card" style="--stat-accent:linear-gradient(90deg,#8b5cf6,#a78bfa)">
+            <div class="stat-bg-glow" style="--stat-glow:rgba(139,92,246,.1)"></div>
+            <span class="stat-icon">🎯</span>
+            <div class="stat-value" :style="`color:${userLevel.color}`" x-text="userLevel.name"></div>
             <div class="stat-label">Current Level</div>
-            <div class="progress" style="margin-top:10px"><div class="progress-fill" :style="`width:${userLevel.pct}%;background:${userLevel.color}`"></div></div>
+            <div class="progress" style="margin-top:10px">
+              <div class="progress-fill" :style="`width:${userLevel.pct}%;background:${userLevel.color}`"></div>
+            </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-value" x-text="(userXP.streak||0) + ' days'"></div>
-            <div class="stat-label">Learning Streak</div>
+
+          <div class="stat-card" style="--stat-accent:linear-gradient(90deg,#f16a6a,#fb923c)">
+            <div class="stat-bg-glow" style="--stat-glow:rgba(241,106,106,.1)"></div>
+            <span class="stat-icon">🔥</span>
+            <div class="stat-value" style="color:#f97316" x-text="(userXP.streak||0) + 'd'"></div>
+            <div class="stat-label">Day Streak</div>
           </div>
+
         </div>
 
         <!-- Continue Learning / Recommendation -->
         <template x-if="recommendedChapter">
           <div style="margin-bottom:32px">
             <h2 class="section-heading">Continue Learning</h2>
-            <div class="card card-hover" @click="navigate('chapter', recommendedChapter.id)"
-              style="cursor:pointer;display:flex;align-items:center;gap:20px;padding:20px 24px">
-              <div style="width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0"
-                :style="`background:${domainColor(recommendedChapter.domain_id)}22`"
-                x-text="domains.find(d=>d.id===recommendedChapter.domain_id)?.icon||'📖'"></div>
-              <div style="flex:1;min-width:0">
-                <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px" x-text="recommendedChapter.domain"></div>
-                <div style="font-size:15px;font-weight:600;color:var(--text-primary)" x-text="recommendedChapter.title"></div>
-                <div style="display:flex;gap:12px;margin-top:6px">
-                  <span class="tag" x-text="recommendedChapter.level"></span>
-                  <span style="font-size:12px;color:var(--text-muted)" x-text="'⏱ ' + formatTime(recommendedChapter.mins)"></span>
+            <div class="continue-card" @click="navigate('chapter', recommendedChapter.id)">
+              <!-- Glow orb -->
+              <div class="continue-card-glow"
+                :style="`background:${domainColor(recommendedChapter.domain_id)}`"></div>
+              <div style="display:flex;align-items:center;gap:18px;position:relative">
+                <div style="width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0"
+                  :style="`background:${domainColor(recommendedChapter.domain_id)}22`"
+                  x-text="domains.find(d=>d.id===recommendedChapter.domain_id)?.icon||'📖'"></div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-size:10px;color:var(--text-muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em;font-weight:700"
+                    x-text="recommendedChapter.domain"></div>
+                  <div style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:7px;letter-spacing:-.01em"
+                    x-text="recommendedChapter.title"></div>
+                  <div style="display:flex;gap:10px;align-items:center">
+                    <span :class="getLevelClass(recommendedChapter.level)" x-text="recommendedChapter.level"></span>
+                    <span style="font-size:12px;color:var(--text-muted)" x-text="'⏱ ' + formatTime(recommendedChapter.mins)"></span>
+                    <span style="font-size:12px;color:var(--text-muted)"
+                      x-text="chapterProgress(recommendedChapter.id) > 0 ? chapterProgress(recommendedChapter.id)+'% complete' : 'Not started'"></span>
+                  </div>
+                </div>
+                <div style="flex-shrink:0;width:36px;height:36px;border-radius:50%;background:var(--accent-dim);display:flex;align-items:center;justify-content:center">
+                  <span style="color:var(--accent);font-size:18px;line-height:1">→</span>
                 </div>
               </div>
-              <div style="font-size:20px;color:var(--accent)">→</div>
             </div>
           </div>
         </template>
@@ -566,21 +600,26 @@
 
         <!-- Domain cards -->
         <h2 class="section-heading">All Domains</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:32px">
           <template x-for="d in domains" :key="d.id">
-            <div class="chapter-card" @click="domainFilter=d.id; navigate('domains')" style="cursor:pointer">
-              <div :class="`stripe-${d.id}`" class="card-stripe"></div>
+            <div class="domain-card-v2" :style="`--dc:${d.color}`"
+              @click="domainFilter=d.id; navigate('domains')">
               <div style="display:flex;align-items:flex-start;gap:14px">
-                <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0"
-                  :style="`background:${d.color}22`" x-text="d.icon"></div>
+                <!-- Icon -->
+                <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;transition:transform .2s"
+                  :style="`background:${d.color}18`" x-text="d.icon"></div>
                 <div style="flex:1;min-width:0">
-                  <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:4px" x-text="d.title"></div>
-                  <div style="font-size:12px;color:var(--text-secondary);line-height:1.4;margin-bottom:12px" x-text="d.description"></div>
-                  <div style="display:flex;align-items:center;justify-content:space-between">
-                    <span style="font-size:12px;color:var(--text-muted)" x-text="d.chapters.length + ' chapters'"></span>
-                    <span style="font-size:12px;font-weight:600;color:var(--accent)">Explore →</span>
+                  <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:4px;letter-spacing:-.01em"
+                    x-text="d.title"></div>
+                  <div style="font-size:12px;color:var(--text-secondary);line-height:1.45;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden"
+                    x-text="d.description"></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+                    <span style="font-size:11px;color:var(--text-muted);font-weight:600"
+                      x-text="d.chapters.length + ' chapters'"></span>
+                    <span style="font-size:11px;font-weight:700" :style="`color:${d.color}`"
+                      x-text="getDomainProgress(d.id) + '% done'"></span>
                   </div>
-                  <div class="progress" style="margin-top:6px">
+                  <div class="progress progress-sm">
                     <div class="progress-fill" :style="`width:${getDomainProgress(d.id)}%;background:${d.color}`"></div>
                   </div>
                 </div>
@@ -595,13 +634,25 @@
             <h2 class="section-heading">Recently Visited</h2>
             <div style="display:flex;flex-direction:column;gap:8px">
               <template x-for="ch in recentChapters" :key="ch.id">
-                <div class="card card-hover" @click="navigate('chapter',ch.id)" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px 18px">
-                  <div style="width:8px;height:8px;border-radius:50%;flex-shrink:0" :style="`background:${domainColor(ch.domain_id)}`"></div>
+                <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:all .15s"
+                  @click="navigate('chapter',ch.id)"
+                  @mouseenter="$el.style.borderColor='var(--border-strong)';$el.style.background='var(--bg-elevated)'"
+                  @mouseleave="$el.style.borderColor='var(--border)';$el.style.background='var(--bg-surface)'">
+                  <div style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px"
+                    :style="`background:${domainColor(ch.domain_id)}18`"
+                    x-text="domains.find(d=>d.id===ch.domain_id)?.icon||'📖'"></div>
                   <div style="flex:1;min-width:0">
-                    <div style="font-size:13px;font-weight:600;color:var(--text-primary)" x-text="ch.title"></div>
-                    <div style="font-size:11px;color:var(--text-muted)" x-text="ch.domain"></div>
+                    <div style="font-size:13px;font-weight:600;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+                      x-text="ch.title"></div>
+                    <div style="font-size:11px;color:var(--text-muted);margin-top:2px" x-text="ch.domain"></div>
                   </div>
-                  <div style="font-size:12px;font-weight:600;color:var(--accent)" x-text="ch.mastery + '%'"></div>
+                  <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+                    <div class="progress" style="width:60px">
+                      <div class="progress-fill" :style="`width:${ch.mastery}%;background:${domainColor(ch.domain_id)}`"></div>
+                    </div>
+                    <span style="font-size:12px;font-weight:700;min-width:32px;text-align:right"
+                      :style="`color:${domainColor(ch.domain_id)}`" x-text="ch.mastery + '%'"></span>
+                  </div>
                 </div>
               </template>
             </div>
@@ -613,9 +664,11 @@
       <!-- ══════════════════════════════════════════
            DOMAINS / LIBRARY
       ══════════════════════════════════════════ -->
-      <div x-show="page==='domains' && !activeChapter">
-        <h1 style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:6px">Library</h1>
-        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:16px">52 chapters across 6 domains of pharma analytics.</p>
+      <div x-show="page==='domains' && !activeChapter" class="fade-up">
+        <div style="margin-bottom:24px">
+          <h1 style="font-size:1.8rem;font-weight:900;color:var(--text-primary);margin-bottom:6px;letter-spacing:-.04em">Chapter Library</h1>
+          <p style="color:var(--text-secondary);font-size:13.5px">52 chapters · 6 domains · one integrated pharma analytics curriculum</p>
+        </div>
 
         <!-- Domain filter chips -->
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px">
@@ -635,18 +688,24 @@
         <template x-for="d in (domainFilter ? domains.filter(x=>x.id===domainFilter) : domains)" :key="d.id">
           <div style="margin-bottom:36px">
             <!-- Domain header -->
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
-              <div style="display:flex;align-items:center;gap:12px">
-                <div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0"
-                  :style="`background:${d.color}22`" x-text="d.icon"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0"
+                  :style="`background:${d.color}18`" x-text="d.icon"></div>
                 <div>
-                  <div style="font-size:15px;font-weight:700;color:var(--text-primary)" x-text="d.title"></div>
-                  <div style="font-size:12px;color:var(--text-muted)" x-text="d.chapters.length + ' chapters · ' + getDomainProgress(d.id) + '% complete'"></div>
+                  <div style="font-size:15px;font-weight:800;color:var(--text-primary);letter-spacing:-.02em" x-text="d.title"></div>
+                  <div style="display:flex;align-items:center;gap:10px;margin-top:3px">
+                    <span style="font-size:12px;color:var(--text-muted)" x-text="d.chapters.length + ' chapters'"></span>
+                    <span style="width:3px;height:3px;border-radius:50%;background:var(--text-muted);opacity:.4;display:inline-block"></span>
+                    <span style="font-size:12px;font-weight:700" :style="`color:${d.color}`"
+                      x-text="getDomainProgress(d.id) + '% complete'"></span>
+                  </div>
                 </div>
               </div>
-              <!-- Start first chapter button -->
               <button @click.stop="navigate('chapter', d.chapters[0])"
-                :style="`background:${d.color}22;color:${d.color};border:1px solid ${d.color}44;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer`">
+                :style="`background:${d.color}18;color:${d.color};border:1.5px solid ${d.color}35;padding:7px 16px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s`"
+                @mouseenter="$el.style.background=d.color;$el.style.color='#fff'"
+                @mouseleave="$el.style.background=d.color+'18';$el.style.color=d.color">
                 Start →
               </button>
             </div>
@@ -657,39 +716,51 @@
                 <div>
                   <!-- Available chapter -->
                   <template x-if="getChapter(cid) && getChapter(cid).available">
-                    <div class="chapter-card" @click="navigate('chapter', cid)" style="cursor:pointer;display:flex;flex-direction:column;gap:0">
-                      <div :class="`stripe-${d.id}`" class="card-stripe"></div>
-                      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex:1">
+                    <div @click="navigate('chapter', cid)"
+                      style="padding:16px;background:var(--bg-surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);cursor:pointer;transition:all .18s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:0"
+                      @mouseenter="$el.style.borderColor=d.color+80;$el.style.boxShadow='0 4px 16px rgba(0,0,0,.25)';$el.style.transform='translateY(-1px)'"
+                      @mouseleave="$el.style.borderColor='var(--border)';$el.style.boxShadow='none';$el.style.transform='translateY(0)'">
+                      <!-- Top accent line -->
+                      <div style="position:absolute;top:0;left:0;right:0;height:2px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;transition:opacity .18s"
+                        :style="`background:${d.color};opacity:${chapterProgress(cid)>0?1:.35}`"></div>
+
+                      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex:1;margin-top:6px">
                         <div style="flex:1;min-width:0">
-                          <div style="font-size:10px;color:var(--text-muted);margin-bottom:4px;font-weight:500;text-transform:uppercase;letter-spacing:.4px" x-text="'Chapter ' + cid"></div>
-                          <div style="font-size:13px;font-weight:700;color:var(--text-primary);line-height:1.3;margin-bottom:8px"
+                          <!-- Chapter ID -->
+                          <div style="font-size:9.5px;color:var(--text-muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace"
+                            x-text="cid"></div>
+                          <!-- Title -->
+                          <div style="font-size:13.5px;font-weight:700;color:var(--text-primary);line-height:1.35;margin-bottom:10px;letter-spacing:-.01em"
                             x-text="getChapter(cid).title"></div>
-                          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">
+                          <!-- Level + Time -->
+                          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
                             <span :class="getLevelClass(getChapter(cid).level)" x-text="getChapter(cid).level"></span>
-                            <span class="tag">⏱ <span x-text="formatTime(getChapter(cid).mins)"></span></span>
+                            <span class="tag" style="font-size:10.5px">⏱ <span x-text="formatTime(getChapter(cid).mins)"></span></span>
                           </div>
-                          <!-- Tags preview -->
-                          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+                          <!-- Tags -->
+                          <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px">
                             <template x-for="tag in (getChapter(cid).tags||[]).slice(0,3)" :key="tag">
-                              <span style="font-size:10px;padding:2px 7px;border-radius:4px;background:var(--bg-overlay);color:var(--text-muted)" x-text="tag"></span>
+                              <span style="font-size:10px;padding:2px 8px;border-radius:4px;background:var(--bg-overlay);color:var(--text-muted);border:1px solid var(--border)"
+                                x-text="tag"></span>
                             </template>
                           </div>
-                          <div class="progress">
+                          <!-- Progress bar -->
+                          <div class="progress progress-sm">
                             <div class="progress-fill" :style="`width:${chapterProgress(cid)}%;background:${d.color}`"></div>
                           </div>
                         </div>
-                        <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
-                          <div style="font-size:16px"
-                            :style="`color:${chapterProgress(cid)>=80?'#10b981':'var(--text-muted)'}`"
-                            x-text="chapterProgress(cid)>=80?'✓':'○'"></div>
-                        </div>
+                        <!-- Completion indicator -->
+                        <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .18s;margin-top:2px"
+                          :style="chapterProgress(cid)>=80 ? `background:rgba(45,212,160,.15);color:#2dd4a0` : `background:var(--bg-overlay);color:var(--text-muted)`"
+                          x-text="chapterProgress(cid)>=80 ? '✓' : '○'"></div>
                       </div>
-                      <!-- Read CTA -->
+                      <!-- Footer CTA -->
                       <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
-                        <span style="font-size:11px;color:var(--text-muted)" x-text="chapterProgress(cid)>0 ? chapterProgress(cid)+'% mastery' : 'Not started'"></span>
-                        <span :style="`font-size:12px;font-weight:600;color:${d.color}`">
-                          <span x-text="chapterProgress(cid)>0 ? 'Continue →' : 'Read →'"></span>
-                        </span>
+                        <span style="font-size:11px;color:var(--text-muted);font-weight:500"
+                          x-text="chapterProgress(cid)>0 ? chapterProgress(cid)+'% mastery' : 'Not started'"></span>
+                        <span style="font-size:11.5px;font-weight:700;display:flex;align-items:center;gap:4px"
+                          :style="`color:${d.color}`"
+                          x-text="chapterProgress(cid)>0 ? 'Continue →' : 'Read →'"></span>
                       </div>
                     </div>
                   </template>
@@ -1025,108 +1096,157 @@
       <!-- ══════════════════════════════════════════
            ROADMAP
       ══════════════════════════════════════════ -->
-      <div x-show="page==='roadmap'">
-        <h1 style="font-size:1.6rem;font-weight:800;color:var(--text-primary);margin-bottom:6px">Learning Roadmap</h1>
-        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:28px">The end-to-end pharma analytics journey — from molecule to market, powered by data. Click any stage to explore chapters.</p>
+      <div x-show="page==='roadmap'" class="fade-up">
 
-        <!-- Pipeline title -->
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
-          <div style="height:2px;flex:1;background:linear-gradient(to right,#6366f1,#0ea5e9,#10b981,#f59e0b,#6366f1)"></div>
-          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);white-space:nowrap">Drug Development Pipeline</span>
-          <div style="height:2px;flex:1;background:linear-gradient(to left,#6366f1,#0ea5e9,#10b981,#f59e0b,#6366f1)"></div>
+        <!-- Hero Banner -->
+        <div class="rm-hero">
+          <!-- Decorative orbs -->
+          <div class="rm-hero-orb" style="width:140px;height:140px;background:rgba(99,102,241,.35);top:-40px;right:80px;animation-delay:0s"></div>
+          <div class="rm-hero-orb" style="width:80px;height:80px;background:rgba(14,165,233,.3);bottom:-20px;right:220px;animation-delay:1.5s"></div>
+          <div class="rm-hero-orb" style="width:60px;height:60px;background:rgba(139,92,246,.3);top:20px;right:300px;animation-delay:.8s"></div>
+
+          <div class="rm-hero-eyebrow">Pharma Analytics Mastery Path</div>
+          <h1 class="rm-hero-title">From Molecule <span class="gradient-text">to Market</span></h1>
+          <p class="rm-hero-sub">10 stages · 52 chapters · one end-to-end curriculum. Click any stage to explore chapters and start learning.</p>
+
+          <!-- Phase legend pills -->
+          <div class="rm-hero-pills">
+            <span class="rm-hero-pill" style="background:rgba(99,102,241,.12);border-color:rgba(99,102,241,.3);color:#818cf8">🔵 Research</span>
+            <span class="rm-hero-pill" style="background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.3);color:#a78bfa">🟣 Clinical</span>
+            <span class="rm-hero-pill" style="background:rgba(14,165,233,.12);border-color:rgba(14,165,233,.3);color:#38bdf8">🔷 Regulatory & Launch</span>
+            <span class="rm-hero-pill" style="background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.3);color:#34d399">🟢 Market Access</span>
+            <span class="rm-hero-pill" style="background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.3);color:#fbbf24">🟡 Post-Market</span>
+          </div>
         </div>
 
-        <!-- Vertical timeline -->
-        <div style="position:relative;padding-left:44px;margin-bottom:40px">
-          <!-- Timeline spine -->
-          <div style="position:absolute;left:15px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,#6366f1 0%,#8b5cf6 20%,#0ea5e9 40%,#10b981 60%,#f59e0b 80%,#6366f1 100%)"></div>
+        <!-- ── Pipeline Track ─────────────────────────────────── -->
+        <div class="rm-pipeline-scroll">
+          <div class="rm-pipeline-track">
+            <template x-for="(stage, idx) in roadmapStages" :key="stage.id">
+              <div style="display:flex;align-items:center">
 
-          <template x-for="(stage, idx) in roadmapStages" :key="stage.id">
-            <div style="margin-bottom:16px;position:relative">
-              <!-- Timeline node dot -->
-              <div style="position:absolute;left:-35px;top:16px;width:14px;height:14px;border-radius:50%;border:2.5px solid"
-                :style="`border-color:${stage.color};background:var(--bg-base);box-shadow:0 0 0 3px ${stage.color}30`"></div>
+                <!-- Step node -->
+                <div class="rm-step" :class="expandedStage===stage.id && 'rm-step-active'"
+                  @click="expandedStage = expandedStage===stage.id ? null : stage.id">
 
-              <!-- Stage card -->
-              <div class="card" @click="expandedStage = expandedStage===stage.id ? null : stage.id"
-                style="cursor:pointer;transition:all .15s"
-                :style="expandedStage===stage.id ? `border-color:${stage.color}` : ''"
-                @mouseenter="$el.style.borderColor=stage.color" @mouseleave="$el.style.borderColor=expandedStage===stage.id?stage.color:'var(--border)'">
-                <div style="display:flex;align-items:center;gap:14px">
-                  <div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0"
-                    :style="`background:${stage.color}20`" x-text="stage.icon"></div>
-                  <div style="flex:1;min-width:0">
-                    <div style="font-size:14px;font-weight:700;color:var(--text-primary)" x-text="stage.label"></div>
-                    <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;line-height:1.4" x-text="stage.desc"></div>
+                  <!-- Step number badge -->
+                  <div class="rm-step-num" :style="`background:${stage.color}`"
+                    x-text="(idx+1).toString().padStart(2,'0')"></div>
+
+                  <!-- Icon ring -->
+                  <div class="rm-step-ring"
+                    :style="`background:${stage.color}18; border-color:${expandedStage===stage.id ? stage.color : 'transparent'}`">
+                    <span x-text="stage.icon"></span>
                   </div>
-                  <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-                    <span style="font-size:11px;font-weight:600;padding:3px 9px;border-radius:12px;white-space:nowrap"
-                      :style="`background:${stage.color}20;color:${stage.color}`"
-                      x-text="stage.chapters.length + (stage.chapters.length===1?' chapter':' chapters')"></span>
-                    <span style="font-size:16px;color:var(--text-muted);transition:transform .2s;display:inline-block"
-                      :style="expandedStage===stage.id?'transform:rotate(90deg)':''">›</span>
-                  </div>
+
+                  <!-- Label -->
+                  <div class="rm-step-label" x-text="stage.label"></div>
+
+                  <!-- Chapter count -->
+                  <div class="rm-step-count"
+                    :style="`background:${stage.color}20;color:${stage.color}`"
+                    x-text="stage.chapters.length + ' ch'"></div>
                 </div>
 
-                <!-- Expanded chapters list -->
-                <div x-show="expandedStage===stage.id" x-transition
-                  style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-                  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px">
-                    <template x-for="cid in stage.chapters" :key="cid">
-                      <template x-if="getChapter(cid)">
-                        <div @click.stop="navigate('chapter', cid)"
-                          style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;border:1px solid var(--border);cursor:pointer;background:var(--bg-elevated);transition:all .15s"
-                          @mouseenter="$el.style.borderColor=stage.color;$el.style.background=stage.color+'15'"
-                          @mouseleave="$el.style.borderColor='var(--border)';$el.style.background='var(--bg-elevated)'">
-                          <span style="font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;flex-shrink:0"
-                            :style="`background:${stage.color}20;color:${stage.color}`" x-text="cid"></span>
-                          <span style="font-size:12px;font-weight:600;color:var(--text-primary);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
-                            x-text="getChapter(cid).title"></span>
-                          <span style="font-size:14px;flex-shrink:0" :style="`color:${stage.color}`">→</span>
-                        </div>
-                      </template>
-                    </template>
-                  </div>
+                <!-- Connector (all except last) -->
+                <div class="rm-connector" x-show="idx < roadmapStages.length - 1">
+                  <div class="rm-connector-line" :style="`background:${stage.color}50`"></div>
+                  <span class="rm-connector-chevron">›</span>
                 </div>
+
               </div>
-            </div>
-          </template>
+            </template>
+          </div>
         </div>
 
-        <!-- Enabling Capabilities -->
-        <div style="padding:24px;border-radius:16px;border:2px dashed var(--border);background:var(--bg-elevated)">
-          <h2 style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);text-align:center;margin-bottom:20px">Enabling Capabilities — Foundation for All Stages</h2>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
-            <template x-for="enabler in roadmapEnablers" :key="enabler.label">
-              <div class="card" @click="expandedStage = expandedStage===enabler.label ? null : enabler.label"
-                style="cursor:pointer;text-align:center;padding:20px"
-                :style="expandedStage===enabler.label ? `border-color:${enabler.color}` : ''"
-                @mouseenter="$el.style.borderColor=enabler.color" @mouseleave="$el.style.borderColor=expandedStage===enabler.label?enabler.color:'var(--border)'">
-                <div style="font-size:30px;margin-bottom:10px" x-text="enabler.icon"></div>
-                <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:6px" x-text="enabler.label"></div>
-                <div style="font-size:12px;color:var(--text-secondary);margin-bottom:14px;line-height:1.5" x-text="enabler.desc"></div>
+        <!-- ── Expansion Panel (roadmap stages) ──────────────── -->
+        <template x-if="expandedStage && roadmapStages.find(s=>s.id===expandedStage)">
+          <div class="rm-expand-panel">
+            <!-- Header -->
+            <div class="rm-expand-header">
+              <div class="rm-expand-icon"
+                :style="`background:${roadmapStages.find(s=>s.id===expandedStage).color}20`">
+                <span x-text="roadmapStages.find(s=>s.id===expandedStage).icon" style="font-size:22px"></span>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div class="rm-expand-title"
+                  x-text="roadmapStages.find(s=>s.id===expandedStage).label"></div>
+                <div class="rm-expand-desc"
+                  x-text="roadmapStages.find(s=>s.id===expandedStage).desc"></div>
+              </div>
+              <button @click="expandedStage=null" class="rm-close-btn">✕</button>
+            </div>
 
-                <!-- Collapsed: show chapter count -->
-                <div x-show="expandedStage!==enabler.label">
-                  <span style="font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px"
-                    :style="`background:${enabler.color}20;color:${enabler.color}`">
-                    View <span x-text="enabler.chapters.length"></span> Chapters →
-                  </span>
+            <!-- Chapter grid -->
+            <div class="rm-expand-chapters">
+              <template x-for="cid in roadmapStages.find(s=>s.id===expandedStage).chapters" :key="cid">
+                <template x-if="getChapter(cid)">
+                  <div class="rm-chapter-pill"
+                    @click="navigate('chapter',cid)"
+                    :style="`border-color:${roadmapStages.find(s=>s.id===expandedStage).color}35`"
+                    @mouseenter="$el.style.borderColor=roadmapStages.find(s=>s.id===expandedStage).color;$el.style.background=roadmapStages.find(s=>s.id===expandedStage).color+'12'"
+                    @mouseleave="$el.style.borderColor=roadmapStages.find(s=>s.id===expandedStage).color+'35';$el.style.background='var(--bg-surface)'">
+                    <span class="rm-chapter-id"
+                      :style="`color:${roadmapStages.find(s=>s.id===expandedStage).color}`"
+                      x-text="cid"></span>
+                    <span class="rm-chapter-name" x-text="getChapter(cid).title"></span>
+                    <span :class="getLevelClass(getChapter(cid).level)" x-text="getChapter(cid).level"
+                      style="font-size:10px;flex-shrink:0"></span>
+                    <span style="color:var(--text-muted);font-size:13px;flex-shrink:0;margin-left:auto">→</span>
+                  </div>
+                </template>
+              </template>
+            </div>
+          </div>
+        </template>
+
+        <!-- ── Enabling Capabilities ──────────────────────────── -->
+        <div style="margin-top:8px">
+          <div class="rm-enablers-header">
+            <div class="rm-enablers-line"></div>
+            <span class="rm-enablers-label">⚡ Enabling Capabilities</span>
+            <div class="rm-enablers-line"></div>
+          </div>
+          <p class="rm-enablers-sub">Foundation technologies that power analytics across every stage of drug development</p>
+
+          <div class="rm-enablers-grid">
+            <template x-for="enabler in roadmapEnablers" :key="enabler.label">
+              <div class="rm-enabler-card"
+                :class="expandedStage===enabler.label && 'rm-ec-active'"
+                @click="expandedStage = expandedStage===enabler.label ? null : enabler.label">
+
+                <!-- Glow effect -->
+                <div class="rm-ec-glow"
+                  :style="`background:radial-gradient(ellipse at 50% 0%, ${enabler.color}20, transparent 70%)`"></div>
+
+                <!-- Icon -->
+                <div class="rm-ec-icon" :style="`background:${enabler.color}18`">
+                  <span x-text="enabler.icon" style="font-size:22px"></span>
                 </div>
 
-                <!-- Expanded: chapter list -->
-                <div x-show="expandedStage===enabler.label" x-transition
-                  style="text-align:left;display:flex;flex-direction:column;gap:6px">
+                <div class="rm-ec-title" x-text="enabler.label"></div>
+                <div class="rm-ec-desc" x-text="enabler.desc"></div>
+
+                <div class="rm-ec-footer">
+                  <span class="rm-ec-count"
+                    :style="`background:${enabler.color}20;color:${enabler.color}`"
+                    x-text="enabler.chapters.length + ' chapters'"></span>
+                  <span class="rm-ec-arrow" :style="`color:${enabler.color}`"
+                    :style="expandedStage===enabler.label ? 'transform:rotate(90deg)' : ''">›</span>
+                </div>
+
+                <!-- Expanded chapters -->
+                <div x-show="expandedStage===enabler.label" x-transition class="rm-ec-chapters">
                   <template x-for="cid in enabler.chapters" :key="cid">
                     <template x-if="getChapter(cid)">
-                      <div @click.stop="navigate('chapter', cid)"
-                        style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;border:1px solid var(--border);cursor:pointer;background:var(--bg-elevated);transition:all .15s"
-                        @mouseenter="$el.style.borderColor=enabler.color;$el.style.background=enabler.color+'15'"
-                        @mouseleave="$el.style.borderColor='var(--border)';$el.style.background='var(--bg-elevated)'">
-                        <span style="font-size:10px;font-weight:700;min-width:28px;flex-shrink:0" :style="`color:${enabler.color}`" x-text="cid"></span>
-                        <span style="font-size:12px;color:var(--text-primary);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
+                      <div class="rm-ec-ch" @click.stop="navigate('chapter',cid)"
+                        @mouseenter="$el.style.background=enabler.color+'15'"
+                        @mouseleave="$el.style.background='transparent'">
+                        <span style="font-size:10px;font-weight:800;font-family:'JetBrains Mono',monospace;min-width:28px"
+                          :style="`color:${enabler.color}`" x-text="cid"></span>
+                        <span style="font-size:12.5px;font-weight:600;color:var(--text-primary);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"
                           x-text="getChapter(cid).title"></span>
-                        <span :style="`color:${enabler.color}`" style="font-size:14px;flex-shrink:0">→</span>
+                        <span style="font-size:13px;color:var(--text-muted);flex-shrink:0">→</span>
                       </div>
                     </template>
                   </template>
