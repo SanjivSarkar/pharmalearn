@@ -744,24 +744,24 @@
             <!-- Chapter list -->
             <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px">
               <template x-for="cid in d.chapters" :key="cid">
-                <div>
+                <div style="height:100%">
                   <!-- Available chapter -->
                   <template x-if="getChapter(cid) && getChapter(cid).available">
                     <div @click="navigate('chapter', cid)"
-                      style="padding:16px;background:var(--bg-surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);cursor:pointer;transition:all .18s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:0"
+                      style="height:100%;padding:16px;background:var(--bg-surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);cursor:pointer;transition:all .18s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;display:flex;flex-direction:column;gap:0;box-sizing:border-box"
                       @mouseenter="$el.style.borderColor=d.color+80;$el.style.boxShadow='0 4px 16px rgba(0,0,0,.25)';$el.style.transform='translateY(-1px)'"
                       @mouseleave="$el.style.borderColor='var(--border)';$el.style.boxShadow='none';$el.style.transform='translateY(0)'">
                       <!-- Top accent line -->
                       <div style="position:absolute;top:0;left:0;right:0;height:2px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;transition:opacity .18s"
                         :style="`background:${d.color};opacity:${chapterProgress(cid)>0?1:.35}`"></div>
 
-                      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex:1;margin-top:6px">
+                      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex:1;margin-top:6px;min-height:0">
                         <div style="flex:1;min-width:0">
                           <!-- Chapter ID -->
                           <div style="font-size:9.5px;color:var(--text-muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace"
                             x-text="cid"></div>
                           <!-- Title -->
-                          <div style="font-size:13.5px;font-weight:700;color:var(--text-primary);line-height:1.35;margin-bottom:10px;letter-spacing:-.01em"
+                          <div style="font-size:13.5px;font-weight:700;color:var(--text-primary);line-height:1.35;margin-bottom:10px;letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden"
                             x-text="getChapter(cid).title"></div>
                           <!-- Level + Time -->
                           <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
