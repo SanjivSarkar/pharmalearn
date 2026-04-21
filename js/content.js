@@ -21,8 +21,8 @@ window.PL.domains = [
     title: "Commercial Analytics",
     icon: "📊",
     color: "#0ea5e9",
-    description: "Patient journey analytics, HCP targeting, SFE, forecasting, MMM, launch analytics, gross-to-net, omnichannel, and IC design.",
-    chapters: ["2-1","2-2","2-3","2-4","2-5","2-6","2-7","2-8","2-9","2-10","2-11"]
+    description: "Patient journey analytics, HCP targeting, SFE, forecasting, MMM, launch analytics, gross-to-net, omnichannel, IC design, market research, and supply chain.",
+    chapters: ["2-1","2-2","2-3","2-4","2-5","2-6","2-7","2-8","2-9","2-10","2-11","2-12","2-13"]
   },
   {
     id: 3,
