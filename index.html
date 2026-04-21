@@ -474,6 +474,49 @@
       </div>
     </header>
 
+    <!-- ── News Ticker ───────────────────────────────── -->
+    <div x-show="pharmaNews.length > 0" class="news-ticker-wrap" x-cloak>
+      <!-- Label -->
+      <div class="ticker-label">
+        <span class="ticker-live-dot"></span>
+        <span>US Pharma</span>
+      </div>
+      <!-- Scrolling content -->
+      <div class="ticker-viewport">
+        <div class="ticker-track"
+          :style="`animation-duration:${Math.max(40, pharmaNews.length * 6)}s`">
+          <!-- Duplicate for seamless loop -->
+          <template x-for="(item, i) in pharmaNews.concat(pharmaNews)" :key="i">
+            <a :href="item.url" target="_blank" rel="noopener" class="ticker-item">
+              <span class="ticker-source" x-text="item.source"></span>
+              <span class="ticker-title" x-text="item.title"></span>
+              <template x-if="item.date">
+                <span class="ticker-date" x-text="item.date"></span>
+              </template>
+              <span class="ticker-sep" aria-hidden="true">◆</span>
+            </a>
+          </template>
+        </div>
+      </div>
+      <!-- Refresh -->
+      <button @click="fetchNews()" class="ticker-refresh"
+        :title="newsLoading ? 'Loading…' : 'Refresh news'"
+        :disabled="newsLoading">
+        <span x-text="newsLoading ? '…' : '↻'"></span>
+      </button>
+    </div>
+
+    <!-- Loading ticker skeleton -->
+    <div x-show="newsLoading && !pharmaNews.length" class="news-ticker-wrap ticker-loading" x-cloak>
+      <div class="ticker-label">
+        <span class="ticker-live-dot" style="background:var(--text-muted)"></span>
+        <span>US Pharma</span>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;padding:0 16px;gap:8px;overflow:hidden">
+        <span style="font-size:12px;color:var(--text-muted);animation:pulse 1.5s ease-in-out infinite">Loading today's pharma news…</span>
+      </div>
+    </div>
+
     <!-- Page content -->
     <main class="page-content">
 
@@ -567,36 +610,6 @@
             </div>
           </div>
         </template>
-
-        <!-- Pharma News -->
-        <div style="margin-bottom:32px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-            <h2 class="section-heading" style="margin-bottom:0">Today in Pharma</h2>
-            <div style="display:flex;align-items:center;gap:8px">
-              <div x-show="newsLoading" style="font-size:11px;color:var(--text-muted)">Loading…</div>
-              <button x-show="!newsLoading" @click="fetchNews()"
-                style="background:none;border:none;cursor:pointer;font-size:11px;color:var(--text-muted);padding:4px 8px;border-radius:6px"
-                @mouseenter="$el.style.color='var(--accent)'" @mouseleave="$el.style.color='var(--text-muted)'">↻ Refresh</button>
-            </div>
-          </div>
-          <div x-show="!pharmaNews.length && !newsLoading"
-            style="color:var(--text-muted);font-size:13px;padding:20px;text-align:center;border:1px dashed var(--border);border-radius:12px">
-            News unavailable.
-            <button @click="fetchNews()" style="color:var(--accent);background:none;border:none;cursor:pointer;font-size:13px">Retry</button>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <template x-for="(item, i) in pharmaNews" :key="i">
-              <a :href="item.url" target="_blank" rel="noopener" class="news-item">
-                <span class="news-rank" x-text="(i+1).toString().padStart(2,'0')"></span>
-                <div style="flex:1;min-width:0">
-                  <div class="news-title" x-text="item.title"></div>
-                  <div class="news-meta" x-text="item.source + ' · ' + item.date"></div>
-                </div>
-                <span style="font-size:13px;color:var(--text-muted);flex-shrink:0;padding-top:2px">↗</span>
-              </a>
-            </template>
-          </div>
-        </div>
 
         <!-- Domain cards -->
         <h2 class="section-heading">All Domains</h2>
