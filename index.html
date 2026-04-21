@@ -1141,18 +1141,10 @@
                   style="display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:all .15s"
                   @mouseenter="$el.style.borderColor='var(--border-strong)';$el.style.background='var(--bg-elevated)'"
                   @mouseleave="$el.style.borderColor='var(--border)';$el.style.background='var(--bg-surface)'">
-                  <!-- Mastery ring -->
-                  <div style="flex-shrink:0;position:relative;width:36px;height:36px">
-                    <svg width="36" height="36" viewBox="0 0 36 36">
-                      <circle cx="18" cy="18" r="14" fill="none" stroke="var(--bg-overlay)" stroke-width="3"/>
-                      <circle cx="18" cy="18" r="14" fill="none" :stroke="domainColor(ch.domain_id)" stroke-width="3"
-                        stroke-linecap="round" stroke-dasharray="87.96"
-                        :stroke-dashoffset="87.96 - (87.96 * ch.mastery / 100)"
-                        transform="rotate(-90 18 18)"/>
-                    </svg>
-                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800" :style="`color:${domainColor(ch.domain_id)}`"
-                      x-text="ch.mastery + '%'"></div>
-                  </div>
+                  <!-- Mastery badge -->
+                  <div style="flex-shrink:0;min-width:42px;height:26px;border-radius:13px;display:flex;align-items:center;justify-content:center;padding:0 8px;font-size:11px;font-weight:800;border:1.5px solid;white-space:nowrap"
+                    :style="`color:${domainColor(ch.domain_id)};border-color:${domainColor(ch.domain_id)}50;background:${domainColor(ch.domain_id)}12`"
+                    x-text="ch.mastery + '%'"></div>
                   <div style="flex:1;min-width:0">
                     <div style="font-size:13px;font-weight:600;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" x-text="ch.title"></div>
                     <div style="font-size:11px;color:var(--text-muted);margin-top:2px" x-text="ch.domain"></div>
