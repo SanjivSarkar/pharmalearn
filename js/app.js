@@ -10,7 +10,7 @@
   const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz456'
   const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // from EmailJS Account → API Keys
   const ADMIN_SECRET = 'PAL-HMAC-SECRET-2025';     // change to something private
-  const SESSION_EXPIRY_MS = 30 * 24 * 60 * 60 * 1000; // 30 days then re-verify
+  const SESSION_EXPIRY_MS = 365 * 24 * 60 * 60 * 1000; // 365 days then re-verify
 
   // ─── HMAC token helpers (Web Crypto API) ─────────────────────────────────
   async function makeHmacKey() {
@@ -315,6 +315,11 @@
 
     // ─── Domain/Chapter Data ─────────────────────────────────────────────────
     get domains() { return window.PL.domains; },
+
+    // Stable computed slices for sidebar — avoid inline filter() creating new
+    // array references on every Alpine effect pass, which can cause excess re-renders
+    get domainsCore() { return window.PL.domains.filter(d => d.id <= 4); },
+    get domainsTech() { return window.PL.domains.filter(d => d.id > 4); },
 
     getDomainChapters(domainId) { return getDomainChapters(domainId); },
 

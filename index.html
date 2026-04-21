@@ -37,7 +37,7 @@
   <style>[x-cloak]{display:none!important}</style>
 </head>
 
-<body x-data="pharmaApp()" x-init="init()" x-cloak>
+<body x-data="pharmaApp()" x-init="init()">
 
 <!-- Reading progress bar -->
 <div id="reading-bar" class="reading-progress-bar" style="width:0%"></div>
@@ -225,7 +225,7 @@
 <!-- ═══════════════════════════════════════════════════════
      ONBOARDING MODAL
 ═══════════════════════════════════════════════════════ -->
-<div x-show="showOnboarding" class="fixed inset-0 z-[200] flex items-center justify-center p-4"
+<div x-show="showOnboarding" x-cloak class="fixed inset-0 z-[200] flex items-center justify-center p-4"
      style="background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);">
   <div class="card w-full max-w-md p-8" style="border:1px solid var(--accent);animation:fadeUp .3s ease">
 
@@ -309,7 +309,7 @@
 <!-- ═══════════════════════════════════════════════════════
      TOAST
 ═══════════════════════════════════════════════════════ -->
-<div x-show="toast.show" x-transition
+<div x-show="toast.show" x-cloak x-transition
   :class="`toast toast-${toast.type}`"
   style="position:fixed;bottom:24px;right:24px;z-index:300;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:500;min-width:220px;box-shadow:0 8px 32px rgba(0,0,0,0.4)">
   <span x-text="toast.msg"></span>
@@ -396,7 +396,7 @@
 
       <!-- Group 1: Core Pharma Concepts (domains 1–4) -->
       <div style="padding:10px 10px 4px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)">Core Pharma Concepts</div>
-      <template x-for="d in domains.filter(d => d.id <= 4)" :key="d.id">
+      <template x-for="d in domainsCore" :key="d.id">
         <button @click="domainFilter=d.id; navigate('domains')"
           :style="`width:100%;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;border:none;cursor:pointer;font-size:12px;transition:all .15s;text-align:left;background:${domainFilter===d.id?'var(--accent-dim)':'none'};color:${domainFilter===d.id?'var(--accent)':'var(--text-secondary)'}`">
           <span x-text="d.icon" style="font-size:14px;flex-shrink:0"></span>
@@ -409,7 +409,7 @@
 
       <!-- Group 2: Technical Disciplines (domains 5–6) -->
       <div style="padding:6px 10px 4px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)">Technical Disciplines</div>
-      <template x-for="d in domains.filter(d => d.id > 4)" :key="d.id">
+      <template x-for="d in domainsTech" :key="d.id">
         <button @click="domainFilter=d.id; navigate('domains')"
           :style="`width:100%;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;border:none;cursor:pointer;font-size:12px;transition:all .15s;text-align:left;background:${domainFilter===d.id?'var(--accent-dim)':'none'};color:${domainFilter===d.id?'var(--accent)':'var(--text-secondary)'}`">
           <span x-text="d.icon" style="font-size:14px;flex-shrink:0"></span>
@@ -516,7 +516,7 @@
     </div>
 
     <!-- Page content -->
-    <main class="page-content">
+    <main class="page-content" x-cloak>
 
       <!-- ══════════════════════════════════════════
            HOME
