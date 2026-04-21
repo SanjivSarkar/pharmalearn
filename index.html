@@ -600,9 +600,20 @@
             <div class="domain-card-v2" :style="`--dc:${d.color}`"
               @click="domainFilter=d.id; navigate('domains')">
               <div style="display:flex;align-items:flex-start;gap:14px">
-                <!-- Icon -->
-                <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;transition:transform .2s"
-                  :style="`background:${d.color}18`" x-text="d.icon"></div>
+                <!-- 3D sphere -->
+                <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s"
+                  :style="`background:${d.color}10`">
+                  <svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <radialGradient :id="`sg-${d.id}`" cx="36%" cy="30%" r="65%" fx="36%" fy="30%">
+                        <stop offset="0%"   stop-color="white"   stop-opacity="0.88"/>
+                        <stop offset="42%"  :stop-color="d.color" stop-opacity="1"/>
+                        <stop offset="100%" :stop-color="d.color" stop-opacity="0.55"/>
+                      </radialGradient>
+                    </defs>
+                    <circle cx="15" cy="15" r="13" :fill="`url(#sg-${d.id})`"/>
+                  </svg>
+                </div>
                 <div style="flex:1;min-width:0">
                   <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:4px;letter-spacing:-.01em"
                     x-text="d.title"></div>
