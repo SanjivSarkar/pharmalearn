@@ -325,95 +325,101 @@
 
     <!-- Logo -->
     <div class="sidebar-logo">
-      <div style="display:flex;align-items:center;gap:10px">
-        <svg width="34" height="34" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
-          <defs>
-            <linearGradient id="palg-sb" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#312e81"/>
-              <stop offset="1" stop-color="#0369a1"/>
-            </linearGradient>
-            <linearGradient id="palg-sb-ln" x1="4" y1="24" x2="30" y2="10" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#a5b4fc"/>
-              <stop offset="1" stop-color="#7dd3fc"/>
-            </linearGradient>
-          </defs>
-          <rect width="34" height="34" rx="9" fill="url(#palg-sb)"/>
-          <polyline points="4,24 10,19 16,21 22,12 30,15"
-            fill="none" stroke="url(#palg-sb-ln)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="22" cy="12" r="1.8" fill="#c7d2fe"/>
-          <text x="17" y="32" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="6" font-weight="800"
-            font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" letter-spacing="2">PAL</text>
-        </svg>
-        <div x-show="sidebarOpen">
-          <div style="font-weight:800;font-size:14px;color:var(--text-primary);letter-spacing:-.3px">PAL</div>
-          <div style="font-size:10px;color:var(--text-muted);letter-spacing:.2px">Pharma Analytics Library</div>
+      <div style="display:flex;align-items:center;gap:10px;min-width:0">
+        <div style="width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#312e81,#0369a1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <polyline points="2,13 5,10 8,11 12,6 16,8" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="6" r="1.2" fill="#c7d2fe"/>
+          </svg>
+        </div>
+        <div x-show="sidebarOpen" style="min-width:0">
+          <div style="font-size:13px;font-weight:800;color:var(--text-primary);letter-spacing:-.2px;line-height:1.2">PAL</div>
+          <div style="font-size:10px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Pharma Analytics Library</div>
         </div>
       </div>
     </div>
 
     <!-- Nav -->
     <nav class="sidebar-nav">
-      <button @click="navigate('home')"
-        :class="page==='home'?'nav-item active':'nav-item'"
-        title="Home">
-        <span class="nav-icon">⌂</span>
-        <span class="nav-label" x-show="sidebarOpen">Home</span>
+
+      <button @click="navigate('home')" :class="page==='home'?'nav-item active':'nav-item'" title="Home">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9.5L10 3l7 6.5V17a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+          <path d="M7 18v-6h6v6"/>
+        </svg>
+        <span x-show="sidebarOpen">Home</span>
       </button>
-      <button @click="navigate('domains')"
-        :class="page==='domains'||page==='chapter'?'nav-item active':'nav-item'"
-        title="Library">
-        <span class="nav-icon">📚</span>
-        <span class="nav-label" x-show="sidebarOpen">Library</span>
+
+      <button @click="navigate('domains')" :class="page==='domains'||page==='chapter'?'nav-item active':'nav-item'" title="Library">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="5" height="5" rx="1"/>
+          <rect x="12" y="3" width="5" height="5" rx="1"/>
+          <rect x="3" y="12" width="5" height="5" rx="1"/>
+          <rect x="12" y="12" width="5" height="5" rx="1"/>
+        </svg>
+        <span x-show="sidebarOpen">Library</span>
       </button>
-      <button @click="navigate('roadmap')"
-        :class="page==='roadmap'?'nav-item active':'nav-item'"
-        title="Roadmap">
-        <span class="nav-icon">⟶</span>
-        <span class="nav-label" x-show="sidebarOpen">Roadmap</span>
+
+      <button @click="navigate('roadmap')" :class="page==='roadmap'?'nav-item active':'nav-item'" title="Roadmap">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="5" cy="10" r="1.5"/>
+          <circle cx="15" cy="10" r="1.5"/>
+          <circle cx="10" cy="5" r="1.5"/>
+          <circle cx="10" cy="15" r="1.5"/>
+          <line x1="6.5" y1="10" x2="8.5" y2="10"/>
+          <line x1="11.5" y1="10" x2="13.5" y2="10"/>
+          <line x1="10" y1="6.5" x2="10" y2="8.5"/>
+          <line x1="10" y1="11.5" x2="10" y2="13.5"/>
+        </svg>
+        <span x-show="sidebarOpen">Roadmap</span>
       </button>
-      <button @click="navigate('search')"
-        :class="page==='search'?'nav-item active':'nav-item'"
-        title="Search">
-        <span class="nav-icon">⌕</span>
-        <span class="nav-label" x-show="sidebarOpen">Search</span>
+
+      <button @click="navigate('search')" :class="page==='search'?'nav-item active':'nav-item'" title="Search">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+          <circle cx="8.5" cy="8.5" r="4.5"/>
+          <line x1="12" y1="12" x2="17" y2="17"/>
+        </svg>
+        <span x-show="sidebarOpen">Search</span>
       </button>
-      <button @click="navigate('bookmarks')"
-        :class="page==='bookmarks'?'nav-item active':'nav-item'"
-        title="Bookmarks">
-        <span class="nav-icon">◈</span>
-        <span class="nav-label" x-show="sidebarOpen">Bookmarks</span>
+
+      <button @click="navigate('bookmarks')" :class="page==='bookmarks'?'nav-item active':'nav-item'" title="Bookmarks">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 3h10a1 1 0 011 1v13l-6-3.5L4 17V4a1 1 0 011-1z"/>
+        </svg>
+        <span x-show="sidebarOpen">Bookmarks</span>
       </button>
-      <button @click="navigate('dashboard')"
-        :class="page==='dashboard'?'nav-item active':'nav-item'"
-        title="Dashboard">
-        <span class="nav-icon">▦</span>
-        <span class="nav-label" x-show="sidebarOpen">Dashboard</span>
+
+      <button @click="navigate('dashboard')" :class="page==='dashboard'?'nav-item active':'nav-item'" title="Dashboard">
+        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="3" height="6" rx="1"/>
+          <rect x="8.5" y="7" width="3" height="10" rx="1"/>
+          <rect x="14" y="3" width="3" height="14" rx="1"/>
+        </svg>
+        <span x-show="sidebarOpen">Dashboard</span>
       </button>
+
     </nav>
 
     <!-- Domain quick links -->
-    <div x-show="sidebarOpen" style="padding:0 8px;overflow-y:auto">
+    <div x-show="sidebarOpen" class="sidebar-domains">
 
-      <!-- Group 1: Core Pharma Concepts (domains 1–4) -->
-      <div style="padding:10px 10px 4px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)">Core Pharma Concepts</div>
+      <div class="sidebar-group-label">Core Pharma</div>
       <template x-for="d in domainsCore" :key="d.id">
-        <button @click="domainFilter=d.id; navigate('domains')"
-          :style="`width:100%;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;border:none;cursor:pointer;font-size:12px;transition:all .15s;text-align:left;background:${domainFilter===d.id?'var(--accent-dim)':'none'};color:${domainFilter===d.id?'var(--accent)':'var(--text-secondary)'}`">
-          <span x-text="d.icon" style="font-size:14px;flex-shrink:0"></span>
-          <span x-text="d.title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+        <button @click="domainFilter=d.id; navigate('domains')" class="domain-link"
+          :class="domainFilter===d.id && (page==='domains'||page==='chapter') ? 'domain-link-active' : ''"
+          :style="domainFilter===d.id && (page==='domains'||page==='chapter') ? `--dl-color:${d.color}` : ''">
+          <span class="domain-link-dot" :style="`background:${d.color}`"></span>
+          <span x-text="d.title"></span>
         </button>
       </template>
 
-      <!-- Divider -->
-      <div style="height:1px;background:var(--border);margin:8px 10px"></div>
-
-      <!-- Group 2: Technical Disciplines (domains 5–6) -->
-      <div style="padding:6px 10px 4px;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted)">Technical Disciplines</div>
+      <div class="sidebar-group-label" style="margin-top:8px">Technical</div>
       <template x-for="d in domainsTech" :key="d.id">
-        <button @click="domainFilter=d.id; navigate('domains')"
-          :style="`width:100%;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;border:none;cursor:pointer;font-size:12px;transition:all .15s;text-align:left;background:${domainFilter===d.id?'var(--accent-dim)':'none'};color:${domainFilter===d.id?'var(--accent)':'var(--text-secondary)'}`">
-          <span x-text="d.icon" style="font-size:14px;flex-shrink:0"></span>
-          <span x-text="d.title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+        <button @click="domainFilter=d.id; navigate('domains')" class="domain-link"
+          :class="domainFilter===d.id && (page==='domains'||page==='chapter') ? 'domain-link-active' : ''"
+          :style="domainFilter===d.id && (page==='domains'||page==='chapter') ? `--dl-color:${d.color}` : ''">
+          <span class="domain-link-dot" :style="`background:${d.color}`"></span>
+          <span x-text="d.title"></span>
         </button>
       </template>
 
@@ -421,22 +427,38 @@
 
     <!-- User block -->
     <div class="sidebar-user">
-      <div style="display:flex;align-items:center;gap:10px;min-width:0">
-        <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0"
-          x-text="userName.charAt(0).toUpperCase()"></div>
-        <div x-show="sidebarOpen" style="min-width:0">
-          <div style="font-size:13px;font-weight:600;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" x-text="userName"></div>
-          <div style="font-size:11px;color:var(--text-muted)" x-text="userLevel.name + ' · ' + userXP.total + ' XP'"></div>
-        </div>
+      <div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#a78bfa);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0"
+        x-text="userName.charAt(0).toUpperCase()"></div>
+      <div x-show="sidebarOpen" style="flex:1;min-width:0">
+        <div style="font-size:12.5px;font-weight:600;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" x-text="userName"></div>
+        <div style="font-size:10.5px;color:var(--text-muted)" x-text="userLevel.name"></div>
       </div>
-      <div x-show="sidebarOpen" style="display:flex;align-items:center;gap:4px;flex-shrink:0">
-        <button @click="toggleTheme()"
-          style="background:none;border:none;cursor:pointer;font-size:15px;color:var(--text-muted);padding:4px 5px;border-radius:6px;transition:color .15s"
-          :title="theme==='dark'?'Switch to light':'Switch to dark'"
-          x-text="theme==='dark'?'☀':'☾'"></button>
-        <button @click="logout()" title="Sign out — requires re-verification"
-          style="background:none;border:none;cursor:pointer;font-size:13px;color:var(--text-muted);padding:4px 5px;border-radius:6px;transition:color .15s;line-height:1"
-          @mouseenter="$el.style.color='#f87171'" @mouseleave="$el.style.color='var(--text-muted)'">⏻</button>
+      <div x-show="sidebarOpen" style="display:flex;align-items:center;gap:2px;flex-shrink:0">
+        <button @click="toggleTheme()" class="sidebar-icon-btn"
+          :title="theme==='dark'?'Light mode':'Dark mode'">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <template x-if="theme==='dark'">
+              <g>
+                <circle cx="10" cy="10" r="3.5"/>
+                <line x1="10" y1="2" x2="10" y2="4"/><line x1="10" y1="16" x2="10" y2="18"/>
+                <line x1="2" y1="10" x2="4" y2="10"/><line x1="16" y1="10" x2="18" y2="10"/>
+                <line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="14.4" y1="14.4" x2="15.8" y2="15.8"/>
+                <line x1="14.4" y1="5.6" x2="15.8" y2="4.2"/><line x1="4.2" y1="15.8" x2="5.6" y2="14.4"/>
+              </g>
+            </template>
+            <template x-if="theme!=='dark'">
+              <path d="M17 12A7 7 0 116 3a5.5 5.5 0 1011 9z"/>
+            </template>
+          </svg>
+        </button>
+        <button @click="logout()" class="sidebar-icon-btn" title="Sign out"
+          style="--icon-hover:#f87171">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 3h3a1 1 0 011 1v12a1 1 0 01-1 1h-3"/>
+            <polyline points="9,7 13,10 9,13"/>
+            <line x1="13" y1="10" x2="3" y2="10"/>
+          </svg>
+        </button>
       </div>
     </div>
 
