@@ -703,18 +703,50 @@
         }).filter(i => i.title && i.title.length > 5);
       };
 
-      // Proxy builders
+      // Proxy builders — tried in order of reliability
       const corsProxy  = u => `https://corsproxy.io/?${encodeURIComponent(u)}`;
       const originsRaw = u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`;
+      const rssToJson  = u => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(u)}`;
 
-      // US-focused pharma feeds (Google News geo-targeted to US)
+      // Parse rss2json JSON response (different shape from raw XML)
+      const parseJson = (text, fixedSource) => {
+        try {
+          const json = JSON.parse(text);
+          if (json.status !== 'ok' || !Array.isArray(json.items)) return [];
+          return json.items.slice(0, 40).map(item => {
+            const rawTitle = (item.title || '').trim();
+            const link     = item.link || item.guid || '#';
+            const pub      = item.pubDate || '';
+            let date = ''; let timestamp = 0;
+            if (pub) {
+              const d = new Date(pub);
+              if (!isNaN(d.getTime())) {
+                date = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                timestamp = d.getTime();
+              }
+            }
+            const parts  = rawTitle.split(' - ');
+            const source = fixedSource || (parts.length > 1 ? parts.pop().trim() : 'Pharma News');
+            const title  = fixedSource ? rawTitle : parts.join(' - ').trim();
+            return { title, url: link, source, date, timestamp };
+          }).filter(i => i.title && i.title.length > 5);
+        } catch(_) { return []; }
+      };
+
+      // US-focused feeds
       const GN_PHARMA = 'https://news.google.com/rss/search?q=pharma+FDA+drug+approval+biotech+USA&hl=en-US&gl=US&ceid=US:en';
       const GN_FDA    = 'https://news.google.com/rss/search?q=FDA+drug+approval+clinical+trial+United+States&hl=en-US&gl=US&ceid=US:en';
       const GN_BIO    = 'https://news.google.com/rss/search?q=biotech+pharmaceutical+oncology+gene+therapy+USA&hl=en-US&gl=US&ceid=US:en';
       const STAT      = 'https://www.statnews.com/feed/';
       const FIERCE    = 'https://www.fiercepharma.com/rss/xml';
+      // Global fallback feeds
+      const GN_GLOBAL = 'https://news.google.com/rss/search?q=pharmaceutical+biotech+drug+approval+clinical+trial&hl=en&gl=US&ceid=US:en';
+      const GN_DRUG   = 'https://news.google.com/rss/search?q=drug+discovery+medicine+oncology+vaccine&hl=en&gl=US&ceid=US:en';
+      const REUTERS_H = 'https://feeds.reuters.com/reuters/healthNews';
+      const MNT       = 'https://www.medicalnewstoday.com/rss';
+      const BIOPHARMA = 'https://www.biopharmadive.com/feeds/news/';
 
-      // Merge results from multiple feeds for richer ticker
+      // Merge deduplicated items from any source
       const allItems = [];
       const seenTitles = new Set();
       const addItems = items => {
@@ -724,22 +756,42 @@
         }
       };
 
-      // Waterfall: collect from as many sources as possible
+      // Waterfall: US feeds first, then global fallbacks across all three proxies
       const attempts = [
-        { proxyFn: corsProxy,  feed: GN_PHARMA, source: null },
-        { proxyFn: corsProxy,  feed: GN_FDA,    source: null },
-        { proxyFn: originsRaw, feed: GN_PHARMA, source: null },
-        { proxyFn: corsProxy,  feed: GN_BIO,    source: null },
-        { proxyFn: corsProxy,  feed: STAT,      source: 'STAT News' },
-        { proxyFn: corsProxy,  feed: FIERCE,    source: 'Fierce Pharma' },
+        // US feeds via corsproxy (primary)
+        { proxyFn: corsProxy,  feed: GN_PHARMA, source: null,            jsonMode: false },
+        { proxyFn: corsProxy,  feed: GN_FDA,    source: null,            jsonMode: false },
+        { proxyFn: corsProxy,  feed: GN_BIO,    source: null,            jsonMode: false },
+        // US feeds via allorigins
+        { proxyFn: originsRaw, feed: GN_PHARMA, source: null,            jsonMode: false },
+        { proxyFn: originsRaw, feed: GN_FDA,    source: null,            jsonMode: false },
+        // US specialist feeds
+        { proxyFn: corsProxy,  feed: STAT,      source: 'STAT News',     jsonMode: false },
+        { proxyFn: corsProxy,  feed: FIERCE,    source: 'Fierce Pharma', jsonMode: false },
+        { proxyFn: originsRaw, feed: STAT,      source: 'STAT News',     jsonMode: false },
+        // rss2json for US feeds (different proxy, often succeeds when others fail)
+        { proxyFn: rssToJson,  feed: GN_PHARMA, source: null,            jsonMode: true  },
+        { proxyFn: rssToJson,  feed: GN_FDA,    source: null,            jsonMode: true  },
+        { proxyFn: rssToJson,  feed: STAT,      source: 'STAT News',     jsonMode: true  },
+        // Global fallbacks
+        { proxyFn: corsProxy,  feed: GN_GLOBAL, source: null,            jsonMode: false },
+        { proxyFn: corsProxy,  feed: GN_DRUG,   source: null,            jsonMode: false },
+        { proxyFn: originsRaw, feed: GN_GLOBAL, source: null,            jsonMode: false },
+        { proxyFn: rssToJson,  feed: GN_GLOBAL, source: null,            jsonMode: true  },
+        { proxyFn: corsProxy,  feed: REUTERS_H, source: 'Reuters Health', jsonMode: false },
+        { proxyFn: corsProxy,  feed: BIOPHARMA, source: 'BioPharma Dive', jsonMode: false },
+        { proxyFn: corsProxy,  feed: MNT,       source: 'Medical News Today', jsonMode: false },
+        { proxyFn: originsRaw, feed: REUTERS_H, source: 'Reuters Health', jsonMode: false },
+        { proxyFn: rssToJson,  feed: REUTERS_H, source: 'Reuters Health', jsonMode: true  },
+        { proxyFn: rssToJson,  feed: BIOPHARMA, source: 'BioPharma Dive', jsonMode: true  },
       ];
 
-      for (const { proxyFn, feed, source } of attempts) {
+      for (const { proxyFn, feed, source, jsonMode } of attempts) {
         try {
           const text  = await fetchRaw(proxyFn(feed));
-          const items = parseXml(text, source);
+          const items = jsonMode ? parseJson(text, source) : parseXml(text, source);
           addItems(items);
-          if (allItems.length >= 20) break; // enough for a full ticker
+          if (allItems.length >= 20) break;
         } catch(_) { /* try next */ }
       }
 
