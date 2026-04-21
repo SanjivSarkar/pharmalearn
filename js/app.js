@@ -91,10 +91,10 @@
     },
     getLevel: () => {
       const xp = store.get('xp', { total: 0 }).total;
-      if (xp >= 5001) return { name: 'Principal', color: '#f59e0b', next: null, pct: 100 };
-      if (xp >= 2001) return { name: 'Consultant', color: '#8b5cf6', next: 5001, pct: Math.round((xp-2001)/(5001-2001)*100) };
-      if (xp >= 501)  return { name: 'Sr. Analyst', color: '#6366f1', next: 2001, pct: Math.round((xp-501)/(2001-501)*100) };
-      return { name: 'Analyst', color: '#06b6d4', next: 501, pct: Math.round(xp/501*100) };
+      if (xp >= 5001) return { name: 'Pro',          color: '#f59e0b', next: null, pct: 100 };
+      if (xp >= 2001) return { name: 'Advanced',     color: '#8b5cf6', next: 5001, pct: Math.round((xp-2001)/(5001-2001)*100) };
+      if (xp >= 501)  return { name: 'Intermediate', color: '#6366f1', next: 2001, pct: Math.round((xp-501)/(2001-501)*100) };
+      return { name: 'Basic', color: '#06b6d4', next: 501, pct: Math.round(xp/501*100) };
     }
   };
 
