@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-21T13:53:59Z",
+  "updated": "2026-04-21T19:19:44Z",
   "items": [
     {
       "title": "Regulatory tracker: GSK's multiple myeloma ADC Blenrep expands to China",
@@ -30,25 +30,11 @@
       "timestamp": 1771833600000
     },
     {
-      "title": "Earnings roundup: Amgen vs. FDA, Pfizer\u2019s defense and Merck\u2019s $70B-in-sales plan",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNOXJjVlRweEFDdlFaZUtScWl2UFJkWWVHNzgzWXhkT3BPX2hjWjJqRGhpZVJuOW4tbUdoWlZWQURCcjY2ZndZakh5M2Y4eDhEVWRvb0NnaWkwV1lWbzNaNmxYNElnQXpVLW5fY0xtdXREbWhNa0JZd19JZnVBblNITzdzWnlEbUpLRTU0RkxWV0g3c0NP?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Feb 4",
-      "timestamp": 1770192000000
-    },
-    {
       "title": "China threatens U.S.' drug-making crown amid Trump admin's research overhaul",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5TNEdRRnJOeXNNd1dVZVBNa0NuQWxocTlLb2FFT1FVWHpnakYzWDdtOUZzeDU4RTNMRlZ3RWhtZzJEM0t3UXN6MnhvWTBqVGIwZHJhdk9wR0pZVTY2S2hRQ1NWQUtYMU1NaXc?oc=5",
       "source": "Axios",
       "date": "Jan 30",
       "timestamp": 1769760000000
-    },
-    {
-      "title": "The China Dependence Big Pharma Doesn\u2019t Want Washington to See",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNRnRmY0JZb2pWRkxOTmRWT1liR0p4Smh0TzVhNDVFaHd0SGNoS0VVWVM2dW1fVkV3UzFJZUVNR3lUUDU0Q01fbW40XzlIQldVbkNmcVFLeWxDX1Rkb1dST1ljdTFZdDJOa3hOQnVPdDJqVlZaMFFmUnlTQ0RRVjFXcFhBVFRxQWMzWWxoam5YWjVSazg0SVZn?oc=5",
-      "source": "Coalition For A Prosperous America",
-      "date": "Jan 14",
-      "timestamp": 1768377600000
     },
     {
       "title": "5 FDA decisions to watch in the second quarter of 2026",
@@ -93,6 +79,13 @@
       "timestamp": 1761721200000
     },
     {
+      "title": "FDA declares Novo Nordisk plant, key to drug manufacturing for some biotechs, out of compliance",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaloyaGtUNW1Jb2NXUTJrbW1zcUJ1c3pjdXZYY1hYZWZCNXFQckNNQ1FQNWltcllfOHBpZUEwajhBNnFtZ1VLY3pIUGxBTThTNHZVclZ2NHBSRGZWMko0NW5tOTVmeTcxUGk3YVlNX1d5U0hvXzhZMEJncFduakFaQmtCeGV4NEpj?oc=5",
+      "source": "statnews.com",
+      "date": "Oct 13",
+      "timestamp": 1760338800000
+    },
+    {
       "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
       "source": "statnews.com",
@@ -105,6 +98,13 @@
       "source": "The New York Times",
       "date": "Sep 12",
       "timestamp": 1757660400000
+    },
+    {
+      "title": "Trump admin mulls 'severe restrictions' on US pharmas licensing Chinese meds: NYT",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQS1ZFc2hqWDNJcjcybE5nbnJaSEk0ZENyNVFfS2NQOUV6WS1oNmJfYk4yV0RJQjJ0TnczMU9lSkIzUE1tNlA3eXdTVzZCeXdqRVNPRm1Zb2lCdWZ6Ny1ldGRDenBfaW1EM3dmeFl0SmdUNExrZ25xM3ZEc3dHc2VPVkwwRE9wblJ2LVhIQWNVNWxFcTdxS3M2YnJ6ZlJvWlJGem1MTXZHUFhTckhwajl5bWJ3?oc=5",
+      "source": "Fierce Biotech",
+      "date": "Sep 10",
+      "timestamp": 1757487600000
     },
     {
       "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
@@ -158,6 +158,13 @@
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
+      "source": "Fierce Biotech",
+      "date": "Jun 16",
+      "timestamp": 1750057200000
+    },
+    {
+      "title": "FDA's 'heavy workload' blamed for delays to KalVista's angioedema drug approval decision",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNZ3hYWUlUOG5BeWNBU1RDRVZZbEFHNzBQV1drQ3R3MFNRWWpzWUVRS3p0eDFxUU12RTBCT3U0bmh3bWZ1WHZLcXppS1dEVXZuc1Axb0NVUmVyakFmOEVhTnRNMVlya1N5M05xM1c5SjI1ZFFSYXljaEFsV2lIaHhpSkYxX1h4anhMcGdPRlBFZS14c2hoQU9vcEhGWFdHSXVPSUpqaXItYy1JVFFnVWRWNThPLTNsQQ?oc=5",
       "source": "Fierce Biotech",
       "date": "Jun 16",
       "timestamp": 1750057200000
@@ -238,13 +245,6 @@
       "source": "WSJ",
       "date": "Apr 17",
       "timestamp": 1744873200000
-    },
-    {
-      "title": "Make the FDA Great Again!",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBiWnJpSUhpaWo0d1o3LWo4NXFKNXB3bGxoNDYweVNpSlEyd1d1VWFMRlJ5RjJkOHktbjlUNklFOG9RcURZT2N4VGRKTVA5ck1jazVLcUZIT1hob1pMc0lzWmZJSEwtQQ?oc=5",
-      "source": "blog.joelonsdale.com",
-      "date": "Apr 5",
-      "timestamp": 1743836400000
     },
     {
       "title": "Drugmakers sink after key FDA official ousted as Trump plans health overhaul",
