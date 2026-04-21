@@ -326,10 +326,10 @@
     <!-- Logo -->
     <div class="sidebar-logo">
       <div style="display:flex;align-items:center;gap:10px;min-width:0">
-        <div style="width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#312e81,#0369a1);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <div style="width:32px;height:32px;border-radius:9px;background:rgba(91,141,238,.15);border:1px solid rgba(91,141,238,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <polyline points="2,13 5,10 8,11 12,6 16,8" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="12" cy="6" r="1.2" fill="#c7d2fe"/>
+            <polyline points="2,13 5,10 8,11 12,6 16,8" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="6" r="1.2" fill="var(--accent)"/>
           </svg>
         </div>
         <div x-show="sidebarOpen" style="min-width:0">
@@ -372,14 +372,6 @@
           <line x1="10" y1="11.5" x2="10" y2="13.5"/>
         </svg>
         <span x-show="sidebarOpen">Roadmap</span>
-      </button>
-
-      <button @click="navigate('search')" :class="page==='search'?'nav-item active':'nav-item'" title="Search">
-        <svg class="nav-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-          <circle cx="8.5" cy="8.5" r="4.5"/>
-          <line x1="12" y1="12" x2="17" y2="17"/>
-        </svg>
-        <span x-show="sidebarOpen">Search</span>
       </button>
 
       <button @click="navigate('bookmarks')" :class="page==='bookmarks'?'nav-item active':'nav-item'" title="Bookmarks">
@@ -479,17 +471,6 @@
       </div>
 
       <div style="display:flex;align-items:center;gap:12px">
-        <!-- XP badge -->
-        <div style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--bg-elevated);border-radius:20px;border:1px solid var(--border)">
-          <span style="font-size:13px">⚡</span>
-          <span style="font-size:12px;font-weight:600;color:var(--text-primary)" x-text="userXP.total + ' XP'"></span>
-        </div>
-        <!-- Streak -->
-        <div x-show="userXP.streak > 0"
-          style="display:flex;align-items:center;gap:4px;padding:6px 10px;background:var(--bg-elevated);border-radius:20px;border:1px solid var(--border)">
-          <span style="font-size:13px">🔥</span>
-          <span style="font-size:12px;font-weight:600;color:#f97316" x-text="userXP.streak"></span>
-        </div>
         <!-- Theme (mobile) -->
         <button @click="toggleTheme()" class="btn btn-ghost" style="display:none"
           x-text="theme==='dark'?'☀':'☾'"></button>
@@ -524,7 +505,6 @@
 
           <div class="stat-card" style="--stat-accent:linear-gradient(90deg,#6366f1,#818cf8)">
             <div class="stat-bg-glow" style="--stat-glow:rgba(99,102,241,.12)"></div>
-            <span class="stat-icon">📈</span>
             <div class="stat-value gradient-text" x-text="overallProgress + '%'"></div>
             <div class="stat-label">Overall Progress</div>
             <div class="progress" style="margin-top:10px">
@@ -534,14 +514,12 @@
 
           <div class="stat-card" style="--stat-accent:linear-gradient(90deg,#f59e0b,#fbbf24)">
             <div class="stat-bg-glow" style="--stat-glow:rgba(245,158,11,.1)"></div>
-            <span class="stat-icon">⚡</span>
             <div class="stat-value" style="color:var(--warning)" x-text="userXP.total.toLocaleString()"></div>
             <div class="stat-label">XP Earned</div>
           </div>
 
           <div class="stat-card" style="--stat-accent:linear-gradient(90deg,#8b5cf6,#a78bfa)">
             <div class="stat-bg-glow" style="--stat-glow:rgba(139,92,246,.1)"></div>
-            <span class="stat-icon">🎯</span>
             <div class="stat-value" :style="`color:${userLevel.color}`" x-text="userLevel.name"></div>
             <div class="stat-label">Current Level</div>
             <div class="progress" style="margin-top:10px">
@@ -551,7 +529,6 @@
 
           <div class="stat-card" style="--stat-accent:linear-gradient(90deg,#f16a6a,#fb923c)">
             <div class="stat-bg-glow" style="--stat-glow:rgba(241,106,106,.1)"></div>
-            <span class="stat-icon">🔥</span>
             <div class="stat-value" style="color:#f97316" x-text="(userXP.streak||0) + 'd'"></div>
             <div class="stat-label">Day Streak</div>
           </div>
