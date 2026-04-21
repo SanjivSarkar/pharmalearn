@@ -687,17 +687,19 @@
           const pub = item.querySelector('pubDate')?.textContent?.trim() || '';
           // Safe date parse — new Date('') and invalid strings return Invalid Date
           let date = '';
+          let timestamp = 0;
           if (pub) {
             const d = new Date(pub);
             if (!isNaN(d.getTime())) {
               date = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+              timestamp = d.getTime();
             }
           }
           // Google News titles end with " - Source Name"
           const parts  = rawTitle.split(' - ');
           const source = fixedSource || (parts.length > 1 ? parts.pop().trim() : 'Pharma News');
           const title  = fixedSource ? rawTitle : parts.join(' - ').trim();
-          return { title, url: link, source, date };
+          return { title, url: link, source, date, timestamp };
         }).filter(i => i.title && i.title.length > 5);
       };
 
@@ -800,10 +802,13 @@
       return window.PL.chapters[id] || null;
     },
 
-    // Ticker items doubled for seamless CSS loop — computed so Alpine
-    // doesn't see a new array reference on every evaluation cycle
-    get tickerItems() {
-      return this.pharmaNews.concat(this.pharmaNews);
+    // Latest news filtered to last 3 days, newest first
+    get recentNews() {
+      const cutoff = Date.now() - 3 * 24 * 60 * 60 * 1000;
+      return this.pharmaNews
+        .filter(i => i.timestamp === 0 || i.timestamp >= cutoff)
+        .sort((a, b) => b.timestamp - a.timestamp)
+        .slice(0, 12);
     }
   });
 })();
