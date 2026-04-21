@@ -925,11 +925,13 @@ body {
 
 
 .sidebar-logo {
-  padding: 14px 12px;
+  height: var(--header-h);
+  padding: 0 14px;
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .sidebar-nav {
