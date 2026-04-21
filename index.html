@@ -1070,7 +1070,7 @@
               <div style="font-size:12px;color:var(--text-muted)"
                 x-text="userLevel.next ? userXP.total + ' / ' + userLevel.next + ' XP to next level' : 'Max level achieved!'"></div>
             </div>
-            <div style="font-size:20px" x-text="userXP.total >= 5001 ? '👑' : userXP.total >= 2001 ? '🔮' : userXP.total >= 501 ? '⭐' : '🌱'"></div>
+            <div style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px" :style="`background:${userLevel.color}18;color:${userLevel.color}`" x-text="userLevel.name"></div>
           </div>
           <div class="progress" style="height:8px">
             <div class="progress-fill" :style="`width:${userLevel.pct}%;background:${userLevel.color}`"></div>
@@ -1084,7 +1084,7 @@
             <div class="card" style="padding:16px 20px">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
                 <div style="display:flex;align-items:center;gap:10px">
-                  <span x-text="d.icon" style="font-size:18px"></span>
+                  <span style="display:inline-block;width:10px;height:10px;border-radius:50%;flex-shrink:0" :style="`background:${d.color}`"></span>
                   <span style="font-size:13px;font-weight:600;color:var(--text-primary)" x-text="d.title"></span>
                 </div>
                 <span style="font-size:13px;font-weight:700" :style="`color:${d.color}`" x-text="d.progress + '%'"></span>
