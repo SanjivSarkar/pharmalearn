@@ -866,13 +866,12 @@
       return window.PL.chapters[id] || null;
     },
 
-    // Latest news filtered to last 3 days, newest first
+    // Latest news: prefer last 7 days, but always show at least 5 items
     get recentNews() {
       const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
-      return this.pharmaNews
-        .filter(i => i.timestamp === 0 || i.timestamp >= cutoff)
-        .sort((a, b) => b.timestamp - a.timestamp)
-        .slice(0, 12);
+      const sorted = [...this.pharmaNews].sort((a, b) => b.timestamp - a.timestamp);
+      const recent = sorted.filter(i => i.timestamp === 0 || i.timestamp >= cutoff);
+      return recent.length >= 5 ? recent.slice(0, 12) : sorted.slice(0, 5);
     }
   });
 })();
