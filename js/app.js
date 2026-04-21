@@ -793,6 +793,12 @@
 
     getChapter(id) {
       return window.PL.chapters[id] || null;
+    },
+
+    // Ticker items doubled for seamless CSS loop — computed so Alpine
+    // doesn't see a new array reference on every evaluation cycle
+    get tickerItems() {
+      return this.pharmaNews.concat(this.pharmaNews);
     }
   });
 })();

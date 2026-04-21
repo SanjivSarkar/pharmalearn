@@ -486,7 +486,7 @@
         <div class="ticker-track"
           :style="`animation-duration:${Math.max(40, pharmaNews.length * 6)}s`">
           <!-- Duplicate for seamless loop -->
-          <template x-for="(item, i) in pharmaNews.concat(pharmaNews)" :key="i">
+          <template x-for="(item, i) in tickerItems" :key="i">
             <a :href="item.url" target="_blank" rel="noopener" class="ticker-item">
               <span class="ticker-source" x-text="item.source"></span>
               <span class="ticker-title" x-text="item.title"></span>
@@ -521,7 +521,7 @@
       <!-- ══════════════════════════════════════════
            HOME
       ══════════════════════════════════════════ -->
-      <div x-show="page==='home'" class="fade-up">
+      <div x-show="page==='home'">
 
         <!-- Hero -->
         <div class="home-hero" style="margin-bottom:28px">
@@ -675,7 +675,7 @@
       <!-- ══════════════════════════════════════════
            DOMAINS / LIBRARY
       ══════════════════════════════════════════ -->
-      <div x-show="page==='domains' && !activeChapter" class="fade-up">
+      <div x-show="page==='domains' && !activeChapter">
         <div style="margin-bottom:24px">
           <h1 style="font-size:1.8rem;font-weight:900;color:var(--text-primary);margin-bottom:6px;letter-spacing:-.04em">Chapter Library</h1>
           <p style="color:var(--text-secondary);font-size:13.5px">52 chapters · 6 domains · one integrated pharma analytics curriculum</p>
@@ -1107,7 +1107,7 @@
       <!-- ══════════════════════════════════════════
            ROADMAP
       ══════════════════════════════════════════ -->
-      <div x-show="page==='roadmap'" class="fade-up">
+      <div x-show="page==='roadmap'">
 
         <!-- Hero Banner -->
         <div class="rm-hero">
