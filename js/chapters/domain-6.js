@@ -37,63 +37,28 @@ PL.addChapters({
 <tr><td>Debugging</td><td>Hard — transformation errors buried in pipeline</td><td>Easy — raw data preserved; rerun transforms</td></tr>
 <tr><td>Best for pharma</td><td>Legacy CDISC submissions, on-premise EDC</td><td>Claims analytics, commercial dashboards, ML feature stores</td></tr>
 </tbody></table>
-<pre><code class="language-python"># ELT in practice: load raw, transform in SQL
-# Step 1: Load raw IQVIA file to S3/Snowflake (no transformation)
-import boto3, pandas as pd
-
-def ingest_raw_claims(local_file_path, s3_bucket, s3_key):
-    """
-    Load raw vendor file to S3 without transformation.
-    Preserve exactly what the vendor sent — no alterations.
-    """
-    s3 = boto3.client('s3')
-    s3.upload_file(local_file_path, s3_bucket, s3_key)
-    print(f"Loaded raw file to s3://{s3_bucket}/{s3_key}")
-
-# Step 2: Register raw file in Snowflake external stage
-# CREATE STAGE raw_claims_stage URL='s3://pharma-lake-raw/claims/';
-# COPY INTO raw.medical_claims FROM @raw_claims_stage;
-
-# Step 3: Transform in dbt (runs SQL in Snowflake, not Python)
-# dbt run --select silver.medical_claims_clean</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">S3 = boto3.client('s3')</div>
+</div>
 <div class="callout info"><div class="callout-title">The Raw Zone is Sacred</div><p>In ELT, the raw zone (Bronze layer) must never be modified after ingestion. It is the single source of truth for auditors, regulators, and debugging. If a transformation produces wrong results, you can always rerun from raw. Overwriting raw data destroys your audit trail.</p></div>`},
     {id:"s3",content:`<h2 id="s3">Lakehouse Architecture for Pharma</h2>
 <p>The <strong>lakehouse</strong> combines the low-cost storage of a data lake with the ACID transactions and SQL performance of a data warehouse. Delta Lake (Databricks), Apache Iceberg, and Apache Hudi are the three dominant lakehouse table formats.</p>
-<pre><code class="language-python"># Delta Lake table example — ACID claims ingestion
-from pyspark.sql import SparkSession
-from delta.tables import DeltaTable
-
-spark = SparkSession.builder \
-    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
-    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
-    .getOrCreate()
-
-# Write with ACID guarantees — safe for concurrent reads
-def upsert_claims_delta(new_claims_df, delta_path, merge_key="claim_id"):
-    """
-    Upsert claims into Delta table — update existing, insert new.
-    ACID guarantee: readers never see partial writes.
-    """
-    if DeltaTable.isDeltaTable(spark, delta_path):
-        delta_table = DeltaTable.forPath(spark, delta_path)
-        delta_table.alias("existing").merge(
-            new_claims_df.alias("new"),
-            f"existing.{merge_key} = new.{merge_key}"
-        ).whenMatchedUpdateAll() \
-         .whenNotMatchedInsertAll() \
-         .execute()
-        print(f"Upserted {new_claims_df.count()} records")
-    else:
-        new_claims_df.write.format("delta") \
-            .partitionBy("service_year", "service_month") \
-            .save(delta_path)
-        print(f"Created Delta table with {new_claims_df.count()} records")
-
-# Time travel — query as of any historical point
-historical_claims = spark.read.format("delta") \
-    .option("timestampAsOf", "2024-01-01") \
-    .load(delta_path)
-print("Reading claims as of Jan 1, 2024")</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Spark = SparkSession.builder \</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Delta Table = DeltaTable.forPath(spark, delta path)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">F"Existing.{Merge Key} = new.{merge key}"</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>DeltaTable.isDeltaTable(spark, delta path)</td><td>delta table = DeltaTable.forPath(spark, delta path)</td></tr>
+</tbody></table>
 <p><strong>Time travel</strong> is a killer feature for pharma regulatory submissions — you can reproduce the exact dataset used for any historical analysis by querying the Delta table at a specific timestamp or version.</p>`},
     {id:"s4",content:`<h2 id="s4">Tool Selection Guide</h2>
 <table><thead><tr><th>Decision</th><th>Option A</th><th>Option B</th><th>Pharma Recommendation</th></tr></thead>
@@ -106,45 +71,10 @@ print("Reading claims as of Jan 1, 2024")</code></pre>
 </tbody></table>
 <div class="callout warning"><div class="callout-title">The Vendor Lock-In Trap</div><p>Snowflake's proprietary format and Databricks' Delta Lake are both highly capable but create lock-in. Apache Iceberg is the emerging open standard supported by all three major clouds — for new platforms being built for 10+ year horizons, Iceberg provides the best portability.</p></div>`},
     {id:"s5",content:`<h2 id="s5">Reference Architecture</h2>
-<pre><code class="language-python">"""
-Pharma Modern Data Stack — AWS Reference Architecture
-=====================================================
-
-SOURCES
-  ├── IQVIA Xponent (prescriber Rx)        ── SFTP → S3 raw
-  ├── Komodo Health (medical claims)       ── API → S3 raw
-  ├── Veeva CRM                            ── Fivetran → Snowflake raw
-  ├── Flatiron EMR                         ── Secure file transfer → S3 raw
-  └── Internal ERP/Finance                 ── Airbyte → Snowflake raw
-
-INGESTION & STORAGE
-  ├── S3 (Raw Zone / Bronze)              ── Parquet, partitioned by source+date
-  │   └── AWS Glue Catalog                ── Schema registry for all raw tables
-  ├── Snowflake (Silver + Gold)           ── Claims analytics, brand marts
-  └── Databricks (ML + Genomics)         ── Feature store, large-scale Spark jobs
-
-TRANSFORMATION (dbt)
-  ├── Raw → Silver                        ── Clean, deduplicate, standardize, OMOP
-  ├── Silver → Gold (brand marts)         ── Prescriber targets, funnel, adherence
-  └── Gold → Semantic Layer               ── Metrics definitions (TRx, market share)
-
-ORCHESTRATION (Airflow on MWAA)
-  ├── Daily DAGs                          ── CRM sync, digital engagement, lab
-  ├── Weekly DAGs                         ── Prescriber analytics refresh
-  └── Monthly DAGs                        ── Claims refresh, HTA submissions
-
-CONSUMPTION
-  ├── Tableau (brand dashboards)          ── Field force, brand team, exec
-  ├── Jupyter/SageMaker (analytics)       ── Data scientists, HEOR team
-  ├── Power BI (finance)                  ── GTN, gross-to-net reporting
-  └── dbt Semantic Layer (self-service)   ── Business users, no SQL required
-
-GOVERNANCE & SECURITY
-  ├── Snowflake column-level security     ── PII masking, role-based access
-  ├── AWS Lake Formation                  ── Fine-grained S3 permissions
-  ├── Apache Atlas / Collibra            ── Data catalog, lineage tracking
-  └── CloudTrail + Snowflake audit logs  ── HIPAA access audit trail
-"""</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main"> = ====================================================</div>
+</div>`},
     {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>ELT is the modern default for pharma analytics — load raw data first unchanged, transform in the warehouse using dbt, and preserve the raw zone as an unalterable audit trail for regulatory purposes.</div></div>
 <div class="takeaway"><div class="takeaway-num">2</div><div>The Bronze-Silver-Gold medallion architecture aligns with HIPAA and regulatory needs: Bronze = raw vendor data, Silver = cleaned/OMOP-conformant, Gold = brand analytics marts optimized for specific use cases.</div></div>
@@ -189,60 +119,7 @@ GOVERNANCE & SECURITY
 </tbody></table>
 <div class="callout info"><div class="callout-title">Grain is Everything</div><p>Defining the grain (the most atomic row in a fact table) is the most important decision in dimensional modeling. The prescription grain should be one row per fill per patient per drug — never aggregate before storing in the fact table. Aggregations are fast in modern warehouses; you can always roll up but you can never roll down.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Star Schema Design</h2>
-<pre><code class="language-sql">-- FACT TABLE: one row per prescription fill
-CREATE TABLE fact_prescription (
-    prescription_sk     BIGINT PRIMARY KEY,       -- Surrogate key
-    patient_sk          INT REFERENCES dim_patient(patient_sk),
-    prescriber_sk       INT REFERENCES dim_hcp(hcp_sk),
-    drug_sk             INT REFERENCES dim_drug(drug_sk),
-    date_sk             INT REFERENCES dim_date(date_sk),
-    pharmacy_sk         INT REFERENCES dim_pharmacy(pharmacy_sk),
-    payer_sk            INT REFERENCES dim_payer(payer_sk),
-    -- Natural keys (for joins to source systems)
-    patient_id          VARCHAR(50),
-    ndc_code            VARCHAR(11),
-    -- Measures (NEVER average here — store additive facts)
-    rx_count            SMALLINT DEFAULT 1,
-    days_supply         SMALLINT,
-    quantity_dispensed  DECIMAL(10,2),
-    paid_amount         DECIMAL(12,2),
-    patient_copay       DECIMAL(10,2),
-    -- Audit
-    load_timestamp      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    source_system       VARCHAR(20)
-);
-
--- DIMENSION: HCP (prescriber)
-CREATE TABLE dim_hcp (
-    hcp_sk              INT PRIMARY KEY,           -- Surrogate key
-    npi                 VARCHAR(10) UNIQUE,        -- Natural key
-    full_name           VARCHAR(200),
-    specialty_primary   VARCHAR(100),
-    specialty_secondary VARCHAR(100),
-    practice_state      CHAR(2),
-    practice_zip        VARCHAR(10),
-    practice_setting    VARCHAR(50),    -- solo, group, hospital, academic
-    is_kol              BOOLEAN DEFAULT FALSE,
-    -- SCD Type 2 columns
-    effective_date      DATE,
-    expiration_date     DATE DEFAULT '9999-12-31',
-    is_current          BOOLEAN DEFAULT TRUE
-);
-
--- DIMENSION: Drug
-CREATE TABLE dim_drug (
-    drug_sk             INT PRIMARY KEY,
-    ndc_11              CHAR(11) UNIQUE,
-    brand_name          VARCHAR(100),
-    generic_name        VARCHAR(200),
-    drug_class          VARCHAR(100),
-    drug_sub_class      VARCHAR(100),
-    manufacturer        VARCHAR(100),
-    route               VARCHAR(50),
-    strength            VARCHAR(50),
-    is_brand            BOOLEAN,
-    is_specialty        BOOLEAN
-);</code></pre>`},
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>`},
     {id:"s3",content:`<h2 id="s3">Slowly Changing Dimensions (SCD)</h2>
 <p>HCP and patient attributes change over time — specialty changes, practice relocations, payer plan changes. <strong>Slowly Changing Dimensions (SCD)</strong> handle this gracefully:</p>
 <table><thead><tr><th>SCD Type</th><th>Behavior</th><th>When to Use in Pharma</th></tr></thead>
@@ -252,34 +129,7 @@ CREATE TABLE dim_drug (
 <tr><td><strong>Type 3</strong></td><td>Add column — keep current + previous value only</td><td>Two-period comparisons (this year vs last year territory)</td></tr>
 <tr><td><strong>Type 6</strong></td><td>Hybrid (Type 1 + 2 + 3) — current value on all rows plus history</td><td>Payer formulary tier — need both current status and historical changes</td></tr>
 </tbody></table>
-<pre><code class="language-sql">-- SCD Type 2 implementation in dbt (snapshots)
--- dbt/snapshots/snap_dim_hcp.sql
-
-{% snapshot snap_dim_hcp %}
-{{
-  config(
-    target_schema='snapshots',
-    unique_key='npi',
-    strategy='check',
-    check_cols=['specialty_primary','practice_state','practice_zip','practice_setting'],
-    invalidate_hard_deletes=True
-  )
-}}
-
-SELECT
-    npi,
-    full_name,
-    specialty_primary,
-    practice_state,
-    practice_zip,
-    practice_setting,
-    is_kol
-FROM {{ source('hcp_master', 'onekey_hcp_current') }}
-
-{% endsnapshot %}
-
--- dbt automatically adds: dbt_scd_id, dbt_updated_at,
---                         dbt_valid_from, dbt_valid_to, dbt_is_current</code></pre>`},
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>`},
     {id:"s4",content:`<h2 id="s4">Data Vault for Audit Trails</h2>
 <p><strong>Data Vault 2.0</strong> is an alternative modeling approach designed for auditability, parallelism, and handling schema changes gracefully. It is increasingly used for FDA-grade regulatory data:</p>
 <p>Data Vault has three entity types:</p>
@@ -288,93 +138,10 @@ FROM {{ source('hcp_master', 'onekey_hcp_current') }}
 <li><strong>Links:</strong> Relationships between hubs (patient prescribed drug by provider on date)</li>
 <li><strong>Satellites:</strong> Descriptive attributes and their historical changes (attached to hubs or links)</li>
 </ul>
-<pre><code class="language-sql">-- Data Vault example: patient-prescription relationship
-
--- HUB: Patient business keys
-CREATE TABLE hub_patient (
-    patient_hk      CHAR(32) PRIMARY KEY,  -- Hash of patient_id
-    patient_id      VARCHAR(50),            -- Business key (de-identified)
-    load_date       TIMESTAMP,
-    record_source   VARCHAR(50)             -- ALWAYS track data source
-);
-
--- HUB: Drug business keys
-CREATE TABLE hub_drug (
-    drug_hk         CHAR(32) PRIMARY KEY,  -- Hash of NDC
-    ndc_code        CHAR(11),
-    load_date       TIMESTAMP,
-    record_source   VARCHAR(50)
-);
-
--- LINK: Patient-Drug prescription relationship
-CREATE TABLE link_patient_drug_rx (
-    rx_hk           CHAR(32) PRIMARY KEY,  -- Hash of (patient_id + ndc + fill_date)
-    patient_hk      CHAR(32) REFERENCES hub_patient(patient_hk),
-    drug_hk         CHAR(32) REFERENCES hub_drug(drug_hk),
-    fill_date_hk    CHAR(32),
-    load_date       TIMESTAMP,
-    record_source   VARCHAR(50)
-);
-
--- SATELLITE: Prescription descriptive attributes (temporal)
-CREATE TABLE sat_rx_details (
-    rx_hk           CHAR(32) REFERENCES link_patient_drug_rx(rx_hk),
-    load_date       TIMESTAMP,
-    load_end_date   TIMESTAMP,             -- When record was superseded
-    days_supply     SMALLINT,
-    quantity        DECIMAL(10,2),
-    paid_amount     DECIMAL(12,2),
-    record_source   VARCHAR(50),
-    PRIMARY KEY (rx_hk, load_date)
-);</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <div class="callout info"><div class="callout-title">Data Vault for FDA Compliance</div><p>Data Vault's complete historical tracking with load dates and record sources on every table makes it naturally compliant with FDA 21 CFR Part 11 (electronic records) requirements. Every insert is immutable — you can prove exactly what data existed at any point in time, who loaded it, and from which source system.</p></div>`},
     {id:"s5",content:`<h2 id="s5">dbt Model Patterns</h2>
-<pre><code class="language-sql">-- dbt staging model: stg_medical_claims.sql
--- Minimal transformations: rename, cast, basic cleaning only
-
-WITH source AS (
-    SELECT * FROM {{ source('raw_claims', 'medical_claims_raw') }}
-),
-renamed AS (
-    SELECT
-        claim_id                                    AS claim_id,
-        member_id                                   AS patient_id,
-        CAST(service_date AS DATE)                  AS service_date,
-        UPPER(REGEXP_REPLACE(dx_code_1, '\\.', '')) AS icd10_dx_1,
-        UPPER(REGEXP_REPLACE(dx_code_2, '\\.', '')) AS icd10_dx_2,
-        LPAD(CAST(proc_code AS VARCHAR), 5, '0')   AS cpt_code,
-        COALESCE(paid_amt, 0)                       AS paid_amount,
-        npi_rendering                               AS provider_npi,
-        payer_id                                    AS payer_id
-    FROM source
-    WHERE claim_id IS NOT NULL
-      AND member_id IS NOT NULL
-      AND service_date IS NOT NULL
-)
-SELECT * FROM renamed
-
--- dbt intermediate model: int_cll_patients.sql
--- Business logic applied: CLL identification with 2-code rule
-
-WITH cll_claims AS (
-    SELECT patient_id, service_date
-    FROM {{ ref('stg_medical_claims') }}
-    WHERE icd10_dx_1 LIKE 'C83%'
-       OR icd10_dx_2 LIKE 'C83%'
-),
-patient_summary AS (
-    SELECT
-        patient_id,
-        MIN(service_date) AS first_dx_date,
-        MAX(service_date) AS last_dx_date,
-        COUNT(DISTINCT service_date) AS dx_date_count
-    FROM cll_claims
-    GROUP BY patient_id
-)
-SELECT *
-FROM patient_summary
-WHERE dx_date_count >= 2
-  AND DATEDIFF(day, first_dx_date, last_dx_date) >= 30</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <p><strong>dbt model naming convention:</strong> <code>stg_</code> → <code>int_</code> → <code>fct_</code> / <code>dim_</code> — each prefix signals maturity and transformation depth to any reader.</p>`},
     {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>Grain defines dimensional model quality — always store the most atomic fact (one row per prescription fill, not aggregated) and let the warehouse do the aggregations; you can always roll up, never roll down.</div></div>
@@ -409,62 +176,10 @@ WHERE dx_date_count >= 2
   sections:[
     {id:"s1",content:`<h2 id="s1">Snowflake for Pharma Analytics</h2>
 <p>Snowflake's separation of storage and compute makes it ideal for pharma's variable workload patterns — heavy month-end claims refresh, then lighter daily analytics queries.</p>
-<pre><code class="language-sql">-- Snowflake warehouse sizing for pharma workloads
-
--- For monthly claims refresh (heavy ingestion + transformation)
-CREATE OR REPLACE WAREHOUSE claims_refresh_wh
-  WAREHOUSE_SIZE = 'X-LARGE'       -- 16 nodes for heavy Spark-like queries
-  AUTO_SUSPEND = 60                 -- Suspend after 60s idle
-  AUTO_RESUME = TRUE
-  MIN_CLUSTER_COUNT = 1
-  MAX_CLUSTER_COUNT = 4             -- Scale out for concurrent users
-  SCALING_POLICY = 'ECONOMY'        -- Don't scale until truly needed
-  COMMENT = 'Monthly claims ELT — shut down between monthly runs';
-
--- For interactive analytics (brand team queries)
-CREATE OR REPLACE WAREHOUSE brand_analytics_wh
-  WAREHOUSE_SIZE = 'MEDIUM'         -- Sufficient for most brand queries
-  AUTO_SUSPEND = 120
-  AUTO_RESUME = TRUE
-  COMMENT = 'Daily brand analytics — auto-suspends quickly';
-
--- Clustering for claims tables — critical for query performance
-ALTER TABLE fact_prescription
-  CLUSTER BY (service_year, drug_class, prescriber_state);
-
--- After clustering, analyze distribution
-SELECT SYSTEM$CLUSTERING_INFORMATION('fact_prescription',
-    '(service_year, drug_class, prescriber_state)');</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <div class="callout info"><div class="callout-title">Snowflake Clustering Keys</div><p>On claims tables with billions of rows, clustering by (service_year, drug_class, prescriber_state) means queries filtered on those columns scan only the relevant micro-partitions — typically reducing query time from minutes to seconds. Without clustering, every query scans the full table. Choose clustering keys based on the columns used most frequently in WHERE clauses.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Snowflake Performance & Cost</h2>
-<pre><code class="language-sql">-- Cost monitoring: identify expensive queries
-SELECT
-    query_text,
-    execution_status,
-    ROUND(total_elapsed_time/1000,1) AS elapsed_seconds,
-    ROUND(bytes_scanned/1e9,2) AS gb_scanned,
-    ROUND(credits_used_cloud_services,4) AS credits_used,
-    user_name,
-    warehouse_name
-FROM snowflake.account_usage.query_history
-WHERE start_time >= DATEADD(day,-7,CURRENT_TIMESTAMP())
-  AND execution_status = 'SUCCESS'
-  AND credits_used_cloud_services > 0.1  -- Only significant queries
-ORDER BY credits_used_cloud_services DESC
-LIMIT 20;
-
--- Resource monitors: prevent runaway costs
-CREATE OR REPLACE RESOURCE MONITOR monthly_spend_cap
-  WITH CREDIT_QUOTA = 500              -- Alert at 500 credits/month
-  TRIGGERS
-    ON 75 PERCENT DO NOTIFY           -- Email at 75%
-    ON 90 PERCENT DO NOTIFY           -- Email at 90%
-    ON 100 PERCENT DO SUSPEND;        -- Suspend warehouses at 100%
-
--- Zero-copy cloning: create dev environments without copying data
-CREATE DATABASE pharma_analytics_dev CLONE pharma_analytics_prod;
--- Dev environment ready in seconds, costs nothing until data diverges
--- Perfect for testing dbt model changes before production deploy</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <p><strong>Snowflake cost optimization checklist:</strong></p>
 <ul>
 <li>Set AUTO_SUSPEND to ≤ 60 seconds for all warehouses — idle compute is the #1 cost driver</li>
@@ -474,68 +189,18 @@ CREATE DATABASE pharma_analytics_dev CLONE pharma_analytics_prod;
 <li>Review QUERY_HISTORY weekly for expensive queries that need optimization</li>
 </ul>`},
     {id:"s3",content:`<h2 id="s3">Databricks for ML Workloads</h2>
-<pre><code class="language-python">from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
-from pyspark.ml.feature import VectorAssembler
-from pyspark.ml.classification import GBTClassifier
-from pyspark.ml import Pipeline
-
-spark = SparkSession.builder \
-    .appName("PharmaHCPPropensityModel") \
-    .config("spark.sql.adaptive.enabled", "true") \
-    .config("spark.sql.adaptive.coalescePartitions.enabled", "true") \
-    .getOrCreate()
-
-def build_hcp_features(claims_path, crm_path, digital_path):
-    """
-    Build HCP propensity model features from multi-source claims data.
-    Databricks excels here: parallel processing across billions of rows.
-    """
-    # Read directly from Delta Lake (Databricks native format)
-    claims = spark.read.format("delta").load(claims_path)
-    crm = spark.read.format("delta").load(crm_path)
-    digital = spark.read.format("delta").load(digital_path)
-
-    # Aggregate prescriber features (Spark handles billion-row tables)
-    prescriber_features = claims \
-        .filter(F.col("service_year") >= 2022) \
-        .groupBy("prescriber_npi") \
-        .agg(
-            F.countDistinct("patient_id").alias("unique_patients"),
-            F.sum(F.when(F.col("drug_class") == "BTK_inhibitor", 1).otherwise(0))
-             .alias("btk_rx_count"),
-            F.sum(F.when(F.col("drug_name") == "CALQUENCE", 1).otherwise(0))
-             .alias("brand_rx_count"),
-            F.countDistinct(F.when(F.col("icd10_dx_1").startswith("C83"), F.col("patient_id")))
-             .alias("cll_patients")
-        )
-
-    # Join with CRM call data
-    crm_features = crm.groupBy("hcp_npi").agg(
-        F.count("call_id").alias("total_calls_12m"),
-        F.avg("call_quality_score").alias("avg_call_quality")
-    )
-
-    # Build feature dataset
-    features = prescriber_features \
-        .join(crm_features, prescriber_features.prescriber_npi == crm_features.hcp_npi, "left") \
-        .join(digital, on="prescriber_npi", how="left") \
-        .fillna(0)
-
-    return features
-
-def train_propensity_model(features_df):
-    """Train GBT propensity model using Spark ML pipeline."""
-    feature_cols = ["unique_patients","btk_rx_count","cll_patients",
-                    "total_calls_12m","avg_call_quality","email_opens_90d"]
-
-    assembler = VectorAssembler(inputCols=feature_cols, outputCol="features")
-    gbt = GBTClassifier(featuresCol="features", labelCol="is_high_value",
-                        maxIter=100, maxDepth=5)
-    pipeline = Pipeline(stages=[assembler, gbt])
-
-    model = pipeline.fit(features_df)
-    return model</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Spark = SparkSession.builder \</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Claims = spark.read.format("delta").load(claims path)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Crm = spark.read.format("delta").load(crm path)</div>
+</div>`},
     {id:"s4",content:`<h2 id="s4">Cross-Platform Architecture</h2>
 <p>Most pharma organizations use Snowflake for commercial analytics AND Databricks for ML — the two platforms integrate via several patterns:</p>
 <table><thead><tr><th>Integration Pattern</th><th>Use Case</th><th>Mechanism</th></tr></thead>
@@ -545,19 +210,12 @@ def train_propensity_model(features_df):
 <tr><td><strong>Data copy via COPY INTO</strong></td><td>Move ML model outputs (scores) from Databricks to Snowflake</td><td>Write Parquet to S3; COPY INTO Snowflake table</td></tr>
 <tr><td><strong>Databricks SQL</strong></td><td>SQL analytics on Databricks for BI tool integration</td><td>ODBC/JDBC connector; replaces Snowflake for Spark-native data</td></tr>
 </tbody></table>
-<pre><code class="language-python"># Pattern: ML scores from Databricks → Snowflake for dashboard use
-# Step 1: Write propensity scores from Databricks to S3
-scores_df.write \
-    .format("parquet") \
-    .mode("overwrite") \
-    .partitionBy("score_date") \
-    .save("s3://pharma-lake/ml-outputs/hcp-propensity/")
-
-# Step 2: Load into Snowflake via COPY INTO (from SQL)
-# COPY INTO brand_analytics.hcp_propensity_scores
-#   FROM @pharma_s3_stage/ml-outputs/hcp-propensity/
-#   FILE_FORMAT = (TYPE = 'PARQUET')
-#   MATCH_BY_COLUMN_NAME = CASE_INSENSITIVE;</code></pre>
+<div class="flow-box"><div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>Pattern: ML scores from Databricks → Snowflake for dashboard use</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>Step 1: Write propensity scores from Databricks to S3</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">3</div><div class="rule-step-body"><strong>Step 2: Load into Snowflake via COPY INTO (from SQL)</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">4</div><div class="rule-step-body"><strong>COPY INTO brand_analytics.hcp_propensity_scores</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">5</div><div class="rule-step-body"><strong>FROM @pharma_s3_stage/ml-outputs/hcp-propensity/</strong></div></div>
+</div>
 <div class="callout"><div class="callout-title">The Right Tool Principle</div><p>Snowflake for SQL + BI. Databricks for Spark + ML. Share data between them via Delta Sharing or S3 Parquet. This isn't a compromise — it's intentional architecture that uses each platform at its best. Forcing everything into one platform degrades performance on the workloads it wasn't designed for.</p></div>`},
     {id:"s5",content:`<h2 id="s5">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>Snowflake warehouse AUTO_SUSPEND ≤ 60 seconds is the single most impactful cost optimization — idle compute that isn't suspended is money burning with no return.</div></div>
@@ -604,146 +262,45 @@ scores_df.write \
 <div class="callout warning"><div class="callout-title">Don't Stream Everything</div><p>Streaming pipelines are 3–5x more complex to build, test, and maintain than batch pipelines. Every streaming requirement should pass the "Would a 4-hour delay cause a measurable business impact?" test. If not, batch is the right answer. Premature streaming optimization is one of the most expensive mistakes in data engineering.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Kafka Architecture for Pharma</h2>
 <p>Apache Kafka is the dominant event streaming platform — a durable, distributed log that decouples data producers (EMR, hub systems, CRM) from consumers (alerting engines, analytics, ML models).</p>
-<pre><code class="language-python">from kafka import KafkaProducer, KafkaConsumer
-import json
-from datetime import datetime
-
-# Producer: Hub system sends patient refill events
-def emit_refill_event(hub_client, patient_data):
-    """
-    Emit patient refill event to Kafka when hub system records a fill.
-    Hub systems (Sonexus, ConnectiveRx) can webhook into Kafka.
-    """
-    producer = KafkaProducer(
-        bootstrap_servers=['kafka-broker-1:9092','kafka-broker-2:9092'],
-        value_serializer=lambda v: json.dumps(v).encode('utf-8'),
-        # Key by patient_id: ensures all events for one patient go to same partition
-        key_serializer=lambda k: k.encode('utf-8'),
-        acks='all',              # Wait for all replicas to confirm (durability)
-        retries=3
-    )
-
-    event = {
-        'event_type': 'REFILL_DISPENSED',
-        'patient_id': patient_data['patient_id'],  # De-identified ID
-        'drug_name': patient_data['drug_name'],
-        'fill_date': datetime.utcnow().isoformat(),
-        'days_supply': patient_data['days_supply'],
-        'pharmacy_id': patient_data['pharmacy_id'],
-        'timestamp': datetime.utcnow().isoformat()
-    }
-
-    producer.send(
-        topic='pharma.patient.refills',
-        key=patient_data['patient_id'],
-        value=event
-    )
-    producer.flush()
-
-# Topic design for pharma events
-PHARMA_TOPICS = {
-    'pharma.patient.refills':     {'partitions': 24, 'replication': 3},
-    'pharma.adverse.events':      {'partitions': 6,  'replication': 3},  # Safety critical
-    'pharma.crm.calls':           {'partitions': 12, 'replication': 2},
-    'pharma.hub.enrollments':     {'partitions': 6,  'replication': 3},
-}</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Producer = KafkaProducer(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Value Serializer = lambda v: json.dumps(v).encode('utf − 8'),</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Key Serializer = lambda k: k.encode('utf − 8'),</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">Spark Structured Streaming</h2>
-<pre><code class="language-python">from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
-from pyspark.sql.types import *
-
-spark = SparkSession.builder \
-    .appName("PatientAdherenceAlerts") \
-    .config("spark.sql.streaming.checkpointLocation", "s3://pharma-lake/checkpoints/") \
-    .getOrCreate()
-
-# Read refill events from Kafka
-refill_stream = spark.readStream \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers", "kafka-broker-1:9092") \
-    .option("subscribe", "pharma.patient.refills") \
-    .option("startingOffsets", "latest") \
-    .load()
-
-# Parse JSON payload
-refill_schema = StructType([
-    StructField("patient_id", StringType()),
-    StructField("drug_name", StringType()),
-    StructField("fill_date", StringType()),
-    StructField("days_supply", IntegerType()),
-    StructField("timestamp", TimestampType())
-])
-
-refills_parsed = refill_stream \
-    .select(F.from_json(F.col("value").cast("string"), refill_schema).alias("data")) \
-    .select("data.*") \
-    .withColumn("fill_timestamp", F.to_timestamp("timestamp"))
-
-# WINDOWED AGGREGATION: Count refills per patient per 30-day window
-# Watermark handles late-arriving events (up to 7 days late)
-refill_counts = refills_parsed \
-    .withWatermark("fill_timestamp", "7 days") \
-    .groupBy(
-        F.window("fill_timestamp", "30 days", "1 day"),  # 30-day sliding window
-        "patient_id",
-        "drug_name"
-    ) \
-    .agg(
-        F.count("fill_date").alias("fills_in_window"),
-        F.sum("days_supply").alias("days_covered")
-    ) \
-    .withColumn("pdc_rolling", F.col("days_covered") / 30.0)
-
-# Alert on low PDC
-adherence_alerts = refill_counts.filter(F.col("pdc_rolling") < 0.80)
-
-# Write alerts to downstream systems
-query = adherence_alerts.writeStream \
-    .outputMode("update") \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers", "kafka-broker-1:9092") \
-    .option("topic", "pharma.alerts.adherence") \
-    .option("checkpointLocation", "s3://pharma-lake/checkpoints/adherence/") \
-    .start()
-
-query.awaitTermination()</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Spark = SparkSession.builder \</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Refill Stream = spark.readStream \</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Refill Schema = StructType([</div>
+</div>`},
     {id:"s4",content:`<h2 id="s4">Real-Time Pharmacovigilance</h2>
 <p>The FDA requires manufacturers to report serious adverse events within 15 calendar days (7 days for fatal/life-threatening). Real-time AE detection pipelines close the gap between AE occurrence and reporting:</p>
-<pre><code class="language-python">def detect_ae_signals(medical_events_stream, drug_name, ae_codes):
-    """
-    Real-time adverse event signal detection using Spark Streaming.
-
-    Detects: unusual spike in AE-related diagnoses in patients on study drug
-    Uses: CUSUM (Cumulative Sum) statistical process control
-
-    ae_codes: List of ICD-10 codes associated with adverse event of interest
-    """
-    import numpy as np
-
-    # Filter events for drug of interest + AE diagnosis codes
-    ae_stream = medical_events_stream.filter(
-        (F.col("active_drug") == drug_name) &
-        (F.col("icd10_dx_1").isin(ae_codes) | F.col("icd10_dx_2").isin(ae_codes))
-    )
-
-    # Count AE events in 24-hour tumbling windows
-    ae_counts = ae_stream \
-        .withWatermark("event_timestamp", "1 hour") \
-        .groupBy(F.window("event_timestamp", "24 hours")) \
-        .agg(
-            F.count("patient_id").alias("ae_count"),
-            F.countDistinct("patient_id").alias("unique_patients")
-        )
-
-    # Signal: AE count exceeds 3x rolling 30-day average
-    # (In production: CUSUM or SPRT sequential probability ratio test)
-    ae_with_signal = ae_counts \
-        .withColumn("baseline_daily_rate", F.lit(2.5)) \
-        .withColumn("signal_detected",
-            F.col("ae_count") > F.col("baseline_daily_rate") * 3
-        )
-
-    return ae_with_signal.filter(F.col("signal_detected") == True)</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Ae Stream = medical events stream.filter(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">(F.Col("Active Drug") = = drug name) &</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Ae Counts = ae stream \</div>
+</div>
 <div class="callout warning"><div class="callout-title">15-Day FDA Clock</div><p>The FDA MedWatch 15-day expedited reporting clock starts when any employee of the manufacturer becomes aware of a serious unexpected adverse event — not when the clinical team reviews it. Real-time AE monitoring that alerts the pharmacovigilance team immediately prevents clock-start ambiguity and ensures compliant reporting timelines.</p></div>`},
     {id:"s5",content:`<h2 id="s5">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>Not everything needs streaming — apply the "Would a 4-hour delay cause measurable business harm?" test before committing to streaming architecture; batch processing is 3–5x simpler and should be the default.</div></div>
@@ -789,200 +346,39 @@ query.awaitTermination()</code></pre>`},
 </tbody></table>
 <div class="callout info"><div class="callout-title">Most Pharma Teams Are at Level 1–2</div><p>Despite having sophisticated analytical capabilities, most pharma analytics teams have Level 1–2 DataOps maturity — no version control on SQL, no tests, no documentation. Moving to Level 3 (git + dbt + automated tests) delivers the highest ROI of any data engineering investment and takes 3–6 months for a motivated team.</p></div>`},
     {id:"s2",content:`<h2 id="s2">dbt Testing Strategy</h2>
-<pre><code class="language-yaml"># dbt schema.yml — comprehensive test coverage for claims models
-
-version: 2
-
-models:
-  - name: fct_prescription
-    description: "One row per prescription fill — core commercial analytics fact table"
-    tests:
-      # Table-level tests
-      - dbt_utils.expression_is_true:
-          expression: "COUNT(*) > 50000000"  # Sanity check: >50M rows expected
-          name: "prescription_minimum_volume"
-      - dbt_utils.recency:
-          field: fill_date
-          datepart: day
-          interval: 90  # Data must be no older than 90 days (claims lag)
-
-    columns:
-      - name: prescription_sk
-        tests: [unique, not_null]
-
-      - name: patient_id
-        tests: [not_null]
-
-      - name: ndc_code
-        tests:
-          - not_null
-          - relationships:
-              to: ref('dim_drug')
-              field: ndc_11
-          - dbt_expectations.expect_column_value_lengths_to_equal:
-              value: 11  # NDC is always 11 digits
-
-      - name: fill_date
-        tests:
-          - not_null
-          - dbt_expectations.expect_column_values_to_be_between:
-              min_value: "'2015-01-01'"
-              max_value: "CURRENT_DATE()"
-
-      - name: days_supply
-        tests:
-          - not_null
-          - dbt_expectations.expect_column_values_to_be_between:
-              min_value: 1
-              max_value: 365  # Flag implausible supply quantities
-
-      - name: paid_amount
-        tests:
-          - dbt_expectations.expect_column_values_to_be_between:
-              min_value: 0
-              max_value: 500000  # Flag outlier paid amounts
-
-  - name: dim_hcp
-    columns:
-      - name: npi
-        tests:
-          - unique
-          - not_null
-          - dbt_expectations.expect_column_value_lengths_to_equal:
-              value: 10  # NPI is always 10 digits</code></pre>`},
+<div class="callout info"><div class="callout-title">dbt Data Quality Contract (schema.yml)</div>
+<p>Every dbt model has a schema.yml that defines tests running automatically on every pipeline run:</p>
+<table><thead><tr><th>Test Type</th><th>What It Checks</th><th>Pharma Example</th></tr></thead><tbody>
+<tr><td><strong>not_null</strong></td><td>Required fields are always populated</td><td>patient_id, fill_date never missing</td></tr>
+<tr><td><strong>unique</strong></td><td>No duplicate rows on key columns</td><td>One row per patient per fill date</td></tr>
+<tr><td><strong>accepted_values</strong></td><td>Categorical field within allowed set</td><td>channel IN ("retail","specialty","mail-order")</td></tr>
+<tr><td><strong>relationships</strong></td><td>Foreign keys exist in parent table</td><td>Every prescriber_npi exists in HCP master</td></tr>
+<tr><td><strong>custom SQL</strong></td><td>Business rule validation</td><td>days_supply BETWEEN 1 AND 365</td></tr>
+</tbody></table></div>`},
     {id:"s3",content:`<h2 id="s3">CI/CD for Data Pipelines</h2>
-<pre><code class="language-yaml"># .github/workflows/dbt_ci.yml
-# GitHub Actions CI pipeline for dbt project
-
-name: dbt CI Pipeline
-
-on:
-  pull_request:
-    branches: [main, develop]
-    paths: ['models/**', 'tests/**', 'macros/**', 'dbt_project.yml']
-
-jobs:
-  dbt_test:
-    runs-on: ubuntu-latest
-    environment: dev
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Install dbt
-        run: pip install dbt-snowflake==1.7.0
-
-      - name: Configure dbt profile
-        run: |
-          mkdir -p ~/.dbt
-          cat > ~/.dbt/profiles.yml << EOF
-          pharma_analytics:
-            target: ci
-            outputs:
-              ci:
-                type: snowflake
-                account: \${{ secrets.SNOWFLAKE_ACCOUNT }}
-                user: \${{ secrets.SNOWFLAKE_CI_USER }}
-                password: \${{ secrets.SNOWFLAKE_CI_PASSWORD }}
-                role: CI_ROLE
-                database: PHARMA_ANALYTICS_CI
-                warehouse: CI_WH
-                schema: "CI_\${{ github.event.pull_request.number }}"
-          EOF
-
-      - name: dbt compile (syntax check)
-        run: dbt compile --profiles-dir ~/.dbt
-
-      - name: dbt run (changed models only)
-        run: |
-          dbt run \
-            --profiles-dir ~/.dbt \
-            --select state:modified+ \
-            --state ./prod_manifest \
-            --target ci
-
-      - name: dbt test
-        run: |
-          dbt test \
-            --profiles-dir ~/.dbt \
-            --select state:modified+ \
-            --target ci
-
-      - name: Post PR comment with test results
-        uses: actions/github-script@v6
-        if: always()
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '✅ dbt CI passed — all tests green on changed models'
-            })</code></pre>`},
+<div class="flow-box">
+<div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>Pull Request Opened</strong><p>Data engineer submits a change to a dbt model — CI pipeline triggers automatically</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>Slim CI Check</strong><p><code>dbt build --select state:modified+</code> — only builds changed models and their downstream dependencies, not the entire project</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">3</div><div class="rule-step-body"><strong>Automated Tests</strong><p>All schema tests (not_null, unique, relationships, accepted_values) run against the changed models</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">4</div><div class="rule-step-body"><strong>Pass/Fail Gate</strong><p>PR cannot merge if any test fails. Results posted back to GitHub with failing row counts and model lineage</p></div></div>
+</div>`},
     {id:"s4",content:`<h2 id="s4">Data Observability</h2>
 <p>Data observability monitors the health of your data in production — detecting issues before downstream users or regulators find them first:</p>
-<pre><code class="language-python">import great_expectations as gx
-from datetime import datetime, timedelta
-import pandas as pd
-
-class PharmaDataObservability:
-    """Production data quality monitoring for pharma analytics platform."""
-
-    def __init__(self, context):
-        self.context = context
-
-    def check_claims_freshness(self, claims_df: pd.DataFrame) -> dict:
-        """Verify claims data is recent enough for analytics."""
-        max_date = pd.to_datetime(claims_df['service_date']).max()
-        days_stale = (datetime.now() - max_date).days
-
-        # Claims should never be more than 90 days old
-        # (accounts for adjudication lag)
-        status = "PASS" if days_stale <= 90 else "FAIL"
-        alert_level = "CRITICAL" if days_stale > 180 else "WARNING" if days_stale > 90 else "OK"
-
-        return {
-            'check': 'claims_freshness',
-            'max_service_date': str(max_date.date()),
-            'days_stale': days_stale,
-            'status': status,
-            'alert_level': alert_level,
-            'timestamp': datetime.utcnow().isoformat()
-        }
-
-    def check_volume_anomaly(self, daily_counts: pd.DataFrame,
-                              lookback_days: int = 30,
-                              threshold_pct: float = 0.25) -> dict:
-        """Detect unusual drops or spikes in daily data volume."""
-        recent_avg = daily_counts.tail(lookback_days)['count'].mean()
-        latest_count = daily_counts.iloc[-1]['count']
-        deviation = abs(latest_count - recent_avg) / recent_avg
-
-        status = "FAIL" if deviation > threshold_pct else "PASS"
-
-        return {
-            'check': 'volume_anomaly',
-            'latest_count': int(latest_count),
-            'rolling_avg': round(recent_avg),
-            'deviation_pct': round(deviation * 100, 1),
-            'status': status,
-            'alert_level': 'CRITICAL' if deviation > 0.5 else 'WARNING' if status == 'FAIL' else 'OK'
-        }
-
-    def run_all_checks(self, claims_df, daily_counts):
-        results = [
-            self.check_claims_freshness(claims_df),
-            self.check_volume_anomaly(daily_counts)
-        ]
-        failures = [r for r in results if r['status'] == 'FAIL']
-        print(f"Observability checks: {len(results)-len(failures)}/{len(results)} passed")
-        return results</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Self.Context = context</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Max Date = pd.to datetime(claims df['service date']).max()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Days Stale = (datetime.now()  −  max date).days</div>
+</div>`},
     {id:"s5",content:`<h2 id="s5">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>Most pharma analytics teams are at DataOps Level 1–2 — moving to Level 3 (git + dbt + automated tests) is the highest-ROI data engineering investment and achievable in 3–6 months.</div></div>
 <div class="takeaway"><div class="takeaway-num">2</div><div>dbt tests run in CI on every PR catch data issues before they reach production — the combination of schema tests (unique, not_null, relationships) and custom SQL tests covers the vast majority of real-world data quality problems.</div></div>
@@ -1027,101 +423,26 @@ class PharmaDataObservability:
 <div class="callout warning"><div class="callout-title">Data Mesh Is an Organizational Change</div><p>Data mesh is primarily an organizational and cultural change, not a technology change. It requires domain teams to accept data ownership (including quality, freshness, and documentation) — a significant shift from "that's the data team's job." Most data mesh failures occur because domain teams are given ownership without resources, skills, or incentive to exercise it responsibly.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Pharma Data Products</h2>
 <p>A <strong>data product</strong> is a self-contained, discoverable, trustworthy data asset with a defined interface, owner, SLA, and documentation — treated like an internal software product.</p>
-<pre><code class="language-yaml"># Data Product Specification: Patient Journey Analytics
-# Owner: Patient Analytics Domain — Commercial Analytics Team
-
-name: patient_journey_analytics
-version: "2.1.0"
-owner: patient-analytics-team@pharma.com
-domain: commercial_analytics
-
-description: >
-  Patient journey analytics product providing diagnosis-to-treatment
-  funnel analysis for oncology brands. Covers CLL, DLBCL, and MCL.
-  Updated monthly after IQVIA claims refresh.
-
-sla:
-  availability: 99.5%           # Downtime < 44 hours/year
-  freshness: 35_days            # Data no older than 35 days (claims lag + 5 days processing)
-  latency_p95: 30_seconds       # 95th percentile query response time
-  support_response: 4_hours     # Response to data quality issues during business hours
-
-interface:
-  type: snowflake_view
-  location: BRAND_ANALYTICS.PATIENT_JOURNEY.V_PATIENT_FUNNEL_SUMMARY
-  authentication: snowflake_role_based_access
-  documentation: https://data-catalog.pharma.com/products/patient-journey
-
-schema:
-  - name: diagnosis_date
-    type: DATE
-    description: "Date of first qualifying CLL/DLBCL/MCL diagnosis"
-  - name: treatment_initiation_date
-    type: DATE
-    description: "Date of first BTK inhibitor fill (null if untreated)"
-  - name: days_diagnosis_to_treatment
-    type: INTEGER
-    description: "Days from diagnosis to treatment initiation (null if untreated)"
-  - name: brand_name
-    type: VARCHAR
-    description: "Brand name of first BTK inhibitor"
-  - name: lot_number
-    type: INTEGER
-    description: "Line of therapy (1=first line, 2=second line, etc.)"
-
-data_quality:
-  completeness_sla: 98%         # Max 2% missing on key fields
-  tests: dbt_tests_on_every_deploy
-
-consumers:
-  - team: brand_management
-    use_case: Monthly funnel reporting
-  - team: heor
-    use_case: Comparative effectiveness RWE studies
-  - team: market_access
-    use_case: Payer value dossier evidence generation</code></pre>`},
+<div class="callout info"><div class="callout-title">Data Product Specification Template</div>
+<p>A data product is formally documented with a spec sheet — like a product brief, but for a dataset:</p>
+<table><thead><tr><th>Field</th><th>Description</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Owner</strong></td><td>Team responsible for quality and SLA</td><td>Patient Analytics Team</td></tr>
+<tr><td><strong>Consumers</strong></td><td>Who uses this data product</td><td>Brand team, Medical Affairs, Market Access</td></tr>
+<tr><td><strong>Refresh SLA</strong></td><td>How often data is updated and maximum allowed lag</td><td>Weekly; max 3-day lag after source receipt</td></tr>
+<tr><td><strong>Schema</strong></td><td>Column definitions with business descriptions</td><td>time_to_therapy: days from diagnosis to first Rx fill</td></tr>
+<tr><td><strong>Quality Thresholds</strong></td><td>Minimum acceptable data quality before serving</td><td>≥98% patient match rate; 0 null patient_ids</td></tr>
+<tr><td><strong>Access Tier</strong></td><td>Who can access and under what conditions</td><td>PHI-restricted; requires data use agreement</td></tr>
+</tbody></table></div>`},
     {id:"s3",content:`<h2 id="s3">Data Contracts</h2>
 <p>A <strong>data contract</strong> is a formal, machine-readable agreement between a data producer (team that publishes a data product) and data consumers (teams that depend on it). It specifies what the producer guarantees and what consumers can rely upon.</p>
-<pre><code class="language-yaml"># Data Contract: patient_journey_analytics v2.1.0
-# Between: Patient Analytics Team (producer) and Brand Management (consumer)
-
-schema:
-  fields:
-    - name: patient_id
-      type: string
-      required: true
-      description: "De-identified patient identifier"
-    - name: diagnosis_date
-      type: date
-      required: true
-    - name: days_to_treatment
-      type: integer
-      required: false
-      description: "Null if patient remains untreated"
-
-quality:
-  completeness:
-    patient_id: 100%
-    diagnosis_date: 100%
-    days_to_treatment: 80%  # 20% may be untreated — null is valid
-  freshness:
-    max_age_days: 35
-  volume:
-    min_rows: 10000
-    max_rows_deviation_pct: 30  # Alert if volume changes >30% month-over-month
-
-semantics:
-  - rule: "days_to_treatment is always positive or null — negative values indicate data error"
-  - rule: "lot_number is always 1, 2, 3, or 4+ — values outside this range are invalid"
-  - rule: "brand_name is always one of: CALQUENCE, IMBRUVICA, BRUKINSA, VENCLEXTA"
-
-sla:
-  availability: 99.5%
-  breach_notification: "Producer notifies consumers within 30 minutes of detected breach"
-
-versioning:
-  breaking_change_notice: 30_days  # Producer gives 30 days notice before breaking changes
-  backward_compatibility: minor_versions_only</code></pre>
+<div class="callout"><div class="callout-title">Data Contract: Key Terms Between Producer and Consumer</div>
+<table><thead><tr><th>Contract Element</th><th>What It Specifies</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Schema Version</strong></td><td>Versioned schema — consumers know when breaking changes happen</td><td>patient_journey_analytics v2.1.0</td></tr>
+<tr><td><strong>SLA</strong></td><td>Freshness guarantee: data will be no older than X hours/days</td><td>Available by 06:00 EST every Monday</td></tr>
+<tr><td><strong>Quality Guarantee</strong></td><td>Minimum quality the producer commits to</td><td>completeness ≥ 98%, uniqueness = 100%</td></tr>
+<tr><td><strong>Breaking Change Policy</strong></td><td>How much notice before schema changes</td><td>30 days notice before column removal or rename</td></tr>
+<tr><td><strong>Deprecation</strong></td><td>Sunset timeline for columns being removed</td><td>legacy_patient_id deprecated 2025-06-30</td></tr>
+</tbody></table></div>
 <div class="callout info"><div class="callout-title">Data Contracts Prevent Surprise Breakages</div><p>Without data contracts, schema changes by upstream teams silently break downstream analytics — a column renamed at 2am causes brand team dashboards to show null all day. With contracts, breaking changes require 30-day notice and are enforced in CI — both teams have visibility and time to adapt.</p></div>`},
     {id:"s4",content:`<h2 id="s4">Federated Governance in Pharma</h2>
 <p>In a data mesh, governance is <em>federated</em> — global standards are enforced automatically by the platform, while domains retain control of their own data product decisions.</p>
@@ -1132,50 +453,24 @@ versioning:
 <li><strong>OMOP vocabulary:</strong> All diagnosis codes must be mapped to SNOMED; all drugs to RxNorm — enforced as a platform-level constraint, not a team preference</li>
 <li><strong>Audit logging:</strong> Every query to every data product is logged with user, timestamp, and query text — HIPAA-compliant access audit trail enforced by platform</li>
 </ul>
-<pre><code class="language-python">class PharmaDataMeshGovernance:
-    """
-    Automated governance enforcement for pharma data mesh platform.
-    Applied to all data products at publish time.
-    """
-
-    PHI_COLUMN_PATTERNS = [
-        'patient_name', 'date_of_birth', 'dob', 'ssn', 'social_security',
-        'mrn', 'medical_record', 'member_id', 'zip_code', 'address',
-        'phone', 'email', 'ip_address'
-    ]
-
-    def scan_phi_columns(self, schema: dict) -> list:
-        """Identify columns that match PHI patterns."""
-        phi_columns = []
-        for field in schema.get('fields', []):
-            col_name = field['name'].lower()
-            if any(pattern in col_name for pattern in self.PHI_COLUMN_PATTERNS):
-                phi_columns.append(field['name'])
-        return phi_columns
-
-    def validate_data_product(self, product_spec: dict) -> dict:
-        """Run governance validation before allowing data product publication."""
-        violations = []
-
-        # Check PHI handling
-        phi_cols = self.scan_phi_columns(product_spec.get('schema', {}))
-        if phi_cols and product_spec.get('consumer_tier') == 'external':
-            violations.append(f"PHI columns {phi_cols} cannot be exposed to external consumers")
-
-        # Check OMOP compliance for diagnosis codes
-        schema_fields = [f['name'] for f in product_spec.get('schema',{}).get('fields',[])]
-        if any('icd' in f.lower() for f in schema_fields):
-            violations.append("Raw ICD codes must be mapped to SNOMED before publishing — use OMOP vocabulary mapping")
-
-        # Require SLA definition
-        if not product_spec.get('sla'):
-            violations.append("All data products must define SLA (availability, freshness)")
-
-        return {
-            'approved': len(violations) == 0,
-            'violations': violations,
-            'phi_columns_detected': phi_cols
-        }</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Col Name = field['name'].lower()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Phi Cols = self.scan phi columns(product spec.get('schema', {}))</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">'Approved': Len(Violations) = = 0,</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>any(pattern in col name for pattern in self.PHI COLUMN PATTERNS)</td><td>phi columns.append(field['name'])</td></tr>
+<tr><td>phi cols and product spec.get('consumer tier') = 'external'</td><td>violations.append(f"PHI columns {phi cols} cannot be exposed to external consumers")</td></tr>
+<tr><td>any('icd' in f.lower() for f in schema fields)</td><td>violations.append("Raw ICD codes must be mapped to SNOMED before publishing — use OMOP vocabulary mapping")</td></tr>
+<tr><td>not product spec.get('sla')</td><td>violations.append("All data products must define SLA (availability, freshness)")</td></tr>
+</tbody></table>`},
     {id:"s5",content:`<h2 id="s5">When NOT to Use Data Mesh</h2>
 <p>Data mesh is powerful for large, complex organizations but counterproductive in others. Apply this decision framework:</p>
 <table><thead><tr><th>Condition</th><th>Data Mesh?</th><th>Better Alternative</th></tr></thead>
@@ -1242,21 +537,17 @@ versioning:
 </tbody></table>`},
     {id:"s2",content:`<h2 id="s2">Spark Architecture: Driver, Executors & DAG</h2>
 <p>Understanding Spark's architecture is essential to diagnosing failures and performance issues:</p>
-<pre><code class="language-plaintext">USER CODE (Python/Scala/SQL)
-    ↓
-DRIVER PROGRAM (SparkContext / SparkSession)
-  - Analyzes your code
-  - Builds Logical Plan → Optimized Physical Plan (via Catalyst optimizer)
-  - Creates DAG (Directed Acyclic Graph) of stages and tasks
-  - Coordinates cluster
-    ↓
-CLUSTER MANAGER (YARN / Kubernetes / Standalone)
-  - Allocates resources: executor containers
-    ↓
-EXECUTORS (JVM processes on worker nodes)
-  - Execute tasks (one task = one partition of data)
-  - Cache data in memory when instructed
-  - Report status to Driver</code></pre>
+<div class="flow-box">
+<div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>User Code (Python / SQL / Scala)</strong><p>Data engineer writes transformations using familiar syntax — Spark translates to distributed operations automatically</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>Driver Program (SparkContext)</strong><p>Coordinates the job — breaks work into tasks, schedules on worker nodes, collects results</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">3</div><div class="rule-step-body"><strong>Cluster Manager (YARN / Kubernetes)</strong><p>Allocates compute resources (memory + CPU) across the cluster; scales up/down based on job size</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">4</div><div class="rule-step-body"><strong>Worker Nodes (Executors)</strong><p>Each executor processes its partition of data in parallel — 200 GB claims file split across 50 nodes = 4 GB each</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">5</div><div class="rule-step-body"><strong>Result Written to Storage</strong><p>Aggregated output written back to data lake (Delta/Parquet) or data warehouse (Snowflake)</p></div></div>
+</div>
 <p>Key concepts from the execution model:</p>
 <ul>
 <li><strong>Job:</strong> Triggered by an action (count(), write(), show())</li>
@@ -1267,86 +558,35 @@ EXECUTORS (JVM processes on worker nodes)
 <div class="callout info"><div class="callout-title">Transformations vs. Actions</div><p>Spark is lazy: transformations (filter, select, join, groupBy) build the computation graph but do NOT execute. Actions (count, collect, show, write) trigger execution. This allows Catalyst to optimize the full logical plan before any work happens. The most common beginner mistake: calling collect() on a large DataFrame — this pulls all data to the driver, causing OOM crashes.</p></div>`},
     {id:"s3",content:`<h2 id="s3">PySpark DataFrames & Spark SQL</h2>
 <p>The DataFrame API is the primary modern Spark interface — it generates the same optimized code as Spark SQL and is preferable to the low-level RDD API for all analytical workloads.</p>
-<pre><code class="language-python">from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
-from pyspark.sql.window import Window
-
-spark = SparkSession.builder \
-    .appName("PharmaAnalytics") \
-    .config("spark.sql.adaptive.enabled", "true") \
-    .config("spark.sql.adaptive.coalescePartitions.enabled", "true") \
-    .getOrCreate()
-
-# Read from S3 (parquet is preferred format — columnar, compressed, schema-aware)
-claims = spark.read.parquet("s3://pharma-datalake/claims/medical/year=2024/")
-
-# DataFrame operations — identical in performance to Spark SQL
-result = (
-    claims
-    .filter(F.col("icd10_primary").startswith("C9"))  # Oncology claims
-    .filter(F.col("service_date") >= "2024-01-01")
-    .withColumn("year_month", F.date_format("service_date", "yyyy-MM"))
-    .groupBy("npi", "year_month")
-    .agg(
-        F.count("claim_id").alias("claim_count"),
-        F.sum("paid_amount").alias("total_paid"),
-        F.countDistinct("patient_id").alias("unique_patients")
-    )
-)
-
-# Window functions (equivalent to SQL window functions)
-window_spec = Window.partitionBy("npi").orderBy("year_month")
-result_with_growth = result.withColumn(
-    "mom_claim_growth_pct",
-    (F.col("claim_count") - F.lag("claim_count", 1).over(window_spec))
-    / F.lag("claim_count", 1).over(window_spec) * 100
-)
-
-# Equivalent Spark SQL (same performance)
-claims.createOrReplaceTempView("claims")
-result_sql = spark.sql("""
-    SELECT npi, date_format(service_date, 'yyyy-MM') as year_month,
-           count(claim_id) as claim_count,
-           sum(paid_amount) as total_paid
-    FROM claims
-    WHERE icd10_primary LIKE 'C9%' AND service_date >= '2024-01-01'
-    GROUP BY npi, date_format(service_date, 'yyyy-MM')
-""")</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Spark = SparkSession.builder \</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Claims = spark.read.parquet("s3: ÷  ÷ pharma − datalake ÷ claims ÷ medical ÷ year=2024 ÷ ")</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">.Filter(F.Col("Service Date") > = "2024 − 01 − 01")</div>
+</div>`},
     {id:"s4",content:`<h2 id="s4">Spark Optimization: Partitioning, Caching & Joins</h2>
 <p>Spark performance is governed by three levers: how data is partitioned, what is cached, and how joins are executed.</p>
 <p><strong>1. Partitioning</strong></p>
-<pre><code class="language-python"># Too few partitions: not enough parallelism; tasks take too long
-# Too many partitions: overhead of scheduling thousands of tiny tasks
-# Rule: aim for 100-200MB per partition; 2-4x number of CPU cores
-
-# Check current partition count
-print(f"Partitions: {df.rdd.getNumPartitions()}")
-
-# Repartition for better parallelism before heavy operations
-df_repartitioned = df.repartition(200)  # Triggers full shuffle
-
-# Coalesce to reduce partitions (no shuffle — only merges)
-df_smaller = df.coalesce(10)
-
-# Partition BY KEY for downstream groupBy/join efficiency
-df.repartition(200, "npi")  # All rows with same NPI go to same partition
-    .write.partitionBy("year", "month")  # Write partitioning (on-disk)
-    .parquet("s3://output/")</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Df Repartitioned = df.repartition(200)  # Triggers full shuffle</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Df Smaller = df.coalesce(10)</div>
+</div>
 <p><strong>2. Caching</strong></p>
-<pre><code class="language-python"># Cache DataFrames that are used multiple times
-# Without cache: Spark recomputes from scratch for each action
-expensive_df = (
-    spark.read.parquet("s3://large-dataset/")
-    .join(reference_data, "npi")
-    .filter(F.col("specialty").isin(["Oncology", "Hematology"]))
-)
-expensive_df.cache()  # Materialize and store in executor memory
-
-# Force materialization (cache is lazy by default)
-expensive_df.count()  # Now it's cached
-
-# Clean up when done (prevent memory pressure)
-expensive_df.unpersist()</code></pre>
+<div class="flow-box"><div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>Cache DataFrames that are used multiple times</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>Without cache: Spark recomputes from scratch for each action</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">3</div><div class="rule-step-body"><strong>Force materialization (cache is lazy by default)</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">4</div><div class="rule-step-body"><strong>Clean up when done (prevent memory pressure)</strong></div></div>
+</div>
 <p><strong>3. Join Strategies</strong></p>
 <table><thead><tr><th>Join Type</th><th>Mechanism</th><th>Use When</th><th>Config</th></tr></thead>
 <tbody>
@@ -1354,15 +594,18 @@ expensive_df.unpersist()</code></pre>
 <tr><td>Sort-merge join</td><td>Both tables sorted + shuffled by join key; merge in parallel</td><td>Both tables large; default fallback</td><td>Most common; shuffle-intensive</td></tr>
 <tr><td>Shuffle hash join</td><td>Hash both tables by join key</td><td>Medium tables; no sort required</td><td>Adaptive Query Execution selects automatically</td></tr>
 </tbody></table>
-<pre><code class="language-python"># Explicitly broadcast a small lookup table
-from pyspark.sql.functions import broadcast
-
-npi_master = spark.read.parquet("s3://npi-master/")  # Small: 50MB
-large_claims = spark.read.parquet("s3://claims/")    # Large: 5TB
-
-# Without broadcast: sort-merge join triggers 5TB shuffle → slow
-# With broadcast: 50MB pushed to all executors → no large table shuffle
-result = large_claims.join(broadcast(npi_master), "npi", "left")</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Npi Master = spark.read.parquet("s3: ÷  ÷ npi − master ÷ ")  # Small: 50MB</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Large Claims = spark.read.parquet("s3: ÷  ÷ claims ÷ ")    # Large: 5TB</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Result = large claims.join(broadcast(npi master), "npi", "left")</div>
+</div>`},
     {id:"s5",content:`<h2 id="s5">Delta Lake: ACID on Data Lakes</h2>
 <p><strong>Delta Lake</strong> is an open-source storage layer that brings ACID transactions, schema enforcement, and time travel to data lakes (S3, ADLS, GCS). It solves the core limitations of raw Parquet/CSV data lakes.</p>
 <table><thead><tr><th>Problem with Raw Parquet Lake</th><th>Delta Lake Solution</th></tr></thead>
@@ -1373,33 +616,18 @@ result = large_claims.join(broadcast(npi_master), "npi", "left")</code></pre>`},
 <tr><td>No upsert — can't update individual rows in Parquet</td><td>MERGE INTO with full SQL upsert semantics</td></tr>
 <tr><td>Slow metadata — listing millions of files takes minutes</td><td>Transaction log caches file manifest; 1000x faster metadata reads</td></tr>
 </tbody></table>
-<pre><code class="language-python">from delta.tables import DeltaTable
-from pyspark.sql import functions as F
-
-# Write as Delta (converts to Delta format with transaction log)
-claims_df.write.format("delta").mode("overwrite") \
-    .partitionBy("year", "month") \
-    .save("s3://pharma-lake/delta/claims/")
-
-# MERGE (upsert) — handle late-arriving or corrected claims
-delta_table = DeltaTable.forPath(spark, "s3://pharma-lake/delta/claims/")
-delta_table.alias("target").merge(
-    new_claims.alias("source"),
-    "target.claim_id = source.claim_id"
-).whenMatchedUpdateAll()     # Update if claim already exists (correction)
- .whenNotMatchedInsertAll()  # Insert if new claim
- .execute()
-
-# Time travel: query data as of a specific version or timestamp
-claims_yesterday = spark.read.format("delta") \
-    .option("timestampAsOf", "2024-03-15") \
-    .load("s3://pharma-lake/delta/claims/")
-
-# Rollback to previous version if bad data was written
-delta_table.restoreToVersion(42)
-
-# OPTIMIZE: compact small files for faster reads (run weekly)
-delta_table.optimize().executeZOrderBy("npi", "service_date")</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Delta Table = DeltaTable.forPath(spark, "s3: ÷  ÷ pharma − lake ÷ delta ÷ claims ÷ ")</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">"Target.Claim Id = source.claim id"</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Claims Yesterday = spark.read.format("delta") \</div>
+</div>`},
     {id:"s6",content:`<h2 id="s6">Debugging Spark Performance</h2>
 <p>Spark UI (available at port 4040 during job) is the primary debugging tool. Learn to read it before escalating performance issues:</p>
 <table><thead><tr><th>Symptom</th><th>Root Cause</th><th>Fix</th></tr></thead>
@@ -1462,59 +690,29 @@ delta_table.optimize().executeZOrderBy("npi", "service_date")</code></pre>`},
 <div class="callout info"><div class="callout-title">Pharma Cloud Adoption Patterns</div><p>Most large pharma companies run multi-cloud: AWS for US commercial analytics (Snowflake hosted on AWS), Azure for enterprise Microsoft integration (Teams, Office 365, Power BI), and sometimes GCP for specific AI/ML workloads (Vertex AI, BigQuery). A single primary cloud with a minority secondary is the most common architecture.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Data Lake Architecture on Cloud</h2>
 <p>The modern cloud data lake follows a <strong>medallion architecture</strong>: Bronze (raw) → Silver (cleaned/joined) → Gold (business-ready). Each layer has different access patterns, retention policies, and quality guarantees.</p>
-<pre><code class="language-plaintext">s3://pharma-lake/
-├── bronze/                   # Raw, immutable copies of source data
-│   ├── iqvia/               # Vendor-specific folders
-│   │   └── xponent/year=2024/month=03/  # Partitioned for pruning
-│   ├── claims/komodo/
-│   └── specialty_pharmacy/
-├── silver/                   # Cleaned, standardized, joined
-│   ├── patient_universe/     # Deduplicated patient IDs
-│   ├── prescriber_master/    # NPI-resolved, validated
-│   └── rx_transactions/      # Normalized Rx data
-└── gold/                     # Business-domain specific, analytics-ready
-    ├── brand/brand_x/        # Brand-specific marts
-    │   ├── patient_journey/
-    │   └── hcp_performance/
-    ├── commercial/
-    └── market_access/</code></pre>
+<div class="callout info"><div class="callout-title">Medallion Architecture — Folder Structure</div>
+<table><thead><tr><th>Layer</th><th>Path</th><th>Contents</th><th>Who Accesses</th></tr></thead><tbody>
+<tr><td><strong>Bronze (Raw)</strong></td><td>s3://pharma-lake/bronze/</td><td>Exact copy of vendor file as received — never modified</td><td>Data engineers only</td></tr>
+<tr><td><strong>Silver (Clean)</strong></td><td>s3://pharma-lake/silver/</td><td>Standardized, deduplicated, validated — OMOP-mapped</td><td>Data engineers, data scientists</td></tr>
+<tr><td><strong>Gold (Analytics-Ready)</strong></td><td>s3://pharma-lake/gold/</td><td>Business-logic applied, KPIs calculated, joined cohorts</td><td>Analysts, dashboards, ML models</td></tr>
+</tbody></table>
+<div class="callout warning"><div class="callout-title">The Bronze Zone is Sacred</div><p>Raw files in the bronze zone are immutable — never overwrite them. If a transformation produces wrong results, you can always reprocess from the original source file. Overwriting raw data destroys your audit trail and creates regulatory risk.</p></div></div>
 <p>S3 access patterns and performance optimization:</p>
-<pre><code class="language-python">import boto3
-
-# AWS S3: write Parquet with optimal settings for Spark reads
-def write_optimized_parquet(df, s3_path, partition_cols=None):
-    """Write Spark DataFrame as optimized Parquet for analytics."""
-    writer = df.write.format("parquet") \
-        .option("compression", "snappy") \
-        .option("maxRecordsPerFile", 1_000_000)  # ~128MB per file at typical density
-
-    if partition_cols:
-        writer = writer.partitionBy(*partition_cols)
-
-    writer.mode("overwrite").save(s3_path)
-
-# S3 lifecycle policies (via boto3 or Terraform)
-s3 = boto3.client('s3')
-lifecycle_config = {
-    'Rules': [{
-        'ID': 'bronze-to-glacier',
-        'Status': 'Enabled',
-        'Filter': {'Prefix': 'bronze/'},
-        'Transitions': [
-            {'Days': 90,  'StorageClass': 'STANDARD_IA'},  # After 90 days: IA
-            {'Days': 365, 'StorageClass': 'GLACIER'},       # After 1 year: Glacier
-        ]
-    }, {
-        'ID': 'delete-temp-files',
-        'Status': 'Enabled',
-        'Filter': {'Prefix': 'temp/'},
-        'Expiration': {'Days': 7}  # Auto-delete temp files after 7 days
-    }]
-}
-s3.put_bucket_lifecycle_configuration(
-    Bucket='pharma-lake',
-    LifecycleConfiguration=lifecycle_config
-)</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Writer = df.write.format("parquet") \</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Writer = writer.partitionBy( × partition cols)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">S3 = boto3.client('s3')</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>partition cols</td><td>writer = writer.partitionBy(*partition cols)</td></tr>
+</tbody></table>`},
     {id:"s3",content:`<h2 id="s3">Compute Patterns: Serverless, Containers & VMs</h2>
 <p>Choosing the right compute pattern determines cost efficiency, scalability, and operational overhead:</p>
 <table><thead><tr><th>Pattern</th><th>Examples</th><th>Best For</th><th>Cost Model</th></tr></thead>
@@ -1525,29 +723,21 @@ s3.put_bucket_lifecycle_configuration(
 <tr><td>Serverless SQL</td><td>BigQuery, Athena, Synapse Serverless</td><td>Ad-hoc query on S3/GCS without cluster management</td><td>Pay per TB scanned; optimize with partitioning/columnar format</td></tr>
 <tr><td>GPU instances</td><td>p3/p4 (AWS), NC (Azure)</td><td>DL training; LLM inference; computer vision</td><td>$2–30/hr; spot instances for training; reserved for inference</td></tr>
 </tbody></table>
-<pre><code class="language-python"># AWS Lambda: event-triggered ETL for small jobs
-import boto3
-import json
-
-def lambda_handler(event, context):
-    """Trigger Glue job when new data arrives in S3."""
-    s3_key = event['Records'][0]['s3']['object']['key']
-    bucket = event['Records'][0]['s3']['bucket']['name']
-
-    # Only process files matching expected pattern
-    if not s3_key.startswith('bronze/claims/komodo/'):
-        return {'statusCode': 200, 'body': 'Skipped — not a claims file'}
-
-    glue = boto3.client('glue')
-    response = glue.start_job_run(
-        JobName='claims-bronze-to-silver',
-        Arguments={
-            '--source_bucket': bucket,
-            '--source_key': s3_key,
-            '--target_path': 's3://pharma-lake/silver/rx_transactions/'
-        }
-    )
-    return {'statusCode': 200, 'body': f"Glue job started: {response['JobRunId']}"}</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">S3 Key = event['Records'][0]['s3']['object']['key']</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Bucket = event['Records'][0]['s3']['bucket']['name']</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Glue = boto3.client('glue')</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>not s3 key.startswith('bronze/claims/komodo/')</td><td>return {'statusCode': 200, 'body': 'Skipped — not a claims file'}</td></tr>
+</tbody></table>`},
     {id:"s4",content:`<h2 id="s4">Security & Compliance for Healthcare Data</h2>
 <p>Healthcare data in the cloud requires a defense-in-depth security architecture. HIPAA Business Associate Agreements (BAAs) must be in place with cloud providers before any PHI is stored.</p>
 <table><thead><tr><th>Security Layer</th><th>Control</th><th>AWS Implementation</th></tr></thead>
@@ -1559,37 +749,10 @@ def lambda_handler(event, context):
 <tr><td>Audit logging</td><td>All access to PHI data logged and retained</td><td>CloudTrail for API calls; S3 access logs; Lake Formation audit logs</td></tr>
 <tr><td>Data classification</td><td>PHI columns tagged; access governed by classification</td><td>AWS Glue Data Catalog + Lake Formation column-level access control</td></tr>
 </tbody></table>
-<pre><code class="language-python">import boto3
-
-# Column-level security with Lake Formation
-# Restrict PHI columns to specific IAM roles only
-
-lf = boto3.client('lakeformation')
-
-# Grant access to non-PHI columns for analytics role
-lf.grant_permissions(
-    Principal={'DataLakePrincipalIdentifier': 'arn:aws:iam::123456789:role/AnalyticsRole'},
-    Resource={
-        'TableWithColumns': {
-            'DatabaseName': 'pharma_silver',
-            'Name': 'patient_rx_transactions',
-            'ColumnWildcard': {
-                'ExcludedColumnNames': [
-                    'patient_first_name', 'patient_last_name', 'date_of_birth',
-                    'ssn', 'address', 'phone'  # PHI columns excluded
-                ]
-            }
-        }
-    },
-    Permissions=['SELECT']
-)
-
-# Grant full access (including PHI) to HIPAA-compliant roles only
-lf.grant_permissions(
-    Principal={'DataLakePrincipalIdentifier': 'arn:aws:iam::123456789:role/PHIAdminRole'},
-    Resource={'Table': {'DatabaseName': 'pharma_silver', 'Name': 'patient_rx_transactions'}},
-    Permissions=['SELECT', 'INSERT', 'ALTER', 'DROP']
-)</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Lf = boto3.client('lakeformation')</div>
+</div>`},
     {id:"s5",content:`<h2 id="s5">Cost Optimization Strategies</h2>
 <p>Cloud data engineering costs are dominated by three categories: storage, compute, and data transfer. Each requires different optimization strategies.</p>
 <table><thead><tr><th>Cost Driver</th><th>Typical % of Bill</th><th>Key Optimizations</th></tr></thead>
@@ -1599,33 +762,22 @@ lf.grant_permissions(
 <tr><td>Data warehouse (Redshift, BigQuery)</td><td>15–30%</td><td>Partition pruning; columnar filters; materialized views; reserved instances for predictable workloads</td></tr>
 <tr><td>Data transfer (egress)</td><td>5–15%</td><td>Keep compute in same region as storage; VPC endpoints (no NAT gateway cost); avoid cross-region data movement</td></tr>
 </tbody></table>
-<pre><code class="language-python">import boto3
-
-# Right-sizing: analyze EMR cluster utilization
-def analyze_cluster_utilization(cluster_id, hours_back=24):
-    cloudwatch = boto3.client('cloudwatch')
-    metrics = {}
-
-    for metric_name in ['YARNMemoryAvailablePercentage', 'ContainerPendingRatio']:
-        response = cloudwatch.get_metric_statistics(
-            Namespace='AWS/ElasticMapReduce',
-            MetricName=metric_name,
-            Dimensions=[{'Name': 'JobFlowId', 'Value': cluster_id}],
-            Statistics=['Average', 'Minimum'],
-            Period=3600  # 1-hour granularity
-        )
-        metrics[metric_name] = response['Datapoints']
-
-    # Decision logic
-    avg_memory_available = sum(d['Average'] for d in metrics['YARNMemoryAvailablePercentage']) / \
-                            max(len(metrics['YARNMemoryAvailablePercentage']), 1)
-
-    if avg_memory_available > 60:
-        print(f"Cluster {cluster_id} is over-provisioned (avg {avg_memory_available:.0f}% memory idle)")
-        print("Recommendation: Reduce core instance count by 30-40%")
-    elif avg_memory_available < 15:
-        print("Cluster is under-provisioned — jobs may be spilling to disk")
-        print("Recommendation: Add 2 core instances or increase instance type")</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Cloudwatch = boto3.client('cloudwatch')</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Response = cloudwatch.get metric statistics(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Namespace = 'AWS ÷ ElasticMapReduce',</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>avg memory available &gt; 60</td><td>print(f"Cluster {cluster id} is over-provisioned (avg {avg memory available:.0f}% memory idle)")</td></tr>
+<tr><td>elavg memory available &lt; 15</td><td>print("Cluster is under-provisioned — jobs may be spilling to disk")</td></tr>
+</tbody></table>
 <div class="callout"><div class="callout-title">Spot Instances for Spark Workloads</div><p>AWS Spot instances (preemptible on GCP, low-priority on Azure) run at 60-90% discount but can be interrupted with 2-minute notice. For Spark, the strategy is: run the driver on an On-Demand instance (interruption would kill the job), run all executor/task nodes on Spot. With checkpointing enabled, even a Spot interruption causes only a partial re-computation, not a full job restart. This architecture reduces EMR costs by 50-70% with minimal job completion impact.</p></div>`},
     {id:"s6",content:`<h2 id="s6">Multi-Cloud & Hybrid Patterns</h2>
 <p>Most enterprises operate across multiple clouds and on-premise environments. Data engineers must understand how to move data safely and efficiently across boundaries.</p>
@@ -1685,101 +837,32 @@ def analyze_cluster_utilization(cluster_id, hours_back=24):
 <div class="callout"><div class="callout-title">The Business Cost of Poor Data Quality</div><p>Gartner estimates poor data quality costs organizations an average of $12.9M annually. In pharma analytics, a 10% PDC calculation error can cause: incorrect adherence tracking for regulatory reporting, wrong IC payouts to field reps, and flawed patient support program ROI calculations. Data quality failures are never just technical — they have commercial, financial, and sometimes regulatory consequences.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Great Expectations: Validation Framework</h2>
 <p><strong>Great Expectations (GX)</strong> is the most widely adopted Python library for data quality validation. It defines quality rules as "expectations" that are tested against actual data.</p>
-<pre><code class="language-python">import great_expectations as gx
-from great_expectations.checkpoint import Checkpoint
-
-context = gx.get_context()
-
-# Define a Data Source (points to your data)
-datasource = context.sources.add_spark("spark_datasource", spark=spark)
-data_asset = datasource.add_dataframe_asset(name="claims_silver")
-
-# Define Expectations (quality rules)
-batch_request = data_asset.build_batch_request(dataframe=claims_df)
-validator = context.get_validator(batch_request=batch_request)
-
-# Completeness checks
-validator.expect_column_values_to_not_be_null("npi")
-validator.expect_column_values_to_not_be_null("patient_id")
-validator.expect_column_values_to_not_be_null("service_date")
-
-# Validity checks
-validator.expect_column_values_to_be_between("pdc_score", min_value=0.0, max_value=1.0)
-validator.expect_column_values_to_match_regex("npi", r"^\d{10}$")
-
-# Volume / freshness checks
-validator.expect_table_row_count_to_be_between(min_value=1_000_000, max_value=50_000_000)
-validator.expect_column_max_to_be_between(
-    "service_date", min_value="2024-01-01", max_value="2024-12-31"
-)
-
-# Uniqueness
-validator.expect_column_values_to_be_unique("claim_id")
-
-# Referential integrity
-valid_ndcs = [row['ndc'] for row in ndc_reference.collect()]
-validator.expect_column_values_to_be_in_set("ndc", value_set=valid_ndcs)
-
-# Save and run
-validator.save_expectation_suite(discard_failed_expectations=False)
-checkpoint = Checkpoint(
-    name="claims_daily_checkpoint",
-    validations=[{"batch_request": batch_request, "expectation_suite_name": "claims.warning"}]
-)
-results = checkpoint.run()
-print(f"All passed: {results.success}")</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Context = gx.get context()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Datasource = context.sources.add spark("spark datasource", spark=spark)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Data Asset = datasource.add dataframe asset(name="claims silver")</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">dbt Tests: Built-in & Custom</h2>
 <p>dbt (data build tool) has a built-in testing framework that runs after each model build. Tests are defined in YAML and run as SQL assertions:</p>
-<pre><code class="language-yaml"># models/silver/schema.yml
-version: 2
-
-models:
-  - name: silver_rx_transactions
-    description: "Cleaned and standardized Rx transaction data"
-    columns:
-      - name: claim_id
-        description: "Unique claim identifier"
-        tests:
-          - unique                    # No duplicates
-          - not_null                  # Required field
-
-      - name: npi
-        tests:
-          - not_null
-          - relationships:           # Referential integrity
-              to: ref('silver_npi_master')
-              field: npi
-
-      - name: pdc_score
-        tests:
-          - not_null
-          - dbt_utils.accepted_range:  # From dbt-utils package
-              min_value: 0
-              max_value: 1
-              inclusive: true
-
-      - name: therapy_line
-        tests:
-          - accepted_values:
-              values: [1, 2, 3, 4, 5, 6]  # LOT must be 1-6
-
-  - name: silver_rx_transactions
-    tests:
-      # Table-level tests (dbt-utils package)
-      - dbt_utils.expression_is_true:
-          expression: "refill_date >= fill_date OR refill_date IS NULL"
-          name: "refill_must_be_after_fill"
-
-      - dbt_utils.recency:
-          datepart: day
-          field: service_date
-          interval: 90  # Max service_date must be within last 90 days</code></pre>
-<pre><code class="language-python"># Custom singular dbt test (SQL file in tests/ folder)
-# tests/assert_no_future_service_dates.sql
-SELECT COUNT(*) AS future_dates
-FROM {{ ref('silver_rx_transactions') }}
-WHERE service_date > CURRENT_DATE
-HAVING COUNT(*) > 0  -- Test FAILS if any future dates exist</code></pre>`},
+<div class="callout info"><div class="callout-title">Silver Layer — Data Quality Rules for Rx Transactions</div>
+<table><thead><tr><th>Column</th><th>Rule</th><th>Business Reason</th></tr></thead><tbody>
+<tr><td>patient_id</td><td>Not null, unique per fill</td><td>Every dispensed Rx must trace to a patient</td></tr>
+<tr><td>fill_date</td><td>Not null, within last 2 years</td><td>Stale claims indicate a data load error</td></tr>
+<tr><td>ndc_code</td><td>11 digits, in drug master</td><td>Invalid NDC = unidentifiable drug</td></tr>
+<tr><td>days_supply</td><td>Between 1 and 365</td><td>Values outside range indicate data entry error</td></tr>
+<tr><td>channel</td><td>IN (retail, specialty, mail)</td><td>Unknown channel breaks channel-mix reporting</td></tr>
+<tr><td>paid_amount</td><td>≥ 0</td><td>Negative amounts indicate reversal — needs separate handling</td></tr>
+</tbody></table></div>
+<div class="flow-box"><div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>Custom singular dbt test (SQL file in tests/ folder)</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>tests/assert_no_future_service_dates.sql</strong></div></div>
+</div>`},
     {id:"s4",content:`<h2 id="s4">Testing Data Pipelines</h2>
 <p>Data pipelines need the same testing pyramid as software: unit tests for individual components, integration tests for end-to-end flow, and contract tests at boundaries.</p>
 <table><thead><tr><th>Test Level</th><th>What It Tests</th><th>Tools</th><th>Run Frequency</th></tr></thead>
@@ -1789,96 +872,30 @@ HAVING COUNT(*) > 0  -- Test FAILS if any future dates exist</code></pre>`},
 <tr><td>Data contract tests</td><td>Incoming data from external sources matches expected schema</td><td>Great Expectations, Soda</td><td>Every pipeline run</td></tr>
 <tr><td>End-to-end tests</td><td>Full pipeline from raw source to gold layer output</td><td>Airflow/Prefect test DAG + validation</td><td>Nightly or on deploy</td></tr>
 </tbody></table>
-<pre><code class="language-python">import pytest
-from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
-
-@pytest.fixture(scope="session")
-def spark():
-    return SparkSession.builder.master("local[2]").appName("test").getOrCreate()
-
-# Unit test: test PDC calculation function in isolation
-def calculate_pdc(fills_df, observation_window_days=365):
-    """Calculate Proportion of Days Covered."""
-    return (fills_df
-        .withColumn("days_covered",
-                    F.least(F.col("days_supply"),
-                            F.lit(observation_window_days)))
-        .groupBy("patient_id")
-        .agg(F.sum("days_covered").alias("total_covered"))
-        .withColumn("pdc", F.least(F.col("total_covered") / observation_window_days,
-                                   F.lit(1.0)))
-    )
-
-def test_pdc_caps_at_one(spark):
-    """PDC should never exceed 1.0 even with overlapping fills."""
-    test_data = spark.createDataFrame([
-        (1, "2024-01-01", 400),  # 400-day supply in 365-day window
-        (2, "2024-01-01", 180),
-        (2, "2024-06-15", 180),  # Overlap — PDC should still be 1.0
-    ], schema="patient_id INT, fill_date STRING, days_supply INT")
-
-    result = calculate_pdc(test_data)
-
-    max_pdc = result.select(F.max("pdc")).collect()[0][0]
-    assert max_pdc <= 1.0, f"PDC exceeded 1.0: {max_pdc}"
-
-def test_pdc_zero_for_no_fills(spark):
-    """Patients with no fills should not appear (they have no supply)."""
-    empty_df = spark.createDataFrame([], schema="patient_id INT, fill_date STRING, days_supply INT")
-    result = calculate_pdc(empty_df)
-    assert result.count() == 0</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">@Pytest.Fixture(Scope = "session")</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Test Data = spark.createDataFrame([</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">], Schema = "patient id INT, fill date STRING, days supply INT")</div>
+</div>`},
     {id:"s5",content:`<h2 id="s5">Data Contracts in Practice</h2>
 <p>A data contract is a formal agreement between a data producer and data consumer specifying schema, semantics, quality SLAs, and change process. It transforms implicit expectations into enforceable agreements.</p>
-<pre><code class="language-yaml"># data-contract.yml
-# Format: OpenDataContract standard (ODCS)
-id: "iqvia-xponent-rx-contract-v2.1"
-name: "IQVIA Xponent Prescriber-Level Rx Data"
-version: "2.1.0"
-status: "active"
-
-producer:
-  team: "commercial-data-ingestion"
-  contact: "data-eng@company.com"
-  sla:
-    availability: "99.5%"
-    freshness: "Data available by 9th of each month for prior month"
-    completeness: "≥97% of IQVIA-universe NPIs present"
-
-schema:
-  - name: npi
-    type: VARCHAR(10)
-    nullable: false
-    description: "10-digit National Provider Identifier"
-    pattern: "^\\d{10}$"
-    pii: false
-
-  - name: product_name
-    type: VARCHAR(100)
-    nullable: false
-
-  - name: rx_volume
-    type: BIGINT
-    nullable: false
-    description: "Total TRx units for the month/NPI/product combination"
-    constraints:
-      minimum: 0
-
-  - name: period_year_month
-    type: VARCHAR(7)
-    nullable: false
-    description: "Reporting period in YYYY-MM format"
-    pattern: "^\\d{4}-\\d{2}$"
-
-change_management:
-  breaking_changes_notice_days: 30
-  non_breaking_notice_days: 7
-  deprecation_notice_days: 60
-
-quality_checks:
-  - name: "no_duplicate_npi_product_month"
-    sql: "SELECT COUNT(*) FROM {table} GROUP BY npi, product_name, period_year_month HAVING COUNT(*) > 1"
-    threshold: 0  # Zero duplicates allowed</code></pre>`},
+<div class="callout"><div class="callout-title">OpenDataContract Standard (ODCS) — Key Fields</div>
+<p>The Open Data Contract Standard is an emerging industry format for machine-readable data contracts. Key sections:</p>
+<table><thead><tr><th>Section</th><th>What It Defines</th></tr></thead><tbody>
+<tr><td><strong>id + version</strong></td><td>Unique contract identifier and semantic version (breaking changes increment major version)</td></tr>
+<tr><td><strong>dataset</strong></td><td>Tables, columns, types, descriptions — the complete schema</td></tr>
+<tr><td><strong>servicelevels</strong></td><td>Freshness SLA, availability %, incident response time</td></tr>
+<tr><td><strong>quality</strong></td><td>Automated quality checks with SQL expressions that must pass</td></tr>
+<tr><td><strong>price</strong></td><td>Internal chargeback model — cost per query or per consumer team</td></tr>
+<tr><td><strong>stakeholders</strong></td><td>Owner, data steward, consumers — with roles and notification preferences</td></tr>
+</tbody></table></div>`},
     {id:"s6",content:`<h2 id="s6">Data Observability Monitoring</h2>
 <p><strong>Data observability</strong> answers: "Is my data healthy right now?" at all times, not just when a pipeline runs. It monitors data health continuously, alerting before downstream users discover problems.</p>
 <p>The five pillars of data observability (after Monte Carlo):</p>
@@ -1890,42 +907,21 @@ quality_checks:
 <tr><td>Distribution</td><td>Are value distributions within normal range?</td><td>"pdc_score mean dropped from 0.72 to 0.43 — likely calculation bug"</td></tr>
 <tr><td>Lineage</td><td>Which upstream tables/pipelines feed this asset?</td><td>"brand_performance_dashboard depends on 3 stale tables"</td></tr>
 </tbody></table>
-<pre><code class="language-python">import pandas as pd
-from scipy import stats
-import numpy as np
-
-class DataObservabilityMonitor:
-    def __init__(self, history_df: pd.DataFrame, metric_col: str):
-        """
-        Monitor a metric (e.g., daily row count) for anomalies.
-        history_df: historical values of the metric
-        """
-        self.history = history_df[metric_col].values
-        self.metric_col = metric_col
-        # Fit normal distribution to historical data
-        self.mu, self.sigma = np.mean(self.history), np.std(self.history)
-
-    def check(self, current_value: float, sigma_threshold: float = 3.0) -> dict:
-        """Flag current value if it's beyond N sigma from historical mean."""
-        z_score = (current_value - self.mu) / max(self.sigma, 1e-10)
-        is_anomaly = abs(z_score) > sigma_threshold
-
-        return {
-            'metric': self.metric_col,
-            'current_value': current_value,
-            'historical_mean': round(self.mu, 2),
-            'z_score': round(z_score, 2),
-            'is_anomaly': is_anomaly,
-            'severity': 'CRITICAL' if abs(z_score) > 4 else 'WARNING' if is_anomaly else 'OK',
-            'lower_bound': round(self.mu - sigma_threshold * self.sigma, 0),
-            'upper_bound': round(self.mu + sigma_threshold * self.sigma, 0)
-        }
-
-# Usage: alert if today's row count deviates from 30-day history
-monitor = DataObservabilityMonitor(last_30_days_stats, 'row_count')
-alert = monitor.check(current_value=today_row_count)
-if alert['is_anomaly']:
-    send_slack_alert(f"Data anomaly: {alert}")</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Self.History = history df[metric col].values</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Self.Metric Col = metric col</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Self.Mu, Self.Sigma = np.mean(self.history), np.std(self.history)</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>alert['is anomaly']</td><td>send slack alert(f"Data anomaly: {alert}")</td></tr>
+</tbody></table>`},
     {id:"s7",content:`<h2 id="s7">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>Data quality has seven measurable dimensions — completeness, accuracy, consistency, timeliness, validity, uniqueness, and integrity — each catches different types of failures that domain checks alone would miss.</div></div>
 <div class="takeaway"><div class="takeaway-num">2</div><div>Automate quality checks at every pipeline stage: Great Expectations for Python/Spark pipelines, dbt tests for SQL transformations — failing quality checks should stop the pipeline before bad data reaches consumers.</div></div>

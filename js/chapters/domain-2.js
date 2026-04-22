@@ -46,51 +46,7 @@ PL.addChapters({
     {id:"s3",content:`<h2 id="s3">Funnel Analytics & Conversion Rates</h2>
 <p>A <strong>patient funnel</strong> quantifies how many patients progress through each journey stage and where they drop out. This is the most important deliverable in patient journey analytics because it directly identifies revenue opportunities.</p>
 <h3>Building the Funnel with Claims Data</h3>
-<pre><code class="language-sql">-- Patient funnel: diagnosed -> tested -> treated -> on-brand
-WITH diagnosed AS (
-  SELECT DISTINCT patient_id,
-         MIN(claim_date) AS first_dx_date
-  FROM medical_claims
-  WHERE icd10_code IN ('C50.911','C50.912','C50.919')
-    AND claim_date BETWEEN '2023-01-01' AND '2024-12-31'
-  GROUP BY patient_id
-  HAVING COUNT(DISTINCT claim_date) >= 2  -- require 2+ dx claims
-),
-biomarker_tested AS (
-  SELECT DISTINCT d.patient_id
-  FROM diagnosed d
-  JOIN medical_claims m ON d.patient_id = m.patient_id
-  WHERE m.cpt_code IN ('81162','81211','81213')
-    AND m.claim_date >= d.first_dx_date
-),
-treated AS (
-  SELECT DISTINCT d.patient_id
-  FROM diagnosed d
-  JOIN pharmacy_claims p ON d.patient_id = p.patient_id
-  WHERE p.therapeutic_class = 'CDK4/6 inhibitor'
-    AND p.fill_date >= d.first_dx_date
-),
-on_brand AS (
-  SELECT DISTINCT t.patient_id
-  FROM treated t
-  JOIN pharmacy_claims p ON t.patient_id = p.patient_id
-  WHERE p.brand_name = 'IBRANCE'
-)
-SELECT
-  COUNT(DISTINCT d.patient_id)   AS diagnosed_n,
-  COUNT(DISTINCT b.patient_id)   AS tested_n,
-  COUNT(DISTINCT t.patient_id)   AS treated_n,
-  COUNT(DISTINCT o.patient_id)   AS on_brand_n,
-  ROUND(100.0 * COUNT(DISTINCT b.patient_id) /
-        NULLIF(COUNT(DISTINCT d.patient_id),0), 1) AS test_rate_pct,
-  ROUND(100.0 * COUNT(DISTINCT t.patient_id) /
-        NULLIF(COUNT(DISTINCT d.patient_id),0), 1) AS treat_rate_pct,
-  ROUND(100.0 * COUNT(DISTINCT o.patient_id) /
-        NULLIF(COUNT(DISTINCT t.patient_id),0), 1) AS brand_share_pct
-FROM diagnosed d
-LEFT JOIN biomarker_tested b ON d.patient_id = b.patient_id
-LEFT JOIN treated t ON d.patient_id = t.patient_id
-LEFT JOIN on_brand o ON d.patient_id = o.patient_id;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <p>Typical funnel leakage points and commercial actions:</p>
 <ul>
 <li><strong>Diagnosed but not tested:</strong> Invest in biomarker education programs and testing partnerships</li>
@@ -101,18 +57,7 @@ LEFT JOIN on_brand o ON d.patient_id = o.patient_id;</code></pre>
     {id:"s4",content:`<h2 id="s4">Time-to-Treatment & Treatment Gap Analysis</h2>
 <p><strong>Time-to-treatment (TTT)</strong> measures the interval between diagnosis and first therapy administration. Extended TTT correlates with worse outcomes and represents a commercial opportunity — every day a patient waits is a day of lost therapy and potentially lost revenue.</p>
 <h3>Calculating Time-to-Treatment</h3>
-<pre><code class="language-sql">SELECT
-  patient_id,
-  first_dx_date,
-  first_rx_date,
-  DATEDIFF(day, first_dx_date, first_rx_date) AS time_to_treat_days,
-  CASE
-    WHEN DATEDIFF(day, first_dx_date, first_rx_date) <= 14 THEN 'Rapid (<2 wks)'
-    WHEN DATEDIFF(day, first_dx_date, first_rx_date) <= 30 THEN 'Standard (2-4 wks)'
-    WHEN DATEDIFF(day, first_dx_date, first_rx_date) <= 90 THEN 'Delayed (1-3 mo)'
-    ELSE 'Significantly Delayed (>3 mo)'
-  END AS ttt_category
-FROM patient_journey_summary;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <h3>Treatment Gap Identification</h3>
 <p>Treatment gaps occur when patients have periods without active therapy that are not clinically intended. Identifying gaps requires analyzing the interval between the end of one prescription's days supply and the next fill date:</p>
 <ul>
@@ -127,23 +72,18 @@ FROM patient_journey_summary;</code></pre>
 <p>PDC is the gold standard adherence metric endorsed by CMS and PQA. Unlike MPR, PDC caps coverage at 1.0 per day, preventing overcounting from early refills.</p>
 <p><strong>Formula:</strong> PDC = (Number of days in period covered by medication) / (Number of days in measurement period)</p>
 <p>A patient is considered <strong>adherent</strong> if PDC >= 0.80.</p>
-<pre><code class="language-python">import numpy as np
-import pandas as pd
-
-def calculate_pdc(fills_df, obs_start, obs_end):
-    """
-    Calculate PDC for each patient.
-    fills_df: DataFrame with [patient_id, fill_date, days_supply]
-    """
-    obs_days = (obs_end - obs_start).days
-    coverage = np.zeros(obs_days)
-
-    for _, row in fills_df.iterrows():
-        start = max(0, (row['fill_date'] - obs_start).days)
-        end = min(obs_days, start + row['days_supply'])
-        coverage[start:end] = 1  # cap at 1 per day
-
-    return coverage.sum() / obs_days</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Obs Days = (obs end  −  obs start).days</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Coverage = np.zeros(obs days)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Start = max(0, (row['fill date']  −  obs start).days)</div>
+</div>
 <h3>Medication Possession Ratio (MPR)</h3>
 <p>MPR = (Total days supply dispensed) / (Observation period). MPR can exceed 1.0 due to early refills, making PDC generally preferred. MPR is still used in some legacy reports.</p>
 <h3>Persistence</h3>
@@ -242,39 +182,12 @@ def calculate_pdc(fills_df, obs_start, obs_end):
 </tbody></table>
 <h3>Prescribing Trend Analysis</h3>
 <p>Beyond point-in-time metrics, trend analysis reveals HCP behavior trajectories:</p>
-<pre><code class="language-sql">-- Monthly NRx trend by HCP with growth classification
-SELECT
-  hcp_npi,
-  rx_month,
-  SUM(nrx_count) AS monthly_nrx,
-  AVG(SUM(nrx_count)) OVER (
-    PARTITION BY hcp_npi ORDER BY rx_month
-    ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
-  ) AS rolling_3mo_avg,
-  CASE
-    WHEN SUM(nrx_count) > 1.2 * LAG(SUM(nrx_count), 3)
-         OVER (PARTITION BY hcp_npi ORDER BY rx_month)
-    THEN 'Growing'
-    WHEN SUM(nrx_count) < 0.8 * LAG(SUM(nrx_count), 3)
-         OVER (PARTITION BY hcp_npi ORDER BY rx_month)
-    THEN 'Declining'
-    ELSE 'Stable'
-  END AS trend_status
-FROM prescription_data
-WHERE brand = 'YOUR_BRAND'
-GROUP BY hcp_npi, rx_month;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <p><strong>Brand share</strong> at the HCP level is equally critical: Brand Share = Brand TRx / Class TRx. An HCP writing 100 class TRx with 10% brand share represents far more opportunity than one writing 20 class TRx with 50% share.</p>`},
     {id:"s3",content:`<h2 id="s3">Decile Analysis & Segmentation</h2>
 <p><strong>Decile analysis</strong> ranks all HCPs by prescribing volume and divides them into 10 equal groups. This is the most fundamental segmentation in pharma commercial analytics and drives resource allocation decisions across every brand.</p>
 <h3>Building Deciles</h3>
-<pre><code class="language-sql">SELECT
-  hcp_npi,
-  total_class_trx,
-  brand_trx,
-  NTILE(10) OVER (ORDER BY total_class_trx DESC) AS decile,
-  ROUND(100.0 * brand_trx / NULLIF(total_class_trx, 0), 1) AS brand_share_pct
-FROM hcp_prescribing_summary
-WHERE total_class_trx > 0;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <h3>The 80/20 Rule in Pharma</h3>
 <p>Pharma prescribing follows a power law: the top 2 deciles (20% of HCPs) typically generate 60-80% of total prescriptions. This concentration drives the industry-standard tiered targeting model:</p>
 <table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Tier</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Deciles</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">% of HCPs</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">% of TRx</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Typical Call Frequency</th></tr></thead>
@@ -342,20 +255,14 @@ WHERE total_class_trx > 0;</code></pre>
     {id:"s7",content:`<h2 id="s7">Promotional Response Modeling</h2>
 <p><strong>Promotional response models</strong> quantify the relationship between promotional effort (calls, samples, digital touches) and prescribing behavior change. This is the analytical foundation for call plan optimization and budget allocation.</p>
 <h3>Standard Model Structure</h3>
-<pre><code class="language-python">import statsmodels.api as sm
-
-# Promotional response model: NRx as function of promotional inputs
-# Using log-log specification to capture diminishing returns
-model = sm.OLS.from_formula(
-    'np.log(nrx + 1) ~ np.log(details + 1) + np.log(samples + 1) '
-    '+ np.log(digital_touches + 1) + brand_share_lag '
-    '+ C(specialty) + C(region)',
-    data=hcp_panel_df
-).fit()
-
-# Interpret coefficients as elasticities
-# detail_elasticity = 0.15 means 10% more details -> 1.5% more NRx
-print(model.summary())</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Model = sm.OLS.from formula(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Data = hcp panel df</div>
+</div>
 <h3>Diminishing Returns</h3>
 <p>All promotional channels exhibit <strong>diminishing returns</strong> — the Nth call produces less incremental prescribing than the (N-1)th. Industry data shows the response curve typically flattens after 8-10 personal details per year. This is why frequency caps are set at 10-12 calls for even the highest-value targets.</p>
 <h3>Affinity Scoring</h3>
@@ -412,27 +319,18 @@ print(model.summary())</code></pre>
 <li><strong>Optimize balance:</strong> Use algorithms to minimize variance in workload and potential across territories while maintaining geographic contiguity</li>
 </ol>
 <h3>Workload Model</h3>
-<pre><code class="language-python">def territory_workload(territory_hcps, call_plan, selling_days=220):
-    """
-    Calculate territory workload as % of capacity.
-    """
-    total_calls_needed = sum(
-        call_plan.get(hcp['tier'], 0) for hcp in territory_hcps
-    )
-    calls_per_day = 7  # average face-to-face
-    total_capacity = selling_days * calls_per_day
-
-    workload_pct = total_calls_needed / total_capacity * 100
-    return {
-        'calls_needed': total_calls_needed,
-        'capacity': total_capacity,
-        'workload_pct': round(workload_pct, 1),
-        'status': 'Balanced' if 85 <= workload_pct <= 115 else
-                  'Under' if workload_pct < 85 else 'Over'
-    }
-
-# Call plan by tier
-call_plan = {'A': 10, 'B': 6, 'C': 3, 'D': 0}</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Total Calls Needed = sum(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Calls Per Day = 7  # average face − to − face</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Total Capacity = selling days  ×  calls per day</div>
+</div>
 <p>Target workload utilization is 90-110% of capacity. Territories below 85% indicate excess capacity (consider adding HCPs or reducing headcount); territories above 115% indicate overwork (reps will underserve targets).</p>
 <div class="callout callout-tip"><div class="callout-title">Disruption Score</div><p>When realigning territories, calculate a <strong>disruption score</strong> — the percentage of HCPs who change rep assignments. Industry best practice keeps disruption below 20% to preserve relationship continuity. Major realignments (>40% disruption) should be avoided unless absolutely necessary.</p></div>`},
     {id:"s3",content:`<h2 id="s3">Activity & Performance Metrics</h2>
@@ -457,22 +355,7 @@ call_plan = {'A': 10, 'B': 6, 'C': 3, 'D': 0}</code></pre>
 <p>Analyzing individual rep performance requires controlling for territory differences. A rep in a high-potential territory will naturally produce more volume than one in a low-potential territory, so raw volume comparisons are misleading.</p>
 <h3>Fair Share Analysis</h3>
 <p><strong>Fair share</strong> adjusts for territory potential to create an apples-to-apples comparison:</p>
-<pre><code class="language-sql">SELECT
-  rep_id,
-  territory_id,
-  brand_trx,
-  territory_class_trx,
-  ROUND(100.0 * brand_trx / NULLIF(territory_class_trx, 0), 1)
-    AS brand_share_pct,
-  national_brand_share_pct,
-  ROUND(100.0 * brand_trx / NULLIF(territory_class_trx, 0), 1)
-    - national_brand_share_pct AS share_vs_national,
-  CASE
-    WHEN brand_share > 1.1 * national_brand_share THEN 'Outperformer'
-    WHEN brand_share < 0.9 * national_brand_share THEN 'Underperformer'
-    ELSE 'At National'
-  END AS performance_tier
-FROM territory_performance;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <h3>Goal Attainment Distribution</h3>
 <p>A healthy IC plan produces a bell-curve distribution of goal attainment centered around 100%. Warning signs include:</p>
 <ul>
@@ -495,30 +378,18 @@ FROM territory_performance;</code></pre>
     {id:"s6",content:`<h2 id="s6">ROI of Sales Force Activities</h2>
 <p>Calculating sales force ROI requires attributing incremental prescriptions to promotional activity and converting those scripts to revenue:</p>
 <h3>ROI Calculation Framework</h3>
-<pre><code class="language-python">def calculate_sfe_roi(promo_cost, incremental_trx, net_revenue_per_trx):
-    """
-    Calculate ROI of sales force promotional activity.
-
-    promo_cost: Total cost of promotion (salary + benefits + T&E + samples)
-    incremental_trx: Additional TRx attributable to promotion
-    net_revenue_per_trx: Net revenue per prescription after GTN
-    """
-    incremental_revenue = incremental_trx * net_revenue_per_trx
-    roi = (incremental_revenue - promo_cost) / promo_cost
-    return {
-        'incremental_revenue': incremental_revenue,
-        'promo_cost': promo_cost,
-        'roi': round(roi, 2),
-        'cost_per_incremental_trx': round(promo_cost / max(incremental_trx, 1), 2)
-    }
-
-# Example: specialty brand
-result = calculate_sfe_roi(
-    promo_cost=50_000_000,      # $50M field force cost
-    incremental_trx=200_000,     # 200K incremental scripts
-    net_revenue_per_trx=800      # $800 net per Rx
-)
-# ROI = ($160M - $50M) / $50M = 2.2x</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Incremental Revenue = incremental trx  ×  net revenue per trx</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Roi = (incremental revenue  −  promo cost)  ÷  promo cost</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Result = calculate sfe roi(</div>
+</div>
 <p>Key considerations for accurate ROI:</p>
 <ul>
 <li><strong>Baseline estimation:</strong> What would have happened without promotion? This requires modeling a "no-promotion" counterfactual, often using matched markets or promotion-gap analysis</li>
@@ -585,35 +456,34 @@ result = calculate_sfe_roi(
 <p>Statistical models use historical patterns in prescription data to project future demand. They are most effective for established brands with 2+ years of stable history.</p>
 <h3>ARIMA (AutoRegressive Integrated Moving Average)</h3>
 <p>ARIMA is the workhorse of time-series forecasting in pharma. It models the data as a combination of autoregressive (past values), differencing (stationarity), and moving average (past errors) components.</p>
-<pre><code class="language-python">from statsmodels.tsa.arima.model import ARIMA
-import pandas as pd
-
-# Monthly TRx data for an established brand
-trx_data = pd.read_csv('monthly_trx.csv', index_col='month', parse_dates=True)
-
-# ARIMA(p,d,q): p=autoregressive, d=differencing, q=moving average
-# Use AIC/BIC for model selection
-model = ARIMA(trx_data['trx'], order=(2, 1, 1), seasonal_order=(1, 1, 1, 12))
-results = model.fit()
-
-# 12-month forecast with confidence intervals
-forecast = results.get_forecast(steps=12)
-print(forecast.summary_frame(alpha=0.05))  # 95% CI</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Trx Data = pd.read csv('monthly trx.csv', index col='month', parse dates=True)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Model = ARIMA(trx data['trx'], order=(2, 1, 1), seasonal order=(1, 1, 1, 12))</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Results = model.fit()</div>
+</div>
 <h3>Exponential Smoothing (ETS)</h3>
 <p>ETS models capture level, trend, and seasonality with exponentially decaying weights. Holt-Winters triple exponential smoothing is commonly used for seasonal pharma data (e.g., flu products, seasonal allergy).</p>
 <h3>Regression-Based Models</h3>
 <p>When external drivers matter (e.g., competitive launches, formulary changes), regression models incorporate causal variables:</p>
-<pre><code class="language-python">import statsmodels.api as sm
-
-# TRx as function of market drivers
-model = sm.OLS.from_formula(
-    'trx ~ trend + season_q1 + season_q4 + competitor_launch '
-    '+ formulary_win + detail_calls + samples',
-    data=monthly_df
-).fit()
-
-# Forecast: plug in assumed future values of drivers
-future_df['trx_forecast'] = model.predict(future_df)</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Model = sm.OLS.from formula(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Data = monthly df</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Future Df['Trx Forecast'] = model.predict(future df)</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">Patient-Based Forecasting</h2>
 <p>Patient-based forecasting is the gold standard for specialty and rare disease products. It builds demand from first principles by modeling the patient flow from epidemiology through treatment to brand selection.</p>
 <h3>The Patient-Based Forecast Cascade</h3>
@@ -671,24 +541,18 @@ future_df['trx_forecast'] = model.predict(future_df)</code></pre>`},
 <tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top"><strong>WMAPE</strong></td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Sum(|A-F|) / Sum(A) x 100</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top"><15% across portfolio</td></tr>
 <tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top"><strong>Bias</strong></td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Mean((Forecast - Actual) / Actual) x 100</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">+/-5%</td></tr>
 </tbody></table>
-<pre><code class="language-python">import numpy as np
-
-def forecast_accuracy(actual, forecast):
-    """Calculate forecast accuracy metrics."""
-    actual, forecast = np.array(actual), np.array(forecast)
-    errors = actual - forecast
-    abs_errors = np.abs(errors)
-
-    mape = np.mean(abs_errors / actual) * 100
-    wmape = abs_errors.sum() / actual.sum() * 100
-    bias = np.mean((forecast - actual) / actual) * 100
-
-    return {
-        'MAPE': round(mape, 1),
-        'WMAPE': round(wmape, 1),
-        'Bias': round(bias, 1),
-        'Bias_direction': 'Over-forecast' if bias > 0 else 'Under-forecast'
-    }</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Actual, Forecast = np.array(actual), np.array(forecast)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Errors = actual  −  forecast</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Abs Errors = np.abs(errors)</div>
+</div>
 <div class="callout callout-tip"><div class="callout-title">Bias is More Dangerous Than Error</div><p>A forecast with 8% MAPE but +7% bias consistently over-predicts, leading to excess inventory and missed earnings. Unbiased forecasts with moderate error are preferable to low-error forecasts with systematic bias. Track both metrics independently.</p></div>`},
     {id:"s6",content:`<h2 id="s6">Scenario Planning & Consensus Process</h2>
 <h3>Scenario Planning</h3>
@@ -764,13 +628,12 @@ def forecast_accuracy(actual, forecast):
 <li><strong>External factors:</strong> Competition, seasonality, formulary changes, guidelines, macro trends. Typically 5-15%.</li>
 </ul>
 <p>The standard MMM equation:</p>
-<pre><code class="language-python"># Multiplicative MMM model (log-log specification)
-# log(Sales) = B0 + B1*log(Details) + B2*log(Samples)
-#            + B3*log(DTC_GRPs) + B4*log(Digital)
-#            + B5*Competitor_NRx + B6*Seasonality + error
-
-# Coefficients = elasticities (% change in sales per % change in driver)
-# Example: B1 = 0.08 -> 10% more details -> 0.8% more sales</code></pre>
+<div class="flow-box"><div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>Multiplicative MMM model (log-log specification)</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>log(Sales) = B0 + B1*log(Details) + B2*log(Samples)</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">3</div><div class="rule-step-body"><strong>+ B3*log(DTC_GRPs) + B4*log(Digital)</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">4</div><div class="rule-step-body"><strong>+ B5*Competitor_NRx + B6*Seasonality + error</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">5</div><div class="rule-step-body"><strong>Coefficients = elasticities (% change in sales per % change in driver)</strong></div></div>
+</div>
 <div class="callout"><div class="callout-title">MMM vs. MTA</div><p>MMM uses aggregate data (weekly/monthly, national/regional) and works without individual-level tracking. Multi-Touch Attribution (MTA) uses individual-level data. In pharma, privacy constraints and long sales cycles make MMM the dominant approach, though hybrid models combining both are emerging.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Data Inputs & Preparation</h2>
 <p>MMM requires minimum 2-3 years of weekly or monthly data across all channels. Data quality and completeness directly determine model reliability.</p>
@@ -794,49 +657,28 @@ def forecast_accuracy(actual, forecast):
     {id:"s3",content:`<h2 id="s3">Adstock & Carry-Over Effects</h2>
 <p>Marketing activities have effects that persist beyond the week they occur. <strong>Adstock transformation</strong> models this carry-over effect by creating a decaying weighted average of current and past promotional activity.</p>
 <h3>Adstock Formula</h3>
-<pre><code class="language-python">def adstock_transform(x, decay_rate=0.7):
-    """
-    Apply geometric adstock transformation.
-    decay_rate: how much of the effect carries over to the next period
-                0 = no carry-over, 1 = infinite carry-over
-    Typical values: 0.4-0.8 for pharma channels
-    """
-    adstocked = np.zeros(len(x))
-    adstocked[0] = x[0]
-    for i in range(1, len(x)):
-        adstocked[i] = x[i] + decay_rate * adstocked[i-1]
-    return adstocked
-
-# Channel-specific decay rates (industry typical)
-decay_rates = {
-    'dtc_tv':       0.75,   # TV has long carry-over
-    'detail_calls': 0.50,   # Personal details decay faster
-    'samples':      0.30,   # Samples have shorter memory
-    'digital':      0.40,   # Digital moderate carry-over
-    'speaker_prog': 0.60,   # Speaker programs linger
-}</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">0 = no carry − over, 1 = infinite carry − over</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Adstocked = np.zeros(len(x))</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Adstocked[0] = x[0]</div>
+</div>
 <h3>Interpreting Carry-Over</h3>
 <p>A decay rate of 0.7 means 70% of this week's effect carries into next week, 49% (0.7^2) into the week after, and so on. The <strong>half-life</strong> — the number of periods for the effect to halve — is calculated as: half-life = log(0.5) / log(decay_rate). For decay=0.7, half-life = 1.94 weeks.</p>
 <div class="callout callout-tip"><div class="callout-title">Why Adstock Matters</div><p>Without adstock transformation, MMM attributes all impact to the week of spend, systematically underestimating channels with long carry-over (TV, speaker programs) and overestimating channels with short memory (email, digital ads). Getting adstock right can shift channel ROI estimates by 30-50%.</p></div>`},
     {id:"s4",content:`<h2 id="s4">Diminishing Returns & Saturation</h2>
 <p>All marketing channels exhibit <strong>diminishing returns</strong> — each additional dollar of spend generates less incremental impact than the previous dollar. This is modeled using saturation curves.</p>
 <h3>Common Saturation Functions</h3>
-<pre><code class="language-python">import numpy as np
-
-def hill_saturation(x, half_max, steepness):
-    """
-    Hill function for modeling saturation.
-    half_max: spend level at which half the maximum effect is achieved
-    steepness: shape parameter (higher = more S-curve, lower = more concave)
-    """
-    return x**steepness / (half_max**steepness + x**steepness)
-
-def log_saturation(x, alpha=1.0):
-    """Simple log transformation for diminishing returns."""
-    return alpha * np.log(1 + x)
-
-# Example: at $5M DTC spend, 80% of max effect achieved
-# Doubling to $10M only gets to 92% — the incremental $5M yields only 12pp</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Steepness: Shape Parameter (Higher = more S − curve, lower = more concave)</div>
+</div>
 <h3>Practical Implications</h3>
 <p>Saturation analysis directly informs budget allocation:</p>
 <ul>
@@ -855,22 +697,18 @@ def log_saturation(x, alpha=1.0):
 <p>The primary output of MMM is the <strong>due-to analysis</strong> — quantifying how many incremental prescriptions each channel generates and its return on investment.</p>
 <h3>Due-To Decomposition</h3>
 <p>Total incremental TRx is decomposed by channel. Each channel's contribution is calculated by comparing predicted sales with that channel's effect vs. without it (setting the channel's adstocked values to zero).</p>
-<pre><code class="language-python">def channel_contribution(model, data, channel_col):
-    """
-    Calculate incremental TRx attributable to a specific channel.
-    Sets channel to zero and measures the difference in predicted sales.
-    """
-    # Predicted with all channels
-    pred_full = model.predict(data)
-
-    # Predicted with channel zeroed out
-    data_zeroed = data.copy()
-    data_zeroed[channel_col] = 0
-    pred_without = model.predict(data_zeroed)
-
-    incremental = pred_full.sum() - pred_without.sum()
-    roi = incremental * net_revenue_per_trx / channel_spend
-    return {'incremental_trx': incremental, 'roi': roi}</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Pred Full = model.predict(data)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Data Zeroed = data.copy()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Pred Without = model.predict(data zeroed)</div>
+</div>
 <h3>ROI by Channel</h3>
 <p>Channel ROI = (Incremental Revenue - Channel Cost) / Channel Cost. In pharma, typical ROI ranges are:</p>
 <ul>
@@ -890,22 +728,18 @@ def log_saturation(x, alpha=1.0):
 <li><strong>Built-in adstock and saturation:</strong> Modern frameworks jointly estimate decay rates and saturation parameters</li>
 </ul>
 <h3>Modern Bayesian MMM Frameworks</h3>
-<pre><code class="language-python"># Example using PyMC-Marketing (open source Bayesian MMM)
-import pymc as pm
-from pymc_marketing.mmm import DelayedSaturatedMMM
-
-mmm = DelayedSaturatedMMM(
-    date_column='week',
-    channel_columns=['details', 'dtc_tv', 'digital', 'samples'],
-    control_columns=['seasonality', 'competitor_nrx'],
-    adstock_max_lag=8,  # max weeks of carry-over
-)
-mmm.fit(X=weekly_data, y=weekly_data['trx'])
-
-# Posterior channel contributions with uncertainty
-mmm.plot_channel_contribution_share_hdi()
-# Budget optimization
-mmm.optimize_budget(total_budget=80_000_000)</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Mmm = DelayedSaturatedMMM(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Date Column = 'week',</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Adstock Max Lag = 8,  # max weeks of carry − over</div>
+</div>
 <div class="callout"><div class="callout-title">Industry Adoption</div><p>Google's Meridian, Meta's Robyn, and PyMC-Marketing are open-source Bayesian MMM frameworks gaining rapid adoption in pharma. They democratize what was previously a $500K+ consulting engagement into a reproducible, in-house capability.</p></div>`},
     {id:"s7",content:`<h2 id="s7">Pharma-Specific MMM Considerations</h2>
 <p>Pharma MMM differs from CPG/retail MMM in several critical ways:</p>
@@ -967,18 +801,7 @@ mmm.optimize_budget(total_budget=80_000_000)</code></pre>
 <li><strong>Payer landscape:</strong> Current class coverage, prior auth requirements, step therapy protocols</li>
 </ul>
 <h3>Prescriber Universe Identification</h3>
-<pre><code class="language-sql">-- Identify launch target universe: HCPs treating the indication
-SELECT
-  npi,
-  specialty,
-  practice_state,
-  SUM(CASE WHEN drug_class = 'target_class' THEN trx ELSE 0 END) AS class_trx,
-  COUNT(DISTINCT CASE WHEN icd10 LIKE 'C34%' THEN patient_id END) AS indication_patients,
-  NTILE(10) OVER (ORDER BY SUM(trx) DESC) AS volume_decile
-FROM hcp_claims_summary
-WHERE specialty IN ('Medical Oncology','Hematology/Oncology','Pulmonology')
-GROUP BY npi, specialty, practice_state
-HAVING class_trx > 0 OR indication_patients > 5;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <h3>Patient Identification</h3>
 <p>For biomarker-driven therapies, pre-launch patient identification quantifies the addressable market: How many patients have the relevant biomarker? What percentage are currently tested? What is the gap between tested and treated?</p>`},
     {id:"s2",content:`<h2 id="s2">Launch Readiness KPIs</h2>
@@ -1009,30 +832,18 @@ HAVING class_trx > 0 OR indication_patients > 5;</code></pre>
     {id:"s4",content:`<h2 id="s4">Analogue Benchmarking</h2>
 <p>Analogue benchmarking compares your launch trajectory to relevant past launches. This is the most common method for evaluating whether a launch is on track.</p>
 <h3>Building an Analogue Comparison</h3>
-<pre><code class="language-python">import pandas as pd
-
-def build_launch_curve(weekly_trx, launch_date):
-    """
-    Normalize weekly TRx to months-from-launch for comparison.
-    """
-    df = weekly_trx.copy()
-    df['months_from_launch'] = (
-        (df['week'] - launch_date).dt.days / 30.44
-    ).round(0).astype(int)
-    return df.groupby('months_from_launch')['trx'].sum().reset_index()
-
-# Compare your launch to 3 analogues
-analogues = {
-    'Analogue A (fast ramp)': build_launch_curve(analogue_a, launch_a),
-    'Analogue B (moderate)':  build_launch_curve(analogue_b, launch_b),
-    'Analogue C (slow ramp)': build_launch_curve(analogue_c, launch_c),
-    'Your Brand':             build_launch_curve(your_brand, your_launch),
-}
-
-# Calculate share of eventual peak at each timepoint
-for name, curve in analogues.items():
-    peak = curve['trx'].max()
-    curve['pct_of_peak'] = (curve['trx'] / peak * 100).round(1)</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Df = weekly trx.copy()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Peak = curve['trx'].max()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Curve['Pct Of Peak'] = (curve['trx']  ÷  peak  ×  100).round(1)</div>
+</div>
 <h3>Analogue Selection Best Practices</h3>
 <ul>
 <li>Select 3-5 analogues spanning the range of possible outcomes (best case to worst case)</li>
@@ -1043,28 +854,7 @@ for name, curve in analogues.items():
     {id:"s5",content:`<h2 id="s5">Pull-Through Analytics</h2>
 <p><strong>Pull-through</strong> measures the conversion of formulary access into actual prescriptions. Having formulary coverage is necessary but not sufficient — prescribers must still choose your product and patients must fill the prescription.</p>
 <h3>Pull-Through Rate Calculation</h3>
-<pre><code class="language-sql">-- Pull-through: brand share in plans with access vs. without
-SELECT
-  access_status,
-  COUNT(DISTINCT patient_id) AS patients,
-  SUM(brand_trx) AS brand_trx,
-  SUM(class_trx) AS class_trx,
-  ROUND(100.0 * SUM(brand_trx) / NULLIF(SUM(class_trx), 0), 1)
-    AS brand_share_pct
-FROM (
-  SELECT
-    p.patient_id,
-    p.brand_trx,
-    p.class_trx,
-    CASE
-      WHEN f.formulary_status IN ('Preferred','Unrestricted') THEN 'Good Access'
-      WHEN f.formulary_status = 'Prior Auth' THEN 'Restricted'
-      ELSE 'No Coverage'
-    END AS access_status
-  FROM patient_rx p
-  JOIN formulary_data f ON p.plan_id = f.plan_id
-) sub
-GROUP BY access_status;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <p>Typical pull-through dynamics:</p>
 <ul>
 <li><strong>Unrestricted access:</strong> 15-25% brand share (the baseline access benefit)</li>
@@ -1189,34 +979,18 @@ GROUP BY access_status;</code></pre>
     {id:"s4",content:`<h2 id="s4">Forecasting GTN Deductions</h2>
 <p>GTN forecasting is among the most complex analytical tasks in pharma because each deduction line has different drivers, timing, and uncertainty profiles.</p>
 <h3>GTN Forecasting Framework</h3>
-<pre><code class="language-python">def forecast_gtn(units_by_channel, wac, rebate_rates, other_deductions):
-    """
-    Forecast GTN deductions by channel and category.
-    """
-    gross_sales = sum(units * wac for channel, units in units_by_channel.items())
-
-    deductions = {}
-    for channel, units in units_by_channel.items():
-        channel_gross = units * wac
-        deductions[channel] = {
-            'rebates': channel_gross * rebate_rates[channel]['rebate'],
-            'chargebacks': channel_gross * rebate_rates[channel]['chargeback'],
-            'copay': channel_gross * rebate_rates[channel]['copay'],
-            'distribution': channel_gross * rebate_rates[channel]['dist_fee'],
-        }
-
-    total_deductions = sum(
-        sum(cats.values()) for cats in deductions.values()
-    )
-    net_sales = gross_sales - total_deductions
-    gtn_pct = total_deductions / gross_sales * 100
-
-    return {
-        'gross_sales': gross_sales,
-        'total_deductions': total_deductions,
-        'net_sales': net_sales,
-        'gtn_pct': round(gtn_pct, 1)
-    }</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Gross Sales = sum(units  ×  wac for channel, units in units by channel.items())</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Channel Gross = units  ×  wac</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Total Deductions = sum(</div>
+</div>
 <h3>Key Forecasting Inputs</h3>
 <ul>
 <li><strong>Unit forecast by channel:</strong> Commercial, Medicare, Medicaid, 340B, VA/DoD — from demand planning</li>
@@ -1233,13 +1007,18 @@ GROUP BY access_status;</code></pre>
 <p>Excluded from Best Price: 340B, VA/DoD, state pharmaceutical assistance programs, certain nominal pricing.</p>
 <h3>340B Program Analytics</h3>
 <p>The 340B ceiling price = AMP - unit rebate amount (URA). For brands with high AMP and high Medicaid rebate, the 340B ceiling price can be pennies on the dollar.</p>
-<pre><code class="language-python"># 340B ceiling price calculation
-amp = 500.00  # Average Manufacturer Price
-statutory_rebate_pct = 0.231  # 23.1% for branded drugs
-ura = max(amp * statutory_rebate_pct, amp - best_price)
-ceiling_price = amp - ura
-# If AMP=$500 and best_price=$350: URA = max($115.50, $150) = $150
-# Ceiling price = $500 - $150 = $350</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Amp = 500.00  # Average Manufacturer Price</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Statutory Rebate Pct = 0.231  # 23.1% for branded drugs</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Ura = max(amp  ×  statutory rebate pct, amp  −  best price)</div>
+</div>
 <div class="callout"><div class="callout-title">Best Price Vigilance</div><p>A single contract error that sets an anomalously low price can trigger Best Price, cascading through Medicaid rebates for every unit dispensed. Best Price monitoring requires cross-functional coordination between pricing, contracting, trade, and legal teams.</p></div>`},
     {id:"s6",content:`<h2 id="s6">GTN True-Up Process</h2>
 <p>GTN deductions are initially recorded as <strong>accruals</strong> (estimates) because actual rebate claims arrive months after the prescription is dispensed. The <strong>true-up</strong> process reconciles accruals against actual payments.</p>
@@ -1335,27 +1114,18 @@ ceiling_price = amp - ura
 <tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Time decay</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">More credit to recent interactions</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Reflects recency bias</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Undervalues early touches</td></tr>
 <tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Data-driven (Shapley/Markov)</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Algorithmically determined from data</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Most accurate</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Requires large data, complex</td></tr>
 </tbody></table>
-<pre><code class="language-python"># Shapley value attribution example
-from itertools import combinations
-
-def shapley_attribution(channels, conversion_fn):
-    """
-    Calculate Shapley values for each channel's contribution to conversion.
-    conversion_fn: returns conversion rate for a given set of channels
-    """
-    n = len(channels)
-    shapley = {c: 0 for c in channels}
-
-    for channel in channels:
-        for size in range(n):
-            for subset in combinations([c for c in channels if c != channel], size):
-                subset_set = set(subset)
-                marginal = (conversion_fn(subset_set | {channel})
-                           - conversion_fn(subset_set))
-                weight = (factorial(size) * factorial(n - size - 1)) / factorial(n)
-                shapley[channel] += weight * marginal
-
-    return shapley</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">N = len(channels)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Subset Set = set(subset)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Marginal = (conversion fn(subset set | {channel})</div>
+</div>`},
     {id:"s4",content:`<h2 id="s4">Next Best Action (NBA) Models</h2>
 <p><strong>Next Best Action</strong> models recommend the optimal next touchpoint for each HCP based on their current engagement state, preferences, and predicted response. NBA moves from calendar-driven campaigns to real-time, individualized engagement.</p>
 <h3>NBA Model Architecture</h3>
@@ -1366,23 +1136,14 @@ def shapley_attribution(channels, conversion_fn):
 <li><strong>Action selection:</strong> Choose the action with highest expected value, subject to business rules (frequency caps, compliance, rep availability)</li>
 </ol>
 <h3>Implementation Approach</h3>
-<pre><code class="language-python"># Simplified NBA scoring
-def score_next_action(hcp_features, candidate_actions, response_model):
-    """
-    Score each candidate action for an HCP and return ranked recommendations.
-    """
-    scores = []
-    for action in candidate_actions:
-        features = {**hcp_features, 'action_type': action['type'],
-                     'days_since_last_touch': action['recency']}
-        prob = response_model.predict_proba(features)[1]
-        expected_value = prob * action['impact_if_positive']
-        scores.append({
-            'action': action['type'],
-            'probability': round(prob, 3),
-            'expected_value': round(expected_value, 2)
-        })
-    return sorted(scores, key=lambda x: -x['expected_value'])</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Prob = response model.predict proba(features)[1]</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Expected Value = prob  ×  action['impact if positive']</div>
+</div>
 <div class="callout callout-tip"><div class="callout-title">NBA Success Factors</div><p>NBA models are only as good as the data feeding them. Critical inputs: CRM call notes, email engagement data, digital activity logs, prescribing data (with 2-4 week lag). Integration across Veeva CRM, marketing automation (SFMC, Marketo), and prescribing data is the technical prerequisite.</p></div>`},
     {id:"s5",content:`<h2 id="s5">Digital Channel Analytics</h2>
 <p>Each digital channel has specific metrics that indicate engagement quality:</p>
@@ -1430,20 +1191,10 @@ def score_next_action(hcp_features, candidate_actions, response_model):
 </tbody></table>
 <h3>Omnichannel Engagement Score</h3>
 <p>A composite <strong>Omnichannel Engagement Score (OES)</strong> aggregates all touchpoints into a single metric per HCP:</p>
-<pre><code class="language-python">def omnichannel_engagement_score(hcp_interactions):
-    """
-    Calculate composite engagement score from all channel interactions.
-    """
-    weights = {
-        'field_detail': 10, 'virtual_detail': 7, 'speaker_attend': 8,
-        'email_open': 1, 'email_click': 3, 'webinar_attend': 6,
-        'portal_visit': 2, 'sample_request': 5, 'congress_attend': 9
-    }
-    score = sum(
-        count * weights.get(interaction_type, 1)
-        for interaction_type, count in hcp_interactions.items()
-    )
-    return min(score, 100)  # cap at 100</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Score = sum(</div>
+</div>
 <div class="callout"><div class="callout-title">The Integration Challenge</div><p>The #1 barrier to omnichannel analytics is data integration. Veeva CRM (field), SFMC/Marketo (email), web analytics (portal), and prescribing data (IQVIA) typically live in separate systems. A unified customer data platform (CDP) that links all touchpoints to the HCP master is the technical prerequisite for effective omnichannel measurement.</p></div>`},
     {id:"s8",content:`<h2 id="s8">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div><strong>Omnichannel means orchestration, not just multiple channels.</strong> The value is in coordinating touchpoints so each builds on the last. Running field, digital, and patient channels independently is multichannel, not omnichannel.</div></div>
@@ -1505,19 +1256,14 @@ def score_next_action(hcp_features, candidate_actions, response_model):
 </tbody></table>
 <h3>Territory Potential & Fairness</h3>
 <p>Quota allocation must account for territory potential differences. A common approach:</p>
-<pre><code class="language-python"># Fair quota allocation using territory potential
-total_national_quota = 1_000_000  # units
-
-territories['potential_index'] = (
-    territories['class_trx'] / territories['class_trx'].sum()
-)
-territories['quota'] = (
-    territories['potential_index'] * total_national_quota
-).round(0)
-
-# Fairness check: coefficient of variation of quota/potential ratio
-cv = territories['quota'].std() / territories['quota'].mean()
-# Target CV < 0.15 for fair allocation</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Total National Quota = 1 000 000  # units</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Cv = territories['quota'].std()  ÷  territories['quota'].mean()</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">Payout Curves</h2>
 <p>The <strong>payout curve</strong> defines the relationship between goal attainment and incentive payout. It is the most powerful behavioral lever in IC design — its shape determines whether reps are motivated to stretch, coast, or give up.</p>
 <h3>Common Payout Curve Types</h3>
@@ -1551,31 +1297,9 @@ cv = territories['quota'].std() / territories['quota'].mean()
     {id:"s5",content:`<h2 id="s5">IC Analytics & Plan Effectiveness</h2>
 <p>After a plan year, analytics evaluates whether the plan drove the intended behaviors and outcomes.</p>
 <h3>Attainment Distribution Analysis</h3>
-<pre><code class="language-python">import numpy as np
-import matplotlib.pyplot as plt
-
-def analyze_attainment(attainment_pcts):
-    """
-    Analyze IC plan attainment distribution for plan health.
-    """
-    analysis = {
-        'mean': round(np.mean(attainment_pcts), 1),
-        'median': round(np.median(attainment_pcts), 1),
-        'std': round(np.std(attainment_pcts), 1),
-        'pct_below_threshold': round(
-            100 * np.mean(np.array(attainment_pcts) < 70), 1
-        ),
-        'pct_above_goal': round(
-            100 * np.mean(np.array(attainment_pcts) >= 100), 1
-        ),
-        'pct_at_cap': round(
-            100 * np.mean(np.array(attainment_pcts) >= 150), 1
-        ),
-    }
-    return analysis
-
-# Healthy plan: mean ~100%, std 15-20%, 50-60% above goal,
-# <10% below threshold, <5% at cap</code></pre>
+<div class="flow-box"><div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>Healthy plan: mean ~100%, std 15-20%, 50-60% above goal,</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong><10% below threshold, <5% at cap</strong></div></div>
+</div>
 <h3>Pay-for-Performance Correlation</h3>
 <p>A strong IC plan shows high correlation between performance ranking and payout ranking. Calculate the Spearman rank correlation between performance rank and payout rank — a coefficient below 0.7 suggests the plan is not effectively differentiating performance.</p>`},
     {id:"s6",content:`<h2 id="s6">Compliance & OIG Guidelines</h2>
@@ -1591,40 +1315,22 @@ def analyze_attainment(attainment_pcts):
     {id:"s7",content:`<h2 id="s7">IC Plan Modeling & Simulation</h2>
 <p>Before finalizing an IC plan, simulate its impact across the sales force to verify fairness, cost, and behavioral incentives.</p>
 <h3>Simulation Process</h3>
-<pre><code class="language-python">def simulate_ic_plan(territories_df, payout_curve, target_incentive):
-    """
-    Simulate IC plan payouts across all territories.
-    """
-    results = []
-    for _, terr in territories_df.iterrows():
-        # Simulate performance scenarios
-        for scenario in ['downside', 'base', 'upside']:
-            if scenario == 'downside':
-                attainment = terr['expected_attainment'] * 0.85
-            elif scenario == 'upside':
-                attainment = terr['expected_attainment'] * 1.15
-            else:
-                attainment = terr['expected_attainment']
-
-            payout_pct = payout_curve(attainment)
-            payout = target_incentive * payout_pct
-
-            results.append({
-                'territory': terr['id'],
-                'scenario': scenario,
-                'attainment': round(attainment, 1),
-                'payout': round(payout, 0),
-            })
-
-    results_df = pd.DataFrame(results)
-
-    # Key outputs
-    total_cost = results_df[results_df.scenario == 'base']['payout'].sum()
-    cost_range = (
-        results_df[results_df.scenario == 'downside']['payout'].sum(),
-        results_df[results_df.scenario == 'upside']['payout'].sum()
-    )
-    return results_df, total_cost, cost_range</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Attainment = terr['expected attainment']  ×  0.85</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Elif Scenario = = 'upside':</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Attainment = terr['expected attainment']  ×  1.15</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>scenario = 'downside'</td><td>attainment = terr['expected attainment'] * 0.85</td></tr>
+<tr><td>elscenario = 'upside'</td><td>attainment = terr['expected attainment'] * 1.15</td></tr>
+</tbody></table>
 <h3>Key Simulation Outputs</h3>
 <ul>
 <li><strong>Total plan cost:</strong> Base, downside, and upside scenarios for budget planning</li>
@@ -1680,25 +1386,7 @@ def analyze_attainment(attainment_pcts):
     {id:"s2",content:`<h2 id="s2">Market Share Analytics</h2>
 <p>Market share is the most fundamental competitive metric. It must be analyzed at multiple levels to reveal meaningful patterns:</p>
 <h3>Share Hierarchy</h3>
-<pre><code class="language-sql">-- Multi-level market share analysis
-SELECT
-  brand_name,
-  -- Total class share
-  ROUND(100.0 * SUM(trx) / SUM(SUM(trx)) OVER(), 1) AS class_share_pct,
-  -- Share within sub-segment (e.g., 2L+ mNSCLC)
-  ROUND(100.0 * SUM(CASE WHEN segment = '2L+' THEN trx END) /
-    NULLIF(SUM(SUM(CASE WHEN segment = '2L+' THEN trx END)) OVER(), 0), 1)
-    AS segment_2l_share_pct,
-  -- Share trend: current quarter vs prior year quarter
-  ROUND(100.0 * SUM(CASE WHEN period = 'current_q' THEN trx END) /
-    NULLIF(SUM(SUM(CASE WHEN period = 'current_q' THEN trx END)) OVER(), 0), 1)
-    - ROUND(100.0 * SUM(CASE WHEN period = 'prior_yr_q' THEN trx END) /
-    NULLIF(SUM(SUM(CASE WHEN period = 'prior_yr_q' THEN trx END)) OVER(), 0), 1)
-    AS share_change_pp
-FROM prescription_data
-WHERE therapeutic_class = 'target_class'
-GROUP BY brand_name
-ORDER BY class_share_pct DESC;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <h3>Share Decomposition</h3>
 <p>Share changes can be decomposed into three components:</p>
 <ul>
@@ -1710,26 +1398,7 @@ ORDER BY class_share_pct DESC;</code></pre>
     {id:"s3",content:`<h2 id="s3">Prescriber Switching Patterns</h2>
 <p>Switching analysis reveals which brands are gaining patients from which competitors and why. This directly informs competitive messaging and targeting.</p>
 <h3>Switching Matrix</h3>
-<pre><code class="language-sql">-- Brand switching matrix: where are patients coming from/going to?
-SELECT
-  prior_brand,
-  current_brand,
-  COUNT(DISTINCT patient_id) AS switch_patients,
-  ROUND(100.0 * COUNT(DISTINCT patient_id) /
-    SUM(COUNT(DISTINCT patient_id)) OVER (PARTITION BY prior_brand), 1)
-    AS pct_of_prior_brand_switches
-FROM (
-  SELECT
-    patient_id,
-    LAG(brand_name) OVER (PARTITION BY patient_id ORDER BY fill_date) AS prior_brand,
-    brand_name AS current_brand
-  FROM pharmacy_claims
-  WHERE therapeutic_class = 'target_class'
-) switches
-WHERE prior_brand IS NOT NULL
-  AND prior_brand != current_brand
-GROUP BY prior_brand, current_brand
-ORDER BY switch_patients DESC;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <h3>Brand Loyalty Metrics</h3>
 <ul>
 <li><strong>Retention rate:</strong> % of patients remaining on brand after 12 months (inverse of switching rate)</li>
@@ -1741,20 +1410,7 @@ ORDER BY switch_patients DESC;</code></pre>
     {id:"s4",content:`<h2 id="s4">Share of Voice Analysis</h2>
 <p><strong>Share of Voice (SOV)</strong> measures your brand's promotional presence relative to competitors. It is calculated across all promotional channels and compared to market share to identify over- or under-investment.</p>
 <h3>SOV Calculation</h3>
-<pre><code class="language-sql">SELECT
-  brand_name,
-  SUM(detail_calls) AS total_details,
-  ROUND(100.0 * SUM(detail_calls) /
-    SUM(SUM(detail_calls)) OVER(), 1) AS sov_details_pct,
-  ROUND(100.0 * SUM(trx) /
-    SUM(SUM(trx)) OVER(), 1) AS market_share_pct,
-  -- SOV/SOM ratio: >1 = over-investing, <1 = under-investing
-  ROUND(
-    (100.0 * SUM(detail_calls) / SUM(SUM(detail_calls)) OVER()) /
-    NULLIF(100.0 * SUM(trx) / SUM(SUM(trx)) OVER(), 0), 2
-  ) AS sov_som_ratio
-FROM competitive_data
-GROUP BY brand_name;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <h3>SOV/SOM Ratio Interpretation</h3>
 <table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">SOV/SOM Ratio</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Interpretation</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Action</th></tr></thead>
 <tbody>
@@ -1772,20 +1428,7 @@ GROUP BY brand_name;</code></pre>
 <li><strong>Competitive exchanges:</strong> Plans that move a competitor up while moving you down (or vice versa)</li>
 </ul>
 <h3>Impact Quantification</h3>
-<pre><code class="language-sql">-- Formulary change impact on prescribing
-SELECT
-  plan_name,
-  formulary_change_type,  -- 'Win' or 'Loss'
-  lives_affected,
-  brand_share_pre_change,
-  brand_share_post_change,
-  brand_share_post_change - brand_share_pre_change AS share_impact_pp,
-  -- Estimated annual TRx impact
-  lives_affected * avg_class_trx_per_member * (share_impact_pp / 100.0)
-    AS estimated_annual_trx_impact
-FROM formulary_changes
-WHERE change_date >= DATEADD(year, -1, CURRENT_DATE)
-ORDER BY ABS(estimated_annual_trx_impact) DESC;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <p>A formulary win affecting a million lives with 5pp share lift represents a significantly larger impact than a win affecting 100K lives with 15pp lift. Always weight by lives covered.</p>`},
     {id:"s6",content:`<h2 id="s6">Pipeline Monitoring & Threat Assessment</h2>
 <p>Proactive competitive intelligence monitors the clinical pipeline for future threats and opportunities.</p>
@@ -1863,17 +1506,7 @@ ORDER BY ABS(estimated_annual_trx_impact) DESC;</code></pre>
 <li><strong>Adherence-outcome link:</strong> Patients with PDC>0.80 vs. <0.80 — difference in clinical outcomes</li>
 </ul>
 <h3>Economic Outcomes</h3>
-<pre><code class="language-sql">-- Total cost of care comparison: Brand A vs. Brand B
-SELECT
-  treatment_group,
-  AVG(drug_cost_12mo) AS avg_drug_cost,
-  AVG(medical_cost_12mo) AS avg_medical_cost,
-  AVG(drug_cost_12mo + medical_cost_12mo) AS avg_total_cost,
-  AVG(hospitalization_count_12mo) AS avg_hospitalizations,
-  AVG(er_visit_count_12mo) AS avg_er_visits
-FROM patient_outcomes_cohort
-WHERE propensity_score_matched = TRUE  -- Matched cohort for fair comparison
-GROUP BY treatment_group;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <p>The key insight for commercial teams: a higher-cost drug that reduces hospitalizations by 20% may have a <strong>lower total cost of care</strong> than a cheaper alternative. This "offset" narrative is the foundation of value-based positioning.</p>`},
     {id:"s3",content:`<h2 id="s3">Value Story Development</h2>
 <p>A <strong>value story</strong> is the evidence-based narrative that connects your product's clinical benefits to economic value for specific stakeholders.</p>
@@ -1915,62 +1548,23 @@ GROUP BY treatment_group;</code></pre>
 <li><strong>Abandonment rate:</strong> Patients who start but never complete enrollment (target: <15%)</li>
 </ul>
 <h3>Specialty Pharmacy Analytics</h3>
-<pre><code class="language-sql">-- SP performance scorecard
-SELECT
-  sp_name,
-  COUNT(DISTINCT patient_id) AS active_patients,
-  AVG(days_referral_to_dispense) AS avg_cycle_time,
-  ROUND(100.0 * SUM(CASE WHEN dispensed = TRUE THEN 1 END) /
-    COUNT(*), 1) AS fulfillment_rate_pct,
-  AVG(refill_rate_30day) AS avg_30d_refill_rate,
-  AVG(pdc_6mo) AS avg_pdc_6month
-FROM sp_operations
-GROUP BY sp_name
-ORDER BY active_patients DESC;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <div class="callout callout-tip"><div class="callout-title">SP Selection Matters</div><p>Specialty pharmacy performance varies significantly. The difference between a top-quartile and bottom-quartile SP can be 15-20% in fulfillment rate and 10% in persistence. Use analytics to hold SP partners accountable and shift volume to higher performers.</p></div>`},
     {id:"s6",content:`<h2 id="s6">Adherence Program ROI</h2>
 <p>Demonstrating ROI of adherence programs requires connecting program investment to incremental persistence, which translates to incremental prescriptions and revenue.</p>
 <h3>ROI Calculation Framework</h3>
-<pre><code class="language-python">def adherence_program_roi(
-    enrolled_patients, non_enrolled_patients,
-    persistence_enrolled, persistence_non_enrolled,
-    avg_trx_per_persistent_patient, net_revenue_per_trx,
-    program_cost
-):
-    """
-    Calculate ROI of adherence/support program.
-    """
-    # Incremental persistence
-    persistence_lift = persistence_enrolled - persistence_non_enrolled
-
-    # Incremental TRx from better persistence
-    incremental_persistent_patients = enrolled_patients * persistence_lift
-    incremental_trx = incremental_persistent_patients * avg_trx_per_persistent_patient
-
-    # Revenue and ROI
-    incremental_revenue = incremental_trx * net_revenue_per_trx
-    roi = (incremental_revenue - program_cost) / program_cost
-
-    return {
-        'persistence_lift': round(persistence_lift * 100, 1),
-        'incremental_patients': round(incremental_persistent_patients, 0),
-        'incremental_trx': round(incremental_trx, 0),
-        'incremental_revenue': round(incremental_revenue, 0),
-        'program_cost': program_cost,
-        'roi': round(roi, 1)
-    }
-
-# Example: specialty drug support program
-result = adherence_program_roi(
-    enrolled_patients=5000,
-    non_enrolled_patients=8000,
-    persistence_enrolled=0.65,    # 65% at 12 months
-    persistence_non_enrolled=0.48, # 48% at 12 months
-    avg_trx_per_persistent_patient=10,
-    net_revenue_per_trx=2000,
-    program_cost=3_000_000
-)
-# persistence_lift: 17%, incremental_revenue: $17M, ROI: 4.7x</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Persistence Lift = persistence enrolled  −  persistence non enrolled</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Incremental Persistent Patients = enrolled patients  ×  persistence lift</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Incremental Trx = incremental persistent patients  ×  avg trx per persistent patient</div>
+</div>
 <div class="callout"><div class="callout-title">Selection Bias Caveat</div><p>Patients who enroll in support programs are often more motivated and may have higher persistence regardless of program support. To measure true program impact, use propensity score matching or difference-in-differences methods that control for self-selection bias.</p></div>`},
     {id:"s7",content:`<h2 id="s7">Case Studies</h2>
 <h3>Case 1: Oncology Brand — Using RWE to Defend Formulary Position</h3>
@@ -2040,19 +1634,12 @@ result = adherence_program_roi(
 <p>Web-based surveys are the workhorse of pharma quantitative research. Typical HCP survey: n=150-300 per specialty, 15-20 minute length, $800-2,000 per completed HCP interview (due to high honorarium requirements).</p>
 <h3>Conjoint Analysis</h3>
 <p>Conjoint measures how HCPs or patients trade off between product attributes to make choices. This is the gold standard for understanding what drives treatment selection.</p>
-<pre><code class="language-python"># Choice-Based Conjoint (CBC) analysis
-# HCPs choose between hypothetical product profiles defined by attributes
-
-attributes = {
-    'efficacy': ['20% PFS improvement', '35% PFS improvement', '50% PFS improvement'],
-    'safety': ['Mild AEs only', 'Moderate AEs (manageable)', 'Severe AEs (15% discontinuation)'],
-    'dosing': ['Daily oral', 'Weekly injection', 'Monthly IV infusion'],
-    'cost_to_patient': ['$0 copay', '$50/month', '$200/month'],
-}
-
-# Analysis produces: part-worth utilities for each attribute level
-# Importance weights: which attribute matters most in the decision
-# Simulation: predicted share for any combination of attribute levels</code></pre>
+<div class="flow-box"><div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>Choice-Based Conjoint (CBC) analysis</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>HCPs choose between hypothetical product profiles defined by attributes</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">3</div><div class="rule-step-body"><strong>Analysis produces: part-worth utilities for each attribute level</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">4</div><div class="rule-step-body"><strong>Importance weights: which attribute matters most in the decision</strong></div></div>
+<div class="rule-step"><div class="rule-step-num">5</div><div class="rule-step-body"><strong>Simulation: predicted share for any combination of attribute levels</strong></div></div>
+</div>
 <h3>Max-Diff (Maximum Difference Scaling)</h3>
 <p>Respondents select the "most important" and "least important" item from subsets of a larger list. This produces a ratio-scaled ranking that is more discriminating than simple Likert ratings. Commonly used for: message prioritization, attribute importance ranking, unmet need assessment.</p>
 <div class="callout callout-tip"><div class="callout-title">Stated vs. Revealed Preference</div><p>Surveys capture stated preference (what people say they would do). Claims data captures revealed preference (what they actually do). These often diverge — HCPs may state they prescribe based on efficacy, but claims show formulary status is a stronger predictor. Triangulate both data types for the most accurate picture.</p></div>`},
@@ -2203,11 +1790,10 @@ attributes = {
 <tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top"><strong>Sell-through</strong></td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Units dispensed to patients</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">True patient demand (TRx)</td></tr>
 </tbody></table>
 <p><strong>Critical insight:</strong> During a launch, sell-in exceeds sell-through because of pipeline fill — wholesalers and pharmacies are stocking product for the first time. This creates a revenue "bubble" in Q1 that deflates in Q2 as the channel reaches steady-state inventory. Always track the sell-in/sell-through gap to avoid misinterpreting launch revenue.</p>
-<pre><code class="language-python"># Stocking factor calculation
-stocking_factor = sell_in_units / sell_through_units
-# Steady state: 1.00 - 1.05
-# Launch Q1: 1.10 - 1.30 (pipeline fill)
-# If > 1.20 in steady state: channel may be over-stocked (future destocking risk)</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Stocking Factor = sell in units  ÷  sell through units</div>
+</div>`},
     {id:"s4",content:`<h2 id="s4">Inventory Analytics</h2>
 <p>Inventory analytics ensures optimal stock levels across the supply chain — enough to prevent stockouts but not so much that capital is tied up in excess inventory.</p>
 <h3>Key Inventory Metrics</h3>
@@ -2218,26 +1804,18 @@ stocking_factor = sell_in_units / sell_through_units
 <tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Weeks of Supply (WOS)</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Current inventory / Weekly demand</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">4-6 weeks total channel</td></tr>
 <tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Fill Rate</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Orders fulfilled on time / Total orders</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">>98%</td></tr>
 </tbody></table>
-<pre><code class="language-python">import numpy as np
-
-def calculate_safety_stock(
-    avg_daily_demand, demand_std, lead_time_days, service_level=0.95
-):
-    """
-    Calculate safety stock for a pharmaceutical product.
-    service_level: 0.95 = 95% fill rate, 0.99 = 99%
-    """
-    from scipy.stats import norm
-    z = norm.ppf(service_level)  # 1.65 for 95%, 2.33 for 99%
-
-    safety_stock = z * demand_std * np.sqrt(lead_time_days)
-    reorder_point = (avg_daily_demand * lead_time_days) + safety_stock
-
-    return {
-        'safety_stock_units': round(safety_stock, 0),
-        'safety_stock_days': round(safety_stock / avg_daily_demand, 1),
-        'reorder_point': round(reorder_point, 0)
-    }</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Service Level: 0.95 = 95% fill rate, 0.99 = 99%</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Z = norm.ppf(service level)  # 1.65 for 95%, 2.33 for 99%</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Safety Stock = z  ×  demand std  ×  np.sqrt(lead time days)</div>
+</div>
 <div class="callout callout-tip"><div class="callout-title">Inventory Agreements</div><p>Most manufacturers have Inventory Management Agreements (IMAs) with the Big 3 wholesalers that cap inventory at specific DOH levels (typically 2-4 weeks). These agreements prevent wholesaler speculation (buying ahead of price increases) and smooth demand signals. Track IMA compliance to ensure channel inventory does not distort demand.</p></div>`},
     {id:"s5",content:`<h2 id="s5">Channel Data & Analytics Sources</h2>
 <p>Multiple data sources provide visibility into supply chain dynamics:</p>

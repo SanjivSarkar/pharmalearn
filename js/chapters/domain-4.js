@@ -56,73 +56,21 @@ PL.addChapters({
 </ul>`},
     {id:"s4",content:`<h2 id="s4">Propensity Score Methods</h2>
 <p>The <strong>propensity score</strong> is the probability of receiving treatment given observed covariates — a single summary score that, when balanced between groups, eliminates confounding from all included variables:</p>
-<pre><code class="language-python">from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import StandardScaler
-import pandas as pd, numpy as np
-
-def propensity_score_matching(df, treatment_col, covariates, caliper=0.2):
-    """
-    Propensity score matching for observational study bias reduction.
-
-    df: Patient-level DataFrame
-    treatment_col: Binary treatment indicator (1=treated, 0=control)
-    covariates: List of confounders to balance
-    caliper: Max propensity score difference for valid match (in SD units)
-    """
-    # Step 1: Estimate propensity score
-    X = df[covariates].fillna(df[covariates].median())
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
-    y = df[treatment_col]
-
-    ps_model = LogisticRegression(max_iter=500)
-    ps_model.fit(X_scaled, y)
-    df = df.copy()
-    df['ps_score'] = ps_model.predict_proba(X_scaled)[:, 1]
-    df['logit_ps'] = np.log(df['ps_score'] / (1 - df['ps_score']))
-
-    # Step 2: 1:1 nearest-neighbor matching with caliper
-    treated = df[df[treatment_col] == 1].copy()
-    control = df[df[treatment_col] == 0].copy()
-
-    matches = []
-    used_controls = set()
-
-    for _, t_row in treated.iterrows():
-        # Find controls within caliper (in SD of logit PS)
-        ps_sd = df['logit_ps'].std()
-        eligible = control[
-            (abs(control['logit_ps'] - t_row['logit_ps']) < caliper * ps_sd) &
-            (~control.index.isin(used_controls))
-        ]
-
-        if not eligible.empty:
-            # Select nearest neighbor
-            nearest_idx = (eligible['logit_ps'] - t_row['logit_ps']).abs().idxmin()
-            matches.append((t_row.name, nearest_idx))
-            used_controls.add(nearest_idx)
-
-    matched_idx = [idx for pair in matches for idx in pair]
-    matched_df = df.loc[matched_idx]
-
-    print(f"Matched pairs: {len(matches)} / {len(treated)} treated patients")
-    print(f"Match rate: {len(matches)/len(treated):.1%}")
-
-    return matched_df, pd.DataFrame(matches, columns=['treated_id','control_id'])
-
-def check_balance(df, treatment_col, covariates):
-    """Check standardized mean differences before/after matching."""
-    smd = {}
-    for cov in covariates:
-        mean_t = df[df[treatment_col]==1][cov].mean()
-        mean_c = df[df[treatment_col]==0][cov].mean()
-        pooled_sd = df[cov].std()
-        smd[cov] = abs(mean_t - mean_c) / pooled_sd
-
-    smd_df = pd.DataFrame.from_dict(smd, orient='index', columns=['SMD'])
-    print(f"Max SMD: {smd_df['SMD'].max():.3f} (target <0.10 for good balance)")
-    print(f"Variables with SMD>0.10: {(smd_df['SMD']>0.10).sum()}")
-    return smd_df</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">X = df[covariates].fillna(df[covariates].median())</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Scaler = StandardScaler()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">X Scaled = scaler.fit transform(X)</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>not eligible.empty</td><td># Select nearest neighbor</td></tr>
+</tbody></table>`},
     {id:"s5",content:`<h2 id="s5">FDA RWE Framework</h2>
 <p>The FDA's <strong>Real-World Evidence Framework</strong> (per 21st Century Cures Act) establishes a pathway for using RWE in regulatory decisions:</p>
 <table><thead><tr><th>RWE Use Case</th><th>FDA Regulatory Acceptance</th><th>Evidence Standard</th></tr></thead>
@@ -175,38 +123,18 @@ def check_balance(df, treatment_col, covariates):
 <tr><td>Washout period</td><td>Exclude patients with prior drug use?</td><td>6–12 month pre-index clean period for new user design</td></tr>
 <tr><td>Comparator selection</td><td>Active comparator or no treatment?</td><td>Active comparator preferred — reduces confounding by indication</td></tr>
 </tbody></table>
-<pre><code class="language-python">def build_study_cohort(claims_df, index_drug_ndc, comparator_ndc,
-                        study_start, study_end,
-                        baseline_months=12, followup_months=12):
-    """
-    Build new-user active-comparator retrospective cohort.
-    """
-    # Find first claims for each drug
-    drug_A_first = (claims_df[claims_df['ndc'].isin(index_drug_ndc)]
-                   .groupby('patient_id')['claim_date'].min()
-                   .reset_index().rename(columns={'claim_date':'index_date'}))
-    drug_A_first['cohort'] = 'Drug_A'
-
-    drug_B_first = (claims_df[claims_df['ndc'].isin(comparator_ndc)]
-                   .groupby('patient_id')['claim_date'].min()
-                   .reset_index().rename(columns={'claim_date':'index_date'}))
-    drug_B_first['cohort'] = 'Drug_B'
-
-    cohort = pd.concat([drug_A_first, drug_B_first]).drop_duplicates('patient_id')
-
-    # Apply study period filter
-    cohort = cohort[
-        (cohort['index_date'] >= study_start) &
-        (cohort['index_date'] <= study_end)
-    ]
-
-    # Continuous enrollment requirement: 12 mo pre + 12 mo post (placeholder)
-    cohort['baseline_start'] = cohort['index_date'] - pd.DateOffset(months=baseline_months)
-    cohort['followup_end'] = cohort['index_date'] + pd.DateOffset(months=followup_months)
-
-    print(f"Drug A: {(cohort['cohort']=='Drug_A').sum()} patients")
-    print(f"Drug B: {(cohort['cohort']=='Drug_B').sum()} patients")
-    return cohort</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Baseline Months = 12, followup months=12):</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Drug A First = (claims df[claims df['ndc'].isin(index drug ndc)]</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Drug A First['Cohort'] = 'Drug A'</div>
+</div>`},
     {id:"s2",content:`<h2 id="s2">Burden of Illness Studies</h2>
 <p>A <strong>Burden of Illness (BOI)</strong> study quantifies the economic and humanistic costs of a disease — establishing the "problem" that a new therapy solves. BOI is typically the first HEOR study conducted for a new asset.</p>
 <p>BOI components:</p>
@@ -216,33 +144,18 @@ def check_balance(df, treatment_col, covariates):
 <li><strong>Indirect costs:</strong> Productivity loss, absenteeism, presenteeism, disability</li>
 <li><strong>Humanistic burden:</strong> HRQoL, QALY loss, PRO measures</li>
 </ul>
-<pre><code class="language-python">def calculate_economic_burden(claims_df, diagnosed_patients, control_patients):
-    """
-    Calculate incremental healthcare costs in disease vs. matched controls.
-    Uses a matched-control design: disease patients vs propensity-matched non-disease patients.
-    """
-    def get_costs(patient_ids, period_days=365):
-        pts = claims_df[claims_df['patient_id'].isin(patient_ids)]
-        costs = pts.groupby('patient_id').agg(
-            inpatient_cost=('ip_cost','sum'),
-            outpatient_cost=('op_cost','sum'),
-            rx_cost=('rx_cost','sum'),
-            er_visits=('er_flag','sum'),
-            hospitalizations=('ip_flag','sum')
-        ).reset_index()
-        return costs
-
-    disease_costs = get_costs(diagnosed_patients)
-    control_costs = get_costs(control_patients)
-
-    disease_mean = disease_costs[['inpatient_cost','outpatient_cost','rx_cost']].mean()
-    control_mean = control_costs[['inpatient_cost','outpatient_cost','rx_cost']].mean()
-
-    incremental = disease_mean - control_mean
-    print("Incremental Annual Costs (Disease vs Controls):")
-    print(incremental)
-    print(f"Total Incremental: \${incremental.sum():,.0f}/patient/year")
-    return incremental</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Pts = claims df[claims df['patient id'].isin(patient ids)]</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Costs = pts.groupby('patient id').agg(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Inpatient Cost = ('ip cost','sum'),</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">Patient-Reported Outcomes</h2>
 <p><strong>Patient-Reported Outcomes (PROs)</strong> capture how patients feel and function — increasingly required by both HTA bodies and FDA for labeling claims. Key PRO instruments in pharma:</p>
 <table><thead><tr><th>Instrument</th><th>Condition Area</th><th>Domains</th><th>HTA Acceptance</th></tr></thead>
@@ -308,64 +221,18 @@ def check_balance(df, treatment_col, covariates):
 <div class="callout info"><div class="callout-title">MA Analytics Maturity Model</div><p>Level 1: Activity tracking (calls made, inquiries answered). Level 2: Engagement quality (KOL satisfaction, content relevance). Level 3: Impact measurement (KOL prescribing behavior, publication citations). Level 4: Predictive optimization (ML-based KOL targeting, content personalization). Most MA functions operate at Level 1–2; Level 3–4 is competitive differentiation.</p></div>`},
     {id:"s2",content:`<h2 id="s2">KOL Identification & Mapping</h2>
 <p>Key Opinion Leaders (KOLs) influence prescribing behavior through research, publications, and peer-to-peer communication. A data-driven KOL identification framework:</p>
-<pre><code class="language-python">def identify_kols(publications_df, clinical_trials_df, congress_df,
-                   open_payments_df, claims_df):
-    """
-    Score physicians on KOL dimensions to identify top thought leaders.
-
-    Scoring dimensions (all scored 0-100, then weighted):
-    - Research productivity: Publications, citations, h-index
-    - Clinical trial leadership: PI roles, enrollment numbers
-    - Congress activity: Presentations, abstracts, chair roles
-    - Peer influence: Co-authorship network centrality
-    - Prescriber volume: Claims-based category volume
-    """
-    kol_scores = {}
-
-    # Research score
-    pub_metrics = (publications_df
-                   .groupby('author_npi')
-                   .agg(pub_count=('pmid','count'),
-                        total_citations=('citation_count','sum'),
-                        first_author=('is_first_author','sum'))
-                   .reset_index())
-    pub_metrics['research_score'] = (
-        0.4 * _normalize(pub_metrics['pub_count']) +
-        0.4 * _normalize(pub_metrics['total_citations']) +
-        0.2 * _normalize(pub_metrics['first_author'])
-    ) * 100
-
-    # Trial leadership score
-    trial_metrics = (clinical_trials_df
-                     .groupby('pi_npi')
-                     .agg(trial_count=('nct_id','count'),
-                          enrolled=('enrollment','sum'))
-                     .reset_index())
-    trial_metrics['trial_score'] = (
-        0.5 * _normalize(trial_metrics['trial_count']) +
-        0.5 * _normalize(trial_metrics['enrolled'])
-    ) * 100
-
-    # Congress score
-    congress_metrics = (congress_df
-                        .groupby('speaker_npi')
-                        .agg(presentations=('session_id','count'),
-                             invited=('is_invited','sum'))
-                        .reset_index())
-
-    # Combine with weights
-    combined = pub_metrics.merge(trial_metrics, left_on='author_npi',
-                                  right_on='pi_npi', how='outer')
-    combined['kol_score'] = (
-        0.35 * combined.get('research_score', 0) +
-        0.30 * combined.get('trial_score', 0) +
-        0.35 * combined.get('congress_score', 0)
-    )
-
-    return combined.sort_values('kol_score', ascending=False)
-
-def _normalize(series):
-    return (series - series.min()) / (series.max() - series.min()).clip(lower=0.001)</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Pub Metrics = (publications df</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">.Agg(Pub Count = ('pmid','count'),</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Total Citations = ('citation count','sum'),</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">Medical Inquiry Analytics</h2>
 <p>Medical inquiries (MIs) — unsolicited questions from HCPs about drug safety, efficacy, and use — are a gold mine of scientific intelligence:</p>
 <ul>
@@ -374,38 +241,18 @@ def _normalize(series):
 <li><strong>Off-label intelligence:</strong> Patterns in off-label questions guide evidence generation priorities</li>
 <li><strong>Competitive intelligence:</strong> Questions comparing your drug to a competitor signal prescriber consideration of switching</li>
 </ul>
-<pre><code class="language-python">from collections import Counter
-import re
-
-def analyze_inquiry_patterns(inquiry_df, drug_name, period_months=6):
-    """
-    NLP-based medical inquiry pattern analysis.
-
-    inquiry_df: [inquiry_id, date, hcp_npi, inquiry_text, category]
-    """
-    recent = inquiry_df[
-        inquiry_df['date'] >= pd.Timestamp.now() - pd.DateOffset(months=period_months)
-    ]
-
-    # Topic distribution
-    topic_dist = recent['category'].value_counts(normalize=True) * 100
-    print("Top inquiry topics:")
-    print(topic_dist.head(10))
-
-    # Emerging signals: compare to prior period
-    prior = inquiry_df[
-        (inquiry_df['date'] < pd.Timestamp.now() - pd.DateOffset(months=period_months)) &
-        (inquiry_df['date'] >= pd.Timestamp.now() - pd.DateOffset(months=period_months*2))
-    ]
-
-    for topic in topic_dist.index[:5]:
-        recent_pct = (recent['category'] == topic).mean()
-        prior_pct = (prior['category'] == topic).mean() if len(prior) > 0 else 0
-        change = recent_pct - prior_pct
-        flag = " ⚠️ SIGNAL" if change > 0.05 else ""
-        print(f"{topic}: {recent_pct:.1%} (Δ{change:+.1%}){flag}")
-
-    return topic_dist</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Recent = inquiry df[</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Inquiry Df['Date'] > = pd.Timestamp.now()  −  pd.DateOffset(months=period months)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Topic Dist = recent['category'].value counts(normalize=True)  ×  100</div>
+</div>`},
     {id:"s4",content:`<h2 id="s4">MSL Effectiveness Metrics</h2>
 <p>Measuring MSL impact is challenging because medical scientific exchange cannot be directly correlated to prescribing (regulatory boundary). Instead, proxy metrics capture engagement quality:</p>
 <table><thead><tr><th>Metric Category</th><th>Specific KPI</th><th>Benchmark</th></tr></thead>
@@ -461,103 +308,46 @@ def analyze_inquiry_patterns(inquiry_df, drug_name, period_months=6):
 <p><strong>Steady-state relationship:</strong></p>
 <p style="text-align:center;font-size:1.1em;margin:1rem 0;"><strong>Prevalence ≈ Incidence × Average Disease Duration</strong></p>
 <p>This formula means: a disease with low incidence but long duration (e.g., chronic conditions like MS, HIV) has high prevalence, creating a large market. A disease with high incidence but short duration (acute infections) may have lower prevalence.</p>
-<pre><code class="language-python">def calculate_incidence_prevalence(claims_df, population_size, year):
-    """Calculate epidemiological measures from claims data."""
-    # New cases (incidence): first diagnosis in the year with no prior diagnosis
-    new_cases = (claims_df[
-        (claims_df['first_dx_year'] == year) &
-        (claims_df['has_prior_dx'] == False)
-    ]['patient_id'].nunique())
-
-    # Prevalent cases: any diagnosis in the observation year
-    prevalent_cases = (claims_df[
-        claims_df['dx_year'] == year
-    ]['patient_id'].nunique())
-
-    incidence_rate = new_cases / population_size * 100_000
-    prevalence_rate = prevalent_cases / population_size * 100_000
-
-    return {
-        'year': year,
-        'new_cases': new_cases,
-        'prevalent_cases': prevalent_cases,
-        'incidence_per_100k': round(incidence_rate, 1),
-        'prevalence_per_100k': round(prevalence_rate, 1)
-    }</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">New Cases = (claims df[</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">(Claims Df['First Dx Year'] = = year) &</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">(Claims Df['Has Prior Dx'] = = False)</div>
+</div>`},
     {id:"s2",content:`<h2 id="s2">Survival Analysis</h2>
 <p><strong>Kaplan-Meier (KM)</strong> survival analysis estimates the probability of surviving (or remaining event-free) to each time point, accounting for censored observations (patients who leave the study before experiencing the event).</p>
-<pre><code class="language-python">from lifelines import KaplanMeierFitter
-import matplotlib.pyplot as plt
-
-def plot_km_curves(df, duration_col, event_col, group_col, title="Survival Curves"):
-    """
-    Plot Kaplan-Meier survival curves by group with confidence intervals.
-
-    df: Patient DataFrame
-    duration_col: Time to event or censoring (in months)
-    event_col: Binary (1=event occurred, 0=censored)
-    group_col: Grouping variable (e.g., treatment arm)
-    """
-    kmf = KaplanMeierFitter()
-    fig, ax = plt.subplots(figsize=(10, 6))
-
-    groups = df[group_col].unique()
-    colors = ['#5b8dee', '#e05c8d', '#50c878', '#f5a623']
-
-    for i, group in enumerate(groups):
-        mask = df[group_col] == group
-        kmf.fit(
-            df[mask][duration_col],
-            df[mask][event_col],
-            label=f"{group} (n={mask.sum():,})"
-        )
-        kmf.plot_survival_function(ax=ax, ci_show=True, color=colors[i % len(colors)])
-
-    # Add median survival annotations
-    ax.axhline(0.5, linestyle='--', color='gray', alpha=0.5, label='Median survival')
-    ax.set_xlabel("Time (months)")
-    ax.set_ylabel("Probability of Survival")
-    ax.set_title(title)
-    ax.legend(loc='upper right')
-
-    # At-risk table
-    from lifelines.plotting import add_at_risk_counts
-    add_at_risk_counts(*[KaplanMeierFitter().fit(
-        df[df[group_col]==g][duration_col],
-        df[df[group_col]==g][event_col]) for g in groups], ax=ax)
-
-    plt.tight_layout()
-    return fig, ax</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Event Col: Binary (1 = event occurred, 0=censored)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Kmf = KaplanMeierFitter()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Fig, Ax = plt.subplots(figsize=(10, 6))</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">Cox Proportional Hazards Model</h2>
 <p>The <strong>Cox proportional hazards model</strong> extends KM analysis to adjust for multiple covariates simultaneously, producing hazard ratios (HRs) that quantify the relative risk of the event at any time point:</p>
-<pre><code class="language-python">from lifelines import CoxPHFitter
-import pandas as pd
-
-def cox_regression(df, duration_col, event_col, covariates):
-    """
-    Fit Cox proportional hazards model and interpret hazard ratios.
-
-    HR < 1: Treatment reduces hazard (protective)
-    HR > 1: Treatment increases hazard (harmful)
-    HR = 1: No effect
-    """
-    cox_df = df[[duration_col, event_col] + covariates].dropna()
-
-    cph = CoxPHFitter()
-    cph.fit(cox_df, duration_col=duration_col, event_col=event_col)
-
-    print(cph.print_summary())
-
-    # Extract results
-    results = cph.summary[['exp(coef)', 'exp(coef) lower 95%',
-                            'exp(coef) upper 95%', 'p']].copy()
-    results.columns = ['HR', 'CI_lower', 'CI_upper', 'p_value']
-
-    # Identify significant predictors
-    significant = results[results['p_value'] < 0.05]
-    print(f"\nSignificant predictors (p<0.05): {len(significant)}")
-
-    return cph, results</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Hr = 1: No effect</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Cox Df = df[[duration col, event col]  +  covariates].dropna()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Cph = CoxPHFitter()</div>
+</div>
 <p><strong>Interpreting hazard ratios:</strong></p>
 <ul>
 <li><strong>HR = 0.70:</strong> Treatment reduces the hazard of the event by 30% at any time point</li>
@@ -627,36 +417,18 @@ def cox_regression(df, duration_col, event_col, covariates):
 <li><strong>Timeliness:</strong> Data entered within acceptable time after clinical event</li>
 <li><strong>Representativeness:</strong> Registry population reflects the full target disease population (not just academic centers)</li>
 </ul>
-<pre><code class="language-python">def assess_registry_quality(registry_df, key_variables, site_col='site_id'):
-    """
-    Assess registry data quality across completeness and consistency dimensions.
-    """
-    quality_report = {}
-
-    # Completeness by variable
-    completeness = {
-        var: (registry_df[var].notna().sum() / len(registry_df) * 100)
-        for var in key_variables
-    }
-    quality_report['completeness'] = pd.Series(completeness)
-
-    # Completeness by site (identify low-quality sites)
-    site_completeness = registry_df.groupby(site_col)[key_variables].apply(
-        lambda x: x.notna().mean() * 100
-    )
-    quality_report['site_quality'] = site_completeness.mean(axis=1)
-
-    # Flag poor quality
-    poor_vars = [v for v, c in completeness.items() if c < 90]
-    poor_sites = site_completeness.mean(axis=1)[
-        site_completeness.mean(axis=1) < 80
-    ].index.tolist()
-
-    print(f"Variables below 90% completeness: {poor_vars}")
-    print(f"Sites below 80% completeness: {poor_sites}")
-    print(f"Overall data quality score: {quality_report['completeness'].mean():.1f}%")
-
-    return quality_report</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Quality Report['Completeness'] = pd.Series(completeness)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Site Completeness = registry df.groupby(site col)[key variables].apply(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Quality Report['Site Quality'] = site completeness.mean(axis=1)</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">CDISC Standards</h2>
 <p><strong>CDISC (Clinical Data Interchange Standards Consortium)</strong> standards are required by FDA and EMA for clinical trial data submissions and increasingly adopted for registry data:</p>
 <table><thead><tr><th>Standard</th><th>Full Name</th><th>Application</th></tr></thead>

@@ -52,46 +52,25 @@ PL.addChapters({
 <tr><td><strong>Site-of-Care</strong></td><td>Requires infusion in lower-cost setting (home vs hospital)</td><td>Revenue shift to preferred settings</td><td>Access challenges for high-acuity patients</td></tr>
 </tbody></table>`},
     {id:"s4",content:`<h2 id="s4">Formulary Analytics</h2>
-<pre><code class="language-python">def build_payer_coverage_waterfall(formulary_df, patient_lives_df):
-    """
-    Build payer coverage waterfall showing accessible patient lives.
-
-    formulary_df: DataFrame with [payer, plan_name, formulary_status, tier, pa_required, step_required]
-    patient_lives_df: DataFrame with [payer, plan_name, enrolled_lives]
-    """
-    import pandas as pd
-
-    merged = formulary_df.merge(patient_lives_df, on=['payer','plan_name'])
-
-    # Categorize access quality
-    def access_category(row):
-        if row['formulary_status'] == 'excluded':
-            return 'Excluded'
-        elif row['pa_required'] and row['step_required']:
-            return 'Restricted (PA + Step)'
-        elif row['pa_required'] or row['step_required']:
-            return 'Restricted (PA or Step)'
-        elif row['tier'] in ['specialty','tier3','non-preferred']:
-            return 'Non-Preferred'
-        elif row['tier'] in ['tier2','preferred']:
-            return 'Preferred'
-        else:
-            return 'Tier 1 / Unrestricted'
-
-    merged['access_cat'] = merged.apply(access_category, axis=1)
-
-    waterfall = (merged.groupby('access_cat')['enrolled_lives']
-                       .sum()
-                       .reset_index()
-                       .sort_values('enrolled_lives', ascending=False))
-
-    waterfall['pct_of_total'] = waterfall['enrolled_lives'] / waterfall['enrolled_lives'].sum() * 100
-    waterfall['accessible_pct'] = waterfall.loc[
-        ~waterfall['access_cat'].isin(['Excluded','Restricted (PA + Step)']),
-        'pct_of_total'
-    ].sum()
-
-    return waterfall</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Merged = formulary df.merge(patient lives df, on=['payer','plan name'])</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Merged['Access Cat'] = merged.apply(access category, axis=1)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Waterfall = (merged.groupby('access cat')['enrolled lives']</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>row['formulary status'] = 'excluded'</td><td>return 'Excluded</td></tr>
+<tr><td>elrow['pa required'] and row['step required']</td><td>return 'Restricted (PA + Step)</td></tr>
+<tr><td>elrow['pa required'] or row['step required']</td><td>return 'Restricted (PA or Step)</td></tr>
+<tr><td>elrow['tier'] in ['specialty','tier3','non-preferred']</td><td>return 'Non-Preferred</td></tr>
+<tr><td>elrow['tier'] in ['tier2','preferred']</td><td>return 'Preferred</td></tr>
+</tbody></table>
 <p><strong>Access quality benchmarks by brand stage:</strong></p>
 <ul>
 <li><strong>Preferred unrestricted:</strong> >60% of lives = strong access (new brand target at launch +6 months)</li>
@@ -142,106 +121,54 @@ PL.addChapters({
 </tbody></table>
 <div class="callout warning"><div class="callout-title">The GTN Bubble</div><p>In 2023, the average gross-to-net (GTN) discount across branded drugs was ~52%, meaning manufacturers received only 48 cents per dollar of WAC. For insulin, the Big 3 PBMs' rebate demands drove GTN above 90%, eventually forcing list price reductions. The gap between WAC and net price creates a transparency problem for payers, patients, and policy makers.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Gross-to-Net & Rebate Economics</h2>
-<pre><code class="language-python">def model_gross_to_net(wac_per_unit, volume_units, params):
-    """
-    Model gross-to-net revenue cascade.
-
-    params includes:
-    - gross_to_gross: %WAC (chargebacks, distribution fees, returns)
-    - medicaid_rebate: % of AMP (statutory 23.1% + additional)
-    - commercial_rebate: % of WAC offered to commercial payers
-    - patient_assistance: $ value of copay cards/PAP
-    - other_gtn: misc discounts (340B, GPO, government)
-    """
-    gross_revenue = wac_per_unit * volume_units
-
-    # Gross-to-gross deductions (off-invoice)
-    chargebacks = gross_revenue * params['chargebacks_pct']
-    dist_fees = gross_revenue * params['distribution_fees_pct']
-    returns = gross_revenue * params['returns_pct']
-
-    # Contractual rebates
-    medicaid_rebate = gross_revenue * params['medicaid_volume_pct'] * params['medicaid_rebate_pct']
-    commercial_rebate = gross_revenue * params['commercial_volume_pct'] * params['commercial_rebate_pct']
-    govt_rebate = gross_revenue * params['govt_volume_pct'] * params['govt_rebate_pct']
-
-    # Patient programs
-    copay_cards = params['copay_card_users'] * params['avg_copay_card_value']
-
-    total_deductions = (chargebacks + dist_fees + returns +
-                        medicaid_rebate + commercial_rebate +
-                        govt_rebate + copay_cards)
-
-    net_revenue = gross_revenue - total_deductions
-    gtn_pct = total_deductions / gross_revenue * 100
-
-    return {
-        'gross_revenue_M': gross_revenue / 1e6,
-        'total_deductions_M': total_deductions / 1e6,
-        'net_revenue_M': net_revenue / 1e6,
-        'gtn_discount_pct': gtn_pct,
-        'net_price_per_unit': net_revenue / volume_units
-    }</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Gross Revenue = wac per unit  ×  volume units</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Chargebacks = gross revenue  ×  params['chargebacks pct']</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Dist Fees = gross revenue  ×  params['distribution fees pct']</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">Value-Based Pricing & ICER</h2>
 <p><strong>ICER (Institute for Clinical and Economic Review)</strong> publishes evidence reports that assess whether a drug's price is aligned with its clinical value. ICER calculates a cost-effectiveness threshold and derives a "value-based price benchmark."</p>
 <p>The core metric is the <strong>Incremental Cost-Effectiveness Ratio (ICER):</strong></p>
 <p style="text-align:center;font-size:1.1em;margin:1rem 0;"><strong>ICER = ΔCost / ΔQALY</strong></p>
 <p>Where QALY = Quality-Adjusted Life Year (1.0 = perfect health for 1 year)</p>
 <p>US threshold commonly used: $100,000–$150,000 per QALY (UK NICE: £20,000–£30,000)</p>
-<pre><code class="language-python">def calculate_icer(incremental_cost, incremental_qaly, threshold=150000):
-    """
-    Calculate ICER and value-based price recommendation.
-
-    incremental_cost: Difference in total healthcare cost (drug + admin + downstream)
-    incremental_qaly: Difference in QALYs vs. comparator
-    threshold: Willingness-to-pay threshold per QALY
-    """
-    if incremental_qaly <= 0:
-        return {'icer': float('inf'), 'verdict': 'Dominated — not cost-effective'}
-
-    icer = incremental_cost / incremental_qaly
-
-    # Value-based price: solve for drug cost where ICER = threshold
-    # Simplification: assume other costs unchanged
-    value_based_annual_cost = threshold * incremental_qaly
-
-    return {
-        'icer': round(icer),
-        'icer_formatted': f"\${icer:,.0f} per QALY",
-        'threshold': threshold,
-        'verdict': 'Cost-effective' if icer <= threshold else 'Exceeds threshold',
-        'value_based_annual_cost': round(value_based_annual_cost),
-        'premium_to_threshold': round((icer - threshold) / threshold * 100, 1)
-    }</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Icer = incremental cost  ÷  incremental qaly</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Value Based Annual Cost = threshold  ×  incremental qaly</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">'Verdict': 'Cost-Effective' If Icer < = threshold else 'Exceeds threshold',</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>incremental qaly ≤ 0</td><td>return {'icer': float('inf'), 'verdict': 'Dominated — not cost-effective'}</td></tr>
+</tbody></table>
 <div class="callout info"><div class="callout-title">ICER's Commercial Impact</div><p>Although ICER has no regulatory authority, its reports are used by PBMs and payers to justify formulary exclusions and negotiate lower net prices. A negative ICER report can cost a brand 10–20% in rebate demands. Engaging ICER's review process early with real-world evidence is now a core market access strategy.</p></div>`},
     {id:"s4",content:`<h2 id="s4">Price Elasticity Analytics</h2>
 <p><strong>Price elasticity of demand (PED)</strong> measures how volume changes in response to price changes. Pharmaceutical demand is generally inelastic (|PED| < 1) because patients need medication regardless of price — but patient cost-sharing can make adherence highly elastic.</p>
-<pre><code class="language-python">def estimate_price_elasticity(price_volume_history):
-    """
-    Estimate price elasticity from historical price-volume data.
-
-    PED = (% change in quantity) / (% change in price)
-    |PED| < 1: Inelastic (price increase = revenue increase)
-    |PED| > 1: Elastic (price increase = revenue decrease)
-    """
-    df = price_volume_history.sort_values('date')
-    df['pct_price_change'] = df['net_price'].pct_change()
-    df['pct_volume_change'] = df['rx_volume'].pct_change()
-
-    # Remove periods with no price change (division by zero)
-    df_filtered = df[df['pct_price_change'].abs() > 0.01].copy()
-    df_filtered['ped'] = df_filtered['pct_volume_change'] / df_filtered['pct_price_change']
-
-    avg_ped = df_filtered['ped'].median()
-
-    # Revenue optimization: find price that maximizes revenue
-    # For a log-log demand curve: Q = A × P^ped
-    # Revenue maximizing price: MR = 0 when PED = -1
-    print(f"Average PED: {avg_ped:.2f}")
-    print(f"Demand is {'inelastic' if abs(avg_ped) < 1 else 'elastic'}")
-    print(f"Price increase → revenue {'increase' if abs(avg_ped) < 1 else 'decrease'}")
-
-    return df_filtered[['date','net_price','rx_volume','ped']]</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Ped = (% change in quantity)  ÷  (% change in price)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">|Ped| < 1: Inelastic (Price Increase = revenue increase)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">|Ped| > 1: Elastic (Price Increase = revenue decrease)</div>
+</div>`},
     {id:"s5",content:`<h2 id="s5">IRA Impact & Implications</h2>
 <p>The <strong>Inflation Reduction Act (IRA) of 2022</strong> introduced the most significant US drug pricing reform in two decades:</p>
 <table><thead><tr><th>IRA Provision</th><th>Detail</th><th>Commercial Impact</th></tr></thead>
@@ -469,72 +396,32 @@ PL.addChapters({
 <li>Patient cost-sharing still high despite preferred tier</li>
 </ul>`},
     {id:"s2",content:`<h2 id="s2">Access Quality Scoring</h2>
-<pre><code class="language-python">def calculate_access_quality_score(formulary_df, payer_weights):
-    """
-    Score each payer plan's quality of access for a brand.
-
-    formulary_df: [payer, plan, tier, pa_required, step_required, quantity_limits, enrolled_lives]
-    payer_weights: {payer_name: strategic_importance_weight}
-    """
-    df = formulary_df.copy()
-
-    # Tier score (4 = best, 0 = excluded)
-    tier_map = {'tier1': 4, 'preferred': 4, 'tier2': 3,
-                'non-preferred': 2, 'tier3': 2, 'specialty': 2,
-                'excluded': 0, 'not_covered': 0}
-    df['tier_score'] = df['tier'].map(tier_map).fillna(1)
-
-    # Restriction penalties
-    df['pa_penalty'] = df['pa_required'].map({True: -1.0, False: 0})
-    df['step_penalty'] = df['step_required'].map({True: -1.5, False: 0})
-    df['ql_penalty'] = df['quantity_limit'].map({True: -0.5, False: 0})
-
-    # Raw access score (0-4 scale)
-    df['raw_score'] = (df['tier_score'] +
-                       df['pa_penalty'] +
-                       df['step_penalty'] +
-                       df['ql_penalty']).clip(lower=0)
-
-    # Weight by lives and strategic importance
-    df['payer_weight'] = df['payer'].map(payer_weights).fillna(1.0)
-    df['weighted_score'] = df['raw_score'] * df['enrolled_lives'] * df['payer_weight']
-
-    total_lives = (df['enrolled_lives'] * df['payer_weight']).sum()
-    composite_score = df['weighted_score'].sum() / total_lives
-
-    # Convert to 0-100
-    df['access_quality_pct'] = df['raw_score'] / 4 * 100
-    brand_access_score = composite_score / 4 * 100
-
-    print(f"Brand Access Quality Score: {brand_access_score:.1f}/100")
-    return df, round(brand_access_score, 1)</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Df = formulary df.copy()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Df['Tier Score'] = df['tier'].map(tier map).fillna(1)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Df['Pa Penalty'] = df['pa required'].map({True:  − 1.0, False: 0})</div>
+</div>`},
     {id:"s3",content:`<h2 id="s3">Identifying Pull-Through Gaps</h2>
 <p>Pull-through gaps are identified by comparing actual Rx share to expected share given the access quality in each market segment:</p>
-<pre><code class="language-python">def identify_pullthrough_gaps(rx_df, access_df, geography_level='territory'):
-    """
-    Identify territories where Rx performance underperforms vs. access quality.
-
-    A territory with high access quality score but low Rx share has a pull-through gap
-    requiring field action.
-    """
-    merged = rx_df.merge(access_df, on=geography_level)
-
-    # Expected Rx share based on access quality (regression-based relationship)
-    from sklearn.linear_model import LinearRegression
-    model = LinearRegression()
-    model.fit(merged[['access_quality_score']], merged['brand_rx_share'])
-    merged['expected_rx_share'] = model.predict(merged[['access_quality_score']])
-
-    merged['pullthrough_gap'] = merged['brand_rx_share'] - merged['expected_rx_share']
-    merged['gap_type'] = merged['pullthrough_gap'].apply(
-        lambda x: 'Underperforming' if x < -0.03 else ('Overperforming' if x > 0.03 else 'On Track')
-    )
-
-    gaps = merged[merged['gap_type'] == 'Underperforming'].sort_values('pullthrough_gap')
-    print(f"Territories with pull-through gaps: {len(gaps)}")
-    print(f"Average gap size: {gaps['pullthrough_gap'].mean():.1%}")
-
-    return merged, gaps</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Merged = rx df.merge(access df, on=geography level)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Model = LinearRegression()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Merged['Expected Rx Share'] = model.predict(merged[['access quality score']])</div>
+</div>`},
     {id:"s4",content:`<h2 id="s4">Field Pull-Through Action Plans</h2>
 <p>Pull-through action plans translate access intelligence into field activities:</p>
 <table><thead><tr><th>Gap Type</th><th>Root Cause</th><th>Field Action</th><th>Measure</th></tr></thead>
@@ -596,85 +483,33 @@ PL.addChapters({
 </tbody></table>`},
     {id:"s2",content:`<h2 id="s2">Cost-Effectiveness Modeling</h2>
 <p><strong>Markov models</strong> are the most common structure for chronic disease cost-effectiveness analysis. Patients transition between health states over time, accumulating costs and QALYs:</p>
-<pre><code class="language-python">import numpy as np
-import pandas as pd
-
-def markov_cea(states, transition_matrix, costs, utilities,
-               cycle_length_years=1, n_cycles=10, discount_rate=0.035):
-    """
-    Simple Markov cost-effectiveness model.
-
-    states: List of health state names (last = 'Dead')
-    transition_matrix: n×n probability matrix (rows must sum to 1)
-    costs: Annual cost per state (drug + medical management)
-    utilities: Quality-of-life weight per state (0=dead, 1=perfect health)
-    """
-    n_states = len(states)
-    cohort = np.zeros(n_states)
-    cohort[0] = 1.0  # Start in first (best) health state
-
-    total_cost = 0
-    total_qaly = 0
-
-    for cycle in range(n_cycles):
-        discount = 1 / (1 + discount_rate) ** cycle
-
-        # Costs and QALYs in this cycle
-        cycle_cost = np.dot(cohort, costs) * cycle_length_years * discount
-        cycle_qaly = np.dot(cohort, utilities) * cycle_length_years * discount
-
-        total_cost += cycle_cost
-        total_qaly += cycle_qaly
-
-        # Transition to next cycle
-        cohort = cohort @ transition_matrix
-
-    return {'total_cost': total_cost, 'total_qaly': total_qaly}
-
-def calculate_icer_markov(drug_results, comparator_results):
-    """Calculate ICER from two Markov model results."""
-    delta_cost = drug_results['total_cost'] - comparator_results['total_cost']
-    delta_qaly = drug_results['total_qaly'] - comparator_results['total_qaly']
-    icer = delta_cost / delta_qaly if delta_qaly != 0 else float('inf')
-    return {'delta_cost': delta_cost, 'delta_qaly': delta_qaly, 'icer': icer}</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Cycle Length Years = 1, n cycles=10, discount rate=0.035):</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">N States = len(states)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Cohort = np.zeros(n states)</div>
+</div>
 <div class="callout info"><div class="callout-title">Uncertainty Analysis</div><p>Every HEOR model requires a Probabilistic Sensitivity Analysis (PSA) — Monte Carlo simulation across thousands of parameter draws to characterize the distribution of ICER outcomes. HTA bodies reject models without PSA. The result is a cost-effectiveness acceptability curve (CEAC) showing the probability of being cost-effective at each WTP threshold.</p></div>`},
     {id:"s3",content:`<h2 id="s3">Budget Impact Analysis</h2>
 <p>While cost-effectiveness addresses value per QALY, <strong>Budget Impact Analysis (BIA)</strong> answers the affordability question: what does it cost a payer to add this drug to their formulary over 1–3 years?</p>
-<pre><code class="language-python">def budget_impact_analysis(payer_pop, params, years=3):
-    """
-    Estimate budget impact of formulary adoption for a payer.
-
-    params: {
-        'prevalence_rate': float,      # Condition rate in payer population
-        'treated_rate': float,         # % who receive drug therapy
-        'market_share_new': list,      # Projected brand share by year
-        'market_share_current': list,  # Current brand share (counterfactual)
-        'brand_annual_cost': float,    # Net drug cost per patient per year
-        'displaced_drug_cost': float,  # Cost of drug being displaced
-        'offset_savings': float        # Medical cost savings per patient
-    }
-    """
-    results = []
-    eligible_patients = payer_pop * params['prevalence_rate'] * params['treated_rate']
-
-    for yr in range(years):
-        new_patients = eligible_patients * params['market_share_new'][yr]
-        current_patients = eligible_patients * params['market_share_current'][yr]
-        incremental_patients = new_patients - current_patients
-
-        drug_cost_increase = incremental_patients * params['brand_annual_cost']
-        displaced_savings = incremental_patients * params['displaced_drug_cost']
-        medical_offset = incremental_patients * params['offset_savings']
-
-        net_budget_impact = drug_cost_increase - displaced_savings - medical_offset
-
-        results.append({
-            'year': yr + 1,
-            'incremental_patients': round(incremental_patients),
-            'net_budget_impact_M': round(net_budget_impact / 1e6, 2)
-        })
-
-    return pd.DataFrame(results)</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Eligible Patients = payer pop  ×  params['prevalence rate']  ×  params['treated rate']</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">New Patients = eligible patients  ×  params['market share new'][yr]</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Current Patients = eligible patients  ×  params['market share current'][yr]</div>
+</div>
 <p><strong>BIA threshold guidance:</strong> US payers typically flag budget impact > $500 per member per year (PMPY) for additional scrutiny. Budget impact > $2M/year for a plan with 1M members often triggers outcomes-based contracting requirements.</p>`},
     {id:"s4",content:`<h2 id="s4">Value Dossier Architecture</h2>
 <p>A <strong>Value Dossier</strong> (also called a payer value dossier or payer evidence package) is a comprehensive document that consolidates all clinical, economic, and humanistic evidence for HCP and payer audiences.</p>
@@ -758,51 +593,24 @@ def calculate_icer_markov(drug_results, comparator_results):
 <div class="callout warning"><div class="callout-title">Medicaid Best Price & VBCs</div><p>A long-standing barrier to VBCs was that Medicaid Best Price (used to calculate mandatory rebates) had to be reported as a single number — a performance-based rebate that sometimes resulted in $0 net price would set best price at $0, triggering catastrophic Medicaid liability for all units. CMS finalized a rule in 2022 allowing manufacturers to report multiple best prices (one per VBC tier), removing this barrier for compliant VBCs.</p></div>`},
     {id:"s4",content:`<h2 id="s4">Implementation: Data, Attribution & Adjudication</h2>
 <p>VBC implementation requires building a data infrastructure that most manufacturers and payers do not have in standard operations:</p>
-<pre><code class="language-python">class VBCOutcomeTracker:
-    """
-    Track patients enrolled in a value-based contract
-    and flag outcome events for rebate adjudication.
-    """
-    def __init__(self, contract_id, outcome_definition, measurement_window_days):
-        self.contract_id = contract_id
-        self.outcome_definition = outcome_definition  # dict: ICD/CPT codes
-        self.window = measurement_window_days
-
-    def enroll_patient(self, patient_id, drug_start_date, payer_id):
-        """Register patient in VBC cohort on drug initiation."""
-        return {
-            'patient_id': patient_id,
-            'contract_id': self.contract_id,
-            'enrollment_date': drug_start_date,
-            'measurement_end_date': drug_start_date + self.window,
-            'payer_id': payer_id,
-            'outcome_status': 'PENDING',
-            'adjudication_date': None
-        }
-
-    def check_outcome(self, patient_id, claims_data, lab_data=None):
-        """
-        Evaluate outcome for enrolled patient.
-        Returns: 'RESPONDER', 'NON_RESPONDER', or 'INSUFFICIENT_DATA'
-        """
-        patient_claims = claims_data[claims_data['patient_id'] == patient_id]
-
-        # Check for outcome event (e.g., hospitalization for heart failure)
-        outcome_events = patient_claims[
-            patient_claims['icd10'].isin(self.outcome_definition['failure_codes'])
-        ]
-
-        if len(outcome_events) > 0:
-            return 'NON_RESPONDER'  # Rebate triggered
-        elif lab_data is not None:
-            lab = lab_data[lab_data['patient_id'] == patient_id]
-            if len(lab) == 0:
-                return 'INSUFFICIENT_DATA'  # Excluded from adjudication
-            latest = lab.sort_values('test_date').iloc[-1]
-            threshold = self.outcome_definition.get('lab_threshold')
-            if threshold and latest['result'] > threshold:
-                return 'NON_RESPONDER'
-        return 'RESPONDER'</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Self.Contract Id = contract id</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Self.Outcome Definition = outcome definition  # dict: ICD ÷ CPT codes</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Self.Window = measurement window days</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>len(outcome events) &gt; 0</td><td>return 'NON RESPONDER'  # Rebate triggered</td></tr>
+<tr><td>ellab data is not None</td><td>lab = lab data[lab data['patient id'] == patient id]</td></tr>
+<tr><td>len(lab) = 0</td><td>return 'INSUFFICIENT DATA'  # Excluded from adjudication</td></tr>
+<tr><td>threshold and latest['result'] &gt; threshold</td><td>return 'NON RESPONDER</td></tr>
+</tbody></table>
 <p>Key adjudication challenges:</p>
 <table><thead><tr><th>Challenge</th><th>Impact</th><th>Mitigation</th></tr></thead>
 <tbody>
@@ -905,45 +713,22 @@ def calculate_icer_markov(drug_results, comparator_results):
 <tr><td>Diagnosis confirmation</td><td>Approved indication required</td><td>Prescription, diagnosis codes</td></tr>
 </tbody></table>
 <p>PAP analytics — measuring program reach and gaps:</p>
-<pre><code class="language-sql">-- PAP program analytics: identify uninsured patients not enrolled
-SELECT
-  p.patient_id,
-  p.state,
-  p.age,
-  p.diagnosis_code,
-  p.insurance_type,
-  CASE WHEN pap.patient_id IS NOT NULL THEN 'Enrolled'
-       ELSE 'Eligible but NOT Enrolled' END AS pap_status,
-  pap.enrollment_date,
-  pap.drug_shipped_date
-FROM patient_registry p
-LEFT JOIN pap_enrollment pap ON p.patient_id = pap.patient_id
-WHERE p.insurance_type IN ('Uninsured','Underinsured')
-  AND p.diagnosis_code LIKE 'C9%'  -- Oncology diagnoses
-ORDER BY p.enrollment_date DESC;</code></pre>
+<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
 <div class="callout info"><div class="callout-title">Bridge Programs</div><p>Bridge programs provide free drug for a defined short period (30-90 days) while insurance coverage is being established or while a PAP application is pending. They prevent treatment gaps for patients who have been prescribed the drug but face a coverage delay. Bridge programs are tracked separately from PAP and from commercial copay programs in GTN accounting.</p></div>`},
     {id:"s4",content:`<h2 id="s4">Hub Services & Case Management</h2>
 <p>A <strong>hub</strong> is a centralized patient support service organization (often third-party) that coordinates benefits investigation, prior authorization support, copay enrollment, SP referral, and ongoing adherence support for specialty patients.</p>
 <p>Hub workflow for a new specialty prescription:</p>
-<pre><code class="language-plaintext">HCP writes Rx
-    ↓
-Hub receives e-prescription or fax
-    ↓
-Benefits Investigation (BI): verify insurance, formulary status, PA requirements
-    (Completed in 24-48 hours)
-    ↓
-If PA required:
-    Hub completes PA paperwork → submits to payer → tracks approval
-    If denied → coordinates peer-to-peer appeal with HCP
-    ↓
-If approved → coordinate specialty pharmacy fulfillment
-    ↓
-Patient support call:
-    - Explain treatment, side effects to expect
-    - Enroll in copay card
-    - Schedule adherence check-in calls
-    ↓
-Ongoing: refill coordination, adherence monitoring, adverse event reporting</code></pre>
+<div class="flow-box">
+<div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>HCP Writes Prescription</strong><p>Physician writes Rx for specialty drug; sent electronically or via fax to the Hub</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>Hub Receives &amp; Verifies</strong><p>Benefits Investigation (BI) team checks insurance coverage and determines patient out-of-pocket cost</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">3</div><div class="rule-step-body"><strong>Prior Authorization (PA)</strong><p>Hub submits PA documentation to payer; turnaround 24–72 hrs for standard, 4–8 hrs for urgent</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">4</div><div class="rule-step-body"><strong>Patient Financial Support</strong><p>If copay &gt; threshold, patient is enrolled in copay assistance or PAP (Patient Assistance Program)</p></div></div>
+<div class="flow-arrow">↓</div>
+<div class="rule-step"><div class="rule-step-num">5</div><div class="rule-step-body"><strong>Specialty Pharmacy Dispenses</strong><p>Drug shipped to patient home or clinic; tracking and adherence outreach begins</p></div></div>
+</div>
 <table><thead><tr><th>Hub KPI</th><th>Definition</th><th>Best-in-Class Target</th></tr></thead>
 <tbody>
 <tr><td>Time to first fill (TTFF)</td><td>Days from Rx to patient receiving drug</td><td>&lt;7 days</td></tr>
@@ -979,33 +764,18 @@ Ongoing: refill coordination, adherence monitoring, adverse event reporting</cod
 <tr><td>Program cost per patient year</td><td>Total PSP spend / Active patients on therapy</td><td>Budget sizing; compare vs. Rx revenue</td></tr>
 <tr><td>Abandonment recovery rate</td><td>Patients who abandoned and restarted / Total abandoned</td><td>Re-engagement program effectiveness</td></tr>
 </tbody></table>
-<pre><code class="language-python">def psp_roi_analysis(psp_cohort_rx, control_cohort_rx,
-                     psp_cost_per_patient, net_revenue_per_rx):
-    """
-    Compare Rx persistence between PSP-enrolled and control patients.
-    Calculate ROI on PSP investment.
-    """
-    # Incremental Rx attributable to PSP
-    incremental_rx = psp_cohort_rx - control_cohort_rx
-
-    # Revenue generated by incremental persistence
-    incremental_revenue = incremental_rx * net_revenue_per_rx
-
-    # ROI
-    roi = (incremental_revenue - psp_cost_per_patient) / psp_cost_per_patient
-
-    return {
-        'incremental_rx': incremental_rx,
-        'incremental_net_revenue': incremental_revenue,
-        'psp_cost': psp_cost_per_patient,
-        'roi': f"{roi:.1%}",
-        'break_even_rx': psp_cost_per_patient / net_revenue_per_rx
-    }
-
-# Example: PSP patients average 9.2 fills/year vs. 6.8 for non-PSP; PSP costs $800/patient
-result = psp_roi_analysis(9.2, 6.8, 800, 4200)  # $4,200 net revenue per Rx
-print(result)
-# incremental_rx=2.4, incremental_net_revenue=$10,080, roi=1160%</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Incremental Rx = psp cohort rx  −  control cohort rx</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Incremental Revenue = incremental rx  ×  net revenue per rx</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Roi = (incremental revenue  −  psp cost per patient)  ÷  psp cost per patient</div>
+</div>`},
     {id:"s7",content:`<h2 id="s7">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>35-55% of new specialty prescriptions are abandoned before first dose — patient support programs address the specific barriers (cost, PA, coordination) that drive each abandonment type.</div></div>
 <div class="takeaway"><div class="takeaway-num">2</div><div>Copay cards are restricted to commercially insured patients — providing copay assistance to Medicare/Medicaid patients violates the Anti-Kickback Statute and is a federal OIG enforcement priority.</div></div>
@@ -1061,60 +831,24 @@ print(result)
 <li>Currency exchange rate changes affecting EUR-denominated prices</li>
 <li>Generic or biosimilar entry in reference country (price drop → IRP trigger)</li>
 </ul>
-<pre><code class="language-python">import pandas as pd
-
-class IRPSimulator:
-    """Simulate IRP cascade across reference markets."""
-
-    def __init__(self, reference_map):
-        """
-        reference_map: dict of {country: [list of countries it references]}
-        """
-        self.reference_map = reference_map
-
-    def simulate_cascade(self, price_changes: dict, current_prices: dict):
-        """
-        Given price changes in some countries, calculate cascading IRP impacts.
-        """
-        updated_prices = current_prices.copy()
-
-        # Apply announced price changes
-        for country, new_price in price_changes.items():
-            updated_prices[country] = new_price
-
-        # Recalculate IRP for countries that reference changed countries
-        changed = True
-        iterations = 0
-        while changed and iterations < 20:
-            changed = False
-            iterations += 1
-            for country, references in self.reference_map.items():
-                if not references:
-                    continue
-                ref_prices = [updated_prices.get(r) for r in references
-                              if updated_prices.get(r) is not None]
-                if not ref_prices:
-                    continue
-                # Country takes minimum (most restrictive common rule)
-                irp_ceiling = min(ref_prices)
-                if updated_prices.get(country, float('inf')) > irp_ceiling:
-                    updated_prices[country] = irp_ceiling
-                    changed = True
-
-        return updated_prices
-
-# Example: France references Germany, UK, Italy
-ref_map = {
-    'France': ['Germany', 'UK', 'Italy'],
-    'Spain': ['Germany', 'France', 'UK'],
-    'Italy': ['Germany', 'France', 'UK'],
-    'Poland': ['Germany', 'France', 'UK', 'Italy'],
-}
-current = {'Germany': 1000, 'UK': 900, 'Italy': 850, 'France': 920, 'Spain': 880, 'Poland': 750}
-changes = {'UK': 750}  # UK negotiates 750
-sim = IRPSimulator(ref_map)
-result = sim.simulate_cascade(changes, current)
-print(result)</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Self.Reference Map = reference map</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Updated Prices = current prices.copy()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Updated Prices[Country] = new price</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>not references</td><td>continue</td></tr>
+<tr><td>updated prices.get(r) is not None]</td><td>if not ref prices:</td></tr>
+<tr><td>not ref prices</td><td>continue</td></tr>
+<tr><td>updated prices.get(country, float('inf')) &gt; irp ceiling</td><td>updated prices[country] = irp ceiling</td></tr>
+</tbody></table>`},
     {id:"s3",content:`<h2 id="s3">Launch Sequence Strategy</h2>
 <p>Since IRP cascades from low-price launches to high-price markets, the optimal global launch sequence launches high-price markets first and low-price markets last — or delays low-price markets until the drug is off-patent in major markets.</p>
 <table><thead><tr><th>Tier</th><th>Markets</th><th>Typical Price Level</th><th>Launch Timing Recommendation</th></tr></thead>
@@ -1144,43 +878,18 @@ print(result)</code></pre>`},
 </tbody></table>`},
     {id:"s5",content:`<h2 id="s5">Price Corridor Management</h2>
 <p>A <strong>price corridor</strong> is the acceptable range between the highest and lowest net prices across markets — narrow enough to limit IRP cascade risk while allowing market-specific access optimization.</p>
-<pre><code class="language-python">import numpy as np
-import pandas as pd
-
-def price_corridor_analysis(market_prices: dict, acceptable_corridor_pct: float = 0.30):
-    """
-    Analyze global price corridor and flag markets outside corridor.
-    acceptable_corridor_pct: max acceptable price variation (e.g., 0.30 = 30% below max)
-    """
-    prices_df = pd.DataFrame([
-        {'market': k, 'list_price': v['list'], 'net_price': v['net'],
-         'irp_sensitivity': v.get('irp_sensitivity', 'medium')}
-        for k, v in market_prices.items()
-    ])
-
-    # Calculate corridor based on net prices (what IRP countries typically reference)
-    max_net = prices_df['net_price'].max()
-    corridor_floor = max_net * (1 - acceptable_corridor_pct)
-
-    prices_df['in_corridor'] = prices_df['net_price'] >= corridor_floor
-    prices_df['pct_below_max'] = (max_net - prices_df['net_price']) / max_net * 100
-    prices_df['irp_risk'] = prices_df.apply(
-        lambda r: 'HIGH' if not r['in_corridor'] and r['irp_sensitivity'] == 'high'
-                  else 'MEDIUM' if not r['in_corridor']
-                  else 'LOW', axis=1
-    )
-
-    return prices_df.sort_values('net_price', ascending=False)
-
-# Example markets
-markets = {
-    'USA': {'list': 8000, 'net': 5200, 'irp_sensitivity': 'low'},
-    'Germany': {'list': 4500, 'net': 4200, 'irp_sensitivity': 'high'},
-    'France': {'list': 3800, 'net': 3500, 'irp_sensitivity': 'high'},
-    'Italy': {'list': 3200, 'net': 2900, 'irp_sensitivity': 'high'},
-    'Poland': {'list': 1800, 'net': 1600, 'irp_sensitivity': 'medium'},
-}
-print(price_corridor_analysis(markets))</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Prices Df = pd.DataFrame([</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Max Net = prices df['net price'].max()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Corridor Floor = max net  ×  (1  −  acceptable corridor pct)</div>
+</div>`},
     {id:"s6",content:`<h2 id="s6">IRA & Global Pricing Cascade</h2>
 <p>The Inflation Reduction Act (2022) created the first US government drug price negotiation — and introduced a new IRP risk vector. When Medicare negotiates a Maximum Fair Price (MFP) for a drug, other countries may use the US MFP as a reference anchor, arguing "if even the US negotiated that price, we should pay no more."</p>
 <table><thead><tr><th>Risk Scenario</th><th>Probability</th><th>Manufacturer Response</th></tr></thead>
@@ -1277,34 +986,21 @@ print(price_corridor_analysis(markets))</code></pre>`},
 <tr><td>Population targeting</td><td>Maximize Medicare penetration</td><td>Consider whether Medicare exposure triggers IRA selection risk; in rare disease, small N may avoid selection</td></tr>
 <tr><td>Portfolio mix</td><td>Small molecules and biologics both viable</td><td>Biologic route preferred for Medicare-exposed chronic diseases; small molecule advantage only where biologic approach impractical</td></tr>
 </tbody></table>
-<pre><code class="language-python">def ira_impact_model(drug_params):
-    """
-    Model IRA financial impact on drug NPV.
-    """
-    p = drug_params
-    annual_revenue = []
-    ira_eligible_year = 7 if p['modality'] == 'small_molecule' else 11
-
-    for year in range(1, p['patent_cliff_year'] + 1):
-        gross_rev = p['peak_sales'] * p['ramp_curve'][min(year-1, len(p['ramp_curve'])-1)]
-        medicare_rev = gross_rev * p['medicare_share']
-        commercial_rev = gross_rev * (1 - p['medicare_share'])
-
-        if year >= ira_eligible_year and p['ira_selected']:
-            # Apply MFP discount to Medicare revenue
-            mfp_discount = 0.40 if year >= 16 else 0.35 if year >= 12 else 0.25
-            medicare_rev_post_ira = medicare_rev * (1 - mfp_discount)
-        else:
-            medicare_rev_post_ira = medicare_rev
-
-        annual_revenue.append({
-            'year': year,
-            'medicare_revenue': medicare_rev_post_ira,
-            'commercial_revenue': commercial_rev,
-            'total_revenue': medicare_rev_post_ira + commercial_rev
-        })
-
-    return annual_revenue</code></pre>`},
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">P = drug params</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Ira Eligible Year = 7 if p['modality'] == 'small molecule' else 11</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Gross Rev = p['peak sales']  ×  p['ramp curve'][min(year − 1, len(p['ramp curve']) − 1)]</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>year ≥ ira eligible year and p['ira selected']</td><td># Apply MFP discount to Medicare revenue</td></tr>
+</tbody></table>`},
     {id:"s5",content:`<h2 id="s5">Portfolio & Lifecycle Implications</h2>
 <p>The IRA is reshaping pharmaceutical R&D portfolio strategy in ways that will compound over the next decade:</p>
 <table><thead><tr><th>Portfolio Decision</th><th>Pre-IRA Logic</strong></th><th>Post-IRA Logic</th></tr></thead>

@@ -65,31 +65,21 @@ PL.addChapters({
 
 <h3>The Transformer Architecture</h3>
 <p>Every major LLM is built on the transformer (Vaswani et al., 2017). Its core innovation: <strong>self-attention</strong>, which allows each token to attend to every other token in the sequence simultaneously — no sequential processing bottleneck.</p>
-<pre><code class="language-python">import torch
-import torch.nn.functional as F
-
-def scaled_dot_product_attention(Q, K, V, mask=None):
-    """
-    Core attention computation.
-    Q, K, V: Query, Key, Value matrices (batch, heads, seq_len, d_k)
-
-    Intuition:
-    - Q: "What am I looking for?"
-    - K: "What do I contain?"
-    - V: "What do I pass forward if selected?"
-    - Score = similarity between Q and each K
-    - Softmax normalizes scores to attention weights
-    - Output = weighted sum of V
-    """
-    d_k = Q.shape[-1]  # dimension of keys
-    scores = torch.matmul(Q, K.transpose(-2, -1)) / (d_k ** 0.5)  # scaled dot product
-
-    if mask is not None:
-        scores = scores.masked_fill(mask == 0, float('-inf'))
-
-    attention_weights = F.softmax(scores, dim=-1)  # normalize across sequence positions
-    output = torch.matmul(attention_weights, V)    # weighted sum of values
-    return output, attention_weights</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">- Score = similarity between Q and each K</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">- Output = weighted sum of V</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">D K = Q.shape[ − 1]  # dimension of keys</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>mask is not None</td><td>scores = scores.masked fill(mask == 0, float('-inf'))</td></tr>
+</tbody></table>
 
 <div class="callout info"><div class="callout-title">Multi-Head Attention</div><p>Transformers run multiple attention operations in parallel ("heads"), each learning different relationship patterns. One head might learn syntax (subject–verb agreement), another coreference (pronoun resolution), another semantic similarity. The outputs are concatenated and projected — giving the model a rich, multi-perspective representation.</p></div>
 
@@ -134,67 +124,18 @@ def scaled_dot_product_attention(Q, K, V, mask=None):
 <tr><td><strong>Self-consistency</strong></td><td>Sample multiple CoT chains, take majority vote</td><td>High-stakes decisions needing robustness</td><td>Run the same clinical classification 5 times, take modal answer</td></tr>
 </tbody></table>
 
-<pre><code class="language-python">from openai import OpenAI
-import json
-
-client = OpenAI()
-
-# Pattern 1: Structured extraction from adverse event narrative
-def extract_adverse_event(narrative: str) -> dict:
-    """
-    Extract structured data from a free-text adverse event report.
-    Returns: patient demographics, drug, event, severity, outcome.
-    """
-    system_prompt = """You are a pharmacovigilance data scientist.
-Extract structured data from adverse event narratives.
-Always respond with valid JSON matching the schema exactly.
-If a field cannot be determined, use null."""
-
-    user_prompt = f"""Extract adverse event data from this narrative:
-
-NARRATIVE: {narrative}
-
-Respond with JSON:
-{{
-  "patient_age": <number or null>,
-  "patient_sex": "<M|F|Unknown>",
-  "suspect_drug": "<drug name>",
-  "event_term": "<MedDRA preferred term>",
-  "seriousness": "<Serious|Non-serious>",
-  "seriousness_criteria": ["<hospitalization|death|life-threatening|disability|congenital>"],
-  "outcome": "<recovered|recovering|not_recovered|fatal|unknown>"
-}}"""
-
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user",   "content": user_prompt}
-        ],
-        response_format={"type": "json_object"},
-        temperature=0  # deterministic for data extraction
-    )
-    return json.loads(response.choices[0].message.content)
-
-# Pattern 2: Chain-of-Thought for clinical decision support
-def assess_drug_interaction(drug_a: str, drug_b: str) -> str:
-    prompt = f"""Think through this step by step before giving your final answer.
-
-Question: Is there a clinically significant interaction between {drug_a} and {drug_b}?
-
-Step 1: What is the primary mechanism of each drug?
-Step 2: Do these mechanisms interact (pharmacokinetic or pharmacodynamic)?
-Step 3: What is the clinical significance and recommended management?
-Step 4: Final answer with confidence level.
-
-Answer:"""
-
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.1
-    )
-    return response.choices[0].message.content</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Client = OpenAI()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">System Prompt = """You are a pharmacovigilance data scientist.</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">User Prompt = f"""Extract adverse event data from this narrative:</div>
+</div>
 
 <h3>Common Failure Modes & Mitigations</h3>
 <table><thead><tr><th>Failure Mode</th><th>What Happens</th><th>Mitigation</th></tr></thead>
@@ -212,99 +153,24 @@ Answer:"""
 <p><strong>Retrieval-Augmented Generation (RAG)</strong> solves the two biggest LLM limitations for enterprise use: outdated knowledge (training cutoffs) and hallucination. Instead of relying solely on parametric knowledge (weights), RAG retrieves relevant documents at inference time and injects them into the prompt as grounding context.</p>
 
 <h3>RAG Architecture</h3>
-<pre><code class="language-python">"""
-RAG Pipeline:
-
-User Query
-    │
-    ▼
-[Embedding Model] ──── encode query ────▶ Query Vector
-                                              │
-                                    ┌─────────▼──────────┐
-                                    │   Vector Database   │
-                                    │  (Chroma/Pinecone)  │
-                                    │   ─── ANN search ───│
-                                    └─────────┬───────────┘
-                                              │
-                                    Top-k relevant chunks
-                                              │
-    ┌─────────────────────────────────────────▼──────────┐
-    │  Augmented Prompt = System + Retrieved Chunks + Query│
-    └─────────────────────────────────────────┬──────────┘
-                                              │
-                                        [LLM Generator]
-                                              │
-                                        Grounded Answer
-                                     (with source citations)
-"""</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">│  Augmented Prompt = System  +  Retrieved Chunks  +  Query│</div>
+</div>
 
 <h3>Building a Pharma RAG Pipeline</h3>
-<pre><code class="language-python">from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain_community.vectorstores import Chroma
-from langchain.chains import RetrievalQA
-from langchain.schema import Document
-import PyPDF2
-
-# Step 1: Load and chunk documents
-def load_and_chunk_pdf(pdf_path: str, chunk_size=800, chunk_overlap=100):
-    """
-    Chunk size strategy for pharma docs:
-    - 800 tokens: good for clinical guidelines (paragraph-level context)
-    - 400 tokens: better for structured tables (keeps rows together)
-    - Overlap: 100 tokens prevents cutting mid-sentence
-    """
-    reader = PyPDF2.PdfReader(pdf_path)
-    full_text = "\n".join(page.extract_text() for page in reader.pages)
-
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=chunk_size,
-        chunk_overlap=chunk_overlap,
-        separators=["\n\n", "\n", ".", " "]  # semantic split hierarchy
-    )
-    chunks = splitter.split_text(full_text)
-    return [Document(page_content=c, metadata={"source": pdf_path}) for c in chunks]
-
-# Step 2: Build vector store
-def build_knowledge_base(documents: list[Document], persist_dir="./pharma_kb"):
-    embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
-    vectorstore = Chroma.from_documents(
-        documents=documents,
-        embedding=embeddings,
-        persist_directory=persist_dir
-    )
-    return vectorstore
-
-# Step 3: Create RAG chain with citations
-def build_rag_chain(vectorstore, k=5):
-    retriever = vectorstore.as_retriever(
-        search_type="mmr",            # Maximum Marginal Relevance: diverse, non-redundant results
-        search_kwargs={"k": k, "fetch_k": 20}
-    )
-    llm = ChatOpenAI(model="gpt-4o", temperature=0)
-
-    chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        chain_type="stuff",           # "stuff" = concatenate all retrieved chunks into prompt
-        retriever=retriever,
-        return_source_documents=True,
-        chain_type_kwargs={
-            "prompt": CLINICAL_QA_PROMPT  # custom prompt with citation instructions
-        }
-    )
-    return chain
-
-# Usage: Drug interaction knowledge base from FDA labels
-documents = []
-for label_pdf in ["warfarin_label.pdf", "aspirin_label.pdf", "clopidogrel_label.pdf"]:
-    documents.extend(load_and_chunk_pdf(label_pdf))
-
-kb = build_knowledge_base(documents)
-qa_chain = build_rag_chain(kb)
-
-result = qa_chain.invoke({"query": "What is the interaction between warfarin and aspirin?"})
-print(result["result"])
-print("Sources:", [doc.metadata["source"] for doc in result["source_documents"]])</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Reader = PyPDF2.PdfReader(pdf path)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Full Text = "\n".join(page.extract text() for page in reader.pages)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Splitter = RecursiveCharacterTextSplitter(</div>
+</div>
 
 <h3>RAG vs Fine-Tuning: Decision Framework</h3>
 <table><thead><tr><th>Criterion</th><th>Use RAG</th><th>Use Fine-Tuning</th></tr></thead>
@@ -324,82 +190,21 @@ print("Sources:", [doc.metadata["source"] for doc in result["source_documents"]]
 
 <h3>The ReAct Pattern: Reason + Act</h3>
 <p>The most widely used agent loop: the model alternates between <strong>Reasoning</strong> (what do I need to do?) and <strong>Acting</strong> (call a tool), then observes the result and repeats.</p>
-<pre><code class="language-python">from openai import OpenAI
-import json, requests, datetime
-
-client = OpenAI()
-
-# Define tools the agent can call
-tools = [
-    {
-        "type": "function",
-        "function": {
-            "name": "search_fda_approvals",
-            "description": "Search FDA drug approval database for recent NDA/BLA approvals",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "drug_name": {"type": "string", "description": "Drug or active ingredient name"},
-                    "days_back": {"type": "integer", "description": "How many days back to search", "default": 30}
-                },
-                "required": ["drug_name"]
-            }
-        }
-    },
-    {
-        "type": "function",
-        "function": {
-            "name": "get_clinical_trial_status",
-            "description": "Get current status and results of a clinical trial from ClinicalTrials.gov",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "nct_id": {"type": "string", "description": "NCT identifier e.g. NCT04513795"}
-                },
-                "required": ["nct_id"]
-            }
-        }
-    }
-]
-
-def run_pharma_intelligence_agent(query: str) -> str:
-    """
-    An autonomous agent that researches pharmaceutical competitive intelligence.
-    Uses ReAct loop: Reason → Act → Observe → Reason → ...
-    """
-    messages = [
-        {"role": "system", "content": """You are a pharma competitive intelligence agent.
-You have access to FDA and ClinicalTrials.gov data.
-Think step by step, use tools to gather facts, then synthesize a comprehensive answer.
-Always cite your sources."""},
-        {"role": "user", "content": query}
-    ]
-
-    # ReAct loop (max 5 iterations to prevent infinite loops)
-    for _ in range(5):
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=messages,
-            tools=tools,
-            tool_choice="auto"
-        )
-        msg = response.choices[0].message
-
-        # If no tool calls, agent is done — return final answer
-        if not msg.tool_calls:
-            return msg.content
-
-        # Execute each tool call and feed results back
-        messages.append(msg)
-        for call in msg.tool_calls:
-            result = execute_tool(call.function.name, json.loads(call.function.arguments))
-            messages.append({
-                "role": "tool",
-                "tool_call_id": call.id,
-                "content": json.dumps(result)
-            })
-
-    return "Max iterations reached — partial answer may be incomplete."</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Client = OpenAI()</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Response = client.chat.completions.create(</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Model = "gpt − 4o",</div>
+</div>
+<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
+<tr><td>not msg.tool calls</td><td>return msg.content</td></tr>
+</tbody></table>
 
 <h3>Multi-Agent Systems</h3>
 <p>Complex pharma workflows benefit from specialised agents working together:</p>
@@ -436,39 +241,14 @@ Always cite your sources."""},
 </ul>
 
 <h3>Commercial AI Applications</h3>
-<pre><code class="language-python">from sklearn.ensemble import GradientBoostingClassifier
-import pandas as pd
-
-def build_next_best_action_model(hcp_engagement_df: pd.DataFrame):
-    """
-    Predict the optimal next channel and message for each HCP.
-    Inputs: engagement history, Rx data, specialty, territory
-    Output: ranked action recommendations per HCP
-    """
-    features = [
-        'days_since_last_rep_call', 'email_open_rate_90d',
-        'category_rx_volume_decile', 'brand_share_pct',
-        'formulary_status', 'digital_engagement_score',
-        'speaker_events_attended', 'msl_meetings_12m'
-    ]
-
-    # Multi-label classifier: predict which action drives highest Rx lift
-    actions = ['rep_call', 'approved_email', 'webinar_invite',
-               'speaker_program', 'msl_visit', 'no_action']
-
-    # Train one classifier per action (one-vs-rest)
-    models = {}
-    for action in actions:
-        y = (hcp_engagement_df['best_action'] == action).astype(int)
-        models[action] = GradientBoostingClassifier(n_estimators=200).fit(
-            hcp_engagement_df[features], y
-        )
-
-    # Score and rank actions per HCP
-    scores = {action: models[action].predict_proba(hcp_engagement_df[features])[:, 1]
-              for action in actions}
-
-    return pd.DataFrame(scores, index=hcp_engagement_df.index).idxmax(axis=1)</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Y = (hcp engagement df['best action'] == action).astype(int)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Models[Action] = GradientBoostingClassifier(n estimators=200).fit(</div>
+</div>
 
 <h3>AI Beyond Pharma — Transferable Lessons</h3>
 <table><thead><tr><th>Industry</th><th>AI Application</th><th>Pharma Analogy</th></tr></thead>
@@ -495,46 +275,18 @@ def build_next_best_action_model(hcp_engagement_df: pd.DataFrame):
 </tbody></table>
 
 <h3>Explainability in Practice</h3>
-<pre><code class="language-python">import shap
-import xgboost as xgb
-import pandas as pd
-import matplotlib.pyplot as plt
-
-def explain_patient_risk(model, X_train, X_patient, feature_names):
-    """
-    Generate SHAP explanation for a single patient's risk prediction.
-    """
-    # SHAP TreeExplainer for tree-based models (fast, exact)
-    explainer = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(X_patient)
-
-    # Global importance: which features drive predictions most overall
-    shap.summary_plot(
-        shap.TreeExplainer(model).shap_values(X_train),
-        X_train,
-        feature_names=feature_names,
-        plot_type="bar",
-        show=False
-    )
-    plt.title("Global Feature Importance (SHAP)")
-
-    # Local explanation: why THIS patient got THIS score
-    force_plot = shap.force_plot(
-        explainer.expected_value,
-        shap_values[0],
-        X_patient.iloc[0],
-        feature_names=feature_names
-    )
-
-    # Format for clinical dashboard
-    explanation = pd.DataFrame({
-        "Feature": feature_names,
-        "Value": X_patient.iloc[0].values,
-        "SHAP_Impact": shap_values[0],
-        "Direction": ["↑ Risk" if v > 0 else "↓ Risk" for v in shap_values[0]]
-    }).sort_values("SHAP_Impact", key=abs, ascending=False)
-
-    return explanation.head(5)  # Top 5 drivers for clinician review</code></pre>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Explainer = shap.TreeExplainer(model)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Shap Values = explainer.shap values(X patient)</div>
+</div>
+<div class="formula-box">
+  <div class="formula-label">Formula</div>
+  <div class="formula-main">Feature Names = feature names,</div>
+</div>
 
 <h3>Regulatory Landscape</h3>
 <table><thead><tr><th>Regulation / Guidance</th><th>Scope</th><th>Key Requirements</th></tr></thead>
