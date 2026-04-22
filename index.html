@@ -337,38 +337,14 @@
 
     <!-- Logo -->
     <div class="sidebar-logo">
-      <div style="display:flex;align-items:center;gap:10px;min-width:0">
-
-        <!-- Brand mark: hexagon (chemistry) + ascending analytics line -->
-        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
-          <defs>
-            <linearGradient id="pal-bg" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#4f46e5"/>
-              <stop offset="1" stop-color="#0284c7"/>
-            </linearGradient>
-            <linearGradient id="pal-line" x1="6" y1="22" x2="28" y2="8" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#a5b4fc"/>
-              <stop offset="1" stop-color="#7dd3fc"/>
-            </linearGradient>
-          </defs>
-          <!-- Rounded square container -->
-          <rect width="34" height="34" rx="9" fill="url(#pal-bg)"/>
-          <!-- Hexagon outline (chemistry reference) -->
-          <path d="M17 5.5 L26 10.5 L26 20.5 L17 25.5 L8 20.5 L8 10.5 Z"
-            fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.1"/>
-          <!-- Analytics line (ascending trend) -->
-          <polyline points="9,22 13,17 17.5,19.5 23,12"
-            fill="none" stroke="url(#pal-line)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- Peak data point glow -->
-          <circle cx="23" cy="12" r="2.2" fill="#bae6fd" opacity=".9"/>
-          <circle cx="23" cy="12" r="1.1" fill="white"/>
-        </svg>
-
-        <div x-show="sidebarOpen" style="min-width:0">
-          <div style="font-size:14px;font-weight:800;color:var(--text-primary);letter-spacing:-.3px;line-height:1.15">PAL</div>
-          <div style="font-size:9.5px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.01em">Pharma Analytics Library</div>
-        </div>
-      </div>
+      <!-- Full logo when sidebar open -->
+      <img x-show="sidebarOpen || isMobile" src="assets/logo.png" alt="Pharma Analytics Library"
+        class="sidebar-logo-img"
+        :style="theme === 'dark' ? 'filter:invert(1) hue-rotate(180deg) brightness(1.1)' : ''">
+      <!-- Icon-only when collapsed (desktop) -->
+      <img x-show="!sidebarOpen && !isMobile" src="assets/logo.png" alt="PAL"
+        class="sidebar-logo-icon"
+        :style="theme === 'dark' ? 'filter:invert(1) hue-rotate(180deg) brightness(1.1)' : ''">
     </div>
 
     <!-- Nav -->
