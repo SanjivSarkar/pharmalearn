@@ -147,7 +147,8 @@
   // ─── Alpine.js App Data ───────────────────────────────────────────────────
   window.pharmaApp = () => ({
     page: 'home',
-    sidebarOpen: window.innerWidth > 1024,
+    sidebarOpen: window.innerWidth > 900,
+    isMobile: window.innerWidth <= 900,
     theme: localStorage.getItem('pl_theme') || 'dark',
     searchQuery: '',
     searchResults: [],
@@ -281,7 +282,8 @@
         }
       });
       window.addEventListener('resize', () => {
-        if (window.innerWidth <= 1024) this.sidebarOpen = false;
+        this.isMobile = window.innerWidth <= 900;
+        if (this.isMobile) this.sidebarOpen = false;
       });
       window.addEventListener('scroll', () => this.updateReadingProgress());
       this.fetchNews();
@@ -300,6 +302,7 @@
     },
 
     navigate(pg, params = '') {
+      if (this.isMobile) this.sidebarOpen = false;
       window.location.hash = '/' + pg + (params ? '/' + params : '');
     },
 

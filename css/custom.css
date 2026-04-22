@@ -635,11 +635,12 @@ body {
 
 /* ─── Mobile ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .sidebar { transform: translateX(calc(-1 * var(--sidebar-w))); }
-  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar { transform: translateX(calc(-1 * var(--sidebar-w))); z-index: 150; }
+  .sidebar.mobile-open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,.35); }
   .main { margin-left: 0 !important; }
-  .page-content { padding: 20px; }
+  .page-content { padding: 16px; }
   .toc-rail { display: none; }
+  .topbar { padding: 0 12px; }
 }
 
 /* ─── Hidden utility ─────────────────────────────────────────── */
