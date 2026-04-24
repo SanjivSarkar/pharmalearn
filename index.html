@@ -815,10 +815,10 @@
                   <span style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);white-space:nowrap">Deep Dives — Learn More</span>
                   <div style="height:1px;flex:1;background:var(--border)"></div>
                 </div>
-                <div style="display:flex;flex-wrap:wrap;gap:10px">
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">
                   <template x-for="res in d.resources" :key="res.href">
                     <a :href="res.href" target="_blank" rel="noopener"
-                      style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--bg-surface);border:1.5px solid var(--border);border-radius:10px;text-decoration:none;flex:1;min-width:200px;max-width:320px;transition:all .18s"
+                      style="display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--bg-surface);border:1.5px solid var(--border);border-radius:10px;text-decoration:none;transition:all .18s"
                       @mouseenter="$el.style.borderColor=d.color;$el.style.transform='translateY(-1px)'"
                       @mouseleave="$el.style.borderColor='var(--border)';$el.style.transform='translateY(0)'">
                       <!-- Left accent bar -->
