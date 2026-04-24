@@ -149,7 +149,7 @@
     page: 'home',
     sidebarOpen: window.innerWidth > 900,
     isMobile: window.innerWidth <= 900,
-    theme: localStorage.getItem('pl_theme') || 'dark',
+    theme: localStorage.getItem('pl_theme') || 'light',
     searchQuery: '',
     searchResults: [],
 
