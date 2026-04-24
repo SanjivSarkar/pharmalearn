@@ -149,7 +149,6 @@
     page: 'home',
     sidebarOpen: window.innerWidth > 900,
     isMobile: window.innerWidth <= 900,
-    theme: localStorage.getItem('pl_theme') || 'light',
     searchQuery: '',
     searchResults: [],
 
@@ -183,7 +182,6 @@
 
     async init() {
       initProgress();
-      this.applyTheme();
       // Apply enrichment patches (prepend foundational sections to select chapters)
       if (window.PL_ENRICHMENT) {
         for (const [id, patch] of Object.entries(window.PL_ENRICHMENT)) {
@@ -304,16 +302,6 @@
     navigate(pg, params = '') {
       if (this.isMobile) this.sidebarOpen = false;
       window.location.hash = '/' + pg + (params ? '/' + params : '');
-    },
-
-    applyTheme() {
-      document.documentElement.setAttribute('data-theme', this.theme);
-      localStorage.setItem('pl_theme', this.theme);
-    },
-
-    toggleTheme() {
-      this.theme = this.theme === 'dark' ? 'light' : 'dark';
-      this.applyTheme();
     },
 
     // ─── Domain/Chapter Data ─────────────────────────────────────────────────

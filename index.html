@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -470,23 +470,6 @@
         <div style="font-size:10.5px;color:var(--text-muted)" x-text="userLevel.name"></div>
       </div>
       <div x-show="sidebarOpen" style="display:flex;align-items:center;gap:2px;flex-shrink:0">
-        <button @click="toggleTheme()" class="sidebar-icon-btn"
-          :title="theme==='dark'?'Light mode':'Dark mode'">
-          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-            <template x-if="theme==='dark'">
-              <g>
-                <circle cx="10" cy="10" r="3.5"/>
-                <line x1="10" y1="2" x2="10" y2="4"/><line x1="10" y1="16" x2="10" y2="18"/>
-                <line x1="2" y1="10" x2="4" y2="10"/><line x1="16" y1="10" x2="18" y2="10"/>
-                <line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="14.4" y1="14.4" x2="15.8" y2="15.8"/>
-                <line x1="14.4" y1="5.6" x2="15.8" y2="4.2"/><line x1="4.2" y1="15.8" x2="5.6" y2="14.4"/>
-              </g>
-            </template>
-            <template x-if="theme!=='dark'">
-              <path d="M17 12A7 7 0 116 3a5.5 5.5 0 1011 9z"/>
-            </template>
-          </svg>
-        </button>
         <button @click="logout()" class="sidebar-icon-btn" title="Sign out"
           style="--icon-hover:#f87171">
           <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
@@ -515,9 +498,6 @@
       </div>
 
       <div style="display:flex;align-items:center;gap:12px">
-        <!-- Theme (mobile) -->
-        <button @click="toggleTheme()" class="btn btn-ghost" style="display:none"
-          x-text="theme==='dark'?'☀':'☾'"></button>
       </div>
     </header>
 
