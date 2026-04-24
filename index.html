@@ -339,39 +339,26 @@
     <div class="sidebar-logo">
 
       <!-- Icon mark — always visible -->
-      <!-- Shape: 4-lobe organic blob inspired by Claude's logo mark -->
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
         <defs>
           <linearGradient id="pal-g1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
             <stop stop-color="#0E1B33"/>
             <stop offset="1" stop-color="#2A3E66"/>
           </linearGradient>
-          <linearGradient id="pal-g2" x1="6" y1="28" x2="30" y2="8" gradientUnits="userSpaceOnUse">
+          <linearGradient id="pal-g2" x1="7" y1="27" x2="29" y2="9" gradientUnits="userSpaceOnUse">
             <stop stop-color="#D4A574"/>
             <stop offset="1" stop-color="#F5EFE4"/>
           </linearGradient>
         </defs>
-        <!-- Claude-style 4-lobe organic blob shape -->
-        <path d="M 13 9
-          C 13 1, 23 1, 23 9
-          C 31 9, 35 13, 35 18
-          C 35 23, 31 27, 23 27
-          C 23 35, 13 35, 13 27
-          C 5 27, 1 23, 1 18
-          C 1 13, 5 9, 13 9 Z"
-          fill="url(#pal-g1)"/>
+        <!-- Round circle base -->
+        <circle cx="18" cy="18" r="17" fill="url(#pal-g1)"/>
         <!-- Subtle inner ring -->
-        <path d="M 14.5 11.5
-          C 14.5 6, 21.5 6, 21.5 11.5
-          C 27 11.5, 27 24.5, 21.5 24.5
-          C 21.5 30, 14.5 30, 14.5 24.5
-          C 9 24.5, 9 11.5, 14.5 11.5 Z"
-          fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+        <circle cx="18" cy="18" r="13" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
         <!-- Ascending analytics line -->
         <polyline points="9,26 13,20 17,23 22,14 27,11"
           fill="none" stroke="url(#pal-g2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <!-- Peak glow dot -->
-        <circle cx="27" cy="11" r="2.6" fill="#bae6fd" opacity="0.9"/>
+        <circle cx="27" cy="11" r="2.6" fill="#D4A574" opacity="0.9"/>
         <circle cx="27" cy="11" r="1.3" fill="white"/>
       </svg>
 
@@ -841,9 +828,9 @@
                         <div style="font-size:10.5px;color:var(--text-muted)" x-text="res.subtitle"></div>
                       </div>
                       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0">
-                        <span style="font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:4px;white-space:nowrap;border:1px solid"
+                        <span style="font-size:8px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;border:1px solid"
                           :style="`border-color:${d.color}50;color:${d.color}`" x-text="res.tag"></span>
-                        <span style="font-size:11px;font-weight:700" :style="`color:${d.color}`">Learn More →</span>
+                        <span style="font-size:9px;font-weight:600" :style="`color:${d.color}`">Learn More →</span>
                       </div>
                     </a>
                   </template>
