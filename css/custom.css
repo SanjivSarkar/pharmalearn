@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ─── Design Tokens ─────────────────────────────────────────── */
 :root {
@@ -88,28 +88,54 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: 'Inter Tight', -apple-system, sans-serif;
   background: var(--bg-base);
   color: var(--text-primary);
   line-height: 1.6;
+  font-size: 15px;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   transition: background .3s, color .3s;
 }
 
-/* Subtle dot grid texture matching extended pages */
+/* Exact paper grain texture from extended pages */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(rgba(107,93,79,0.06) 1px, transparent 1px),
+    radial-gradient(rgba(107,93,79,0.04) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 1px;
+}
+
+/* Dot grid layer — matches pharma-bdl.html exactly */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(15,27,45,0.025) 1px, transparent 0);
   background-size: 24px 24px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.6;
 }
+
 .app-shell { position: relative; z-index: 1; }
+
+/* Fraunces serif for headings — matches extended pages */
+h1, h2, h3, .serif {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
 
 ::selection { background: var(--accent-dim); color: var(--accent); }
 
@@ -128,7 +154,9 @@ body::before {
 .sidebar {
   width: var(--sidebar-w);
   flex-shrink: 0;
-  background: var(--bg-surface);
+  background: rgba(238,229,206,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -140,6 +168,8 @@ body::before {
   overflow: hidden;
 }
 .sidebar.collapsed { transform: translateX(calc(-1 * var(--sidebar-w))); }
+[data-theme="dark"] .sidebar { background: rgba(14,27,51,0.94); }
+[data-theme="dark"] .topbar  { background: rgba(22,32,64,0.94); }
 
 .sidebar-inner {
   display: flex;
@@ -162,7 +192,9 @@ body::before {
 .topbar {
   position: sticky; top: 0; z-index: 50;
   height: var(--header-h);
-  background: var(--bg-surface);
+  background: rgba(245,239,223,0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
