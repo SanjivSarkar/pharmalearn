@@ -822,16 +822,18 @@
                       @mouseenter="$el.style.borderColor=d.color;$el.style.boxShadow='0 2px 12px rgba(0,0,0,.2)';$el.style.transform='translateY(-1px)'"
                       @mouseleave="$el.style.borderColor='var(--border)';$el.style.boxShadow='none';$el.style.transform='translateY(0)'">
                       <!-- Left accent -->
-                      <div style="width:3px;height:36px;border-radius:2px;flex-shrink:0" :style="`background:${d.color}`"></div>
+                      <div style="width:3px;height:36px;border-radius:2px;flex-shrink:0;align-self:center" :style="`background:${d.color}`"></div>
+                      <!-- Content -->
                       <div style="flex:1;min-width:0">
-                        <div style="font-size:12.5px;font-weight:700;color:var(--text-primary);line-height:1.3;margin-bottom:3px" x-text="res.title"></div>
-                        <div style="font-size:10.5px;color:var(--text-muted)" x-text="res.subtitle"></div>
+                        <div style="font-size:12.5px;font-weight:700;color:var(--text-primary);line-height:1.3;margin-bottom:4px" x-text="res.title"></div>
+                        <div style="display:flex;align-items:center;gap:6px">
+                          <span style="font-size:10.5px;color:var(--text-muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" x-text="res.subtitle"></span>
+                          <span style="font-size:8px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;border:1px solid;flex-shrink:0"
+                            :style="`border-color:${d.color}50;color:${d.color}`" x-text="res.tag"></span>
+                        </div>
                       </div>
-                      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0">
-                        <span style="font-size:8px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;border:1px solid"
-                          :style="`border-color:${d.color}50;color:${d.color}`" x-text="res.tag"></span>
-                        <span style="font-size:9px;font-weight:600" :style="`color:${d.color}`">Learn More →</span>
-                      </div>
+                      <!-- CTA -->
+                      <span style="font-size:9px;font-weight:600;flex-shrink:0;align-self:center;padding-left:4px" :style="`color:${d.color}`">Learn More →</span>
                     </a>
                   </template>
                 </div>
