@@ -616,7 +616,7 @@ h1, h2, h3, .serif {
 
 /* ─── Gradient text ──────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1157,7 +1157,7 @@ h1, h2, h3, .serif {
   top: 0; left: 0; right: 0;
   height: 2px;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  background: var(--stat-accent, linear-gradient(90deg, var(--accent), #a78bfa));
+  background: var(--stat-accent, linear-gradient(90deg, var(--accent), var(--accent-hover)));
 }
 .stat-card:hover { border-color: var(--accent-border); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 .stat-bg-glow {
@@ -1221,8 +1221,8 @@ h1, h2, h3, .serif {
   content: '';
   position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse at 90% 10%, rgba(99,102,241,.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 10% 90%, rgba(167,139,250,.07) 0%, transparent 50%);
+    radial-gradient(ellipse at 90% 10%, rgba(200,152,74,.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 10% 90%, rgba(75,107,138,.05) 0%, transparent 50%);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1232,8 +1232,8 @@ h1, h2, h3, .serif {
 /* ── Hero Banner ─────────────────────────────────────────────── */
 .rm-hero {
   position: relative;
-  background: linear-gradient(135deg, #060a1c 0%, #0d1535 55%, #091428 100%);
-  border: 1px solid var(--border-strong);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: 40px 48px;
   margin-bottom: 28px;
@@ -1244,44 +1244,49 @@ h1, h2, h3, .serif {
   content: '';
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 15% 50%, rgba(99,102,241,.22) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 50%, rgba(14,165,233,.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% -10%, rgba(139,92,246,.18) 0%, transparent 60%);
+    radial-gradient(ellipse at 15% 50%, rgba(200,152,74,.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 50%, rgba(75,107,138,.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% -10%, rgba(45,95,71,.05) 0%, transparent 60%);
   pointer-events: none;
 }
 .rm-hero-eyebrow {
   font-size: 10px; font-weight: 800; letter-spacing: .25em;
   text-transform: uppercase;
-  color: rgba(129,140,248,.85);
+  color: var(--accent);
+  opacity: .8;
   margin-bottom: 14px;
   position: relative;
 }
 .rm-hero-title {
   font-size: 2.2rem; font-weight: 900; letter-spacing: -.05em;
-  color: #f0f4ff; margin-bottom: 10px; line-height: 1.15;
+  color: var(--text-primary); margin-bottom: 10px; line-height: 1.15;
   position: relative;
 }
 .rm-hero-sub {
-  font-size: 14px; color: rgba(176,196,222,.65);
+  font-size: 14px; color: var(--text-secondary);
   position: relative; max-width: 480px; margin: 0 auto;
   line-height: 1.6;
 }
 .rm-hero-pills {
-  display: flex; gap: 10px; justify-content: center; margin-top: 20px;
+  display: flex; gap: 8px; justify-content: center; margin-top: 20px;
   flex-wrap: wrap; position: relative;
 }
 .rm-hero-pill {
-  font-size: 11px; font-weight: 700; padding: 5px 14px;
-  border-radius: 99px; border: 1px solid rgba(255,255,255,.1);
-  color: rgba(240,244,255,.6);
+  font-size: 11px; font-weight: 600; padding: 4px 14px;
+  border-radius: 99px; border: 1px solid var(--border);
+  color: var(--text-secondary); background: var(--bg-elevated);
+  display: flex; align-items: center; gap: 6px;
 }
-/* Decorative floating orbs */
+.rm-hero-pill-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+/* Decorative floating orbs — parchment-toned */
 .rm-hero-orb {
-  position: absolute; border-radius: 50%; pointer-events: none; opacity: .15;
-  filter: blur(1px);
-  animation: rm-float 4s ease-in-out infinite;
+  position: absolute; border-radius: 50%; pointer-events: none; opacity: .25;
+  filter: blur(2px);
+  animation: rm-float 5s ease-in-out infinite;
 }
-@keyframes rm-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes rm-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
 /* ── Pipeline Scroll Track ───────────────────────────────────── */
 .rm-pipeline-scroll {
@@ -1328,17 +1333,16 @@ h1, h2, h3, .serif {
   z-index: 1;
 }
 
-/* Icon ring */
+/* Shape ring */
 .rm-step-ring {
   width: 52px; height: 52px; border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
   transition: all .25s cubic-bezier(.4,0,.2,1);
   border: 2px solid transparent;
   flex-shrink: 0;
 }
-.rm-step:hover .rm-step-ring { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.3); }
-.rm-step.rm-step-active .rm-step-ring { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+.rm-step:hover .rm-step-ring { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(15,27,45,.14); }
+.rm-step.rm-step-active .rm-step-ring { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(15,27,45,.18); }
 
 /* Labels */
 .rm-step-label {
@@ -1389,7 +1393,7 @@ h1, h2, h3, .serif {
 .rm-expand-icon {
   width: 48px; height: 48px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 22px; flex-shrink: 0;
+  flex-shrink: 0;
 }
 .rm-expand-title {
   font-size: 16px; font-weight: 800; color: var(--text-primary);
@@ -1472,7 +1476,7 @@ h1, h2, h3, .serif {
 .rm-ec-icon {
   width: 48px; height: 48px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 22px; margin-bottom: 14px; position: relative;
+  margin-bottom: 14px; position: relative;
 }
 .rm-ec-title {
   font-size: 15px; font-weight: 800; color: var(--text-primary);

@@ -91,10 +91,10 @@
     },
     getLevel: () => {
       const xp = store.get('xp', { total: 0 }).total;
-      if (xp >= 5001) return { name: 'Pro',          color: '#f59e0b', next: null, pct: 100 };
-      if (xp >= 2001) return { name: 'Advanced',     color: '#8b5cf6', next: 5001, pct: Math.round((xp-2001)/(5001-2001)*100) };
-      if (xp >= 501)  return { name: 'Intermediate', color: '#6366f1', next: 2001, pct: Math.round((xp-501)/(2001-501)*100) };
-      return { name: 'Basic', color: '#06b6d4', next: 501, pct: Math.round(xp/501*100) };
+      if (xp >= 5001) return { name: 'Pro',          color: '#C8984A', next: null, pct: 100 };
+      if (xp >= 2001) return { name: 'Advanced',     color: '#4B6B8A', next: 5001, pct: Math.round((xp-2001)/(5001-2001)*100) };
+      if (xp >= 501)  return { name: 'Intermediate', color: '#2D5F47', next: 2001, pct: Math.round((xp-501)/(2001-501)*100) };
+      return { name: 'Basic', color: '#9B7233', next: 501, pct: Math.round(xp/501*100) };
     }
   };
 
@@ -805,24 +805,37 @@
     // ─── Roadmap ──────────────────────────────────────────────────────────────
     get roadmapStages() {
       return [
-        { id:'discovery', label:'Drug Discovery', icon:'🔬', color:'#6366f1', desc:'Target identification, compound screening, hit-to-lead optimization', chapters:['1-1'] },
-        { id:'preclinical', label:'Pre-Clinical Development', icon:'🧪', color:'#6366f1', desc:'In vitro/vivo studies, ADMET profiling, toxicology, IND filing', chapters:['1-2'] },
-        { id:'phase1', label:'Phase I Clinical Trials', icon:'💉', color:'#8b5cf6', desc:'First-in-human safety, PK/PD characterization, dose escalation', chapters:['1-3'] },
-        { id:'phase23', label:'Phase II/III Trials', icon:'📋', color:'#8b5cf6', desc:'Efficacy proof-of-concept, dose-ranging, pivotal randomized trials', chapters:['1-3','1-4'] },
-        { id:'regulatory', label:'Regulatory Submission', icon:'📄', color:'#0ea5e9', desc:'NDA/BLA/MAA dossier, FDA/EMA review, approval strategy & labeling', chapters:['1-5'] },
-        { id:'marketaccess', label:'Market Access & Pricing', icon:'💊', color:'#10b981', desc:'Payer negotiations, HTA, pricing strategy, reimbursement, value dossiers', chapters:['3-1','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9','3-10'] },
-        { id:'launch', label:'Product Launch', icon:'🚀', color:'#0ea5e9', desc:'Commercial readiness, go-to-market strategy, SFE, launch analytics', chapters:['1-6','2-6'] },
-        { id:'commercial', label:'Commercial Operations', icon:'📊', color:'#0ea5e9', desc:'Patient journey analytics, HCP targeting, omnichannel, IC design, forecasting', chapters:['2-1','2-2','2-3','2-4','2-5','2-7','2-8','2-9','2-10','2-11'] },
-        { id:'rwe', label:'Post-Market RWE & Medical Affairs', icon:'🏥', color:'#f59e0b', desc:'Real-world studies, HEOR, medical affairs analytics, safety surveillance', chapters:['4-1','4-2','4-3','4-4','4-5'] },
-        { id:'loe', label:'LOE & Lifecycle Management', icon:'🔄', color:'#6366f1', desc:'Patent cliff strategy, biosimilar competition, indication expansion, LCM', chapters:['1-7'] },
+        { id:'discovery', label:'Drug Discovery', color:'#4B6B8A', desc:'Target identification, compound screening, hit-to-lead optimization', chapters:['1-1'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none"/></svg>' },
+        { id:'preclinical', label:'Pre-Clinical Development', color:'#4B6B8A', desc:'In vitro/vivo studies, ADMET profiling, toxicology, IND filing', chapters:['1-2'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,3.5 19.8,8 19.8,16 12,20.5 4.2,16 4.2,8"/></svg>' },
+        { id:'phase1', label:'Phase I Clinical Trials', color:'#5A6E88', desc:'First-in-human safety, PK/PD characterization, dose escalation', chapters:['1-3'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,3 21,12 12,21 3,12"/></svg>' },
+        { id:'phase23', label:'Phase II/III Trials', color:'#5A6E88', desc:'Efficacy proof-of-concept, dose-ranging, pivotal randomized trials', chapters:['1-3','1-4'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="8.5"/></svg>' },
+        { id:'regulatory', label:'Regulatory Submission', color:'#4B6B4A', desc:'NDA/BLA/MAA dossier, FDA/EMA review, approval strategy & labeling', chapters:['1-5'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg>' },
+        { id:'marketaccess', label:'Market Access & Pricing', color:'#2D5F47', desc:'Payer negotiations, HTA, pricing strategy, reimbursement, value dossiers', chapters:['3-1','3-2','3-3','3-4','3-5','3-6','3-7','3-8','3-9','3-10'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L4 7v5c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V7z"/></svg>' },
+        { id:'launch', label:'Product Launch', color:'#4B6B4A', desc:'Commercial readiness, go-to-market strategy, SFE, launch analytics', chapters:['1-6','2-6'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="5,18 12,5 19,18"/><line x1="8.2" y1="13.5" x2="15.8" y2="13.5"/></svg>' },
+        { id:'commercial', label:'Commercial Operations', color:'#9B7233', desc:'Patient journey analytics, HCP targeting, omnichannel, IC design, forecasting', chapters:['2-1','2-2','2-3','2-4','2-5','2-7','2-8','2-9','2-10','2-11'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="20" x2="21" y2="20"/><rect x="4" y="14" width="4" height="6" rx="1"/><rect x="10" y="9" width="4" height="11" rx="1"/><rect x="16" y="5" width="4" height="15" rx="1"/></svg>' },
+        { id:'rwe', label:'Post-Market RWE & Medical Affairs', color:'#7D5A3C', desc:'Real-world studies, HEOR, medical affairs analytics, safety surveillance', chapters:['4-1','4-2','4-3','4-4','4-5'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,12 5,12 7,6 9,18 12,9 14,15 16,12 22,12"/></svg>' },
+        { id:'loe', label:'LOE & Lifecycle Management', color:'#4B6B8A', desc:'Patent cliff strategy, biosimilar competition, indication expansion, LCM', chapters:['1-7'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 018-8c2.5 0 4.7 1.1 6.2 2.8L20 9"/><polyline points="15,4 20,9 15,14"/><path d="M20 12a8 8 0 01-8 8c-2.5 0-4.7-1.1-6.2-2.8L4 15"/><polyline points="9,20 4,15 9,10"/></svg>' },
       ];
     },
 
     get roadmapEnablers() {
       return [
-        { label:'Data Science & ML', icon:'⚙️', color:'#ec4899', desc:'Statistics, ML, causal inference, NLP, deep learning, MLOps for pharma analytics', chapters:['5-1','5-2','5-3','5-4','5-5','5-6','5-7','5-8','5-9','5-10'] },
-        { label:'AI Concepts & GenAI', icon:'🤖', color:'#a855f7', desc:'Foundation models, LLMs, prompt engineering, RAG, AI agents, and responsible AI in life sciences', chapters:['5-11'] },
-        { label:'Data Engineering', icon:'🏗️', color:'#14b8a6', desc:'Modern data stack, Snowflake, Spark, DataOps, streaming, data quality for healthcare', chapters:['6-1','6-2','6-3','6-4','6-5','6-6','6-7','6-8','6-9'] },
+        { label:'Data Science & ML', color:'#A84B2A', desc:'Statistics, ML, causal inference, NLP, deep learning, MLOps for pharma analytics', chapters:['5-1','5-2','5-3','5-4','5-5','5-6','5-7','5-8','5-9','5-10'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="18" x2="20" y2="6"/><circle cx="6" cy="16" r="2" fill="currentColor" stroke="none"/><circle cx="11" cy="11" r="2" fill="currentColor" stroke="none"/><circle cx="15.5" cy="13" r="2" fill="currentColor" stroke="none"/><circle cx="18.5" cy="7" r="2" fill="currentColor" stroke="none"/></svg>' },
+        { label:'AI Concepts & GenAI', color:'#4B6B8A', desc:'Foundation models, LLMs, prompt engineering, RAG, AI agents, and responsible AI in life sciences', chapters:['5-11'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.5,3 16.5,3 21,7.5 21,16.5 16.5,21 7.5,21 3,16.5 3,7.5"/></svg>' },
+        { label:'Data Engineering', color:'#2D5F47', desc:'Modern data stack, Snowflake, Spark, DataOps, streaming, data quality for healthcare', chapters:['6-1','6-2','6-3','6-4','6-5','6-6','6-7','6-8','6-9'],
+          shape:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v4c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 10v4c0 1.7 3.6 3 8 3s8-1.3 8-3v-4"/></svg>' },
       ];
     },
 
