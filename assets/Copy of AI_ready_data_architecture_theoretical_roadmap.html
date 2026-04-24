@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Ready Data Architecture for Pharma — A 15-Day Theoretical Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<style>
+:root {
+  --navy: #1B2A4A;
+  --navy-deep: #0F1923;
+  --navy-light: #2A3F6A;
+  --amber: #D4A574;
+  --amber-bright: #E8C185;
+  --amber-light: #E8C9A4;
+  --parchment: #FAF6F0;
+  --sage: #7C9082;
+  --sage-light: #A3B8A8;
+  --coral: #E8735A;
+  --coral-light: #F0A090;
+  --forest: #2D5F3E;
+  --bg-dark: #0F1923;
+  --bg-card: #162030;
+  --bg-card-alt: #1A2840;
+  --text-main: #E8E2D8;
+  --text-dim: #9BA4AD;
+  --text-bright: #FFFFFF;
+  --border-subtle: rgba(212,165,116,0.15);
+  --border-amber: rgba(212,165,116,0.35);
+  --glow-amber: rgba(212,165,116,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Source Sans Pro',sans-serif;background:var(--bg-dark);color:var(--text-main);line-height:1.7;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:'Playfair Display',serif;color:var(--text-bright);line-height:1.25;letter-spacing:-0.01em}
+code,.metric-badge{font-family:'Fira Code',monospace;font-size:0.85em}
+
+/* ====================== NAVIGATION ====================== */
+.top-nav{position:sticky;top:0;z-index:1000;background:rgba(15,25,35,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-subtle);padding:0.7rem 1.5rem;display:flex;align-items:center;gap:1.2rem;overflow-x:auto}
+.nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.05rem;color:var(--amber);white-space:nowrap;letter-spacing:-0.02em}
+.nav-logo span{color:var(--text-dim);font-weight:400;font-size:0.8rem;margin-left:0.4rem}
+.nav-links{display:flex;gap:0.2rem;flex:1;overflow-x:auto;scrollbar-width:thin}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:0.82rem;font-weight:600;padding:0.4rem 0.8rem;border-radius:6px;white-space:nowrap;transition:all 0.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--amber);background:rgba(212,165,116,0.1)}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--coral));z-index:1001;transition:width 0.25s}
+
+/* ====================== HERO ====================== */
+.hero{min-height:85vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 1.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 40%,rgba(45,95,62,0.18) 0%,transparent 55%),radial-gradient(ellipse at 75% 30%,rgba(212,165,116,0.12) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(232,115,90,0.08) 0%,transparent 50%)}
+.hero::after{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(212,165,116,0.015) 2px,rgba(212,165,116,0.015) 4px);pointer-events:none}
+.hero-content{position:relative;z-index:1;max-width:900px}
+.hero-eyebrow{display:inline-block;font-family:'Fira Code',monospace;font-size:0.78rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber);background:rgba(212,165,116,0.08);padding:0.4rem 1rem;border:1px solid var(--border-amber);border-radius:24px;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.2rem,5.5vw,4rem);margin-bottom:1.2rem;font-weight:800;background:linear-gradient(135deg,var(--text-bright) 20%,var(--amber) 90%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:clamp(1rem,2vw,1.25rem);color:var(--text-dim);max-width:720px;margin:0 auto 2rem;font-weight:300}
+.hero .meta-badges{display:flex;flex-wrap:wrap;gap:0.55rem;justify-content:center}
+.meta-badge{background:rgba(22,32,48,0.8);border:1px solid var(--border-subtle);padding:0.4rem 0.95rem;border-radius:20px;font-size:0.78rem;color:var(--amber);font-weight:600;backdrop-filter:blur(4px)}
+.hero-hook{background:linear-gradient(135deg,rgba(27,42,74,0.6),rgba(45,95,62,0.3));border:1px solid rgba(45,95,62,0.4);color:var(--text-bright);padding:1rem 1.5rem;border-radius:14px;margin-bottom:2rem;max-width:740px;font-size:0.95rem}
+.hero-hook strong{color:var(--amber)}
+
+/* ====================== SECTIONS ====================== */
+.section{max-width:960px;margin:0 auto;padding:3.5rem 1.5rem}
+.section-header{margin-bottom:2.5rem}
+.section-header .label{font-family:'Fira Code',monospace;font-size:0.75rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.6rem;color:var(--amber)}
+.section-header h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin-bottom:0.6rem;font-weight:700}
+.section-header .desc{color:var(--text-dim);font-size:1.05rem;max-width:720px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-amber),transparent);margin:2.5rem 0}
+
+/* ====================== CARDS ====================== */
+.card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:14px;padding:1.6rem 1.8rem;margin-bottom:1.2rem;transition:border-color 0.3s,transform 0.3s}
+.card:hover{border-color:var(--border-amber)}
+.card h3{font-size:1.2rem;margin-bottom:0.7rem;color:var(--text-bright)}
+.card h4{font-size:1rem;margin-bottom:0.5rem;color:var(--amber);font-family:'Source Sans Pro',sans-serif;font-weight:700;letter-spacing:0.02em}
+
+/* ====================== CALLOUTS ====================== */
+.callout{border-radius:12px;padding:1.4rem 1.6rem;margin:1.5rem 0;position:relative}
+.callout-mentor{background:linear-gradient(135deg,rgba(250,246,240,0.04),rgba(250,246,240,0.02));border-left:4px solid var(--amber)}
+.callout-hook{background:linear-gradient(135deg,rgba(27,42,74,0.7),rgba(45,95,62,0.35));border:1px solid rgba(45,95,62,0.4);color:var(--text-bright)}
+.callout-hook strong{color:var(--amber-bright)}
+.callout-insight{background:rgba(124,144,130,0.1);border-left:4px solid var(--sage)}
+.callout-check{background:rgba(212,165,116,0.06);border:1px solid rgba(212,165,116,0.25);border-radius:12px;padding:1.4rem 1.6rem;margin:1.5rem 0}
+.callout-memory{background:rgba(232,115,90,0.07);border-left:4px solid var(--coral)}
+.callout-icon{font-size:1.2rem;margin-right:0.4rem}
+
+/* ====================== BADGES ====================== */
+.metric-badge{display:inline-block;background:rgba(212,165,116,0.12);border:1px solid rgba(212,165,116,0.28);color:var(--amber);padding:0.18rem 0.6rem;border-radius:5px;font-size:0.78rem;margin:0.15rem 0.2rem;font-weight:500}
+.diff{display:inline-block;padding:0.15rem 0.55rem;border-radius:10px;font-size:0.72rem;font-weight:700;margin-right:0.4rem;letter-spacing:0.02em}
+.diff-easy{background:rgba(45,95,62,0.22);color:#8BC49E}
+.diff-med{background:rgba(212,165,116,0.22);color:var(--amber)}
+.diff-hard{background:rgba(232,115,90,0.22);color:var(--coral)}
+.bloom-badge{display:inline-block;background:rgba(27,42,74,0.6);border:1px solid var(--navy-light);color:var(--amber-bright);padding:0.2rem 0.7rem;border-radius:4px;font-size:0.72rem;font-weight:600;letter-spacing:0.05em;margin-right:0.4rem}
+
+/* ====================== TABLES ====================== */
+.table-wrap{overflow-x:auto;margin:1.3rem 0;border-radius:10px;border:1px solid var(--border-subtle)}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{background:var(--bg-card-alt);color:var(--amber);font-weight:700;text-align:left;padding:0.8rem 1.1rem;border-bottom:2px solid var(--amber);font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase}
+td{padding:0.7rem 1.1rem;border-bottom:1px solid var(--border-subtle);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(212,165,116,0.03)}
+
+/* ====================== DIAGRAMS ====================== */
+.diagram-box{background:linear-gradient(135deg,var(--bg-card),var(--bg-card-alt));border:1px solid var(--border-subtle);border-radius:14px;padding:1.8rem 1.6rem;margin:1.8rem 0;text-align:center}
+.diagram-box h4{margin-bottom:1.1rem;color:var(--amber-bright)}
+.diagram-box .label{font-size:0.78rem;color:var(--text-dim);margin-top:1rem;font-style:italic;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.5}
+
+/* Architecture stack */
+.arch-stack{display:flex;flex-direction:column;gap:0;max-width:720px;margin:0.8rem auto}
+.arch-layer{padding:0.85rem 1.2rem;text-align:center;font-weight:600;font-size:0.88rem;border:1px solid rgba(255,255,255,0.08);position:relative;color:#fff}
+.arch-layer:first-child{border-radius:10px 10px 0 0}
+.arch-layer:last-child{border-radius:0 0 10px 10px}
+.arch-layer .sub{font-weight:400;font-size:0.78rem;color:rgba(255,255,255,0.75);display:block;margin-top:0.25rem}
+
+/* Flow arrows */
+.flow-container{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0.6rem;margin:1.4rem 0}
+.flow-step{background:var(--bg-card-alt);border:1px solid var(--border-subtle);border-radius:10px;padding:0.7rem 1.1rem;font-size:0.82rem;font-weight:600;text-align:center;min-width:110px;color:var(--text-main)}
+.flow-step .flow-sub{font-size:0.7rem;color:var(--text-dim);font-weight:400;margin-top:0.2rem}
+.flow-arrow{color:var(--amber);font-size:1.25rem;font-weight:700}
+
+/* Mountain range diagram */
+.mountain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.2rem 0}
+.mountain-card{background:var(--bg-card-alt);border:1px solid var(--border-subtle);border-radius:12px;padding:1.2rem;position:relative;overflow:hidden}
+.mountain-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--mountain-color,var(--amber))}
+.mountain-card .peak{font-size:1.8rem;margin-bottom:0.4rem;display:block}
+.mountain-card h5{font-size:0.95rem;color:var(--text-bright);margin-bottom:0.4rem}
+.mountain-card p{font-size:0.82rem;color:var(--text-dim);margin-bottom:0.5rem;line-height:1.5}
+.mountain-card .sources{font-family:'Fira Code',monospace;font-size:0.72rem;color:var(--amber);line-height:1.7}
+
+/* ====================== PHASE BANNERS ====================== */
+.phase-banner{padding:2.8rem 1.8rem;text-align:center;position:relative;border-radius:18px;margin:3.5rem 0 2rem;overflow:hidden}
+.phase-banner.p1{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%)}
+.phase-banner.p2{background:linear-gradient(135deg,rgba(212,165,116,0.3) 0%,rgba(212,165,116,0.12) 100%);border:1px solid rgba(212,165,116,0.25)}
+.phase-banner.p3{background:linear-gradient(135deg,rgba(124,144,130,0.3) 0%,rgba(45,95,62,0.2) 100%);border:1px solid rgba(124,144,130,0.25)}
+.phase-banner .phase-num{font-family:'Fira Code',monospace;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:0.5rem}
+.phase-banner h2{font-size:2rem;margin-bottom:0.6rem;font-weight:800}
+.phase-banner .phase-tagline{font-size:1rem;color:var(--text-main);max-width:520px;margin:0.6rem auto 1rem;font-style:italic}
+.phase-banner .phase-meta{display:flex;justify-content:center;gap:1.4rem;flex-wrap:wrap;font-size:0.85rem;color:var(--text-dim);margin-top:0.8rem}
+.phase-banner .phase-meta span{white-space:nowrap}
+
+/* ====================== DAY CARDS ====================== */
+.day-card{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:16px;margin-bottom:1.8rem;overflow:hidden;transition:border-color 0.3s}
+.day-card:hover{border-color:var(--border-amber)}
+.day-header{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.6rem;background:var(--bg-card-alt);border-bottom:1px solid var(--border-subtle)}
+.day-number{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--amber);line-height:1;min-width:2rem;text-align:center;letter-spacing:-0.02em}
+.day-title-wrap{flex:1}
+.day-label{font-family:'Fira Code',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:0.15rem}
+.day-title-wrap h3{font-size:1.2rem;margin:0;color:var(--text-bright)}
+.day-meta{display:flex;gap:0.4rem;flex-wrap:wrap;font-size:0.72rem}
+.day-body{padding:1.6rem 1.8rem}
+.day-body h4{font-size:0.88rem;color:var(--amber);text-transform:uppercase;letter-spacing:0.08em;margin-top:1.2rem;margin-bottom:0.5rem;font-family:'Source Sans Pro',sans-serif;font-weight:700}
+.day-body h4:first-child{margin-top:0}
+.day-body p{color:var(--text-main);font-size:0.95rem;line-height:1.7}
+.day-body ul{margin:0.5rem 0 0.8rem 1.2rem}
+.day-body ul li{margin-bottom:0.3rem;color:var(--text-main);font-size:0.93rem}
+
+/* Mini-analogy box inside day */
+.analogy-box{background:linear-gradient(135deg,rgba(250,246,240,0.04),rgba(250,246,240,0.01));border-left:4px solid var(--amber);padding:1rem 1.2rem;border-radius:8px;margin:0.8rem 0;font-style:italic;color:var(--text-main);font-size:0.94rem;line-height:1.65}
+.analogy-box strong{color:var(--amber);font-style:normal}
+
+/* Teach-back box */
+.teach-back{background:rgba(45,95,62,0.1);border:1px dashed var(--sage);border-radius:8px;padding:0.9rem 1.1rem;margin:0.8rem 0}
+.teach-back .tb-label{font-size:0.75rem;color:var(--sage-light);letter-spacing:0.1em;text-transform:uppercase;font-weight:700;margin-bottom:0.3rem}
+.teach-back p{font-size:0.9rem;color:var(--text-main);font-style:italic}
+
+/* Memory hook mini */
+.memory-hook-mini{background:rgba(232,115,90,0.08);border:1px solid rgba(232,115,90,0.25);border-radius:8px;padding:0.8rem 1.1rem;margin-top:0.8rem;font-size:0.9rem}
+.memory-hook-mini strong{color:var(--coral-light)}
+
+/* ====================== VISUAL DEVICES ====================== */
+.visual-comparison{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.2rem 0}
+.v-comp-card{background:var(--bg-card-alt);border:1px solid var(--border-subtle);border-radius:10px;padding:1.1rem;position:relative}
+.v-comp-card .v-icon{font-size:2rem;margin-bottom:0.5rem}
+.v-comp-card h5{font-size:0.95rem;color:var(--text-bright);margin-bottom:0.4rem}
+.v-comp-card p{font-size:0.82rem;color:var(--text-dim);line-height:1.5}
+
+/* Timeline */
+.timeline{position:relative;padding-left:2rem;margin:1.5rem 0}
+.timeline::before{content:'';position:absolute;left:0.5rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--amber),var(--sage),var(--coral))}
+.timeline-item{position:relative;margin-bottom:1.3rem;padding-left:1rem}
+.timeline-item::before{content:'';position:absolute;left:-1.7rem;top:0.4rem;width:12px;height:12px;border-radius:50%;border:2px solid var(--amber);background:var(--bg-dark)}
+.timeline-item h5{font-size:0.96rem;margin-bottom:0.2rem;color:var(--text-bright)}
+.timeline-item p{font-size:0.88rem;color:var(--text-dim)}
+.timeline-item .t-year{font-family:'Fira Code',monospace;color:var(--amber);font-size:0.78rem;font-weight:600}
+
+/* Jargon grid */
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0.8rem}
+.glossary-item{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:8px;padding:0.9rem 1.1rem;transition:border-color 0.2s}
+.glossary-item:hover{border-color:var(--border-amber)}
+.glossary-item .term{font-family:'Fira Code',monospace;color:var(--amber);font-weight:600;font-size:0.85rem;margin-bottom:0.25rem}
+.glossary-item .def{font-size:0.83rem;color:var(--text-dim);line-height:1.55}
+
+/* Mermaid container */
+.mermaid-wrap{background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:14px;padding:1.5rem;margin:1.5rem 0;overflow-x:auto}
+
+/* ====================== RESPONSIVE ====================== */
+@media(max-width:768px){
+  .section{padding:2.2rem 1rem}
+  .top-nav{padding:0.5rem 0.8rem;gap:0.5rem}
+  .nav-logo{font-size:0.88rem}
+  .nav-logo span{display:none}
+  .hero{min-height:65vh;padding:3rem 1rem}
+  .glossary-grid{grid-template-columns:1fr}
+  .flow-container{flex-direction:column}
+  .flow-arrow{transform:rotate(90deg)}
+  .day-header{flex-direction:column;align-items:flex-start;gap:0.5rem;padding:1rem 1.2rem}
+  .day-body{padding:1.2rem 1.3rem}
+  .phase-banner{padding:2rem 1.2rem}
+  .phase-banner h2{font-size:1.5rem}
+}
+
+/* ====================== PRINT ====================== */
+@media print{
+  .top-nav,.progress-bar{display:none}
+  body{background:#fff;color:#222}
+  .card,.callout,.phase-banner,.day-card{break-inside:avoid;page-break-inside:avoid}
+  .hero{min-height:auto;padding:2rem}
+  .hero h1{color:#1B2A4A;-webkit-text-fill-color:#1B2A4A}
+}
+
+/* ====================== ANIMATIONS ====================== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.section{animation:fadeUp 0.6s ease-out}
+.hero-content>*{animation:fadeUp 0.7s ease-out backwards}
+.hero-content>*:nth-child(1){animation-delay:0.05s}
+.hero-content>*:nth-child(2){animation-delay:0.15s}
+.hero-content>*:nth-child(3){animation-delay:0.25s}
+.hero-content>*:nth-child(4){animation-delay:0.35s}
+.hero-content>*:nth-child(5){animation-delay:0.45s}
+
+/* Subtle grain texture hint */
+.grain{position:fixed;inset:0;pointer-events:none;opacity:0.025;z-index:999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E")}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="top-nav">
+  <div class="nav-logo">🏗️ AI-Ready Data <span>15-Day Roadmap</span></div>
+  <div class="nav-links">
+    <a href="#hook">Hook</a>
+    <a href="#pitch">Pitch</a>
+    <a href="#origin">Origin</a>
+    <a href="#prereq">Prereq</a>
+    <a href="#map">Map</a>
+    <a href="#phase1">Week 1</a>
+    <a href="#phase2">Week 2</a>
+    <a href="#phase3">Week 3</a>
+    <a href="#jargon">Jargon</a>
+    <a href="#pitfalls">Pitfalls</a>
+    <a href="#cross">Cross</a>
+    <a href="#schedule">Review</a>
+    <a href="#wisdom">Wisdom</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<header class="hero" id="hook">
+  <div class="hero-content">
+    <div class="hero-eyebrow">A 15-Day Theoretical Roadmap · Visual-First</div>
+    <h1>AI-Ready Data Architecture<br>for Pharma</h1>
+    <p class="subtitle">From "what even is a lakehouse?" to "I can draw the full stack from memory" — guided by a kitchen metaphor, fifteen vivid analogies, and one origin story for every layer.</p>
+    <div class="hero-hook">
+      <span class="callout-icon">🔥</span> <strong>DID YOU KNOW?</strong> A typical pharma company has 400+ data sources — yet fewer than 15% are wired together in a way AI can actually use. The <em>architecture gap</em>, not the algorithm, is what kills ~87% of AI projects. This roadmap teaches you the vocabulary and the mental model to close that gap.
+    </div>
+    <div class="meta-badges">
+      <span class="meta-badge">📅 15 Days</span>
+      <span class="meta-badge">🎯 3 Phases</span>
+      <span class="meta-badge">🧠 Bloom's: Remember → Analyze</span>
+      <span class="meta-badge">📊 Visual-First</span>
+      <span class="meta-badge">💊 Pharma Context</span>
+      <span class="meta-badge">🔁 Spaced Review</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     SECTION 1: 30-SECOND ELEVATOR PITCH
+============================================================ -->
+<section class="section" id="pitch">
+  <div class="section-header">
+    <div class="label">Section 1 · The Big Idea</div>
+    <h2>The 30-Second Elevator Pitch</h2>
+    <p class="desc">Before we spend 15 days inside this topic, here's the whole thing in one sentence — plus the master analogy that will anchor every concept you learn.</p>
+  </div>
+
+  <div class="card">
+    <h3>🎯 AI-Ready Data Architecture in 30 Seconds</h3>
+    <p style="font-size:1.08rem;color:var(--text-bright)">It's the <strong>complete kitchen setup</strong> that lets AI "chefs" actually cook — not just the ingredients (data), but the organized pantry, the plumbing, the prep stations, the recipe book, and the quality checks that turn raw inputs into a Michelin-star meal.</p>
+  </div>
+
+  <div class="callout callout-mentor">
+    <h4><span class="callout-icon">🧠</span> THE MASTER ANALOGY — The Restaurant Kitchen</h4>
+    <p style="margin-top:0.6rem">Imagine a world-class restaurant. The <strong>ingredients</strong> are your data (claims, Rx, CRM logs, EHR notes). The <strong>kitchen architecture</strong> is the data platform — storage, pipes, prep stations. The <strong>chefs</strong> are AI and ML models. The <strong>menu</strong> is your use cases (HCP 360, patient journey, forecasting). And the <strong>diners</strong> are anyone waiting for insights.</p>
+    <p style="margin-top:0.7rem">Here's the twist: you can hire the most brilliant chef in the world, but if the kitchen has no running water, ingredients are thrown in one big pile, and there's no recipe book — <em>nothing edible comes out</em>. That's exactly where most pharma AI projects fail. They hire the chef (buy the tool) but never build the kitchen.</p>
+    <p style="margin-top:0.9rem;color:var(--amber);font-weight:600">This roadmap teaches you the kitchen — every pipe, every station, every recipe book — the architecture that makes AI actually work.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2: ORIGIN STORY
+============================================================ -->
+<section class="section" id="origin">
+  <div class="section-header">
+    <div class="label" style="color:var(--sage-light)">Section 2 · How We Got Here</div>
+    <h2>The Origin Story</h2>
+    <p class="desc">You can't understand the shape of modern data architecture without seeing the problems that forced it into existence. Here's the three-act play — in 40 years.</p>
+  </div>
+
+  <div class="diagram-box">
+    <h4>From Vault → Swamp → Lakehouse</h4>
+    <div class="timeline" style="text-align:left">
+      <div class="timeline-item">
+        <span class="t-year">1988–2005</span>
+        <h5>🏛️ Act 1 — The Warehouse Era</h5>
+        <p>Barry Devlin &amp; Paul Murphy at IBM Ireland proposed the "business data warehouse" — a single, organized vault where all enterprise reporting lived. Teradata commercialized it. By 2000, pharma companies were running multi-million-dollar warehouse appliances. It worked beautifully — for tidy, rectangular, structured data.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="t-year">2006–2015</span>
+        <h5>🌊 Act 2 — The Lake (and Swamp) Era</h5>
+        <p>Doug Cutting built Hadoop (named after his son's toy elephant) so Yahoo could store petabytes on cheap hardware. Pharma companies rushed in. James Dixon coined "data lake" in 2010 — "a large body of water in a more natural state." But without governance, lakes became <em>swamps</em>: nobody could find anything, data quality evaporated, PHI scattered across files nobody could trace.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="t-year">2020–Today</span>
+        <h5>🏠 Act 3 — The Lakehouse &amp; The AI-Ready Era</h5>
+        <p>In January 2020, Databricks and UC Berkeley published "Lakehouse: A New Generation of Open Platforms." They argued you could get warehouse-grade governance on lake-grade storage by layering metadata on open file formats. Then GenAI arrived in 2023 and moved the goalposts again: architecture must not only serve dashboards, but also <strong>feed AI models</strong>. That's where we are today — and that's what you're about to learn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3: PREREQUISITES
+============================================================ -->
+<section class="section" id="prereq">
+  <div class="section-header">
+    <div class="label" style="color:var(--sage-light)">Section 3 · Before You Begin</div>
+    <h2>Prerequisites Check</h2>
+  </div>
+
+  <div class="callout callout-insight">
+    <h4>🔑 What You'll Want Before Day 1</h4>
+    <p style="margin-top:0.5rem"><strong>✅ Basic data literacy.</strong> You know what a table, row, and column are. You've seen a spreadsheet and a dashboard.<br>
+    <em>Self-test: Can you describe the difference between a row and a column?</em> → You're good.</p>
+    <p style="margin-top:0.5rem"><strong>✅ A little pharma vocabulary helps.</strong> If terms like <em>Rx</em>, <em>HCP</em>, <em>patient journey</em>, <em>formulary</em>, and <em>prior authorization</em> ring a bell, you'll move faster through the examples. If not — don't worry, we translate every term on first use.<br>
+    <em>Self-test: Can you loosely describe what "prior authorization" means?</em> → Perfect.</p>
+    <p style="margin-top:0.5rem"><strong>✅ No coding or engineering background required.</strong> This is a conceptual roadmap. Not a single line of code anywhere.</p>
+    <p style="margin-top:0.7rem;color:var(--sage-light);font-weight:600">⏱️ Gap-filling time: ~0 hours. If you understand "spreadsheet" and have heard the word "database," you're ready.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4: CONCEPT MAP
+============================================================ -->
+<section class="section" id="map">
+  <div class="section-header">
+    <div class="label">Section 4 · The Big Picture</div>
+    <h2>The Concept Map</h2>
+    <p class="desc">One visual to hold in your head for the entire 15 days. Every day we add one more room to this kitchen.</p>
+  </div>
+
+  <div class="mermaid-wrap">
+    <pre class="mermaid">
+flowchart TB
+    classDef foundation fill:#1B2A4A,stroke:#D4A574,color:#FAF6F0
+    classDef engine fill:#D4A574,stroke:#D4A574,color:#1B2A4A
+    classDef ai fill:#7C9082,stroke:#7C9082,color:#FAF6F0
+    classDef synth fill:#E8735A,stroke:#E8735A,color:#FAF6F0
+
+    A[🏗️ AI-Ready Data Architecture]
+
+    A --> P1[📘 Week 1: Foundations]
+    A --> P2[📗 Week 2: Engine Room]
+    A --> P3[📙 Week 3: The AI Stack]
+
+    P1 --> D1[Day 1: Kitchen Metaphor]
+    P1 --> D2[Day 2: Origin Story]
+    P1 --> D3[Day 3: Data Mountain Ranges]
+    P1 --> D4[Day 4: Warehouse vs Lake vs Lakehouse]
+    P1 --> D5[Day 5: The 9 Data Marts]
+
+    P2 --> D6[Day 6: ETL vs ELT]
+    P2 --> D7[Day 7: Data Quality - ACCTV]
+    P2 --> D8[Day 8: Medallion Architecture]
+    P2 --> D9[Day 9: Ontology]
+    P2 --> D10[Day 10: Semantic + Context Layers]
+
+    P3 --> D11[Day 11: Feature Stores]
+    P3 --> D12[Day 12: Vector DBs &amp; Embeddings]
+    P3 --> D13[Day 13: RAG]
+    P3 --> D14[Day 14: Data Mesh vs Fabric]
+    P3 --> D15[Day 15: Full-Stack Synthesis]
+
+    class P1,D1,D2,D3,D4,D5 foundation
+    class P2,D6,D7,D8,D9,D10 engine
+    class P3,D11,D12,D13,D14 ai
+    class D15 synth
+    </pre>
+  </div>
+
+  <div class="callout callout-insight">
+    <p><strong>How to read this map:</strong> each box becomes a 20–30 minute learning session. You'll leave every day with one new visual, one new analogy, and one new memory hook. By Day 15, you'll redraw this map from memory — and each box will have a story attached to it.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     WEEK 1 BANNER
+============================================================ -->
+<div class="section" id="phase1">
+  <div class="phase-banner p1">
+    <div class="phase-num">Week 1 of 3 · Days 1–5</div>
+    <h2>Foundations — The Kitchen Blueprint</h2>
+    <p class="phase-tagline">Before we build anything, we have to see the kitchen, know where ingredients come from, and understand the three generations of storage that got us here.</p>
+    <div class="phase-meta">
+      <span>⏱️ 5 × ~30 min</span>
+      <span>🎯 Bloom's: Remember</span>
+      <span>📊 🟢 Beginner</span>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 1 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">01</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 1 · Week 1</div>
+        <h3>The Kitchen Metaphor — Why Architecture Matters for AI</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">REMEMBER</span>
+          <span class="diff diff-easy">🟢 Easy</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> In a 2023 Gartner analysis, the #1 reason enterprise AI projects fail wasn't model quality, budget, or leadership — it was "insufficient data foundations." The algorithm is the easy part. The kitchen is the hard part.
+      </div>
+
+      <h4>The Visual</h4>
+      <div class="diagram-box">
+        <div class="flow-container">
+          <div class="flow-step" style="border-color:var(--coral)">📦 Ingredients<div class="flow-sub">(Data)</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="border-color:var(--amber)">🏗️ Kitchen<div class="flow-sub">(Architecture)</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="border-color:var(--sage)">👨‍🍳 Chef<div class="flow-sub">(AI Model)</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="border-color:var(--forest)">🍽️ Dish<div class="flow-sub">(Insight)</div></div>
+        </div>
+        <div class="label">Four actors, one dependency chain. Weaken any link and nothing reaches the diner.</div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>"AI-Ready Data Architecture" is the entire set of systems, standards, and structures that turns raw, scattered enterprise data into something an AI model can reliably consume. It covers <em>where</em> data lives, <em>how</em> it flows, <em>what</em> it means, and <em>who</em> is allowed to touch it. It exists because modern AI (especially large language models) is extraordinarily sensitive to data quality, consistency, and context. Feed it chaos, and you get confident-sounding chaos back.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Think of a Michelin-star restaurant. The chef is a genius, but the kitchen is spotless — every herb labeled, every stove calibrated, every recipe standardized. Now picture the same chef dropped into a junkyard with a gas burner and a pile of unlabeled cans. Same talent, wildly different outcome. <em>AI models are chefs. Your architecture is the kitchen.</em>
+      </div>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"You know how even the best cook can't make dinner if the kitchen is a mess and the ingredients are rotten? AI is like that cook. Data architecture is like cleaning up the kitchen, labeling everything, and making sure the fridge works — so the cook can actually cook."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "AI chefs need kitchens." Every time you hear someone say "our AI project failed," ask: did they build the kitchen, or just hire the chef?
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 2 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">02</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 2 · Week 1</div>
+        <h3>The Three Generations — Vault → Swamp → Lakehouse</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">REMEMBER</span>
+          <span class="diff diff-easy">🟢 Easy</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> Hadoop — the technology that launched the entire "big data" era — is named after Doug Cutting's son's yellow toy elephant. The name was chosen because it was "easy to spell and pronounce, meaningless, and not used elsewhere."
+      </div>
+
+      <h4>The Visual — Three Generations, Three Problems</h4>
+      <div class="visual-comparison">
+        <div class="v-comp-card" style="border-color:var(--navy-light)">
+          <div class="v-icon">🏛️</div>
+          <h5>The Warehouse (1988)</h5>
+          <p>Structured-only. Strict schemas. Perfect for pre-planned reports. Chokes on unstructured data.</p>
+        </div>
+        <div class="v-comp-card" style="border-color:var(--coral)">
+          <div class="v-icon">🌊</div>
+          <h5>The Lake (2006)</h5>
+          <p>Store everything, cheap. Infinite flexibility. But without rules, lakes become swamps nobody can navigate.</p>
+        </div>
+        <div class="v-comp-card" style="border-color:var(--sage)">
+          <div class="v-icon">🏠</div>
+          <h5>The Lakehouse (2020)</h5>
+          <p>Lake's flexibility + warehouse's governance. A metadata layer on open storage. The current gold standard.</p>
+        </div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>Every generation was born from the pain of the previous one. Warehouses couldn't handle the EHR note explosion after the 2009 HITECH Act. Lakes couldn't be governed once they held PHI. The lakehouse was a compromise between rigor and flexibility — and the timing happened to align perfectly with the AI/GenAI wave of 2023+, because AI wanted both: the scale of a lake and the trust of a warehouse.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Think of a library. A <em>warehouse</em> is the Library of Congress — every book catalogued, shelved by Dewey decimal, pristine. A <em>lake</em> is a warehouse that burned down and every book landed in a swimming pool — technically everything is there, but good luck finding the one about WWII. A <em>lakehouse</em> is the pool, drained and reorganized, with a magical index floating on top that tells you exactly where every waterlogged book now lives.
+      </div>
+
+      <h4>🔗 How This Connects</h4>
+      <p>Day 1 gave you the kitchen metaphor. Day 2 tells you why we <em>had</em> to invent a new kitchen three times. Every concept we learn from here on lives <em>inside</em> the third-generation lakehouse — so remember: we're not learning history for its own sake, we're learning why the current design choices exist.</p>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"First, people built super-organized data vaults, but the vaults couldn't hold messy stuff like emails and doctor notes. So they built giant open lakes that held everything — but then nobody could find anything. The lakehouse is a lake with a smart librarian glued on top."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>V</strong>ault → <strong>S</strong>wamp → <strong>L</strong>akehouse." Say it out loud. The middle one is a swamp because that's what unmanaged lakes actually became — and remembering the failure is what makes the solution make sense.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 3 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">03</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 3 · Week 1</div>
+        <h3>The Four Data Mountain Ranges (Structured vs. Unstructured)</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">REMEMBER</span>
+          <span class="diff diff-easy">🟢 Easy</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> Industry estimates suggest roughly 80% of enterprise data is <em>unstructured</em> — free text, PDFs, images, audio. Yet most pharma commercial analytics still runs almost entirely on the remaining 20%. The 80% is where GenAI finally unlocks value.
+      </div>
+
+      <h4>The Visual — Four Mountain Ranges</h4>
+      <div class="mountain-grid">
+        <div class="mountain-card" style="--mountain-color:var(--amber)">
+          <span class="peak">🏔️</span>
+          <h5>Commercial &amp; Market Access</h5>
+          <p>The biggest range for commercial analytics.</p>
+          <div class="sources">IQVIA Xponent · LAAD · APLD · Veeva CRM · Symphony · Komodo · MMIT · Claims · Rx feeds</div>
+        </div>
+        <div class="mountain-card" style="--mountain-color:var(--sage)">
+          <span class="peak">⛰️</span>
+          <h5>Clinical &amp; R&amp;D</h5>
+          <p>Trial data, outcomes, safety.</p>
+          <div class="sources">CDISC SDTM/ADaM · EDC · CTMS · Safety DB · Registries · Real-world evidence</div>
+        </div>
+        <div class="mountain-card" style="--mountain-color:var(--coral)">
+          <span class="peak">🗻</span>
+          <h5>Human — HCP &amp; Patient</h5>
+          <p>The people data: providers and patients.</p>
+          <div class="sources">NPI · HCP affiliations · EHR notes · Hub enrollment · Patient surveys · Social listening</div>
+        </div>
+        <div class="mountain-card" style="--mountain-color:var(--navy-light)">
+          <span class="peak">🏔️</span>
+          <h5>Operational &amp; External</h5>
+          <p>Context data — what the outside world is doing.</p>
+          <div class="sources">Formulary · Policy · Competitive intel · Macro data · News feeds · Scientific literature</div>
+        </div>
+      </div>
+
+      <h4>Structured vs. Unstructured — The Critical Split</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Dimension</th><th>Structured</th><th>Unstructured</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Shape</strong></td><td>Rows &amp; columns</td><td>Free form — text, image, audio, PDF</td></tr>
+            <tr><td><strong>Examples</strong></td><td>Claims, Rx fills, call logs, lab values</td><td>EHR physician notes, PA denial letters, rep call notes, trial protocols</td></tr>
+            <tr><td><strong>Tells you</strong></td><td>WHAT happened and WHEN</td><td>WHY it happened and HOW it felt</td></tr>
+            <tr><td><strong>Processable by</strong></td><td>SQL, dashboards, classical ML</td><td>NLP, embeddings, LLMs</td></tr>
+            <tr><td><strong>Share of pharma data</strong></td><td>~20%</td><td>~80%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Structured data is the nutrition label on the box — grams of protein, calories, neat little numbers. Unstructured data is the customer's Yelp review of the dish: "The texture was gummy but the flavor reminded me of my grandmother's kitchen." The label tells you <em>what's in it</em>. The review tells you <em>what it was like to eat it</em>. Pharma used to only look at labels. AI finally lets us read the reviews — at scale.
+      </div>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"Some data fits neatly into a spreadsheet — like a list of everyone's height. Other data is messy, like doctors' handwritten notes or audio recordings. The messy stuff is 80% of what companies have, and only recently can computers actually read it."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>SLHO</strong> — four ranges: <strong>S</strong>ales/Commercial, c<strong>L</strong>inical, <strong>H</strong>uman, <strong>O</strong>perational." Say it as "Slow": data comes in slow from four directions, and your job is to unite them.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 4 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">04</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 4 · Week 1</div>
+        <h3>Warehouse vs. Lake vs. Lakehouse — The Deep Comparison</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">UNDERSTAND</span>
+          <span class="diff diff-easy">🟢 Easy</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> One unnamed Top-10 pharma CDO reportedly said in 2019: "Our data lake became a compliance liability. We have PHI scattered across files nobody can find." That single quote launched a multi-billion-dollar migration industry.
+      </div>
+
+      <h4>The Visual — Side-by-Side</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Property</th><th>🏛️ Warehouse</th><th>🌊 Lake</th><th>🏠 Lakehouse</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Data types</strong></td><td>Structured only</td><td>Any type</td><td>Any type</td></tr>
+            <tr><td><strong>Schema</strong></td><td>On write (rigid)</td><td>On read (loose)</td><td>Both, flexible</td></tr>
+            <tr><td><strong>Governance</strong></td><td>Strong</td><td>Weak</td><td>Strong</td></tr>
+            <tr><td><strong>Cost</strong></td><td>$$$</td><td>$</td><td>$$</td></tr>
+            <tr><td><strong>AI/ML friendly?</strong></td><td>Partial — no unstructured</td><td>Yes, but chaotic</td><td>Yes, clean</td></tr>
+            <tr><td><strong>ACID transactions</strong></td><td>Yes</td><td>No</td><td>Yes (via Delta/Iceberg)</td></tr>
+            <tr><td><strong>Typical era</strong></td><td>1990s–2010s</td><td>2010s</td><td>2020–today</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Why the Lakehouse Won (For Now)</h4>
+      <p>The lakehouse solved a problem nobody believed was solvable: you can get <em>transaction-level reliability</em> (the warehouse's superpower) on top of <em>cheap object storage with any file format</em> (the lake's superpower). The trick was a metadata layer — open table formats like Delta Lake, Apache Iceberg, and Apache Hudi — that sits on top of plain files and tracks every change. Modern AI needs this because models want huge volumes of varied data (lake) AND reliable snapshots they can reproduce (warehouse).</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Imagine three garages. Garage 1 is your grandmother's — every tool labeled, in a drawer, in alphabetical order (warehouse). Garage 2 is a frat-house basement — everything is there, somewhere (lake). Garage 3 is the frat-house basement, but someone installed a smart inventory app that knows exactly where every item was last seen and who moved it (lakehouse). You still park your car anywhere, but nothing is ever lost.
+      </div>
+
+      <h4>🔗 How This Connects</h4>
+      <p>Tomorrow (Day 5) we zoom <em>inside</em> the lakehouse and discover that it's not one big storage blob — it's organized into specialized prep stations called data marts. Today's lakehouse is the <em>building</em>. Tomorrow is the <em>floor plan</em>.</p>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"A warehouse is like a strict library — everything perfect, but only books allowed. A lake is like throwing every book, toy, and tape into a swimming pool — cheap but impossible to search. A lakehouse is the pool with a magic catalogue that knows where everything is, even the weird stuff."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "Warehouse = <strong>strict</strong>. Lake = <strong>wild</strong>. Lakehouse = <strong>smart</strong>." Three S-words, three eras, one trajectory.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 5 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">05</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 5 · Week 1</div>
+        <h3>The Nine Data Marts — Specialized Prep Stations</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">UNDERSTAND</span>
+          <span class="diff diff-med">🟡 Medium</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> In most mature pharma orgs, five or more teams can independently calculate "market share" and get five different numbers. The difference is usually hidden in which data mart they're querying — and what got included or excluded on the way in.
+      </div>
+
+      <h4>The Visual — The 9 Prep Stations</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Data Mart</th><th>Kitchen Station</th><th>Key Data Inside</th><th>Business Question It Answers</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Commercial Analytics</strong></td><td>Main grill</td><td>TRx, NBRx, market share</td><td>How are we performing in the market?</td></tr>
+            <tr><td><strong>HCP 360</strong></td><td>Tasting station</td><td>Rx, affiliations, payer mix, promo response</td><td>Who is this physician and what drives them?</td></tr>
+            <tr><td><strong>Patient Journey</strong></td><td>Full tasting menu</td><td>Dx → Tx → Adherence → Switch timeline</td><td>What happens to patients over time?</td></tr>
+            <tr><td><strong>Promotional Effectiveness</strong></td><td>Spice rack</td><td>Calls, emails, samples, digital, SOV</td><td>Which channels actually move prescribing?</td></tr>
+            <tr><td><strong>Payer / Market Access</strong></td><td>Supply procurement</td><td>Formulary, PA rates, coverage, GTN</td><td>Can patients actually get our drug?</td></tr>
+            <tr><td><strong>Patient Services / Hub</strong></td><td>Front-of-house</td><td>Enrollment, BV, co-pay, time-to-start</td><td>Where do patients drop off?</td></tr>
+            <tr><td><strong>Sales Force Analytics</strong></td><td>Shift management</td><td>Call plans, reach, frequency, quota</td><td>Is the field team effective?</td></tr>
+            <tr><td><strong>GTM Strategy</strong></td><td>Menu planning</td><td>Targets, segments, launch plans</td><td>Where should we invest next?</td></tr>
+            <tr><td><strong>Clinical Trial</strong></td><td>R&amp;D lab</td><td>Endpoints, enrollment, safety</td><td>Is the molecule working?</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Core Concept — What "Analytical-Ready" Means</h4>
+      <p>A data mart is a <em>focused subset</em> of your data, organized around one business area. The data has already been cleaned, joined, de-duplicated, standardized, and shaped so that a business user or AI model can query it directly and get a trustworthy answer — <strong>without</strong> having to wrangle raw files. "Analytical-ready" is the whole point: the hard prep work happened <em>before</em> you arrived, so you spend your time analyzing, not cleaning.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Picture a massive Indian wedding kitchen. Ingredients pour in from dozens of suppliers — some arrive perfectly portioned (structured claims), others arrive whole and unprocessed (unstructured EHR notes, PDFs). The <strong>lakehouse</strong> is the kitchen building. The <strong>nine data marts</strong> are the nine prep stations: one for biryani, one for sweets, one for starters, one for breads. Each station has <em>exactly</em> what it needs, pre-chopped, pre-marinated, ready to cook. The chefs (AI) focus on cooking — never on hunting for salt.
+      </div>
+
+      <h4>🔗 How This Connects</h4>
+      <p>Day 4 gave us the building (lakehouse). Day 5 gave us the floor plan (9 marts). Next week we ask: <em>how does raw data get from "just arrived at the loading dock" to "sitting pre-chopped at the right station"?</em> That's the engine room.</p>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"You know how in a huge kitchen, different cooks work at different stations — one does salads, one does desserts, one does grill? Data marts are those stations, but for data. Each mart has only the stuff that team needs, already cleaned and ready, so nobody wastes time chopping onions."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>9 marts, 9 stations, 9 business questions.</strong>" You don't need to memorize all nine names today — you need to remember that a lakehouse without marts is a warehouse without shelves.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     WEEK 2 BANNER
+============================================================ -->
+<div class="section" id="phase2">
+  <div class="phase-banner p2">
+    <div class="phase-num">Week 2 of 3 · Days 6–10</div>
+    <h2>The Engine Room — How Data Becomes AI-Ready</h2>
+    <p class="phase-tagline">Now we go under the floorboards. Plumbing, quality controls, refinement stages, translation dictionaries, and the three invisible layers that make data <em>intelligent</em>.</p>
+    <div class="phase-meta">
+      <span>⏱️ 5 × ~30 min</span>
+      <span>🎯 Bloom's: Understand</span>
+      <span>📊 🟡 Medium</span>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 6 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">06</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 6 · Week 2</div>
+        <h3>Data Pipelines — ETL vs. ELT (And Why ELT Won)</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">UNDERSTAND</span>
+          <span class="diff diff-easy">🟢 Easy</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> In 2015, Airbnb's data team found they were spending 80% of their time just <em>finding and understanding</em> data before they could analyze it. That frustration birthed Apache Airflow — the open-source pipeline tool that now orchestrates data flows at Spotify, Slack, and most of the Fortune 500.
+      </div>
+
+      <h4>The Visual — Two Pipeline Philosophies</h4>
+      <div class="diagram-box">
+        <h4 style="margin-bottom:0.8rem;color:var(--coral)">🐢 ETL (Old Way)</h4>
+        <div class="flow-container">
+          <div class="flow-step">📦 Extract</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="border-color:var(--coral)">⚙️ Transform<div class="flow-sub">in staging server</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">📥 Load<div class="flow-sub">into warehouse</div></div>
+        </div>
+        <h4 style="margin-top:1.5rem;margin-bottom:0.8rem;color:var(--sage-light)">🚀 ELT (Modern Way)</h4>
+        <div class="flow-container">
+          <div class="flow-step">📦 Extract</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">📥 Load<div class="flow-sub">raw, into lakehouse</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="border-color:var(--sage)">⚙️ Transform<div class="flow-sub">in place, using lakehouse compute</div></div>
+        </div>
+        <div class="label">The difference is one letter — but it changes who does the work, where, and how fast.</div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>A <strong>data pipeline</strong> is a set of automated steps that moves data from source systems to where it's used. ETL (Extract, Transform, Load) is the old pattern: transform data in a separate staging environment, <em>then</em> load the clean result into a warehouse. ELT (Extract, Load, Transform) flips the order: dump the raw data into the lakehouse first, transform it <em>inside</em> using the lakehouse's own compute muscle. Modern platforms like Databricks and Snowflake are powerful enough to handle transformation in-place — faster, cheaper, and you get to keep the raw data for reprocessing.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> ETL is washing and chopping vegetables in a separate room <em>before</em> carrying them into the kitchen. ELT is carrying the vegetables straight into the kitchen and prepping them at the station where they'll actually be used. In a small kitchen with one burner, the first makes sense. In a commercial kitchen with twenty stations, the second is obviously faster.
+      </div>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"ETL is cleaning your groceries on the driveway before bringing them inside. ELT is throwing everything into the fridge and cleaning them at the counter when you're ready to cook. Modern kitchens are big enough that ELT is just faster."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>E-L-T</strong> = Extract, <em>Land</em>, Transform." The L stands for <em>land the raw stuff first</em> — transformation happens later, where the power is.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 7 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">07</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 7 · Week 2</div>
+        <h3>Data Quality — The Five Dimensions (ACCTV)</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">UNDERSTAND</span>
+          <span class="diff diff-med">🟡 Medium</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> Classical software: "Garbage in, garbage out." Modern AI: "Garbage in, <em>confident-sounding</em> garbage out." A large language model given wrong data doesn't look confused — it looks articulate and wrong. That's the new failure mode.
+      </div>
+
+      <h4>The Visual — The 5 Dimensions</h4>
+      <div class="mountain-grid">
+        <div class="mountain-card" style="--mountain-color:var(--coral)">
+          <span class="peak">🎯</span>
+          <h5>A — Accuracy</h5>
+          <p>Is it correct?</p>
+          <div class="sources">"Is Dr. Patel actually a cardiologist, or miscoded?"</div>
+        </div>
+        <div class="mountain-card" style="--mountain-color:var(--amber)">
+          <span class="peak">📋</span>
+          <h5>C — Completeness</h5>
+          <p>Is anything missing?</p>
+          <div class="sources">"Are 30% of patient records missing Dx dates?"</div>
+        </div>
+        <div class="mountain-card" style="--mountain-color:var(--sage)">
+          <span class="peak">🔗</span>
+          <h5>C — Consistency</h5>
+          <p>Does it match across sources?</p>
+          <div class="sources">"Does 'Humira' in claims match 'adalimumab' in EHR?"</div>
+        </div>
+        <div class="mountain-card" style="--mountain-color:var(--forest)">
+          <span class="peak">⏰</span>
+          <h5>T — Timeliness</h5>
+          <p>Is it fresh enough?</p>
+          <div class="sources">"Is your claims data already 3 months stale?"</div>
+        </div>
+        <div class="mountain-card" style="--mountain-color:var(--navy-light)">
+          <span class="peak">✅</span>
+          <h5>V — Validity</h5>
+          <p>Does it make logical sense?</p>
+          <div class="sources">"A patient age of 250 is a real entry in some systems."</div>
+        </div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>Data quality is the multi-dimensional measure of whether your data can be <em>trusted</em>. A dataset can be technically complete but totally inaccurate. It can be accurate but already stale. It can be fresh, accurate, and complete — but use "Humira" in one column and "adalimumab" in another, so no machine can tell they're the same drug. AI amplifies all five dimensions. A model trained on inconsistent data will confidently produce inconsistent outputs — and look smart doing it.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Think of a health inspector walking into your restaurant. They don't ask one question — they ask five. Is the meat the right kind? (Accuracy.) Are all the ingredients on the label actually there? (Completeness.) Does the tomato sauce in the kitchen match the tomato sauce listed on the menu? (Consistency.) Is the fish fresh? (Timeliness.) Is that lobster actually 200 years old? (Validity.) Fail any one, and the whole kitchen closes.
+      </div>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"Good data is a little like good food — it has to be correct, complete, fresh, consistent, and believable. If any one of those five is bad, the whole meal is ruined. AI just turns bad data into a fancier-looking bad meal."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>ACCTV</strong>" — the 5-channel TV of data quality. <strong>A</strong>ccuracy, <strong>C</strong>ompleteness, <strong>C</strong>onsistency, <strong>T</strong>imeliness, <strong>V</strong>alidity. If one channel is fuzzy, the whole picture is wrong.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 8 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">08</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 8 · Week 2</div>
+        <h3>The Medallion Architecture — Bronze / Silver / Gold</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">UNDERSTAND</span>
+          <span class="diff diff-med">🟡 Medium</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> There's a strict industry rule most beginners don't know: <em>AI models should only consume Silver or Gold layer data — never Bronze</em>. Feeding raw data to AI is like asking a chef to cook with ingredients still in the crate, mud and all.
+      </div>
+
+      <h4>The Visual — Three Medallion Layers</h4>
+      <div class="diagram-box">
+        <h4 style="margin-bottom:1rem">The Medallion Architecture</h4>
+        <div class="arch-stack">
+          <div class="arch-layer" style="background:linear-gradient(90deg,#8B6914,#A67C00);border-radius:10px 10px 0 0">
+            🥇 <strong>GOLD</strong> — Business-Ready, Aggregated
+            <span class="sub">Data marts, ML features, KPI aggregates. AI consumes here.</span>
+            <span class="sub">Example: an HCP 360 table with unified prescribing + promo + payer view</span>
+          </div>
+          <div class="arch-layer" style="background:linear-gradient(90deg,#808080,#A0A0A0)">
+            🥈 <strong>SILVER</strong> — Cleaned, Standardized, Joined
+            <span class="sub">Duplicates removed, IDs resolved, ontology mapped, validated.</span>
+            <span class="sub">Example: claims with standardized drug names, deduplicated HCPs</span>
+          </div>
+          <div class="arch-layer" style="background:linear-gradient(90deg,#8B4513,#A0522D);border-radius:0 0 10px 10px">
+            🥉 <strong>BRONZE</strong> — Raw, As-Received
+            <span class="sub">Exact copy from source. Nothing touched. Audit trail preserved.</span>
+            <span class="sub">Example: raw IQVIA LAAD feed, unprocessed Veeva CRM extract</span>
+          </div>
+        </div>
+        <div class="label">⚠️ The rule: AI only eats Silver or Gold. Never Bronze.</div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>The medallion pattern is a refinement workflow for data quality. Data enters at the <strong>Bronze</strong> layer exactly as it arrived — unchanged, auditable, reproducible. It moves to the <strong>Silver</strong> layer only after cleaning: duplicates removed, IDs resolved, codes standardized, rules applied. Finally it reaches <strong>Gold</strong> — aggregated, business-ready, the stuff dashboards and AI models consume. Why three layers? Because if Silver is ever wrong, you can rebuild it from Bronze. And if Gold is wrong, you can rebuild it from Silver. Every layer is a restoration point.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Think of refining gold. Miners bring up raw ore — rocks with flecks of gold inside (Bronze). Smelters melt it, separate impurities, and produce refined bars (Silver). Jewelers shape those bars into rings and necklaces (Gold). Three stages, three grades of value. And critically: you never sell a customer raw ore and claim it's jewelry.
+      </div>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"Imagine data comes in as dirty potatoes. Bronze is the potatoes with dirt still on them. Silver is the potatoes washed and peeled. Gold is french fries — ready to eat. AI should only eat french fries."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>Bronze = Born</strong> (raw), <strong>Silver = Sorted</strong> (clean), <strong>Gold = Great</strong> (ready)." Never serve Bronze to AI.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 9 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">09</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 9 · Week 2</div>
+        <h3>Ontology — The Translation Dictionary</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">APPLY</span>
+          <span class="diff diff-med">🟡 Medium</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> The drug Humira has at least five different "names" across pharma systems: <code>Humira</code>, <code>adalimumab</code>, <code>J0135</code> (HCPCS billing code), <code>NDC 00074-4339-02</code> (product code), <code>L04AB04</code> (ATC therapeutic class). If your architecture can't resolve these to one thing, every cross-source analysis is fiction.
+      </div>
+
+      <h4>The Visual — Many Names, One Entity</h4>
+      <div class="diagram-box">
+        <div class="arch-stack" style="max-width:600px">
+          <div class="arch-layer" style="background:rgba(212,165,116,0.25);border:1px solid var(--amber);border-radius:10px 10px 0 0">
+            <strong>Entity: "The drug Humira / adalimumab"</strong>
+          </div>
+          <div class="arch-layer" style="background:rgba(27,42,74,0.5)">
+            Brand name: <code>Humira</code>
+          </div>
+          <div class="arch-layer" style="background:rgba(27,42,74,0.5)">
+            Generic (INN): <code>adalimumab</code>
+          </div>
+          <div class="arch-layer" style="background:rgba(27,42,74,0.5)">
+            HCPCS: <code>J0135</code>
+          </div>
+          <div class="arch-layer" style="background:rgba(27,42,74,0.5)">
+            NDC: <code>00074-4339-02</code>
+          </div>
+          <div class="arch-layer" style="background:rgba(27,42,74,0.5);border-radius:0 0 10px 10px">
+            ATC class: <code>L04AB04</code>
+          </div>
+        </div>
+        <div class="label">The ontology's job is to know all five of these refer to one real-world thing.</div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>An <strong>ontology</strong> is a standardized vocabulary that resolves the "same thing, many names" problem. It's the glue that makes data from different systems <em>comparable</em>. Without ontology, your HCP appears as "R. Patel MD" in claims, "Dr. Rajesh Patel" in CRM, and an anonymous NPI number elsewhere — and any AI trying to build an HCP 360 view will treat them as three different people. Major standards in pharma: <code>SNOMED CT</code> (clinical concepts), <code>ICD-10</code> (diagnoses), <code>NDC</code> (drug products), <code>NPI</code> (providers), <code>ATC</code> (drug therapeutic classes), <code>RxNorm</code> (normalized drug names), <code>MedDRA</code> (adverse events).</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Imagine the Rosetta Stone, but for pharma. On one face it says "Humira." On another, "adalimumab." On another, "J0135." The ontology is the stone itself — the physical evidence that all three inscriptions describe the same royal decree. Without it, three scholars looking at three faces would write three books, each convinced the others are wrong.
+      </div>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"Imagine your grandma, mom, and little brother all call you different names — 'sweetie,' 'honey,' and 'bro.' Now imagine a robot has to figure out they all mean the same person. An ontology is the robot's cheat sheet that says 'all three = one kid.'"</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>One thing, many names — ontology knows them all.</strong>" The day you grasp ontology is the day you realize most pharma AI models have been quietly double-counting physicians for years.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 10 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">10</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 10 · Week 2</div>
+        <h3>The Three Intelligence Layers — Ontology → Semantic → Context</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">APPLY</span>
+          <span class="diff diff-hard">🔴 Hard</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> In almost every large pharma org, finance, field, and brand calculate "market share" with slightly different rules. All three are technically correct. Without a semantic layer, the truth is a negotiation — not a fact.
+      </div>
+
+      <h4>The Visual — The Three Layers Stacked</h4>
+      <div class="diagram-box">
+        <div class="arch-stack">
+          <div class="arch-layer" style="background:rgba(232,115,90,0.32);border-color:var(--coral);border-radius:10px 10px 0 0">
+            <strong>🧠 CONTEXT LAYER — "The Waiter's Knowledge"</strong>
+            <span class="sub">Domain expertise, business rules, temporal caveats, competitive dynamics</span>
+            <span class="sub">"Injection site reactions in Month 1 are normal. In Month 6, they're a switch signal."</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(212,165,116,0.22);border-color:var(--amber)">
+            <strong>📐 SEMANTIC LAYER — "The Universal Menu"</strong>
+            <span class="sub">Standard metric definitions. One formula. One truth.</span>
+            <span class="sub">Market Share = Brand TRx ÷ Market TRx. PDC = Days Covered ÷ Days in Period.</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(27,42,74,0.5);border-color:var(--navy-light);border-radius:0 0 10px 10px">
+            <strong>📖 ONTOLOGY — "The Translation Dictionary"</strong>
+            <span class="sub">Standard vocabularies that resolve the "same thing, many names" problem</span>
+            <span class="sub">Humira = adalimumab = J0135 = NDC 00074-4339-02</span>
+          </div>
+        </div>
+        <div class="label">Each layer builds on the one below. Without Ontology, Semantic can't calculate consistently. Without Context, AI misinterprets the metrics.</div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>These three layers are what you <em>layer on top</em> of your data to make it intelligent, not just stored. <strong>Ontology</strong> (from Day 9) says <em>what things are called</em>. The <strong>Semantic Layer</strong> says <em>how metrics are calculated</em> — one formula for market share, one formula for NBRx, everywhere in the org. The <strong>Context Layer</strong> says <em>when to trust the metric and how to interpret it</em> — "ignore weeks 50–52 due to holiday seasonality," or "this market share drop correlates with the competitor launch, not a quality issue." AI without these three layers is a parrot with a calculator: technically accurate, profoundly wrong.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Ontology is the <em>ingredient dictionary</em> — "fennel and saunf are the same spice." Semantic Layer is the <em>standardized recipe book</em> — "biryani means this exact technique, not whatever the chef feels like." Context Layer is the <em>head chef's silent judgment</em> — "add more salt in winter when customers' palates dull; hold back when the AC is broken because people taste salt more when hot." Together, they're what separates a chain restaurant from a Michelin kitchen.
+      </div>
+
+      <h4>🔗 How This Connects</h4>
+      <p>Week 1 taught you <em>where</em> data lives. Week 2 is teaching you how to make it <em>trustworthy and intelligent</em>. Next week, we ask the bigger question: how do we feed this beautifully-prepared data into modern AI systems? That's where feature stores, vector databases, and RAG come in.</p>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"Ontology is a dictionary that says 'couch' and 'sofa' mean the same thing. Semantic layer is the rule that says 'height is always measured in inches, never feet.' Context layer is the grownup who knows that when your little sister says she's 'starving,' she means hungry, not actually starving."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>OSC — Oh, Smart Chef!</strong>" <strong>O</strong>ntology (what things are called) → <strong>S</strong>emantic (how to calculate) → <strong>C</strong>ontext (when to care). These three turn AI from a parrot into a chef.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     WEEK 3 BANNER
+============================================================ -->
+<div class="section" id="phase3">
+  <div class="phase-banner p3">
+    <div class="phase-num">Week 3 of 3 · Days 11–15</div>
+    <h2>The AI Stack — Feeding Intelligence</h2>
+    <p class="phase-tagline">Now we put modern AI into the kitchen. Feature stores, vector databases, RAG, and the two organizational philosophies for scaling architecture across the whole company.</p>
+    <div class="phase-meta">
+      <span>⏱️ 5 × ~30 min</span>
+      <span>🎯 Bloom's: Apply → Analyze</span>
+      <span>📊 🔴 Advanced</span>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 11 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">11</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 11 · Week 3</div>
+        <h3>Feature Stores — Mise en Place for Machine Learning</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">UNDERSTAND</span>
+          <span class="diff diff-med">🟡 Medium</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> Uber built the first modern feature store — "Michelangelo" — in 2017 after discovering their data scientists were spending roughly 60% of their time <em>recreating features that another team had already built</em>. That wasted effort inspired the open-source Feast project, which has since become industry-standard.
+      </div>
+
+      <h4>The Visual — The Shared Pantry</h4>
+      <div class="diagram-box">
+        <div class="arch-stack" style="max-width:600px">
+          <div class="arch-layer" style="background:rgba(124,144,130,0.25);border:1px solid var(--sage);border-radius:10px 10px 0 0">
+            <strong>👨‍🔬 Data Scientists (Many Teams)</strong>
+            <span class="sub">Team A, Team B, Team C — all need ML features</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(212,165,116,0.3);border-color:var(--amber)">
+            <strong>🏪 FEATURE STORE — Shared Pantry</strong>
+            <span class="sub">"HCP 12-month Rx volume", "Patient adherence %", "Payer PA denial rate" — pre-computed, versioned, discoverable</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(27,42,74,0.5);border-radius:0 0 10px 10px">
+            <strong>🥇 Gold Layer Data</strong>
+            <span class="sub">Source of truth the features are derived from</span>
+          </div>
+        </div>
+        <div class="label">Build a feature once. Every team uses it. No more "wait, which version of adherence did you compute?"</div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>A <strong>feature store</strong> is a specialized database that stores pre-computed <em>features</em> — the derived inputs machine-learning models use. Instead of every data scientist writing their own code to calculate "patient's 90-day adherence rate" and getting subtly different answers, the feature is computed <em>once</em>, stored centrally, versioned, and served to every model that needs it. It solves three problems at once: <em>consistency</em> (one definition), <em>reusability</em> (don't redo work), and <em>training-serving skew</em> (the dreaded bug where a model works in training but fails in production because the features are computed differently).</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> In a restaurant kitchen, <em>mise en place</em> means "everything in its place." Before service starts, the prep cooks chop the onions, mince the garlic, portion the proteins — and arrange them in small trays at every station. When the dinner rush hits, chefs grab pre-prepped ingredients and focus on <em>cooking</em>, not chopping. A feature store is industrial-scale mise en place for ML: prep the ingredients once, serve them to every model.
+      </div>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"Imagine five kids in art class, all needing purple paint. They could each mix red and blue separately, and all get slightly different purples. Or the teacher mixes a big jar of perfect purple once and everyone shares it. A feature store is that shared purple paint jar — but for math."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>Features = prepped ingredients. Store = shared pantry.</strong>" If every chef had to start from whole vegetables, no restaurant would ever open on time.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 12 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">12</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 12 · Week 3</div>
+        <h3>Vector Databases &amp; Embeddings — GPS for Meaning</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">UNDERSTAND</span>
+          <span class="diff diff-hard">🔴 Hard</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> When ChatGPT launched in late 2022, the vector database company Pinecone reportedly saw its usage jump roughly 10x almost overnight. The world had suddenly discovered it needed a new kind of database — one that searched by <em>meaning</em>, not by keyword.
+      </div>
+
+      <h4>The Visual — Meaning as Coordinates</h4>
+      <div class="diagram-box">
+        <div style="display:flex;flex-direction:column;gap:0.8rem;max-width:620px;margin:0 auto">
+          <div style="background:var(--bg-card-alt);padding:1rem;border-radius:10px;border:1px solid var(--border-subtle);font-family:'Fira Code',monospace;font-size:0.85rem;text-align:left">
+            <div style="color:var(--amber);margin-bottom:0.3rem">Text → Embedding (list of numbers)</div>
+            <div style="color:var(--text-dim)">"joint swelling"     → [0.21, -0.14, 0.88, ..., 0.02]</div>
+            <div style="color:var(--text-dim)">"arthritis flare"    → [0.23, -0.12, 0.86, ..., 0.04]</div>
+            <div style="color:var(--text-dim)">"car engine trouble" → [-0.91, 0.77, -0.05, ..., 0.62]</div>
+          </div>
+          <div style="color:var(--text-dim);font-size:0.88rem;line-height:1.6">The first two vectors sit <em>close together</em> in the mathematical space. The third sits far away. The database searches by <strong>distance</strong>, not by matching words.</div>
+        </div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>An <strong>embedding</strong> is a long list of numbers (typically 384, 768, or 1536 of them) that captures the <em>meaning</em> of a piece of text, an image, or any other input. Embeddings are produced by AI models — the model literally learns to place semantically similar inputs near each other in a high-dimensional space. A <strong>vector database</strong> is a database designed to efficiently search through billions of these vectors and find the ones closest to a query vector. The killer feature: you can ask "what notes are <em>similar in meaning</em> to this one?" — even if no word overlaps. That's the ability that unlocked modern AI search.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> A regular database is like a phone book — you find "John Smith" if you spell it exactly right. A vector database is like GPS — every idea gets latitude/longitude coordinates in a space where <em>meaning</em> is distance. "Joint swelling" lives right next to "arthritis flare." "Car engine trouble" lives thousands of kilometers away. Ask "what's near here?" and the vector database returns every medically relevant phrase in the building, whether or not the exact words match.
+      </div>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"Imagine a library where every book has a secret coordinate based on what it's <em>about</em>, not what it's <em>called</em>. Books about dinosaurs sit next to books about fossils, even if the word 'dinosaur' isn't in either. A vector database finds books by <em>meaning-neighborhood</em>, like a GPS for ideas."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>Vectors map meaning like GPS maps places.</strong>" The instant this clicks, RAG (tomorrow) will feel obvious.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 13 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">13</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 13 · Week 3</div>
+        <h3>RAG — How AI Reads Before It Answers</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">APPLY</span>
+          <span class="diff diff-hard">🔴 Hard</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> A plain LLM given a pharma question will often invent a confident-sounding clinical answer that doesn't exist in any real document — this is called <em>hallucination</em>. RAG is the single most effective technique we have to prevent it. It forces the AI to look at real documents <em>before</em> answering.
+      </div>
+
+      <h4>The Visual — The Four Steps of RAG</h4>
+      <div class="diagram-box">
+        <div class="flow-container">
+          <div class="flow-step">1️⃣ Question<div class="flow-sub">asked in plain English</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="border-color:var(--amber)">2️⃣ Retrieve<div class="flow-sub">vector DB finds relevant docs</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="border-color:var(--sage)">3️⃣ Augment<div class="flow-sub">docs injected into prompt</div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="border-color:var(--forest)">4️⃣ Generate<div class="flow-sub">grounded answer with citations</div></div>
+        </div>
+        <div class="label">RAG = Retrieval + Augmented + Generation. Every answer is anchored to real documents the model just read.</div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p><strong>Retrieval-Augmented Generation</strong> is a pattern, not a product. When a question comes in, the system first <em>retrieves</em> the most relevant chunks of your proprietary content (using yesterday's vector database), then <em>augments</em> the LLM's prompt by pasting those chunks in, then asks the LLM to <em>generate</em> its answer based only on the retrieved evidence. The trick is simple but powerful: the LLM stops relying on its training data and starts reading <em>your</em> documents every time. It's the difference between an exam where you memorize everything versus an open-book exam where you cite your sources.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Think of a student in an open-book exam. The closed-book version — a plain LLM — has to answer from memory, and sometimes confidently makes up citations that don't exist. The open-book version — RAG — first flips through the textbook (retrieval), finds the three most relevant paragraphs (augmentation), and writes an answer that cites those paragraphs (generation). Same student, vastly more trustworthy output.
+      </div>
+
+      <h4>🔗 How This Connects</h4>
+      <p>Now you can see why every previous day mattered. RAG needs clean documents (Days 6–8, medallion architecture). It needs consistent terminology (Day 9, ontology). It needs a vector database (Day 12). It needs a feature store if it's combining structured + unstructured signals (Day 11). RAG is the grand finale — the moment where the whole kitchen finally makes a dish.</p>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"You know how your teacher makes you cite quotes from the book in essays? RAG does the same for AI — before answering, it first reads through the company's real documents and picks the most relevant parts. That way it gives answers based on facts, not guesses."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>R-A-G = Read And Ground.</strong>" Read the real documents, then ground the answer in what was actually read. No reading = no grounding = hallucination.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 14 ======================== -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">14</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 14 · Week 3</div>
+        <h3>Data Mesh vs. Data Fabric — Two Organizational Philosophies</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">ANALYZE</span>
+          <span class="diff diff-hard">🔴 Hard</span>
+          <span class="metric-badge">~30 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> These two terms sound almost identical — "mesh" and "fabric" — but they represent <em>opposite</em> philosophies. One is technology-first and centralizing. The other is organization-first and federating. Confusing them leads to failed strategy decks industry-wide.
+      </div>
+
+      <h4>The Visual — Central Kitchen vs. Franchise Model</h4>
+      <div class="visual-comparison">
+        <div class="v-comp-card" style="border-color:var(--amber)">
+          <div class="v-icon">🧵</div>
+          <h5>Data Fabric</h5>
+          <p><strong>Technology-first.</strong> One unified layer wraps all data sources with a single governance plane, metadata catalog, and access interface. Centralized control.</p>
+          <p style="margin-top:0.5rem"><strong>Analogy:</strong> A central commissary kitchen that supplies every restaurant.</p>
+        </div>
+        <div class="v-comp-card" style="border-color:var(--sage)">
+          <div class="v-icon">🕸️</div>
+          <h5>Data Mesh</h5>
+          <p><strong>Organization-first.</strong> Each business domain (Commercial, Clinical, Market Access) owns its own data as a <em>product</em> — with its own team, its own SLAs, its own quality standards.</p>
+          <p style="margin-top:0.5rem"><strong>Analogy:</strong> A franchise model where each location owns its kitchen but follows brand standards.</p>
+        </div>
+      </div>
+
+      <h4>Core Concept</h4>
+      <p>Both approaches aim to solve the same problem: how do you make data accessible, trustworthy, and AI-ready across a large enterprise? They just answer differently. <strong>Data Fabric</strong> is the <em>technology solution</em> — buy/build one unified platform that sits over every source and pretends everything is one system. <strong>Data Mesh</strong> is the <em>organizational solution</em> — give each business domain its own platform, its own team, and its own product-thinking, and let them interoperate through standards. Most real-world enterprises end up with a hybrid: a thin fabric for discovery and governance, meshed domains for ownership and speed.</p>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy:</strong> Two ways to run a restaurant group. <em>Fabric</em>: one giant central kitchen cooks every dish, delivered to every location. Uniform quality, slow to adapt. <em>Mesh</em>: every location owns its kitchen, shares the cookbook and brand standards, adapts dishes to local tastes. Faster innovation, harder to enforce consistency. The 2020s answer for most pharma companies is: fabric's catalog, mesh's ownership.
+      </div>
+
+      <h4>🎤 Feynman Teach-Back</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain to a 12-year-old in 3 sentences</div>
+        <p>"Imagine a school with one huge central kitchen for every classroom (fabric), versus one where each classroom has its own mini-kitchen but shares the same recipe book (mesh). Both feed the kids — but one is managed top-down, the other bottom-up. Most schools end up with a bit of both."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook:</strong> "<strong>Fabric wraps. Mesh federates.</strong>" A fabric is a single cloth covering everything. A mesh is a net — many nodes, loosely connected.
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== DAY 15 ======================== -->
+  <div class="day-card" style="border-color:var(--coral);border-width:2px">
+    <div class="day-header" style="background:linear-gradient(135deg,rgba(232,115,90,0.15),rgba(212,165,116,0.08))">
+      <div class="day-number" style="color:var(--coral)">15</div>
+      <div class="day-title-wrap">
+        <div class="day-label">Day 15 · Week 3 · The Capstone</div>
+        <h3>The Full-Stack Synthesis — The Whole Kitchen, Running</h3>
+        <div class="day-meta">
+          <span class="bloom-badge">ANALYZE</span>
+          <span class="diff diff-hard">🔴 Capstone</span>
+          <span class="metric-badge">~45 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="callout callout-hook" style="margin-top:0">
+        <span class="callout-icon">🔥</span> <strong>HOOK:</strong> If you can draw the full stack from memory today — from raw sources at the bottom to AI consumption at the top — you now understand something that most business stakeholders never will. This is the single most valuable diagram you'll carry forward.
+      </div>
+
+      <h4>The Visual — The Full AI-Ready Data Architecture Stack</h4>
+      <div class="diagram-box">
+        <div class="arch-stack">
+          <div class="arch-layer" style="background:rgba(232,115,90,0.35);border-radius:10px 10px 0 0">
+            🖥️ <strong>CONSUMPTION</strong>
+            <span class="sub">Analysts · Dashboards · ML Models · GenAI / RAG · Agentic AI</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(232,115,90,0.18)">
+            🧠 <strong>INTELLIGENCE LAYERS</strong>
+            <span class="sub">Context Layer → Semantic Layer → Ontology · (Day 9, 10)</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(212,165,116,0.22)">
+            🧬 <strong>AI-SPECIFIC STORES</strong>
+            <span class="sub">Feature Store (ML features) · Vector Database (embeddings for RAG) · (Day 11, 12, 13)</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(212,165,116,0.13)">
+            🏪 <strong>DATA MARTS — THE 9 PREP STATIONS</strong>
+            <span class="sub">Commercial · HCP 360 · Patient Journey · Promo · Payer · Hub · SF · GTM · Clinical · (Day 5)</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(124,144,130,0.22)">
+            🏠 <strong>LAKEHOUSE — MEDALLION</strong>
+            <span class="sub">🥇 Gold (aggregated) → 🥈 Silver (cleaned) → 🥉 Bronze (raw) · (Day 4, 8)</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(124,144,130,0.12)">
+            🏷️ <strong>QUALITY &amp; GOVERNANCE</strong>
+            <span class="sub">ACCTV Quality Rules · Metadata · Lineage · Access Control · (Day 7)</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(27,42,74,0.5)">
+            🔄 <strong>INGESTION PIPELINES (ELT)</strong>
+            <span class="sub">Batch · Streaming · API-based · (Day 6)</span>
+          </div>
+          <div class="arch-layer" style="background:rgba(27,42,74,0.7);border-radius:0 0 10px 10px">
+            📦 <strong>SOURCE SYSTEMS — THE FOUR MOUNTAIN RANGES</strong>
+            <span class="sub">Commercial · Clinical · Human · Operational · (Day 3)</span>
+          </div>
+        </div>
+        <div class="label">Every layer you've learned, stacked. From ingredient delivery (bottom) to plated dish (top). This is the kitchen.</div>
+      </div>
+
+      <h4>Core Concept — The Structured vs. Unstructured Processing Insight</h4>
+      <p>Here's the subtle piece most practitioners miss: structured and unstructured data travel <em>different paths</em> through the architecture — they only converge at the Gold layer. Structured data gets deduplicated, joined, and code-mapped. Unstructured data gets run through NLP, entity extraction, and embedding generation. Both end up in Gold — but the journey is entirely different. Good architecture plans for both paths from day one.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Stage</th><th>Structured Path</th><th>Unstructured Path</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Ingestion</strong></td><td>Flat files, APIs, DB extracts</td><td>OCR, document parsers, NLP pipelines</td></tr>
+            <tr><td><strong>Bronze</strong></td><td>Raw tables / CSVs as-is</td><td>Raw text / images / audio as-is</td></tr>
+            <tr><td><strong>Silver</strong></td><td>Dedup, standardize, join</td><td>Entity extraction, sentiment, embeddings</td></tr>
+            <tr><td><strong>Storage</strong></td><td>Delta / Parquet tables</td><td>Vector DB + document store</td></tr>
+            <tr><td><strong>🥇 Gold (Converge!)</strong></td><td colspan="2" style="text-align:center;color:var(--amber);font-weight:600">Unified patient/HCP view combining structured timeline + NLP-derived insights</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="analogy-box">
+        <strong>Mentor's Analogy (Full Circle):</strong> Remember Day 1's kitchen? You've now built every station in it. Ingredients arrive through ingestion pipelines. They pass through quality inspection. They get stored in the three-tier medallion pantry. Prep cooks move them through the nine specialized stations. The intelligence layers are the chef's recipe book, ingredient dictionary, and hard-earned wisdom. The feature store is mise en place. The vector DB is the flavor library. The diners are finally fed. That's the whole stack. That's what "AI-ready" means.
+      </div>
+
+      <h4>🎤 Feynman Teach-Back — The Ultimate One</h4>
+      <div class="teach-back">
+        <div class="tb-label">Explain the whole thing to a 12-year-old in 5 sentences</div>
+        <p>"A company has data from hundreds of different places. Before AI can use any of it, we need to catch it, clean it in stages (bronze, silver, gold), and organize it into specialized shelves (data marts). Then we add labels (ontology), standard recipes (semantic layer), and real-world context (context layer) so nothing gets misunderstood. Finally we add two special AI pantries — one for ML ingredients (feature store) and one for meaning-searches (vector database) — and now AI can actually cook reliable dishes. That's the whole kitchen."</p>
+      </div>
+
+      <div class="memory-hook-mini">
+        <strong>🧲 Memory Hook — The Master Acronym:</strong> "<strong>SIMPLE-AI-KITCHEN</strong>" — <strong>S</strong>ources, <strong>I</strong>ngestion, <strong>M</strong>edallion, <strong>P</strong>rep stations (marts), <strong>L</strong>ayers of intelligence, <strong>E</strong>mbeddings &amp; features, for <strong>AI</strong>. Seven nested rings — you built them all.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     JARGON DECODER
+============================================================ -->
+<section class="section" id="jargon">
+  <div class="section-header">
+    <div class="label">Reference · Jargon Decoder</div>
+    <h2>The Full Jargon Decoder</h2>
+    <p class="desc">Every term introduced in the 15 days, organized by difficulty. Bookmark this for quick lookup.</p>
+  </div>
+
+  <div class="card">
+    <h4>🟢 FOUNDATIONAL (Week 1)</h4>
+    <p style="margin-top:0.5rem"><span class="metric-badge">Data Warehouse</span> Structured repository optimized for reporting. Rigid schema, strong governance. Plain English: the organized library.</p>
+    <p><span class="metric-badge">Data Lake</span> Storage for raw data at any scale, any format. Cheap and flexible. Plain English: the unmanaged swimming pool of data.</p>
+    <p><span class="metric-badge">Data Lakehouse</span> Unified platform combining lake flexibility with warehouse governance. Plain English: the smart pool with an inventory system.</p>
+    <p><span class="metric-badge">Data Mart</span> Subject-oriented subset of a lakehouse/warehouse. Plain English: a specialized prep station with only what one team needs.</p>
+    <p><span class="metric-badge">Structured Data</span> Rows and columns. Claims, Rx, CRM logs, lab values.</p>
+    <p><span class="metric-badge">Unstructured Data</span> Free-form. EHR notes, PDFs, audio, images, rep call notes.</p>
+  </div>
+
+  <div class="card">
+    <h4>🟡 INTERMEDIATE (Week 2)</h4>
+    <p style="margin-top:0.5rem"><span class="metric-badge">ETL / ELT</span> Automated plumbing that moves data from sources to the platform. ELT = load raw first, transform inside.</p>
+    <p><span class="metric-badge">Medallion Architecture</span> Bronze (raw) → Silver (clean) → Gold (ready). Like refining ore into jewelry.</p>
+    <p><span class="metric-badge">Ontology</span> Standard vocabulary ensuring "Humira" and "adalimumab" are recognized as the same thing across all systems.</p>
+    <p><span class="metric-badge">Semantic Layer</span> The universal rule book for how business metrics are calculated. One formula, everywhere.</p>
+    <p><span class="metric-badge">Context Layer</span> Domain expertise embedded in the system so AI interprets data correctly in context.</p>
+    <p><span class="metric-badge">Metadata / Meta Tags</span> Labels on data assets (who owns it, how fresh, how reliable, what it contains).</p>
+    <p><span class="metric-badge">Data Quality (ACCTV)</span> Accuracy, Completeness, Consistency, Timeliness, Validity — the five axes of trustworthiness.</p>
+  </div>
+
+  <div class="card">
+    <h4>🔴 ADVANCED (Week 3)</h4>
+    <p style="margin-top:0.5rem"><span class="metric-badge">Feature Store</span> Pre-calculated ML features, versioned and shared across teams. Mise en place for data scientists.</p>
+    <p><span class="metric-badge">Embedding</span> A list of numbers capturing the <em>meaning</em> of text or data. GPS coordinates for ideas.</p>
+    <p><span class="metric-badge">Vector Database</span> Storage optimized for similarity search on embeddings. Find documents by meaning, not keywords.</p>
+    <p><span class="metric-badge">RAG</span> Retrieval-Augmented Generation. AI reads your real documents before answering, so it doesn't hallucinate.</p>
+    <p><span class="metric-badge">NLP</span> Natural Language Processing — how computers extract structure and meaning from human text.</p>
+    <p><span class="metric-badge">Data Fabric</span> Technology-first approach: one unified access layer across all data. Central control.</p>
+    <p><span class="metric-badge">Data Mesh</span> Organization-first approach: each domain owns its own data as a "product." Federated ownership.</p>
+    <p><span class="metric-badge">Data Lineage</span> The audit trail showing where data came from and every transformation it went through.</p>
+    <p><span class="metric-badge">Agentic AI</span> AI that plans, acts, uses tools, and iterates — not just answers.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PITFALLS
+============================================================ -->
+<section class="section" id="pitfalls">
+  <div class="section-header">
+    <div class="label" style="color:var(--coral)">The Trap Map</div>
+    <h2>Pitfalls &amp; Misconceptions</h2>
+    <p class="desc">Four conceptual traps that will silently derail your understanding — and how to spot each one.</p>
+  </div>
+
+  <div class="card" style="border-color:var(--coral)">
+    <h4>⚠️ Trap #1: "Better Tools = Better Architecture"</h4>
+    <p>❌ <strong>Myth:</strong> Buy Databricks/Snowflake/the newest platform and you're AI-ready.</p>
+    <p>✅ <strong>Reality:</strong> Tools without governance, ontology, and a semantic layer are expensive empty kitchens. Industry studies suggest roughly 70% of real effort is data preparation, not tool configuration. The hardware is the easy part.</p>
+    <p style="color:var(--text-dim);font-size:0.9rem;margin-top:0.4rem">💡 <strong>Conceptual check:</strong> Whenever you hear a tool pitch, ask: "What data foundation does this assume already exists?"</p>
+  </div>
+
+  <div class="card" style="border-color:var(--coral)">
+    <h4>⚠️ Trap #2: "AI Doesn't Need Clean Data — It's Smart Enough"</h4>
+    <p>❌ <strong>Myth:</strong> Modern AI and LLMs can handle messy data and figure it out.</p>
+    <p>✅ <strong>Reality:</strong> AI amplifies data quality issues. It doesn't get <em>confused</em> by bad data — it gets <em>eloquent</em> with bad data. Garbage in, articulate garbage out. The confidence of the output is completely decoupled from the correctness of the input.</p>
+  </div>
+
+  <div class="card" style="border-color:var(--coral)">
+    <h4>⚠️ Trap #3: "Structured Data Is Enough"</h4>
+    <p>❌ <strong>Myth:</strong> Claims and Rx data tell us everything we need to know about patients and HCPs.</p>
+    <p>✅ <strong>Reality:</strong> Structured data is only ~20% of enterprise data. It tells you <em>what</em> happened, not <em>why</em>. The "injection burden" that makes a patient switch therapies is invisible in claims — it lives in EHR notes, hub calls, and patient surveys. Ignoring unstructured data means ignoring 80% of the story.</p>
+  </div>
+
+  <div class="card" style="border-color:var(--coral)">
+    <h4>⚠️ Trap #4: "Ontology and Semantic Layer Are the Same Thing"</h4>
+    <p>❌ <strong>Myth:</strong> They both standardize things — just pick one.</p>
+    <p>✅ <strong>Reality:</strong> Ontology standardizes <em>what things are called</em> (Humira = adalimumab). Semantic layer standardizes <em>how things are calculated</em> (market share = brand TRx ÷ market TRx). You need both, in order. Ontology feeds the semantic layer.</p>
+  </div>
+
+  <div class="card" style="border-color:var(--coral)">
+    <h4>⚠️ Meta-Trap: "I Must Master Every Detail Before I Move On"</h4>
+    <p>❌ <strong>Myth:</strong> If I can't write the code, I don't really understand it.</p>
+    <p>✅ <strong>Reality:</strong> Architectural fluency — being able to draw the stack, explain each layer, and ask the right questions — is a distinct and valuable skill. Implementation is a different craft. Let the conceptual map solidify first; the details will hang on it later.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     CROSS-DOMAIN
+============================================================ -->
+<section class="section" id="cross">
+  <div class="section-header">
+    <div class="label" style="color:var(--sage-light)">Cross-Domain</div>
+    <h2>Unexpected Connections</h2>
+    <p class="desc">The same architectural patterns show up in wildly different fields. Seeing them elsewhere proves the pattern is real — and gives your brain extra memory pathways.</p>
+  </div>
+
+  <div class="card">
+    <h4>🏏 Cricket / Sports Analytics</h4>
+    <p>Modern cricket analytics uses almost identical architecture. Structured data — runs, wickets, balls, averages — is claims data's twin. Unstructured data — commentary, match reports, fan tweets — is EHR-note territory. Predictive models for match outcomes are cousins of patient-switch models. The "Player 360" view is the HCP 360 of cricket. Swap the domain vocabulary and most of the stack is identical.</p>
+  </div>
+
+  <div class="card">
+    <h4>🛒 Retail &amp; E-Commerce Recommendations</h4>
+    <p>Amazon's recommendation engine runs on feature stores, vector databases, and semantic layers — the same pattern you'd build for pharma next-best-action. "Customers who bought X also bought Y" is architecturally identical to "HCPs who prescribed X also prescribed Y." The feature store stores customer behavioral features. The vector database stores product embeddings. RAG is used to ground chatbot product recommendations in real inventory. Different industry, same architecture.</p>
+  </div>
+
+  <div class="card">
+    <h4>🎬 Netflix / Streaming</h4>
+    <p>Netflix was one of the earliest adopters of the medallion pattern and feature stores — years before the pharma industry. Bronze = raw viewing logs. Silver = cleaned watch events. Gold = per-user engagement features. Embeddings capture the "vibe" of every title. Vector search powers "more like this." The reason the concepts feel familiar when you hear "Netflix's data architecture" is that the patterns themselves are domain-agnostic. Pharma just arrived at the party about five years later.</p>
+  </div>
+
+  <div class="callout callout-insight">
+    <p>Seeing the same architecture in three fields — pharma, sports, retail, streaming — is your brain's signal that you've learned a <em>pattern</em>, not just a vocabulary. Patterns generalize. Vocabulary doesn't.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SPACED REPETITION SCHEDULE
+============================================================ -->
+<section class="section" id="schedule">
+  <div class="section-header">
+    <div class="label" style="color:var(--forest)">Spaced Repetition</div>
+    <h2>Your 15-Day Review Schedule</h2>
+    <p class="desc">The forgetting curve is real. Here's a review rhythm designed around it, with touchpoints at Day 3, 7, 14, 21, and 45.</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Day</th><th>Action</th><th>Time</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Days 1–5</strong></td><td>Complete Week 1 — Foundations (one day-card per day)</td><td>5 × 30 min</td></tr>
+        <tr><td><strong>End of Day 5</strong></td><td>Review Week 1 memory hooks (Vault→Swamp→Lakehouse, SLHO, 9 marts)</td><td>15 min</td></tr>
+        <tr><td><strong>Days 6–10</strong></td><td>Complete Week 2 — Engine Room</td><td>5 × 30 min</td></tr>
+        <tr><td><strong>End of Day 10</strong></td><td>Redo all Feynman teach-backs from Weeks 1 &amp; 2 out loud</td><td>25 min</td></tr>
+        <tr><td><strong>Days 11–15</strong></td><td>Complete Week 3 — The AI Stack</td><td>5 × 30–45 min</td></tr>
+        <tr><td><strong>Day 15 capstone</strong></td><td>Redraw the full-stack diagram from memory. Recite the master acronym.</td><td>30 min</td></tr>
+        <tr><td><strong>Day 21 (one week after)</strong></td><td>Take the concept map and fill in every day's core concept + analogy from memory</td><td>20 min</td></tr>
+        <tr><td><strong>Day 30</strong></td><td>Re-read only the memory hooks. Flag any that don't trigger recall → revisit those days.</td><td>15 min</td></tr>
+        <tr><td><strong>Day 45</strong></td><td>Redraw the full stack from memory, a second time. Compare to Day 15 attempt.</td><td>20 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-insight">
+    <h4>🔁 The 3-Question Review (use at every touchpoint)</h4>
+    <p style="margin-top:0.4rem">1. <strong>"What was the most surprising thing I learned?"</strong> <em>(tests memory)</em></p>
+    <p>2. <strong>"Can I explain [today's concept] using its analogy — without the roadmap in front of me?"</strong> <em>(tests understanding)</em></p>
+    <p>3. <strong>"Have I encountered this concept in the wild since last review?"</strong> <em>(tests application)</em></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     MENTOR'S PARTING WISDOM
+============================================================ -->
+<section class="section" id="wisdom">
+  <div class="section-header">
+    <div class="label">Section · Mentor's Parting Wisdom</div>
+    <h2>Before You Go</h2>
+  </div>
+
+  <div class="callout callout-mentor" style="border-left-width:6px">
+    <p style="font-size:1.06rem">You started 15 days ago with a simple question — <em>"what is AI-ready data architecture, and why do people keep saying pharma doesn't have it?"</em> — and you end with the full kitchen in your head. Lakehouse, medallion, ontology, semantic layer, context layer, feature store, vector database, RAG, mesh, fabric. Every one of those terms now has a picture, an analogy, and a memory hook attached to it.</p>
+
+    <p style="margin-top:0.9rem;font-size:1.06rem">Here is the insider secret most architecture guides bury on the last page: <strong>the hardest part of AI-ready architecture isn't the technology — it's the invisible standardization work</strong>. Getting five teams to agree on what "market share" means. Forcing every system to use the same NPI. Tagging PHI rigorously. Writing down the rules that senior analysts know in their heads but have never documented. That's the architecture. Everything else is just tools that enforce it.</p>
+
+    <p style="margin-top:0.9rem;font-size:1.06rem">Understanding this map matters even if you never write a line of Spark or configure a Delta table. The person who can <em>draw the stack</em> and <em>explain why each layer exists</em> is the person who can recognize a good architecture proposal from a bad one, ask the questions that expose weak foundations, and bridge the conversation between business and engineering. The map is the skill.</p>
+
+    <p style="margin-top:1rem;font-size:1.18rem;color:var(--amber);font-weight:700;font-family:'Playfair Display',serif">"The kitchen is the real technology. The chef is just the last five minutes of a ten-year build."</p>
+
+    <p style="margin-top:0.6rem;font-size:0.95rem;color:var(--text-dim)">Now close this page. Wait a day. Then try to redraw the full-stack diagram on a blank sheet of paper — every layer, every analogy, every memory hook. That's the real test.</p>
+  </div>
+</section>
+
+<footer style="text-align:center;padding:2.5rem 1.5rem;color:var(--text-dim);font-size:0.82rem;border-top:1px solid var(--border-subtle);margin-top:2rem">
+  <p style="margin-bottom:0.3rem">AI-Ready Data Architecture for Pharma — 15-Day Theoretical Roadmap</p>
+  <p>Built for learners who want to <em>see</em> the whole kitchen before touching any tool.</p>
+  <p style="margin-top:0.6rem;color:var(--amber)">🔁 Return here on Day 21, 30, and 45 for spaced review.</p>
+</footer>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  const bar = document.getElementById('progressBar');
+  if (bar) bar.style.width = pct + '%';
+});
+
+// Mermaid init
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'dark',
+  themeVariables: {
+    primaryColor: '#1B2A4A',
+    primaryTextColor: '#FAF6F0',
+    primaryBorderColor: '#D4A574',
+    lineColor: '#D4A574',
+    secondaryColor: '#2D5F3E',
+    tertiaryColor: '#162030',
+    fontFamily: 'Source Sans Pro'
+  }
+});
+
+// Active nav link tracking
+const sections = document.querySelectorAll('section[id], div[id^="phase"], header[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

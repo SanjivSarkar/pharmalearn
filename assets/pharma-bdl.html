@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Strategist's Map — Pharma Strategy &amp; BD&amp;L in 5 Days</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+
+<style>
+  :root {
+    --ink:         #0F1B2D;
+    --ink-soft:    #2A3B52;
+    --paper:       #F5EFDF;
+    --paper-warm:  #EEE5CE;
+    --paper-dark:  #E4D8B8;
+    --ochre:       #C8984A;
+    --ochre-deep:  #9B7233;
+    --moss:        #4B6B4A;
+    --moss-soft:   #7C9082;
+    --rust:        #A84B2A;
+    --rust-soft:   #D67D5C;
+    --rule:        rgba(15,27,45,0.14);
+    --rule-strong: rgba(15,27,45,0.3);
+    --shadow-soft: 0 2px 12px rgba(15,27,45,0.08);
+    --shadow-lift: 0 8px 32px rgba(15,27,45,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter Tight', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* Texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(15,27,45,0.025) 1px, transparent 0);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, nav, header { position: relative; z-index: 1; }
+
+  /* Typography */
+  h1, h2, h3, h4, .display {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 500; }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+  h4 { font-size: 1.05rem; font-weight: 600; font-family: 'Inter Tight', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+
+  p { max-width: 68ch; }
+
+  em { font-style: italic; color: var(--ink-soft); }
+  strong { font-weight: 600; color: var(--ink); }
+
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: var(--paper-warm); padding: 0.1em 0.4em; border-radius: 3px; border: 1px solid var(--rule); }
+
+  /* Nav */
+  nav.top {
+    position: sticky;
+    top: 0;
+    background: rgba(245,239,223,0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.8rem 2rem;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  nav.top .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+  }
+  nav.top .brand em { color: var(--ochre-deep); font-style: italic; }
+
+  nav.top ul { display: flex; gap: 0.4rem; list-style: none; flex-wrap: wrap; }
+  nav.top a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.82rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+  nav.top a:hover { background: var(--ink); color: var(--paper); }
+
+  /* Progress bar */
+  .progress-track {
+    position: sticky;
+    top: 58px;
+    height: 3px;
+    background: rgba(15,27,45,0.08);
+    z-index: 99;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--ochre), var(--rust));
+    width: 0%;
+    transition: width 0.15s ease;
+  }
+
+  /* Container */
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+
+  /* Hero */
+  .hero {
+    padding: 7rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ochre-deep);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 { max-width: 18ch; margin-bottom: 1.8rem; }
+  .hero h1 em { color: var(--ochre-deep); font-style: italic; }
+  .hero .lede {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    max-width: 52ch;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .hero-ornament {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 380px;
+    height: 380px;
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  /* The Hook */
+  .hook-card {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 2.5rem;
+    border-radius: 2px;
+    margin: 3rem 0;
+    position: relative;
+    box-shadow: var(--shadow-lift);
+  }
+  .hook-card::before {
+    content: '01';
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-family: 'Fraunces', serif;
+    font-size: 4rem;
+    color: var(--ochre);
+    opacity: 0.4;
+    font-style: italic;
+  }
+  .hook-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 1rem;
+  }
+  .hook-card p {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    font-weight: 300;
+    max-width: 54ch;
+  }
+  .hook-card p em { color: var(--ochre); font-style: italic; }
+
+  /* Section spacing */
+  section { padding: 4rem 0; position: relative; }
+  section + section { border-top: 1px solid var(--rule); }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ochre-deep);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--ochre-deep);
+  }
+
+  section h2 { margin-bottom: 1.8rem; max-width: 22ch; }
+  section p { margin-bottom: 1.1rem; }
+
+  /* Master analogy card */
+  .master-analogy {
+    background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-dark) 100%);
+    border: 1px solid var(--rule);
+    border-left: 5px solid var(--ochre);
+    padding: 2.5rem 2.5rem 2.5rem 3rem;
+    margin: 2.5rem 0;
+    position: relative;
+    border-radius: 2px;
+  }
+  .master-analogy::before {
+    content: '“';
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-family: 'Fraunces', serif;
+    font-size: 6rem;
+    color: var(--ochre);
+    line-height: 1;
+  }
+  .master-analogy h4 { margin-bottom: 1rem; color: var(--ochre-deep); }
+  .master-analogy p { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 300; line-height: 1.55; }
+  .master-analogy p + p { margin-top: 0.8rem; }
+
+  /* Mapping grid (analogy mapping) */
+  .mapping-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem 1.5rem;
+    align-items: center;
+    margin-top: 1.8rem;
+    padding-top: 1.8rem;
+    border-top: 1px dashed var(--rule-strong);
+  }
+  .mapping-grid .from { font-weight: 500; color: var(--ink); text-align: right; }
+  .mapping-grid .arrow { font-family: 'JetBrains Mono', monospace; color: var(--ochre-deep); font-size: 0.9rem; }
+  .mapping-grid .to { color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic; }
+
+  /* Two-column layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media (max-width: 820px) {
+    .two-col { grid-template-columns: 1fr; gap: 2rem; }
+    .mapping-grid { grid-template-columns: 1fr; gap: 0.3rem 0; }
+    .mapping-grid .from { text-align: left; }
+    .mapping-grid .arrow { display: none; }
+    .mapping-grid .to { padding-left: 1rem; border-left: 2px solid var(--ochre); margin-bottom: 0.8rem; }
+  }
+
+  /* Concept map */
+  .concept-map-wrap {
+    background: var(--paper-warm);
+    padding: 2.5rem;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+  .mermaid { text-align: center; font-family: 'Inter Tight', sans-serif !important; }
+
+  /* Phase accordion */
+  .phases-container { margin-top: 2rem; }
+
+  .phase {
+    border: 1px solid var(--rule);
+    background: var(--paper-warm);
+    margin-bottom: 1.2rem;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .phase:hover { box-shadow: var(--shadow-soft); }
+  .phase.open { background: var(--paper); box-shadow: var(--shadow-lift); }
+
+  .phase-header {
+    padding: 1.8rem 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+  }
+  .phase-header:hover { background: rgba(200,152,74,0.08); }
+
+  .phase-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 3.2rem;
+    color: var(--ochre);
+    line-height: 1;
+    min-width: 60px;
+  }
+  .phase-title h3 { margin-bottom: 0.3rem; font-family: 'Fraunces', serif; font-weight: 400; }
+  .phase-title .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .phase-title .meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .phase-title .meta .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--moss);
+  }
+  .phase-title .meta .dot.medium { background: var(--ochre); }
+  .phase-title .meta .dot.hard { background: var(--rust); }
+
+  .phase-chevron {
+    font-size: 1.5rem;
+    color: var(--ink-soft);
+    transition: transform 0.3s ease;
+  }
+  .phase.open .phase-chevron { transform: rotate(45deg); }
+
+  .phase-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .phase.open .phase-body { max-height: 10000px; }
+
+  .phase-content { padding: 0 2rem 2.5rem; }
+
+  /* Phase curiosity hook */
+  .curiosity-hook {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1.5rem 2rem;
+    margin: 0 -2rem 2rem;
+    border-left: 4px solid var(--ochre);
+  }
+  .curiosity-hook .icon { color: var(--ochre); font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.25em; text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
+  .curiosity-hook p { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 300; line-height: 1.5; max-width: none; margin-bottom: 0; }
+
+  /* Objectives */
+  .objectives {
+    margin: 2rem 0;
+  }
+  .objectives h4 { margin-bottom: 1rem; }
+  .objectives ul { list-style: none; }
+  .objectives li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+    font-size: 0.98rem;
+  }
+  .objectives li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    color: var(--ochre-deep);
+    font-weight: 600;
+  }
+
+  /* Key concepts */
+  .concepts-grid {
+    display: grid;
+    gap: 1.2rem;
+    margin: 2rem 0;
+  }
+  .concept-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 1.8rem;
+    border-radius: 2px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .phase.open .concept-card { background: var(--paper-warm); }
+  .concept-card:hover { border-color: var(--ochre); transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+
+  .concept-card .diff-badge {
+    position: absolute;
+    top: 1.3rem;
+    right: 1.3rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+  }
+  .diff-badge.easy { background: rgba(75,107,74,0.15); color: var(--moss); }
+  .diff-badge.medium { background: rgba(200,152,74,0.2); color: var(--ochre-deep); }
+  .diff-badge.hard { background: rgba(168,75,42,0.15); color: var(--rust); }
+
+  .concept-card h4 {
+    font-family: 'Fraunces', serif;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    font-size: 1.2rem;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    padding-right: 6rem;
+  }
+  .concept-card .what {
+    font-size: 0.96rem;
+    margin-bottom: 0.8rem;
+  }
+  .concept-card .real-world {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+    padding: 0.7rem 1rem;
+    background: var(--paper-dark);
+    border-left: 3px solid var(--ochre);
+    margin: 0.6rem 0;
+  }
+  .concept-card .real-world::before { content: 'In the world →  '; font-family: 'JetBrains Mono', monospace; font-style: normal; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--ochre-deep); display: block; margin-bottom: 0.3rem; font-weight: 600; }
+  .concept-card .connects {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-top: 0.5rem;
+  }
+  .concept-card .connects strong { color: var(--moss); font-weight: 600; }
+
+  /* Mentor analogy (per phase) */
+  .mentor-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.2rem 2.5rem;
+    margin: 2.5rem 0;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mentor-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--ochre);
+  }
+  .mentor-box .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 1rem;
+  }
+  .mentor-box p {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    font-weight: 300;
+    max-width: 62ch;
+  }
+  .mentor-box p + p { margin-top: 1rem; }
+  .mentor-box em { color: var(--ochre); font-style: italic; }
+
+  /* SVG visual container */
+  .visual {
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+  }
+  .visual .caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ochre-deep);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .visual svg { width: 100%; height: auto; display: block; }
+
+  /* Checkpoint */
+  .checkpoint {
+    background: var(--paper-warm);
+    border: 2px dashed var(--moss);
+    padding: 1.8rem;
+    margin: 2rem 0;
+    border-radius: 2px;
+  }
+  .checkpoint h4 { color: var(--moss); display: flex; align-items: center; gap: 0.6rem; }
+  .checkpoint h4::before { content: '✓'; font-size: 1.2rem; }
+  .checkpoint p { font-family: 'Fraunces', serif; font-size: 1.08rem; margin-top: 0.8rem; font-weight: 400; font-style: italic; }
+  .checkpoint .hint {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-family: 'Inter Tight', sans-serif;
+    margin-top: 0.8rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--rule-strong);
+    font-style: normal;
+  }
+  .checkpoint .hint::before { content: 'If stuck → '; font-weight: 600; color: var(--moss); }
+
+  /* Feynman flip card */
+  .feynman {
+    perspective: 1200px;
+    margin: 2rem 0;
+    min-height: 220px;
+  }
+  .feynman-inner {
+    position: relative;
+    width: 100%;
+    min-height: 220px;
+    transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+  .feynman.flipped .feynman-inner { transform: rotateY(180deg); }
+  .feynman-front, .feynman-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    padding: 2rem;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .feynman-front {
+    background: var(--rust);
+    color: var(--paper);
+    border: 1px solid var(--rust);
+  }
+  .feynman-back {
+    background: var(--paper-warm);
+    border: 1px solid var(--rust);
+    color: var(--ink);
+    transform: rotateY(180deg);
+  }
+  .feynman .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+  .feynman p { font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.5; max-width: none; }
+  .feynman .flip-cue {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    opacity: 0.75;
+  }
+
+  /* Memory hook */
+  .memory-hook {
+    background: linear-gradient(135deg, rgba(200,152,74,0.12) 0%, rgba(168,75,42,0.08) 100%);
+    border: 1px solid var(--ochre);
+    padding: 1.8rem 2rem;
+    margin: 2rem 0;
+    border-radius: 2px;
+    position: relative;
+  }
+  .memory-hook h4 { color: var(--ochre-deep); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+  .memory-hook h4::before { content: '◆'; font-size: 1.2rem; color: var(--ochre); }
+  .memory-hook p { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 400; line-height: 1.5; }
+  .memory-hook .mnemonic {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ochre-deep);
+    padding: 0.4rem 0;
+    letter-spacing: 0.1em;
+  }
+
+  /* Jargon decoder */
+  .jargon-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  .jargon-table td {
+    padding: 1rem 1rem 1rem 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .jargon-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--ochre-deep);
+    width: 22%;
+    padding-right: 1.5rem;
+  }
+  .jargon-table td:nth-child(2) {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    width: 40%;
+  }
+  .jargon-group h4 { margin: 2rem 0 0.5rem; color: var(--moss); }
+
+  /* Pitfalls */
+  .pitfalls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+  .pitfall-card {
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--rust);
+    padding: 1.6rem;
+    border-radius: 2px;
+  }
+  .pitfall-card .trap-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--rust);
+    font-size: 1.8rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .pitfall-card h4 { text-transform: none; letter-spacing: -0.01em; font-family: 'Fraunces', serif; font-size: 1.15rem; margin-bottom: 1rem; color: var(--ink); font-weight: 500; }
+  .pitfall-card .myth { margin: 0.4rem 0; font-size: 0.92rem; }
+  .pitfall-card .myth::before {
+    content: '✗';
+    color: var(--rust);
+    margin-right: 0.5rem;
+    font-weight: 700;
+  }
+  .pitfall-card .reality { margin: 0.4rem 0; font-size: 0.92rem; }
+  .pitfall-card .reality::before {
+    content: '✓';
+    color: var(--moss);
+    margin-right: 0.5rem;
+    font-weight: 700;
+  }
+
+  /* Cross-domain */
+  .cross-domain {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .domain-card {
+    padding: 1.8rem;
+    background: var(--paper-warm);
+    border-left: 4px solid var(--moss);
+    border-radius: 2px;
+  }
+  .domain-card .domain-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 0.6rem;
+  }
+  .domain-card h4 { font-family: 'Fraunces', serif; text-transform: none; letter-spacing: -0.01em; font-size: 1.15rem; margin-bottom: 0.8rem; }
+  .domain-card p { font-size: 0.92rem; margin-bottom: 0; }
+
+  /* Schedule */
+  .schedule-timeline {
+    margin: 2rem 0;
+    position: relative;
+  }
+  .schedule-timeline::before {
+    content: '';
+    position: absolute;
+    left: 80px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: var(--rule-strong);
+  }
+  .sched-row {
+    display: grid;
+    grid-template-columns: 80px 30px 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    align-items: start;
+    position: relative;
+  }
+  .sched-day {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ochre-deep);
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  .sched-dot {
+    width: 14px;
+    height: 14px;
+    background: var(--ochre);
+    border-radius: 50%;
+    border: 3px solid var(--paper);
+    box-shadow: 0 0 0 2px var(--ochre);
+    margin-top: 6px;
+    margin-left: 8px;
+    z-index: 1;
+  }
+  .sched-action { padding-top: 0.2rem; }
+  .sched-action strong { display: block; margin-bottom: 0.2rem; }
+  .sched-action span { font-size: 0.88rem; color: var(--ink-soft); }
+
+  /* Mentor wisdom */
+  .wisdom {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink-soft) 100%);
+    color: var(--paper);
+    margin: 5rem -2rem 0;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+  .wisdom::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--ochre) 0%, transparent 70%);
+    opacity: 0.25;
+  }
+  .wisdom .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 1.5rem;
+  }
+  .wisdom h2 { color: var(--paper); margin-bottom: 1.5rem; }
+  .wisdom p { font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.6; font-weight: 300; max-width: 62ch; }
+  .wisdom p + p { margin-top: 1rem; }
+  .wisdom .signoff {
+    margin-top: 2.5rem;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--ochre);
+    max-width: 54ch;
+  }
+
+  /* Footer */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--rule);
+  }
+  footer em { color: var(--ochre-deep); }
+
+  /* Pills / mini tags */
+  .pill {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    background: var(--paper-dark);
+    font-size: 0.72rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.08em;
+    margin-right: 0.3rem;
+    color: var(--ink-soft);
+  }
+
+  /* Print styles */
+  @media print {
+    nav.top, .progress-track { display: none; }
+    .phase-body { max-height: none !important; }
+    .phase { break-inside: avoid; }
+    section { break-inside: avoid; padding: 2rem 0; }
+    .feynman-inner { transform: none !important; }
+    .feynman-back { position: relative; transform: none; margin-top: 1rem; }
+    .feynman-front { position: relative; }
+    body { background: white; }
+    body::before { display: none; }
+    .mentor-box, .hook-card, .wisdom { background: white; color: black; border: 2px solid black; }
+    .mentor-box p em, .hook-card p em, .wisdom .label { color: #666; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="top">
+  <div class="brand">The Strategist's <em>Map</em></div>
+  <ul>
+    <li><a href="#pitch">Premise</a></li>
+    <li><a href="#map">Map</a></li>
+    <li><a href="#day1">Day 1</a></li>
+    <li><a href="#day2">Day 2</a></li>
+    <li><a href="#day3">Day 3</a></li>
+    <li><a href="#day4">Day 4</a></li>
+    <li><a href="#day5">Day 5</a></li>
+    <li><a href="#jargon">Jargon</a></li>
+    <li><a href="#traps">Traps</a></li>
+    <li><a href="#review">Review</a></li>
+  </ul>
+</nav>
+
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-meta">Module 01 · Strategy &amp; BD&amp;L · 5-day Roadmap</div>
+    <h1>The <em>Strategist's</em> Map for Pharma</h1>
+    <p class="lede">A five-day theoretical tour through the brain of a pharmaceutical company — how it chooses its battlefields, sizes its bets, hunts for the right deals, and reads its rivals.</p>
+
+    <!-- Hero ornament SVG -->
+    <svg class="hero-ornament" viewBox="0 0 400 400" aria-hidden="true">
+      <defs>
+        <radialGradient id="orbglow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#C8984A" stop-opacity="0.4"/>
+          <stop offset="70%" stop-color="#C8984A" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#C8984A" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <circle cx="200" cy="200" r="180" fill="url(#orbglow)"/>
+      <circle cx="200" cy="200" r="140" fill="none" stroke="#0F1B2D" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="200" cy="200" r="100" fill="none" stroke="#0F1B2D" stroke-width="0.5" opacity="0.25"/>
+      <circle cx="200" cy="200" r="60" fill="none" stroke="#0F1B2D" stroke-width="0.5" opacity="0.2"/>
+      <g transform="translate(200,200)">
+        <line x1="0" y1="-170" x2="0" y2="170" stroke="#0F1B2D" stroke-width="0.5" opacity="0.2"/>
+        <line x1="-170" y1="0" x2="170" y2="0" stroke="#0F1B2D" stroke-width="0.5" opacity="0.2"/>
+        <line x1="-120" y1="-120" x2="120" y2="120" stroke="#0F1B2D" stroke-width="0.4" opacity="0.15"/>
+        <line x1="-120" y1="120" x2="120" y2="-120" stroke="#0F1B2D" stroke-width="0.4" opacity="0.15"/>
+      </g>
+      <!-- 5 nodes around center -->
+      <g>
+        <circle cx="200" cy="40" r="14" fill="#0F1B2D"/>
+        <text x="200" y="45" text-anchor="middle" fill="#C8984A" font-family="Fraunces" font-style="italic" font-size="12">1</text>
+        <circle cx="352" cy="140" r="14" fill="#0F1B2D"/>
+        <text x="352" y="145" text-anchor="middle" fill="#C8984A" font-family="Fraunces" font-style="italic" font-size="12">2</text>
+        <circle cx="295" cy="330" r="14" fill="#0F1B2D"/>
+        <text x="295" y="335" text-anchor="middle" fill="#C8984A" font-family="Fraunces" font-style="italic" font-size="12">3</text>
+        <circle cx="105" cy="330" r="14" fill="#0F1B2D"/>
+        <text x="105" y="335" text-anchor="middle" fill="#C8984A" font-family="Fraunces" font-style="italic" font-size="12">4</text>
+        <circle cx="48" cy="140" r="14" fill="#0F1B2D"/>
+        <text x="48" y="145" text-anchor="middle" fill="#C8984A" font-family="Fraunces" font-style="italic" font-size="12">5</text>
+        <circle cx="200" cy="200" r="22" fill="#C8984A"/>
+        <circle cx="200" cy="200" r="16" fill="none" stroke="#0F1B2D" stroke-width="1.5"/>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<main>
+
+<!-- The Hook -->
+<section>
+  <div class="wrap-narrow">
+    <div class="section-label">The Hook</div>
+    <div class="hook-card">
+      <div class="label">Did you know?</div>
+      <p>Of every <em>10,000 compounds</em> that enter a pharma company's discovery pipeline, roughly <em>one</em> makes it to the pharmacy shelf — and that one journey takes <em>10–15 years</em> and <em>$2.6 billion</em>. Strategy and BD&amp;L exist to decide which tiny fraction of those 10,000 even deserve the attention in the first place.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Elevator Pitch + Master Analogy -->
+<section id="pitch">
+  <div class="wrap-narrow">
+    <div class="section-label">The 30-Second Premise</div>
+    <h2>Pharma strategy is deciding <em>what</em> to bet on, <em>how much</em>, and <em>from where</em>.</h2>
+
+    <p>Every pharmaceutical company faces the same four questions, continuously, for every asset in its portfolio and every dollar in its budget. These four questions are the <strong>four pillars of Module 1</strong> — and they never stop being asked, from the day a chemist first draws a molecule until decades later, long after the patent expires.</p>
+
+    <div class="master-analogy">
+      <h4>The Master Analogy → Pharma as a Top-Tier Football Club</h4>
+      <p>Imagine you are the <em>director of football</em> at a club like Manchester City or Real Madrid. You don't kick a ball. You don't pick the starting eleven. You do something far more consequential: you decide <em>which competitions</em> the club will try to win, <em>which players</em> to develop, <em>which transfers</em> to pursue, and <em>what rival clubs</em> are plotting.</p>
+      <p>A pharmaceutical company is exactly the same institution — just with scientists instead of strikers, therapeutic areas instead of tournaments, and drug candidates instead of footballers. Every concept in this five-day roadmap maps back to this one picture.</p>
+
+      <div class="mapping-grid">
+        <div class="from">Therapeutic Areas (TAs)</div><div class="arrow">───</div><div class="to">the competitions you choose to compete in</div>
+        <div class="from">Pipeline of drug candidates</div><div class="arrow">───</div><div class="to">your squad, from academy kids to first-team stars</div>
+        <div class="from">BD&amp;L deals</div><div class="arrow">───</div><div class="to">the transfer window — signings, loans, sales</div>
+        <div class="from">Competitive Intelligence</div><div class="arrow">───</div><div class="to">scouts in the stands of every rival's match</div>
+        <div class="from">Stage-gate governance</div><div class="arrow">───</div><div class="to">youth-team promotions; who gets released</div>
+        <div class="from">LOE (loss of exclusivity)</div><div class="arrow">───</div><div class="to">your superstar's contract running out</div>
+      </div>
+    </div>
+
+    <p>Hold this picture. When you meet <strong>real options valuation</strong> on Day 3 or <strong>war-gaming</strong> on Day 5, return to the club. The jargon will stop feeling foreign.</p>
+  </div>
+</section>
+
+<!-- Origin Story -->
+<section>
+  <div class="wrap-narrow">
+    <div class="section-label">Why This Field Exists</div>
+    <h2>The origin story — how pharma learned to think strategically.</h2>
+
+    <p>For most of the twentieth century, pharmaceutical companies were <em>chemistry houses</em>. Scientists ran screens, molecules emerged, and a relatively small commercial team took whatever chemistry found and sold it hard. Strategy, as a discipline, barely existed.</p>
+
+    <p>That world broke in the 1990s and 2000s. Two forces collided. First, the cost of developing a drug climbed past a billion dollars per approval — failure was no longer an absorbable accident. Second, the <em>patent cliff</em> arrived: blockbuster drugs like Lipitor and Plavix lost exclusivity almost simultaneously, wiping out tens of billions of dollars of annual revenue in a single year. Suddenly, deciding <em>which diseases to pursue</em>, <em>which assets to buy</em>, and <em>which to kill</em> mattered more than any one molecule.</p>
+
+    <p>From that pressure, a new function crystallized. <strong>Corporate strategy</strong> started asking which therapeutic areas were worth a 15-year commitment. <strong>Portfolio management</strong> brought the discipline of probability-weighted valuation to the pipeline. <strong>BD&amp;L</strong> (business development &amp; licensing) transformed from a sleepy deal desk into the single largest source of new assets for most large pharma — it is common today for more than half of a major company's revenue to come from drugs it did not originally discover. And <strong>competitive intelligence</strong> professionalized into an always-on radar scanning trial readouts, conference abstracts, and patent filings in real time.</p>
+
+    <p>This five-day map walks you through all four — in the order they tend to be asked inside a real company.</p>
+  </div>
+</section>
+
+<!-- Concept Map -->
+<section id="map">
+  <div class="wrap">
+    <div class="section-label">The Map</div>
+    <h2>How the four pillars connect — and progress across five days.</h2>
+
+    <div class="concept-map-wrap">
+      <div class="mermaid">
+graph TB
+  Core["<b>Module 1: Strategy &amp; BD&amp;L</b><br/><i>The brain of the pharma company</i>"]
+
+  Core --> D1["<b>Day 1</b><br/>The Landscape"]
+  Core --> D2["<b>Day 2</b><br/>TA Strategy"]
+  Core --> D3["<b>Day 3</b><br/>Portfolio &amp; Capital"]
+  Core --> D4["<b>Day 4</b><br/>BD&amp;L Deals"]
+  Core --> D5["<b>Day 5</b><br/>Competitive Intel"]
+
+  D1 --> C1a["10-phase lifecycle"]
+  D1 --> C1b["Four pillars"]
+  D1 --> C1c["Always-on rhythm"]
+
+  D2 --> C2a["Strategic archetypes"]
+  D2 --> C2b["North-star framework"]
+  D2 --> C2c["TA attractiveness"]
+  D2 --> C2d["Breadth vs depth"]
+
+  D3 --> C3a["Pipeline stages"]
+  D3 --> C3b["PoS benchmarks"]
+  D3 --> C3c["rNPV mechanics"]
+  D3 --> C3d["Real options"]
+
+  D4 --> C4a["Deal-type spectrum"]
+  D4 --> C4b["Due diligence stack"]
+  D4 --> C4c["Valuation vs price"]
+  D4 --> C4d["Complex structures"]
+
+  D5 --> C5a["CI sources"]
+  D5 --> C5b["War-gaming"]
+  D5 --> C5c["Threat indices"]
+  D5 --> C5d["Integration"]
+
+  C2c -.-> C3c
+  C3c -.-> C4c
+  C4b -.-> C5a
+  C2a -.-> C4a
+
+  classDef core fill:#0F1B2D,stroke:#C8984A,stroke-width:2px,color:#F5EFDF,font-family:Inter
+  classDef d1 fill:#C8984A,stroke:#9B7233,color:#0F1B2D
+  classDef d2 fill:#4B6B4A,stroke:#2D4A2D,color:#F5EFDF
+  classDef d3 fill:#A84B2A,stroke:#7A3520,color:#F5EFDF
+  classDef d4 fill:#9B7233,stroke:#6A4E20,color:#F5EFDF
+  classDef d5 fill:#2A3B52,stroke:#0F1B2D,color:#F5EFDF
+  classDef sub fill:#EEE5CE,stroke:#C8984A,color:#0F1B2D
+
+  class Core core
+  class D1 d1
+  class D2 d2
+  class D3 d3
+  class D4 d4
+  class D5 d5
+  class C1a,C1b,C1c,C2a,C2b,C2c,C2d,C3a,C3b,C3c,C3d,C4a,C4b,C4c,C4d,C5a,C5b,C5c,C5d sub
+      </div>
+    </div>
+    <p style="margin-top:1rem;font-size:0.9rem;color:var(--ink-soft);"><em>The dotted lines are the <strong>cross-bridges</strong> — concepts that recur in different days. For example, TA attractiveness (Day 2) is built from the same building blocks as deal valuation (Day 4), and the due diligence stack (Day 4) feeds directly into competitive intelligence (Day 5).</em></p>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section>
+  <div class="wrap">
+    <div class="section-label">The Five Days</div>
+    <h2>Your theoretical route through the four pillars.</h2>
+    <p>Click any day to expand. Each day follows the same rhythm: a curiosity hook, the learning objectives, the key concepts with their analogies, a <em>signature analogy</em> that binds the day, a visual, a checkpoint, a teach-back flip card, and a memory hook.</p>
+
+    <div class="phases-container">
+
+      <!-- DAY 1 ============================================ -->
+      <div class="phase" id="day1">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-num">I</div>
+          <div class="phase-title">
+            <h3>Day 1 · The Landscape</h3>
+            <div class="meta">
+              <span>~3 hours</span>
+              <span>Bloom's: Remember → Understand</span>
+              <span><span class="dot"></span> Foundation</span>
+            </div>
+          </div>
+          <div class="phase-chevron">+</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-content">
+
+            <div class="curiosity-hook">
+              <span class="icon">Curiosity Hook</span>
+              <p>A blockbuster drug that sells $5 billion a year can take <strong>15 years of strategy work</strong> before it ever shows up in a TV ad — and most of that strategy happens before the first patient is even dosed.</p>
+            </div>
+
+            <div class="objectives">
+              <h4>What you'll be able to do</h4>
+              <ul>
+                <li>Describe the <strong>10 chronological phases</strong> of a drug's life, from Discovery to Post-LOE.</li>
+                <li>Explain why <strong>Strategy &amp; BD&amp;L is "always on"</strong> — active in every one of those 10 phases.</li>
+                <li>Name the <strong>four pillars</strong> of Module 1 and what question each one answers.</li>
+                <li>Use the <strong>master analogy</strong> (the football club) to orient any new concept you meet.</li>
+              </ul>
+            </div>
+
+            <h4 style="margin-top:2rem;">Key Concepts</h4>
+            <div class="concepts-grid">
+
+              <div class="concept-card">
+                <span class="diff-badge easy">Foundation</span>
+                <h4>The 10-Phase Lifecycle</h4>
+                <p class="what">A drug's life is typically broken into ten chronological phases: <span class="mono">Discovery → Preclinical → Phase 1 → Phase 2 → Phase 3 → Regulatory Submission → Launch → In-Line Growth → LOE Defense → Post-LOE</span>. Each phase has its own dominant concerns and its own dominant functional owners.</p>
+                <div class="real-world">Like a football career: youth academy → reserves → first-team debut → breakthrough season → peak years → testimonial → transfer out → retirement. Same person, different questions at each stage.</div>
+                <p class="connects"><strong>Connects to →</strong> Every other concept in this roadmap lives somewhere on this timeline.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge easy">Foundation</span>
+                <h4>Strategy is "Always On"</h4>
+                <p class="what">Unlike Clinical Operations (which peaks during Phase 3) or Manufacturing (which peaks at Launch), strategy and BD&amp;L run continuously — from Day 0 of Discovery to the final Post-LOE wind-down. It is one of very few functions that never sleep.</p>
+                <div class="real-world">The club's director of football is never on holiday. There's always a transfer window somewhere, an academy prospect to evaluate, a rival's tactics to decipher.</div>
+                <p class="connects"><strong>Connects to →</strong> Why portfolio management and CI are continuous disciplines, not one-off projects.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge easy">Foundation</span>
+                <h4>The Four Pillars</h4>
+                <p class="what">Everything in Module 1 sits under one of four questions: <strong>(1) What fields do we compete in?</strong> (Corporate &amp; TA Strategy, Day 2). <strong>(2) What do we already have, and what is it worth?</strong> (Portfolio Management, Day 3). <strong>(3) What should we buy, sell, or license?</strong> (BD&amp;L, Day 4). <strong>(4) What are our rivals doing?</strong> (Competitive Intelligence, Day 5).</p>
+                <div class="real-world">These are literally the four questions every football director faces every morning: What leagues are we targeting? What squad do I have? Who should I sign or sell? What are City, United, Liverpool doing?</div>
+                <p class="connects"><strong>Connects to →</strong> Days 2–5 are one pillar each.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge easy">Foundation</span>
+                <h4>Dominant Functions per Phase</h4>
+                <p class="what">Each lifecycle phase has a different set of <em>dominant</em> functions. Discovery belongs to Research and IP. Phase 3 belongs to Clinical Operations, Biostatistics, and HEOR. Launch belongs to Commercial, Market Access, and PV. Strategy is present in all of them — but it always speaks <em>through</em> whichever function is currently dominant.</p>
+                <div class="real-world">Youth-academy season → coaches dominate. Pre-season → fitness staff dominate. Transfer window → director of football dominates. The director influences all seasons, but speaks with different voices.</div>
+                <p class="connects"><strong>Connects to →</strong> How strategy translates into action depends entirely on the phase you are in.</p>
+              </div>
+
+            </div>
+
+            <!-- Visual: Lifecycle Gantt -->
+            <div class="visual">
+              <div class="caption">Figure 1.1 — The always-on strip of Strategy across the 10-phase lifecycle</div>
+              <svg viewBox="0 0 880 240" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+                    <line x1="0" y1="0" x2="0" y2="6" stroke="#C8984A" stroke-width="2"/>
+                  </pattern>
+                </defs>
+                <!-- Phase labels -->
+                <g font-family="JetBrains Mono" font-size="9" fill="#2A3B52" text-anchor="middle">
+                  <text x="60" y="22">DISC</text>
+                  <text x="140" y="22">PRECL</text>
+                  <text x="220" y="22">P1</text>
+                  <text x="300" y="22">P2</text>
+                  <text x="380" y="22">P3</text>
+                  <text x="460" y="22">SUBM</text>
+                  <text x="540" y="22" font-weight="700" fill="#0F1B2D">LAUNCH</text>
+                  <text x="620" y="22">GROW</text>
+                  <text x="720" y="22">LOE</text>
+                  <text x="820" y="22">POST</text>
+                </g>
+                <!-- Time axis -->
+                <line x1="20" y1="35" x2="860" y2="35" stroke="#0F1B2D" stroke-width="0.5" opacity="0.3"/>
+                <g font-family="JetBrains Mono" font-size="8" fill="#2A3B52" text-anchor="middle">
+                  <text x="60" y="50">T–15y</text>
+                  <text x="540" y="50" font-weight="700">T=0</text>
+                  <text x="820" y="50">T+20y</text>
+                </g>
+                <line x1="540" y1="35" x2="540" y2="215" stroke="#C8984A" stroke-width="1" stroke-dasharray="3,3" opacity="0.8"/>
+
+                <!-- Track: Strategy & BD&L (the hero bar) -->
+                <g>
+                  <text x="15" y="82" font-family="Inter Tight" font-size="11" font-weight="600" fill="#0F1B2D" text-anchor="end">Strategy &amp; BD&amp;L</text>
+                  <rect x="20" y="70" width="840" height="22" fill="#0F1B2D" rx="2"/>
+                  <rect x="20" y="70" width="840" height="22" fill="url(#hatch)" opacity="0.4" rx="2"/>
+                  <text x="440" y="85" font-family="Fraunces" font-style="italic" font-size="11" fill="#F5EFDF" text-anchor="middle">always on — every phase, every day</text>
+                </g>
+
+                <!-- Track: Clinical Development -->
+                <g>
+                  <text x="15" y="117" font-family="Inter Tight" font-size="10" fill="#2A3B52" text-anchor="end">Clinical Dev</text>
+                  <rect x="180" y="105" width="420" height="18" fill="#7C9082" opacity="0.7" rx="2"/>
+                  <rect x="600" y="105" width="140" height="18" fill="#7C9082" opacity="0.35" rx="2"/>
+                </g>
+                <!-- Track: CMC / Supply -->
+                <g>
+                  <text x="15" y="142" font-family="Inter Tight" font-size="10" fill="#2A3B52" text-anchor="end">CMC / Supply</text>
+                  <rect x="100" y="130" width="680" height="18" fill="#D67D5C" opacity="0.6" rx="2"/>
+                </g>
+                <!-- Track: Regulatory -->
+                <g>
+                  <text x="15" y="167" font-family="Inter Tight" font-size="10" fill="#2A3B52" text-anchor="end">Regulatory</text>
+                  <rect x="100" y="155" width="420" height="18" fill="#4B6B4A" opacity="0.55" rx="2"/>
+                  <rect x="420" y="155" width="120" height="18" fill="#4B6B4A" opacity="0.85" rx="2"/>
+                </g>
+                <!-- Track: Commercial -->
+                <g>
+                  <text x="15" y="192" font-family="Inter Tight" font-size="10" fill="#2A3B52" text-anchor="end">Commercial</text>
+                  <rect x="300" y="180" width="500" height="18" fill="#C8984A" opacity="0.55" rx="2"/>
+                  <rect x="500" y="180" width="180" height="18" fill="#C8984A" opacity="0.95" rx="2"/>
+                </g>
+
+                <!-- Legend -->
+                <g font-family="Inter Tight" font-size="9" fill="#2A3B52">
+                  <rect x="20" y="215" width="12" height="10" fill="#0F1B2D"/>
+                  <text x="38" y="223">Strategy = continuous</text>
+                  <rect x="180" y="215" width="12" height="10" fill="#7C9082" opacity="0.7"/>
+                  <text x="198" y="223">Development peaks</text>
+                  <rect x="330" y="215" width="12" height="10" fill="#C8984A" opacity="0.95"/>
+                  <text x="348" y="223">Commercial peaks</text>
+                  <line x1="500" y1="220" x2="515" y2="220" stroke="#C8984A" stroke-width="1" stroke-dasharray="3,3"/>
+                  <text x="521" y="223">Launch (T=0)</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="mentor-box">
+              <div class="label">Mentor's Signature Analogy — Day 1</div>
+              <p>Picture the tunnel of a football stadium before kickoff. The manager is pacing. The physio is checking the left-back's knee. The analysts are queuing up the match-day tactical board. <em>Where is the director of football?</em> Not in the tunnel. She's in the directors' box, already on the phone — because the January transfer window opens in eight weeks, the U-19s have a match tonight, and the rival's star striker is rumoured to be unhappy.</p>
+              <p>That's pharma strategy. Everyone else works a shift. The strategist is never off the clock, because the next drug's fate is being decided somewhere in the shadows of every single day.</p>
+            </div>
+
+            <div class="checkpoint">
+              <h4>Checkpoint</h4>
+              <p>"Why is Strategy &amp; BD&amp;L drawn as a single long bar across all ten phases, while Clinical Development is a short bar that peaks and then tapers off?"</p>
+              <div class="hint">Think about who is asking <em>which drug should exist at all</em> versus who is asking <em>does this specific drug work</em>.</div>
+            </div>
+
+            <div class="feynman" onclick="this.classList.toggle('flipped');">
+              <div class="feynman-inner">
+                <div class="feynman-front">
+                  <div class="label">Feynman Teach-Back</div>
+                  <p>Explain to a 12-year-old, in three sentences, why a pharmaceutical company needs a <em>strategy department</em> if it already has scientists, doctors, and salespeople.</p>
+                  <div class="flip-cue">▶ tap to reveal a framework answer</div>
+                </div>
+                <div class="feynman-back">
+                  <div class="label">Framework Answer</div>
+                  <p>"You know how a football club has a manager who picks the team, but also a director who decides <em>which leagues</em> the club should even try to win? The scientists and doctors are like the players — they're the ones doing the work. The strategy department is like that director — they decide which diseases are worth fighting, whether to buy new medicines from other companies, and what the rivals are planning. It matters because picking the wrong fight can bankrupt even a brilliant team."</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="memory-hook">
+              <h4>Memory Hook</h4>
+              <p>Remember the four pillars with <span class="mnemonic">T·P·D·C</span> — <strong>T</strong>erritory (TA strategy) → <strong>P</strong>ortfolio → <strong>D</strong>eals → <strong>C</strong>ompetition. The same order a chess player thinks: <em>where's the battlefield → what pieces do I have → what trades should I make → what is my opponent doing</em>.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 2 ============================================ -->
+      <div class="phase" id="day2">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-num">II</div>
+          <div class="phase-title">
+            <h3>Day 2 · Corporate &amp; TA Strategy</h3>
+            <div class="meta">
+              <span>~3.5 hours</span>
+              <span>Bloom's: Understand → Apply</span>
+              <span><span class="dot medium"></span> Core</span>
+            </div>
+          </div>
+          <div class="phase-chevron">+</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-content">
+
+            <div class="curiosity-hook">
+              <span class="icon">Curiosity Hook</span>
+              <p>Two of the ten largest pharmas of 1995 <strong>no longer exist as independent companies</strong>. The usual cause of death was not a single failed drug — it was a wrong bet on which therapeutic areas would matter over the next decade.</p>
+            </div>
+
+            <div class="objectives">
+              <h4>What you'll be able to do</h4>
+              <ul>
+                <li>Distinguish the four dominant <strong>strategic archetypes</strong> (specialty, rare-disease, oncology-first, diversified).</li>
+                <li>Apply the <strong>north-star framework</strong>: mission → TA mandate → asset priorities.</li>
+                <li>Score a therapeutic area on the <strong>four classical TA-selection criteria</strong>.</li>
+                <li>Reason about <strong>breadth vs. depth</strong> and when a company should exit a TA.</li>
+              </ul>
+            </div>
+
+            <h4 style="margin-top:2rem;">Key Concepts</h4>
+            <div class="concepts-grid">
+
+              <div class="concept-card">
+                <span class="diff-badge easy">Foundation</span>
+                <h4>Strategic Archetypes</h4>
+                <p class="what">Pharma companies tend to cluster into four recognizable shapes. <strong>Specialty</strong>: narrow TA focus, high-science, high-price (e.g. rare neurology). <strong>Rare disease</strong>: very small populations, very high prices per patient, orphan-drug incentives. <strong>Oncology-first</strong>: an enormous pipeline concentrated in cancer, often on a handful of platforms. <strong>Diversified</strong>: many TAs, many modalities, many revenue streams. Each archetype has its own economics, its own risk profile, and its own characteristic investor expectation.</p>
+                <div class="real-world">Football clubs cluster the same way: a youth-academy club (Ajax), a Galácticos club (Real Madrid), a tactical-system club (old-school Barcelona), or a franchise chain (City Football Group). The archetype dictates every subsequent choice.</div>
+                <p class="connects"><strong>Connects to →</strong> Day 3 portfolio construction, Day 4 which deals even get looked at.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge medium">Core</span>
+                <h4>The North-Star Framework</h4>
+                <p class="what">A three-tier cascade. At the top: <strong>Mission</strong> (e.g. "double the life of patients with incurable cancers"). One level down: <strong>TA Mandate</strong> — the specific therapeutic areas you commit to, and, crucially, the ones you explicitly do <em>not</em> commit to. Bottom level: <strong>Asset Priorities</strong> — which individual programs in those TAs get resources first.</p>
+                <div class="real-world">Mission: "Win the Champions League every decade." TA Mandate: "UEFA competitions + domestic league only; no cup runs at the expense of league form." Asset Priorities: "Striker and centre-back this summer; goalkeeper can wait."</div>
+                <p class="connects"><strong>Connects to →</strong> Everything downstream. If mission and mandate aren't clear, the rest of the company drifts.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge medium">Core</span>
+                <h4>The Four TA Selection Criteria</h4>
+                <p class="what">When evaluating whether a therapeutic area is worth entering — or staying in — four dimensions dominate. <strong>(1) Unmet need</strong>: how many patients are suffering without good options? <strong>(2) Market size</strong>: how much money could a successful drug earn? <strong>(3) Science maturity</strong>: do we understand the biology well enough to act? <strong>(4) Competitive density</strong>: how crowded is the race already?</p>
+                <div class="real-world">Evaluating whether to enter a new competition: How much prestige does it carry (unmet need)? What's the prize money (market size)? Do we have the tactical know-how (science)? How good are the other clubs entering (competition)?</div>
+                <p class="connects"><strong>Connects to →</strong> These four dimensions reappear as the valuation inputs in every downstream day.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge hard">Advanced</span>
+                <h4>Breadth vs. Depth (and the Exit Question)</h4>
+                <p class="what">A diversified company plays in many TAs shallowly. A specialty company plays in one or two TAs very deeply. Neither is inherently better — but both must answer: <em>when do we exit a TA?</em> Exit signals include sustained underperformance, science evolving away from your platform, or a mandate change. TA exit discipline is one of the hardest capabilities to build: portfolios naturally accumulate history, not intent.</p>
+                <div class="real-world">A club that competes in domestic league, FA Cup, League Cup, Europa League, friendlies abroad, and women's football is broad. A club focused exclusively on top-flight league football is deep. Exiting a competition ("we won't prioritize the FA Cup anymore") is politically painful but sometimes necessary.</div>
+                <p class="connects"><strong>Connects to →</strong> Day 4 divestiture decisions; Day 5 reading when rivals exit a TA is a massive signal.</p>
+              </div>
+
+            </div>
+
+            <!-- Visual: TA Attractiveness Radar -->
+            <div class="visual">
+              <div class="caption">Figure 2.1 — Scoring three hypothetical TAs on the four selection criteria</div>
+              <svg viewBox="0 0 880 320" xmlns="http://www.w3.org/2000/svg">
+                <!-- Three radar charts side by side -->
+                <g font-family="Fraunces" font-size="13" font-style="italic" fill="#0F1B2D" text-anchor="middle">
+                  <text x="150" y="25">TA α — "Common Disease, Crowded"</text>
+                  <text x="440" y="25">TA β — "Rare Disease, Differentiated"</text>
+                  <text x="730" y="25">TA γ — "New Biology, Uncertain"</text>
+                </g>
+
+                <!-- Radar 1 -->
+                <g transform="translate(150,170)">
+                  <!-- grid -->
+                  <g fill="none" stroke="#0F1B2D" stroke-width="0.5" opacity="0.2">
+                    <polygon points="0,-100 100,0 0,100 -100,0"/>
+                    <polygon points="0,-75 75,0 0,75 -75,0"/>
+                    <polygon points="0,-50 50,0 0,50 -50,0"/>
+                    <polygon points="0,-25 25,0 0,25 -25,0"/>
+                  </g>
+                  <!-- axes -->
+                  <g stroke="#0F1B2D" stroke-width="0.5" opacity="0.3">
+                    <line x1="0" y1="-100" x2="0" y2="100"/>
+                    <line x1="-100" y1="0" x2="100" y2="0"/>
+                  </g>
+                  <!-- data: unmet=3, market=5, science=4, competition=1 (inverted: high comp=low score) -->
+                  <polygon points="0,-30 50,0 0,40 -10,0" fill="#C8984A" opacity="0.4" stroke="#9B7233" stroke-width="1.5"/>
+                  <g font-family="JetBrains Mono" font-size="9" fill="#0F1B2D">
+                    <text x="0" y="-108" text-anchor="middle">Unmet need</text>
+                    <text x="112" y="4" text-anchor="start">Market</text>
+                    <text x="0" y="120" text-anchor="middle">Science</text>
+                    <text x="-112" y="4" text-anchor="end">Uncrowded</text>
+                  </g>
+                </g>
+
+                <!-- Radar 2 -->
+                <g transform="translate(440,170)">
+                  <g fill="none" stroke="#0F1B2D" stroke-width="0.5" opacity="0.2">
+                    <polygon points="0,-100 100,0 0,100 -100,0"/>
+                    <polygon points="0,-75 75,0 0,75 -75,0"/>
+                    <polygon points="0,-50 50,0 0,50 -50,0"/>
+                    <polygon points="0,-25 25,0 0,25 -25,0"/>
+                  </g>
+                  <g stroke="#0F1B2D" stroke-width="0.5" opacity="0.3">
+                    <line x1="0" y1="-100" x2="0" y2="100"/>
+                    <line x1="-100" y1="0" x2="100" y2="0"/>
+                  </g>
+                  <!-- data: unmet=5, market=3, science=5, competition=4 (high score = uncrowded) -->
+                  <polygon points="0,-90 60,0 0,90 -80,0" fill="#4B6B4A" opacity="0.4" stroke="#4B6B4A" stroke-width="1.5"/>
+                  <g font-family="JetBrains Mono" font-size="9" fill="#0F1B2D">
+                    <text x="0" y="-108" text-anchor="middle">Unmet need</text>
+                    <text x="112" y="4" text-anchor="start">Market</text>
+                    <text x="0" y="120" text-anchor="middle">Science</text>
+                    <text x="-112" y="4" text-anchor="end">Uncrowded</text>
+                  </g>
+                </g>
+
+                <!-- Radar 3 -->
+                <g transform="translate(730,170)">
+                  <g fill="none" stroke="#0F1B2D" stroke-width="0.5" opacity="0.2">
+                    <polygon points="0,-100 100,0 0,100 -100,0"/>
+                    <polygon points="0,-75 75,0 0,75 -75,0"/>
+                    <polygon points="0,-50 50,0 0,50 -50,0"/>
+                    <polygon points="0,-25 25,0 0,25 -25,0"/>
+                  </g>
+                  <g stroke="#0F1B2D" stroke-width="0.5" opacity="0.3">
+                    <line x1="0" y1="-100" x2="0" y2="100"/>
+                    <line x1="-100" y1="0" x2="100" y2="0"/>
+                  </g>
+                  <!-- data: unmet=4, market=4, science=1 (low), competition=5 (uncrowded) -->
+                  <polygon points="0,-80 80,0 0,20 -100,0" fill="#A84B2A" opacity="0.4" stroke="#A84B2A" stroke-width="1.5"/>
+                  <g font-family="JetBrains Mono" font-size="9" fill="#0F1B2D">
+                    <text x="0" y="-108" text-anchor="middle">Unmet need</text>
+                    <text x="112" y="4" text-anchor="start">Market</text>
+                    <text x="0" y="120" text-anchor="middle">Science</text>
+                    <text x="-112" y="4" text-anchor="end">Uncrowded</text>
+                  </g>
+                </g>
+
+                <!-- Takeaway annotations -->
+                <g font-family="Fraunces" font-size="10" font-style="italic" fill="#2A3B52" text-anchor="middle">
+                  <text x="150" y="295">Big market, but everyone is already there.</text>
+                  <text x="150" y="310">A specialty firm may still win with differentiation.</text>
+                  <text x="440" y="295">Classic "rare disease" shape — well-balanced,</text>
+                  <text x="440" y="310">especially attractive to a focused archetype.</text>
+                  <text x="730" y="295">Wide-open field, but the biology isn't ready.</text>
+                  <text x="730" y="310">A bet for patient capital — or a partnership target.</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="mentor-box">
+              <div class="label">Mentor's Signature Analogy — Day 2</div>
+              <p>Every TA decision has the same shape as this question: <em>"Should our club enter the Women's Super League?"</em> It is not a <em>yes/no</em> — it is a <em>portfolio-fit</em> question. You look at your mission (are you a family club or a men's-only brand?), the state of the league (prestige, prize money, maturity), your internal capabilities (do you even have a women's academy?), and what your rivals are doing. The answer is almost never "because the league exists." The answer is "because entering it, at this scale, aligns with who we are becoming."</p>
+              <p>Therapeutic areas are leagues. And the quiet test of a great strategy team is not the leagues they <em>enter</em> — it is the leagues they <em>refuse to enter</em>, calmly, with a crisp reason.</p>
+            </div>
+
+            <div class="checkpoint">
+              <h4>Checkpoint</h4>
+              <p>"A company with a 'diversified' archetype and a mission of 'broad patient access' is considering entering a rare-disease TA where the science is strong but total patients number only a few thousand worldwide. What two archetype-level tensions does this create, and what question should strategy be asking before the four TA criteria even get scored?"</p>
+              <div class="hint">The question is about archetype alignment, not numbers. Look for the mismatch between "broad access" and "few thousand patients."</div>
+            </div>
+
+            <div class="feynman" onclick="this.classList.toggle('flipped');">
+              <div class="feynman-inner">
+                <div class="feynman-front">
+                  <div class="label">Feynman Teach-Back</div>
+                  <p>In three sentences, explain to someone outside pharma why a big company might <em>refuse</em> to develop a drug that solves a real unmet medical need.</p>
+                  <div class="flip-cue">▶ tap to reveal a framework answer</div>
+                </div>
+                <div class="feynman-back">
+                  <div class="label">Framework Answer</div>
+                  <p>"You know how a big family restaurant might refuse to start serving sushi, even though people want it? It's not that sushi is bad — it's that they don't have sushi chefs, their suppliers don't stock raw fish, and their brand is about comfort food. A pharma company can say no to a real unmet need if the science doesn't fit their platform, the market is too small for their cost base, or it would distract from the leagues they've committed to. Saying no to good opportunities is often the <em>hardest</em> part of strategy — and usually the most important."</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="memory-hook">
+              <h4>Memory Hook</h4>
+              <p>The four TA criteria form the mnemonic <span class="mnemonic">U · M · S · C</span> — "<strong>U</strong>nmet, <strong>M</strong>arket, <strong>S</strong>cience, <strong>C</strong>ompetition." Picture a bow tied by four ribbons pulling in four directions: each one has to be strong enough to hold, or the bow slips.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 3 ============================================ -->
+      <div class="phase" id="day3">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-num">III</div>
+          <div class="phase-title">
+            <h3>Day 3 · Portfolio Management &amp; Capital Allocation</h3>
+            <div class="meta">
+              <span>~4 hours</span>
+              <span>Bloom's: Apply → Analyze</span>
+              <span><span class="dot medium"></span> Core</span>
+            </div>
+          </div>
+          <div class="phase-chevron">+</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-content">
+
+            <div class="curiosity-hook">
+              <span class="icon">Curiosity Hook</span>
+              <p>Of every 100 drug candidates that enter Phase 1 human trials, only about <strong>9 to 12 reach FDA approval</strong>. A working portfolio model has to budget for the <strong>88 that will fail</strong> — and still deliver a return.</p>
+            </div>
+
+            <div class="objectives">
+              <h4>What you'll be able to do</h4>
+              <ul>
+                <li>Explain the <strong>stage-gate</strong> system and why pharma is run as a sequence of explicit go/no-go decisions.</li>
+                <li>Interpret <strong>Probability of Success (PoS)</strong> benchmarks and explain why they matter more than gross sales forecasts.</li>
+                <li>Decompose the <strong>rNPV formula</strong> (risk-adjusted Net Present Value) and name what each term represents.</li>
+                <li>Explain the intuition behind <strong>real options</strong> — why "the option to wait" is itself worth money.</li>
+              </ul>
+            </div>
+
+            <h4 style="margin-top:2rem;">Key Concepts</h4>
+            <div class="concepts-grid">
+
+              <div class="concept-card">
+                <span class="diff-badge easy">Foundation</span>
+                <h4>Pipeline Stages &amp; Stage-Gate Governance</h4>
+                <p class="what">A pharma pipeline is not a conveyor belt. It is a series of <em>gates</em>. At each gate (end of Discovery, end of Preclinical, end of Phase 1, end of Phase 2, end of Phase 3), a governance committee asks: <em>go, stop, or modify?</em> The right to continue is earned, not assumed. The stage-gate system exists precisely to make <strong>killing a program</strong> a normal, sanctioned event rather than a failure.</p>
+                <div class="real-world">A football academy is a stage-gate system. At U-12, U-15, U-18, Reserves, you decide: promote, release, or loan. The manager isn't allowed to refuse to release a player "because he tried hard" — the governance exists to make the hard call routine.</div>
+                <p class="connects"><strong>Connects to →</strong> Every downstream valuation multiplies outcomes by the probability of passing the next gate.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge medium">Core</span>
+                <h4>Probability of Success (PoS)</h4>
+                <p class="what">PoS is the empirical probability that an asset at a given phase will eventually reach approval. Industry benchmarks (from BioMedTracker, IQVIA, and similar) show the ruthless attrition: entering Phase 1 ≈ 10% chance of approval. Entering Phase 2 ≈ 15–20%. Entering Phase 3 ≈ 50–60%. PoS varies enormously by therapeutic area — oncology PoS is far lower than anti-infectives, for example.</p>
+                <div class="real-world">An academy striker's probability of ever playing first-team Premier League football. At U-15 it's maybe 2%. By Reserves it's 20%. After a pre-season goal against a senior side, perhaps 50%. The bar moves up only when evidence accumulates.</div>
+                <p class="connects"><strong>Connects to →</strong> The first input into every valuation. Without PoS, rNPV is just NPV — and useless.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge hard">Advanced</span>
+                <h4>rNPV — Risk-Adjusted Net Present Value</h4>
+                <p class="what">The single most common valuation currency in pharma strategy. In plain English: <em>every future cashflow an asset might generate, multiplied by the probability it actually happens, then discounted back to today's dollars</em>. Three moving parts: (1) forecast of peak sales and their trajectory, (2) the probability chain of passing every remaining gate, (3) a discount rate reflecting time value and risk. Change any of the three, the number changes. Strategy debates are really debates about these three inputs.</p>
+                <div class="real-world">Valuing a 17-year-old academy player today. You model his possible salaries if he makes it, multiply by the probability he actually does (not high), and discount because those salaries would be years away. One player's rNPV is much lower than his potential peak earnings — and that's the whole point.</div>
+                <p class="connects"><strong>Connects to →</strong> Day 4's deal valuation is rNPV applied to an asset you are considering buying.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge hard">Advanced</span>
+                <h4>Real Options — The Value of Waiting</h4>
+                <p class="what">Classical NPV treats a decision as now-or-never. Real options thinking rejects that. It says: you can <em>wait</em> until uncertainty resolves before committing more capital, and that <em>flexibility itself</em> has monetary value. In pharma, this is how you explain why killing a program after a disappointing Phase 2 readout is <em>rational</em>, even if the forecast still looks positive — because the optionality you preserve by stopping is worth more than the upside you give up.</p>
+                <div class="real-world">Deciding whether to trigger a £20m buy-back clause on a loan player. You could decide today. Or you could watch him play ten more matches — your <em>option</em> to decide later is worth money, because you'll know more. Forcing a decision prematurely throws that option value away.</div>
+                <p class="connects"><strong>Connects to →</strong> Day 4's option deals and Day 5's scenario monitoring — both are real-options thinking made practical.</p>
+              </div>
+
+            </div>
+
+            <!-- Visual: Pipeline Funnel -->
+            <div class="visual">
+              <div class="caption">Figure 3.1 — The attrition funnel, showing why PoS matters</div>
+              <svg viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Funnel segments -->
+                <g font-family="Fraunces" font-style="italic" font-size="13" fill="#0F1B2D">
+                  <text x="440" y="22" text-anchor="middle">10,000 molecules enter Discovery. One reaches patients.</text>
+                </g>
+
+                <!-- Discovery -->
+                <polygon points="40,60 840,60 740,100 140,100" fill="#C8984A" opacity="0.8"/>
+                <text x="440" y="85" font-family="Inter Tight" font-size="13" font-weight="600" fill="#0F1B2D" text-anchor="middle">Discovery &amp; Preclinical · ~10,000 molecules</text>
+
+                <!-- Phase 1 -->
+                <polygon points="165,105 715,105 645,140 235,140" fill="#9B7233" opacity="0.85"/>
+                <text x="440" y="127" font-family="Inter Tight" font-size="12" font-weight="600" fill="#F5EFDF" text-anchor="middle">Phase 1 · ~250 candidates · PoS ~10%</text>
+
+                <!-- Phase 2 -->
+                <polygon points="260,145 620,145 565,180 315,180" fill="#4B6B4A" opacity="0.85"/>
+                <text x="440" y="167" font-family="Inter Tight" font-size="12" font-weight="600" fill="#F5EFDF" text-anchor="middle">Phase 2 · ~125 · PoS ~30%</text>
+
+                <!-- Phase 3 -->
+                <polygon points="335,185 545,185 500,215 380,215" fill="#A84B2A" opacity="0.9"/>
+                <text x="440" y="204" font-family="Inter Tight" font-size="12" font-weight="600" fill="#F5EFDF" text-anchor="middle">Phase 3 · ~40 · PoS ~60%</text>
+
+                <!-- Approval -->
+                <polygon points="400,220 480,220 465,250 415,250" fill="#0F1B2D"/>
+                <text x="440" y="240" font-family="Inter Tight" font-size="11" font-weight="600" fill="#C8984A" text-anchor="middle">Approval · ~10</text>
+
+                <!-- Launch -->
+                <polygon points="425,255 455,255 448,280 432,280" fill="#0F1B2D"/>
+                <text x="440" y="295" font-family="Fraunces" font-style="italic" font-size="11" fill="#0F1B2D" text-anchor="middle">1 true blockbuster</text>
+
+                <!-- Side annotation -->
+                <g font-family="JetBrains Mono" font-size="9" fill="#A84B2A">
+                  <text x="860" y="85" text-anchor="end">↓ ~40× cut</text>
+                  <text x="860" y="127" text-anchor="end">↓ ~2× cut</text>
+                  <text x="860" y="167" text-anchor="end">↓ ~3× cut</text>
+                  <text x="860" y="204" text-anchor="end">↓ ~4× cut</text>
+                </g>
+              </svg>
+            </div>
+
+            <div class="mentor-box">
+              <div class="label">Mentor's Signature Analogy — Day 3</div>
+              <p>Imagine you're the director of football managing an academy of 150 kids. You know — statistically — that only <em>one or two</em> will ever be regular first-team players. Your job is not to predict which one. Your job is to run a system that sorts, promotes, kills, and reallocates across the 150 <em>fairly and repeatedly</em>, so that the one or two who emerge genuinely deserve it. If you fall in love with a particular kid and refuse to release him, you starve the others of coaching time. That's portfolio management.</p>
+              <p>The <em>rNPV number</em> is just the dispassionate way of putting that logic on a spreadsheet: multiply what you <em>might</em> gain by the probability you'll actually gain it, and now you can compare Kid A to Kid B without sentiment.</p>
+            </div>
+
+            <div class="checkpoint">
+              <h4>Checkpoint</h4>
+              <p>"Asset A has a forecast peak sales of $4bn and is in Phase 1. Asset B has forecast peak sales of $900m and is in Phase 3. Without doing the full math, which is <em>likely</em> to have the higher rNPV, and why might the answer be counter-intuitive to someone outside pharma?"</p>
+              <div class="hint">Do the rough PoS multiplication in your head: 4bn × ~10% vs. 900m × ~60%. Also think about time-to-cash and discounting.</div>
+            </div>
+
+            <div class="feynman" onclick="this.classList.toggle('flipped');">
+              <div class="feynman-inner">
+                <div class="feynman-front">
+                  <div class="label">Feynman Teach-Back</div>
+                  <p>Explain to a 12-year-old why a pharmaceutical company might <em>deliberately kill</em> a drug program that still looks like it could work.</p>
+                  <div class="flip-cue">▶ tap to reveal a framework answer</div>
+                </div>
+                <div class="feynman-back">
+                  <div class="label">Framework Answer</div>
+                  <p>"You know how, in a school bake sale, you only have one oven and you have to pick which cake to bake next? If your chocolate cake is <em>okay</em> but your lemon cake is <em>probably going to sell much more</em>, you stop baking the chocolate one — even though it might have been fine — because the oven time is worth more on the lemon. Pharma companies kill drug programs the same way: not because the drug is bad, but because the <em>people, money, and factories</em> are worth more on a different program. It's not about the drug being a failure — it's about whether it's the <em>best use</em> of the oven."</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="memory-hook">
+              <h4>Memory Hook</h4>
+              <p>Remember the rNPV formula as <span class="mnemonic">CASH × CHANCE ÷ TIME</span> — the three questions in every portfolio debate: <em>how much cash</em> could this generate, <em>what chance</em> does it have of happening, and <em>how far in the future</em>? Fix one of the three and you've fixed the argument.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 4 ============================================ -->
+      <div class="phase" id="day4">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-num">IV</div>
+          <div class="phase-title">
+            <h3>Day 4 · BD&amp;L — The Art of the Deal</h3>
+            <div class="meta">
+              <span>~4 hours</span>
+              <span>Bloom's: Analyze → Evaluate</span>
+              <span><span class="dot hard"></span> Stretch</span>
+            </div>
+          </div>
+          <div class="phase-chevron">+</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-content">
+
+            <div class="curiosity-hook">
+              <span class="icon">Curiosity Hook</span>
+              <p>For many of the world's top-selling drugs, the company selling them is <strong>not</strong> the company that discovered them. More than half of big-pharma revenue today comes from assets that were <em>bought, licensed, or partnered</em> — not invented in-house.</p>
+            </div>
+
+            <div class="objectives">
+              <h4>What you'll be able to do</h4>
+              <ul>
+                <li>Place any deal on the <strong>commitment spectrum</strong>, from low-commitment options to full acquisition.</li>
+                <li>Name the <strong>six layers of the due diligence stack</strong> and what each layer is trying to falsify.</li>
+                <li>Explain why deals are valued on <strong>scenario rNPV vs. price paid</strong>, not absolute value.</li>
+                <li>Recognize <strong>complex structures</strong> — CVRs, milestones, earn-outs — and why they exist.</li>
+              </ul>
+            </div>
+
+            <h4 style="margin-top:2rem;">Key Concepts</h4>
+            <div class="concepts-grid">
+
+              <div class="concept-card">
+                <span class="diff-badge easy">Foundation</span>
+                <h4>The Deal-Type Spectrum</h4>
+                <p class="what">Deals sit on a continuum of <em>commitment</em>. At the low-commitment end: an <strong>option deal</strong> (pay a small fee now to have the right to buy later). Then: <strong>in-licensing</strong> (rights to develop and sell, with royalties back). Then: <strong>co-promotion or JV</strong> (shared rights, shared economics). At the high-commitment end: <strong>outright acquisition</strong> (you own it, you run it). The further right you go, the more control and upside you get — and the more capital and risk you commit.</p>
+                <div class="real-world">The transfer market is the same spectrum: short loan → loan with option to buy → permanent transfer → whole-club acquisition. Each step up is more money, more control, less reversibility.</div>
+                <p class="connects"><strong>Connects to →</strong> Day 2 archetype choice drives which end of the spectrum a company prefers.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge medium">Core</span>
+                <h4>The Due Diligence Stack</h4>
+                <p class="what">Before a deal closes, six layers of due diligence run in parallel. <strong>Scientific</strong>: is the biology real? <strong>Clinical</strong>: do the trial data hold up? <strong>CMC</strong> (chemistry, manufacturing, controls): can it actually be made at scale and to quality? <strong>IP</strong>: is the patent estate defensible? <strong>Commercial</strong>: will payers pay and prescribers prescribe? <strong>Regulatory</strong>: will the FDA/EMA approve the label you're modeling? Each layer can kill the deal alone. Strong deals require all six to hold.</p>
+                <div class="real-world">Signing a big-money player: medical exam (clinical), video review (scientific), fitness test (CMC), agent negotiation (commercial), work-permit check (regulatory), and current-contract clearance (IP). Any one failing scrubs the deal.</div>
+                <p class="connects"><strong>Connects to →</strong> Day 5 CI teams often produce the commercial and competitive inputs into DD.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge medium">Core</span>
+                <h4>Scenario rNPV vs. Price Paid</h4>
+                <p class="what">A deal is never valued as a single number. It is valued as a <em>range</em>: bear, base, bull rNPV — each with different assumptions about PoS, peak sales, and time to launch. A disciplined deal team asks three questions: (1) Is the <em>base-case rNPV above the price</em>? (2) Does the <em>bear case still break even</em>? (3) Is the <em>bull case large enough to justify strategic risk</em>? A deal that only works in the bull case is usually a warning sign.</p>
+                <div class="real-world">A transfer fee of £80m for a 22-year-old. Base case: he becomes a top-six striker (justifies £80m). Bear: he's injured three seasons out of five (does it still break even?). Bull: he becomes the best in the league (does it beat the next-best use of the £80m?).</div>
+                <p class="connects"><strong>Connects to →</strong> Day 3 rNPV machinery is the engine; Day 4 adds the <em>negotiation</em> overlay.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge hard">Advanced</span>
+                <h4>Complex Structures (CVRs, Milestones, Earn-Outs)</h4>
+                <p class="what">When buyer and seller disagree about the future, they can <em>split the disagreement</em> structurally. <strong>Milestone payments</strong>: extra money flows only if specific future events happen (Phase 3 success, FDA approval, first commercial sale). <strong>CVRs</strong> (contingent value rights): shares that only pay out if future conditions are met. <strong>Earn-outs</strong>: additional consideration based on future performance. These instruments <em>buy time</em>, letting the price adjust as uncertainty resolves — and they are textbook real-options thinking applied to deal structure.</p>
+                <div class="real-world">Bonus clauses in a player's contract: £5m extra if he plays 30 games, £10m if the team qualifies for Champions League, £20m if he wins Player of the Year. The headline fee is smaller; the total value tracks the future.</div>
+                <p class="connects"><strong>Connects to →</strong> Directly implements the "value of waiting" from Day 3's real options.</p>
+              </div>
+
+            </div>
+
+            <!-- Visual: Deal type spectrum -->
+            <div class="visual">
+              <div class="caption">Figure 4.1 — The deal-type spectrum: from optionality to ownership</div>
+              <svg viewBox="0 0 880 220" xmlns="http://www.w3.org/2000/svg">
+                <!-- Axis -->
+                <line x1="60" y1="120" x2="820" y2="120" stroke="#0F1B2D" stroke-width="1.5"/>
+                <polygon points="820,120 810,114 810,126" fill="#0F1B2D"/>
+
+                <!-- Stations -->
+                <g font-family="Inter Tight" font-size="11" font-weight="600" fill="#0F1B2D">
+                  <!-- Option -->
+                  <circle cx="120" cy="120" r="14" fill="#EEE5CE" stroke="#C8984A" stroke-width="2"/>
+                  <text x="120" y="124" text-anchor="middle" font-size="10">OPT</text>
+                  <text x="120" y="95" text-anchor="middle">Option deal</text>
+                  <text x="120" y="150" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="10" fill="#2A3B52">pay to wait</text>
+
+                  <!-- License -->
+                  <circle cx="280" cy="120" r="16" fill="#C8984A" stroke="#9B7233" stroke-width="2"/>
+                  <text x="280" y="124" text-anchor="middle" font-size="10" fill="#0F1B2D">LIC</text>
+                  <text x="280" y="93" text-anchor="middle">In-licensing</text>
+                  <text x="280" y="150" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="10" fill="#2A3B52">rights, royalties</text>
+
+                  <!-- Co-promote / JV -->
+                  <circle cx="440" cy="120" r="18" fill="#4B6B4A" stroke="#2D4A2D" stroke-width="2"/>
+                  <text x="440" y="124" text-anchor="middle" font-size="10" fill="#F5EFDF">JV</text>
+                  <text x="440" y="91" text-anchor="middle">Co-promote / JV</text>
+                  <text x="440" y="152" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="10" fill="#2A3B52">shared rights</text>
+
+                  <!-- Asset acquisition -->
+                  <circle cx="600" cy="120" r="20" fill="#A84B2A" stroke="#7A3520" stroke-width="2"/>
+                  <text x="600" y="124" text-anchor="middle" font-size="10" fill="#F5EFDF">ASSET</text>
+                  <text x="600" y="88" text-anchor="middle">Asset acquisition</text>
+                  <text x="600" y="155" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="10" fill="#2A3B52">buy the molecule</text>
+
+                  <!-- Company acquisition -->
+                  <circle cx="760" cy="120" r="23" fill="#0F1B2D" stroke="#0F1B2D" stroke-width="2"/>
+                  <text x="760" y="124" text-anchor="middle" font-size="10" fill="#C8984A">M&amp;A</text>
+                  <text x="760" y="85" text-anchor="middle">Company M&amp;A</text>
+                  <text x="760" y="158" text-anchor="middle" font-family="Fraunces" font-style="italic" font-size="10" fill="#2A3B52">buy the whole club</text>
+                </g>
+
+                <!-- End labels -->
+                <g font-family="JetBrains Mono" font-size="10" fill="#2A3B52">
+                  <text x="40" y="200" text-anchor="start">← LESS COMMITMENT</text>
+                  <text x="40" y="214" font-size="9" fill="#9B7233">smaller cheque · reversible · less control</text>
+                  <text x="840" y="200" text-anchor="end">MORE COMMITMENT →</text>
+                  <text x="840" y="214" font-size="9" fill="#A84B2A" text-anchor="end">bigger cheque · irreversible · full control</text>
+                </g>
+
+                <!-- Top header -->
+                <text x="440" y="35" font-family="Fraunces" font-style="italic" font-size="14" fill="#0F1B2D" text-anchor="middle">Every deal is a point on this line — and choosing where matters more than the headline number.</text>
+              </svg>
+            </div>
+
+            <div class="mentor-box">
+              <div class="label">Mentor's Signature Analogy — Day 4</div>
+              <p>A due diligence committee is essentially a <em>pre-match briefing</em>. Six specialists in a room, each one assigned to find the weakness no one else will spot: the scientist asks "does the biology actually work?", the clinician asks "did the patients really improve or is the trial noisy?", the manufacturing engineer asks "can we make this at scale or will every batch drift?", the lawyer asks "does someone else's patent sit on top of ours?", the commercial lead asks "will doctors actually prescribe and payers actually pay?", and the regulator-whisperer asks "what will the FDA label actually say?"</p>
+              <p>A bad deal team agrees. A great deal team <em>argues</em>. Each specialist's job is to try and kill the deal. If, after all six have genuinely tried, the deal is <em>still</em> standing — you have something worth signing.</p>
+            </div>
+
+            <div class="checkpoint">
+              <h4>Checkpoint</h4>
+              <p>"A biotech is offering you a Phase 2 rare-disease asset. They want $2bn upfront. Your team models base-case rNPV at $2.5bn, bear case at $0.8bn, bull case at $6bn. Why might you <em>still walk away</em>, and how might an <em>alternative deal structure</em> rescue the transaction?"</p>
+              <div class="hint">Walk-away reason: bear case is below the cheque. Rescue: shift some of that $2bn from "upfront" to "milestone" — that's CVR / earn-out logic.</div>
+            </div>
+
+            <div class="feynman" onclick="this.classList.toggle('flipped');">
+              <div class="feynman-inner">
+                <div class="feynman-front">
+                  <div class="label">Feynman Teach-Back</div>
+                  <p>Explain to a 12-year-old why a pharma company would ever choose a <em>complicated</em> deal with milestones, rather than just paying a single, simpler price.</p>
+                  <div class="flip-cue">▶ tap to reveal a framework answer</div>
+                </div>
+                <div class="feynman-back">
+                  <div class="label">Framework Answer</div>
+                  <p>"You know how, when you trade cards with a friend, sometimes you can't agree on who has the better card? One way to fix it is to say: 'I'll give you my card now, but if my card turns out to be super rare, you owe me another one later.' Pharma deals work the same way. The seller thinks their drug will be amazing; the buyer isn't sure yet. Instead of fighting about the price today, they agree: <em>pay a smaller amount now, and pay more later if the drug hits certain milestones</em>. Both sides can walk away feeling fair — and the buyer doesn't have to bet on a future nobody can yet see."</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="memory-hook">
+              <h4>Memory Hook</h4>
+              <p>The six DD layers spell <span class="mnemonic">S · C · C · I · C · R</span> — <strong>S</strong>cientific, <strong>C</strong>linical, <strong>C</strong>MC, <strong>I</strong>P, <strong>C</strong>ommercial, <strong>R</strong>egulatory. Or, more usefully: remember the image of a <em>six-legged stool</em> holding up a deal. Kick any one leg, the deal falls.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 5 ============================================ -->
+      <div class="phase" id="day5">
+        <div class="phase-header" onclick="togglePhase(this)">
+          <div class="phase-num">V</div>
+          <div class="phase-title">
+            <h3>Day 5 · Competitive Intelligence &amp; Integration</h3>
+            <div class="meta">
+              <span>~3.5 hours</span>
+              <span>Bloom's: Evaluate → Create</span>
+              <span><span class="dot hard"></span> Stretch</span>
+            </div>
+          </div>
+          <div class="phase-chevron">+</div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-content">
+
+            <div class="curiosity-hook">
+              <span class="icon">Curiosity Hook</span>
+              <p>Most meaningful competitive surprises in pharma were <strong>visible in public data months before they hit the news</strong> — in a conference abstract, a patent filing, or a job advert for an unusual new capability. Competitive intelligence is less about secrets than about <em>paying attention</em>.</p>
+            </div>
+
+            <div class="objectives">
+              <h4>What you'll be able to do</h4>
+              <ul>
+                <li>Name the main <strong>public sources</strong> competitive intelligence draws on and why they matter.</li>
+                <li>Explain the annual <strong>rhythm of CI</strong> — major congresses (ASCO, AHA, EHA) as synchronization points.</li>
+                <li>Describe <strong>war-gaming</strong> and why it is a strategic tool, not a prediction tool.</li>
+                <li>Integrate all four pillars into one <strong>end-to-end strategic loop</strong>.</li>
+              </ul>
+            </div>
+
+            <h4 style="margin-top:2rem;">Key Concepts</h4>
+            <div class="concepts-grid">
+
+              <div class="concept-card">
+                <span class="diff-badge easy">Foundation</span>
+                <h4>CI Sources — The Public Footprint</h4>
+                <p class="what">Serious CI is built on public, legal sources. Clinical trial registries (ClinicalTrials.gov) reveal what's being tested, where, and how. Conference abstracts reveal results months before peer-reviewed publication. Patent filings reveal platform intentions. Company earnings calls reveal strategic priorities. Job postings reveal capability investments. SEC filings reveal deal rumors and risk factors. A CI analyst is a <em>trained reader</em> — spotting signal inside public noise.</p>
+                <div class="real-world">A scout watching an opposing club isn't stealing secrets — she's watching every match, reading every press conference, noting who's missing from training, and counting youth-team appearances. The patterns tell the story.</div>
+                <p class="connects"><strong>Connects to →</strong> These same sources feed Day 2 TA scouting and Day 4 deal sourcing.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge medium">Core</span>
+                <h4>The Congress Calendar</h4>
+                <p class="what">Certain scientific congresses act as <em>synchronized clocks</em> for entire therapeutic areas. In oncology, ASCO (June) and ESMO (September–October) are when major readouts happen. In cardiology, AHA (November) and ACC (March/April). In hematology, EHA (June) and ASH (December). CI teams plan the year around these dates: pre-conference anticipation, abstract-release briefings, live-at-conference reporting, and post-conference synthesis. Strategy debates move on congress rhythms as much as fiscal-quarter rhythms.</p>
+                <div class="real-world">Transfer windows (January and summer) and fixture congestion (Christmas) are the football equivalent: the rhythm of the year is fixed, and everything else plans around those moments.</div>
+                <p class="connects"><strong>Connects to →</strong> Day 2 mandate reviews are often timed to major-congress readouts.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge hard">Advanced</span>
+                <h4>War-Gaming</h4>
+                <p class="what">A war-game is a structured exercise in which internal teams play the part of competitors. Team A is your company; Team B is Pfizer; Team C is Merck. Each team gets the same public data, makes strategic moves (launch decisions, pricing, trial designs), and sees the consequences. The goal is <em>not</em> to predict the future — it is to <em>pressure-test your own strategy</em> by forcing yourself to see the board from outside. The best output of a war-game is usually a surprise your own team did not consider.</p>
+                <div class="real-world">Top football managers do this constantly: "If I were the Atlético manager preparing for our match, what would I see as our weakness?" Building the opponent's game plan is how you find the holes in your own.</div>
+                <p class="connects"><strong>Connects to →</strong> Day 4 deal strategy and Day 3 portfolio prioritization both improve after a war-game stress-tests them.</p>
+              </div>
+
+              <div class="concept-card">
+                <span class="diff-badge hard">Advanced</span>
+                <h4>The Integrated Strategic Loop</h4>
+                <p class="what">The four pillars are not separate. They form a loop that runs continuously. <strong>TA strategy</strong> sets the frame → <strong>portfolio management</strong> lives within that frame → <strong>BD&amp;L</strong> fills gaps the portfolio reveals → <strong>CI</strong> monitors whether the frame is still valid. If CI spots an environmental change (a rival's breakthrough, a policy shift, a disruptive modality), the loop restarts from TA strategy. The great strategy teams run this loop <em>fast</em>: new information flows from CI back into TA mandates within weeks, not years.</p>
+                <div class="real-world">A club's football brain works the same way: league ambition (TA) shapes the squad (portfolio), the squad reveals gaps to fill in the market (BD&amp;L), and scouting (CI) tells you whether your rivals just changed the rules.</div>
+                <p class="connects"><strong>Connects to →</strong> All four previous days collapse into this one idea.</p>
+              </div>
+
+            </div>
+
+            <!-- Visual: The Strategic Loop -->
+            <div class="visual">
+              <div class="caption">Figure 5.1 — The four-pillar strategic loop, running continuously</div>
+              <svg viewBox="0 0 880 360" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#0F1B2D"/>
+                  </marker>
+                </defs>
+
+                <!-- Central label -->
+                <g transform="translate(440,180)">
+                  <circle cx="0" cy="0" r="60" fill="#0F1B2D"/>
+                  <circle cx="0" cy="0" r="52" fill="none" stroke="#C8984A" stroke-width="1"/>
+                  <text x="0" y="-5" font-family="Fraunces" font-style="italic" font-size="13" fill="#C8984A" text-anchor="middle">the</text>
+                  <text x="0" y="12" font-family="Fraunces" font-size="15" font-weight="500" fill="#F5EFDF" text-anchor="middle">Strategic Loop</text>
+                  <text x="0" y="30" font-family="JetBrains Mono" font-size="9" fill="#C8984A" text-anchor="middle">ALWAYS ON</text>
+                </g>
+
+                <!-- Four nodes at compass points -->
+                <!-- Top: TA Strategy -->
+                <g transform="translate(440,50)">
+                  <rect x="-110" y="-26" width="220" height="52" rx="4" fill="#C8984A" stroke="#9B7233" stroke-width="1.5"/>
+                  <text x="0" y="-5" font-family="Inter Tight" font-size="13" font-weight="600" fill="#0F1B2D" text-anchor="middle">① TA Strategy</text>
+                  <text x="0" y="13" font-family="Fraunces" font-style="italic" font-size="11" fill="#0F1B2D" text-anchor="middle">what fields do we fight on?</text>
+                </g>
+
+                <!-- Right: Portfolio -->
+                <g transform="translate(760,180)">
+                  <rect x="-100" y="-26" width="200" height="52" rx="4" fill="#4B6B4A" stroke="#2D4A2D" stroke-width="1.5"/>
+                  <text x="0" y="-5" font-family="Inter Tight" font-size="13" font-weight="600" fill="#F5EFDF" text-anchor="middle">② Portfolio</text>
+                  <text x="0" y="13" font-family="Fraunces" font-style="italic" font-size="11" fill="#F5EFDF" text-anchor="middle">what do we have · what's it worth?</text>
+                </g>
+
+                <!-- Bottom: BD&L -->
+                <g transform="translate(440,310)">
+                  <rect x="-100" y="-26" width="200" height="52" rx="4" fill="#A84B2A" stroke="#7A3520" stroke-width="1.5"/>
+                  <text x="0" y="-5" font-family="Inter Tight" font-size="13" font-weight="600" fill="#F5EFDF" text-anchor="middle">③ BD&amp;L Deals</text>
+                  <text x="0" y="13" font-family="Fraunces" font-style="italic" font-size="11" fill="#F5EFDF" text-anchor="middle">what do we buy · sell · license?</text>
+                </g>
+
+                <!-- Left: CI -->
+                <g transform="translate(120,180)">
+                  <rect x="-100" y="-26" width="200" height="52" rx="4" fill="#2A3B52" stroke="#0F1B2D" stroke-width="1.5"/>
+                  <text x="0" y="-5" font-family="Inter Tight" font-size="13" font-weight="600" fill="#F5EFDF" text-anchor="middle">④ Competitive Intel</text>
+                  <text x="0" y="13" font-family="Fraunces" font-style="italic" font-size="11" fill="#F5EFDF" text-anchor="middle">what are rivals actually doing?</text>
+                </g>
+
+                <!-- Arrows -->
+                <!-- TA → Portfolio -->
+                <path d="M 560 65 Q 700 90 755 155" fill="none" stroke="#0F1B2D" stroke-width="1.5" marker-end="url(#arrow)"/>
+                <!-- Portfolio → BD&L -->
+                <path d="M 755 205 Q 700 275 555 300" fill="none" stroke="#0F1B2D" stroke-width="1.5" marker-end="url(#arrow)"/>
+                <!-- BD&L → CI -->
+                <path d="M 325 305 Q 180 275 125 210" fill="none" stroke="#0F1B2D" stroke-width="1.5" marker-end="url(#arrow)"/>
+                <!-- CI → TA (the feedback that restarts the loop) -->
+                <path d="M 125 155 Q 180 90 325 65" fill="none" stroke="#A84B2A" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+
+                <!-- Caption on the feedback arrow -->
+                <text x="235" y="100" font-family="JetBrains Mono" font-size="10" fill="#A84B2A" font-weight="600" text-anchor="middle">feedback · restarts loop</text>
+              </svg>
+            </div>
+
+            <div class="mentor-box">
+              <div class="label">Mentor's Signature Analogy — Day 5</div>
+              <p>Think of CI as the <em>peripheral vision</em> of the strategy team. The other three pillars look forward, at the drug, the portfolio, the deal. CI looks sideways — at everything that isn't your own plan. Without peripheral vision, even the best plan is walked into by a pedestrian you never saw coming.</p>
+              <p>But here's the real insight: <em>CI is only as valuable as the speed with which it reshapes the other three pillars.</em> A CI team that produces beautiful reports nobody reads is worthless. A CI team whose intel changed a TA mandate last month, a portfolio decision last week, and a deal term yesterday — that team is the nervous system of the company.</p>
+            </div>
+
+            <div class="checkpoint">
+              <h4>Checkpoint</h4>
+              <p>"Your CI team reports that a major rival has quietly posted job adverts for 30 gene-therapy scientists in a therapeutic area where your company's current portfolio is all small molecules. Walk through, in one sentence each, how this single piece of intelligence should ripple through pillars ①, ②, and ③ — TA strategy, portfolio, and BD&amp;L."</p>
+              <div class="hint">① Question whether your TA mandate still holds if the field is moving to a new modality. ② Ask whether your small-molecule assets are now structurally disadvantaged. ③ Ask whether there's a gene-therapy biotech you should now be scouting.</div>
+            </div>
+
+            <div class="feynman" onclick="this.classList.toggle('flipped');">
+              <div class="feynman-inner">
+                <div class="feynman-front">
+                  <div class="label">Feynman Teach-Back</div>
+                  <p>Explain, in three sentences to a 12-year-old, why a pharma strategy team might spend <em>half their year attending scientific conferences</em> — even when they aren't presenting anything.</p>
+                  <div class="flip-cue">▶ tap to reveal a framework answer</div>
+                </div>
+                <div class="feynman-back">
+                  <div class="label">Framework Answer</div>
+                  <p>"You know how, in sports, teams send scouts to watch other teams play — not to cheat, but just to see what they're up to? Scientists who are inventing medicines show off their early results at big meetings, and if you're paying attention, you can see who's ahead, who's behind, and what new ideas are coming. A strategy team goes to conferences the way a detective reads the newspaper: the clues about what the rest of the world is doing are all sitting right there in public, you just have to know what to look for."</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="memory-hook">
+              <h4>Memory Hook</h4>
+              <p>The four pillars as one loop: <span class="mnemonic">① FIELDS · ② FORCES · ③ FILLS · ④ FOES</span>. <em>Fields</em> you fight on (TA). <em>Forces</em> you already have (Portfolio). <em>Fills</em> the gaps (BD&amp;L). <em>Foes</em> change everything (CI). Say it out loud three times; it sticks.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Jargon Decoder -->
+<section id="jargon">
+  <div class="wrap-narrow">
+    <div class="section-label">The Jargon Decoder</div>
+    <h2>Every term that appeared, translated once.</h2>
+    <p>Pharma strategy is unusually acronym-heavy. Scan this once before starting Day 1, and return to it whenever a term feels slippery.</p>
+
+    <div class="jargon-group">
+      <h4>Foundational (Day 1–2)</h4>
+      <table class="jargon-table">
+        <tr><td>TA</td><td>Therapeutic Area.</td><td>A disease "league" — cardiology, oncology, immunology. The big buckets of biology pharma organizes around.</td></tr>
+        <tr><td>Pipeline</td><td>All assets in development.</td><td>Your squad across every age-group. The sum total of what you might one day launch.</td></tr>
+        <tr><td>Asset</td><td>An individual drug candidate.</td><td>One specific player. Has its own name, its own phase, its own story.</td></tr>
+        <tr><td>LOE</td><td>Loss of Exclusivity (patent expiry).</td><td>The day a rival can legally launch a copy — the star's contract runs out.</td></tr>
+        <tr><td>Mandate</td><td>The set of TAs a company formally commits to.</td><td>Which leagues you've promised to compete in, on the record.</td></tr>
+        <tr><td>TPP</td><td>Target Product Profile.</td><td>The "ideal player spec" the drug is being designed to meet.</td></tr>
+      </table>
+    </div>
+
+    <div class="jargon-group">
+      <h4>Intermediate (Day 3–4)</h4>
+      <table class="jargon-table">
+        <tr><td>PoS</td><td>Probability of Success at reaching approval.</td><td>The empirically-observed odds a drug at this phase survives every remaining gate.</td></tr>
+        <tr><td>NPV</td><td>Net Present Value.</td><td>Today's value of all future cash a project will produce, discounted back.</td></tr>
+        <tr><td>rNPV</td><td>Risk-adjusted NPV.</td><td>NPV with PoS baked in — the realistic, not-wishful version.</td></tr>
+        <tr><td>Stage-gate</td><td>A governance checkpoint between phases.</td><td>The formal moment someone is allowed to kill a program.</td></tr>
+        <tr><td>DD</td><td>Due Diligence.</td><td>The structured "can this deal withstand scrutiny" review across six layers.</td></tr>
+        <tr><td>Term sheet</td><td>A non-binding summary of proposed deal terms.</td><td>The "napkin draft" of a deal before the full contract is drawn.</td></tr>
+        <tr><td>Upfront</td><td>The cash paid at deal signing.</td><td>The transfer fee paid at the moment of the trade.</td></tr>
+        <tr><td>Milestone</td><td>A conditional payment triggered by a future event.</td><td>The "£5m bonus if he plays 30 games" clause.</td></tr>
+        <tr><td>CVR</td><td>Contingent Value Right.</td><td>A security that only pays out if a future milestone occurs — structurally split uncertainty.</td></tr>
+      </table>
+    </div>
+
+    <div class="jargon-group">
+      <h4>Advanced (Day 4–5)</h4>
+      <table class="jargon-table">
+        <tr><td>Real options</td><td>Valuation method that prices the flexibility to decide later.</td><td>"The right to wait" has monetary value — treat it the way finance treats a stock option.</td></tr>
+        <tr><td>LRP</td><td>Long-Range Plan (usually 10-year).</td><td>The multi-year strategic horizon pharma plans on — quarterly thinking doesn't work in a 15-year cycle.</td></tr>
+        <tr><td>War-game</td><td>Structured role-play of competitor moves.</td><td>Internal teams argue <em>as if</em> they were Pfizer, Merck, etc., to stress-test your own plan.</td></tr>
+        <tr><td>Threat index</td><td>Composite score of a competing asset's danger.</td><td>PoS × expected launch × differentiation × access — one number, many inputs.</td></tr>
+        <tr><td>Efficient frontier</td><td>The set of portfolios with best return for a given risk.</td><td>Borrowed from finance — the "Pareto front" of a pipeline under resource constraints.</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Pitfalls -->
+<section id="traps">
+  <div class="wrap">
+    <div class="section-label">Pitfalls &amp; Misconceptions</div>
+    <h2>The five traps that catch almost every beginner.</h2>
+
+    <div class="pitfalls-grid">
+
+      <div class="pitfall-card">
+        <div class="trap-num">i.</div>
+        <h4>"The big NPV number wins."</h4>
+        <p class="myth"><strong>Myth:</strong> Whichever asset has the highest forecast sales is the best asset.</p>
+        <p class="reality"><strong>Reality:</strong> Forecast without probability is fiction. A $5bn asset at 10% PoS is, in expected value, worse than a $1bn asset at 70% PoS. This is why the <em>r</em> in rNPV matters as much as the NPV.</p>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:0.8rem;"><em>Matters on Day 3.</em></p>
+      </div>
+
+      <div class="pitfall-card">
+        <div class="trap-num">ii.</div>
+        <h4>"BD&amp;L is the glamorous part."</h4>
+        <p class="myth"><strong>Myth:</strong> Deals are where strategy really happens.</p>
+        <p class="reality"><strong>Reality:</strong> Deals are <em>executions</em> of a strategy set upstream. The hardest work — choosing the TAs, setting the mandate, sizing the portfolio envelope — happens before any deal team is involved. A bad TA strategy cannot be rescued by a brilliant deal.</p>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:0.8rem;"><em>Matters on Days 2 and 4.</em></p>
+      </div>
+
+      <div class="pitfall-card">
+        <div class="trap-num">iii.</div>
+        <h4>"CI predicts the future."</h4>
+        <p class="myth"><strong>Myth:</strong> The job of competitive intelligence is to tell you what rivals will do.</p>
+        <p class="reality"><strong>Reality:</strong> CI doesn't predict — it <em>pressure-tests</em>. Nobody reliably predicts rival behavior; the useful product is a set of <em>plausible scenarios</em> that force your own strategy to be robust across all of them. Prediction invites overconfidence; scenarios invite readiness.</p>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:0.8rem;"><em>Matters on Day 5.</em></p>
+      </div>
+
+      <div class="pitfall-card">
+        <div class="trap-num">iv.</div>
+        <h4>"Killing programs is failure."</h4>
+        <p class="myth"><strong>Myth:</strong> A successful portfolio team shouldn't be killing many programs.</p>
+        <p class="reality"><strong>Reality:</strong> The opposite. A healthy stage-gate system <em>must</em> kill most programs — because biology kills most programs, and governance exists to make that killing <em>timely</em> rather than painful. A team that never kills is a team that doesn't believe its own data.</p>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:0.8rem;"><em>Matters on Day 3.</em></p>
+      </div>
+
+      <div class="pitfall-card">
+        <div class="trap-num">v.</div>
+        <h4>"The four pillars are separate departments."</h4>
+        <p class="myth"><strong>Myth:</strong> TA strategy, portfolio, BD&amp;L, and CI each live in their own corner.</p>
+        <p class="reality"><strong>Reality:</strong> They are <em>one loop</em>. An insight from CI re-opens TA mandate. A gap in the portfolio spawns a BD&amp;L search. A deal shifts the portfolio which shifts TA allocation. Treating them as separate departments produces a strategy that looks coherent on paper and fails in practice.</p>
+        <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:0.8rem;"><em>Matters everywhere — especially Day 5.</em></p>
+      </div>
+
+      <div class="pitfall-card" style="border-top-color:var(--moss);">
+        <div class="trap-num" style="color:var(--moss);">vi.</div>
+        <h4>The meta-trap — "I should understand it all perfectly before moving on."</h4>
+        <p class="myth"><strong>Myth:</strong> Each concept must be fully mastered before the next one is attempted.</p>
+        <p class="reality"><strong>Reality:</strong> Strategy concepts interlock — rNPV only fully makes sense once you've seen it applied in both portfolio (Day 3) <em>and</em> a deal (Day 4). Make peace with temporary fuzziness; it resolves on the second pass through the material.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Cross-Domain Connections -->
+<section>
+  <div class="wrap-narrow">
+    <div class="section-label">Cross-Domain Connections</div>
+    <h2>The same four pillars, visible in three very different worlds.</h2>
+    <p>The strategic loop (<em>Fields → Forces → Fills → Foes</em>) isn't a pharma invention. It re-appears, under different vocabulary, in any field that runs long-horizon bets under uncertainty.</p>
+
+    <div class="cross-domain">
+
+      <div class="domain-card">
+        <div class="domain-label">Venture Capital</div>
+        <h4>Thesis → Portfolio → Deal Flow → Market Intel</h4>
+        <p>A VC firm's <em>investment thesis</em> is its TA strategy. Its <em>portfolio of startups</em> is the pharma pipeline. <em>New investments</em> are BD&amp;L deals. <em>Market intelligence on emerging sectors</em> is CI. Even the rNPV logic translates — VCs routinely price companies as probability-weighted exit scenarios.</p>
+      </div>
+
+      <div class="domain-card">
+        <div class="domain-label">Film Studios</div>
+        <h4>Slate → Greenlights → Acquisitions → Rival Watch</h4>
+        <p>A studio decides <em>which genres and franchises</em> to invest in (TA strategy). Its <em>slate</em> of films at various stages (script, production, post, release) is the portfolio. Buying <em>indie IP or distribution rights</em> is BD&amp;L. <em>Tracking competitor release calendars</em> is CI. The stage-gate logic is identical: projects get killed at every step.</p>
+      </div>
+
+      <div class="domain-card">
+        <div class="domain-label">Military &amp; Defense</div>
+        <h4>Doctrine → Force Structure → Procurement → Intel</h4>
+        <p>A nation sets its <em>strategic doctrine</em> (TA). Its <em>force structure</em> — branches, units, capabilities — is the portfolio. <em>Weapons procurement and alliance-building</em> is BD&amp;L. <em>Intelligence services</em> are CI. War-gaming, in fact, is borrowed directly from this domain into pharma strategy.</p>
+      </div>
+
+    </div>
+
+    <p style="margin-top:2rem;font-style:italic;color:var(--ink-soft);">These three parallels mean your brain already has multiple pathways to recall the four pillars. Any time a pharma concept feels foreign, translate it into one of these three worlds first — then translate back.</p>
+  </div>
+</section>
+
+<!-- Spaced Repetition -->
+<section id="review">
+  <div class="wrap-narrow">
+    <div class="section-label">Spaced Repetition</div>
+    <h2>A thirty-day review schedule.</h2>
+    <p>Content forgotten is content un-learned. This schedule uses classical spaced repetition: each day revisits previous days at increasing intervals, until the concepts stick.</p>
+
+    <div class="schedule-timeline">
+      <div class="sched-row">
+        <div class="sched-day">Day 1</div>
+        <div class="sched-dot"></div>
+        <div class="sched-action"><strong>Complete Day 1 · The Landscape</strong><span>Read everything. Tap the Feynman flip card. Do the checkpoint aloud.</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-day">Day 2</div>
+        <div class="sched-dot"></div>
+        <div class="sched-action"><strong>Review Day 1 (15 min) · Start Day 2</strong><span>Re-state the four pillars from memory. Then do Day 2 — TA strategy.</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-day">Day 3</div>
+        <div class="sched-dot"></div>
+        <div class="sched-action"><strong>Review Day 2 (10 min) · Complete Day 3</strong><span>Re-draw the four TA criteria. Then do Day 3 — portfolio &amp; rNPV.</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-day">Day 4</div>
+        <div class="sched-dot"></div>
+        <div class="sched-action"><strong>Review Days 1–3 (20 min) · Complete Day 4</strong><span>Re-explain rNPV in CASH × CHANCE ÷ TIME form. Then do Day 4 — BD&amp;L.</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-day">Day 5</div>
+        <div class="sched-dot"></div>
+        <div class="sched-action"><strong>Complete Day 5 · First-pass integration</strong><span>Finish Day 5 — CI &amp; integration. Re-read your own notes end-to-end once.</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-day">Day 7</div>
+        <div class="sched-dot"></div>
+        <div class="sched-action"><strong>Full review (30 min)</strong><span>Re-do every checkpoint from memory. Re-flip every Feynman card <em>without</em> peeking at the back.</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-day">Day 14</div>
+        <div class="sched-dot"></div>
+        <div class="sched-action"><strong>Teach-back round</strong><span>Pick three concepts at random and teach them to a person (real or imagined) with zero jargon.</span></div>
+      </div>
+      <div class="sched-row">
+        <div class="sched-day">Day 30</div>
+        <div class="sched-dot"></div>
+        <div class="sched-action"><strong>Redraw the concept map from memory</strong><span>Blank page. Four pillars. Fill in every concept you can remember. Compare against the map above.</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem;padding:1.8rem;background:var(--paper-warm);border-radius:2px;border-left:4px solid var(--moss);">
+      <h4 style="color:var(--moss);margin-bottom:1rem;">The three-question review (use at every review touchpoint)</h4>
+      <ol style="list-style:decimal;padding-left:1.5rem;line-height:1.9;">
+        <li><em>What surprised me most today?</em> (memory)</li>
+        <li><em>Could I explain this to a 12-year-old without jargon?</em> (understanding)</li>
+        <li><em>Where have I seen something analogous in the world?</em> (application)</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Mentor's Parting Wisdom -->
+<section>
+  <div class="wrap">
+    <div class="wisdom">
+      <div class="label">Mentor's Parting Wisdom</div>
+      <h2>A closing note — on learning a field made of answers to four questions.</h2>
+
+      <p>Strategy &amp; BD&amp;L can look, from the outside, like an intimidating wall of acronyms and valuation spreadsheets. It isn't. Underneath all of it is a very small number of recurring questions — the four pillars — that every pharmaceutical company on earth is asking, every day. Once you can hear those four questions underneath any meeting or any slide deck, the field stops feeling foreign. You've already learned them.</p>
+
+      <p>The confusion you feel in the first pass of this material is not a sign that you're behind. It is a sign that you're encountering a domain where concepts genuinely interlock — where rNPV on Day 3 only fully makes sense after you've seen it applied to deal structure on Day 4, and where CI on Day 5 only really clicks once you've already understood the TA mandate from Day 2. Don't fight the temporary fuzziness. Just come back for a second pass. The second pass is where the learning compounds.</p>
+
+      <p>The insider secret nobody states out loud: <em>strategy in pharma is mostly a disciplined practice of saying no</em>. No to the TA that doesn't fit the archetype. No to the program that stopped making sense at Phase 2. No to the deal that only works in the bull case. The art isn't in the yes — it's in the clean, reasoned, unsentimental no. If you can hold that one idea, the rest of Module 1 falls into place.</p>
+
+      <div class="signoff">— Hold the map. The territory is learnable. You've already started.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>The Strategist's Map · A five-day theoretical roadmap for <em>Pharma Strategy &amp; BD&amp;L</em> · Module 01.</p>
+</footer>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+  });
+
+  // Phase accordion
+  function togglePhase(headerEl) {
+    const phase = headerEl.parentElement;
+    phase.classList.toggle('open');
+  }
+
+  // Auto-open Day 1 on load for visual confirmation
+  window.addEventListener('DOMContentLoaded', () => {
+    // Initialize Mermaid
+    if (typeof mermaid !== 'undefined') {
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+          fontFamily: 'Inter Tight, sans-serif',
+          fontSize: '13px',
+          primaryColor: '#C8984A',
+          primaryTextColor: '#0F1B2D',
+          primaryBorderColor: '#9B7233',
+          lineColor: '#2A3B52',
+          background: '#EEE5CE',
+          mainBkg: '#EEE5CE',
+          secondaryColor: '#4B6B4A',
+          tertiaryColor: '#A84B2A'
+        }
+      });
+    }
+
+    // Auto-open the first phase
+    const firstPhase = document.querySelector('.phase');
+    if (firstPhase) firstPhase.classList.add('open');
+  });
+
+  // Smooth-scroll offset for sticky nav
+  document.querySelectorAll('nav.top a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        const yOffset = -70;
+        const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({top: y, behavior: 'smooth'});
+
+        // If target is a phase, open it
+        if (target.classList && target.classList.contains('phase')) {
+          target.classList.add('open');
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

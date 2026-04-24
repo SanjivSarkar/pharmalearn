@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Signals Room — Drug Safety &amp; Pharmacovigilance in 5 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<style>
+  :root {
+    --ink: #0F1B2D; --ink-soft: #2A3B52;
+    --paper: #F5EFDF; --paper-warm: #EEE5CE; --paper-dark: #E4D8B8;
+    --ochre: #C8984A; --ochre-deep: #9B7233;
+    --moss: #4B6B4A; --moss-soft: #7C9082;
+    --rust: #A84B2A; --rust-soft: #D67D5C;
+    --indigo: #2D3561; --indigo-deep: #1E2447; --indigo-soft: #525B84;
+    --rule: rgba(15,27,45,0.14); --rule-strong: rgba(15,27,45,0.3);
+    --shadow-soft: 0 2px 12px rgba(15,27,45,0.08);
+    --shadow-lift: 0 8px 32px rgba(15,27,45,0.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-weight: 400; line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(15,27,45,0.025) 1px, transparent 0); background-size: 24px 24px; pointer-events: none; z-index: 0; }
+  main, nav, header { position: relative; z-index: 1; }
+  h1, h2, h3, h4, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.015em; line-height: 1.1; color: var(--ink); }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 500; }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+  h4 { font-size: 1.05rem; font-weight: 600; font-family: 'Inter Tight', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+  p { max-width: 68ch; }
+  em { font-style: italic; color: var(--ink-soft); }
+  strong { font-weight: 600; color: var(--ink); }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: var(--paper-warm); padding: 0.1em 0.4em; border-radius: 3px; border: 1px solid var(--rule); }
+  nav.top { position: sticky; top: 0; background: rgba(245,239,223,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); padding: 0.8rem 2rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  nav.top .brand { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; }
+  nav.top .brand em { color: var(--indigo); font-style: italic; }
+  nav.top ul { display: flex; gap: 0.4rem; list-style: none; flex-wrap: wrap; }
+  nav.top a { color: var(--ink-soft); text-decoration: none; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 20px; transition: all 0.2s ease; font-weight: 500; }
+  nav.top a:hover { background: var(--ink); color: var(--paper); }
+  .progress-track { position: sticky; top: 58px; height: 3px; background: rgba(15,27,45,0.08); z-index: 99; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--indigo), var(--ochre)); width: 0%; transition: width 0.15s ease; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+  .hero { padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+  .hero-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--indigo); margin-bottom: 1.5rem; }
+  .hero h1 { max-width: 18ch; margin-bottom: 1.8rem; }
+  .hero h1 em { color: var(--indigo); font-style: italic; }
+  .hero .lede { font-family: 'Fraunces', serif; font-size: clamp(1.1rem, 1.6vw, 1.4rem); max-width: 54ch; color: var(--ink-soft); font-weight: 300; line-height: 1.5; }
+  .hero-ornament { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 380px; height: 380px; opacity: 0.58; pointer-events: none; }
+  .hook-card { background: var(--ink); color: var(--paper); padding: 3rem 2.5rem; border-radius: 2px; margin: 3rem 0; position: relative; box-shadow: var(--shadow-lift); }
+  .hook-card::before { content: '08'; position: absolute; top: 1rem; right: 1.5rem; font-family: 'Fraunces', serif; font-size: 4rem; color: var(--ochre); opacity: 0.4; font-style: italic; }
+  .hook-card .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 1rem; }
+  .hook-card p { font-family: 'Fraunces', serif; font-size: 1.4rem; line-height: 1.4; font-weight: 300; max-width: 54ch; }
+  .hook-card p em { color: var(--ochre); font-style: italic; }
+  section { padding: 4rem 0; position: relative; }
+  section + section { border-top: 1px solid var(--rule); }
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--indigo); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--indigo); }
+  section h2 { margin-bottom: 1.8rem; max-width: 26ch; }
+  section p { margin-bottom: 1.1rem; }
+  .master-analogy { background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-dark) 100%); border: 1px solid var(--rule); border-left: 5px solid var(--indigo); padding: 2.5rem 2.5rem 2.5rem 3rem; margin: 2.5rem 0; position: relative; border-radius: 2px; }
+  .master-analogy::before { content: '“'; position: absolute; top: -20px; left: 20px; font-family: 'Fraunces', serif; font-size: 6rem; color: var(--indigo); line-height: 1; }
+  .master-analogy h4 { margin-bottom: 1rem; color: var(--indigo); }
+  .master-analogy p { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 300; line-height: 1.55; }
+  .master-analogy p + p { margin-top: 0.8rem; }
+  .mapping-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem 1.5rem; align-items: center; margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px dashed var(--rule-strong); }
+  .mapping-grid .from { font-weight: 500; color: var(--ink); text-align: right; }
+  .mapping-grid .arrow { font-family: 'JetBrains Mono', monospace; color: var(--indigo); font-size: 0.9rem; }
+  .mapping-grid .to { color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic; }
+  @media (max-width: 820px) { .mapping-grid { grid-template-columns: 1fr; gap: 0.3rem 0; } .mapping-grid .from { text-align: left; } .mapping-grid .arrow { display: none; } .mapping-grid .to { padding-left: 1rem; border-left: 2px solid var(--indigo); margin-bottom: 0.8rem; } }
+  .concept-map-wrap { background: var(--paper-warm); padding: 2.5rem; border-radius: 2px; border: 1px solid var(--rule); overflow-x: auto; margin: 2rem 0; }
+  .mermaid { text-align: center; font-family: 'Inter Tight', sans-serif !important; }
+  .phases-container { margin-top: 2rem; }
+  .phase { border: 1px solid var(--rule); background: var(--paper-warm); margin-bottom: 1.2rem; border-radius: 2px; overflow: hidden; transition: all 0.3s ease; }
+  .phase:hover { box-shadow: var(--shadow-soft); }
+  .phase.open { background: var(--paper); box-shadow: var(--shadow-lift); }
+  .phase-header { padding: 1.8rem 2rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; cursor: pointer; user-select: none; }
+  .phase-number { font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 300; color: var(--indigo); line-height: 1; font-style: italic; min-width: 3rem; }
+  .phase-title-wrap .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .phase-title-wrap h3 { font-weight: 500; color: var(--ink); }
+  .phase-title-wrap h3 em { color: var(--indigo); font-style: italic; }
+  .phase-toggle { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--ink-soft); transition: transform 0.3s ease; }
+  .phase.open .phase-toggle { transform: rotate(45deg); color: var(--indigo); }
+  .phase-body { max-height: 0; overflow: hidden; padding: 0 2rem; transition: max-height 0.4s ease, padding 0.4s ease; }
+  .phase.open .phase-body { max-height: 12000px; padding: 0 2rem 2.5rem; }
+  .curiosity-hook { font-family: 'Fraunces', serif; font-size: 1.2rem; font-style: italic; color: var(--ink-soft); border-left: 3px solid var(--indigo); padding-left: 1.2rem; margin: 1.5rem 0 2rem; max-width: 58ch; line-height: 1.55; }
+  .objectives { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.8rem; margin: 1.5rem 0 2.5rem; border-radius: 2px; }
+  .objectives h4 { margin-bottom: 0.8rem; color: var(--indigo); font-size: 0.8rem; }
+  .objectives ul { list-style: none; padding: 0; }
+  .objectives li { padding: 0.3rem 0 0.3rem 1.6rem; position: relative; font-size: 0.96rem; }
+  .objectives li::before { content: '◆'; position: absolute; left: 0; color: var(--indigo); font-size: 0.6rem; top: 0.55rem; }
+  .bloom-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.2em 0.5em; border-radius: 3px; background: var(--indigo); color: var(--paper); margin-right: 0.5em; text-transform: uppercase; font-weight: 500; }
+  .concept-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  @media (max-width: 780px) { .concept-cards { grid-template-columns: 1fr; } }
+  .concept-card { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.4rem 1.5rem; border-radius: 2px; border-left: 3px solid var(--ochre); position: relative; }
+  .concept-card:nth-child(2n) { border-left-color: var(--moss); }
+  .concept-card:nth-child(3n) { border-left-color: var(--rust); }
+  .concept-card:nth-child(4n) { border-left-color: var(--indigo); }
+  .concept-card h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; }
+  .concept-card .analogy { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 0.92rem; margin: 0.5rem 0 0.8rem; border-top: 1px dashed var(--rule); padding-top: 0.7rem; }
+  .concept-card p { font-size: 0.93rem; margin-bottom: 0.4rem; max-width: none; }
+  .visual { background: var(--paper); border: 1px solid var(--rule); padding: 2rem; margin: 2rem 0; border-radius: 2px; position: relative; overflow-x: auto; }
+  .visual .caption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .visual svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .mentor-analogy { background: var(--ink); color: var(--paper); padding: 2rem 2.2rem; margin: 2rem 0; border-radius: 2px; position: relative; border-left: 4px solid var(--ochre); }
+  .mentor-analogy .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.8rem; }
+  .mentor-analogy p { font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.6; font-weight: 300; max-width: 58ch; }
+  .mentor-analogy p em { color: var(--ochre); font-style: italic; }
+  .checkpoint { border: 2px dashed var(--indigo); background: transparent; padding: 1.5rem 1.8rem; margin: 2rem 0; border-radius: 2px; }
+  .checkpoint h4 { color: var(--indigo); margin-bottom: 0.6rem; }
+  .checkpoint p { font-size: 0.94rem; margin-bottom: 0.4rem; }
+  .checkpoint ul { list-style: none; padding: 0; }
+  .checkpoint li { padding: 0.25rem 0 0.25rem 1.4rem; position: relative; font-size: 0.94rem; }
+  .checkpoint li::before { content: '□'; position: absolute; left: 0; color: var(--indigo); font-family: 'JetBrains Mono', monospace; }
+  .flip-card { perspective: 1200px; height: 220px; margin: 2rem 0; cursor: pointer; }
+  .flip-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s ease; transform-style: preserve-3d; }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; padding: 1.8rem 2rem; border-radius: 2px; display: flex; flex-direction: column; justify-content: center; }
+  .flip-front { background: var(--paper-dark); border: 1px solid var(--rule-strong); }
+  .flip-front .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--indigo); margin-bottom: 0.7rem; }
+  .flip-front h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+  .flip-front .hint { font-size: 0.82rem; color: var(--ink-soft); margin-top: 1rem; font-style: italic; }
+  .flip-back { background: var(--ink); color: var(--paper); transform: rotateY(180deg); border-left: 4px solid var(--ochre); }
+  .flip-back .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.7rem; }
+  .flip-back p { font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.55; max-width: none; font-weight: 300; }
+  .memory-hook { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 2px; font-size: 0.93rem; }
+  .memory-hook .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre-deep); margin-bottom: 0.4rem; }
+  .memory-hook strong { color: var(--indigo); }
+  .jargon-tier { margin: 2rem 0; padding: 1.8rem 2rem; background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 2px; }
+  .jargon-tier h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 0.4rem; color: var(--indigo); }
+  .jargon-tier .tier-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .jargon-tier dl { display: grid; grid-template-columns: 180px 1fr; gap: 0.8rem 1.5rem; }
+  .jargon-tier dt { font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+  .jargon-tier dd { color: var(--ink-soft); font-size: 0.93rem; }
+  @media (max-width: 680px) { .jargon-tier dl { grid-template-columns: 1fr; gap: 0.3rem 0; } .jargon-tier dd { margin-bottom: 0.8rem; padding-left: 0.8rem; border-left: 2px solid var(--indigo); } }
+  .pitfall-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .pitfall-grid { grid-template-columns: 1fr; } }
+  .pitfall { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; border-top: 3px solid var(--rust); position: relative; }
+  .pitfall .num { position: absolute; top: 0.8rem; right: 1rem; font-family: 'Fraunces', serif; font-size: 1.8rem; color: var(--rust); font-style: italic; opacity: 0.5; line-height: 1; }
+  .pitfall h4 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; max-width: 90%; }
+  .pitfall p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .pitfall .rescue { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.88rem; color: var(--moss); padding-top: 0.5rem; margin-top: 0.5rem; border-top: 1px dashed var(--rule); }
+  .crossdomain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .crossdomain-grid { grid-template-columns: 1fr; } }
+  .crossdomain { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; }
+  .crossdomain .domain { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--indigo); margin-bottom: 0.5rem; }
+  .crossdomain h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.7rem; }
+  .crossdomain p { font-size: 0.9rem; color: var(--ink-soft); }
+  .spaced-rep { background: var(--paper-warm); border: 1px solid var(--rule); padding: 2rem; border-radius: 2px; margin: 2rem 0; overflow-x: auto; }
+  .sr-timeline { display: grid; grid-template-columns: repeat(8, minmax(88px, 1fr)); gap: 0.8rem; margin-top: 1.5rem; min-width: 700px; }
+  .sr-day { padding: 1rem 0.8rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; text-align: center; position: relative; }
+  .sr-day::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: var(--indigo); border-radius: 50%; }
+  .sr-day .day-num { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 500; color: var(--indigo); font-style: italic; }
+  .sr-day .day-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.3rem; }
+  .sr-day .day-task { font-size: 0.78rem; margin-top: 0.5rem; color: var(--ink); line-height: 1.3; }
+  .closing { background: var(--ink); color: var(--paper); padding: 5rem 2rem; margin-top: 4rem; }
+  .closing h2 { color: var(--paper); max-width: 24ch; margin-bottom: 2rem; }
+  .closing h2 em { color: var(--ochre); font-style: italic; }
+  .closing p { font-family: 'Fraunces', serif; font-size: 1.2rem; line-height: 1.6; font-weight: 300; max-width: 58ch; color: rgba(245,239,223,0.88); }
+  .closing .mantra { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.5rem; color: var(--ochre); padding: 2rem 0; margin: 2rem 0; border-top: 1px solid rgba(200,152,74,0.3); border-bottom: 1px solid rgba(200,152,74,0.3); max-width: 54ch; }
+  footer { padding: 2rem; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); background: var(--paper); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="brand">The Signals <em>Room</em></div>
+  <ul>
+    <li><a href="#hook">Hook</a></li><li><a href="#analogy">Analogy</a></li><li><a href="#map">Map</a></li>
+    <li><a href="#day1">Day 1</a></li><li><a href="#day2">Day 2</a></li><li><a href="#day3">Day 3</a></li>
+    <li><a href="#day4">Day 4</a></li><li><a href="#day5">Day 5</a></li>
+    <li><a href="#jargon">Jargon</a></li><li><a href="#pitfalls">Pitfalls</a></li><li><a href="#spaced">Review</a></li>
+  </ul>
+</nav>
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+<main>
+
+<header class="hero wrap">
+  <div class="hero-meta">Module 08 · Drug Safety &amp; Pharmacovigilance · Five-Day Theoretical Roadmap</div>
+  <h1>The Signals <em>Room</em>.</h1>
+  <p class="lede">Every drug has side effects. Most are known; some are rare; a few are catastrophic and still unseen. Pharmacovigilance is the function whose job is to find the unseen ones — before too many patients have found them first.</p>
+  <svg class="hero-ornament" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="hg8" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2D3561" stop-opacity="0.4"/><stop offset="100%" stop-color="#2D3561" stop-opacity="0.05"/></radialGradient></defs>
+    <circle cx="190" cy="190" r="170" fill="none" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="2 6" opacity="0.25"/>
+    <circle cx="190" cy="190" r="150" fill="none" stroke="#0F1B2D" stroke-width="1.2" opacity="0.3"/>
+    <circle cx="190" cy="190" r="138" fill="url(#hg8)"/>
+    <circle cx="190" cy="190" r="138" fill="none" stroke="#2D3561" stroke-width="0.8" opacity="0.5"/>
+    <!-- Radar sweep rings -->
+    <g transform="translate(190, 190)">
+      <circle cx="0" cy="0" r="110" fill="none" stroke="#2D3561" stroke-width="0.6" opacity="0.45"/>
+      <circle cx="0" cy="0" r="85" fill="none" stroke="#2D3561" stroke-width="0.6" opacity="0.4"/>
+      <circle cx="0" cy="0" r="60" fill="none" stroke="#2D3561" stroke-width="0.6" opacity="0.35"/>
+      <!-- Crosshair -->
+      <line x1="-120" y1="0" x2="120" y2="0" stroke="#2D3561" stroke-width="0.5" opacity="0.35"/>
+      <line x1="0" y1="-120" x2="0" y2="120" stroke="#2D3561" stroke-width="0.5" opacity="0.35"/>
+      <!-- Radar sweep -->
+      <path d="M 0 0 L 120 0 A 120 120 0 0 1 85 85 Z" fill="#2D3561" opacity="0.2"/>
+      <!-- Central watchtower -->
+      <g>
+        <rect x="-14" y="-38" width="28" height="48" fill="#1E2447" opacity="0.95"/>
+        <polygon points="-20,-38 0,-58 20,-38" fill="#1E2447" opacity="0.95"/>
+        <rect x="-4" y="-28" width="8" height="10" fill="#C8984A" opacity="0.9"/>
+        <rect x="-4" y="-10" width="8" height="10" fill="#C8984A" opacity="0.9"/>
+        <rect x="-18" y="10" width="36" height="6" fill="#1E2447" opacity="0.95"/>
+        <line x1="0" y1="-58" x2="0" y2="-74" stroke="#C8984A" stroke-width="1.5"/>
+        <circle cx="0" cy="-78" r="3" fill="#C8984A"/>
+      </g>
+      <!-- Signal dots scattered (noise + signals) -->
+      <circle cx="75" cy="-40" r="2.5" fill="#A84B2A" opacity="0.8"/>
+      <circle cx="-55" cy="60" r="2" fill="#525B84" opacity="0.6"/>
+      <circle cx="95" cy="35" r="2" fill="#525B84" opacity="0.6"/>
+      <circle cx="-80" cy="-30" r="3" fill="#A84B2A" opacity="0.85"/>
+      <circle cx="40" cy="80" r="2" fill="#525B84" opacity="0.6"/>
+      <circle cx="-30" cy="-75" r="2" fill="#525B84" opacity="0.6"/>
+      <circle cx="60" cy="-85" r="2" fill="#525B84" opacity="0.6"/>
+      <circle cx="-95" cy="45" r="2" fill="#525B84" opacity="0.6"/>
+      <circle cx="-20" cy="95" r="2.5" fill="#A84B2A" opacity="0.8"/>
+      <circle cx="100" cy="-15" r="2" fill="#525B84" opacity="0.6"/>
+    </g>
+    <!-- Orbital source labels -->
+    <text x="190" y="28" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2D3561" letter-spacing="2" font-weight="600">FAERS</text>
+    <text x="358" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2D3561" letter-spacing="2" font-weight="600">EV</text>
+    <text x="358" y="258" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2D3561" letter-spacing="2" font-weight="600">LIT</text>
+    <text x="190" y="362" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2D3561" letter-spacing="2" font-weight="600">RWE</text>
+    <text x="22" y="258" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2D3561" letter-spacing="2" font-weight="600">SOC</text>
+    <text x="22" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2D3561" letter-spacing="2" font-weight="600">EHR</text>
+    <!-- Small antenna icons at cardinal points -->
+    <g fill="#2D3561" opacity="0.55">
+      <circle cx="190" cy="46" r="2"/>
+      <circle cx="332" cy="108" r="2"/>
+      <circle cx="332" cy="272" r="2"/>
+      <circle cx="190" cy="346" r="2"/>
+      <circle cx="48" cy="272" r="2"/>
+      <circle cx="48" cy="108" r="2"/>
+    </g>
+  </svg>
+</header>
+
+<section id="hook" class="wrap-narrow">
+  <div class="hook-card">
+    <div class="label">The hook</div>
+    <p>On the morning of 30 September 2004, Merck voluntarily withdrew Vioxx — rofecoxib — from global markets. Five years earlier, the drug had been approved as a breakthrough painkiller; at its peak, <em>roughly 80 million patients worldwide</em> had taken it. The trigger for withdrawal was a single trial: the APPROVe study, investigating Vioxx for colon polyp prevention, had found patients on Vioxx suffering roughly twice the cardiovascular event rate of patients on placebo beyond 18 months of use. But the signal had been visible, in fragments, for years. The 2000 VIGOR trial had shown a five-fold higher heart-attack rate on Vioxx than on naproxen. FAERS case reports had accumulated. Independent researchers had published warnings. An FDA reviewer, David Graham, would later testify to Congress that the excess cardiovascular events attributable to Vioxx during its market life lay <em>between 88,000 and 140,000</em>. Merck paid $4.85 billion in settlements. Modern pharmacovigilance — the entire architecture of what the discipline looks like today — is, to a remarkable extent, the response to that five-year delay between the signal and the action.</p>
+  </div>
+</section>
+
+<section id="analogy" class="wrap-narrow">
+  <div class="section-label">The elevator pitch</div>
+  <h2>Pharmacovigilance is pharma's signals intelligence service.</h2>
+  <p>Every drug, once released into the world, generates a constant stream of real-world data — clinician observations, patient complaints, autopsy findings, claims records, literature case reports, poison-center calls, forum posts, adverse event submissions to half a dozen national databases. The vast majority of this stream is noise — coincidental events, already-known side effects, reporting artefacts, misattributions. A tiny fraction is <em>signal</em> — the first whisper of a side effect the label doesn't describe, a population that reacts differently than anyone predicted, an interaction that was mathematically impossible to find during a 4,000-patient Phase 3 trial. Pharmacovigilance is the discipline whose job is to find the signal in the noise, fast enough that the next patient does not also become a data point.</p>
+
+  <div class="master-analogy">
+    <h4>The master analogy — the intelligence watchroom</h4>
+    <p>Picture a national signals intelligence bureau. Analysts sit at workstations with multiple screens. Reports flow in from every channel — human agents in the field, intercepts, open-source scraping, allied-service feeds, academic publications, social media. Every report is logged, coded, and filed in a central archive. Pattern-detection algorithms scan the archive constantly, flagging clusters that exceed a statistical threshold — a particular word appearing across unrelated cables, a particular face recurring in unrelated surveillance photos, a particular pattern of payments across unrelated accounts. Analysts triage the flags: noise, or an emerging threat? If an emerging threat, how serious, how imminent, how certain? The weekly intelligence brief goes to decision-makers; the decision may be to do nothing, to raise the alert level, to deploy countermeasures, or — in rare cases — to act openly and publicly.</p>
+    <p>Pharmaceutical PV is this exact work. The <em>ICSR</em> (Individual Case Safety Report) is a field agent's cable. <em>FAERS, EudraVigilance, VigiBase</em> are the allied-service feeds. <em>Literature and social-media monitoring</em> are the open-source scraping. <em>MedDRA</em> is the standardized codebook every cable must be translated into. <em>Disproportionality statistics — PRR, ROR, EBGM</em> — are the pattern-detection algorithms. <em>Signal triage and causality assessment</em> are the analyst's judgment about whether the flag is real. The <em>DSUR, PSUR, and PBRER</em> are the periodic intelligence briefs. The <em>Risk Management Plan</em> is the threat-mitigation strategy. <em>REMS</em> is the deployed operational countermeasure. The <em>Benefit-Risk Assessment</em> is the net-threat appraisal that decides whether the drug stays or goes. And the <em>DSMB</em> is the independent oversight cabinet that can halt an ongoing operation if the evidence becomes compelling enough.</p>
+
+    <div class="mapping-grid">
+      <div class="from">A field agent's intelligence cable</div><div class="arrow">—→</div><div class="to">ICSR — Individual Case Safety Report</div>
+      <div class="from">Allied service feeds</div><div class="arrow">—→</div><div class="to">FAERS, EudraVigilance, VigiBase, PMDA</div>
+      <div class="from">Open-source intelligence scraping</div><div class="arrow">—→</div><div class="to">Literature PV + social media PV</div>
+      <div class="from">The standardized codebook</div><div class="arrow">—→</div><div class="to">MedDRA — Medical Dictionary for Regulatory Activities</div>
+      <div class="from">Pattern-detection algorithms</div><div class="arrow">—→</div><div class="to">Disproportionality: PRR, ROR, EBGM, MGPS</div>
+      <div class="from">Analyst's triage judgment</div><div class="arrow">—→</div><div class="to">Signal triage + causality assessment</div>
+      <div class="from">Weekly intelligence brief</div><div class="arrow">—→</div><div class="to">DSUR · PSUR · PBRER</div>
+      <div class="from">Threat-mitigation strategy</div><div class="arrow">—→</div><div class="to">Risk Management Plan (RMP)</div>
+      <div class="from">Deployed operational countermeasure</div><div class="arrow">—→</div><div class="to">REMS — Risk Evaluation &amp; Mitigation Strategy</div>
+      <div class="from">Independent oversight cabinet</div><div class="arrow">—→</div><div class="to">DSMB / DMC — Data Safety Monitoring Board</div>
+      <div class="from">Net-threat appraisal</div><div class="arrow">—→</div><div class="to">Benefit-risk assessment (qualitative or MCDA)</div>
+      <div class="from">Early-warning bulletin</div><div class="arrow">—→</div><div class="to">Emerging safety signal notification</div>
+      <div class="from">Declassified public release</div><div class="arrow">—→</div><div class="to">Dear HCP Letter · label update · market action</div>
+      <div class="from">The central archive</div><div class="arrow">—→</div><div class="to">Safety database (Argus, ArisGlobal, Veeva Safety)</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap-narrow">
+  <div class="section-label">Origin story</div>
+  <h2>How modern pharmacovigilance was forged — almost entirely by one drug, given to the wrong people, at the wrong time.</h2>
+  <p>Before 1961, pharmaceutical regulators around the world collected adverse event data haphazardly — some countries not at all, others via ad-hoc case reports in medical journals. The assumption was that pre-marketing studies were sufficient; post-market surveillance was an afterthought. Then came <em>thalidomide</em>. Marketed from the late 1950s as a sedative safe enough to prescribe to pregnant women for morning sickness, thalidomide caused catastrophic limb-reduction defects in an estimated <em>10,000 children worldwide</em>, most born between 1958 and 1962. The disaster was not a surprise because the warning signals were subtle — it was a disaster because no system existed to aggregate them. Individual clinicians noticed; individual publications appeared; no one was connecting the dots.</p>
+  <p>The response was the birth of modern PV. The 1962 Kefauver-Harris Amendments codified post-market adverse event reporting into US law. In <em>1968, the WHO Programme for International Drug Monitoring</em> established a global adverse event database — the future VigiBase, now containing over 30 million reports from more than 150 countries, hosted at the <em>Uppsala Monitoring Centre</em> in Sweden. <em>1993</em> saw the FDA launch <strong>MedWatch</strong> as a unified adverse-event intake program. <em>1997 FDAMA</em> expanded FDA's PV authority. The <em>2005 EMA launch of EudraVigilance</em> centralized European adverse event data. Then came <em>Vioxx in 2004</em> — the event that reshaped the field more than any since thalidomide.</p>
+  <p>Post-Vioxx reforms cascaded. <em>2007 FDAAA</em> gave FDA authority to require REMS and post-marketing studies. <em>2010 FDA Sentinel Initiative</em> pioneered active surveillance — proactively querying claims and EHR databases rather than waiting for spontaneous reports. <em>2012 EU Pharmacovigilance Legislation</em> comprehensively overhauled European PV, creating the Pharmacovigilance Risk Assessment Committee (<em>PRAC</em>) and mandating the modern Risk Management Plan. <em>2016+</em> saw the rise of AI and NLP in case processing — machine-assisted MedDRA coding, automated narrative drafting, LLM-driven literature screening. <em>2020+</em> has seen the integration of RWE, social media, and wearable data into integrated signal detection platforms. Each reform was a response to a specific failure; each failure taught the next generation what the previous one could not see.</p>
+</section>
+
+<section id="map" class="wrap">
+  <div class="section-label">The concept web</div>
+  <h2>The full PV lifecycle, in one diagram.</h2>
+  <p>The four engines of a modern PV function are not a sequence but a <em>continuous listening loop</em> — <strong>Watch, Signal, Assess, Act</strong>. Every action feeds back into the next round of watching; every signal retrospectively teaches the system what to listen for; every assessment sharpens the threshold for the next one. The drug and the population are in constant conversation for the entire life of the product, and often beyond.</p>
+  <div class="concept-map-wrap">
+    <div class="mermaid">
+flowchart LR
+  classDef central fill:#2D3561,stroke:#0F1B2D,color:#F5EFDF,stroke-width:2px,font-weight:600
+  classDef pillar fill:#EEE5CE,stroke:#0F1B2D,color:#0F1B2D,stroke-width:1.5px,font-weight:500
+  classDef sub fill:#F5EFDF,stroke:#0F1B2D,color:#2A3B52,stroke-width:1px,stroke-dasharray:3 3
+  CORE[The Patient:<br/>Net benefit &gt; risk,<br/>continuously re-examined]:::central
+  W[Watch:<br/>Intake from every<br/>channel]:::pillar
+  S[Signal:<br/>Disproportionality,<br/>triage, causality]:::pillar
+  A[Assess:<br/>Benefit-risk,<br/>PSUR/PBRER, RMP]:::pillar
+  X[Act:<br/>Label, REMS,<br/>withdrawal, reassurance]:::pillar
+  CORE --- W
+  CORE --- S
+  CORE --- A
+  CORE --- X
+  W --- w1[ICSR intake · MedDRA coding]:::sub
+  W --- w2[Literature · social media]:::sub
+  W --- w3[RWE · claims · EHR]:::sub
+  S --- s1[PRR · ROR · EBGM · MGPS]:::sub
+  S --- s2[Bayesian signal detection]:::sub
+  S --- s3[Integrated multi-source]:::sub
+  A --- a1[Causality assessment]:::sub
+  A --- a2[Benefit-risk · MCDA]:::sub
+  A --- a3[DSUR · PSUR · PBRER]:::sub
+  X --- x1[Label update · Dear HCP]:::sub
+  X --- x2[RMP · REMS · ETASU]:::sub
+  X --- x3[Withdrawal · restriction]:::sub
+  W -.-&gt; S
+  S -.-&gt; A
+  A -.-&gt; X
+  X -.-&gt; W
+    </div>
+  </div>
+</section>
+
+<!-- DAY 1 -->
+<section id="day1" class="wrap">
+  <div class="section-label">Day 01 · The Watchroom</div>
+  <h2>PV foundations — definitions, vocabulary, governance.</h2>
+  <div class="phases-container">
+    <div class="phase open">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">01</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Remember + Understand · ~2.5 hrs</div><h3>PV foundations &amp; safety governance — <em>the vocabulary and the boardroom</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">Every pharmaceutical function has its specialty data. PV has everybody else's — every clinician observation, every patient complaint, every autopsy note, every lab result that deviates from the expected. Its first discipline is not analysis. It is the <em>hygiene of vocabulary</em>: ensuring that when a million people each describe something slightly different, the system recognizes when they are all describing the same thing.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 1</span>Learning objectives</h4>
+          <ul>
+            <li>Precisely define AE, ADR, SAE, SUSAR, ADE — and the thresholds between them</li>
+            <li>Understand MedDRA's hierarchy (SOC → HLGT → HLT → PT → LLT) and why it matters</li>
+            <li>Grasp safety governance: the Safety Committee, DSMB/DMC, benefit-risk framework</li>
+            <li>Appreciate safety database architecture (Argus, ArisGlobal, Veeva Safety) and the regulatory reporting rules it encodes</li>
+            <li>Understand the target product safety profile (TPSP) and how it evolves across the lifecycle</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--indigo);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>AE, ADR, SAE, SUSAR — the core hierarchy</h4>
+            <p>An <strong>AE (Adverse Event)</strong> is any untoward medical occurrence in a patient taking a drug — causation not assumed. An <strong>ADR (Adverse Drug Reaction)</strong> is an AE for which causal relationship is reasonably possible. An <strong>SAE (Serious AE)</strong> is one resulting in death, life-threatening event, hospitalization, persistent disability, or congenital anomaly. A <strong>SUSAR</strong> is a Suspected Unexpected Serious ADR — unexpected meaning not consistent with the Reference Safety Information. Each category has different reporting clocks and obligations. Misclassification is the most common PV quality finding.</p>
+            <div class="analogy">Intelligence report categories. An observation is any data point; a threat is an observation judged meaningfully malicious; a serious threat is one meeting defined severity criteria; an unexpected serious threat triggers the highest-priority escalation with hard deadlines.</div>
+          </div>
+          <div class="concept-card">
+            <h4>MedDRA — the codebook</h4>
+            <p>The <strong>Medical Dictionary for Regulatory Activities</strong> is the universal standardized terminology for adverse events. Five-level hierarchy: <strong>SOC</strong> (System Organ Class, e.g., "Cardiac disorders") → <strong>HLGT</strong> (High-Level Group Term) → <strong>HLT</strong> (High-Level Term) → <strong>PT</strong> (Preferred Term, e.g., "Myocardial infarction") → <strong>LLT</strong> (Lowest-Level Term, often the verbatim reporter phrase). Every regulator, every database, every literature search, every signal detection relies on MedDRA. Inconsistent coding destroys disproportionality signals.</p>
+            <div class="analogy">The tagging schema for a global intelligence database. Without a consistent vocabulary, pattern detection across millions of records becomes impossible; with it, a signal can span continents and languages.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Safety governance — Safety Committee, DSMB, B-R framework</h4>
+            <p>The <strong>Safety Committee</strong> is the sponsor's internal cross-functional body (Clinical, PV, Regulatory, Medical Affairs, Epi) reviewing accumulating safety data and making decisions on escalation, label updates, communications. The <strong>DSMB / DMC</strong> (Data Safety Monitoring Board) is an <em>independent</em> external committee with blinded or unblinded access to ongoing clinical trial data, empowered to recommend continuing, modifying, or halting a trial. The <strong>Benefit-Risk Framework</strong> is the structured document that catalogs benefits and risks and reconciles them into a net-clinical-benefit judgment, refreshed at every major milestone.</p>
+            <div class="analogy">Internal war cabinet (Safety Committee) plus independent joint-chiefs-of-staff equivalent (DSMB) plus the updated strategic doctrine (benefit-risk framework). Three bodies, three perspectives, shared responsibility for life-or-death calls.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Safety databases &amp; regulatory reporting rules</h4>
+            <p><strong>Safety databases</strong> (Oracle Argus, ArisGlobal LifeSphere, Veeva Vault Safety) are the operational backbone — case intake, MedDRA coding, narrative generation, regulatory submission, signal detection, audit trail. They encode the reporting rules: <strong>SUSAR in expedited report to FDA/EMA in 7 days (fatal/life-threatening) or 15 days (other)</strong>; aggregate periodic reports (DSUR, PSUR) on defined cycles; local reporting to national authorities per each country's requirements. A database misconfigured on reporting rules produces the worst PV finding there is — missed regulatory submissions.</p>
+            <div class="analogy">The intelligence bureau's central archive and dispatch system — every cable filed, tagged, cross-referenced, and automatically forwarded to the right desks on the right clock.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 1 · MedDRA hierarchy — the five-level codebook that makes signals possible</div>
+          <svg viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg">
+            <!-- Level blocks, left -->
+            <g font-family="'Inter Tight', sans-serif">
+              <rect x="40" y="40" width="200" height="52" fill="#1E2447" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="140" y="62" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#F5EFDF" font-weight="600">SOC</text>
+              <text x="140" y="80" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">SYSTEM ORGAN CLASS</text>
+
+              <rect x="40" y="105" width="200" height="52" fill="#2D3561" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="140" y="127" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-weight="600">HLGT</text>
+              <text x="140" y="145" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">HIGH-LEVEL GROUP</text>
+
+              <rect x="40" y="170" width="200" height="52" fill="#525B84" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="140" y="192" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-weight="600">HLT</text>
+              <text x="140" y="210" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">HIGH-LEVEL TERM</text>
+
+              <rect x="40" y="235" width="200" height="52" fill="#C8984A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="140" y="257" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#0F1B2D" font-weight="700">PT</text>
+              <text x="140" y="275" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#1E2447" letter-spacing="2">PREFERRED TERM ★</text>
+
+              <rect x="40" y="300" width="200" height="52" fill="#EEE5CE" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="140" y="322" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#0F1B2D" font-weight="600">LLT</text>
+              <text x="140" y="340" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#1E2447" letter-spacing="2">LOWEST-LEVEL TERM</text>
+            </g>
+            <!-- Arrow connectors -->
+            <g stroke="#2D3561" stroke-width="1" opacity="0.5">
+              <line x1="140" y1="92" x2="140" y2="105"/>
+              <line x1="140" y1="157" x2="140" y2="170"/>
+              <line x1="140" y1="222" x2="140" y2="235"/>
+              <line x1="140" y1="287" x2="140" y2="300"/>
+            </g>
+            <!-- Right side: concrete example -->
+            <text x="390" y="30" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="2">CONCRETE EXAMPLE — ONE PATH</text>
+            <g font-family="'Inter Tight', sans-serif">
+              <rect x="370" y="40" width="560" height="52" fill="none" stroke="#1E2447" stroke-width="1" stroke-dasharray="3 3"/>
+              <text x="390" y="62" font-size="11" fill="#0F1B2D" font-weight="600">Cardiac disorders</text>
+              <text x="390" y="80" font-family="'JetBrains Mono', monospace" font-size="8" fill="#525B84">→ 27 HLGTs ↓</text>
+
+              <rect x="370" y="105" width="560" height="52" fill="none" stroke="#2D3561" stroke-width="1" stroke-dasharray="3 3"/>
+              <text x="390" y="127" font-size="11" fill="#0F1B2D" font-weight="600">Coronary artery disorders</text>
+              <text x="390" y="145" font-family="'JetBrains Mono', monospace" font-size="8" fill="#525B84">→ 6 HLTs ↓</text>
+
+              <rect x="370" y="170" width="560" height="52" fill="none" stroke="#525B84" stroke-width="1" stroke-dasharray="3 3"/>
+              <text x="390" y="192" font-size="11" fill="#0F1B2D" font-weight="600">Ischaemic coronary artery disorders</text>
+              <text x="390" y="210" font-family="'JetBrains Mono', monospace" font-size="8" fill="#525B84">→ ~40 PTs ↓</text>
+
+              <rect x="370" y="235" width="560" height="52" fill="#C8984A" opacity="0.18" stroke="#C8984A" stroke-width="1.5"/>
+              <text x="390" y="257" font-size="11" fill="#0F1B2D" font-weight="700">Myocardial infarction ★</text>
+              <text x="390" y="275" font-family="'JetBrains Mono', monospace" font-size="8" fill="#9B7233" font-weight="600">THE LEVEL USED FOR MOST SIGNAL DETECTION</text>
+
+              <rect x="370" y="300" width="560" height="52" fill="none" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="3 3"/>
+              <text x="390" y="322" font-size="11" fill="#0F1B2D" font-weight="600">"heart attack" · "MI" · "STEMI" · "NSTEMI" · "cardiac infarct"</text>
+              <text x="390" y="340" font-family="'JetBrains Mono', monospace" font-size="8" fill="#525B84">verbatim reporter phrases — mapped upward by coder</text>
+            </g>
+            <text x="560" y="378" text-anchor="middle" font-family="'Fraunces', serif" font-size="12" font-style="italic" fill="#0F1B2D">Reporters speak LLT. Signals are detected at PT. Reviews happen at SOC.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The first lesson I ever got in PV was from a clinician-turned-safety-officer who said: <em>"The most dangerous word in pharmacovigilance is 'minor.'"</em> Every adverse event somebody downgrades to "minor" based on their own judgment is a data point that, in aggregate, might have been the earliest signal of a serious pattern. The discipline is not about deciding what matters and filing only those. It is about recording everything — <em>faithfully, using the standardized vocabulary</em> — and letting the aggregate analysis tell you what matters. Reporters who edit during intake are doing signal detection's job without signal detection's tools, and getting it wrong in ways that will not be visible for years.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 1 checkpoint</h4>
+          <ul>
+            <li>Define AE, ADR, SAE, SUSAR — and give one scenario that would be exactly each</li>
+            <li>Draw the MedDRA hierarchy and show how a reporter-verbatim phrase maps upward</li>
+            <li>Name the three bodies of safety governance and what each owns</li>
+            <li>Explain what an expedited 7-day report is, and what triggers one rather than a 15-day report</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A clinician reports: "Patient had chest discomfort after second dose — probably nothing, felt fine next day." What does the PV team need from you before they can process this, and why does vocabulary matter?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>The PV team needs, at minimum: (1) the <strong>four core ICSR validity criteria</strong> — identifiable reporter, identifiable patient (even minimally, like "male, 40s"), suspect drug, and a suspect reaction. Missing any one of the four and the case is invalid — cannot be processed, cannot contribute to signal detection. (2) The <strong>temporal relationship</strong> — onset after what dose, duration, resolution. (3) <strong>Seriousness criteria</strong> — did the event involve death, life-threat, hospitalization, persistent disability, congenital anomaly, or other medically important event. "Probably nothing" is a <em>clinician's causality assessment</em>, which is valuable context but does <em>not</em> remove the event's reportability. Vocabulary matters because "chest discomfort" codes differently from "chest pain" from "angina" from "myocardial infarction" — each at a different MedDRA PT, each counted into a different cell of the disproportionality matrix. The same physical event, described in four different reports with four different phrases, could fail to accumulate as a signal because the coding never converged. That is how the Vioxx cardiovascular signal remained diffuse across FAERS for years — hundreds of events coded across dozens of related PTs, none of which individually crossed threshold, all of which together would have.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>A-A-S-S:</strong> the core hierarchy — <em>AE, ADR, SAE, SUSAR.</em> Each stricter than the last; each with its own reporting clock.<br>
+          <strong>S-H-H-P-L:</strong> the MedDRA ladder — <em>SOC, HLGT, HLT, PT, LLT.</em> Reporters speak at the bottom; signals are detected at PT; reviews happen at SOC.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 2 -->
+    <div class="phase" id="day2">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">02</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Understand + Apply · ~3 hrs</div><h3>Clinical trial safety — <em>SAE reporting, DSURs, and the DSMB</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">A phase-3 trial with 4,000 patients, even run flawlessly, cannot detect an adverse event occurring in one patient per 10,000 exposures. By simple arithmetic, some of the most important safety findings about any drug will be made <em>after</em> approval, by clinicians who were never on the investigator list. What happens during the trial is less about finding every side effect than about <em>building the framework</em> that will find the rest — long after the trial has closed.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 2</span>Learning objectives</h4>
+          <ul>
+            <li>Navigate the SAE reporting workflow and the 7-day / 15-day expedited clocks</li>
+            <li>Understand narrative writing and the anatomy of a well-coded ICSR</li>
+            <li>Grasp the DSUR (Development Safety Update Report) — what it is, when it is due, what it contains</li>
+            <li>Appreciate DSMB/DMC operation — membership, charter, stopping rules</li>
+            <li>Understand adaptive safety monitoring approaches for novel modalities</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--indigo);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The expedited reporting clocks</h4>
+            <p>For <strong>SUSARs</strong> (Suspected Unexpected Serious Adverse Reactions) arising in clinical trials, the reporting clocks are regulatorily fixed: <strong>7 calendar days</strong> for fatal or life-threatening events (initial report, followed by follow-up within 8 days), <strong>15 calendar days</strong> for other serious unexpected events. The clock starts from "Day 0" — the day the sponsor first becomes aware of a case meeting SUSAR criteria. Missing an expedited report is a regulatory infraction that can trigger sponsor inspections and warning letters.</p>
+            <div class="analogy">The "flash" priority classification in military communications. Ordinary traffic is routed by standard channels; flash traffic interrupts whatever the commander is doing, wherever they are, within a fixed window.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Narrative writing &amp; ICSR quality</h4>
+            <p>Each serious case requires a <strong>narrative</strong> — a structured prose summary capturing: patient demographics, medical history and concomitant medications, suspect drug details (dose, duration, timing), event description with dates, treatment received, outcome, and causality assessment. Modern AI tools can draft narratives from structured case data, but the final signed narrative is the reviewable document — the one an FDA inspector will read. Quality metrics include <strong>narrative cycle time</strong> (days from intake to finalization) and <strong>consistency across reporters</strong>.</p>
+            <div class="analogy">The after-action report that accompanies every significant field incident. The incident itself generates structured logs; the narrative translates those logs into human-readable intelligence the senior analyst can actually reason over.</div>
+          </div>
+          <div class="concept-card">
+            <h4>DSUR — the yearly brief</h4>
+            <p>The <strong>Development Safety Update Report</strong> (ICH E2F) is the annual aggregate safety report for every investigational product, due <strong>60 days</strong> after the annual International Birth Date. It aggregates cumulative safety across all indications, studies, regions — including interval SUSARs, line listings, safety issue analyses, investigator brochure update status, and the sponsor's overall benefit-risk assessment. The DSUR is the document regulators consult most when deciding whether to impose clinical holds, require protocol amendments, or allow trials to continue.</p>
+            <div class="analogy">The annual threat assessment a national intelligence agency delivers to the executive — a consolidated view of everything that has emerged across every field of operations in the past year, with explicit comparison to prior-year assessments.</div>
+          </div>
+          <div class="concept-card">
+            <h4>DSMB operation &amp; stopping rules</h4>
+            <p>The <strong>DSMB</strong> is typically 3–7 independent experts (biostatistician, clinicians in the therapeutic area, ethicist), with a charter defining access (blinded / unblinded), meeting cadence, and stopping-rule criteria. <strong>Stopping rules</strong> can be for <em>futility</em> (the trial will not show benefit), <em>efficacy</em> (benefit so clear continued randomization is unethical), or <em>safety</em> (harm so clear continued exposure is unethical). The most famous recent stoppings — both HIV-PrEP and certain oncology trials — occurred because the DSMB judged equipoise had been broken.</p>
+            <div class="analogy">The independent board of inquiry empowered to halt a military operation mid-flight. Their authority derives from their independence; their decisions have immediate force; the sponsor can disagree but cannot override.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 2 · The clinical-trial safety reporting clocks — from case awareness to regulatory dispatch</div>
+          <svg viewBox="0 0 980 360" xmlns="http://www.w3.org/2000/svg">
+            <!-- Timeline base -->
+            <line x1="80" y1="200" x2="900" y2="200" stroke="#0F1B2D" stroke-width="1.5"/>
+            <!-- Day markers -->
+            <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52">
+              <line x1="80" y1="195" x2="80" y2="205" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="80" y="222" text-anchor="middle" font-weight="700">DAY 0</text>
+              <text x="80" y="236" text-anchor="middle" font-size="8">case aware</text>
+              <line x1="260" y1="195" x2="260" y2="205" stroke="#0F1B2D"/>
+              <text x="260" y="222" text-anchor="middle" font-weight="700">DAY 7</text>
+              <line x1="440" y1="195" x2="440" y2="205" stroke="#0F1B2D"/>
+              <text x="440" y="222" text-anchor="middle" font-weight="700">DAY 15</text>
+              <line x1="620" y1="195" x2="620" y2="205" stroke="#0F1B2D"/>
+              <text x="620" y="222" text-anchor="middle">~DAY 90</text>
+              <line x1="800" y1="195" x2="800" y2="205" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="800" y="222" text-anchor="middle" font-weight="700">YEAR + 60d</text>
+              <text x="800" y="236" text-anchor="middle" font-size="8">DSUR due</text>
+            </g>
+            <!-- 7-day SUSAR track (fatal/life-threat) -->
+            <rect x="80" y="120" width="180" height="50" fill="#A84B2A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+            <text x="170" y="140" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="700">7-DAY CLOCK</text>
+            <text x="170" y="156" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">fatal · life-threatening SUSAR</text>
+            <!-- 15-day SUSAR track -->
+            <rect x="80" y="80" width="360" height="30" fill="#C8984A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+            <text x="260" y="100" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#0F1B2D" font-weight="700">15-DAY CLOCK — other serious unexpected SUSARs</text>
+            <!-- Follow-up windows -->
+            <rect x="260" y="130" width="180" height="30" fill="#D67D5C" opacity="0.85" stroke="#0F1B2D" stroke-width="0.5" stroke-dasharray="3 3"/>
+            <text x="350" y="150" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">→ 8-day follow-up on 7-day cases</text>
+            <!-- Aggregate reporting -->
+            <rect x="80" y="260" width="720" height="30" fill="#525B84" opacity="0.88" stroke="#0F1B2D" stroke-width="0.6"/>
+            <text x="440" y="280" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="600">Continuous aggregate collection → annual DSUR + interim line listings to DSMB</text>
+            <!-- Side note panel -->
+            <rect x="520" y="40" width="380" height="140" fill="#EEE5CE" opacity="0.7" stroke="#2D3561" stroke-width="0.5"/>
+            <text x="535" y="58" font-family="'JetBrains Mono', monospace" font-size="8" fill="#1E2447" letter-spacing="2">REGULATORY CLOCK MECHANICS</text>
+            <text x="535" y="76" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• Day 0 = first sponsor awareness of case meeting SUSAR criteria</text>
+            <text x="535" y="92" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• Calendar days, not business days</text>
+            <text x="535" y="108" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• Late expedited reports = regulatory infraction</text>
+            <text x="535" y="124" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• DSMBs typically receive safety data more frequently than regulators</text>
+            <text x="535" y="140" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• Every investigator receives SUSARs from across the program</text>
+            <text x="535" y="156" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• ICSR validity = 4 criteria, present in every case</text>
+            <text x="535" y="172" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• The DSUR summarizes everything on a 12-month cycle</text>
+            <!-- Title -->
+            <text x="80" y="34" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Three clocks running in parallel. Miss any one and an inspection will open doors.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The hardest thing about the expedited reporting clock is not the timing — modern safety databases automate the arithmetic. The hardest thing is <em>Day 0</em>. When does the sponsor "become aware"? Is it when the investigator calls the CRO? When the CRO enters it into the safety database? When the medical reviewer codes it as a SUSAR? These judgments seem administrative; in practice, they are where inspections live. Every sponsor I've ever worked with has had a moment where a Day 0 determination was genuinely ambiguous, and every mature sponsor resolves that ambiguity by <em>choosing the earliest defensible date</em> — accepting the operational burden of starting the clock earlier rather than later. The firms that optimize the other direction eventually find themselves explaining to an inspector why a case the medical reviewer received on Tuesday did not start its clock until Friday. That conversation rarely goes well.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 2 checkpoint</h4>
+          <ul>
+            <li>Walk through the SUSAR expedited reporting workflow from Day 0 to submission</li>
+            <li>Describe the anatomy of a high-quality narrative and three common narrative quality failures</li>
+            <li>Outline the contents of a DSUR and explain its relationship to the Investigator Brochure</li>
+            <li>Draft a DSMB charter skeleton for a first-in-class oncology trial</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A CRO flags a case on Tuesday morning, but the sponsor's medical reviewer doesn't confirm SUSAR status until Friday. When does the 7-day clock actually start, and why does this matter?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>The regulatory principle is <strong>Day 0 = earliest date at which minimum information was available to the sponsor (or its agent) to meet the SUSAR definition</strong>. The CRO is the sponsor's agent; its awareness is the sponsor's awareness. If by Tuesday the CRO already had the four ICSR validity criteria <em>plus</em> information sufficient to classify the event as serious, unexpected, and suspected ADR, Tuesday is Day 0 — regardless of when the sponsor's internal medical reviewer confirmed. The medical reviewer's confirmation adds rigor but does not gate the clock; if it did, sponsors could trivially extend clocks by slow internal review. <strong>Why this matters:</strong> an inspection reviewing a set of expedited reports compares each case's regulatory submission date to the earliest documented sponsor/agent awareness. If the pattern shows the sponsor consistently counting from medical-reviewer confirmation rather than from CRO/agent receipt, the inspector will characterize this as a systemic late-reporting issue — one 483 observation that becomes a warning letter faster than almost any other PV finding, because it touches regulatory disclosure obligations directly. The correct operational stance is aggressive: <em>start the clock the moment any part of the sponsor's accountability chain has what's needed, and let internal review happen inside the clock.</em></p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>7-15-60:</strong> the regulatory clocks — <em>7 days for fatal/life-threat SUSARs, 15 days for other SUSARs, 60 days after birth-date for DSUR.</em> Three numbers that define an entire operating rhythm.<br>
+          <strong>Day 0 is earliest awareness, not latest confirmation.</strong> The single most-inspected judgment in clinical PV.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 3 -->
+    <div class="phase" id="day3">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">03</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Apply + Analyze · ~3 hrs</div><h3>Post-market PV intake &amp; databases — <em>FAERS, EudraVigilance, the global archive</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">Approximately ten percent of adverse events that occur are ever reported to a regulatory database. Of those reported, many are incomplete, some are duplicates, a few are misattributions, and a handful are outright fraudulent. Post-market PV is not about having a clean dataset. It is about <em>extracting defensible signals from the messiest intelligence stream in medicine</em> — and doing it fast enough that the signal matters.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 3</span>Learning objectives</h4>
+          <ul>
+            <li>Navigate the global safety database ecosystem — FAERS, EudraVigilance, VigiBase, PMDA, NMPA</li>
+            <li>Understand spontaneous reporting limitations — underreporting, bias, Weber effect, notoriety effect</li>
+            <li>Grasp the ICSR processing workflow from intake to submission</li>
+            <li>Understand PSUR / PBRER — the marketed-product equivalent of the DSUR</li>
+            <li>Plan an RMP update in response to accumulating post-market evidence</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--indigo);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The global database ecosystem</h4>
+            <p><strong>FAERS</strong> (FDA Adverse Event Reporting System) — US spontaneous reports, publicly queryable. <strong>EudraVigilance</strong> (EMA) — EU reports, tiered public access. <strong>VigiBase</strong> (WHO, Uppsala) — global aggregation, 30M+ reports from 150+ countries. <strong>PMDA</strong> (Japan) — Japan-specific reports. <strong>NMPA</strong> (China) — China-specific reports. Each database has different data standards, access rules, and latency. Mature sponsors query all of them; signals often emerge in one jurisdiction before reaching threshold globally.</p>
+            <div class="analogy">The allied-service intelligence exchange. Each national service has its own collection priorities, tradecraft, and blind spots. A pattern seen in one service's take but not another's can itself be a signal.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Spontaneous reporting limitations</h4>
+            <p>Only a small fraction of AEs are reported. The <strong>Weber effect</strong> — reporting peaks around year 2 post-launch and declines — is partly attention-cycle, partly saturation. The <strong>notoriety effect</strong> — once a drug-event association is publicized, reporting of that specific event accelerates — can distort disproportionality signals. <strong>Channeling bias</strong> — newer drugs get prescribed to different patients than older drugs — distorts comparisons. Competent signal detection explicitly models these biases rather than assuming them absent.</p>
+            <div class="analogy">Any intelligence analyst who thinks their sources reflect ground truth is untrained. Every source has a selection bias; every channel has a collection gap; every piece of intel reflects the collection method as much as the event.</div>
+          </div>
+          <div class="concept-card">
+            <h4>ICSR processing workflow</h4>
+            <p>Cases flow: <strong>intake</strong> (reporter channel, initial capture) → <strong>validity check</strong> (four ICSR criteria) → <strong>MedDRA coding</strong> (reviewer or LLM-assisted) → <strong>seriousness assessment</strong> → <strong>causality assessment</strong> → <strong>narrative drafting</strong> → <strong>QC review</strong> → <strong>regulatory submission</strong> (E2B XML to relevant authorities) → <strong>archive</strong>. Key quality metrics: <strong>case processing time</strong>, <strong>coding consistency</strong>, <strong>regulatory submission compliance rate</strong>, <strong>follow-up completion rate</strong>.</p>
+            <div class="analogy">The intake-to-dispatch pipeline at an intelligence desk. A piece of raw reporting arrives; it is authenticated, translated, tagged, correlated, rated for credibility, written up, and sent to whoever needs to know — on a clock.</div>
+          </div>
+          <div class="concept-card">
+            <h4>PSUR / PBRER</h4>
+            <p>The <strong>Periodic Safety Update Report</strong> (EU) / <strong>Periodic Benefit-Risk Evaluation Report</strong> (ICH E2C R2, now harmonized) is the marketed-product equivalent of the DSUR. PSURs are submitted on defined cycles — 6-monthly in the first two years post-launch, annual for years 3–5, then 3-yearly. Contents: cumulative and interval safety data, exposure estimates, signal evaluations, benefit-risk conclusion, labeling update status, RMP effectiveness. <strong>PRAC</strong> (EU Pharmacovigilance Risk Assessment Committee) reviews PSURs and can trigger label changes, additional studies, or market action.</p>
+            <div class="analogy">The quarterly consolidated intelligence brief — a standing rhythm of what has emerged, what has changed since last cycle, and what the overall net assessment is. The brief is not the only communication, but it is the one that gets archived as the system's formal self-understanding.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 3 · The global PV database ecosystem — sources, flows, and coverage</div>
+          <svg viewBox="0 0 980 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Central aggregator -->
+            <circle cx="490" cy="210" r="58" fill="#1E2447" opacity="0.95" stroke="#C8984A" stroke-width="1"/>
+            <text x="490" y="204" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-weight="600">Sponsor's</text>
+            <text x="490" y="220" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-weight="600">Safety DB</text>
+            <text x="490" y="238" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#C8984A" letter-spacing="2">ARGUS · LIFESPHERE</text>
+            <!-- Five regional databases -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- FAERS - left -->
+              <rect x="80" y="90" width="140" height="70" fill="#2D3561" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="150" y="115" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">FAERS</text>
+              <text x="150" y="132" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">US · FDA</text>
+              <text x="150" y="148" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">~20M cases</text>
+              <!-- EudraVigilance - top -->
+              <rect x="420" y="30" width="140" height="70" fill="#2D3561" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="490" y="55" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">EudraVigilance</text>
+              <text x="490" y="72" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">EU · EMA</text>
+              <text x="490" y="88" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">~25M cases</text>
+              <!-- VigiBase - right -->
+              <rect x="760" y="90" width="140" height="70" fill="#525B84" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="830" y="115" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">VigiBase</text>
+              <text x="830" y="132" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.88">WHO · Uppsala</text>
+              <text x="830" y="148" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.88">30M+ · 150 countries</text>
+              <!-- PMDA - bottom left -->
+              <rect x="80" y="260" width="140" height="70" fill="#525B84" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="150" y="285" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">PMDA</text>
+              <text x="150" y="302" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">Japan</text>
+              <text x="150" y="318" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">regional focus</text>
+              <!-- NMPA - bottom right -->
+              <rect x="760" y="260" width="140" height="70" fill="#525B84" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="830" y="285" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">NMPA</text>
+              <text x="830" y="302" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">China</text>
+              <text x="830" y="318" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">regional focus</text>
+            </g>
+            <!-- Upstream sources -->
+            <g font-family="'Inter Tight', sans-serif">
+              <rect x="280" y="340" width="110" height="40" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="335" y="357" text-anchor="middle" font-size="10" fill="#0F1B2D" font-weight="600">HCPs</text>
+              <text x="335" y="372" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#0F1B2D">MedWatch · physician</text>
+              <rect x="405" y="340" width="110" height="40" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="460" y="357" text-anchor="middle" font-size="10" fill="#0F1B2D" font-weight="600">Patients</text>
+              <text x="460" y="372" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#0F1B2D">consumer · call-in</text>
+              <rect x="530" y="340" width="110" height="40" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="585" y="357" text-anchor="middle" font-size="10" fill="#0F1B2D" font-weight="600">Literature</text>
+              <text x="585" y="372" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#0F1B2D">PubMed · Embase</text>
+              <rect x="655" y="340" width="110" height="40" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="710" y="357" text-anchor="middle" font-size="10" fill="#0F1B2D" font-weight="600">Social · RWE</text>
+              <text x="710" y="372" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#0F1B2D">forums · EHR · claims</text>
+            </g>
+            <!-- Arrows: sources → sponsor DB -->
+            <defs><marker id="arrPv" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2A3B52"/></marker></defs>
+            <g stroke="#2A3B52" stroke-width="0.9" opacity="0.55" marker-end="url(#arrPv)" fill="none">
+              <line x1="335" y1="340" x2="460" y2="270"/>
+              <line x1="460" y1="340" x2="480" y2="270"/>
+              <line x1="585" y1="340" x2="505" y2="270"/>
+              <line x1="710" y1="340" x2="520" y2="270"/>
+            </g>
+            <!-- Arrows: sponsor DB → regional DBs (bidirectional via submission and feedback) -->
+            <g stroke="#1E2447" stroke-width="1.2" opacity="0.65" marker-end="url(#arrPv)" fill="none">
+              <line x1="435" y1="195" x2="225" y2="135"/>
+              <line x1="490" y1="150" x2="490" y2="105"/>
+              <line x1="548" y1="195" x2="755" y2="135"/>
+              <line x1="435" y1="230" x2="225" y2="285"/>
+              <line x1="548" y1="230" x2="755" y2="285"/>
+            </g>
+            <!-- Overlay: VigiBase aggregates national feeds -->
+            <g stroke="#4B6B4A" stroke-width="0.8" opacity="0.5" stroke-dasharray="3 3" fill="none">
+              <path d="M 220 125 Q 500 -10 760 125"/>
+              <path d="M 220 295 Q 500 390 760 295"/>
+            </g>
+            <text x="490" y="14" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Sources feed sponsor database. Sponsor submits to regional authorities. VigiBase aggregates globally.</text>
+            <text x="490" y="392" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">ILLUSTRATIVE · MAJOR FLOWS ONLY · REGIONAL RULES VARY</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>Here is a thing every senior PV professional eventually learns and that no textbook quite captures: <em>the databases are not populated uniformly</em>. FAERS has rich US clinician reporting; EudraVigilance has uneven EU quality with stronger structured data; VigiBase has extraordinary global breadth and uneven depth; PMDA is dense for approved Japanese indications and thin for others. Signal detection run naively on any single database can mislead. Signal detection run on the union — or worse, the intersection without accounting for the asymmetries — can mislead even more. The most experienced signal analysts run detection on multiple databases separately, treat concordance as strong evidence, treat single-database signals as hypotheses, and treat any single-database result <em>trending in one direction while another database trends the opposite way</em> as a flag for investigation of the underlying reporting dynamics rather than the drug itself. The mature skill is <em>reading the databases as much as reading the data</em>.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 3 checkpoint</h4>
+          <ul>
+            <li>Name the five major global PV databases and one distinguishing feature of each</li>
+            <li>Describe the Weber effect, notoriety effect, and channeling bias — with one example each</li>
+            <li>Walk through the ICSR workflow from intake to regulatory submission</li>
+            <li>Outline a PSUR's main sections and the core questions it must answer</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>FAERS shows a disproportionality signal for drug X and hepatotoxicity. VigiBase shows nothing comparable. How would you interpret this, and what would you do next?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>The divergence has several plausible explanations and none should be assumed. <strong>Possibility 1 — real regional effect:</strong> the drug is metabolized differently in US populations (genetic polymorphism prevalence, coadministered drug patterns, baseline disease differences) causing more hepatotoxicity in the US than globally. <strong>Possibility 2 — reporting asymmetry:</strong> US hepatotoxicity is more vigorously reported than global (US clinicians particularly sensitized to hepatotoxicity post-troglitazone era). <strong>Possibility 3 — exposure differences:</strong> the drug is far more used in the US than globally, giving FAERS the denominator needed to surface a signal that VigiBase cannot yet see. <strong>Possibility 4 — database artefacts:</strong> different MedDRA coding conventions, different case-de-duplication rules, different time windows. <strong>What to do:</strong> (1) <strong>quantify exposure</strong> in each region so rates, not counts, drive the comparison; (2) <strong>examine case-level detail</strong> in both databases — do cases actually look similar? (3) <strong>run disproportionality in both databases with matched methodology</strong> (same PT cluster, same comparators, same time window); (4) <strong>check literature and US regulatory correspondence</strong> for any prior hepatotoxicity discussion; (5) if signal persists after adjustment, <strong>classify it as validated and escalate to causality assessment</strong>; if signal disappears under adjustment, <strong>document the reasoning</strong> and monitor the trend over the next PSUR cycle. The discipline is not to dismiss regional signals nor to over-react; it is to interrogate them rigorously enough that the decision survives its own audit trail.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>F-E-V-P-N:</strong> the global ecosystem — <em>FAERS (US), EudraVigilance (EU), VigiBase (WHO), PMDA (Japan), NMPA (China).</em> Five archives; one patient population.<br>
+          <strong>Weber-Notoriety-Channeling:</strong> the three biases that distort every spontaneous-reporting signal. Name them before trusting any number.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 4 -->
+    <div class="phase" id="day4">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">04</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Analyze + Evaluate · ~3.5 hrs</div><h3>Signal detection &amp; management — <em>pattern recognition in the noise</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">Somewhere in the stream of several million spontaneous adverse event reports filed globally each year sits the next Vioxx — the pattern nobody has yet noticed because it is spread across jurisdictions, across MedDRA terms, across time. Signal detection is the discipline of finding that pattern before enough patients have been affected to make it obvious. It is pattern recognition, run as an industrial process, against the noisiest data medicine produces.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 4</span>Learning objectives</h4>
+          <ul>
+            <li>Understand disproportionality methods — PRR, ROR — and their assumptions</li>
+            <li>Grasp Bayesian methods — EBGM, MGPS — and why they handle sparse data better</li>
+            <li>Master signal triage — strength-of-evidence grading, causality assessment (Bradford Hill)</li>
+            <li>Appreciate integrated signal detection across RWE, claims, EHR, literature, social</li>
+            <li>Plan an action response when a validated signal emerges post-launch</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--indigo);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Disproportionality — PRR and ROR</h4>
+            <p><strong>PRR (Proportional Reporting Ratio)</strong>: the proportion of reports for drug X mentioning event Y, divided by the proportion of reports for all other drugs mentioning Y. <strong>ROR (Reporting Odds Ratio)</strong>: analogous odds-ratio formulation, approximating relative risk when the AE is rare. A PRR ≥ 2 with ≥ 3 cases and chi-square ≥ 4 is the classical EMA signal threshold. Both methods share the fundamental assumption that background reporting represents a meaningful comparator — an assumption that is imperfect in practice.</p>
+            <div class="analogy">The word-frequency analysis on a corpus of intercepted cables. The word "bridge" appearing across cables about city X at 2× its background rate is not proof of a bridge-related plot; it is a flag worth investigating.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Bayesian methods — EBGM and MGPS</h4>
+            <p><strong>EBGM (Empirical Bayes Geometric Mean)</strong> is the output of <strong>MGPS (Multi-item Gamma Poisson Shrinker)</strong>, a Bayesian shrinkage method that handles sparse data better than PRR — small numerators don't produce wildly inflated signals. EBGM ≥ 2 with EB05 ≥ 2 is a typical signal threshold. FDA, EMA, and many sponsors use MGPS/EBGM as the primary method for FAERS-scale signal detection; it is more robust when any particular drug-event cell has few cases.</p>
+            <div class="analogy">The difference between averaging raw accusations and averaging weighted-by-reliability accusations. Bayesian shrinkage is the mathematical equivalent of taking a breath before trusting a sparse data point.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Signal triage &amp; causality assessment</h4>
+            <p>A statistical signal is a flag, not a conclusion. <strong>Triage</strong> sequences work by priority: severity, novelty, strength of evidence. <strong>Causality assessment</strong> draws on <strong>Bradford Hill's criteria</strong> (strength, consistency, specificity, temporality, biological gradient, plausibility, coherence, experiment, analogy) — originally developed for epidemiology, adapted for drug safety. The WHO-UMC scale (Certain / Probable / Possible / Unlikely / Unassessable) is a common causality taxonomy. Signal validation results in an outcome: <em>validated signal</em>, <em>refuted</em>, or <em>monitoring continues</em>.</p>
+            <div class="analogy">The gap between a pattern algorithm flagging a cluster and an analyst concluding the cluster is a threat. The algorithm produces evidence; the analyst produces judgment. Neither replaces the other.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Integrated signal detection</h4>
+            <p>Modern signal detection goes beyond spontaneous databases. <strong>Literature signals</strong> — NLP extraction from PubMed, Embase, case reports. <strong>Social media signals</strong> — forum monitoring, patient communities. <strong>RWE signals</strong> — self-controlled case series, propensity-weighted cohort studies on claims/EHR data. The <strong>FDA Sentinel Initiative</strong> has pioneered active surveillance using claims databases covering 100M+ lives. Integrated platforms that correlate signals across sources surface patterns no single source reveals.</p>
+            <div class="analogy">All-source intelligence fusion — where a HUMINT cable, a SIGINT intercept, an open-source news item, and a financial-flow record each say something different, and their combination tells a story none of them tell alone.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 4 · The signal detection pipeline — from multi-source intake to validated action</div>
+          <svg viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg">
+            <!-- Five input streams on left -->
+            <g font-family="'Inter Tight', sans-serif">
+              <rect x="30" y="40" width="130" height="34" fill="#525B84" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="95" y="61" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Spontaneous</text>
+              <rect x="30" y="86" width="130" height="34" fill="#525B84" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="95" y="107" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Literature</text>
+              <rect x="30" y="132" width="130" height="34" fill="#525B84" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="95" y="153" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Social media</text>
+              <rect x="30" y="178" width="130" height="34" fill="#525B84" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="95" y="199" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">RWE · claims</text>
+              <rect x="30" y="224" width="130" height="34" fill="#525B84" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="95" y="245" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">EHR · registries</text>
+              <rect x="30" y="270" width="130" height="34" fill="#525B84" opacity="0.9" stroke="#0F1B2D" stroke-width="0.5"/>
+              <text x="95" y="291" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Trial pharmacovigilance</text>
+            </g>
+            <!-- Algorithm tier -->
+            <rect x="240" y="40" width="200" height="300" fill="#2D3561" opacity="0.85" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="340" y="70" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-weight="600">Disproportionality &amp;</text>
+            <text x="340" y="88" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-weight="600">pattern recognition</text>
+            <text x="340" y="125" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#C8984A" font-weight="600">PRR · ROR</text>
+            <text x="340" y="145" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF">frequentist baseline</text>
+            <text x="340" y="175" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#C8984A" font-weight="600">EBGM · MGPS</text>
+            <text x="340" y="195" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF">Bayesian shrinkage</text>
+            <text x="340" y="225" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#C8984A" font-weight="600">SCCS · causal ML</text>
+            <text x="340" y="245" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF">RWE methods</text>
+            <text x="340" y="275" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#C8984A" font-weight="600">NLP signal extraction</text>
+            <text x="340" y="295" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF">unstructured text</text>
+            <text x="340" y="322" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF">cross-source concordance</text>
+            <!-- Triage tier -->
+            <rect x="520" y="40" width="180" height="300" fill="#1E2447" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="610" y="70" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-weight="600">Analyst triage</text>
+            <text x="610" y="88" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-weight="600">&amp; causality</text>
+            <text x="610" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#C8984A" font-weight="600">Strength grading</text>
+            <text x="610" y="150" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#C8984A" font-weight="600">Bradford Hill</text>
+            <text x="610" y="180" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#C8984A" font-weight="600">WHO-UMC scale</text>
+            <text x="610" y="210" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#C8984A" font-weight="600">Bias audit</text>
+            <text x="610" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#C8984A" font-weight="600">Signal Validation</text>
+            <text x="610" y="260" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF">→ confirm or refute</text>
+            <text x="610" y="295" text-anchor="middle" font-family="'Fraunces', serif" font-size="11" font-style="italic" fill="#F5EFDF">judgment, not automation</text>
+            <!-- Action tier on right -->
+            <g font-family="'Inter Tight', sans-serif">
+              <rect x="780" y="50" width="170" height="56" fill="#4B6B4A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="865" y="72" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="700">No action</text>
+              <text x="865" y="88" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">signal refuted</text>
+              <text x="865" y="100" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">OR monitor only</text>
+              <rect x="780" y="116" width="170" height="56" fill="#7C9082" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="865" y="138" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="700">Label update</text>
+              <text x="865" y="154" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">new warning / precaution</text>
+              <rect x="780" y="182" width="170" height="56" fill="#C8984A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="865" y="204" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="700">RMP / REMS</text>
+              <text x="865" y="220" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">risk-management action</text>
+              <rect x="780" y="248" width="170" height="56" fill="#D67D5C" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="865" y="270" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="700">Dear HCP letter</text>
+              <text x="865" y="286" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">public communication</text>
+              <rect x="780" y="314" width="170" height="26" fill="#A84B2A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="865" y="332" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="700">Withdrawal / restriction</text>
+            </g>
+            <!-- Arrows -->
+            <defs><marker id="arrSig" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#1E2447"/></marker></defs>
+            <g stroke="#1E2447" stroke-width="1" opacity="0.6" marker-end="url(#arrSig)" fill="none">
+              <line x1="160" y1="57" x2="238" y2="150"/>
+              <line x1="160" y1="103" x2="238" y2="170"/>
+              <line x1="160" y1="149" x2="238" y2="190"/>
+              <line x1="160" y1="195" x2="238" y2="210"/>
+              <line x1="160" y1="241" x2="238" y2="230"/>
+              <line x1="160" y1="287" x2="238" y2="250"/>
+              <line x1="440" y1="190" x2="518" y2="190"/>
+              <line x1="700" y1="190" x2="778" y2="190"/>
+            </g>
+            <text x="30" y="28" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Many sources · several algorithms · one analyst · five possible actions.</text>
+            <text x="30" y="368" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">THE PIPELINE RUNS CONTINUOUSLY FOR THE LIFE OF EVERY MARKETED PRODUCT</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>I'll share the one sentence every senior signal analyst learns early: <em>"A statistical signal is a hypothesis, not a finding."</em> The number on the disproportionality report is an algorithm's suggestion that the analyst pay attention; it is not itself evidence of drug-induced harm. What separates a good signal analyst from a mediocre one is the discipline of treating every algorithmic flag as the <em>start</em> of the investigation — requiring case-series review, biological plausibility analysis, literature triangulation, RWE confirmation, and often an explicit argument against the most plausible alternative explanations — <em>before</em> calling it a validated signal. The analysts who skip these steps accumulate false positives faster than signal detection can keep up; the ones who never declare signals accumulate false negatives the market eventually catches. The craft is the middle path: rigorous enough not to cry wolf, fast enough to matter when the wolf is real.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 4 checkpoint</h4>
+          <ul>
+            <li>Compute a PRR for a hypothetical 2×2 table (drug X vs. all others; event Y vs. all others)</li>
+            <li>Explain why EBGM is preferred over PRR for sparse-data cells</li>
+            <li>List Bradford Hill's nine criteria and give a drug-safety example applying three of them</li>
+            <li>Design a signal-triage rubric — what gets 24-hour review, what gets 30-day, what gets continued monitoring</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>FAERS MGPS flags an EBGM of 4.2 (EB05=2.9) for drug X and a rare cardiac event, based on 14 cases. What is this telling you, and what's the next step before calling it a validated signal?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>An EBGM of 4.2 with EB05 of 2.9 is a <strong>strong statistical signal</strong> — the lower 5th percentile of the Bayesian posterior is still well above the 2.0 signaling threshold, and 14 cases is a meaningful numerator for a rare event. <strong>But it is still a hypothesis</strong>, not a finding. The next steps, in order: <strong>(1) Case-series review</strong> — read all 14 narratives; are they clinically coherent (same AE pattern, similar temporal relationships to dose, similar patient profiles)? Or are they 14 disparate events miscoded under the same PT? <strong>(2) Biological plausibility</strong> — is there a mechanism (on-target effect, off-target binding, metabolite) that could plausibly cause this cardiac event? <strong>(3) Literature check</strong> — has this association been reported, even in case reports or preclinical data, that would strengthen prior probability? <strong>(4) Background rate comparison</strong> — what is the event's base rate in the treated population's demographic and comorbidity profile? Perhaps the 14 cases are entirely consistent with background, and the signal reflects reporter sensitization rather than drug effect. <strong>(5) Active surveillance query</strong> — if the sponsor has access to claims data (Sentinel, Optum, Truven), can the association be reproduced in a propensity-matched cohort? <strong>(6) Bradford Hill application</strong> — strength, consistency, temporality, dose-response. If steps 1–5 converge toward a real drug-associated effect, the analyst writes up a validated signal with a formal recommendation — which may be label update, further study, RMP modification, or REMS. If the convergence fails, the signal is classified "not validated — continued monitoring" with explicit reasoning for future inspection review. The discipline is that the algorithm got you to the starting line; the <em>analyst</em> runs the investigation from there.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>P-R-E-M:</strong> the signal algorithms — <em>PRR, ROR, EBGM, MGPS.</em> Frequentist baseline, odds-ratio analogue, Bayesian point estimate, the method that produces it.<br>
+          <strong>Hypothesis, not finding.</strong> Every statistical signal is a flag for investigation, never evidence of causation by itself.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 5 -->
+    <div class="phase" id="day5">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">05</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Evaluate + Create · ~3 hrs</div><h3>Risk management &amp; REMS — <em>from detection to deployed countermeasure</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">When a signal is validated and the benefit-risk balance tightens, PV is no longer diagnostic — it becomes operational. Risk management is the discipline of translating epidemiological truth into clinical practice: warnings that prescribers actually read, certifications that pharmacies actually implement, registries that actually capture the relevant patients. The hardest part is not designing the countermeasure. It is ensuring the countermeasure persists, at scale, across every HCP and every dispensing point, for as long as the risk persists.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 5</span>Learning objectives</h4>
+          <ul>
+            <li>Understand the Risk Management Plan (RMP) structure and lifecycle</li>
+            <li>Grasp REMS fundamentals — Elements to Assure Safe Use (ETASU)</li>
+            <li>Navigate REMS design choices: certification, registries, communication plans</li>
+            <li>Understand REMS modification, assessment, and ultimately removal</li>
+            <li>Synthesize the W-S-A-A integrated thesis across the full PV lifecycle</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--indigo);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Risk Management Plan (RMP)</h4>
+            <p>The <strong>RMP</strong> (EU) / equivalent REMS document (US) is the structured summary of: (1) <em>safety specification</em> — what is known, what is unknown, what is missing; (2) <em>pharmacovigilance plan</em> — how the sponsor will continue learning; (3) <em>risk minimization measures</em> — routine (labeling, packaging) plus additional (education, restricted access, registries). Living document, updated with every new safety development. The RMP is the explicit strategy document — the mature PV organization revisits it meaningfully at every PSUR cycle.</p>
+            <div class="analogy">The counter-intelligence dossier for a named threat. It documents what you know, what you're still investigating, and what countermeasures you've deployed — and it evolves as the threat evolves.</div>
+          </div>
+          <div class="concept-card">
+            <h4>REMS fundamentals — ETASU</h4>
+            <p><strong>REMS</strong> (Risk Evaluation and Mitigation Strategies) are FDA-required programs for drugs whose benefits only outweigh risks under specific conditions. Components can include: <strong>medication guides</strong>, <strong>communication plans</strong>, <strong>ETASU</strong> (Elements to Assure Safe Use — prescriber certification, pharmacy certification, patient registry enrollment, lab monitoring, documented informed consent). Classic ETASU examples: isotretinoin (iPLEDGE — pregnancy prevention), clozapine (weekly WBC monitoring), thalidomide (STEPS). ETASU programs operationalize the message "this drug is worth it, under these conditions."</p>
+            <div class="analogy">The security-clearance requirement for access to a classified asset. The asset is valuable; the risks are non-negligible; access is restricted to those who have completed the required training, signed the required agreements, and accepted the required monitoring.</div>
+          </div>
+          <div class="concept-card">
+            <h4>REMS assessment &amp; modification</h4>
+            <p>Sponsors submit <strong>REMS assessment reports</strong> at 18 months, 3 years, and 7 years post-approval, documenting: prescriber certification rates, pharmacy certification rates, patient registry enrollment, adherence to ETASU elements, residual AE rates. Based on accumulated evidence, REMS can be <em>modified</em> (adding or removing elements), <em>made less burdensome</em> (moving from ETASU to communication-only), or eventually <em>removed</em> entirely. Modification requires FDA approval and is itself an exercise in demonstrating that risk has decreased or that mitigation has become redundant.</p>
+            <div class="analogy">The periodic threat-level review. Conditions change; measures originally warranted may become excessive; the program either adjusts or loses legitimacy and operational compliance.</div>
+          </div>
+          <div class="concept-card">
+            <h4>REMS removal &amp; the W-S-A-A synthesis</h4>
+            <p>REMS <em>removal</em> — proposing that the elements no longer contribute meaningfully to patient safety — requires RWE demonstrating that real-world use achieves acceptable outcomes even without ETASU. This is where the W-S-A-A cycle completes: <strong>Watch</strong> (continued intake) → <strong>Signal</strong> (tracking that adverse outcomes have not increased) → <strong>Assess</strong> (benefit-risk under current practice is favorable) → <strong>Act</strong> (propose REMS removal). A successful removal case is PV's quiet triumph — evidence that the system learned enough about a drug to safely loosen its constraints.</p>
+            <div class="analogy">The declassification and stand-down of an operational countermeasure. The threat that warranted it has been understood, managed, and, over time, demonstrated to no longer require the original level of response.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 5 · The W-S-A-A flywheel — Watch, Signal, Assess, Act, continuously</div>
+          <svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer flywheel ring -->
+            <circle cx="490" cy="210" r="170" fill="none" stroke="#2D3561" stroke-width="2" opacity="0.35" stroke-dasharray="5 5"/>
+            <text x="490" y="206" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#2D3561">The Patient</text>
+            <text x="490" y="226" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2D3561" letter-spacing="2">NET BENEFIT &gt; RISK</text>
+            <!-- Four quadrants: W, S, A, A -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- Watch - top -->
+              <g transform="translate(490, 40)">
+                <circle cx="0" cy="0" r="48" fill="#2D3561" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#F5EFDF" font-weight="600">W</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Watch</text>
+              </g>
+              <text x="490" y="108" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">intake · MedDRA coding · database dispatch</text>
+              <!-- Signal - right -->
+              <g transform="translate(700, 210)">
+                <circle cx="0" cy="0" r="48" fill="#2D3561" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#F5EFDF" font-weight="600">S</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Signal</text>
+              </g>
+              <text x="642" y="275" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">PRR · EBGM · triage</text>
+              <!-- Assess - bottom -->
+              <g transform="translate(490, 380)">
+                <circle cx="0" cy="0" r="48" fill="#2D3561" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#F5EFDF" font-weight="600">A</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Assess</text>
+              </g>
+              <text x="490" y="320" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">causality · benefit-risk · PSUR</text>
+              <!-- Act - left -->
+              <g transform="translate(280, 210)">
+                <circle cx="0" cy="0" r="48" fill="#C8984A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#0F1B2D" font-weight="700">A</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="600">Act</text>
+              </g>
+              <text x="340" y="275" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">label · RMP · REMS · recall</text>
+            </g>
+            <!-- Arrows -->
+            <defs><marker id="arrFw" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#2D3561"/></marker></defs>
+            <g stroke="#2D3561" stroke-width="1.8" opacity="0.6" fill="none" marker-end="url(#arrFw)">
+              <path d="M 540 50 A 180 180 0 0 1 690 170"/>
+              <path d="M 700 260 A 180 180 0 0 1 540 370"/>
+              <path d="M 440 370 A 180 180 0 0 1 290 260"/>
+              <path d="M 280 170 A 180 180 0 0 1 440 50"/>
+            </g>
+            <!-- Continuous label -->
+            <text x="490" y="24" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Four engines. Continuous rotation. No end-state — only the next cycle.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>Here is the closing thing I will leave you with, because it is what matters most and what textbooks least capture: <em>pharmacovigilance is a humility discipline before it is anything else.</em> Every signal you validate is an acknowledgment that the clinical trial program missed something. Every label update is a confession that your prior understanding was incomplete. Every REMS is an admission that you cannot trust the default standard of care to manage this drug's risk. The professionals I have most respected in this field are the ones who approach every case, every disproportionality number, every benefit-risk calculation with the posture that their current understanding is provisional — and who build their teams, their processes, and their communications to support continuous revision rather than defend prior conclusions. The PV function that most reliably protects patients is the one most willing to be wrong — quickly, publicly, and in print — when the evidence requires it.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 5 checkpoint</h4>
+          <ul>
+            <li>Outline the three major sections of an RMP and what each contains</li>
+            <li>Name three classic ETASU programs and the specific risk each addresses</li>
+            <li>Design a REMS modification proposal based on 7 years of accumulated RWE</li>
+            <li>Evaluate the W-S-A-A four-engine thesis on a real or hypothetical asset — name the weakest engine</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A CFO asks: "We've had a REMS on our drug for 7 years with no new safety issues. Why shouldn't we just let it run? Why invest in removal?"</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>Three reasons, each of which compounds the others. <strong>One — access and uptake:</strong> every ETASU step (prescriber certification, pharmacy certification, registry enrollment, lab monitoring) is a friction point. Friction excludes patients who would benefit but cannot navigate the system — the elderly, those in rural areas with fewer certified providers, those in systems where the REMS paperwork is a deterrent. After 7 years, cumulative patients excluded by REMS friction can significantly exceed cumulative patients protected by REMS elements, particularly if the real-world evidence shows safe use under routine care. <strong>Two — regulatory credibility:</strong> an unchanged REMS after 7 years of negative RWE signals the sponsor has not been watching — that the organization treats risk management as a one-time obligation rather than a living strategy. A sponsor who proactively proposes modification based on evidence demonstrates to regulators that the PV function is functioning. <strong>Three — competitive dynamics:</strong> generic entrants post-LOE will operate under the same REMS. If the REMS is burdensome and not warranted by current evidence, the innovator's voluntary modification can precede generic competition and reposition the brand. Conversely, an innovator defending an unjustified REMS can find itself on the losing end of a formal regulatory challenge. The right question is not "why change?" but "<em>what is the evidence base for the current program, is it still warranted, and if partially warranted, what is the minimum effective program?</em>" — and the answer, based on 7 years of accumulated data, should be generated rigorously and acted on, in whichever direction the evidence points.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>W-S-A-A:</strong> the four PV engines — <em>Watch, Signal, Assess, Act.</em> All four turning or the system stops hearing.<br>
+          <strong>ETASU:</strong> <em>Elements To Assure Safe Use.</em> The operational teeth of REMS — the stuff that actually changes prescriber and pharmacist behavior.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JARGON -->
+<section id="jargon" class="wrap-narrow">
+  <div class="section-label">Jargon decoder · three tiers</div>
+  <h2>The vocabulary of the signals room.</h2>
+  <p>PV is a profession where precise vocabulary is regulatory obligation; a sloppy phrase in an ICSR or PSUR can have a regulatory cost. A minimal working set:</p>
+
+  <div class="jargon-tier">
+    <h3>Tier 1 · Everyday</h3>
+    <div class="tier-label">If you know these, you can read a PV status update</div>
+    <dl>
+      <dt>AE</dt><dd>Adverse Event — any untoward medical occurrence, causation not assumed.</dd>
+      <dt>ADR</dt><dd>Adverse Drug Reaction — AE for which causal relationship is reasonably possible.</dd>
+      <dt>SAE</dt><dd>Serious AE — death, life-threatening, hospitalization, disability, or congenital anomaly.</dd>
+      <dt>SUSAR</dt><dd>Suspected Unexpected Serious ADR — highest-priority expedited reporting trigger.</dd>
+      <dt>ICSR</dt><dd>Individual Case Safety Report — the fundamental unit of PV data.</dd>
+      <dt>MedDRA</dt><dd>Medical Dictionary for Regulatory Activities — standardized AE vocabulary.</dd>
+      <dt>PT / SOC</dt><dd>Preferred Term / System Organ Class — two levels of the MedDRA hierarchy most used operationally.</dd>
+      <dt>Spontaneous report</dt><dd>AE report submitted outside a clinical trial — e.g., from clinician to regulator.</dd>
+      <dt>Labeling / SmPC / USPI</dt><dd>The formal product information document containing approved safety information.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 2 · Technical</h3>
+    <div class="tier-label">You hear these in PV meetings and regulatory documents</div>
+    <dl>
+      <dt>FAERS</dt><dd>FDA Adverse Event Reporting System — US public spontaneous database.</dd>
+      <dt>EudraVigilance</dt><dd>EMA's EU adverse event database; tiered public access.</dd>
+      <dt>VigiBase</dt><dd>WHO global AE database, hosted at Uppsala Monitoring Centre.</dd>
+      <dt>DSUR</dt><dd>Development Safety Update Report — annual aggregate report for investigational products.</dd>
+      <dt>PSUR / PBRER</dt><dd>Periodic Safety Update Report / Periodic Benefit-Risk Evaluation Report — marketed-product equivalent.</dd>
+      <dt>RMP</dt><dd>Risk Management Plan — the living risk strategy document.</dd>
+      <dt>REMS</dt><dd>Risk Evaluation and Mitigation Strategy — FDA-required risk management program.</dd>
+      <dt>ETASU</dt><dd>Elements To Assure Safe Use — operational elements within REMS (certification, registries, monitoring).</dd>
+      <dt>PRR / ROR</dt><dd>Proportional Reporting Ratio / Reporting Odds Ratio — frequentist disproportionality methods.</dd>
+      <dt>Disproportionality</dt><dd>The family of methods detecting drug-event combinations reported more often than expected.</dd>
+      <dt>Exposure-adjusted rate</dt><dd>Events per patient-year rather than raw count — enables comparison across products.</dd>
+      <dt>Signal triage</dt><dd>The analyst process of classifying statistical signals by priority and evidence strength.</dd>
+      <dt>Benefit-risk assessment</dt><dd>The structured synthesis comparing benefits and risks for a defined population.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 3 · Specialist</h3>
+    <div class="tier-label">You hear these from senior safety scientists and regulators</div>
+    <dl>
+      <dt>EBGM / MGPS</dt><dd>Empirical Bayes Geometric Mean / Multi-item Gamma Poisson Shrinker — Bayesian signal detection.</dd>
+      <dt>SCCS</dt><dd>Self-Controlled Case Series — RWE signal detection method using each patient as own control.</dd>
+      <dt>Weber effect</dt><dd>Reporting-frequency phenomenon: peaks around year 2 post-launch, then declines.</dd>
+      <dt>Notoriety effect</dt><dd>Reporting-frequency phenomenon: once a drug-AE link is publicized, reporting of that AE accelerates.</dd>
+      <dt>Channeling bias</dt><dd>Newer drugs prescribed to different patient profiles — distorts comparisons.</dd>
+      <dt>GVP Modules</dt><dd>EMA Guidelines on Good Pharmacovigilance Practices — the EU PV rulebook.</dd>
+      <dt>PRAC</dt><dd>Pharmacovigilance Risk Assessment Committee — EMA's PV decision-making body.</dd>
+      <dt>Sentinel</dt><dd>FDA's active surveillance initiative — 100M+ lives across claims and EHR databases.</dd>
+      <dt>IME / DME</dt><dd>Important Medical Event / Designated Medical Event — events requiring special PV attention.</dd>
+      <dt>Bradford Hill</dt><dd>Nine criteria for causality inference in epidemiology, adapted to drug safety.</dd>
+      <dt>WHO-UMC scale</dt><dd>Causality taxonomy: Certain / Probable / Possible / Unlikely / Unassessable.</dd>
+      <dt>Reference Safety Information</dt><dd>The document defining what is "expected" — the baseline against which unexpectedness is judged.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- PITFALLS -->
+<section id="pitfalls" class="wrap">
+  <div class="section-label">Traps &amp; pitfalls</div>
+  <h2>Where PV programs quietly fail.</h2>
+  <p>Catastrophic PV failures reach the news; quiet, slow-burn failures are endemic. Six patterns that experienced organizations still fall into:</p>
+
+  <div class="pitfall-grid">
+    <div class="pitfall"><div class="num">1</div>
+      <h4>Confirmation bias in causality assessment</h4>
+      <p>The assessor attributes every AE to concomitant medication, underlying disease, or chance — rarely to the drug under evaluation. Over thousands of cases, this bias systematically suppresses signals. The result: a disproportionality flag eventually surfaces that the firm's own causality assessments have been quietly dismissing for years.</p>
+      <p class="rescue">Rescue: blind causality assessors to the outcome variable (drug vs. placebo) where possible; audit assessor-level causality distributions for anomalous patterns; use structured tools (Naranjo, WHO-UMC) rather than unstructured judgment.</p>
+    </div>
+    <div class="pitfall"><div class="num">2</div>
+      <h4>"Everything is a signal" — alert fatigue</h4>
+      <p>Signal detection thresholds set too loose produce hundreds of flags per cycle; analysts triage by skimming, miss the real ones, and stop trusting the system. Alert fatigue silently degrades signal detection into ritual. The 90th false positive trains the analyst to assume the 91st alert is also false.</p>
+      <p class="rescue">Rescue: tune thresholds empirically — track signal validation rates over time; tighten when too many flags, loosen when too few; surface high-priority signals via severity weighting rather than raw count.</p>
+    </div>
+    <div class="pitfall"><div class="num">3</div>
+      <h4>"Nothing is a signal" — explaining signals away</h4>
+      <p>The inverse failure. Every statistical flag has an explanation — reporting bias, channeling, regional artefacts, coding inconsistency. A motivated analyst can explain away anything. The result: real signals accumulate as "not validated — continued monitoring" indefinitely, and the eventual pattern is visible only in retrospect, often after regulatory action or a public health event.</p>
+      <p class="rescue">Rescue: require external peer review of signals dismissed as "not validated"; track time-to-validation; if a signal has been under "continued monitoring" for more than 2 PSUR cycles without resolution, escalate to senior safety committee.</p>
+    </div>
+    <div class="pitfall"><div class="num">4</div>
+      <h4>Over-reliance on spontaneous reporting</h4>
+      <p>The firm runs signal detection against FAERS and EudraVigilance only, treating RWE, literature, and social media as aspirational rather than operational. Post-Vioxx-era practice expects integrated multi-source detection; firms still relying on spontaneous-only detection are systematically behind current standard of care for PV.</p>
+      <p class="rescue">Rescue: operationalize at minimum literature signal detection and, where available, active surveillance in claims/EHR (Sentinel query, internal RWE platform); define explicit thresholds for each source and concordance logic across them.</p>
+    </div>
+    <div class="pitfall"><div class="num">5</div>
+      <h4>Siloed PV</h4>
+      <p>PV operates separately from Medical Affairs, Quality, Regulatory, Commercial. The safety database is walled off; causality assessments are PV-internal; RMP updates are drafted without operational input. The organization fails to integrate PV insights into product strategy, HCP communications, and medical education — where the lessons would actually change outcomes.</p>
+      <p class="rescue">Rescue: standing cross-functional Safety Review Committee with formal decision authority; integrated quality + safety signal reviews; joint PV-Medical-Commercial planning for any emerging issue that will require external communication.</p>
+    </div>
+    <div class="pitfall"><div class="num">6</div>
+      <h4>REMS for compliance, not outcomes</h4>
+      <p>The REMS is implemented to satisfy the regulatory mandate: certifications done, registry populated, metrics reported. No one measures whether the program actually improved outcomes. After 5 years, nobody can answer the question "did REMS make patients safer?" — which is the only question that matters, and the one FDA increasingly asks at assessment cycles.</p>
+      <p class="rescue">Rescue: define outcome metrics at REMS design (not just process metrics); conduct RWE analyses comparing REMS-certified vs. non-certified populations where feasible; propose modification or removal when outcome evidence warrants it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-DOMAIN -->
+<section class="wrap">
+  <div class="section-label">Cross-domain connections</div>
+  <h2>The PV problem pattern appears elsewhere.</h2>
+  <p>Distributed detection of rare events in noisy data, with consequential escalation thresholds, is not unique to pharma. Three other mature domains teach complementary lessons:</p>
+
+  <div class="crossdomain-grid">
+    <div class="crossdomain">
+      <div class="domain">Aviation safety</div>
+      <h4>ASRS &amp; the just-culture of near-miss reporting</h4>
+      <p>The Aviation Safety Reporting System (run by NASA for the FAA) accepts confidential, non-punitive reports of near-miss events from pilots, crew, and mechanics — producing one of the world's richest datasets on the prelude to actual accidents. The just-culture model — rewarding disclosure, distinguishing honest error from negligence — has shaped PV reporter-engagement philosophy substantially.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Public health surveillance</div>
+      <h4>CDC outbreak detection</h4>
+      <p>The CDC's outbreak surveillance — monitoring foodborne illness, emerging infections, unusual disease clusters across millions of data points — uses statistical detection methods closely related to PV disproportionality. FoodNet, PulseNet, and the National Notifiable Diseases Surveillance System informed the Sentinel Initiative's active surveillance approach.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Financial fraud detection</div>
+      <h4>Transaction pattern monitoring</h4>
+      <p>Banks and payment networks run signal detection across billions of transactions, using Bayesian methods, network analysis, and anomaly scoring to flag fraud. The ratio of alerts to true positives — and the analyst-triage workflow around it — closely mirrors PV signal triage, and many of the statistical techniques (including shrinkage estimators) crossed over from finance to pharma.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPACED REP -->
+<section id="spaced" class="wrap">
+  <div class="section-label">Spaced repetition schedule</div>
+  <h2>Holding the signals room in memory.</h2>
+  <p>PV vocabulary is regulatory language — precise, load-bearing, and easy to confuse. The 8-touch schedule gives ~90% retention at the 3-month mark for about 2.5 hours of total review:</p>
+
+  <div class="spaced-rep">
+    <div class="sr-timeline">
+      <div class="sr-day"><div class="day-num">1</div><div class="day-label">Learn</div><div class="day-task">Day 1 foundations + MedDRA</div></div>
+      <div class="sr-day"><div class="day-num">2</div><div class="day-label">Review</div><div class="day-task">Day 1 checkpoint + Day 2 clocks</div></div>
+      <div class="sr-day"><div class="day-num">3</div><div class="day-label">Review</div><div class="day-task">Day 2 flip cards + Day 3 databases</div></div>
+      <div class="sr-day"><div class="day-num">4</div><div class="day-label">Review</div><div class="day-task">Jargon Tier 1 + 2, Day 4 signal methods</div></div>
+      <div class="sr-day"><div class="day-num">5</div><div class="day-label">Review</div><div class="day-task">Day 5 RMP + REMS + W-S-A-A</div></div>
+      <div class="sr-day"><div class="day-num">7</div><div class="day-label">First lapse</div><div class="day-task">All 5 memory hooks</div></div>
+      <div class="sr-day"><div class="day-num">14</div><div class="day-label">Consolidation</div><div class="day-task">Redo all Feynman teach-backs</div></div>
+      <div class="sr-day"><div class="day-num">30</div><div class="day-label">Retention</div><div class="day-task">Draw concept map from memory</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap-narrow">
+    <div class="section-label" style="color: var(--ochre);">Mentor's parting wisdom</div>
+    <h2>The drug you approved is <em>not</em> the drug you know.</h2>
+    <p>Five days cannot make you a pharmacovigilance leader. The craft takes decades — learning the particular failure modes of particular molecules, the reporting cultures of particular geographies, the quirks of particular regulators, and the discipline of treating every new case as potentially the first signal of something the trial program missed.</p>
+    <p>What five days can do is hand you the map. You now know that every drug on the market is under continuous observation, that no drug's safety profile is ever final, and that the function whose job is this continuous observation has its own vocabulary, its own rhythms, its own tools, and its own posture. You know what an ICSR is, how MedDRA codes it, how disproportionality algorithms detect patterns in it, and how a validated signal becomes a label update, a REMS, or — in rare and consequential cases — a withdrawal. You know the Vioxx lesson: signals become evident in retrospect; the discipline is detecting them while they still matter.</p>
+    <p class="mantra">In the signals room, silence is the most dangerous signal of all.</p>
+    <p>The next time you pick up a prescription and read the warnings — the tiny print about rare cardiac events, hepatic injury, dermatologic reactions, interactions with other drugs you might be taking — remember where those warnings came from. Not from the pre-approval trial. From the signals room. From clinicians who reported cases they thought might matter. From coders who translated their words into a standardized vocabulary. From algorithms that found patterns across millions of reports. From analysts who decided the pattern was real. From writers who updated the label. And, through all of it, from the posture of vigilance that treats every patient's experience as potentially the data point that teaches the system what it did not yet know.</p>
+    <p style="margin-top: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ochre);">— End of Module 08 —</p>
+  </div>
+</section>
+
+</main>
+
+<footer>Module 08 · Drug Safety &amp; Pharmacovigilance · Five-Day Theoretical Roadmap</footer>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'base',
+    themeVariables: { fontFamily: 'Inter Tight, sans-serif', primaryColor: '#EEE5CE', primaryTextColor: '#0F1B2D', primaryBorderColor: '#0F1B2D', lineColor: '#2A3B52', secondaryColor: '#F5EFDF', tertiaryColor: '#2D3561', background: '#EEE5CE', mainBkg: '#EEE5CE', secondBkg: '#F5EFDF' }
+  });
+  function togglePhase(header) { header.parentElement.classList.toggle('open'); }
+  window.addEventListener('scroll', () => {
+    const pct = Math.min(100, (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>

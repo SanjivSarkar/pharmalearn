@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Envoy's Brief — Regulatory Affairs in 5 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<style>
+  :root {
+    --ink: #0F1B2D; --ink-soft: #2A3B52;
+    --paper: #F5EFDF; --paper-warm: #EEE5CE; --paper-dark: #E4D8B8;
+    --ochre: #C8984A; --ochre-deep: #9B7233;
+    --moss: #4B6B4A; --moss-soft: #7C9082;
+    --rust: #A84B2A; --rust-soft: #D67D5C;
+    --emerald: #1F4D37; --emerald-deep: #133529; --emerald-soft: #4F7865;
+    --rule: rgba(15,27,45,0.14); --rule-strong: rgba(15,27,45,0.3);
+    --shadow-soft: 0 2px 12px rgba(15,27,45,0.08);
+    --shadow-lift: 0 8px 32px rgba(15,27,45,0.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-weight: 400; line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(15,27,45,0.025) 1px, transparent 0); background-size: 24px 24px; pointer-events: none; z-index: 0; }
+  main, nav, header { position: relative; z-index: 1; }
+  h1, h2, h3, h4, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.015em; line-height: 1.1; color: var(--ink); }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 500; }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+  h4 { font-size: 1.05rem; font-weight: 600; font-family: 'Inter Tight', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+  p { max-width: 68ch; }
+  em { font-style: italic; color: var(--ink-soft); }
+  strong { font-weight: 600; color: var(--ink); }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: var(--paper-warm); padding: 0.1em 0.4em; border-radius: 3px; border: 1px solid var(--rule); }
+  nav.top { position: sticky; top: 0; background: rgba(245,239,223,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); padding: 0.8rem 2rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  nav.top .brand { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; }
+  nav.top .brand em { color: var(--emerald); font-style: italic; }
+  nav.top ul { display: flex; gap: 0.4rem; list-style: none; flex-wrap: wrap; }
+  nav.top a { color: var(--ink-soft); text-decoration: none; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 20px; transition: all 0.2s ease; font-weight: 500; }
+  nav.top a:hover { background: var(--ink); color: var(--paper); }
+  .progress-track { position: sticky; top: 58px; height: 3px; background: rgba(15,27,45,0.08); z-index: 99; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--emerald), var(--ochre)); width: 0%; transition: width 0.15s ease; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+  .hero { padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+  .hero-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--emerald); margin-bottom: 1.5rem; }
+  .hero h1 { max-width: 18ch; margin-bottom: 1.8rem; }
+  .hero h1 em { color: var(--emerald); font-style: italic; }
+  .hero .lede { font-family: 'Fraunces', serif; font-size: clamp(1.1rem, 1.6vw, 1.4rem); max-width: 54ch; color: var(--ink-soft); font-weight: 300; line-height: 1.5; }
+  .hero-ornament { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 380px; height: 380px; opacity: 0.58; pointer-events: none; }
+  .hook-card { background: var(--ink); color: var(--paper); padding: 3rem 2.5rem; border-radius: 2px; margin: 3rem 0; position: relative; box-shadow: var(--shadow-lift); }
+  .hook-card::before { content: '05'; position: absolute; top: 1rem; right: 1.5rem; font-family: 'Fraunces', serif; font-size: 4rem; color: var(--ochre); opacity: 0.4; font-style: italic; }
+  .hook-card .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 1rem; }
+  .hook-card p { font-family: 'Fraunces', serif; font-size: 1.4rem; line-height: 1.4; font-weight: 300; max-width: 54ch; }
+  .hook-card p em { color: var(--ochre); font-style: italic; }
+  section { padding: 4rem 0; position: relative; }
+  section + section { border-top: 1px solid var(--rule); }
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--emerald); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--emerald); }
+  section h2 { margin-bottom: 1.8rem; max-width: 26ch; }
+  section p { margin-bottom: 1.1rem; }
+  .master-analogy { background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-dark) 100%); border: 1px solid var(--rule); border-left: 5px solid var(--emerald); padding: 2.5rem 2.5rem 2.5rem 3rem; margin: 2.5rem 0; position: relative; border-radius: 2px; }
+  .master-analogy::before { content: '“'; position: absolute; top: -20px; left: 20px; font-family: 'Fraunces', serif; font-size: 6rem; color: var(--emerald); line-height: 1; }
+  .master-analogy h4 { margin-bottom: 1rem; color: var(--emerald); }
+  .master-analogy p { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 300; line-height: 1.55; }
+  .master-analogy p + p { margin-top: 0.8rem; }
+  .mapping-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem 1.5rem; align-items: center; margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px dashed var(--rule-strong); }
+  .mapping-grid .from { font-weight: 500; color: var(--ink); text-align: right; }
+  .mapping-grid .arrow { font-family: 'JetBrains Mono', monospace; color: var(--emerald); font-size: 0.9rem; }
+  .mapping-grid .to { color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic; }
+  @media (max-width: 820px) { .mapping-grid { grid-template-columns: 1fr; gap: 0.3rem 0; } .mapping-grid .from { text-align: left; } .mapping-grid .arrow { display: none; } .mapping-grid .to { padding-left: 1rem; border-left: 2px solid var(--emerald); margin-bottom: 0.8rem; } }
+  .concept-map-wrap { background: var(--paper-warm); padding: 2.5rem; border-radius: 2px; border: 1px solid var(--rule); overflow-x: auto; margin: 2rem 0; }
+  .mermaid { text-align: center; font-family: 'Inter Tight', sans-serif !important; }
+  .phases-container { margin-top: 2rem; }
+  .phase { border: 1px solid var(--rule); background: var(--paper-warm); margin-bottom: 1.2rem; border-radius: 2px; overflow: hidden; transition: all 0.3s ease; }
+  .phase:hover { box-shadow: var(--shadow-soft); }
+  .phase.open { background: var(--paper); box-shadow: var(--shadow-lift); }
+  .phase-header { padding: 1.8rem 2rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; cursor: pointer; user-select: none; }
+  .phase-number { font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 300; color: var(--emerald); line-height: 1; font-style: italic; min-width: 3rem; }
+  .phase-title-wrap .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .phase-title-wrap h3 { font-weight: 500; color: var(--ink); }
+  .phase-title-wrap h3 em { color: var(--emerald); font-style: italic; }
+  .phase-toggle { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--ink-soft); transition: transform 0.3s ease; }
+  .phase.open .phase-toggle { transform: rotate(45deg); color: var(--emerald); }
+  .phase-body { max-height: 0; overflow: hidden; padding: 0 2rem; transition: max-height 0.4s ease, padding 0.4s ease; }
+  .phase.open .phase-body { max-height: 12000px; padding: 0 2rem 2.5rem; }
+  .curiosity-hook { font-family: 'Fraunces', serif; font-size: 1.2rem; font-style: italic; color: var(--ink-soft); border-left: 3px solid var(--emerald); padding-left: 1.2rem; margin: 1.5rem 0 2rem; max-width: 58ch; line-height: 1.55; }
+  .objectives { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.8rem; margin: 1.5rem 0 2.5rem; border-radius: 2px; }
+  .objectives h4 { margin-bottom: 0.8rem; color: var(--emerald); font-size: 0.8rem; }
+  .objectives ul { list-style: none; padding: 0; }
+  .objectives li { padding: 0.3rem 0 0.3rem 1.6rem; position: relative; font-size: 0.96rem; }
+  .objectives li::before { content: '◆'; position: absolute; left: 0; color: var(--emerald); font-size: 0.6rem; top: 0.55rem; }
+  .bloom-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.2em 0.5em; border-radius: 3px; background: var(--emerald); color: var(--paper); margin-right: 0.5em; text-transform: uppercase; font-weight: 500; }
+  .concept-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  @media (max-width: 780px) { .concept-cards { grid-template-columns: 1fr; } }
+  .concept-card { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.4rem 1.5rem; border-radius: 2px; border-left: 3px solid var(--ochre); position: relative; }
+  .concept-card:nth-child(2n) { border-left-color: var(--moss); }
+  .concept-card:nth-child(3n) { border-left-color: var(--rust); }
+  .concept-card:nth-child(4n) { border-left-color: var(--emerald); }
+  .concept-card h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; }
+  .concept-card .analogy { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 0.92rem; margin: 0.5rem 0 0.8rem; border-top: 1px dashed var(--rule); padding-top: 0.7rem; }
+  .concept-card p { font-size: 0.93rem; margin-bottom: 0.4rem; max-width: none; }
+  .visual { background: var(--paper); border: 1px solid var(--rule); padding: 2rem; margin: 2rem 0; border-radius: 2px; position: relative; overflow-x: auto; }
+  .visual .caption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .visual svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .mentor-analogy { background: var(--ink); color: var(--paper); padding: 2rem 2.2rem; margin: 2rem 0; border-radius: 2px; position: relative; border-left: 4px solid var(--ochre); }
+  .mentor-analogy .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.8rem; }
+  .mentor-analogy p { font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.6; font-weight: 300; max-width: 58ch; }
+  .mentor-analogy p em { color: var(--ochre); font-style: italic; }
+  .checkpoint { border: 2px dashed var(--emerald); background: transparent; padding: 1.5rem 1.8rem; margin: 2rem 0; border-radius: 2px; }
+  .checkpoint h4 { color: var(--emerald); margin-bottom: 0.6rem; }
+  .checkpoint p { font-size: 0.94rem; margin-bottom: 0.4rem; }
+  .checkpoint ul { list-style: none; padding: 0; }
+  .checkpoint li { padding: 0.25rem 0 0.25rem 1.4rem; position: relative; font-size: 0.94rem; }
+  .checkpoint li::before { content: '□'; position: absolute; left: 0; color: var(--emerald); font-family: 'JetBrains Mono', monospace; }
+  .flip-card { perspective: 1200px; height: 220px; margin: 2rem 0; cursor: pointer; }
+  .flip-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s ease; transform-style: preserve-3d; }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; padding: 1.8rem 2rem; border-radius: 2px; display: flex; flex-direction: column; justify-content: center; }
+  .flip-front { background: var(--paper-dark); border: 1px solid var(--rule-strong); }
+  .flip-front .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--emerald); margin-bottom: 0.7rem; }
+  .flip-front h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+  .flip-front .hint { font-size: 0.82rem; color: var(--ink-soft); margin-top: 1rem; font-style: italic; }
+  .flip-back { background: var(--ink); color: var(--paper); transform: rotateY(180deg); border-left: 4px solid var(--ochre); }
+  .flip-back .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.7rem; }
+  .flip-back p { font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.55; max-width: none; font-weight: 300; }
+  .memory-hook { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 2px; font-size: 0.93rem; }
+  .memory-hook .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre-deep); margin-bottom: 0.4rem; }
+  .memory-hook strong { color: var(--emerald); }
+  .jargon-tier { margin: 2rem 0; padding: 1.8rem 2rem; background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 2px; }
+  .jargon-tier h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 0.4rem; color: var(--emerald); }
+  .jargon-tier .tier-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .jargon-tier dl { display: grid; grid-template-columns: 180px 1fr; gap: 0.8rem 1.5rem; }
+  .jargon-tier dt { font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+  .jargon-tier dd { color: var(--ink-soft); font-size: 0.93rem; }
+  @media (max-width: 680px) { .jargon-tier dl { grid-template-columns: 1fr; gap: 0.3rem 0; } .jargon-tier dd { margin-bottom: 0.8rem; padding-left: 0.8rem; border-left: 2px solid var(--emerald); } }
+  .pitfall-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .pitfall-grid { grid-template-columns: 1fr; } }
+  .pitfall { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; border-top: 3px solid var(--rust); position: relative; }
+  .pitfall .num { position: absolute; top: 0.8rem; right: 1rem; font-family: 'Fraunces', serif; font-size: 1.8rem; color: var(--rust); font-style: italic; opacity: 0.5; line-height: 1; }
+  .pitfall h4 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; max-width: 90%; }
+  .pitfall p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .pitfall .rescue { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.88rem; color: var(--moss); padding-top: 0.5rem; margin-top: 0.5rem; border-top: 1px dashed var(--rule); }
+  .crossdomain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .crossdomain-grid { grid-template-columns: 1fr; } }
+  .crossdomain { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; }
+  .crossdomain .domain { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--emerald); margin-bottom: 0.5rem; }
+  .crossdomain h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.7rem; }
+  .crossdomain p { font-size: 0.9rem; color: var(--ink-soft); }
+  .spaced-rep { background: var(--paper-warm); border: 1px solid var(--rule); padding: 2rem; border-radius: 2px; margin: 2rem 0; overflow-x: auto; }
+  .sr-timeline { display: grid; grid-template-columns: repeat(8, minmax(88px, 1fr)); gap: 0.8rem; margin-top: 1.5rem; min-width: 700px; }
+  .sr-day { padding: 1rem 0.8rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; text-align: center; position: relative; }
+  .sr-day::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: var(--emerald); border-radius: 50%; }
+  .sr-day .day-num { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 500; color: var(--emerald); font-style: italic; }
+  .sr-day .day-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.3rem; }
+  .sr-day .day-task { font-size: 0.78rem; margin-top: 0.5rem; color: var(--ink); line-height: 1.3; }
+  .closing { background: var(--ink); color: var(--paper); padding: 5rem 2rem; margin-top: 4rem; }
+  .closing h2 { color: var(--paper); max-width: 24ch; margin-bottom: 2rem; }
+  .closing h2 em { color: var(--ochre); font-style: italic; }
+  .closing p { font-family: 'Fraunces', serif; font-size: 1.2rem; line-height: 1.6; font-weight: 300; max-width: 58ch; color: rgba(245,239,223,0.88); }
+  .closing .mantra { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.5rem; color: var(--ochre); padding: 2rem 0; margin: 2rem 0; border-top: 1px solid rgba(200,152,74,0.3); border-bottom: 1px solid rgba(200,152,74,0.3); max-width: 54ch; }
+  footer { padding: 2rem; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); background: var(--paper); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="brand">The Envoy's <em>Brief</em></div>
+  <ul>
+    <li><a href="#hook">Hook</a></li><li><a href="#analogy">Analogy</a></li><li><a href="#map">Map</a></li>
+    <li><a href="#day1">Day 1</a></li><li><a href="#day2">Day 2</a></li><li><a href="#day3">Day 3</a></li>
+    <li><a href="#day4">Day 4</a></li><li><a href="#day5">Day 5</a></li>
+    <li><a href="#jargon">Jargon</a></li><li><a href="#pitfalls">Pitfalls</a></li><li><a href="#spaced">Review</a></li>
+  </ul>
+</nav>
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+<main>
+
+<header class="hero wrap">
+  <div class="hero-meta">Module 05 · Regulatory Affairs · Five-Day Theoretical Roadmap</div>
+  <h1>The Envoy's <em>Brief</em>.</h1>
+  <p class="lede">A drug is a scientific artifact. An approved drug is a diplomatic achievement. Behind every launch is a regulatory affairs team that negotiated, cable by cable, a license to enter the market.</p>
+  <svg class="hero-ornament" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="hg5" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#1F4D37" stop-opacity="0.4"/><stop offset="100%" stop-color="#1F4D37" stop-opacity="0.05"/></radialGradient></defs>
+    <circle cx="190" cy="190" r="170" fill="none" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="2 6" opacity="0.25"/>
+    <circle cx="190" cy="190" r="150" fill="none" stroke="#0F1B2D" stroke-width="1.2" opacity="0.3"/>
+    <circle cx="190" cy="190" r="138" fill="url(#hg5)"/>
+    <circle cx="190" cy="190" r="138" fill="none" stroke="#1F4D37" stroke-width="0.8" opacity="0.5"/>
+    <g stroke="#0F1B2D" stroke-width="1" opacity="0.4"><g transform="translate(190,190)">
+      <line x1="0" y1="-150" x2="0" y2="-140"/>
+      <g transform="rotate(45)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+      <g transform="rotate(90)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+      <g transform="rotate(135)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+      <g transform="rotate(180)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+      <g transform="rotate(225)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+      <g transform="rotate(270)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+      <g transform="rotate(315)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+    </g></g>
+    <g transform="translate(190, 190)">
+      <polygon points="0,-110 10,-20 0,0 -10,-20" fill="#1F4D37" opacity="0.9"/><polygon points="0,-110 0,-20 10,-20" fill="#133529" opacity="0.85"/>
+      <polygon points="110,0 20,-10 0,0 20,10" fill="#1F4D37" opacity="0.7"/><polygon points="110,0 20,-10 0,0" fill="#133529" opacity="0.85"/>
+      <polygon points="0,110 10,20 0,0 -10,20" fill="#1F4D37" opacity="0.85"/><polygon points="0,110 0,20 -10,20" fill="#133529" opacity="0.85"/>
+      <polygon points="-110,0 -20,10 0,0 -20,-10" fill="#1F4D37" opacity="0.7"/><polygon points="-110,0 -20,10 0,0" fill="#133529" opacity="0.85"/>
+      <circle cx="0" cy="0" r="22" fill="#0F1B2D" stroke="#C8984A" stroke-width="1"/>
+      <circle cx="0" cy="0" r="14" fill="none" stroke="#C8984A" stroke-width="0.5"/>
+      <text x="0" y="4" text-anchor="middle" font-family="'Fraunces', serif" font-size="11" fill="#C8984A" font-style="italic">Rx</text>
+    </g>
+    <text x="190" y="22" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1F4D37" letter-spacing="3">FDA</text>
+    <text x="370" y="195" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1F4D37" letter-spacing="3">PMDA</text>
+    <text x="190" y="368" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1F4D37" letter-spacing="3">NMPA</text>
+    <text x="10" y="195" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1F4D37" letter-spacing="3">EMA</text>
+  </svg>
+</header>
+
+<section id="hook" class="wrap-narrow">
+  <div class="hook-card">
+    <div class="label">The hook</div>
+    <p>In 1960, a junior FDA medical reviewer named <em>Frances Oldham Kelsey</em> was assigned her first drug application — a sedative already approved in 46 countries. Her boss expected a routine rubber-stamp. Kelsey, troubled by missing safety data on nerve effects, refused to approve it. She held the line through twenty months and six resubmissions. The drug was <em>thalidomide</em>. Tens of thousands of European and Canadian children were born with severe limb malformations. American children, almost entirely, were spared. A single regulator's <em>"no, not yet"</em> rewrote modern pharmaceutical law.</p>
+  </div>
+</section>
+
+<section id="analogy" class="wrap-narrow">
+  <div class="section-label">The elevator pitch</div>
+  <h2>Regulatory affairs is the diplomatic service of pharma.</h2>
+  <p>Regulatory Affairs (RA) is the lifelong interface between a pharmaceutical company and the government agencies that decide which drugs may be sold, to whom, under what label, with what warnings, and for how long. The function begins the day a preclinical candidate is nominated — writing the first regulatory strategy memo — and only retires the day the last SKU of a post-LOE product leaves the market. RA does not make the drug, run the trials, or manufacture the vials. <em>It makes the drug legal to sell.</em> That is the entire job, and it is harder than it sounds.</p>
+
+  <div class="master-analogy">
+    <h4>The master analogy — the envoy to a foreign court</h4>
+    <p>Imagine an ambassador posted to a foreign capital. The ambassador does not run the home country's government, nor the host country's. They stand between the two, translating intent into protocol, drafting cables that anticipate every question the foreign ministry might raise, presenting credentials, attending formal audiences, negotiating treaty language word by word, managing the inevitable crisis that arrives at 2 a.m., and — quietly — building the trust that determines whether the next request is granted or refused.</p>
+    <p>Regulatory affairs does this exact work. <em>FDA, EMA, PMDA, NMPA</em> are four foreign capitals, each with its own language of guidance documents, customs of procedure, and unwritten rules. The sponsor is the home government; the Regulatory team is its embassy. Every meeting is a formal audience. Every briefing document is a diplomatic cable. Every label is a negotiated treaty. The Advisory Committee hearing is testimony before the host parliament. A Complete Response Letter is a démarche — <em>"we have received your proposal, the following matters remain."</em> An approval letter is a license to operate on sovereign territory.</p>
+
+    <div class="mapping-grid">
+      <div class="from">The home government</div><div class="arrow">—→</div><div class="to">Sponsor company (R&amp;D, Clinical, CMC, Commercial)</div>
+      <div class="from">Four foreign capitals</div><div class="arrow">—→</div><div class="to">FDA (US), EMA (EU), PMDA (Japan), NMPA (China)</div>
+      <div class="from">The ambassador's cable</div><div class="arrow">—→</div><div class="to">Briefing document for an agency meeting</div>
+      <div class="from">Credentials presentation</div><div class="arrow">—→</div><div class="to">Pre-IND / Pre-CTA meeting — first formal contact</div>
+      <div class="from">Types of audience (private / formal / summit)</div><div class="arrow">—→</div><div class="to">Type A (urgent), Type B (milestone), Type C (general) meetings</div>
+      <div class="from">The consolidated treaty text</div><div class="arrow">—→</div><div class="to">eCTD — Electronic Common Technical Document (Modules 1–5)</div>
+      <div class="from">Testimony before parliament</div><div class="arrow">—→</div><div class="to">Advisory Committee (AdCom) hearing</div>
+      <div class="from">Diplomatic démarche</div><div class="arrow">—→</div><div class="to">Complete Response Letter (CRL) — deficiencies to address</div>
+      <div class="from">The negotiated treaty</div><div class="arrow">—→</div><div class="to">The approved label (USPI, SmPC, PI)</div>
+      <div class="from">Travel restrictions &amp; escort requirements</div><div class="arrow">—→</div><div class="to">REMS — Risk Evaluation &amp; Mitigation Strategies</div>
+      <div class="from">Amendments to the treaty</div><div class="arrow">—→</div><div class="to">sNDA / sBLA supplements; label updates</div>
+      <div class="from">End of preferential trade status</div><div class="arrow">—→</div><div class="to">Loss of Exclusivity (LOE); generic / biosimilar entry</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap-narrow">
+  <div class="section-label">Origin story</div>
+  <h2>How the modern regulatory state was built — disaster by disaster.</h2>
+  <p>Regulatory affairs as a profession did not exist in 1900. Medicines were sold freely, unlabeled, often adulterated. Upton Sinclair's 1906 <em>The Jungle</em> — ostensibly about meatpacking — shocked Congress into passing the Pure Food and Drug Act, creating what would become the FDA. But the Act only required that drugs be accurately labeled; efficacy and even safety testing were not mandated.</p>
+  <p>The 1937 <em>sulfanilamide elixir</em> disaster (diethylene glycol solvent, 105 dead, mostly children) forced the 1938 Food, Drug &amp; Cosmetic Act, which finally required safety data before marketing. Twenty-four years later, the thalidomide tragedy — averted in the US only by Frances Kelsey — forced the 1962 Kefauver-Harris Amendments, which for the first time required proof of <em>efficacy</em> and gave FDA real teeth.</p>
+  <p>By the 1980s, AIDS activists argued the agency was too slow. The 1992 <em>Prescription Drug User Fee Act (PDUFA)</em> traded faster reviews for industry-paid user fees — creating the performance-metric-driven FDA we know today. The <em>FDA Amendments Act (FDAAA) of 2007</em> added post-market safety tools (REMS, mandatory clinical trial registration). The <em>21st Century Cures Act (2016)</em> and <em>FDARA (2017)</em> added real-world-evidence pathways and patient-focused drug development. Every reform was a response to a crisis: disaster <em>→</em> statute <em>→</em> new regulatory machinery.</p>
+  <p>The diplomat's job changes with each reform. What was cutting-edge in 1995 is table stakes in 2025. Regulatory affairs is a living profession because the law is a living document.</p>
+</section>
+
+<section id="map" class="wrap">
+  <div class="section-label">The concept web</div>
+  <h2>The full regulatory lifecycle, in one diagram.</h2>
+  <p>The four sub-disciplines are not a sequence — they are a <em>continuous loop</em>. Strategy informs every package; every package becomes a submission; every submission triggers lifecycle commitments; every commitment feeds back into strategy for the next indication. The drug and its regulator are in conversation for the entire commercial life of the product.</p>
+  <div class="concept-map-wrap">
+    <div class="mermaid">
+flowchart LR
+  classDef central fill:#1F4D37,stroke:#0F1B2D,color:#F5EFDF,stroke-width:2px,font-weight:600
+  classDef pillar fill:#EEE5CE,stroke:#0F1B2D,color:#0F1B2D,stroke-width:1.5px,font-weight:500
+  classDef sub fill:#F5EFDF,stroke:#0F1B2D,color:#2A3B52,stroke-width:1px,stroke-dasharray:3 3
+  CORE[The Embassy:<br/>Lifecycle Regulatory<br/>Continuity]:::central
+  S[Strategy &amp;<br/>Agency Interactions]:::pillar
+  P[IND / CTA &amp;<br/>Pre-submission]:::pillar
+  N[NDA / BLA / MAA<br/>Submission &amp; Review]:::pillar
+  L[Lifecycle<br/>Regulatory]:::pillar
+  CORE --- S
+  CORE --- P
+  CORE --- N
+  CORE --- L
+  S --- s1[Global landscape]:::sub
+  S --- s2[Meeting types]:::sub
+  S --- s3[Accelerated paths]:::sub
+  P --- p1[eCTD assembly]:::sub
+  P --- p2[Pre-IND / EoP1-2]:::sub
+  P --- p3[Clinical hold strategy]:::sub
+  N --- n1[74-day letter · ISS/ISE]:::sub
+  N --- n2[Label negotiation]:::sub
+  N --- n3[AdCom · BIMO / PAI]:::sub
+  L --- l1[PMR / PMC commitments]:::sub
+  L --- l2[Supplements · REMS]:::sub
+  L --- l3[LOE defense · biosimilars]:::sub
+  S -.-&gt; P
+  P -.-&gt; N
+  N -.-&gt; L
+  L -.-&gt; S
+    </div>
+  </div>
+</section>
+
+<!-- DAY 1 -->
+<section id="day1" class="wrap">
+  <div class="section-label">Day 01 · The Landscape</div>
+  <h2>Four capitals, four dialects, one molecule.</h2>
+  <div class="phases-container">
+    <div class="phase open">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">01</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Remember + Understand · ~2.5 hrs</div><h3>The global regulatory landscape — <em>mapping the agencies</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">There is no such thing as "global approval" of a drug. Every country retains its own sovereign authority to decide. A drug approved by the FDA in 2023 may still be under review at the EMA, rejected in Japan, and not even filed in China — all simultaneously. The envoy's first skill is knowing which capital cares about what, and why.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 1</span>Learning objectives</h4>
+          <ul>
+            <li>Identify the four major regulatory agencies — FDA, EMA, PMDA, NMPA — and their jurisdictions</li>
+            <li>Distinguish the major US approval pathways: NDA 505(b)(1), 505(b)(2), ANDA, BLA 351(a), 351(k)</li>
+            <li>Understand the EMA's centralized vs. decentralized procedures and the role of the CHMP</li>
+            <li>Name the accelerated designations: Fast Track, Breakthrough Therapy, Priority Review, RMAT, Orphan</li>
+            <li>Classify FDA meeting types: Type A, B, C, D, and INTERACT</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--emerald);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The four capitals</h4>
+            <p><strong>FDA</strong> — the world's most influential agency; gold-standard data expectations. <strong>EMA</strong> — recommends; final decision rests with the European Commission. <strong>PMDA</strong> — famously rigorous, ethnic bridging data often required. <strong>NMPA</strong> — rapidly modernizing since 2017 reforms, now ICH member. Plus Health Canada, TGA, MHRA, ANVISA.</p>
+            <div class="analogy">Four foreign governments, each with its own legal code, official language, and diplomatic etiquette. No ambassador pretends one posting teaches them the next.</div>
+          </div>
+          <div class="concept-card">
+            <h4>US approval pathways</h4>
+            <p><strong>NDA 505(b)(1)</strong> — full data, new molecular entity. <strong>505(b)(2)</strong> — relies partly on prior findings (reformulations, new indications). <strong>ANDA</strong> — generics. <strong>BLA 351(a)</strong> — biologics, full data. <strong>BLA 351(k)</strong> — biosimilar pathway, post-2010 BPCIA. Pathway choice shapes data burden and timeline.</p>
+            <div class="analogy">Different visa categories at the same embassy. A tourist visa and a diplomatic credential both let you enter, but the documents, queue, and privileges differ profoundly.</div>
+          </div>
+          <div class="concept-card">
+            <h4>EMA procedures</h4>
+            <p>The <strong>Centralized Procedure</strong> yields a single approval valid across all EU member states — mandatory for biologics, orphan drugs, oncology, HIV, diabetes, neurodegeneration. The <strong>CHMP</strong> delivers the scientific opinion. Decentralized and Mutual Recognition procedures involve individual member states. EMA scientific advice is often considered more rigorous on statistical methodology than FDA's.</p>
+            <div class="analogy">A multi-nation free-trade union. One credential recognized in many capitals — but the treaty that created the union is itself the binding document, and member states retain veto power in some domains.</div>
+          </div>
+          <div class="concept-card">
+            <h4>FDA meeting types</h4>
+            <p><strong>Type A</strong> — urgent, dispute resolution or clinical hold; 30-day target. <strong>Type B</strong> — milestone (pre-IND, EoP1, EoP2, pre-NDA); 60-day target. <strong>Type C</strong> — general scientific; 75-day target. <strong>Type D</strong> (2023) — narrow focused question. <strong>INTERACT</strong> — informal, pre-IND, non-binding for novel modalities. Each has specific briefing-package requirements.</p>
+            <div class="analogy">Formal state dinner, working lunch, coffee meeting, corridor chat. All are diplomatic interactions; only a naïve envoy treats them as interchangeable.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 1 · The four capitals — footprint, strength, and signature characteristics</div>
+          <svg viewBox="0 0 980 400" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="40" width="920" height="320" fill="#EEE5CE" stroke="#0F1B2D" stroke-width="0.6" opacity="0.3"/>
+            <g transform="translate(60, 90)">
+              <rect x="0" y="0" width="200" height="240" fill="#1F4D37" opacity="0.88" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="100" y="28" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#F5EFDF" font-weight="500">FDA</text>
+              <text x="100" y="48" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.8" letter-spacing="2">UNITED STATES</text>
+              <line x1="30" y1="60" x2="170" y2="60" stroke="#C8984A" stroke-width="0.6" opacity="0.6"/>
+              <text x="15" y="82" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Market</text>
+              <text x="15" y="96" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.85">~50% of global Rx spend</text>
+              <text x="15" y="120" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Review style</text>
+              <text x="15" y="134" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.85">data-driven, precedent-led</text>
+              <text x="15" y="158" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Strength</text>
+              <text x="15" y="172" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.85">accelerated pathways, AdCom</text>
+              <text x="15" y="196" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Watchpoint</text>
+              <text x="15" y="210" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.85">74-day letter, CRLs common</text>
+              <text x="15" y="228" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.85">PDUFA user fees</text>
+            </g>
+            <g transform="translate(280, 90)">
+              <rect x="0" y="0" width="200" height="240" fill="#4F7865" opacity="0.85" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="100" y="28" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#F5EFDF" font-weight="500">EMA</text>
+              <text x="100" y="48" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.8" letter-spacing="2">EUROPEAN UNION</text>
+              <line x1="30" y1="60" x2="170" y2="60" stroke="#C8984A" stroke-width="0.6" opacity="0.6"/>
+              <text x="15" y="82" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Market</text>
+              <text x="15" y="96" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">~22% of global Rx spend</text>
+              <text x="15" y="120" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Review style</text>
+              <text x="15" y="134" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">methodology-driven, CHMP-led</text>
+              <text x="15" y="158" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Strength</text>
+              <text x="15" y="172" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">scientific advice, PRIME</text>
+              <text x="15" y="196" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Watchpoint</text>
+              <text x="15" y="210" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">HTA after approval (NICE, G-BA)</text>
+              <text x="15" y="228" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">post-Brexit: MHRA separate</text>
+            </g>
+            <g transform="translate(500, 90)">
+              <rect x="0" y="0" width="200" height="240" fill="#9B7233" opacity="0.88" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="100" y="28" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#F5EFDF" font-weight="500">PMDA</text>
+              <text x="100" y="48" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.8" letter-spacing="2">JAPAN</text>
+              <line x1="30" y1="60" x2="170" y2="60" stroke="#F5EFDF" stroke-width="0.6" opacity="0.6"/>
+              <text x="15" y="82" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Market</text>
+              <text x="15" y="96" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">~8% of global Rx spend</text>
+              <text x="15" y="120" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Review style</text>
+              <text x="15" y="134" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">meticulous, consultation-heavy</text>
+              <text x="15" y="158" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Strength</text>
+              <text x="15" y="172" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">Sakigake priority designation</text>
+              <text x="15" y="196" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Watchpoint</text>
+              <text x="15" y="210" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">ethnic bridging data often needed</text>
+              <text x="15" y="228" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">pricing review tied to approval</text>
+            </g>
+            <g transform="translate(720, 90)">
+              <rect x="0" y="0" width="200" height="240" fill="#A84B2A" opacity="0.88" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="100" y="28" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#F5EFDF" font-weight="500">NMPA</text>
+              <text x="100" y="48" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.8" letter-spacing="2">CHINA</text>
+              <line x1="30" y1="60" x2="170" y2="60" stroke="#F5EFDF" stroke-width="0.6" opacity="0.6"/>
+              <text x="15" y="82" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Market</text>
+              <text x="15" y="96" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">~12% of global Rx spend (↑↑)</text>
+              <text x="15" y="120" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Review style</text>
+              <text x="15" y="134" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">modernizing rapidly post-2017</text>
+              <text x="15" y="158" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Strength</text>
+              <text x="15" y="172" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">Priority review for innovation</text>
+              <text x="15" y="196" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="500">Watchpoint</text>
+              <text x="15" y="210" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">local clinical data often required</text>
+              <text x="15" y="228" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">ICH member since 2017</text>
+            </g>
+            <text x="490" y="26" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Four sovereign agencies. Approval in one does not guarantee approval in any other.</text>
+            <text x="60" y="375" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">AND ALSO: MHRA (UK) · HEALTH CANADA · TGA (AUSTRALIA) · ANVISA (BRAZIL) · WHO PREQUAL · 30+ MINOR JURISDICTIONS</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>Newcomers often assume the agencies are in communication and that if one approves, the others will follow. This is <em>wrong in detail and dangerous in strategy</em>. Agencies share some data (through ICH and confidentiality arrangements) but each conducts its own review independently. A program that won an FDA accelerated approval can still be refused by EMA on statistical grounds, or by PMDA for insufficient Asian-population data. The envoy's job is to hear each capital's concerns in its own language — and never to surprise one by what another has already said.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 1 checkpoint</h4>
+          <ul>
+            <li>Name the four major regulatory agencies and one distinctive quality of each</li>
+            <li>Distinguish 505(b)(1), 505(b)(2), and ANDA pathways in the US</li>
+            <li>Explain the difference between EMA centralized and decentralized procedures</li>
+            <li>Classify a scenario into Type A, B, or C FDA meeting</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A commercial colleague says: "If we get FDA approval, can we just copy the same dossier to EMA to save time?" Explain what's right and wrong about that idea.</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p><strong>Partly right:</strong> the eCTD format is harmonized (thanks to ICH) so the dossier structure — Modules 1–5 — is broadly the same. <em>Most of Modules 3, 4, and 5 can be reused.</em> <strong>But wrong in important ways:</strong> Module 1 is region-specific (different forms, labeling conventions, administrative content). The SAP that convinced FDA may not convince EMA's CHMP — they often ask harder questions on multiplicity, external controls, and subgroup analyses. Japan usually wants Japanese clinical data. China may require local trials. So: same skeleton, different tailoring. Plan for Europe and Japan from the start, not as an afterthought.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>F-E-P-N:</strong> the four capitals — <em>FDA, EMA, PMDA, NMPA.</em> Compass points for a global program.<br>
+          <strong>A-B-C-D:</strong> FDA meeting types — <em>A (urgent), B (milestone), C (general), D (focused).</em> Alphabetical, ascending formality.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 2 -->
+    <div class="phase" id="day2">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">02</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Understand + Apply · ~3 hrs</div><h3>Presenting credentials — <em>IND/CTA &amp; pre-submission packages</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">The FDA's internal review for an IND is 30 days. In those 30 days, a handful of reviewers decide whether your molecule — the product of a decade of science and hundreds of millions of dollars — may be given to a human being. Most of what determines their answer happened <em>before</em> they opened the file. The pre-IND meeting is where the envoy earns the review.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 2</span>Learning objectives</h4>
+          <ul>
+            <li>Understand the IND/CTA submission architecture: eCTD Modules 1–5 and what each contains</li>
+            <li>Plan a pre-IND meeting — briefing package structure, questions, agency expectations</li>
+            <li>Understand End-of-Phase-1 (EoP1) and End-of-Phase-2 (EoP2) milestone meetings</li>
+            <li>Navigate a clinical hold — what triggers one, and how to respond</li>
+            <li>Apply accelerated pathway strategy: Fast Track, Breakthrough, RMAT, Orphan — eligibility and timing</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--emerald);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The IND briefing package</h4>
+            <p>A pre-IND briefing document is typically 50–100 pages, sent to FDA ~4–6 weeks before the meeting. It contains: (1) program overview and regulatory strategy, (2) preclinical data summary, (3) CMC status, (4) proposed FIH protocol, (5) specific questions for the Agency. The questions — typically 4–8 — are where the envoy earns alignment.</p>
+            <div class="analogy">A diplomatic cable sent before a formal audience. The host ministry prepares its position based on what you write. Vague cables produce vague audiences.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Pre-IND · EoP1 · EoP2 · pre-NDA</h4>
+            <p><strong>Pre-IND</strong> — align on FIH design, CMC, pharm/tox. <strong>EoP1</strong> (less common) — confirm Phase 2 design. <strong>EoP2</strong> — critical; align on Phase 3 design, endpoints, populations, statistical approach. <strong>Pre-NDA</strong> — align on the submission package 6–12 months before filing. Each is an opportunity to make the Agency an <em>ally</em> rather than a judge.</p>
+            <div class="analogy">Presenting credentials, quarterly ministerial dialogues, pre-summit consultations, and the meeting just before the treaty signing. The rhythm of an ongoing diplomatic relationship.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Clinical hold dynamics</h4>
+            <p>A <strong>clinical hold</strong> is the FDA's power to stop or prevent an IND trial due to safety or other deficiencies. Partial holds restrict certain patients or doses; full holds stop everything. Sponsors typically have 30 days to respond. Well-handled holds end with a complete response; mishandled holds become program-killers. Most holds are avoidable via good pre-IND planning.</p>
+            <div class="analogy">A foreign ministry revokes entry permits over a protocol violation. An experienced embassy negotiates it reopened in weeks; an inexperienced one finds its mission expelled.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Accelerated pathways</h4>
+            <p><strong>Fast Track</strong> — serious disease + unmet need; rolling review. <strong>Breakthrough Therapy</strong> — early evidence of substantial improvement; intensive FDA guidance. <strong>Priority Review</strong> — 6-month clock vs. 10-month standard. <strong>RMAT</strong> — regenerative medicine advanced therapy. <strong>Orphan</strong> — rare disease (≤200,000 US patients); 7-year exclusivity, tax credits. Designation timing matters — some requested with IND, some later.</p>
+            <div class="analogy">Express diplomatic lanes — priority visa processing, direct ministerial access, expedited treaty review. Not faster rules; faster queues, with tighter obligations.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 2 · The pre-submission meeting ladder — escalating formality, escalating stakes</div>
+          <svg viewBox="0 0 960 420" xmlns="http://www.w3.org/2000/svg">
+            <line x1="60" y1="360" x2="920" y2="360" stroke="#0F1B2D" stroke-width="1.5"/>
+            <text x="60" y="390" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52" letter-spacing="2">DEVELOPMENT TIMELINE →</text>
+            <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52">
+              <line x1="140" y1="355" x2="140" y2="365" stroke="#0F1B2D"/><text x="140" y="378" text-anchor="middle">Preclinical</text>
+              <line x1="360" y1="355" x2="360" y2="365" stroke="#0F1B2D"/><text x="360" y="378" text-anchor="middle">Phase 1</text>
+              <line x1="560" y1="355" x2="560" y2="365" stroke="#0F1B2D"/><text x="560" y="378" text-anchor="middle">Phase 2</text>
+              <line x1="760" y1="355" x2="760" y2="365" stroke="#0F1B2D"/><text x="760" y="378" text-anchor="middle">Phase 3</text>
+              <line x1="900" y1="355" x2="900" y2="365" stroke="#0F1B2D"/><text x="900" y="378" text-anchor="middle">NDA</text>
+            </g>
+            <rect x="70" y="300" width="130" height="50" fill="#7C9082" opacity="0.8" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="135" y="320" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#0F1B2D" font-weight="600">INTERACT</text>
+            <text x="135" y="336" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">informal · novel modality</text>
+            <rect x="220" y="260" width="130" height="90" fill="#4F7865" opacity="0.85" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="285" y="285" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#F5EFDF" font-weight="600">Pre-IND</text>
+            <text x="285" y="302" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Type B meeting</text>
+            <text x="285" y="318" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">60-day FDA target</text>
+            <text x="285" y="334" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">align FIH design</text>
+            <rect x="400" y="230" width="130" height="120" fill="#1F4D37" opacity="0.85" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="465" y="255" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#F5EFDF" font-weight="600">EoP1</text>
+            <text x="465" y="272" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Type B · milestone</text>
+            <text x="465" y="288" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">confirm Phase 2</text>
+            <text x="465" y="304" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">dose selection</text>
+            <text x="465" y="320" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">(often skipped)</text>
+            <rect x="600" y="180" width="150" height="170" fill="#133529" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="675" y="207" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="13" fill="#F5EFDF" font-weight="700">EoP2</text>
+            <text x="675" y="224" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Type B · THE critical meeting</text>
+            <text x="675" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Phase 3 design</text>
+            <text x="675" y="256" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">primary endpoint</text>
+            <text x="675" y="272" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">population, comparator</text>
+            <text x="675" y="288" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">statistical approach</text>
+            <text x="675" y="310" text-anchor="middle" font-family="'Fraunces', serif" font-size="10" fill="#C8984A" font-style="italic">agreement here</text>
+            <text x="675" y="326" text-anchor="middle" font-family="'Fraunces', serif" font-size="10" fill="#C8984A" font-style="italic">= clean review</text>
+            <rect x="790" y="220" width="130" height="130" fill="#9B7233" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="855" y="245" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#F5EFDF" font-weight="600">Pre-NDA</text>
+            <text x="855" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Type B</text>
+            <text x="855" y="278" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">submission plan</text>
+            <text x="855" y="294" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">format · ISS / ISE</text>
+            <text x="855" y="310" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">labeling topics</text>
+            <text x="855" y="326" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">AdCom anticipation</text>
+            <text x="60" y="30" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Each milestone is an opportunity to make the agency an ally — or an obstacle.</text>
+            <defs><marker id="arrLadder" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#1F4D37"/></marker></defs>
+            <line x1="150" y1="115" x2="820" y2="115" stroke="#1F4D37" stroke-width="0.8" opacity="0.5" stroke-dasharray="3 3" marker-end="url(#arrLadder)"/>
+            <text x="485" y="108" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1F4D37" letter-spacing="2">INCREASING STAKES · INCREASING PREPARATION</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>A senior regulatory veteran once told me: "The two questions every FDA reviewer asks silently are <em>'Can I trust this sponsor?'</em> and <em>'Will this drug make more patients better than worse?'</em>. Everything you submit answers one of those two — or wastes paper." A pre-IND that over-claims, a briefing document that hides a weakness, a missed commitment from a prior meeting — each erodes the first answer. Regulatory credibility, like diplomatic credibility, is slow to build and instant to lose.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 2 checkpoint</h4>
+          <ul>
+            <li>Outline the contents of a pre-IND briefing document in your own words</li>
+            <li>Explain why EoP2 is considered the most critical milestone meeting</li>
+            <li>Describe what triggers a clinical hold and the typical response timeline</li>
+            <li>Match each accelerated pathway to its eligibility criteria and key benefit</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>You're preparing a pre-IND package for a first-in-class CAR-T for a rare pediatric leukemia. List the top four questions you'd ask the Agency, and why each matters.</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p><strong>One:</strong> "We propose MABEL rather than NOAEL for FIH dose selection given cytokine-release risk — does the Agency concur?" (Post-TGN1412 precedent.) <strong>Two:</strong> "We plan to enroll pediatric r/r ALL patients directly in FIH rather than starting in adults — does the Agency agree?" <strong>Three:</strong> "Our CMC control strategy uses potency assays measuring activation rather than cytotoxicity — acceptable as the release assay?" <strong>Four:</strong> "Would the Agency support RMAT designation at the time of IND?" Each surfaces a specific risk, makes disagreement cheap (discovered now, not at NDA review), and shows the sponsor has anticipated concerns.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>P-E-E-P:</strong> the milestone meeting sequence — <em>Pre-IND, EoP1, EoP2, Pre-NDA.</em> One acronym for the rhythm of development dialogue.<br>
+          <strong>F-B-P-R-O:</strong> the five accelerated tools — <em>Fast Track, Breakthrough, Priority Review, RMAT, Orphan.</em>
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 3 -->
+    <div class="phase" id="day3">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">03</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Apply + Analyze · ~3.5 hrs</div><h3>The formal audience — <em>NDA / BLA / MAA submission &amp; review</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">An NDA submission routinely runs to <em>hundreds of thousands of pages</em>. The FDA review team — typically 20 to 40 people across clinical, statistical, nonclinical, CMC, and policy — has ten months (or six under Priority Review) to reach a verdict. In that window, they will ask the sponsor several hundred questions, sometimes thousands. The envoy who fails to respond within the window loses the filing date.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 3</span>Learning objectives</h4>
+          <ul>
+            <li>Understand the NDA/BLA/MAA submission structure and the key integrated documents (ISS, ISE, clinical overview)</li>
+            <li>Navigate the 74-day letter, mid-cycle communication, late-cycle meeting, and Action Date</li>
+            <li>Engage in label negotiation — the USPI / SmPC / PI as a negotiated document</li>
+            <li>Prepare for an Advisory Committee (AdCom) — structure, timing, voting, media management</li>
+            <li>Anticipate BIMO and PAI inspections — pre-approval inspection readiness</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--emerald);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>ISS, ISE, and the integrated clinical overview</h4>
+            <p>An NDA does not dump raw trial data. The <strong>Integrated Summary of Safety (ISS)</strong> combines all safety data across pivotal and supportive trials — AEs, labs, ECGs, deaths. The <strong>Integrated Summary of Efficacy (ISE)</strong> pools efficacy data, often with scrutinized subgroup analyses. The <strong>clinical overview</strong> (Module 2.5) is the sponsor's narrative — 60–100 pages telling the integrated story.</p>
+            <div class="analogy">An ambassador's white paper. Not the raw intelligence — the synthesized, defensible argument with caveats. The foreign ministry will still ask for the raw data, but the white paper frames the debate.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The review clock — 74-day letter to Action Date</h4>
+            <p>~<strong>Day 60:</strong> FDA decides whether to file the NDA. ~<strong>Day 74:</strong> the "74-day letter" — initial review priorities, topic list, early labeling concerns. <strong>Mid-cycle:</strong> ~month 5; sponsor hears emerging concerns. <strong>Late-cycle meeting:</strong> ~month 8; final issues. <strong>Action Date (PDUFA date):</strong> month 10 (standard) or 6 (priority). Outcomes: Approval, Approval with Commitments, or <strong>Complete Response Letter (CRL)</strong>.</p>
+            <div class="analogy">The rhythm of a formal diplomatic negotiation. Initial response to credentials, mid-term consultations, final position pre-conclusion, and the signing — or the demand for renegotiation.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Label negotiation</h4>
+            <p>The label — <strong>USPI</strong> (US Prescribing Information), <strong>SmPC</strong> (Summary of Product Characteristics) in Europe — is not drafted in advance and rubber-stamped. It is <em>negotiated</em> section by section, claim by claim, warning by warning. Every Indication, Dosage, Warning, Precaution, and Adverse Reaction section can move. A broader indication, a smaller boxed warning, an earlier line of therapy — each worth hundreds of millions.</p>
+            <div class="analogy">The treaty text. The preamble is often agreed first, but the operative clauses — scope, reservations, enforcement — are contested until the last hour before signing.</div>
+          </div>
+          <div class="concept-card">
+            <h4>AdCom, BIMO, and PAI</h4>
+            <p>An <strong>Advisory Committee (AdCom)</strong> is a public hearing where external experts vote on a regulatory question. Not always held, but often for first-in-class, controversial, or safety-debated drugs. The vote is advisory — FDA may agree or disagree. <strong>BIMO</strong> (Bioresearch Monitoring) audits clinical trial sites. <strong>PAI</strong> (Pre-Approval Inspection) audits manufacturing. Both must pass for approval.</p>
+            <div class="analogy">Testimony before parliament and treaty-compliance audits. The ambassador's personal conduct, the delegation's honesty, the factory's quality — all inspected before ratification.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 3 · The NDA review clock — from filing day to Action Date</div>
+          <svg viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg">
+            <!-- Timeline spine -->
+            <line x1="60" y1="220" x2="920" y2="220" stroke="#0F1B2D" stroke-width="2"/>
+            <!-- Day markers -->
+            <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#0F1B2D">
+              <circle cx="80" cy="220" r="7" fill="#1F4D37"/>
+              <text x="80" y="250" text-anchor="middle" font-weight="600">Day 0</text>
+              <text x="80" y="264" text-anchor="middle" fill="#2A3B52">Submission</text>
+              <circle cx="200" cy="220" r="7" fill="#4F7865"/>
+              <text x="200" y="250" text-anchor="middle" font-weight="600">Day 60</text>
+              <text x="200" y="264" text-anchor="middle" fill="#2A3B52">Filing decision</text>
+              <circle cx="300" cy="220" r="7" fill="#4F7865"/>
+              <text x="300" y="250" text-anchor="middle" font-weight="600">Day 74</text>
+              <text x="300" y="264" text-anchor="middle" fill="#2A3B52">74-day letter</text>
+              <circle cx="480" cy="220" r="7" fill="#C8984A"/>
+              <text x="480" y="250" text-anchor="middle" font-weight="600">Month 5</text>
+              <text x="480" y="264" text-anchor="middle" fill="#2A3B52">Mid-cycle comm.</text>
+              <circle cx="660" cy="220" r="7" fill="#9B7233"/>
+              <text x="660" y="250" text-anchor="middle" font-weight="600">Month 8</text>
+              <text x="660" y="264" text-anchor="middle" fill="#2A3B52">Late-cycle mtg</text>
+              <circle cx="820" cy="220" r="9" fill="#0F1B2D" stroke="#C8984A" stroke-width="2"/>
+              <text x="820" y="250" text-anchor="middle" font-weight="600">Month 10</text>
+              <text x="820" y="264" text-anchor="middle" fill="#2A3B52">PDUFA Action Date</text>
+            </g>
+            <!-- Activity labels above -->
+            <g font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">
+              <text x="140" y="200" text-anchor="middle">primary review</text>
+              <text x="140" y="212" text-anchor="middle">begins</text>
+              <text x="390" y="200" text-anchor="middle">information requests (IRs) flow</text>
+              <text x="570" y="200" text-anchor="middle">labeling negotiation intensifies</text>
+              <text x="750" y="200" text-anchor="middle">AdCom (if convened)</text>
+            </g>
+            <!-- AdCom marker -->
+            <g transform="translate(740, 170)">
+              <rect x="0" y="0" width="70" height="30" fill="#A84B2A" opacity="0.75" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="35" y="14" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF" font-weight="600">AdCom</text>
+              <text x="35" y="25" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF">public hearing</text>
+            </g>
+            <!-- Three outcomes -->
+            <g transform="translate(900, 80)">
+              <rect x="-130" y="0" width="130" height="30" fill="#4B6B4A" opacity="0.85" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="-65" y="14" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF" font-weight="600">APPROVAL</text>
+              <text x="-65" y="25" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF">label agreed</text>
+              <rect x="-130" y="40" width="130" height="30" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="-65" y="54" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D" font-weight="600">APPROVAL + PMR</text>
+              <text x="-65" y="65" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#0F1B2D">post-marketing commitments</text>
+              <rect x="-130" y="80" width="130" height="30" fill="#A84B2A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="-65" y="94" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF" font-weight="600">CRL</text>
+              <text x="-65" y="105" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF">deficiencies to address</text>
+            </g>
+            <line x1="820" y1="220" x2="820" y2="150" stroke="#0F1B2D" stroke-width="0.8" opacity="0.5" stroke-dasharray="3 3"/>
+            <line x1="820" y1="150" x2="870" y2="150" stroke="#0F1B2D" stroke-width="0.8" opacity="0.5"/>
+            <!-- Inspections banner -->
+            <g transform="translate(60, 300)">
+              <rect x="0" y="0" width="860" height="38" fill="#EEE5CE" stroke="#0F1B2D" stroke-width="0.6" opacity="0.7"/>
+              <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52" letter-spacing="1">PARALLEL WORKSTREAM:</text>
+              <text x="12" y="30" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D"><tspan font-weight="600">BIMO inspections</tspan> (clinical sites) · <tspan font-weight="600">PAI</tspan> (manufacturing) · <tspan font-weight="600">labeling review</tspan> cycles · responses to <tspan font-weight="600">Information Requests</tspan> — sustained across the full review window</text>
+            </g>
+            <text x="60" y="30" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">A ten-month formal negotiation, with a hard calendar date at the end.</text>
+            <text x="60" y="50" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">STANDARD REVIEW · PRIORITY REVIEW COMPRESSES TO 6 MONTHS</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The single biggest predictor of approval success is not the strength of the dataset — it is the quality of the response to Information Requests (IRs) during the review. A clean, timely, direct answer to a 24-hour IR builds the reviewer's trust. An evasive or delayed response unravels it. By the late-cycle meeting, a sponsor that has responded well is treated as a partner; a sponsor that has not is treated as a problem. The label follows that dynamic, not the raw science.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 3 checkpoint</h4>
+          <ul>
+            <li>Describe what goes into the ISS vs. the ISE and why both matter</li>
+            <li>Walk through the review clock from Day 0 to the PDUFA Action Date</li>
+            <li>Explain why label negotiation begins well before the 74-day letter</li>
+            <li>Name the three possible outcomes at the Action Date</li>
+            <li>State what AdCom, BIMO, and PAI each audit</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A CEO asks: "Why can't we just argue our case at AdCom if the reviewers disagree with us? Won't the expert panel see things our way?" Give a measured reality check.</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>Three things to note. <strong>One:</strong> AdComs typically vote in the direction the FDA briefing document signals — the sponsor argues into headwinds set by the agency's own analysis. <strong>Two:</strong> panels are chosen by FDA for expertise in the disease area, and experts are often harder on data weaknesses than reviewers, not easier. <strong>Three:</strong> even when the panel votes favorably, FDA retains final authority — and an unfavorable AdCom, even when FDA approves, poisons payer and physician perception for years. The AdCom is not a court of appeal; it is a public interrogation. Win the primary review, then use AdCom to confirm. Never rely on AdCom to reverse a skeptical reviewer.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>7-4 clock:</strong> the 74-day letter sets the review agenda; everything after is negotiation within that frame.<br>
+          <strong>A-A-C:</strong> the three Action Date outcomes — <em>Approval, Approval + commitments, CRL.</em>
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 4 -->
+    <div class="phase" id="day4">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">04</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Analyze + Evaluate · ~3 hrs</div><h3>Ongoing diplomacy — <em>lifecycle regulatory</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">An FDA approval letter is not the end of a regulatory relationship. It is the <em>start</em> of one that will last ten, twenty, sometimes thirty years. Every label change, every manufacturing variation, every new indication, every safety signal — each reopens the conversation. The envoy's second career begins the day the ribbon is cut.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 4</span>Learning objectives</h4>
+          <ul>
+            <li>Distinguish post-marketing requirements (PMRs) from post-marketing commitments (PMCs)</li>
+            <li>Understand supplement types: sNDA, sBLA, CBE-30, PAS, annual reports</li>
+            <li>Navigate REMS — when required, what it contains, how it's modified</li>
+            <li>Plan indication expansion and line extensions as regulatory programs</li>
+            <li>Understand patent listings (Orange Book), exclusivity management, and Paragraph IV certifications</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--emerald);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>PMRs vs. PMCs</h4>
+            <p><strong>PMRs</strong> (Post-Marketing Requirements) are <em>required</em> — FDA compels them as a condition of approval, usually tied to specific safety or efficacy questions. Non-completion can trigger enforcement. <strong>PMCs</strong> (Post-Marketing Commitments) are sponsor-volunteered. Both are publicly tracked. Missing deadlines on either corrodes agency trust and slows every subsequent interaction.</p>
+            <div class="analogy">Treaty obligations vs. voluntary undertakings. Break a treaty term and sanctions follow; break a voluntary commitment and your credibility quietly erodes for every future negotiation.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Supplement types</h4>
+            <p><strong>sNDA / sBLA</strong> — supplements for new indications, new dosages, or major manufacturing changes. <strong>CBE-30</strong> — "changes being effected in 30 days"; modest changes allowed to ship before full approval. <strong>PAS</strong> — prior approval supplement; change waits for FDA blessing. <strong>Annual reports</strong> — minor changes, batched. Choosing the right supplement category for a change is a significant regulatory decision.</p>
+            <div class="analogy">Amendments to a treaty. Some require a fresh ratification cycle; some can be provisionally applied pending acceptance; some go in the annual review. Mis-category, and your foreign ministry is surprised by a unilateral change.</div>
+          </div>
+          <div class="concept-card">
+            <h4>REMS — Risk Evaluation &amp; Mitigation Strategies</h4>
+            <p>REMS is the FDA's toolkit when a drug's risk profile requires more than a boxed warning. Elements can include: medication guides, communication plans, Elements to Assure Safe Use (ETASU) — prescriber certification, pharmacy certification, patient registries, restricted distribution. REMS for isotretinoin, clozapine, and thalidomide itself show the spectrum. Once imposed, REMS is modified only by supplement.</p>
+            <div class="analogy">Travel-restriction conditions on a visa — the ambassador must carry papers, check in periodically, travel only via designated routes. Intrusive, but preserves access to the host country.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Label expansion &amp; exclusivity</h4>
+            <p>Indication expansion via sNDA multiplies commercial value. Line extensions (new dosage forms, new pediatric indications) add exclusivity periods: <strong>pediatric exclusivity</strong> (+6 months), <strong>new chemical entity</strong> (5 years), <strong>orphan</strong> (7 years), <strong>biologic data</strong> (12 years). Patent listings in the <strong>Orange Book</strong> trigger generic litigation timelines. LOE strategy begins a decade before LOE date.</p>
+            <div class="analogy">Managing a preferential trade agreement's expiration — negotiating pediatric extensions, pediatric-use supplements, orphan indications, and secondary patent filings all extend the window before the tariff wall falls.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 4 · The lifecycle regulatory horizon — activity continues for the full commercial life</div>
+          <svg viewBox="0 0 980 400" xmlns="http://www.w3.org/2000/svg">
+            <line x1="60" y1="340" x2="920" y2="340" stroke="#0F1B2D" stroke-width="2"/>
+            <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#0F1B2D">
+              <line x1="80" y1="335" x2="80" y2="345" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="80" y="365" text-anchor="middle" font-weight="600">Approval</text>
+              <line x1="200" y1="335" x2="200" y2="345" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="200" y="365" text-anchor="middle">Y1</text>
+              <line x1="360" y1="335" x2="360" y2="345" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="360" y="365" text-anchor="middle">Y3</text>
+              <line x1="530" y1="335" x2="530" y2="345" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="530" y="365" text-anchor="middle">Y6</text>
+              <line x1="700" y1="335" x2="700" y2="345" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="700" y="365" text-anchor="middle">Y9</text>
+              <line x1="870" y1="335" x2="870" y2="345" stroke="#0F1B2D" stroke-width="2"/>
+              <text x="870" y="365" text-anchor="middle" font-weight="600">LOE</text>
+            </g>
+            <!-- Activity bands -->
+            <g>
+              <rect x="85" y="280" width="790" height="28" fill="#4B6B4A" opacity="0.55" stroke="#0F1B2D" stroke-width="0.4"/>
+              <text x="95" y="298" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="600">PMR / PMC tracking · annual reports · PSUR / PBRER</text>
+              <rect x="85" y="240" width="400" height="28" fill="#C8984A" opacity="0.7" stroke="#0F1B2D" stroke-width="0.4"/>
+              <text x="95" y="258" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D" font-weight="600">Label expansion (sNDA / sBLA) · pediatric exclusivity</text>
+              <rect x="85" y="200" width="530" height="28" fill="#1F4D37" opacity="0.78" stroke="#0F1B2D" stroke-width="0.4"/>
+              <text x="95" y="218" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="600">Safety labeling changes · CBE-30 / PAS · REMS modifications</text>
+              <rect x="85" y="160" width="790" height="28" fill="#9B7233" opacity="0.7" stroke="#0F1B2D" stroke-width="0.4"/>
+              <text x="95" y="178" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="600">CMC changes · manufacturing variations · site additions</text>
+              <rect x="600" y="120" width="275" height="28" fill="#A84B2A" opacity="0.8" stroke="#0F1B2D" stroke-width="0.4"/>
+              <text x="610" y="138" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" font-weight="600">LOE defense · PTE · biosimilar / generic litigation</text>
+            </g>
+            <!-- Patent cliff marker -->
+            <line x1="870" y1="50" x2="870" y2="340" stroke="#A84B2A" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.7"/>
+            <text x="910" y="80" text-anchor="middle" font-family="'Fraunces', serif" font-size="11" font-style="italic" fill="#A84B2A" transform="rotate(-90 910 80)">PATENT CLIFF</text>
+            <text x="60" y="30" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Every band above the timeline is a live workstream demanding regulatory attention.</text>
+            <text x="60" y="50" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">BAR LENGTH ≈ TYPICAL ACTIVITY WINDOW POST-APPROVAL · SCHEMATIC</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>A pattern I watch new regulatory leaders repeat: they celebrate approval and pivot their best talent to the next asset. Two years later, a safety labeling change triggers a regulatory back-and-forth that exposes forgotten PMR deadlines, drifted manufacturing processes, and REMS compliance gaps. Every lifecycle regulatory failure compounds. The embassy you staffed for submission day needs the <em>same</em> staffing quality for year seven. Cut corners here and your next program's pre-IND meeting begins with FDA remembering exactly which commitments you didn't keep.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 4 checkpoint</h4>
+          <ul>
+            <li>Explain the difference between a PMR and a PMC, with one example of each</li>
+            <li>Name the four supplement categories and when each applies</li>
+            <li>List three common REMS elements and one real drug with a REMS program</li>
+            <li>Walk through an exclusivity-extension strategy combining pediatric + orphan + patent listings</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A manufacturing VP wants to change the scale of a fill-finish operation on an approved biologic from a 2000L to a 5000L bioreactor. What regulatory path do you recommend, and why?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>A scale change of this magnitude on a biologic is almost certainly a <strong>Prior Approval Supplement (PAS)</strong>, not CBE-30 and not an annual report. Reasons: <strong>(1)</strong> scale affects CQAs — aggregation, glycosylation, host-cell protein levels can all shift; <strong>(2)</strong> comparability studies will be required to demonstrate the 5000L product matches the 2000L product; <strong>(3)</strong> FDA will want to review the comparability package and likely inspect the new scale (PAI-like). The manufacturing VP may push back on the timeline — PAS typically takes 4–6 months. The regulatory answer is: yes, slower, but a CBE-30 attempted here would likely be downgraded by FDA to a PAS anyway, costing more time and credibility. Do it once, correctly.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>P-P:</strong> <em>Post-marketing Requirements (compelled) vs. Commitments (volunteered).</em> One arrow from FDA, one arrow to FDA.<br>
+          <strong>C-P-A-A:</strong> supplement ladder — <em>CBE-30, PAS, Annual report, and sNDA/sBLA as the major category.</em>
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 5 -->
+    <div class="phase" id="day5">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">05</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Evaluate + Create · ~3 hrs</div><h3>The envoy's playbook — <em>integrated global regulatory strategy</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">When Keytruda was approved in 2014, pembrolizumab had a single indication (melanoma) and a single target market. A decade later, it holds <em>over forty approved indications</em> across dozens of jurisdictions, supported by parallel global submissions, real-world evidence bridges, and a global regulatory architecture that probably cost more to run than most companies' entire R&amp;D budgets. That architecture did not emerge by accident.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 5</span>Learning objectives</h4>
+          <ul>
+            <li>Design a parallel global submission strategy (FDA + EMA + PMDA + NMPA simultaneously)</li>
+            <li>Evaluate the use of real-world evidence (RWE) in supporting new indications or label expansions</li>
+            <li>Understand biosimilar defense strategy — authorized generics, interchangeability, formulation innovation</li>
+            <li>Apply a structured LOE-defense playbook across the 3–5 years before patent cliff</li>
+            <li>Synthesize the four-engine regulatory thesis: Strategy + Pre-submission + Submission + Lifecycle</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--emerald);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Parallel global submissions</h4>
+            <p>Modern oncology programs aim for near-simultaneous submissions to FDA, EMA, PMDA, and NMPA. This requires: (1) early alignment of pivotal trial design with all four agencies (pre-submission); (2) identical core data package, region-specific Module 1; (3) coordinated response teams handling IRs from multiple agencies in parallel; (4) conscious sequencing when simultaneous is impossible (e.g., FDA first to set label precedent for EMA).</p>
+            <div class="analogy">Running four parallel treaty negotiations with different foreign ministries, each of which reads the others' published positions. The core position must be consistent; the rhetoric must be localized.</div>
+          </div>
+          <div class="concept-card">
+            <h4>RWE-supported filings</h4>
+            <p>The 21st Century Cures Act authorized FDA to use <strong>real-world evidence</strong> to support approvals of new indications and post-marketing study requirements. Pfizer's Ibrance received a male breast cancer indication based in part on registry data. Acceptability depends on data quality, fit-for-purpose design, and regulatory precedent. RWE does not replace RCTs; it complements them, especially in rare populations.</p>
+            <div class="analogy">Diplomatic reporting from embassies and consulates supplementing formal negotiations. Not a substitute for the primary negotiation — but invaluable for the populations you cannot interview directly.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Biosimilar &amp; generic defense</h4>
+            <p>Before LOE: (1) <strong>patent fencing</strong> — formulation, dosing, indication patents beyond the composition-of-matter patent; (2) <strong>authorized generics</strong> — license your own product as a generic at LOE; (3) <strong>interchangeability</strong> for biologics — require biosimilars to prove they can substitute without physician intervention; (4) <strong>formulation innovation</strong> — new dosage forms, subcutaneous replacing IV, fixed-dose combinations. Each extends effective exclusivity by months to years.</p>
+            <div class="analogy">A trading nation negotiating a phased wind-down of preferential tariffs. Each instrument — licensing, partnership, innovation — softens the inevitable revenue cliff.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The integrated regulatory thesis</h4>
+            <p>An IND-to-LOE program is successful when four engines converge: <em>Strategy</em> aligned early with agencies globally; <em>Pre-submission</em> packages that turn agencies into allies; <em>Submission</em> reviews that produce labels worth defending; <em>Lifecycle</em> management that preserves exclusivity and extends indications. Any weak engine slows the others. A regulatory affairs leader's job is to ensure all four engines run in formation, year after year.</p>
+            <div class="analogy">A career diplomatic service: the junior posting (strategy), the mid-career mission (pre-submission), the ambassadorship (submission), and the senior advisor role (lifecycle). Each earns the next. None can be skipped.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 5 · The integrated regulatory flywheel — four engines converging on global commercial life</div>
+          <svg viewBox="0 0 820 540" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="410" cy="270" r="78" fill="#0F1B2D" stroke="#1F4D37" stroke-width="2.5"/>
+            <text x="410" y="262" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#F5EFDF" font-style="italic">Global approval</text>
+            <text x="410" y="280" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">LIFECYCLE-READY</text>
+            <text x="410" y="296" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#4F7865" letter-spacing="1">four-engine alignment</text>
+            <g><circle cx="410" cy="80" r="58" fill="#1F4D37" fill-opacity="0.9" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="410" y="74" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#F5EFDF" font-weight="500">Strategy</text>
+              <text x="410" y="92" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" letter-spacing="1" opacity="0.85">GLOBAL ALIGNMENT</text>
+            </g>
+            <g><circle cx="640" cy="270" r="58" fill="#A84B2A" fill-opacity="0.88" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="640" y="264" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#F5EFDF" font-weight="500">Submission</text>
+              <text x="640" y="282" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" letter-spacing="1" opacity="0.85">NDA / BLA / MAA</text>
+            </g>
+            <g><circle cx="410" cy="460" r="58" fill="#C8984A" fill-opacity="0.88" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="410" y="454" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#0F1B2D" font-weight="500">Lifecycle</text>
+              <text x="410" y="472" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" letter-spacing="1">PMR · sNDA · REMS · LOE</text>
+            </g>
+            <g><circle cx="180" cy="270" r="58" fill="#4F7865" fill-opacity="0.9" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="180" y="264" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#F5EFDF" font-weight="500">Pre-submission</text>
+              <text x="180" y="282" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" letter-spacing="1" opacity="0.85">IND / CTA · MEETINGS</text>
+            </g>
+            <circle cx="410" cy="270" r="230" fill="none" stroke="#1F4D37" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.55"/>
+            <text x="410" y="36" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1F4D37" letter-spacing="3">ICH HARMONIZATION LAYER</text>
+            <defs><marker id="arr5" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2A3B52"/></marker></defs>
+            <path d="M 410 140 L 410 190" stroke="#2A3B52" stroke-width="1.3" marker-end="url(#arr5)" opacity="0.7"/>
+            <path d="M 580 270 L 490 270" stroke="#2A3B52" stroke-width="1.3" marker-end="url(#arr5)" opacity="0.7"/>
+            <path d="M 410 400 L 410 350" stroke="#2A3B52" stroke-width="1.3" marker-end="url(#arr5)" opacity="0.7"/>
+            <path d="M 240 270 L 330 270" stroke="#2A3B52" stroke-width="1.3" marker-end="url(#arr5)" opacity="0.7"/>
+            <text x="410" y="525" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#2A3B52">No engine stands alone. Strategy shapes pre-submission; submissions define the label; lifecycle feeds strategy for the next indication.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The regulatory leader I most respect once summarized thirty years of experience this way: <em>"Everything I do — every brief, every meeting, every response — earns or burns trust with the agencies. My job is not to win any single interaction. My job is to make sure our embassy has deeper credibility in year twenty than it did in year one."</em> That framing changes how you prepare for every pre-IND, how you answer every IR, how you handle every failed AdCom. The drug is temporary; the relationship with the agency is longer than any career.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 5 checkpoint</h4>
+          <ul>
+            <li>Design a parallel-submission strategy for a novel oncology program across four agencies</li>
+            <li>Cite two examples of RWE-supported FDA approvals and what made them acceptable</li>
+            <li>List four distinct biosimilar-defense instruments</li>
+            <li>Evaluate the four-engine thesis on a real or hypothetical program — which engine is strongest, which is weakest</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>Your CEO asks: "We got FDA breakthrough designation. Should we shift all regulatory resources to the FDA submission and worry about EMA later?" Walk through the case against this.</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p><strong>Three reasons to resist:</strong> <strong>One</strong> — EMA Scientific Advice on statistics can flag issues FDA may accept but CHMP will reject, and catching those <em>before</em> submission saves a CRL-equivalent in Europe. <strong>Two</strong> — delaying EMA submission by 12+ months gives competitors their first-to-EU advantage; in oncology especially, EU market access via national HTAs takes another 12–24 months after EMA approval, so the total lag is large. <strong>Three</strong> — parallel submissions allow IRs to cross-inform: FDA's questions often surface in EMA's list too; handling them once in both agencies' processes is more efficient than handling them sequentially. The right answer is: prioritize FDA breakthrough while maintaining EMA submission readiness; do not pause EMA work.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>S-P-S-L:</strong> the four regulatory engines — <em>Strategy, Pre-submission, Submission, Lifecycle.</em> All four or the flywheel stalls.<br>
+          <strong>Trust compounds:</strong> regulatory credibility in year 20 is the sum of every interaction since year 1.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JARGON -->
+<section id="jargon" class="wrap-narrow">
+  <div class="section-label">Jargon decoder · three tiers</div>
+  <h2>The vocabulary of the embassy.</h2>
+  <p>Regulatory affairs speaks three languages at once — statute, science, and bureaucratic procedure. A minimal working vocabulary:</p>
+
+  <div class="jargon-tier">
+    <h3>Tier 1 · Everyday</h3>
+    <div class="tier-label">If you know these, you can read a regulatory strategy memo</div>
+    <dl>
+      <dt>FDA / EMA</dt><dd>US Food &amp; Drug Administration / European Medicines Agency — the two most influential agencies.</dd>
+      <dt>PMDA / NMPA</dt><dd>Japan's Pharmaceuticals and Medical Devices Agency / China's National Medical Products Administration.</dd>
+      <dt>IND / CTA</dt><dd>Investigational New Drug (US) / Clinical Trial Application (EU, UK, many others) — the clinical-study filing.</dd>
+      <dt>NDA / BLA / MAA</dt><dd>New Drug Application (US small mol) / Biologics License Application (US biologic) / Marketing Authorization Application (EU).</dd>
+      <dt>eCTD</dt><dd>electronic Common Technical Document — the universal regulatory submission format, Modules 1–5.</dd>
+      <dt>USPI / SmPC / PI</dt><dd>US Prescribing Information / Summary of Product Characteristics (EU) / Prescribing Information (generic).</dd>
+      <dt>AdCom</dt><dd>Advisory Committee — public expert panel that votes on a regulatory question.</dd>
+      <dt>CRL</dt><dd>Complete Response Letter — FDA's formal document listing deficiencies that prevent approval.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 2 · Technical</h3>
+    <div class="tier-label">You hear these in regulatory strategy meetings</div>
+    <dl>
+      <dt>CHMP</dt><dd>Committee for Medicinal Products for Human Use — EMA's scientific-opinion committee.</dd>
+      <dt>PRIME</dt><dd>EMA's Priority Medicines scheme — analogous to FDA Breakthrough.</dd>
+      <dt>PDUFA</dt><dd>Prescription Drug User Fee Act — 1992 law setting FDA review performance goals tied to industry fees.</dd>
+      <dt>BsUFA / GDUFA</dt><dd>Biosimilar / Generic Drug user-fee acts — parallel structures for biosimilars and generics.</dd>
+      <dt>PMR / PMC</dt><dd>Post-Marketing Requirements (compelled) / Commitments (voluntary). Both tracked publicly.</dd>
+      <dt>REMS</dt><dd>Risk Evaluation &amp; Mitigation Strategies — FDA's safety toolkit for high-risk drugs.</dd>
+      <dt>CBE-30 / PAS</dt><dd>Changes Being Effected in 30 days / Prior Approval Supplement — supplement categories by change type.</dd>
+      <dt>BIMO / PAI</dt><dd>Bioresearch Monitoring (clinical-site inspections) / Pre-Approval Inspection (manufacturing).</dd>
+      <dt>DSUR / PSUR / PBRER</dt><dd>Development Safety Update Report (during trials) / Periodic Safety Update Report / Periodic Benefit-Risk Evaluation Report (post-approval).</dd>
+      <dt>74-day letter</dt><dd>FDA's initial review-plan letter sent ~74 days after NDA submission; sets the review agenda.</dd>
+      <dt>ICH</dt><dd>International Council for Harmonisation — the body that standardizes technical requirements across major jurisdictions.</dd>
+      <dt>ISS / ISE</dt><dd>Integrated Summary of Safety / Efficacy — pooled analyses across pivotal and supportive trials.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 3 · Specialist</h3>
+    <div class="tier-label">You hear these from regulatory strategists and senior leadership</div>
+    <dl>
+      <dt>Sakigake</dt><dd>PMDA's priority designation for innovative products, Japanese equivalent of Breakthrough.</dd>
+      <dt>PRV</dt><dd>Priority Review Voucher — issued for rare pediatric / neglected tropical disease approvals; tradeable.</dd>
+      <dt>Interchangeable</dt><dd>Biosimilar designation allowing pharmacy-level substitution without prescriber intervention.</dd>
+      <dt>BPCIA</dt><dd>Biologics Price Competition &amp; Innovation Act (2010) — US biosimilar framework.</dd>
+      <dt>Orange Book</dt><dd>FDA's published list of approved drugs with patent and exclusivity information.</dd>
+      <dt>Purple Book</dt><dd>The biologics analog of the Orange Book, listing licensed biological products.</dd>
+      <dt>PTE</dt><dd>Patent Term Extension — up to 5 years' patent extension to compensate for regulatory review time.</dd>
+      <dt>DMF</dt><dd>Drug Master File — confidential submission covering API or excipient manufacturing details.</dd>
+      <dt>Comparability protocol</dt><dd>Pre-agreed plan with FDA for handling specified future CMC changes without full supplements each time.</dd>
+      <dt>Type V DMF / MF</dt><dd>Contract-facility master files supporting multiple sponsors.</dd>
+      <dt>ETASU</dt><dd>Elements to Assure Safe Use — REMS components such as prescriber certification, restricted distribution.</dd>
+      <dt>Paragraph IV</dt><dd>ANDA certification that generic-maker believes the innovator's patent is invalid or not infringed; triggers litigation.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- PITFALLS -->
+<section id="pitfalls" class="wrap">
+  <div class="section-label">Traps &amp; pitfalls</div>
+  <h2>Where regulatory programs quietly damage themselves.</h2>
+  <p>Catastrophic regulatory failures are rare. Slow-burn credibility damage is endemic. Six traps that experienced teams still fall into:</p>
+
+  <div class="pitfall-grid">
+    <div class="pitfall"><div class="num">1</div>
+      <h4>Over-promising at pre-IND</h4>
+      <p>Under pressure to secure a friendly meeting outcome, a team commits to data or timelines it cannot actually deliver. Those commitments become regulatory debt — tracked, remembered, and weighed against the sponsor at every subsequent meeting.</p>
+      <p class="rescue">Rescue: commit only to what the program can deliver with 80% confidence. Let the Agency know where uncertainty remains. Certainty that proves false is worse than acknowledged uncertainty.</p>
+    </div>
+    <div class="pitfall"><div class="num">2</div>
+      <h4>Flying solo across agencies</h4>
+      <p>Filing parallel FDA and EMA packages without internal harmonization. Reviewers compare public documents. A label claim granted by one agency but not the other, phrased differently, surfaces in the next IR — and now the sponsor is explaining the inconsistency rather than the science.</p>
+      <p class="rescue">Rescue: maintain a single global regulatory strategy document. Every region's lead reads it. Phrasing differences are deliberate, not accidental.</p>
+    </div>
+    <div class="pitfall"><div class="num">3</div>
+      <h4>Under-planned AdCom</h4>
+      <p>Treating the AdCom as a scientific presentation rather than a cross-examination. Slides optimized for persuasion rather than questions. No mock panels. Result: the sponsor's CEO answers a committee member's question poorly in a publicly televised hearing, and the vote goes 12–3 against.</p>
+      <p class="rescue">Rescue: three rounds of mock AdComs with external experts playing committee roles. Every slide must survive hostile questioning. Train every presenter on the specific expert backgrounds on the panel.</p>
+    </div>
+    <div class="pitfall"><div class="num">4</div>
+      <h4>The silent CRL dismissal</h4>
+      <p>A CRL arrives with a deficiency list. Internal review concludes most items are "not substantive" and the response is lean. The FDA — which wrote the CRL deliberately — reads a lean response as a dismissive sponsor. The next review cycle starts with an unfavorable tone.</p>
+      <p class="rescue">Rescue: respond to every CRL item. Even if the response is "we agree and have addressed," say so explicitly. Never leave the Agency wondering whether its concerns were read.</p>
+    </div>
+    <div class="pitfall"><div class="num">5</div>
+      <h4>Late label engagement</h4>
+      <p>Starting label negotiation only after the 74-day letter. By then, FDA has already drafted its preferred label internally. Every moved paragraph is now a fight against a default. Sponsors that engage on labeling at the pre-NDA meeting start from their preferred text, not the Agency's.</p>
+      <p class="rescue">Rescue: include a proposed label with the pre-NDA package. Discuss labeling questions explicitly at the pre-NDA meeting. Set the Agency's first internal draft to resemble yours.</p>
+    </div>
+    <div class="pitfall"><div class="num">6</div>
+      <h4>Forgetting the lifecycle</h4>
+      <p>Post-approval, the top regulatory talent rotates to the next asset. Three years later, a safety labeling change exposes a missed PMR, a drifted manufacturing process, and a REMS modification the Agency expected two years ago. The next indication's pre-IND meeting starts with a reviewer recalling precisely which commitments went unmet.</p>
+      <p class="rescue">Rescue: staff lifecycle regulatory with the same seniority as submission. Automate PMR/PMC tracking. Treat year-seven regulatory health as a board-reviewed KPI.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-DOMAIN -->
+<section class="wrap">
+  <div class="section-label">Cross-domain connections</div>
+  <h2>Regulatory diplomacy is a pattern humans have built before.</h2>
+  <p>If the envoy is the closest mirror, three other domains illuminate why pharmaceutical regulatory affairs looks the way it does:</p>
+
+  <div class="crossdomain-grid">
+    <div class="crossdomain">
+      <div class="domain">International diplomacy</div>
+      <h4>Treaties &amp; state-department craft</h4>
+      <p>The profession regulatory affairs most structurally resembles. Briefs, cables, formal audiences, treaty negotiations, multi-year ambassadorships. The skill set — anticipating objections, cultivating relationships, never surprising the foreign ministry — transfers almost directly.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Securities law</div>
+      <h4>SEC filings &amp; public-company disclosure</h4>
+      <p>A pharma regulatory filing has the same dual audience as an S-1 or 10-K: the literal regulator (FDA, SEC) and the watchful public (physicians, investors). Every word is read twice — once by the Agency, once by everyone else. Disclosure discipline is nearly identical.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Export controls</div>
+      <h4>ITAR &amp; dual-use compliance</h4>
+      <p>A multi-jurisdictional, always-on licensing regime where a single non-compliance event can shut down operations. Technology classification, end-user certification, re-export restrictions — the texture of compliance resembles lifecycle regulatory more than many pharma professionals realize.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPACED REP -->
+<section id="spaced" class="wrap">
+  <div class="section-label">Spaced repetition schedule</div>
+  <h2>Holding the embassy in memory.</h2>
+  <p>Regulatory vocabulary fades fast without structured review. The 8-touch schedule below gives ~90% retention at the 3-month mark for about 2.5 hours of total review time:</p>
+
+  <div class="spaced-rep">
+    <div class="sr-timeline">
+      <div class="sr-day"><div class="day-num">1</div><div class="day-label">Learn</div><div class="day-task">Day 1 agency landscape</div></div>
+      <div class="sr-day"><div class="day-num">2</div><div class="day-label">Review</div><div class="day-task">Day 1 checkpoint + Day 2 pre-submission</div></div>
+      <div class="sr-day"><div class="day-num">3</div><div class="day-label">Review</div><div class="day-task">Day 2 flip cards + Day 3 submission</div></div>
+      <div class="sr-day"><div class="day-num">4</div><div class="day-label">Review</div><div class="day-task">Jargon Tier 1 + 2, Day 4 lifecycle</div></div>
+      <div class="sr-day"><div class="day-num">5</div><div class="day-label">Review</div><div class="day-task">Day 5 integration</div></div>
+      <div class="sr-day"><div class="day-num">7</div><div class="day-label">First lapse</div><div class="day-task">All 5 memory hooks</div></div>
+      <div class="sr-day"><div class="day-num">14</div><div class="day-label">Consolidation</div><div class="day-task">Redo all Feynman teach-backs</div></div>
+      <div class="sr-day"><div class="day-num">30</div><div class="day-label">Retention</div><div class="day-task">Draw concept map from memory</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap-narrow">
+    <div class="section-label" style="color: var(--ochre);">Mentor's parting wisdom</div>
+    <h2>Every approved drug is <em>somebody's cable</em> coming home.</h2>
+    <p>Five days cannot turn you into a regulatory affairs lead. The real craft takes decades — learning the agencies' cultures, their review-division personalities, the precedents they cite, the words they read as warm and the words they read as cold. Nobody shortcuts that.</p>
+    <p>What five days can do is hand you the map. You now know that FDA and EMA have different scientific temperaments. You know why the pre-IND meeting is worth weeks of preparation. You know the difference between a CBE-30 and a PAS. You know why a program that wins approval and loses its lifecycle regulatory attention quietly poisons the next program's chances.</p>
+    <p class="mantra">Every interaction earns or burns trust. Every commitment is remembered. The drug is temporary; the embassy is forever.</p>
+    <p>The next time you see a drug launch, look past the press release. Somewhere in the background is a regulatory team that spent a decade making this moment legal. They will not be named. They will not be thanked publicly. But without them, the drug is a molecule — not a medicine.</p>
+    <p style="margin-top: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ochre);">— End of Module 05 —</p>
+  </div>
+</section>
+
+</main>
+
+<footer>Module 05 · Regulatory Affairs · Five-Day Theoretical Roadmap</footer>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'base',
+    themeVariables: { fontFamily: 'Inter Tight, sans-serif', primaryColor: '#EEE5CE', primaryTextColor: '#0F1B2D', primaryBorderColor: '#0F1B2D', lineColor: '#2A3B52', secondaryColor: '#F5EFDF', tertiaryColor: '#1F4D37', background: '#EEE5CE', mainBkg: '#EEE5CE', secondBkg: '#F5EFDF' }
+  });
+  function togglePhase(header) { header.parentElement.classList.toggle('open'); }
+  window.addEventListener('scroll', () => {
+    const pct = Math.min(100, (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Scholars' Guild — Medical Affairs in 5 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<style>
+  :root {
+    --ink: #0F1B2D; --ink-soft: #2A3B52;
+    --paper: #F5EFDF; --paper-warm: #EEE5CE; --paper-dark: #E4D8B8;
+    --ochre: #C8984A; --ochre-deep: #9B7233;
+    --moss: #4B6B4A; --moss-soft: #7C9082;
+    --rust: #A84B2A; --rust-soft: #D67D5C;
+    --oxblood: #6B2A2A; --oxblood-deep: #4A1E1E; --oxblood-soft: #8E4545;
+    --rule: rgba(15,27,45,0.14); --rule-strong: rgba(15,27,45,0.3);
+    --shadow-soft: 0 2px 12px rgba(15,27,45,0.08);
+    --shadow-lift: 0 8px 32px rgba(15,27,45,0.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-weight: 400; line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(15,27,45,0.025) 1px, transparent 0); background-size: 24px 24px; pointer-events: none; z-index: 0; }
+  main, nav, header { position: relative; z-index: 1; }
+  h1, h2, h3, h4, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.015em; line-height: 1.1; color: var(--ink); }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 500; }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+  h4 { font-size: 1.05rem; font-weight: 600; font-family: 'Inter Tight', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+  p { max-width: 68ch; }
+  em { font-style: italic; color: var(--ink-soft); }
+  strong { font-weight: 600; color: var(--ink); }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: var(--paper-warm); padding: 0.1em 0.4em; border-radius: 3px; border: 1px solid var(--rule); }
+  nav.top { position: sticky; top: 0; background: rgba(245,239,223,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); padding: 0.8rem 2rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  nav.top .brand { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; }
+  nav.top .brand em { color: var(--oxblood); font-style: italic; }
+  nav.top ul { display: flex; gap: 0.4rem; list-style: none; flex-wrap: wrap; }
+  nav.top a { color: var(--ink-soft); text-decoration: none; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 20px; transition: all 0.2s ease; font-weight: 500; }
+  nav.top a:hover { background: var(--ink); color: var(--paper); }
+  .progress-track { position: sticky; top: 58px; height: 3px; background: rgba(15,27,45,0.08); z-index: 99; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--oxblood), var(--ochre)); width: 0%; transition: width 0.15s ease; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+  .hero { padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+  .hero-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oxblood); margin-bottom: 1.5rem; }
+  .hero h1 { max-width: 18ch; margin-bottom: 1.8rem; }
+  .hero h1 em { color: var(--oxblood); font-style: italic; }
+  .hero .lede { font-family: 'Fraunces', serif; font-size: clamp(1.1rem, 1.6vw, 1.4rem); max-width: 54ch; color: var(--ink-soft); font-weight: 300; line-height: 1.5; }
+  .hero-ornament { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 380px; height: 380px; opacity: 0.58; pointer-events: none; }
+  .hook-card { background: var(--ink); color: var(--paper); padding: 3rem 2.5rem; border-radius: 2px; margin: 3rem 0; position: relative; box-shadow: var(--shadow-lift); }
+  .hook-card::before { content: '09'; position: absolute; top: 1rem; right: 1.5rem; font-family: 'Fraunces', serif; font-size: 4rem; color: var(--ochre); opacity: 0.4; font-style: italic; }
+  .hook-card .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 1rem; }
+  .hook-card p { font-family: 'Fraunces', serif; font-size: 1.4rem; line-height: 1.4; font-weight: 300; max-width: 54ch; }
+  .hook-card p em { color: var(--ochre); font-style: italic; }
+  section { padding: 4rem 0; position: relative; }
+  section + section { border-top: 1px solid var(--rule); }
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--oxblood); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--oxblood); }
+  section h2 { margin-bottom: 1.8rem; max-width: 26ch; }
+  section p { margin-bottom: 1.1rem; }
+  .master-analogy { background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-dark) 100%); border: 1px solid var(--rule); border-left: 5px solid var(--oxblood); padding: 2.5rem 2.5rem 2.5rem 3rem; margin: 2.5rem 0; position: relative; border-radius: 2px; }
+  .master-analogy::before { content: '“'; position: absolute; top: -20px; left: 20px; font-family: 'Fraunces', serif; font-size: 6rem; color: var(--oxblood); line-height: 1; }
+  .master-analogy h4 { margin-bottom: 1rem; color: var(--oxblood); }
+  .master-analogy p { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 300; line-height: 1.55; }
+  .master-analogy p + p { margin-top: 0.8rem; }
+  .mapping-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem 1.5rem; align-items: center; margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px dashed var(--rule-strong); }
+  .mapping-grid .from { font-weight: 500; color: var(--ink); text-align: right; }
+  .mapping-grid .arrow { font-family: 'JetBrains Mono', monospace; color: var(--oxblood); font-size: 0.9rem; }
+  .mapping-grid .to { color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic; }
+  @media (max-width: 820px) { .mapping-grid { grid-template-columns: 1fr; gap: 0.3rem 0; } .mapping-grid .from { text-align: left; } .mapping-grid .arrow { display: none; } .mapping-grid .to { padding-left: 1rem; border-left: 2px solid var(--oxblood); margin-bottom: 0.8rem; } }
+  .concept-map-wrap { background: var(--paper-warm); padding: 2.5rem; border-radius: 2px; border: 1px solid var(--rule); overflow-x: auto; margin: 2rem 0; }
+  .mermaid { text-align: center; font-family: 'Inter Tight', sans-serif !important; }
+  .phases-container { margin-top: 2rem; }
+  .phase { border: 1px solid var(--rule); background: var(--paper-warm); margin-bottom: 1.2rem; border-radius: 2px; overflow: hidden; transition: all 0.3s ease; }
+  .phase:hover { box-shadow: var(--shadow-soft); }
+  .phase.open { background: var(--paper); box-shadow: var(--shadow-lift); }
+  .phase-header { padding: 1.8rem 2rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; cursor: pointer; user-select: none; }
+  .phase-number { font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 300; color: var(--oxblood); line-height: 1; font-style: italic; min-width: 3rem; }
+  .phase-title-wrap .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .phase-title-wrap h3 { font-weight: 500; color: var(--ink); }
+  .phase-title-wrap h3 em { color: var(--oxblood); font-style: italic; }
+  .phase-toggle { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--ink-soft); transition: transform 0.3s ease; }
+  .phase.open .phase-toggle { transform: rotate(45deg); color: var(--oxblood); }
+  .phase-body { max-height: 0; overflow: hidden; padding: 0 2rem; transition: max-height 0.4s ease, padding 0.4s ease; }
+  .phase.open .phase-body { max-height: 12000px; padding: 0 2rem 2.5rem; }
+  .curiosity-hook { font-family: 'Fraunces', serif; font-size: 1.2rem; font-style: italic; color: var(--ink-soft); border-left: 3px solid var(--oxblood); padding-left: 1.2rem; margin: 1.5rem 0 2rem; max-width: 58ch; line-height: 1.55; }
+  .objectives { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.8rem; margin: 1.5rem 0 2.5rem; border-radius: 2px; }
+  .objectives h4 { margin-bottom: 0.8rem; color: var(--oxblood); font-size: 0.8rem; }
+  .objectives ul { list-style: none; padding: 0; }
+  .objectives li { padding: 0.3rem 0 0.3rem 1.6rem; position: relative; font-size: 0.96rem; }
+  .objectives li::before { content: '◆'; position: absolute; left: 0; color: var(--oxblood); font-size: 0.6rem; top: 0.55rem; }
+  .bloom-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.2em 0.5em; border-radius: 3px; background: var(--oxblood); color: var(--paper); margin-right: 0.5em; text-transform: uppercase; font-weight: 500; }
+  .concept-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  @media (max-width: 780px) { .concept-cards { grid-template-columns: 1fr; } }
+  .concept-card { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.4rem 1.5rem; border-radius: 2px; border-left: 3px solid var(--ochre); position: relative; }
+  .concept-card:nth-child(2n) { border-left-color: var(--moss); }
+  .concept-card:nth-child(3n) { border-left-color: var(--rust); }
+  .concept-card:nth-child(4n) { border-left-color: var(--oxblood); }
+  .concept-card h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; }
+  .concept-card .analogy { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 0.92rem; margin: 0.5rem 0 0.8rem; border-top: 1px dashed var(--rule); padding-top: 0.7rem; }
+  .concept-card p { font-size: 0.93rem; margin-bottom: 0.4rem; max-width: none; }
+  .visual { background: var(--paper); border: 1px solid var(--rule); padding: 2rem; margin: 2rem 0; border-radius: 2px; position: relative; overflow-x: auto; }
+  .visual .caption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .visual svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .mentor-analogy { background: var(--ink); color: var(--paper); padding: 2rem 2.2rem; margin: 2rem 0; border-radius: 2px; position: relative; border-left: 4px solid var(--ochre); }
+  .mentor-analogy .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.8rem; }
+  .mentor-analogy p { font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.6; font-weight: 300; max-width: 58ch; }
+  .mentor-analogy p em { color: var(--ochre); font-style: italic; }
+  .checkpoint { border: 2px dashed var(--oxblood); background: transparent; padding: 1.5rem 1.8rem; margin: 2rem 0; border-radius: 2px; }
+  .checkpoint h4 { color: var(--oxblood); margin-bottom: 0.6rem; }
+  .checkpoint p { font-size: 0.94rem; margin-bottom: 0.4rem; }
+  .checkpoint ul { list-style: none; padding: 0; }
+  .checkpoint li { padding: 0.25rem 0 0.25rem 1.4rem; position: relative; font-size: 0.94rem; }
+  .checkpoint li::before { content: '□'; position: absolute; left: 0; color: var(--oxblood); font-family: 'JetBrains Mono', monospace; }
+  .flip-card { perspective: 1200px; height: 220px; margin: 2rem 0; cursor: pointer; }
+  .flip-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s ease; transform-style: preserve-3d; }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; padding: 1.8rem 2rem; border-radius: 2px; display: flex; flex-direction: column; justify-content: center; }
+  .flip-front { background: var(--paper-dark); border: 1px solid var(--rule-strong); }
+  .flip-front .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oxblood); margin-bottom: 0.7rem; }
+  .flip-front h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+  .flip-front .hint { font-size: 0.82rem; color: var(--ink-soft); margin-top: 1rem; font-style: italic; }
+  .flip-back { background: var(--ink); color: var(--paper); transform: rotateY(180deg); border-left: 4px solid var(--ochre); }
+  .flip-back .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.7rem; }
+  .flip-back p { font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.55; max-width: none; font-weight: 300; }
+  .memory-hook { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 2px; font-size: 0.93rem; }
+  .memory-hook .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre-deep); margin-bottom: 0.4rem; }
+  .memory-hook strong { color: var(--oxblood); }
+  .jargon-tier { margin: 2rem 0; padding: 1.8rem 2rem; background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 2px; }
+  .jargon-tier h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 0.4rem; color: var(--oxblood); }
+  .jargon-tier .tier-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .jargon-tier dl { display: grid; grid-template-columns: 180px 1fr; gap: 0.8rem 1.5rem; }
+  .jargon-tier dt { font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+  .jargon-tier dd { color: var(--ink-soft); font-size: 0.93rem; }
+  @media (max-width: 680px) { .jargon-tier dl { grid-template-columns: 1fr; gap: 0.3rem 0; } .jargon-tier dd { margin-bottom: 0.8rem; padding-left: 0.8rem; border-left: 2px solid var(--oxblood); } }
+  .pitfall-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .pitfall-grid { grid-template-columns: 1fr; } }
+  .pitfall { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; border-top: 3px solid var(--rust); position: relative; }
+  .pitfall .num { position: absolute; top: 0.8rem; right: 1rem; font-family: 'Fraunces', serif; font-size: 1.8rem; color: var(--rust); font-style: italic; opacity: 0.5; line-height: 1; }
+  .pitfall h4 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; max-width: 90%; }
+  .pitfall p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .pitfall .rescue { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.88rem; color: var(--moss); padding-top: 0.5rem; margin-top: 0.5rem; border-top: 1px dashed var(--rule); }
+  .crossdomain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .crossdomain-grid { grid-template-columns: 1fr; } }
+  .crossdomain { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; }
+  .crossdomain .domain { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oxblood); margin-bottom: 0.5rem; }
+  .crossdomain h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.7rem; }
+  .crossdomain p { font-size: 0.9rem; color: var(--ink-soft); }
+  .spaced-rep { background: var(--paper-warm); border: 1px solid var(--rule); padding: 2rem; border-radius: 2px; margin: 2rem 0; overflow-x: auto; }
+  .sr-timeline { display: grid; grid-template-columns: repeat(8, minmax(88px, 1fr)); gap: 0.8rem; margin-top: 1.5rem; min-width: 700px; }
+  .sr-day { padding: 1rem 0.8rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; text-align: center; position: relative; }
+  .sr-day::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: var(--oxblood); border-radius: 50%; }
+  .sr-day .day-num { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 500; color: var(--oxblood); font-style: italic; }
+  .sr-day .day-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.3rem; }
+  .sr-day .day-task { font-size: 0.78rem; margin-top: 0.5rem; color: var(--ink); line-height: 1.3; }
+  .closing { background: var(--ink); color: var(--paper); padding: 5rem 2rem; margin-top: 4rem; }
+  .closing h2 { color: var(--paper); max-width: 24ch; margin-bottom: 2rem; }
+  .closing h2 em { color: var(--ochre); font-style: italic; }
+  .closing p { font-family: 'Fraunces', serif; font-size: 1.2rem; line-height: 1.6; font-weight: 300; max-width: 58ch; color: rgba(245,239,223,0.88); }
+  .closing .mantra { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.5rem; color: var(--ochre); padding: 2rem 0; margin: 2rem 0; border-top: 1px solid rgba(200,152,74,0.3); border-bottom: 1px solid rgba(200,152,74,0.3); max-width: 54ch; }
+  footer { padding: 2rem; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); background: var(--paper); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="brand">The Scholars' <em>Guild</em></div>
+  <ul>
+    <li><a href="#hook">Hook</a></li><li><a href="#analogy">Analogy</a></li><li><a href="#map">Map</a></li>
+    <li><a href="#day1">Day 1</a></li><li><a href="#day2">Day 2</a></li><li><a href="#day3">Day 3</a></li>
+    <li><a href="#day4">Day 4</a></li><li><a href="#day5">Day 5</a></li>
+    <li><a href="#jargon">Jargon</a></li><li><a href="#pitfalls">Pitfalls</a></li><li><a href="#spaced">Review</a></li>
+  </ul>
+</nav>
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+<main>
+
+<header class="hero wrap">
+  <div class="hero-meta">Module 09 · Medical Affairs · Five-Day Theoretical Roadmap</div>
+  <h1>The Scholars' <em>Guild</em>.</h1>
+  <p class="lede">In the modern pharmaceutical company, there is one function whose credibility depends on its <em>independence</em> from commercial pressure — and whose influence depends on everyone knowing that its independence is real. That function is Medical Affairs, and its whole operating model is a long argument with itself about where the line sits.</p>
+  <svg class="hero-ornament" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="hg9" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6B2A2A" stop-opacity="0.4"/><stop offset="100%" stop-color="#6B2A2A" stop-opacity="0.05"/></radialGradient></defs>
+    <circle cx="190" cy="190" r="170" fill="none" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="2 6" opacity="0.25"/>
+    <circle cx="190" cy="190" r="150" fill="none" stroke="#0F1B2D" stroke-width="1.2" opacity="0.3"/>
+    <circle cx="190" cy="190" r="138" fill="url(#hg9)"/>
+    <circle cx="190" cy="190" r="138" fill="none" stroke="#6B2A2A" stroke-width="0.8" opacity="0.5"/>
+    <!-- Central open book / manuscript -->
+    <g transform="translate(190, 190)">
+      <!-- Book base -->
+      <path d="M -70 -20 L 0 -30 L 70 -20 L 70 40 L 0 50 L -70 40 Z" fill="#4A1E1E" opacity="0.95" stroke="#C8984A" stroke-width="1"/>
+      <!-- Spine / center fold -->
+      <line x1="0" y1="-30" x2="0" y2="50" stroke="#C8984A" stroke-width="1.2" opacity="0.85"/>
+      <!-- Left page lines -->
+      <g stroke="#C8984A" stroke-width="0.5" opacity="0.55">
+        <line x1="-58" y1="-12" x2="-8" y2="-18"/>
+        <line x1="-58" y1="-2" x2="-8" y2="-8"/>
+        <line x1="-58" y1="8" x2="-8" y2="2"/>
+        <line x1="-58" y1="18" x2="-8" y2="12"/>
+        <line x1="-58" y1="28" x2="-8" y2="22"/>
+      </g>
+      <!-- Right page lines -->
+      <g stroke="#C8984A" stroke-width="0.5" opacity="0.55">
+        <line x1="8" y1="-18" x2="58" y2="-12"/>
+        <line x1="8" y1="-8" x2="58" y2="-2"/>
+        <line x1="8" y1="2" x2="58" y2="8"/>
+        <line x1="8" y1="12" x2="58" y2="18"/>
+        <line x1="8" y1="22" x2="58" y2="28"/>
+      </g>
+      <!-- Quill / pen overlay -->
+      <g transform="rotate(-20)">
+        <line x1="-18" y1="-45" x2="22" y2="-10" stroke="#C8984A" stroke-width="2"/>
+        <path d="M -18 -45 L -24 -52 L -20 -42 Z" fill="#C8984A"/>
+      </g>
+    </g>
+    <!-- Orbital guild labels -->
+    <g font-family="'JetBrains Mono', monospace" font-size="8" fill="#6B2A2A" letter-spacing="2" font-weight="600">
+      <text x="190" y="28" text-anchor="middle">MSL</text>
+      <text x="340" y="120" text-anchor="middle">KOL</text>
+      <text x="360" y="230" text-anchor="middle">PUBS</text>
+      <text x="250" y="352" text-anchor="middle">MI</text>
+      <text x="130" y="352" text-anchor="middle">HEOR</text>
+      <text x="20" y="230" text-anchor="middle">IEP</text>
+      <text x="40" y="120" text-anchor="middle">ADVBD</text>
+    </g>
+    <g fill="#6B2A2A" opacity="0.55">
+      <circle cx="190" cy="40" r="2.5"/>
+      <circle cx="320" cy="108" r="2.5"/>
+      <circle cx="340" cy="218" r="2.5"/>
+      <circle cx="250" cy="340" r="2.5"/>
+      <circle cx="130" cy="340" r="2.5"/>
+      <circle cx="58" cy="218" r="2.5"/>
+      <circle cx="60" cy="108" r="2.5"/>
+    </g>
+    <!-- Laurel half-wreath across bottom -->
+    <g stroke="#6B2A2A" stroke-width="1" fill="none" opacity="0.45">
+      <path d="M 80 300 Q 120 340 160 350"/>
+      <path d="M 300 300 Q 260 340 220 350"/>
+    </g>
+    <g fill="#6B2A2A" opacity="0.4">
+      <ellipse cx="100" cy="314" rx="5" ry="2.5" transform="rotate(30 100 314)"/>
+      <ellipse cx="120" cy="328" rx="5" ry="2.5" transform="rotate(20 120 328)"/>
+      <ellipse cx="142" cy="340" rx="5" ry="2.5" transform="rotate(10 142 340)"/>
+      <ellipse cx="280" cy="314" rx="5" ry="2.5" transform="rotate(-30 280 314)"/>
+      <ellipse cx="260" cy="328" rx="5" ry="2.5" transform="rotate(-20 260 328)"/>
+      <ellipse cx="238" cy="340" rx="5" ry="2.5" transform="rotate(-10 238 340)"/>
+    </g>
+  </svg>
+</header>
+
+<section id="hook" class="wrap-narrow">
+  <div class="hook-card">
+    <div class="label">The hook</div>
+    <p>In May 2004, Warner-Lambert — a subsidiary of Pfizer — pled guilty to federal criminal charges and paid $430 million in penalties. The drug was Neurontin (gabapentin), approved by the FDA only as an adjunctive therapy for partial seizures. The company had, over several years, orchestrated a systematic off-label promotion campaign worth billions in revenue: paid "independent" speakers delivering scripted talks, ghost-written articles placed in peer-reviewed journals, supposedly unsolicited medical-information letters sent to tens of thousands of physicians, continuing-medical-education grants steered toward off-label indications, and medical-science-liaison visits that were, in practice, a soft sales channel. Ninety-four percent of prescriptions, at peak, were for uses the FDA had never approved. The case became one of the foundational <em>United States ex rel. Franklin</em> qui tam settlements — and it is, more than any other event, <em>why the modern Medical Affairs function exists as a compliance-firewalled, science-only entity separated from Commercial.</em> Everything you are about to learn — the church-state separation, the field medical compliance code, the unsolicited-request doctrine, the publications governance — is scar tissue from Neurontin.</p>
+  </div>
+</section>
+
+<section id="analogy" class="wrap-narrow">
+  <div class="section-label">The elevator pitch</div>
+  <h2>Medical Affairs is the learned society inside the corporation.</h2>
+  <p>Every pharmaceutical company contains two populations. The first are the people whose job is to <em>sell</em> — to build demand, grow share, compete for formulary access, persuade prescribers. That work is legitimate, necessary, heavily regulated, and fundamentally commercial. The second are the people whose job is to <em>know</em> — to generate evidence, to converse with the scientific community as peers, to interpret data without bias toward their own molecule, and to be trusted by external experts <em>precisely because</em> they are not selling. The first group produces revenue. The second produces something more fragile and arguably more valuable: <em>the scientific reputation</em> that gives the first group anything credible to sell.</p>
+
+  <div class="master-analogy">
+    <h4>The master analogy — the learned society, the scholars' guild, the resident faculty</h4>
+    <p>Imagine a medieval university embedded inside a merchant house. The merchants trade, negotiate, compete, take market risk. The scholars teach, publish, correspond with peers at other universities, sit on academic committees. The merchants depend on the scholars' reputation for their goods to carry intellectual weight; the scholars depend on the merchants' revenue for their institution to exist. But the two populations live under <em>different codes</em> — the merchants under contract law, the scholars under the academic honor code — and everyone inside and outside the institution knows which code applies to which person. When a scholar writes a treatise, the treatise stands or falls on its scholarship. When a merchant sells a good, the sale stands or falls on its commerce. <em>The scandal — the catastrophic, career-ending scandal — is when the two codes get mixed.</em> A scholar who secretly sells, or a merchant who wears academic robes to close a deal, breaks the institution's legitimacy.</p>
+    <p>Medical Affairs is the scholars' guild inside the pharmaceutical company. The <em>Chief Medical Officer</em> is the guild-master. <em>Medical Science Liaisons</em> are the traveling scholars — peer-level emissaries to external KOLs, forbidden from selling, trained to discuss science only. The <em>Integrated Evidence Plan</em> is the research program of the guild. The <em>publication plan</em> is the guild's scholarly output schedule. <em>Advisory boards</em> are the guild's standing consultations with external faculty. <em>Medical Information</em> is the guild's library and reference desk — responding to inquiries with citations, not slogans. The <em>medical-legal-regulatory (MLR) review</em> is the guild's editorial committee, ensuring nothing leaves with the institution's seal unless it meets the standard. And the compliance firewall between Medical and Commercial is the physical architecture of the medieval university itself — the cloister wall that kept the scholars' work from being purchased outright.</p>
+
+    <div class="mapping-grid">
+      <div class="from">Guild-master · dean of faculty</div><div class="arrow">—→</div><div class="to">Chief Medical Officer</div>
+      <div class="from">Traveling scholar · visiting lecturer</div><div class="arrow">—→</div><div class="to">Medical Science Liaison (MSL)</div>
+      <div class="from">External faculty · academic correspondents</div><div class="arrow">—→</div><div class="to">Key Opinion Leaders (KOLs), digital opinion leaders</div>
+      <div class="from">The guild's research programme</div><div class="arrow">—→</div><div class="to">Integrated Evidence Plan (IEP)</div>
+      <div class="from">Scholarly output schedule</div><div class="arrow">—→</div><div class="to">Publication plan (GPP-compliant, ICMJE-aligned)</div>
+      <div class="from">Standing consultation with external faculty</div><div class="arrow">—→</div><div class="to">Advisory board + scientific steering committee</div>
+      <div class="from">Guild library · reference desk</div><div class="arrow">—→</div><div class="to">Medical Information (MI) function</div>
+      <div class="from">Editorial committee · imprimatur</div><div class="arrow">—→</div><div class="to">Medical-Legal-Regulatory (MLR) review</div>
+      <div class="from">Congress of scholars · disputations</div><div class="arrow">—→</div><div class="to">Congress presentations, symposia, satellite sessions</div>
+      <div class="from">Apprentice-funded research</div><div class="arrow">—→</div><div class="to">Investigator-Initiated Studies (IIS) grants</div>
+      <div class="from">Independent teaching grant</div><div class="arrow">—→</div><div class="to">Independent Medical Education (IME) grants</div>
+      <div class="from">Ledger of scholarly correspondence</div><div class="arrow">—→</div><div class="to">Field medical CRM · insight capture platform</div>
+      <div class="from">The cloister wall</div><div class="arrow">—→</div><div class="to">Medical/Commercial compliance firewall · PhRMA Code</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap-narrow">
+  <div class="section-label">Origin story</div>
+  <h2>How the guild was founded — a profession written into being by consent decrees.</h2>
+  <p>For most of the 20th century, "medical departments" at pharmaceutical companies were thinly-staffed units inside commercial organizations. They answered physician letters, wrote package-insert revisions, and occasionally attended congresses. The <em>scientific</em> conversation with KOLs was handled by sales reps with better CVs. There was no firewall, no separate reporting line, no distinct professional identity. The work got done; the conflicts of interest were largely invisible; the external medical community mostly trusted what it was told.</p>
+  <p>The collapse of that model was not a single event but a sequence of consent decrees, qui tam settlements, and regulatory actions stretching from the mid-1990s through the mid-2010s. <em>1997 FDAMA Section 401</em> created limited exceptions for responding to unsolicited physician requests for off-label information — implicitly requiring that someone non-commercial be available to respond. The <em>2002 PhRMA Code on Interactions with Healthcare Professionals</em> (voluntary; strengthened in 2009) began articulating what separated legitimate scientific exchange from promotion. The <em>2004 Warner-Lambert / Neurontin settlement</em> and the subsequent cascade — <em>Pfizer / Bextra 2009 ($2.3B)</em>, <em>Eli Lilly / Zyprexa 2009 ($1.4B)</em>, <em>GSK / Paxil-Wellbutrin-Avandia 2012 ($3B)</em>, <em>Johnson &amp; Johnson / Risperdal 2013 ($2.2B)</em> — hammered into the industry that the distinction between promotion and science could not be left to good intentions.</p>
+  <p>Each settlement brought a <em>Corporate Integrity Agreement</em> (CIA) with the Office of Inspector General, typically five years in duration, mandating structural reforms: separated reporting lines for Medical Affairs, MSL activity logs, MLR review of all HCP-facing materials, monitoring of advisory boards, scrutiny of speaker programs. The profession we now call Medical Affairs was, in large part, <em>codified into existence by these CIAs</em>. The <em>2010 Physician Payments Sunshine Act</em> (effective 2013, as Open Payments) made all transfers of value to physicians public — a transparency regime that further reshaped what kinds of engagement were possible. The rise of <em>ICMJE</em> authorship standards and <em>GPP (Good Publication Practice, first published 2003, revised through GPP4 2022)</em> codified ethics for pharma-sponsored publications. The arrival of <em>MSL-specific credentialing</em> (BCMAS, ACMA) in the 2010s professionalized the role as a peer-level scientist rather than a disguised sales channel. And the <em>2016+</em> era of real-world evidence, integrated evidence planning, and digital KOL engagement transformed Medical Affairs from a support function into, at leading companies, a co-equal strategic partner to R&amp;D and Commercial.</p>
+  <p>The irony is that the function now considered foundational to pharmaceutical integrity is the one least visible to patients and most recently constituted as a profession. The scholars' guild was not founded. It was sentenced into being.</p>
+</section>
+
+<section id="map" class="wrap">
+  <div class="section-label">The concept web</div>
+  <h2>The Medical Affairs operating system, in one diagram.</h2>
+  <p>The four pillars of Medical Affairs are not independent workstreams but a single <em>evidence-to-understanding loop</em> — <strong>Plan, Engage, Publish, Listen</strong>. Evidence plans generate data; engagement disseminates and collects reactions; publications codify the evidence as public record; insights from the field and from information requests feed back into the next plan. Done well, the loop spins for the entire life of the product and often outlasts the commercial franchise itself.</p>
+  <div class="concept-map-wrap">
+    <div class="mermaid">
+flowchart LR
+  classDef central fill:#6B2A2A,stroke:#0F1B2D,color:#F5EFDF,stroke-width:2px,font-weight:600
+  classDef pillar fill:#EEE5CE,stroke:#0F1B2D,color:#0F1B2D,stroke-width:1.5px,font-weight:500
+  classDef sub fill:#F5EFDF,stroke:#0F1B2D,color:#2A3B52,stroke-width:1px,stroke-dasharray:3 3
+  CORE[Scientific credibility:<br/>the currency Medical<br/>Affairs spends]:::central
+  P[Plan:<br/>Evidence strategy,<br/>IEP, gap analysis]:::pillar
+  E[Engage:<br/>KOLs, MSLs, advisory<br/>boards, congress]:::pillar
+  U[Publish:<br/>Manuscripts, abstracts,<br/>posters, reviews]:::pillar
+  L[Listen:<br/>MI, field insights,<br/>unmet needs]:::pillar
+  CORE --- P
+  CORE --- E
+  CORE --- U
+  CORE --- L
+  P --- p1[Evidence gap matrix]:::sub
+  P --- p2[RCT · RWE · HEOR · PROs]:::sub
+  P --- p3[Phase IV · IIS · PMR]:::sub
+  E --- e1[KOL mapping · tiering]:::sub
+  E --- e2[MSL field plan]:::sub
+  E --- e3[Advisory boards · congress]:::sub
+  U --- u1[GPP · ICMJE · authorship]:::sub
+  U --- u2[Narrative · storyboarding]:::sub
+  U --- u3[Omnichannel dissemination]:::sub
+  L --- l1[MI inquiries · off-label]:::sub
+  L --- l2[Field insight capture]:::sub
+  L --- l3[Theme synthesis · action]:::sub
+  P -.-&gt; E
+  E -.-&gt; U
+  U -.-&gt; L
+  L -.-&gt; P
+    </div>
+  </div>
+</section>
+
+<!-- DAY 1 -->
+<section id="day1" class="wrap">
+  <div class="section-label">Day 01 · The Charter</div>
+  <h2>Medical strategy &amp; the integrated evidence plan.</h2>
+  <div class="phases-container">
+    <div class="phase open">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">01</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Remember + Understand · ~2.5 hrs</div><h3>Scientific strategy &amp; evidence generation — <em>the IEP as the guild's charter</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">Most external physicians have a rough, mostly-accurate mental model of what the commercial side of a pharma company does. Almost none have an accurate model of what Medical Affairs does. The profession's identity problem is also its structural advantage: to do the work well, Medical Affairs must be <em>visible enough</em> that external KOLs know a non-commercial interlocutor exists, and <em>invisible enough</em> that the conversation is judged on scientific merit alone.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 1</span>Learning objectives</h4>
+          <ul>
+            <li>Define Medical Affairs' four pillars and distinguish each from the comparable Commercial activity</li>
+            <li>Understand the compliance firewall — what Medical can and cannot do with Commercial</li>
+            <li>Grasp the Integrated Evidence Plan (IEP) — structure, inputs, governance cadence</li>
+            <li>Recognize evidence types: RCT, RWE, HEOR, PROs — and when each is the right tool</li>
+            <li>Understand the role of Phase IV studies, PMRs, and investigator-initiated studies (IIS)</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--oxblood);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The four pillars &amp; the compliance firewall</h4>
+            <p>Medical Affairs operates four main pillars: <strong>Scientific Strategy &amp; Evidence Generation</strong>, <strong>External Engagement (MSLs &amp; KOLs)</strong>, <strong>Medical Communications &amp; Publications</strong>, and <strong>Medical Information &amp; Field Insights</strong>. A hard <strong>compliance firewall</strong> governs what Medical can share with Commercial: aggregated insights yes, identifiable KOL preferences no; scientific narrative yes, sales talking points no; off-label response to unsolicited physician inquiries yes, proactive off-label messaging never. Reporting lines typically run to a Chief Medical Officer, separate from Commercial.</p>
+            <div class="analogy">The medieval university's cloister wall. Scholars and merchants can converse in the courtyard, trade ideas, even share meals — but the scriptorium is off-limits to the merchant, and the merchant's ledger is off-limits to the scholar. The wall defines what each can do, not whether they know each other.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The Integrated Evidence Plan (IEP)</h4>
+            <p>The <strong>IEP</strong> is Medical Affairs' strategic charter for a product or indication — a living document that maps <em>every evidence need</em> (efficacy, safety, real-world effectiveness, comparative effectiveness, patient experience, health economics) against <em>every planned evidence-generating activity</em> (RCTs, RWE studies, HEOR analyses, PRO validation, meta-analyses) across a 3–5 year horizon. Governance usually includes a cross-functional IEP Committee that meets quarterly to review progress, reprioritize, and approve new studies. A good IEP outlives any single launch plan.</p>
+            <div class="analogy">A university department's five-year research plan — what questions the faculty will pursue, what grants will fund them, what publications will emerge, what conferences they will attend. It guides individual researchers while leaving room for serendipity.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Evidence types — RCT, RWE, HEOR, PROs</h4>
+            <p><strong>RCT (randomized controlled trial)</strong> provides regulatory-grade efficacy and safety evidence. <strong>RWE (real-world evidence)</strong> — from claims, EHR, registries — shows how the drug performs in routine clinical practice rather than trial conditions. <strong>HEOR (Health Economics and Outcomes Research)</strong> provides cost-effectiveness, budget impact, and value-based pricing evidence demanded by payers and HTA bodies. <strong>PROs (patient-reported outcomes)</strong> capture the patient voice — quality of life, symptom burden, treatment satisfaction. Each answers questions the others cannot.</p>
+            <div class="analogy">The four instruments of an orchestra's string section. Each has a distinct voice and repertoire; a symphony uses all four together because no single instrument can produce the full sound.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Phase IV, PMRs, and Investigator-Initiated Studies</h4>
+            <p><strong>Phase IV studies</strong> are sponsor-initiated post-approval studies addressing questions the registration trials did not. <strong>Post-Marketing Requirements (PMRs)</strong> are FDA-mandated post-approval studies — often safety-focused — with binding deadlines. <strong>Investigator-Initiated Studies (IIS)</strong> are proposed, designed, and led by external investigators; the sponsor provides the drug and, often, funding, but the investigator is the sponsor of the IND. IIS governance is a compliance tightrope — legitimate scientific support yes, disguised promotion never.</p>
+            <div class="analogy">The university's three modes of research. In-house programs (Phase IV), grant-required deliverables (PMRs), and faculty-initiated projects funded by external patronage (IIS). All legitimate; each requiring different oversight.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 1 · The four pillars of Medical Affairs, with the Commercial firewall</div>
+          <svg viewBox="0 0 980 440" xmlns="http://www.w3.org/2000/svg">
+            <!-- Firewall vertical line (conceptual division) -->
+            <line x1="490" y1="40" x2="490" y2="400" stroke="#6B2A2A" stroke-width="2.5" stroke-dasharray="10 4" opacity="0.55"/>
+            <text x="490" y="24" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6B2A2A" letter-spacing="3" font-weight="600">↓ THE COMPLIANCE FIREWALL · MEDICAL LEFT · COMMERCIAL RIGHT ↓</text>
+            <!-- Left side: four Medical Affairs pillars -->
+            <g font-family="'Inter Tight', sans-serif">
+              <rect x="30" y="60" width="200" height="120" fill="#4A1E1E" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="130" y="88" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#C8984A" font-weight="600">Pillar 1</text>
+              <text x="130" y="108" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Scientific Strategy</text>
+              <text x="130" y="124" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">&amp; Evidence Generation</text>
+              <text x="130" y="148" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">IEP · RCT · RWE · HEOR · IIS</text>
+              <text x="130" y="164" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">Phase IV · PMR · PROs</text>
+
+              <rect x="260" y="60" width="200" height="120" fill="#6B2A2A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="360" y="88" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#C8984A" font-weight="600">Pillar 2</text>
+              <text x="360" y="108" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">External Engagement</text>
+              <text x="360" y="124" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">KOLs &amp; MSLs</text>
+              <text x="360" y="148" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">KOL map · tiering · advisory</text>
+              <text x="360" y="164" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">MSL field plan · congress</text>
+
+              <rect x="30" y="220" width="200" height="120" fill="#6B2A2A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="130" y="248" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#C8984A" font-weight="600">Pillar 3</text>
+              <text x="130" y="268" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Medical Communications</text>
+              <text x="130" y="284" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">&amp; Publications</text>
+              <text x="130" y="308" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">GPP · ICMJE · pub plan</text>
+              <text x="130" y="324" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">manuscripts · posters · IME</text>
+
+              <rect x="260" y="220" width="200" height="120" fill="#4A1E1E" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="360" y="248" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#C8984A" font-weight="600">Pillar 4</text>
+              <text x="360" y="268" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Medical Information</text>
+              <text x="360" y="284" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">&amp; Field Insights</text>
+              <text x="360" y="308" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">MI inquiries · off-label</text>
+              <text x="360" y="324" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">insight capture · themes</text>
+            </g>
+            <!-- Left header -->
+            <rect x="30" y="375" width="430" height="30" fill="#6B2A2A" opacity="0.85"/>
+            <text x="245" y="394" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-style="italic" font-weight="500">MEDICAL AFFAIRS · reports to CMO · non-promotional</text>
+            <!-- Right side: Commercial (abbreviated) -->
+            <g font-family="'Inter Tight', sans-serif">
+              <rect x="530" y="60" width="200" height="80" fill="#E4D8B8" opacity="0.85" stroke="#2A3B52" stroke-width="0.6"/>
+              <text x="630" y="88" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="600">Brand Marketing</text>
+              <text x="630" y="108" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">promotional · positioning</text>
+              <text x="630" y="122" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">campaign · omnichannel</text>
+              <rect x="750" y="60" width="200" height="80" fill="#E4D8B8" opacity="0.85" stroke="#2A3B52" stroke-width="0.6"/>
+              <text x="850" y="88" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="600">Sales &amp; Account Mgmt</text>
+              <text x="850" y="108" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">reps · reach &amp; frequency</text>
+              <text x="850" y="122" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">formulary · access</text>
+              <rect x="530" y="160" width="200" height="80" fill="#E4D8B8" opacity="0.85" stroke="#2A3B52" stroke-width="0.6"/>
+              <text x="630" y="188" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="600">Market Access / Payer</text>
+              <text x="630" y="208" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">pricing · contracting</text>
+              <rect x="750" y="160" width="200" height="80" fill="#E4D8B8" opacity="0.85" stroke="#2A3B52" stroke-width="0.6"/>
+              <text x="850" y="188" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="600">Forecasting &amp; Analytics</text>
+              <text x="850" y="208" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">Rx · share · revenue</text>
+              <rect x="530" y="260" width="420" height="80" fill="#EEE5CE" opacity="0.85" stroke="#2A3B52" stroke-width="0.6" stroke-dasharray="4 3"/>
+              <text x="740" y="288" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="600">Appropriate interfaces</text>
+              <text x="740" y="308" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">Aggregated insights shared · scientific narrative</text>
+              <text x="740" y="322" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">NOT: identifiable KOL prefs · promotional direction</text>
+            </g>
+            <rect x="530" y="375" width="420" height="30" fill="#2A3B52" opacity="0.85"/>
+            <text x="740" y="394" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#F5EFDF" font-style="italic" font-weight="500">COMMERCIAL · reports to GM · promotional</text>
+            <text x="490" y="428" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">FIREWALL = CLOISTER WALL · PERMEABLE TO SCIENCE · IMPERMEABLE TO COMMERCE</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The question every new Medical Affairs person eventually has to answer in their own head, because nobody will answer it for them, is: <em>"When a commercial colleague asks me something that feels just slightly over the line, what exactly is the line?"</em> The answer I was given, and which I have never found a better version of, is: <em>the line is whether your response would feel appropriate if it appeared word-for-word in a qui tam deposition ten years from now.</em> Not whether it's technically allowed. Not whether everyone in the room wants the answer. Not whether the policy manual explicitly prohibits it. The line is whether a federal prosecutor, reading the transcript in 2035, would conclude that Medical Affairs had behaved like scholars or like salespeople with better degrees. Most Medical Affairs professionals never see that prosecutor. But some do. And the ones who do almost always discover that the decisions they most regret are the ones where they talked themselves into thinking the line was further out than it actually was.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 1 checkpoint</h4>
+          <ul>
+            <li>Name the four pillars of Medical Affairs and what each owns</li>
+            <li>Draw the Medical-Commercial firewall and give three things that cross it vs. three that do not</li>
+            <li>Outline the contents of an IEP and explain why it is a living document</li>
+            <li>Distinguish RCT, RWE, HEOR, and PRO evidence and give a question each is best at answering</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A brand director asks Medical Affairs: "Which KOLs on your tier list are most likely to be willing speakers for our next promotional campaign?" How do you respond, and why?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>You do not answer the question as asked, because answering it compromises the firewall. The KOL tier list is Medical's scientific-influence assessment, built from publication record, citation network, peer centrality, and MSL insight — none of which should be used to screen speakers for promotional activity. If the list were shared for promotional-recruitment purposes, Medical's KOL relationships would, at a single stroke, be reframed externally as disguised commercial sourcing. The correct response has three parts. <strong>One:</strong> explain that Medical maintains a KOL list for scientific-engagement purposes (advisory boards, publication collaboration, IIS review) and that list does not inform promotional speaker recruitment. <strong>Two:</strong> point to the appropriate channel — the Commercial speakers bureau, which operates under separate governance, identifies its own speakers through proper recruitment processes, and is subject to Open Payments reporting. <strong>Three:</strong> offer the legitimate alternative — if the brand wants an expert perspective on unmet needs or disease burden for its own strategic planning, Medical can provide aggregated insights from its KOL interactions, without identifying individual KOLs. The underlying principle: <em>Medical's KOL relationships are the institutional asset of the scholars' guild, not a directory Commercial can shop. Sharing the directory would not just cross the firewall; it would dissolve it.</em></p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>P-E-U-L:</strong> the four pillars — <em>Plan, Engage, Publish, Listen.</em> Or: Scientific Strategy, External Engagement, Medical Communications, Medical Information / Insights.<br>
+          <strong>I-E-P:</strong> <em>Integrated Evidence Plan.</em> The single document that ties RCT, RWE, HEOR, and PROs into one multi-year scientific strategy.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 2 -->
+    <div class="phase" id="day2">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">02</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Understand + Apply · ~3 hrs</div><h3>KOL engagement &amp; the MSL — <em>the travelling scholar</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">The paradox of the Medical Science Liaison is that its defining feature is what the role <em>cannot</em> do. An MSL cannot distribute promotional materials, cannot discuss off-label uses unsolicited, cannot claim superiority over competitors, cannot take orders, cannot deliver sales messages however scientifically framed. And yet: a good MSL is often the most valuable person in the company to a senior KOL, precisely because every minute spent with them is trustworthy in a way that no sales call can ever be. The constraints <em>are</em> the value proposition.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 2</span>Learning objectives</h4>
+          <ul>
+            <li>Understand the KOL hierarchy — thought leader, opinion leader, digital opinion leader, patient advocate</li>
+            <li>Master KOL mapping and tiering — publications, citations, affiliations, network centrality</li>
+            <li>Understand MSL role, compliance guardrails, and productivity metrics</li>
+            <li>Grasp advisory board design — FMV, governance, insight capture, documentation</li>
+            <li>Appreciate digital opinion leaders (DOLs) and the 2020+ shift in influence networks</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--oxblood);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>KOL hierarchy &amp; mapping</h4>
+            <p>The field distinguishes <strong>global</strong> KOLs (authors of practice-defining papers, international society leaders), <strong>national</strong> KOLs (national society positions, guideline authors), <strong>regional</strong> KOLs (academic centers, large community practice influence), and <strong>local/rising</strong> KOLs (early-career, high-engagement in specific geographies). Modern mapping uses <strong>network-influence scoring</strong>: publication count, citation centrality, co-authorship networks, congress activity, affiliation tier, and — increasingly — digital presence and peer-discussion prominence.</p>
+            <div class="analogy">The citation graph of a scholarly field, read as a social network. Who cites whom? Who chairs which committee? Who is invited to give keynote lectures? The KOL map is the influence graph, quantified.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The MSL role &amp; guardrails</h4>
+            <p>The <strong>MSL</strong> is a PhD/PharmD/MD-level field scientist whose role is <strong>peer-to-peer scientific exchange</strong> with KOLs. Core activities: deep-dive scientific presentations on request, responding to KOL research interests, supporting advisory boards, capturing field insights, assisting investigator-initiated study submissions. Guardrails: no promotional materials, no unsolicited off-label discussion (the <em>Franklin</em> firewall), no sales quotas, no bonus tied to prescription outcomes, Open Payments reporting of all transfers of value, strict documentation of every interaction in a compliant CRM.</p>
+            <div class="analogy">The traveling scholar of the Renaissance — bearing a letter of introduction from their university, discussing ideas with foreign colleagues as equals, bringing back what was learned. Not selling anything; simply being known to exist, and being useful on request.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Advisory board design &amp; FMV</h4>
+            <p><strong>Advisory boards</strong> are structured consultations where external experts (typically 6–15 KOLs) provide scientific and strategic input on defined questions. Governance requires: legitimate scientific purpose (not promotional), <strong>Fair Market Value (FMV)</strong> honoraria (benchmarked to academic rates), pre-approved agenda and questions, MLR-approved materials, compliant facilitator, clean documentation of recommendations, and — critically — evidence that the advice was <em>used</em>. Advisory boards that cannot document how the input influenced subsequent strategy are the classic target of enforcement action.</p>
+            <div class="analogy">The standing external review board of an academic department. Convened for specific consultations, compensated at scholarly rates, their advice recorded and acted upon — with clear evidence that their role was to counsel, not to be courted.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Digital opinion leaders &amp; the 2020+ shift</h4>
+            <p><strong>Digital opinion leaders (DOLs)</strong> are clinicians whose influence operates partly or primarily through online channels — Twitter/X medical communities, LinkedIn, disease-specific forums, patient communities, podcasts, YouTube. In several therapeutic areas (oncology, rheumatology, dermatology, endocrinology), DOL influence on prescribing rivals or exceeds traditional KOL influence. Modern KOL mapping includes digital signals — follower count weighted by credentials, engagement rate, citation in community discussions, podcast listenership.</p>
+            <div class="analogy">The rise of public intellectuals in the Enlightenment — figures whose influence spread through pamphlets, correspondence societies, and coffeehouse discussions rather than university chairs alone. The university still mattered; but influence now had a second map.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 2 · The KOL influence map — tiers, channels, and the MSL's zone of engagement</div>
+          <svg viewBox="0 0 980 440" xmlns="http://www.w3.org/2000/svg">
+            <!-- Concentric tier circles -->
+            <circle cx="490" cy="220" r="180" fill="none" stroke="#6B2A2A" stroke-width="1" opacity="0.3" stroke-dasharray="3 3"/>
+            <circle cx="490" cy="220" r="135" fill="none" stroke="#6B2A2A" stroke-width="1" opacity="0.4" stroke-dasharray="3 3"/>
+            <circle cx="490" cy="220" r="90" fill="none" stroke="#6B2A2A" stroke-width="1" opacity="0.5" stroke-dasharray="3 3"/>
+            <circle cx="490" cy="220" r="45" fill="#4A1E1E" opacity="0.95" stroke="#C8984A" stroke-width="1"/>
+            <text x="490" y="217" text-anchor="middle" font-family="'Fraunces', serif" font-size="12" fill="#F5EFDF" font-weight="600">Global</text>
+            <text x="490" y="233" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#C8984A" letter-spacing="2">TIER 1</text>
+            <!-- Tier labels on the rings -->
+            <text x="490" y="123" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#6B2A2A" font-style="italic">National</text>
+            <text x="490" y="138" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#6B2A2A" letter-spacing="2">TIER 2</text>
+            <text x="490" y="78" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#6B2A2A" font-style="italic">Regional</text>
+            <text x="490" y="93" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#6B2A2A" letter-spacing="2">TIER 3</text>
+            <text x="490" y="30" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" fill="#6B2A2A" font-style="italic">Local · Rising</text>
+            <text x="490" y="45" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#6B2A2A" letter-spacing="2">TIER 4</text>
+            <!-- Signals on the map (example KOL dots) -->
+            <g fill="#6B2A2A">
+              <circle cx="420" cy="190" r="6" opacity="0.9"/>
+              <circle cx="555" cy="180" r="5" opacity="0.85"/>
+              <circle cx="510" cy="270" r="5" opacity="0.85"/>
+              <circle cx="400" cy="265" r="4" opacity="0.75"/>
+              <circle cx="580" cy="255" r="4" opacity="0.75"/>
+              <circle cx="370" cy="160" r="4" opacity="0.75"/>
+              <circle cx="600" cy="150" r="4" opacity="0.75"/>
+              <circle cx="330" cy="220" r="3.5" opacity="0.65"/>
+              <circle cx="640" cy="220" r="3.5" opacity="0.65"/>
+              <circle cx="490" cy="330" r="3.5" opacity="0.65"/>
+              <circle cx="390" cy="330" r="3" opacity="0.6"/>
+              <circle cx="580" cy="330" r="3" opacity="0.6"/>
+              <circle cx="310" cy="290" r="3" opacity="0.6"/>
+              <circle cx="670" cy="290" r="3" opacity="0.6"/>
+            </g>
+            <!-- Digital KOL overlay -->
+            <g>
+              <circle cx="340" cy="370" r="10" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="340" y="373" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" font-weight="700">DOL</text>
+              <circle cx="640" cy="370" r="10" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="640" y="373" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" font-weight="700">DOL</text>
+              <circle cx="490" cy="400" r="11" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="490" y="403" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" font-weight="700">DOL</text>
+            </g>
+            <!-- Right side legend -->
+            <rect x="760" y="40" width="200" height="380" fill="#EEE5CE" opacity="0.85" stroke="#6B2A2A" stroke-width="0.5"/>
+            <text x="770" y="62" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4A1E1E" letter-spacing="2" font-weight="600">MSL ENGAGEMENT ZONE</text>
+            <text x="770" y="88" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D" font-weight="600">Tier 1 · quarterly</text>
+            <text x="770" y="104" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">deep scientific exchange</text>
+            <text x="770" y="118" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">advisory board invitee</text>
+            <text x="770" y="145" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D" font-weight="600">Tier 2 · bimonthly</text>
+            <text x="770" y="161" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">national congress support</text>
+            <text x="770" y="175" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">IIS collaboration</text>
+            <text x="770" y="202" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D" font-weight="600">Tier 3 · quarterly</text>
+            <text x="770" y="218" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">regional engagement</text>
+            <text x="770" y="232" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3b52">emerging research</text>
+            <text x="770" y="259" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D" font-weight="600">Tier 4 · selective</text>
+            <text x="770" y="275" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">rising-star cultivation</text>
+            <text x="770" y="289" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">longer-horizon investment</text>
+            <text x="770" y="320" font-family="'Inter Tight', sans-serif" font-size="10" fill="#9B7233" font-weight="600">Digital opinion leaders</text>
+            <text x="770" y="336" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">distinct map · different</text>
+            <text x="770" y="350" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">engagement protocols</text>
+            <text x="770" y="380" font-family="'JetBrains Mono', monospace" font-size="7" fill="#9B7233" font-style="italic">KOL ≠ target · colleague</text>
+            <text x="770" y="394" font-family="'JetBrains Mono', monospace" font-size="7" fill="#9B7233" font-style="italic">MSL ≠ rep · peer scientist</text>
+            <!-- Centrality label -->
+            <text x="100" y="220" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6B2A2A" letter-spacing="2">NETWORK CENTRALITY</text>
+            <text x="100" y="234" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6B2A2A" letter-spacing="2">→ CENTER = HIGHEST</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The most important MSL productivity metric is also the one most commonly misused: <em>insight capture</em>. Every KOL interaction produces potential insight — a question asked, an unmet need voiced, a competitive product critique, a protocol frustration, an emerging off-label practice the company needs to know about. Insight capture is the craft of converting these ephemeral moments into structured, actionable intelligence that can be synthesized across MSLs into strategic signal. The misuse comes when insight capture metrics reward <em>quantity</em> — insights per visit, insights per quarter — which produces padding and trivial capture. The useful metric is <em>insight-to-action cycle time</em>: how long between the insight first appearing in an MSL's CRM and a documented downstream strategic action traceable to it. A mature Medical Affairs organization tracks this as obsessively as Commercial tracks sales calls, because it measures whether the listening function is actually connected to the deciding function — or whether the field is pouring insights into a well that nobody reads.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 2 checkpoint</h4>
+          <ul>
+            <li>Define the four KOL tiers and describe appropriate MSL engagement cadence for each</li>
+            <li>List three things an MSL may do and three they must not</li>
+            <li>Outline the governance elements of a compliant advisory board</li>
+            <li>Contrast KOL and DOL influence maps and explain why modern engagement requires both</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>An MSL in your team reports that a Tier-2 KOL asked unprompted about an off-label use in combination with another agent and seems genuinely interested in running a small study. What happens next, and who does what?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>Several things happen in parallel, each governed by a different rulebook. <strong>First — the unsolicited-request response:</strong> the KOL's question about off-label use came unprompted, which places it under the FDAMA 401 / CFR 202.1 <em>unsolicited request</em> regime. The MSL may respond substantively, but the response should go through the <strong>Medical Information (MI)</strong> channel — typically a dossier of published evidence, balanced presentation of efficacy and safety, and explicit acknowledgment of off-label status. The MSL does not freelance the response; the MI function prepares the compliant content; the MSL delivers it. All of this is documented. <strong>Second — the investigator-initiated study interest:</strong> if the KOL wants to run a study, this enters the <strong>IIS pipeline</strong>. The KOL submits a concept proposal through the sponsor's IIS portal; an independent review committee (separate from Commercial) evaluates scientific merit, fit with strategic IEP priorities, and operational feasibility; funding and drug supply are approved or declined on scientific grounds. The MSL can support the submission logistically but does not advocate commercially for the study's approval and does not help draft the study's scientific content in a way that would compromise its investigator-initiated status. <strong>Third — insight capture:</strong> the MSL logs the interaction in the field CRM — what was asked, what evidence was provided, whether an IIS concept is advancing. The insight also feeds into thematic synthesis: if multiple MSLs are hearing similar unprompted questions about this combination, that is a signal the IEP may need to address — via a prospective Phase IV, RWE study, or internal analysis. <strong>What emphatically does not happen:</strong> the MSL does not encourage the off-label interest, does not share with Commercial in a way that would seed promotional messaging, and does not treat the KOL's interest as a prescribing-intent signal. The firewall holds in every direction — including the direction where compliance would feel inconvenient.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>G-N-R-L:</strong> KOL tiers — <em>Global, National, Regional, Local/rising.</em> Plus DOL as an overlay for digital influence.<br>
+          <strong>F-M-V:</strong> <em>Fair Market Value</em> — the honorarium standard that separates a compliant advisory board from a regulated sales channel.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 3 -->
+    <div class="phase" id="day3">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">03</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Apply + Analyze · ~3 hrs</div><h3>Medical communications &amp; publications — <em>the guild's scholarly output</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">A pharma-sponsored manuscript in a peer-reviewed journal is one of the few things in the commercial universe that is built on an honor code — ICMJE authorship, GPP transparency, conflict-of-interest disclosure — rather than on contract law. That honor code is extraordinarily powerful when it holds and catastrophic when it fails. Most of the reputational damage pharma has absorbed over the last twenty years has come from publications written in a way the authors could not fully defend ten years later.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 3</span>Learning objectives</h4>
+          <ul>
+            <li>Understand GPP (Good Publication Practice) — from GPP1 (2003) through GPP4 (2022)</li>
+            <li>Master ICMJE authorship — the four criteria and who qualifies vs. acknowledgments</li>
+            <li>Grasp publication planning — indication-level, phased, audience-segmented</li>
+            <li>Understand the scientific narrative and its disciplined translation across audiences</li>
+            <li>Navigate congress strategy and independent medical education (IME) grants</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--oxblood);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>GPP — Good Publication Practice</h4>
+            <p><strong>GPP</strong>, first published 2003 by ISMPP and now in its fourth iteration (<strong>GPP4, 2022</strong>), is the international standard for ethical, transparent, timely publication of industry-sponsored research. Core principles: all clinical-trial results should be published regardless of outcome, authorship follows ICMJE, professional writing support must be acknowledged, funding must be disclosed, data access must be appropriate, and publications should appear within defined timeframes post-study. GPP is voluntary but is the <em>de facto</em> global standard; major journals require GPP alignment.</p>
+            <div class="analogy">The medieval university's statutes governing scholarly publication — who can claim authorship, who must be acknowledged, how dissent is handled, when work must be released to the scholarly commons. Violations were cause for disfellowshipping; the principle carries forward.</div>
+          </div>
+          <div class="concept-card">
+            <h4>ICMJE authorship</h4>
+            <p>The <strong>International Committee of Medical Journal Editors</strong> defines four criteria, <em>all</em> required: (1) substantial contributions to conception/design or acquisition/analysis/interpretation of data; (2) drafting or critical revision for intellectual content; (3) final approval of the version to be published; (4) agreement to be accountable for all aspects of the work. Meeting only some criteria places a contributor in <strong>Acknowledgments</strong>, not authorship. <strong>Ghostwriting</strong> — uncredited drafting — and <strong>guest authorship</strong> — credited contribution without the four criteria — are both explicitly condemned and grounds for retraction.</p>
+            <div class="analogy">The membership requirements of an academic learned society. All criteria met, you are a fellow; some met, you are an honored guest acknowledged in the proceedings; none met, you are an audience member. The categories do not blur without cost.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Publication planning</h4>
+            <p>A mature <strong>publication plan</strong> is indication-level, phased across the asset lifecycle, and audience-segmented: registration data → primary journals; subanalyses → specialty journals; mechanism-of-action → basic-science journals; real-world data → health-services journals; patient-reported outcomes → patient-experience journals; congress presentations before or alongside peer-reviewed papers. Planning considers embargo, press-release coordination with regulatory milestones, and the orderly release of secondary analyses to sustain scientific dialogue over years.</p>
+            <div class="analogy">A concert season programmed by a music director — one major work plus chamber pieces plus commissioned new compositions, timed across the calendar to build an audience's engagement rather than exhaust it in a single night.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Scientific narrative &amp; IME grants</h4>
+            <p>The <strong>scientific narrative</strong> is Medical's formal articulation of the story the evidence supports — for this molecule, this mechanism, this population, this clinical problem — translated with discipline across journal audiences, congress formats, MSL deck levels, and MI response templates. <strong>Independent Medical Education (IME) grants</strong> support accredited CME by third-party providers, governed by strict separation of grant-making from content influence. The sponsor funds; the provider designs and delivers. Grant-making decisions live in a separate governance from strategic messaging.</p>
+            <div class="analogy">The endowment of an independent lecture series. The university provides the funds; the lecturer chooses the topic and presents freely. The university's name is on the endowment; its influence on the lecture content is nil.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 3 · ICMJE authorship — the four gates, and what lies on each side</div>
+          <svg viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg">
+            <!-- Four gate columns -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- Gate 1 -->
+              <rect x="40" y="60" width="200" height="220" fill="#4A1E1E" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="140" y="88" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#C8984A" font-weight="600">Gate 1</text>
+              <text x="140" y="106" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Substantial</text>
+              <text x="140" y="122" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">contribution</text>
+              <text x="140" y="156" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">conception · design</text>
+              <text x="140" y="172" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">acquisition · analysis</text>
+              <text x="140" y="188" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">interpretation</text>
+              <text x="140" y="228" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.7">AT LEAST ONE</text>
+              <text x="140" y="244" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.7">OF THE ABOVE</text>
+              <!-- Gate 2 -->
+              <rect x="260" y="60" width="200" height="220" fill="#6B2A2A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="360" y="88" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#C8984A" font-weight="600">Gate 2</text>
+              <text x="360" y="106" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Drafting or</text>
+              <text x="360" y="122" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">critical revision</text>
+              <text x="360" y="156" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">for important</text>
+              <text x="360" y="172" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">intellectual content</text>
+              <text x="360" y="228" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.7">NOT: ADMIN EDITS</text>
+              <text x="360" y="244" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.7">NOT: COPYEDITING</text>
+              <!-- Gate 3 -->
+              <rect x="480" y="60" width="200" height="220" fill="#6B2A2A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="580" y="88" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#C8984A" font-weight="600">Gate 3</text>
+              <text x="580" y="106" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Final approval</text>
+              <text x="580" y="122" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">of version</text>
+              <text x="580" y="156" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">to be published</text>
+              <text x="580" y="228" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.7">ACTIVE APPROVAL</text>
+              <text x="580" y="244" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.7">NOT SILENCE</text>
+              <!-- Gate 4 -->
+              <rect x="700" y="60" width="200" height="220" fill="#4A1E1E" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="800" y="88" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#C8984A" font-weight="600">Gate 4</text>
+              <text x="800" y="106" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Accountability</text>
+              <text x="800" y="122" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">for the whole</text>
+              <text x="800" y="156" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">agrees to be</text>
+              <text x="800" y="172" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">accountable for ALL</text>
+              <text x="800" y="188" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">aspects of the work</text>
+              <text x="800" y="228" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.7">INTEGRITY OF THE</text>
+              <text x="800" y="244" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.7">WHOLE PAPER</text>
+            </g>
+            <!-- Bottom bands: all four vs some vs none -->
+            <rect x="40" y="305" width="270" height="38" fill="#4B6B4A" opacity="0.85" stroke="#0F1B2D" stroke-width="0.6"/>
+            <text x="175" y="323" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="700">All four gates</text>
+            <text x="175" y="337" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">→ AUTHORSHIP</text>
+            <rect x="330" y="305" width="270" height="38" fill="#C8984A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+            <text x="465" y="323" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="700">Some but not all</text>
+            <text x="465" y="337" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">→ ACKNOWLEDGMENTS</text>
+            <rect x="620" y="305" width="280" height="38" fill="#A84B2A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.6"/>
+            <text x="760" y="323" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="700">Claimed but not met</text>
+            <text x="760" y="337" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">→ GUEST AUTHORSHIP · RETRACTION RISK</text>
+            <!-- Title -->
+            <text x="40" y="30" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Four gates. All four required. Missing any one places you in Acknowledgments, not in the byline.</text>
+            <text x="40" y="372" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">ICMJE RECOMMENDATIONS · APPLIED GLOBALLY BY ALL MAJOR MEDICAL JOURNALS</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The publications lesson I wish someone had given me earlier in my career: <em>every manuscript is a future regulatory exhibit.</em> Not a threatening one — most of them will never be subpoenaed — but potentially. The practical implication is that you write manuscripts to a standard that would survive a deposition ten years later, regardless of how unlikely that feels. Does the author list meet ICMJE? Is professional writing assistance acknowledged? Are funding sources disclosed? Is the trial result reported regardless of whether it was the result the sponsor hoped for? Are negative findings given equal prominence? Is the limitations section honest? Most of these are trivial to get right in the moment and painful to defend later if they were gotten wrong. The discipline is treating every manuscript as if a federal prosecutor might one day read it alongside your internal strategy slides — and making sure the two documents tell the same story.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 3 checkpoint</h4>
+          <ul>
+            <li>Name the four ICMJE authorship criteria and explain what qualifies a contributor for Acknowledgments vs. authorship</li>
+            <li>Outline the core principles of GPP4 and name two common violations</li>
+            <li>Sketch a 3-year publication plan skeleton for a new indication launch</li>
+            <li>Explain how IME grant-making is governed to preserve content independence</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A senior leader asks: "Our Phase 3 subgroup analysis was negative. Can we simply not publish that one? The primary paper went to the NEJM and that's what matters." How do you respond?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>The answer is <strong>no — the subgroup analysis must be published</strong>, and here is the layered reason. <strong>First, GPP4 and most major publishers' policies require publication of all substantive clinical-trial analyses regardless of outcome</strong>, whether in a primary or subsequent paper; selective publication of only positive findings is one of the defining violations the GPP framework was created to prevent. <strong>Second, the trial protocol and statistical analysis plan likely pre-specified this subgroup</strong>, meaning it is part of the contract with the scientific community when the trial was launched; publishing only the positive primary analysis creates a selective-reporting record that can be discovered and challenged — by investigators, by competitors' scientific teams, by HTA bodies, by regulators, or by systematic reviewers aggregating the evidence base. <strong>Third, the subgroup finding may be scientifically important</strong>: a negative subgroup can clarify the population in which the drug works best, support targeted label language, and — when presented honestly — strengthen rather than weaken the overall scientific story. Treated as publishable data, the negative finding becomes a known, contextualized limitation. Hidden, it becomes a time bomb for the asset's reputation. <strong>Fourth, ClinicalTrials.gov and EudraCT already require results reporting within defined timeframes</strong>, so the negative finding will enter the public record regardless — the only question is whether the sponsor controls that narrative through scientifically rigorous publication or cedes it to competitors and critics. <strong>The right action:</strong> plan the negative subgroup as a secondary publication in an appropriate specialty journal, with balanced interpretation, honest limitations discussion, and — where warranted — discussion of the mechanistic plausibility of the subgroup finding. The NEJM primary paper is the headline; the subgroup paper is the integrity evidence. A Medical Affairs organization that can say "we published everything we found" is scientifically credible in ways that one that cannot, is not.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>I-C-M-J-E:</strong> the four authorship gates — <em>I</em>nvolve substantially, <em>C</em>ritically revise, <em>M</em>ake final approval, <em>J</em>udge accountability for the whole. <em>E</em>xpected of every named author.<br>
+          <strong>G-P-P:</strong> <em>Good Publication Practice.</em> Latest is GPP4 (2022). The honor code of industry-sponsored medical publishing.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 4 -->
+    <div class="phase" id="day4">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">04</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Analyze + Evaluate · ~3 hrs</div><h3>Medical information &amp; field insights — <em>the guild's ear to the ground</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">Every day, somewhere in the field, an MSL hears a comment from a KOL that would change the product's strategy if senior leadership heard it in time. Every day, a medical-information inquiry comes in that reveals an emerging clinical practice pattern the company has not yet noticed. The question for Medical Affairs is not whether the insights are arriving — they always are — but whether the organization has built the <em>infrastructure to hear them</em>.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 4</span>Learning objectives</h4>
+          <ul>
+            <li>Understand the Medical Information function — inquiry taxonomy, response governance, SLA management</li>
+            <li>Navigate the off-label response framework — unsolicited requests, balanced content, documentation</li>
+            <li>Grasp field insight capture — structured collection, thematic synthesis, traceability</li>
+            <li>Understand insight-to-action cycle time as the critical Medical Affairs metric</li>
+            <li>Appreciate the emerging role of LLM-assisted MI and compliance-grade traceability</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--oxblood);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The Medical Information function</h4>
+            <p><strong>Medical Information (MI)</strong> is the formal channel for responding to unsolicited questions from HCPs, patients, and consumers about a company's products. Intake is typically multi-channel (call center, web portal, email, MSL handoff). Responses draw on <strong>standard response documents (SRDs)</strong> — pre-written, MLR-approved content for common inquiry types — and for novel questions, on custom responses prepared from published literature. Key metrics: <strong>first-response SLA</strong> (typically 24–48 hours), <strong>resolution time</strong>, <strong>quality scoring</strong>, <strong>inquiry-theme trending</strong>.</p>
+            <div class="analogy">The reference desk of the guild's library. A visitor arrives with a question; the librarian consults the catalog, pulls appropriate sources, prepares a balanced response, cites what is known, acknowledges what is not. Does not evangelize; does not withhold; simply serves the scholarly inquiry.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Off-label response &amp; the unsolicited-request doctrine</h4>
+            <p>Under <strong>FDAMA Section 401</strong> and FDA's <em>Responding to Unsolicited Requests</em> guidance, companies may provide off-label information in response to genuinely unsolicited inquiries from HCPs — with constraints. The response must be <strong>truthful and non-misleading</strong>, <strong>balanced</strong> (risks as well as benefits), <strong>scientific in nature</strong>, and distributed <strong>only to the person who asked</strong> (not broadcast). All off-label responses are documented with the inquirer's identifying information, the question as asked, the response provided, and the source evidence. Many CIAs specifically audit this process.</p>
+            <div class="analogy">The library's restricted-section protocol. Some materials are held outside the general stacks, available only on specific request, with the request recorded, the patron identified, and the transaction logged. The materials are not forbidden; they are governed.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Field insight capture &amp; synthesis</h4>
+            <p>Field insights are structured observations captured by MSLs during KOL interactions: unmet needs, emerging practice patterns, competitive perceptions, protocol feedback, patient-experience themes. Modern platforms (Veeva CRM, custom insight platforms) enable <strong>tagging</strong> by theme, therapy area, and strategic relevance; <strong>topic modeling</strong> and NLP clustering identify emerging themes across hundreds of individual insights. A mature Medical Affairs organization produces monthly or quarterly <strong>insight synthesis reports</strong> that feed cross-functional strategy discussions.</p>
+            <div class="analogy">The correspondence archive of a learned society — thousands of individual letters that, read as a corpus, reveal shifts in the field that no single correspondent perceived. The synthesis is what turns individual observations into institutional intelligence.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Insight-to-action cycle time</h4>
+            <p>The defining metric of a working Medical Affairs listening function: <strong>how long does it take for a captured insight to become a documented strategic action?</strong> A high-performing organization tracks this at the insight level — from capture date, through synthesis, to review by the relevant decision forum, to assigned owner and action item. Cycle times in weeks indicate a connected system; cycle times in quarters indicate a collection exercise without consequence. The metric is increasingly the differentiator between Medical Affairs organizations that influence strategy and those that document it after the fact.</p>
+            <div class="analogy">The latency between a border observer's dispatch and a strategic council's decision. An army with real-time intelligence and slow decision-making is no better armed than one with stale intelligence.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 4 · The field insight flywheel — from capture to strategic action</div>
+          <svg viewBox="0 0 980 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Flywheel circle -->
+            <circle cx="490" cy="200" r="160" fill="none" stroke="#6B2A2A" stroke-width="2" opacity="0.3" stroke-dasharray="4 4"/>
+            <text x="490" y="196" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" font-style="italic" fill="#6B2A2A">Scientific credibility</text>
+            <text x="490" y="214" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6B2A2A" letter-spacing="2">LISTEN · DECIDE · ACT · LEARN</text>
+            <!-- Six stations around the ring -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- 1. KOL interaction - top -->
+              <g transform="translate(490, 40)">
+                <circle cx="0" cy="0" r="38" fill="#4A1E1E" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-6" text-anchor="middle" font-size="12" fill="#C8984A" font-weight="700">1</text>
+                <text x="0" y="10" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">KOL meets MSL</text>
+              </g>
+              <text x="490" y="90" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">unsolicited question · unmet need surfaces</text>
+              <!-- 2. Insight capture - upper right -->
+              <g transform="translate(640, 130)">
+                <circle cx="0" cy="0" r="38" fill="#6B2A2A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-6" text-anchor="middle" font-size="12" fill="#C8984A" font-weight="700">2</text>
+                <text x="0" y="10" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Capture</text>
+              </g>
+              <text x="700" y="135" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">structured · tagged · CRM</text>
+              <!-- 3. Synthesis - lower right -->
+              <g transform="translate(640, 270)">
+                <circle cx="0" cy="0" r="38" fill="#6B2A2A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-6" text-anchor="middle" font-size="12" fill="#C8984A" font-weight="700">3</text>
+                <text x="0" y="10" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Synthesize</text>
+              </g>
+              <text x="700" y="275" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">topic model · themes</text>
+              <!-- 4. Decide - bottom -->
+              <g transform="translate(490, 360)">
+                <circle cx="0" cy="0" r="38" fill="#6B2A2A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-6" text-anchor="middle" font-size="12" fill="#C8984A" font-weight="700">4</text>
+                <text x="0" y="10" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Decide</text>
+              </g>
+              <text x="490" y="312" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">cross-functional forum · owner assigned</text>
+              <!-- 5. Action - lower left -->
+              <g transform="translate(340, 270)">
+                <circle cx="0" cy="0" r="38" fill="#6B2A2A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-6" text-anchor="middle" font-size="12" fill="#C8984A" font-weight="700">5</text>
+                <text x="0" y="10" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Act</text>
+              </g>
+              <text x="280" y="275" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">IEP update · new study · comms</text>
+              <!-- 6. Loop back - upper left -->
+              <g transform="translate(340, 130)">
+                <circle cx="0" cy="0" r="38" fill="#C8984A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-6" text-anchor="middle" font-size="12" fill="#0F1B2D" font-weight="700">6</text>
+                <text x="0" y="10" text-anchor="middle" font-size="10" fill="#0F1B2D" font-weight="600">Return to KOL</text>
+              </g>
+              <text x="280" y="135" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="8" fill="#9B7233" font-weight="600">THE MOST SKIPPED STEP</text>
+            </g>
+            <!-- Arrows -->
+            <defs><marker id="arrMA" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#6B2A2A"/></marker></defs>
+            <g stroke="#6B2A2A" stroke-width="1.5" opacity="0.5" fill="none" marker-end="url(#arrMA)">
+              <path d="M 526 58 A 160 160 0 0 1 622 115"/>
+              <path d="M 640 170 A 160 160 0 0 1 640 230"/>
+              <path d="M 622 285 A 160 160 0 0 1 526 340"/>
+              <path d="M 454 340 A 160 160 0 0 1 358 285"/>
+              <path d="M 340 230 A 160 160 0 0 1 340 170"/>
+              <path d="M 358 115 A 160 160 0 0 1 454 58"/>
+            </g>
+            <!-- Target cycle time callout -->
+            <text x="490" y="396" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#9B7233" letter-spacing="2" font-weight="600">TARGET CYCLE TIME · WEEKS TO MONTHS · NEVER QUARTERS</text>
+            <text x="490" y="20" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Six stations. Step 6 is what makes the flywheel spin.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The step that separates mature Medical Affairs organizations from immature ones is step 6 in the insight flywheel — <em>returning to the KOL with the resolution</em>. An MSL who captures an insight, and then six months later is able to say to the originating KOL "we heard this, here is what it influenced, here is what has changed" is an MSL whose next insight will be offered twice as freely and with twice the depth. The KOL is not asking for credit; they are asking for evidence that the company is actually <em>listening</em>. When that evidence is present, the KOL becomes a scientific partner whose input is considered rather than merely captured. When it is absent, the relationship degenerates over time into polite interaction with no intellectual substance — and the field CRM fills with insights the KOL never meant to share again. The best Medical Affairs leaders I have seen personally audit step 6 on a random sample of insights each quarter, and treat its completion as the organization's health metric rather than capture count. It is the metric that cannot be faked.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 4 checkpoint</h4>
+          <ul>
+            <li>Name three types of MI inquiry and the appropriate response approach for each</li>
+            <li>Outline the compliant off-label response workflow from inquiry to documentation</li>
+            <li>Describe structured insight capture and name three ways insights commonly fail to translate to action</li>
+            <li>Propose an insight-to-action cycle time target and how you would measure it</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>MSL insights across multiple regions indicate a consistent concern: HCPs are using your drug in a specific off-label combination that the label does not support. What are the legitimate actions Medical Affairs can take in response?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>There are several legitimate actions, and one tempting action that would be a serious compliance failure. <strong>Legitimate actions:</strong> <strong>(1) Synthesize and report the insight internally</strong> — the pattern of HCP behavior is a scientific-intelligence finding that IEP governance, PV, and leadership need to understand, regardless of whether any action follows. <strong>(2) Investigate the safety implications</strong> — an off-label pattern may be generating safety signals that PV should query against FAERS, EudraVigilance, and internal RWE datasets; if a signal emerges, it enters the standard PV workflow. <strong>(3) Assess whether the evidence supports a label expansion</strong> — if the off-label combination has emerging scientific rationale, the right response may be a Phase IV study, an HEOR analysis, or an sNDA submission that would convert the off-label pattern into an approved indication with proper label language. <strong>(4) Prepare compliant MI responses</strong> — HCPs will continue to ask about the combination; MI should have balanced, evidence-based response content ready for unsolicited inquiries, including honest acknowledgment of the limits of available evidence. <strong>(5) Consider investigator-initiated study support</strong> — if external KOLs are interested in formally studying the combination, the IIS pipeline is the legitimate funding path. <strong>(6) Educate MSLs</strong> — ensure the field force knows the latest evidence so that peer-level conversations with KOLs remain scientifically grounded rather than speculative. <strong>The action that is not legitimate:</strong> proactively messaging the off-label combination to HCPs through any channel — MSL decks, MI outreach, speaker programs, CME grants scoped to the off-label topic, or congress activity positioned to normalize the practice. That is promotion of an unapproved use, and is precisely the conduct that built Warner-Lambert's $430 million bill. The discipline is that Medical Affairs can <em>study</em>, <em>respond to inquiry about</em>, <em>pursue label expansion for</em>, and <em>assess the safety of</em> an off-label pattern — but it cannot <em>promote</em> it, even obliquely, even by providing selectively helpful content to a subset of HCPs. The firewall is absolute in the direction of proactive external messaging; it is permeable in the direction of internal learning.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>U-B-S-P:</strong> the off-label response constraints — <em>Unsolicited only, Balanced, Scientific, Person-specific (not broadcast).</em> Four walls around a legitimate response.<br>
+          <strong>I-T-A-C-T:</strong> the differentiating metric — <em>Insight-To-Action Cycle Time.</em> Weeks is good; quarters is a broken system.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 5 -->
+    <div class="phase" id="day5">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">05</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Evaluate + Create · ~3 hrs</div><h3>Omnichannel medical affairs &amp; the integrated operating model — <em>the modern guild</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">Medical Affairs is increasingly judged not on activities — how many KOL meetings, how many publications, how many MI inquiries — but on <em>outcomes</em>: whether the scientific narrative penetrated the community, whether the evidence generated actually changed practice, whether the insights captured actually shaped strategy. The shift from activity metrics to impact metrics is re-architecting what the function looks like. And the 2020s arrival of omnichannel and AI is accelerating that shift beyond what most organizations have yet fully absorbed.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 5</span>Learning objectives</h4>
+          <ul>
+            <li>Understand omnichannel medical communications — journal, congress, digital, MSL coordination</li>
+            <li>Grasp impact measurement — share of scientific voice (SSOV), citation metrics, behavior-change proxies</li>
+            <li>Appreciate the emerging role of LLMs and multi-agent systems in Medical Affairs</li>
+            <li>Recognize the integrated Plan-Engage-Publish-Listen operating model at scale</li>
+            <li>Synthesize the five days into a coherent Medical Affairs thesis</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--oxblood);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Omnichannel medical communications</h4>
+            <p>The <strong>omnichannel</strong> paradigm — borrowed from commercial marketing but now reshaped for Medical Affairs — coordinates scientific messaging across <strong>peer-reviewed journals, congress presentations, MSL-delivered decks, digital KOL-engagement platforms, medical-education webinars, podcast content, and physician community platforms</strong>. The orchestration is harder for Medical than for Commercial because every channel must satisfy both MLR review and the channel-specific compliance regime (ICMJE for journals, CME accreditation for education, PhRMA Code for interactions). Done well, it produces coherent scientific narrative penetration at scale.</p>
+            <div class="analogy">A university's coordinated scholarly output across lectures, journal articles, textbooks, conference talks, online courses, and public-intellectual essays. Each channel has its format; the underlying argument is consistent; the audiences overlap without colliding.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Impact measurement &amp; SSOV</h4>
+            <p><strong>Share of Scientific Voice (SSOV)</strong> — the percentage of relevant congress presentations, publications, or citations in an indication that are attributable to your program — is a leading indicator of scientific leadership in a therapy area. Beyond SSOV, modern metrics include <strong>Altmetric scores</strong> (digital citation and discussion), <strong>download rates</strong>, <strong>prescribing-behavior proxies</strong> (claims-based analyses correlating publication exposure with prescribing shifts), and <strong>causal attribution</strong> (synthetic control designs isolating the effect of specific publications or comms on HCP behavior).</p>
+            <div class="analogy">The citation-impact and H-index metrics of a research program — imperfect measures of scholarly influence, universally critiqued, and still the closest approximations anyone has developed to the underlying question: is the work <em>mattering</em>?</div>
+          </div>
+          <div class="concept-card">
+            <h4>LLMs &amp; multi-agent systems in Medical Affairs</h4>
+            <p>The 2023+ arrival of production-grade LLMs is beginning to transform four Medical Affairs workflows: <strong>literature landscape analysis</strong> (RAG over PubMed + congress abstracts + internal evidence), <strong>manuscript and narrative drafting</strong> (LLM-assisted first drafts with human review for scientific accuracy and authorship compliance), <strong>MI response drafting</strong> (RAG-based MI agents with compliance guardrails and source traceability), and <strong>insight synthesis</strong> (embedding-based clustering of field insights and topic-model theme identification). Compliance-grade deployment requires auditability, source traceability, and human-in-the-loop review for anything reaching an external audience.</p>
+            <div class="analogy">The printing press arriving in the medieval university. The underlying scholarship does not change; what changes is the speed, scale, and cost structure of its production and dissemination. Scholars who learn to use the press well outproduce those who do not; the underlying scholarly standards — authorship, accuracy, peer review — remain the backbone of legitimacy.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The P-E-U-L integrated thesis</h4>
+            <p>The four engines of a modern Medical Affairs organization — <strong>Plan</strong> (evidence strategy), <strong>Engage</strong> (KOLs, MSLs, advisory), <strong>Publish</strong> (peer-reviewed, congress, education), <strong>Listen</strong> (MI, field insights) — are not independent workstreams but a single continuous loop. Weakness in any one undermines all four: plans without engagement are academic, engagement without publication is ephemeral, publication without listening is one-way broadcast, listening without planning is journalistic observation. The mature organization invests in all four and measures the loop's cycle time as its core health indicator.</p>
+            <div class="analogy">The four faculties of the classical university — theology, medicine, law, and arts. Each with its own discipline; together constituting the institution's intellectual life; the loss of any one reduces the others to professional training without a scholarly spine.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 5 · The P-E-U-L integrated Medical Affairs operating model</div>
+          <svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer flywheel ring -->
+            <circle cx="490" cy="210" r="175" fill="none" stroke="#6B2A2A" stroke-width="2" opacity="0.35" stroke-dasharray="5 5"/>
+            <text x="490" y="206" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#6B2A2A">Scientific</text>
+            <text x="490" y="226" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#6B2A2A">credibility</text>
+            <!-- Four quadrants: P, E, U, L -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- Plan - top -->
+              <g transform="translate(490, 40)">
+                <circle cx="0" cy="0" r="48" fill="#4A1E1E" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#C8984A" font-weight="600">P</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Plan</text>
+              </g>
+              <text x="490" y="110" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">IEP · evidence gaps · RCT/RWE/HEOR/PRO</text>
+              <!-- Engage - right -->
+              <g transform="translate(700, 210)">
+                <circle cx="0" cy="0" r="48" fill="#6B2A2A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#C8984A" font-weight="600">E</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Engage</text>
+              </g>
+              <text x="640" y="275" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">KOL · MSL · advisory · congress</text>
+              <!-- Publish - bottom -->
+              <g transform="translate(490, 380)">
+                <circle cx="0" cy="0" r="48" fill="#6B2A2A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#C8984A" font-weight="600">U</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Publish</text>
+              </g>
+              <text x="490" y="320" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">GPP · ICMJE · omnichannel</text>
+              <!-- Listen - left -->
+              <g transform="translate(280, 210)">
+                <circle cx="0" cy="0" r="48" fill="#C8984A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#0F1B2D" font-weight="700">L</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="600">Listen</text>
+              </g>
+              <text x="340" y="275" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">MI · insights · synthesis · action</text>
+            </g>
+            <!-- Arrows -->
+            <defs><marker id="arrPeul" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#6B2A2A"/></marker></defs>
+            <g stroke="#6B2A2A" stroke-width="1.8" opacity="0.6" fill="none" marker-end="url(#arrPeul)">
+              <path d="M 540 50 A 185 185 0 0 1 690 170"/>
+              <path d="M 700 260 A 185 185 0 0 1 540 370"/>
+              <path d="M 440 370 A 185 185 0 0 1 290 260"/>
+              <path d="M 280 170 A 185 185 0 0 1 440 50"/>
+            </g>
+            <text x="490" y="24" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Four engines. Each turn feeds the next. The loop is the operating system.</text>
+            <text x="490" y="406" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="2">HEALTH METRIC = TIME TO COMPLETE ONE FULL CYCLE · FASTER = MORE INTEGRATED</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>I will close with what I believe is the most important thing about Medical Affairs as a profession, and what the textbooks rarely say out loud: <em>the currency of Medical Affairs is trust, and trust has an asymmetric depreciation schedule.</em> Trust is built linearly — one honest publication, one compliant MSL call, one evidence-based MI response at a time, over years. And trust is lost nonlinearly — a single off-label promotion settlement, a single ghostwritten paper, a single advisory board whose honoraria violated FMV, can erase a decade of accumulated credibility in a week. The implication for how you practice the discipline is fundamental: you do not make trade-offs against trust. You do not defer trust-building to hit a quarterly metric. You do not let "just this once" become a pattern. You treat scientific integrity as the asset that underwrites every other asset the company owns — because for Medical Affairs specifically, that is exactly what it is. The moment the external medical community stops treating your MSLs as peer scientists, your advisory boards as legitimate consultations, and your publications as scientifically reliable, the entire function ceases to function. And it cannot be rebuilt faster than it decays.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 5 checkpoint</h4>
+          <ul>
+            <li>Design an omnichannel plan coordinating journal, congress, digital, and MSL dissemination for a pivotal trial</li>
+            <li>Propose three impact metrics beyond SSOV and explain what each captures</li>
+            <li>Identify three LLM-assisted workflows with compliance-grade deployment considerations</li>
+            <li>Evaluate the P-E-U-L four-engine thesis on a real or hypothetical organization — name the weakest engine</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A CEO asks: "Our Medical Affairs team costs $80M per year and produces publications. Why shouldn't we shrink it and redirect the budget to Commercial? What is the argument for keeping Medical Affairs at scale?"</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>The $80M is producing something not captured on any single quarterly report, and the right framing inverts the CEO's question: <strong>Medical Affairs is not a cost center producing publications. It is a risk-management and asset-value function whose output is measured in scientific credibility</strong>, which is the precondition for every other asset the company owns having any market value. Three specific arguments. <strong>One — regulatory and legal risk.</strong> Every dollar shifted from Medical to Commercial increases the probability that promotional boundaries are crossed, because Medical is the internal governance that keeps Commercial on the right side of them. Warner-Lambert's $430M settlement is the benchmark for what one Medical Affairs failure costs; Pfizer's $2.3B Bextra settlement is the next benchmark up. A shrunken Medical function is the leading indicator of future compliance failure, and consent-decree costs routinely dwarf the cumulative salary savings. <strong>Two — evidence generation.</strong> Medical Affairs produces the RWE, HEOR, PRO, and Phase IV data that payers, HTA bodies, guidelines committees, and clinical societies require to sustain market access and formulary positioning after the initial launch. A shrunken Medical function produces fewer of these assets; over 5 years, the effect on market access can exceed the Commercial investment savings by an order of magnitude. <strong>Three — scientific leadership as competitive moat.</strong> In therapy areas where Medical Affairs has invested continuously (oncology, immunology, rare diseases), the accumulated KOL relationships, publication record, and evidence library become durable competitive assets — the competitor who needs to enter the same space has to spend years and multiples building comparable credibility. Shrinking Medical to save short-term cost cedes that moat to competitors. <strong>The correct question is not "why keep Medical at scale?" but "which investments in Medical Affairs produce the highest return in scientific credibility, evidence generation, and compliance risk reduction per dollar?" — and the answer, done rigorously, almost always justifies the full $80M rather than a reduced number.</strong> The CEOs who cut Medical in pursuit of short-term margin are the ones whose successors are writing checks to the DOJ five years later.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>P-E-U-L:</strong> the four engines — <em>Plan, Engage, Publish, Listen.</em> All four running or the guild is an empty library.<br>
+          <strong>Trust decays asymmetrically.</strong> Built linearly over years; lost nonlinearly in weeks. Treat it as the underwriting asset for everything else.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JARGON -->
+<section id="jargon" class="wrap-narrow">
+  <div class="section-label">Jargon decoder · three tiers</div>
+  <h2>The vocabulary of the guild.</h2>
+  <p>Medical Affairs uses the vocabulary of clinical science, regulatory compliance, and publishing ethics simultaneously — the working set is larger than most pharma functions. A minimal working set:</p>
+
+  <div class="jargon-tier">
+    <h3>Tier 1 · Everyday</h3>
+    <div class="tier-label">If you know these, you can read a Medical Affairs status update</div>
+    <dl>
+      <dt>KOL</dt><dd>Key Opinion Leader — a recognized expert whose views influence clinical practice in a defined area.</dd>
+      <dt>MSL</dt><dd>Medical Science Liaison — field-based PhD/PharmD/MD scientist engaging KOLs peer-to-peer.</dd>
+      <dt>MI</dt><dd>Medical Information — the function responding to unsolicited product inquiries from HCPs and patients.</dd>
+      <dt>CME / IME</dt><dd>Continuing Medical Education / Independent Medical Education — accredited physician education.</dd>
+      <dt>MLR</dt><dd>Medical-Legal-Regulatory review — the governance body reviewing external-facing materials.</dd>
+      <dt>Publication</dt><dd>Peer-reviewed manuscript in a medical journal; the primary output of scientific communications.</dd>
+      <dt>Abstract / poster</dt><dd>The congress formats through which data is first shared with the scientific community.</dd>
+      <dt>Advisory board</dt><dd>Structured consultation with external KOLs providing scientific and strategic input.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 2 · Technical</h3>
+    <div class="tier-label">You hear these in Medical Affairs meetings and governance forums</div>
+    <dl>
+      <dt>IEP</dt><dd>Integrated Evidence Plan — the multi-year evidence-generation roadmap for a product or indication.</dd>
+      <dt>RWE</dt><dd>Real-World Evidence — evidence from routine clinical data (claims, EHR, registries) rather than trials.</dd>
+      <dt>HEOR</dt><dd>Health Economics and Outcomes Research — cost-effectiveness and budget-impact evidence.</dd>
+      <dt>PRO</dt><dd>Patient-Reported Outcomes — symptoms, quality of life, and treatment experience captured from patients directly.</dd>
+      <dt>GPP</dt><dd>Good Publication Practice — the ISMPP standard for ethical industry-sponsored publications (current: GPP4, 2022).</dd>
+      <dt>ICMJE</dt><dd>International Committee of Medical Journal Editors — authoritative source on authorship criteria.</dd>
+      <dt>PhRMA Code</dt><dd>The voluntary industry code governing interactions with HCPs; the US benchmark.</dd>
+      <dt>FMV</dt><dd>Fair Market Value — the honorarium standard for KOL consultations benchmarked to academic rates.</dd>
+      <dt>Open Payments</dt><dd>US Sunshine Act database of all transfers of value from industry to HCPs; publicly searchable.</dd>
+      <dt>IIS / IIT</dt><dd>Investigator-Initiated Study / Trial — externally proposed study; sponsor provides drug/funding only.</dd>
+      <dt>Phase IV / PMR</dt><dd>Post-approval studies — Phase IV sponsor-initiated; PMRs FDA-required with binding deadlines.</dd>
+      <dt>SSOV</dt><dd>Share of Scientific Voice — percentage of indication-relevant publications/congress activity attributable to a sponsor.</dd>
+      <dt>DOL</dt><dd>Digital Opinion Leader — clinician influence operating primarily through online scientific channels.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 3 · Specialist</h3>
+    <div class="tier-label">You hear these from senior Medical Affairs leaders, ISMPP members, and compliance counsel</div>
+    <dl>
+      <dt>FDAMA 401</dt><dd>The statute creating the unsolicited-request exception for off-label information responses.</dd>
+      <dt>Unsolicited request</dt><dd>FDA-defined category of HCP inquiry permitting balanced off-label response under strict documentation.</dd>
+      <dt>CIA</dt><dd>Corporate Integrity Agreement — OIG-mandated structural reforms typically following a settlement, 5-year duration.</dd>
+      <dt>Qui tam</dt><dd>Whistleblower-initiated lawsuit under the False Claims Act; many major pharma settlements originated this way.</dd>
+      <dt>SRD</dt><dd>Standard Response Document — MLR-approved, pre-written MI content for common inquiry types.</dd>
+      <dt>Ghostwriting</dt><dd>Uncredited drafting of a manuscript by a non-author; explicitly prohibited by GPP and ICMJE.</dd>
+      <dt>Guest authorship</dt><dd>Listing someone as author who has not met all four ICMJE criteria; grounds for retraction.</dd>
+      <dt>Network centrality</dt><dd>Graph-theoretic measure of KOL influence from co-authorship and citation networks.</dd>
+      <dt>Altmetric</dt><dd>Alternative citation metric capturing digital, social, and policy impact of publications.</dd>
+      <dt>SCCS / RWE causal inference</dt><dd>Self-Controlled Case Series and related methods for causal inference from observational data.</dd>
+      <dt>Insight-to-action cycle time</dt><dd>The defining Medical Affairs process metric — time from field insight capture to traceable strategic action.</dd>
+      <dt>Omnichannel medical</dt><dd>Coordinated scientific communications across journal, congress, digital, MSL, and educational channels.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- PITFALLS -->
+<section id="pitfalls" class="wrap">
+  <div class="section-label">Traps &amp; pitfalls</div>
+  <h2>Where Medical Affairs quietly fails.</h2>
+  <p>The catastrophic failures — the Neurontins, the Paxils, the Risperdals — are the ones anyone can name. The quiet failures are the ones that compound over years without a headline-grade event. Six patterns even well-resourced Medical Affairs organizations routinely slip into:</p>
+
+  <div class="pitfall-grid">
+    <div class="pitfall"><div class="num">1</div>
+      <h4>Firewall erosion by attrition</h4>
+      <p>No single major breach — just a series of small concessions. A KOL list shared informally. A brand director sitting in on an advisory board. An MSL answering a question that should have gone to MI. A publication drafted to match an emerging commercial narrative rather than the evidence. Each incident passes; cumulatively, the firewall softens. The regulatory action, when it comes, is for the twentieth small thing, not the first.</p>
+      <p class="rescue">Rescue: periodic firewall audit — random sampling of MSL interactions, advisory board materials, MLR-approved content, IIS decisions — reviewed by independent compliance against the original standards rather than against evolved practice.</p>
+    </div>
+    <div class="pitfall"><div class="num">2</div>
+      <h4>Publications as one-way broadcast</h4>
+      <p>The publication plan executes; manuscripts appear; congress presentations happen; nobody measures whether the scientific narrative is actually landing — in citations, in guideline adoption, in clinical practice, in MSL feedback from the field. The function produces output uncorrelated with outcome; the budget stays intact for years before anyone notices the ROI is unmeasured.</p>
+      <p class="rescue">Rescue: pair every publication with an impact-measurement plan — SSOV baseline, post-publication citation trajectory, Altmetric monitoring, MSL-captured reception reports. Kill formats that consistently fail to land; double down on those that do.</p>
+    </div>
+    <div class="pitfall"><div class="num">3</div>
+      <h4>MSL as disguised sales channel</h4>
+      <p>Over time, MSL calls start to skew toward pre-prescribing HCPs, to align with brand priorities, to include thinly-disguised promotional talking points, to produce KOL-engagement metrics that look suspiciously like sales metrics. The MSL function drifts from peer scientific exchange back toward the role the CIA era was designed to eliminate.</p>
+      <p class="rescue">Rescue: MSL activity audit — account selection criteria (scientific vs. commercial), call topic distribution, compensation structure (no Rx-tied component), insight capture quality. MSL productivity measured on scientific-exchange metrics, not on territory-level prescribing outcomes.</p>
+    </div>
+    <div class="pitfall"><div class="num">4</div>
+      <h4>Advisory boards without documented use</h4>
+      <p>The advisory board convenes, honoraria are paid, minutes are taken — and then the recommendations disappear into a shared drive without evidence of how they influenced strategy. The session looks like legitimate consultation but functions, in regulatory retrospect, like a mechanism for paying KOLs for their time without extracting scientific value. This is the classic target of enforcement action: not the board itself, but the gap between the board and any documented use of its input.</p>
+      <p class="rescue">Rescue: every advisory board commits, at the close, to named action items with owners and deadlines; post-board report documents adoption or non-adoption of each recommendation with reasoning; audit trail is retained for the retention period applicable to Medical materials.</p>
+    </div>
+    <div class="pitfall"><div class="num">5</div>
+      <h4>Insight capture without synthesis</h4>
+      <p>MSLs faithfully log field insights in the CRM; nobody reads the aggregate; no thematic synthesis is produced; no synthesis reaches a decision forum; no decisions are traceable to insights. The function produces an enormous catalog of collected observations disconnected from any strategic process that would use them. After two years, MSLs notice that nothing they report changes anything, and insight capture silently degrades.</p>
+      <p class="rescue">Rescue: quarterly thematic synthesis reports presented to cross-functional leadership; every theme has an owner; every owner has a next action; next actions are reviewed at the following quarter's forum. Track insight-to-action cycle time at the portfolio level and treat it as a leading indicator.</p>
+    </div>
+    <div class="pitfall"><div class="num">6</div>
+      <h4>IME grants steered toward strategic topics</h4>
+      <p>IME grant-making is technically separated from commercial content control — but the grants funded correspond suspiciously closely to the topics on the strategic message map. The independence is nominally preserved; the pattern shows the firewall is a suggestion rather than a boundary. Enforcement action, when it comes, examines the grant-making pattern rather than any individual grant.</p>
+      <p class="rescue">Rescue: IME grant-making committee blinded to strategic message maps; grant topics selected against published unmet-need evidence and educational gap assessments; annual audit of grant-funded topics against strategic priorities with variance explanation required where alignment exceeds random.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-DOMAIN -->
+<section class="wrap">
+  <div class="section-label">Cross-domain connections</div>
+  <h2>The Medical Affairs problem pattern appears elsewhere.</h2>
+  <p>The challenge of maintaining credible scholarship inside a commercial enterprise, and of deploying peer-level expertise without crossing into sales, recurs in three other industries with complementary lessons:</p>
+
+  <div class="crossdomain-grid">
+    <div class="crossdomain">
+      <div class="domain">Academic publishing</div>
+      <h4>Peer review &amp; editorial independence</h4>
+      <p>Medical journals operate on a trust model — authors disclose conflicts, reviewers are independent, editors are buffered from commercial pressure — and the entire enterprise survives only as long as that trust holds. Medical Affairs' publication governance borrows directly from this architecture, and its failures mirror the scholarly world's concerns about predatory journals and conflicted review.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Investigative journalism</div>
+      <h4>Church-state separation in news</h4>
+      <p>Serious journalism maintains a <em>church-state separation</em> between the newsroom and the advertising/business side, with physical and reporting-line barriers analogous to the Medical/Commercial firewall. When the barrier erodes — branded content indistinguishable from reporting, advertisers influencing coverage — reader trust collapses nonlinearly, as pharma has learned with prescribers.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Investment research</div>
+      <h4>Research analyst independence</h4>
+      <p>After the 2003 Global Settlement addressing research-analyst conflicts in banking, sell-side equity research analysts must be structurally separated from investment banking, with compensation not tied to banking fees, and with clear disclosure of conflicts. The parallels to the Medical/Commercial firewall, the MSL's non-commercial compensation, and Open Payments transparency are direct — both industries learned the same lesson from similar failure modes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPACED REP -->
+<section id="spaced" class="wrap">
+  <div class="section-label">Spaced repetition schedule</div>
+  <h2>Holding the guild in memory.</h2>
+  <p>Medical Affairs vocabulary spans clinical, regulatory, and publishing domains — the retention challenge is greater than single-domain functions. The 8-touch schedule gives ~90% retention at the 3-month mark for about 2.5 hours of review:</p>
+
+  <div class="spaced-rep">
+    <div class="sr-timeline">
+      <div class="sr-day"><div class="day-num">1</div><div class="day-label">Learn</div><div class="day-task">Day 1 pillars + firewall + IEP</div></div>
+      <div class="sr-day"><div class="day-num">2</div><div class="day-label">Review</div><div class="day-task">Day 1 checkpoint + Day 2 KOL/MSL</div></div>
+      <div class="sr-day"><div class="day-num">3</div><div class="day-label">Review</div><div class="day-task">Day 2 flip cards + Day 3 publications</div></div>
+      <div class="sr-day"><div class="day-num">4</div><div class="day-label">Review</div><div class="day-task">Jargon Tier 1 + 2, Day 4 MI + insights</div></div>
+      <div class="sr-day"><div class="day-num">5</div><div class="day-label">Review</div><div class="day-task">Day 5 omnichannel + P-E-U-L</div></div>
+      <div class="sr-day"><div class="day-num">7</div><div class="day-label">First lapse</div><div class="day-task">All 5 memory hooks</div></div>
+      <div class="sr-day"><div class="day-num">14</div><div class="day-label">Consolidation</div><div class="day-task">Redo all Feynman teach-backs</div></div>
+      <div class="sr-day"><div class="day-num">30</div><div class="day-label">Retention</div><div class="day-task">Draw concept map from memory</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap-narrow">
+    <div class="section-label" style="color: var(--ochre);">Mentor's parting wisdom</div>
+    <h2>The guild exists because the institution <em>needs</em> it to.</h2>
+    <p>Five days cannot make you a Medical Affairs leader. The craft takes decades — reading therapy areas as they mature, reading KOL communities as they evolve, reading the slow shifts in regulatory expectation, and reading one's own organization as it oscillates between the two poles Medical Affairs mediates: commercial ambition on one side, scientific integrity on the other.</p>
+    <p>What five days can do is hand you the map. You know now that Medical Affairs is the learned society inside the pharmaceutical company — the scholars' guild whose legitimacy rests on its distance from Commerce and whose value rests on that legitimacy being visible. You know the four pillars (Plan, Engage, Publish, Listen), the compliance firewall, the Integrated Evidence Plan, the MSL as travelling scholar, the KOL tiering architecture, ICMJE authorship, GPP ethics, the off-label response doctrine, insight capture, and the modern omnichannel operating model. You know the hook — Neurontin 2004 — and why almost every discipline you now see in the function is scar tissue from a moment the industry learned the hard way.</p>
+    <p class="mantra">Medical Affairs is the scar tissue the industry grew around its own worst instincts.</p>
+    <p>The next time you see a published clinical trial, remember what stood behind it. A publication plan governed by ICMJE. Authors whose contributions met four gates. Professional writing support disclosed in the acknowledgments. Funding disclosed in the methods. Conflicts declared at submission. Results reported whether the sponsor hoped for them or not. And, underneath all of that, a Medical Affairs organization whose existence was codified by consent decrees and whose every daily decision answers the same quiet question: <em>would this stand scrutiny in ten years, reviewed by people who were not in the room when it was made?</em> That is the guild's work. That is why it matters.</p>
+    <p style="margin-top: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ochre);">— End of Module 09 —</p>
+  </div>
+</section>
+
+</main>
+
+<footer>Module 09 · Medical Affairs · Five-Day Theoretical Roadmap</footer>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'base',
+    themeVariables: { fontFamily: 'Inter Tight, sans-serif', primaryColor: '#EEE5CE', primaryTextColor: '#0F1B2D', primaryBorderColor: '#0F1B2D', lineColor: '#2A3B52', secondaryColor: '#F5EFDF', tertiaryColor: '#6B2A2A', background: '#EEE5CE', mainBkg: '#EEE5CE', secondBkg: '#F5EFDF' }
+  });
+  function togglePhase(header) { header.parentElement.classList.toggle('open'); }
+  window.addEventListener('scroll', () => {
+    const pct = Math.min(100, (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>

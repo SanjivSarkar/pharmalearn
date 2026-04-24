@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Assembly Line — CMC &amp; Supply Chain in 5 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<style>
+  :root {
+    --ink: #0F1B2D; --ink-soft: #2A3B52;
+    --paper: #F5EFDF; --paper-warm: #EEE5CE; --paper-dark: #E4D8B8;
+    --ochre: #C8984A; --ochre-deep: #9B7233;
+    --moss: #4B6B4A; --moss-soft: #7C9082;
+    --rust: #A84B2A; --rust-soft: #D67D5C;
+    --prussian: #2E4E7E; --prussian-deep: #1C3456; --prussian-soft: #547494;
+    --rule: rgba(15,27,45,0.14); --rule-strong: rgba(15,27,45,0.3);
+    --shadow-soft: 0 2px 12px rgba(15,27,45,0.08);
+    --shadow-lift: 0 8px 32px rgba(15,27,45,0.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-weight: 400; line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(15,27,45,0.025) 1px, transparent 0); background-size: 24px 24px; pointer-events: none; z-index: 0; }
+  main, nav, header { position: relative; z-index: 1; }
+  h1, h2, h3, h4, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.015em; line-height: 1.1; color: var(--ink); }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 500; }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+  h4 { font-size: 1.05rem; font-weight: 600; font-family: 'Inter Tight', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+  p { max-width: 68ch; }
+  em { font-style: italic; color: var(--ink-soft); }
+  strong { font-weight: 600; color: var(--ink); }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: var(--paper-warm); padding: 0.1em 0.4em; border-radius: 3px; border: 1px solid var(--rule); }
+  nav.top { position: sticky; top: 0; background: rgba(245,239,223,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); padding: 0.8rem 2rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  nav.top .brand { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; }
+  nav.top .brand em { color: var(--prussian); font-style: italic; }
+  nav.top ul { display: flex; gap: 0.4rem; list-style: none; flex-wrap: wrap; }
+  nav.top a { color: var(--ink-soft); text-decoration: none; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 20px; transition: all 0.2s ease; font-weight: 500; }
+  nav.top a:hover { background: var(--ink); color: var(--paper); }
+  .progress-track { position: sticky; top: 58px; height: 3px; background: rgba(15,27,45,0.08); z-index: 99; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--prussian), var(--ochre)); width: 0%; transition: width 0.15s ease; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+  .hero { padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+  .hero-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--prussian); margin-bottom: 1.5rem; }
+  .hero h1 { max-width: 18ch; margin-bottom: 1.8rem; }
+  .hero h1 em { color: var(--prussian); font-style: italic; }
+  .hero .lede { font-family: 'Fraunces', serif; font-size: clamp(1.1rem, 1.6vw, 1.4rem); max-width: 54ch; color: var(--ink-soft); font-weight: 300; line-height: 1.5; }
+  .hero-ornament { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 380px; height: 380px; opacity: 0.58; pointer-events: none; }
+  .hook-card { background: var(--ink); color: var(--paper); padding: 3rem 2.5rem; border-radius: 2px; margin: 3rem 0; position: relative; box-shadow: var(--shadow-lift); }
+  .hook-card::before { content: '06'; position: absolute; top: 1rem; right: 1.5rem; font-family: 'Fraunces', serif; font-size: 4rem; color: var(--ochre); opacity: 0.4; font-style: italic; }
+  .hook-card .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 1rem; }
+  .hook-card p { font-family: 'Fraunces', serif; font-size: 1.4rem; line-height: 1.4; font-weight: 300; max-width: 54ch; }
+  .hook-card p em { color: var(--ochre); font-style: italic; }
+  section { padding: 4rem 0; position: relative; }
+  section + section { border-top: 1px solid var(--rule); }
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--prussian); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--prussian); }
+  section h2 { margin-bottom: 1.8rem; max-width: 26ch; }
+  section p { margin-bottom: 1.1rem; }
+  .master-analogy { background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-dark) 100%); border: 1px solid var(--rule); border-left: 5px solid var(--prussian); padding: 2.5rem 2.5rem 2.5rem 3rem; margin: 2.5rem 0; position: relative; border-radius: 2px; }
+  .master-analogy::before { content: '“'; position: absolute; top: -20px; left: 20px; font-family: 'Fraunces', serif; font-size: 6rem; color: var(--prussian); line-height: 1; }
+  .master-analogy h4 { margin-bottom: 1rem; color: var(--prussian); }
+  .master-analogy p { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 300; line-height: 1.55; }
+  .master-analogy p + p { margin-top: 0.8rem; }
+  .mapping-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem 1.5rem; align-items: center; margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px dashed var(--rule-strong); }
+  .mapping-grid .from { font-weight: 500; color: var(--ink); text-align: right; }
+  .mapping-grid .arrow { font-family: 'JetBrains Mono', monospace; color: var(--prussian); font-size: 0.9rem; }
+  .mapping-grid .to { color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic; }
+  @media (max-width: 820px) { .mapping-grid { grid-template-columns: 1fr; gap: 0.3rem 0; } .mapping-grid .from { text-align: left; } .mapping-grid .arrow { display: none; } .mapping-grid .to { padding-left: 1rem; border-left: 2px solid var(--prussian); margin-bottom: 0.8rem; } }
+  .concept-map-wrap { background: var(--paper-warm); padding: 2.5rem; border-radius: 2px; border: 1px solid var(--rule); overflow-x: auto; margin: 2rem 0; }
+  .mermaid { text-align: center; font-family: 'Inter Tight', sans-serif !important; }
+  .phases-container { margin-top: 2rem; }
+  .phase { border: 1px solid var(--rule); background: var(--paper-warm); margin-bottom: 1.2rem; border-radius: 2px; overflow: hidden; transition: all 0.3s ease; }
+  .phase:hover { box-shadow: var(--shadow-soft); }
+  .phase.open { background: var(--paper); box-shadow: var(--shadow-lift); }
+  .phase-header { padding: 1.8rem 2rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; cursor: pointer; user-select: none; }
+  .phase-number { font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 300; color: var(--prussian); line-height: 1; font-style: italic; min-width: 3rem; }
+  .phase-title-wrap .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .phase-title-wrap h3 { font-weight: 500; color: var(--ink); }
+  .phase-title-wrap h3 em { color: var(--prussian); font-style: italic; }
+  .phase-toggle { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--ink-soft); transition: transform 0.3s ease; }
+  .phase.open .phase-toggle { transform: rotate(45deg); color: var(--prussian); }
+  .phase-body { max-height: 0; overflow: hidden; padding: 0 2rem; transition: max-height 0.4s ease, padding 0.4s ease; }
+  .phase.open .phase-body { max-height: 12000px; padding: 0 2rem 2.5rem; }
+  .curiosity-hook { font-family: 'Fraunces', serif; font-size: 1.2rem; font-style: italic; color: var(--ink-soft); border-left: 3px solid var(--prussian); padding-left: 1.2rem; margin: 1.5rem 0 2rem; max-width: 58ch; line-height: 1.55; }
+  .objectives { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.8rem; margin: 1.5rem 0 2.5rem; border-radius: 2px; }
+  .objectives h4 { margin-bottom: 0.8rem; color: var(--prussian); font-size: 0.8rem; }
+  .objectives ul { list-style: none; padding: 0; }
+  .objectives li { padding: 0.3rem 0 0.3rem 1.6rem; position: relative; font-size: 0.96rem; }
+  .objectives li::before { content: '◆'; position: absolute; left: 0; color: var(--prussian); font-size: 0.6rem; top: 0.55rem; }
+  .bloom-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.2em 0.5em; border-radius: 3px; background: var(--prussian); color: var(--paper); margin-right: 0.5em; text-transform: uppercase; font-weight: 500; }
+  .concept-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  @media (max-width: 780px) { .concept-cards { grid-template-columns: 1fr; } }
+  .concept-card { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.4rem 1.5rem; border-radius: 2px; border-left: 3px solid var(--ochre); position: relative; }
+  .concept-card:nth-child(2n) { border-left-color: var(--moss); }
+  .concept-card:nth-child(3n) { border-left-color: var(--rust); }
+  .concept-card:nth-child(4n) { border-left-color: var(--prussian); }
+  .concept-card h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; }
+  .concept-card .analogy { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 0.92rem; margin: 0.5rem 0 0.8rem; border-top: 1px dashed var(--rule); padding-top: 0.7rem; }
+  .concept-card p { font-size: 0.93rem; margin-bottom: 0.4rem; max-width: none; }
+  .visual { background: var(--paper); border: 1px solid var(--rule); padding: 2rem; margin: 2rem 0; border-radius: 2px; position: relative; overflow-x: auto; }
+  .visual .caption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .visual svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .mentor-analogy { background: var(--ink); color: var(--paper); padding: 2rem 2.2rem; margin: 2rem 0; border-radius: 2px; position: relative; border-left: 4px solid var(--ochre); }
+  .mentor-analogy .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.8rem; }
+  .mentor-analogy p { font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.6; font-weight: 300; max-width: 58ch; }
+  .mentor-analogy p em { color: var(--ochre); font-style: italic; }
+  .checkpoint { border: 2px dashed var(--prussian); background: transparent; padding: 1.5rem 1.8rem; margin: 2rem 0; border-radius: 2px; }
+  .checkpoint h4 { color: var(--prussian); margin-bottom: 0.6rem; }
+  .checkpoint p { font-size: 0.94rem; margin-bottom: 0.4rem; }
+  .checkpoint ul { list-style: none; padding: 0; }
+  .checkpoint li { padding: 0.25rem 0 0.25rem 1.4rem; position: relative; font-size: 0.94rem; }
+  .checkpoint li::before { content: '□'; position: absolute; left: 0; color: var(--prussian); font-family: 'JetBrains Mono', monospace; }
+  .flip-card { perspective: 1200px; height: 220px; margin: 2rem 0; cursor: pointer; }
+  .flip-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s ease; transform-style: preserve-3d; }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; padding: 1.8rem 2rem; border-radius: 2px; display: flex; flex-direction: column; justify-content: center; }
+  .flip-front { background: var(--paper-dark); border: 1px solid var(--rule-strong); }
+  .flip-front .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--prussian); margin-bottom: 0.7rem; }
+  .flip-front h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+  .flip-front .hint { font-size: 0.82rem; color: var(--ink-soft); margin-top: 1rem; font-style: italic; }
+  .flip-back { background: var(--ink); color: var(--paper); transform: rotateY(180deg); border-left: 4px solid var(--ochre); }
+  .flip-back .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.7rem; }
+  .flip-back p { font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.55; max-width: none; font-weight: 300; }
+  .memory-hook { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 2px; font-size: 0.93rem; }
+  .memory-hook .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre-deep); margin-bottom: 0.4rem; }
+  .memory-hook strong { color: var(--prussian); }
+  .jargon-tier { margin: 2rem 0; padding: 1.8rem 2rem; background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 2px; }
+  .jargon-tier h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 0.4rem; color: var(--prussian); }
+  .jargon-tier .tier-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .jargon-tier dl { display: grid; grid-template-columns: 180px 1fr; gap: 0.8rem 1.5rem; }
+  .jargon-tier dt { font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+  .jargon-tier dd { color: var(--ink-soft); font-size: 0.93rem; }
+  @media (max-width: 680px) { .jargon-tier dl { grid-template-columns: 1fr; gap: 0.3rem 0; } .jargon-tier dd { margin-bottom: 0.8rem; padding-left: 0.8rem; border-left: 2px solid var(--prussian); } }
+  .pitfall-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .pitfall-grid { grid-template-columns: 1fr; } }
+  .pitfall { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; border-top: 3px solid var(--rust); position: relative; }
+  .pitfall .num { position: absolute; top: 0.8rem; right: 1rem; font-family: 'Fraunces', serif; font-size: 1.8rem; color: var(--rust); font-style: italic; opacity: 0.5; line-height: 1; }
+  .pitfall h4 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; max-width: 90%; }
+  .pitfall p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .pitfall .rescue { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.88rem; color: var(--moss); padding-top: 0.5rem; margin-top: 0.5rem; border-top: 1px dashed var(--rule); }
+  .crossdomain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .crossdomain-grid { grid-template-columns: 1fr; } }
+  .crossdomain { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; }
+  .crossdomain .domain { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--prussian); margin-bottom: 0.5rem; }
+  .crossdomain h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.7rem; }
+  .crossdomain p { font-size: 0.9rem; color: var(--ink-soft); }
+  .spaced-rep { background: var(--paper-warm); border: 1px solid var(--rule); padding: 2rem; border-radius: 2px; margin: 2rem 0; overflow-x: auto; }
+  .sr-timeline { display: grid; grid-template-columns: repeat(8, minmax(88px, 1fr)); gap: 0.8rem; margin-top: 1.5rem; min-width: 700px; }
+  .sr-day { padding: 1rem 0.8rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; text-align: center; position: relative; }
+  .sr-day::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: var(--prussian); border-radius: 50%; }
+  .sr-day .day-num { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 500; color: var(--prussian); font-style: italic; }
+  .sr-day .day-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.3rem; }
+  .sr-day .day-task { font-size: 0.78rem; margin-top: 0.5rem; color: var(--ink); line-height: 1.3; }
+  .closing { background: var(--ink); color: var(--paper); padding: 5rem 2rem; margin-top: 4rem; }
+  .closing h2 { color: var(--paper); max-width: 24ch; margin-bottom: 2rem; }
+  .closing h2 em { color: var(--ochre); font-style: italic; }
+  .closing p { font-family: 'Fraunces', serif; font-size: 1.2rem; line-height: 1.6; font-weight: 300; max-width: 58ch; color: rgba(245,239,223,0.88); }
+  .closing .mantra { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.5rem; color: var(--ochre); padding: 2rem 0; margin: 2rem 0; border-top: 1px solid rgba(200,152,74,0.3); border-bottom: 1px solid rgba(200,152,74,0.3); max-width: 54ch; }
+  footer { padding: 2rem; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); background: var(--paper); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="brand">The Assembly <em>Line</em></div>
+  <ul>
+    <li><a href="#hook">Hook</a></li><li><a href="#analogy">Analogy</a></li><li><a href="#map">Map</a></li>
+    <li><a href="#day1">Day 1</a></li><li><a href="#day2">Day 2</a></li><li><a href="#day3">Day 3</a></li>
+    <li><a href="#day4">Day 4</a></li><li><a href="#day5">Day 5</a></li>
+    <li><a href="#jargon">Jargon</a></li><li><a href="#pitfalls">Pitfalls</a></li><li><a href="#spaced">Review</a></li>
+  </ul>
+</nav>
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+<main>
+
+<header class="hero wrap">
+  <div class="hero-meta">Module 06 · CMC &amp; Supply Chain · Five-Day Theoretical Roadmap</div>
+  <h1>The Assembly <em>Line</em>.</h1>
+  <p class="lede">A molecule is an idea. A drug is a physical object that must be made, identically, millions of times, across decades, without failure. Between those two statements sits the quieter half of pharma — and arguably its harder half.</p>
+  <svg class="hero-ornament" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="hg6" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2E4E7E" stop-opacity="0.4"/><stop offset="100%" stop-color="#2E4E7E" stop-opacity="0.05"/></radialGradient></defs>
+    <circle cx="190" cy="190" r="170" fill="none" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="2 6" opacity="0.25"/>
+    <circle cx="190" cy="190" r="150" fill="none" stroke="#0F1B2D" stroke-width="1.2" opacity="0.3"/>
+    <circle cx="190" cy="190" r="138" fill="url(#hg6)"/>
+    <circle cx="190" cy="190" r="138" fill="none" stroke="#2E4E7E" stroke-width="0.8" opacity="0.5"/>
+    <g transform="translate(190, 190)">
+      <g fill="#2E4E7E" opacity="0.85">
+        <rect x="-6" y="-85" width="12" height="18"/>
+        <g transform="rotate(30)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(60)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(90)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(120)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(150)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(180)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(210)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(240)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(270)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(300)"><rect x="-6" y="-85" width="12" height="18"/></g>
+        <g transform="rotate(330)"><rect x="-6" y="-85" width="12" height="18"/></g>
+      </g>
+      <circle cx="0" cy="0" r="70" fill="#1C3456" opacity="0.9"/>
+      <circle cx="0" cy="0" r="70" fill="none" stroke="#C8984A" stroke-width="1" opacity="0.8"/>
+      <circle cx="0" cy="0" r="58" fill="none" stroke="#547494" stroke-width="0.6"/>
+      <circle cx="0" cy="0" r="22" fill="#0F1B2D" stroke="#C8984A" stroke-width="1"/>
+      <text x="0" y="4" text-anchor="middle" font-family="'Fraunces', serif" font-size="11" fill="#C8984A" font-style="italic">Rx</text>
+      <text x="0" y="-50" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" letter-spacing="2" opacity="0.8">DESIGN</text>
+      <text x="50" y="4" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" letter-spacing="2" opacity="0.8">LAUNCH</text>
+      <text x="0" y="58" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" letter-spacing="2" opacity="0.8">DELIVER</text>
+      <text x="-50" y="4" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" letter-spacing="2" opacity="0.8">SUSTAIN</text>
+    </g>
+    <g fill="#2E4E7E" opacity="0.45">
+      <g transform="translate(30, 30)"><rect x="0" y="12" width="24" height="18"/><polygon points="0,12 12,0 24,12"/><rect x="8" y="20" width="3" height="6" fill="#F5EFDF"/></g>
+      <g transform="translate(326, 30)"><rect x="0" y="12" width="24" height="18"/><polygon points="0,12 12,0 24,12"/><rect x="13" y="20" width="3" height="6" fill="#F5EFDF"/></g>
+      <g transform="translate(30, 320)"><rect x="0" y="12" width="24" height="18"/><polygon points="0,12 12,0 24,12"/><rect x="8" y="20" width="3" height="6" fill="#F5EFDF"/></g>
+      <g transform="translate(326, 320)"><rect x="0" y="12" width="24" height="18"/><polygon points="0,12 12,0 24,12"/><rect x="13" y="20" width="3" height="6" fill="#F5EFDF"/></g>
+    </g>
+    <text x="190" y="22" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2E4E7E" letter-spacing="3">API</text>
+    <text x="370" y="195" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2E4E7E" letter-spacing="3">CQA</text>
+    <text x="190" y="368" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2E4E7E" letter-spacing="3">OTIF</text>
+    <text x="10" y="195" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2E4E7E" letter-spacing="3">QbD</text>
+  </svg>
+</header>
+
+<section id="hook" class="wrap-narrow">
+  <div class="hook-card">
+    <div class="label">The hook</div>
+    <p>On the morning of 29 September 1982, a twelve-year-old girl in Elk Grove Village, Illinois, swallowed an Extra-Strength Tylenol capsule for a sore throat. She died within hours. Six more deaths followed that week. The capsules had been removed from store shelves, laced with potassium cyanide, and replaced. Johnson &amp; Johnson had not done it; no employee had; the tampering happened in the supply chain — the space between the factory gate and the patient's hand — which nobody had ever really thought of as <em>pharma's problem</em> before. J&amp;J recalled <em>31 million bottles</em> in a week. They reinvented the bottle itself: foil seal, shrink wrap, tamper-evident cap. The FDA rewrote packaging regulations. Every sealed medicine bottle in your house, forty-three years later, is a direct descendant of those seven deaths.</p>
+  </div>
+</section>
+
+<section id="analogy" class="wrap-narrow">
+  <div class="section-label">The elevator pitch</div>
+  <h2>CMC &amp; supply chain is the assembly line of modern medicine.</h2>
+  <p>CMC — <em>Chemistry, Manufacturing &amp; Controls</em> — plus Supply Chain is the function that turns a research molecule into a product that arrives at the right pharmacy, at the right temperature, in the right quantity, on the right day, with every vial identical to the one beside it. The work starts in the preclinical phase, when the first gram of API is synthesized, and only ends when the last dose of a post-LOE product ships. CMC does not discover the molecule. It does not run the trials. It does not market the drug. <em>It makes the drug exist, legally and physically, at scale.</em> Without it, every other function is theater.</p>
+
+  <div class="master-analogy">
+    <h4>The master analogy — the global automotive manufacturing network</h4>
+    <p>Picture a car company. Not a single factory — a global network: engine plants in Germany, transmission plants in Mexico, electronics suppliers in Korea, assembly lines on four continents, dealer networks in every country. Every vehicle leaving every plant must be identical in spec to every other, must meet crash-test standards in every jurisdiction, must be traceable by VIN, must be deliverable to the customer's driveway, and must be supportable with spare parts for fifteen years after the last car rolls off the line. Change the engine spec and every downstream plant must requalify. Change the supplier and the parts must pass comparability testing. Launch a new model at a second plant and you run pre-production batches to prove consistency before the line goes commercial.</p>
+    <p>Pharmaceutical CMC is this exact work — with patient lives instead of customer convenience as the stakes, and regulatory inspectors as the in-house auditors. The <em>API</em> is the engine block: the heart of the product. <em>Formulation and fill-finish</em> is the vehicle assembly line. <em>CPPs</em> are torque specifications. <em>CQAs</em> are crash-test ratings. <em>QbD</em> is platform engineering — design the system to produce quality, don't inspect it in at the end. <em>Tech transfer</em> is launching a new model at a second plant. <em>PPQ batches</em> are the pre-production run. <em>PAI</em> is the factory acceptance test. <em>DSCSA serialization</em> is the VIN number. The <em>cold chain</em> is the refrigerated-truck fleet. <em>S&amp;OP</em> is the demand-planning committee. <em>COGS</em> is unit manufacturing cost. <em>LOE tail supply</em> is the aftermarket parts obligation.</p>
+
+    <div class="mapping-grid">
+      <div class="from">The engine block</div><div class="arrow">—→</div><div class="to">Active Pharmaceutical Ingredient (API)</div>
+      <div class="from">Vehicle assembly line</div><div class="arrow">—→</div><div class="to">Drug product formulation + fill-finish</div>
+      <div class="from">Torque specification / tolerance band</div><div class="arrow">—→</div><div class="to">Critical Process Parameter (CPP)</div>
+      <div class="from">Crash-test rating</div><div class="arrow">—→</div><div class="to">Critical Quality Attribute (CQA)</div>
+      <div class="from">Platform engineering philosophy</div><div class="arrow">—→</div><div class="to">Quality by Design (QbD)</div>
+      <div class="from">Operating envelope</div><div class="arrow">—→</div><div class="to">Design space (ICH Q8)</div>
+      <div class="from">Launching a model at a second plant</div><div class="arrow">—→</div><div class="to">Tech transfer (sending → receiving site)</div>
+      <div class="from">Pre-production run</div><div class="arrow">—→</div><div class="to">PPQ — Process Performance Qualification batches</div>
+      <div class="from">Factory acceptance test</div><div class="arrow">—→</div><div class="to">Pre-Approval Inspection (PAI)</div>
+      <div class="from">Vehicle Identification Number (VIN)</div><div class="arrow">—→</div><div class="to">DSCSA serialization + track-and-trace</div>
+      <div class="from">Refrigerated-truck fleet</div><div class="arrow">—→</div><div class="to">Cold chain logistics + specialty distribution</div>
+      <div class="from">Unit manufacturing cost</div><div class="arrow">—→</div><div class="to">COGS — Cost of Goods Sold</div>
+      <div class="from">Aftermarket parts obligation</div><div class="arrow">—→</div><div class="to">LOE tail-supply / last-patient-on-drug</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap-narrow">
+  <div class="section-label">Origin story</div>
+  <h2>How modern pharma manufacturing was forged — disaster by disaster, like every good industry.</h2>
+  <p>Before 1937, a US pharmaceutical manufacturer did not need to test a product before selling it. In that year, a Tennessee chemist at S.E. Massengill reformulated sulfanilamide into a sweet-tasting liquid, using diethylene glycol as the solvent. He tasted it; patients did not. <em>One hundred and five people died</em>, most of them children. The resulting 1938 Food, Drug &amp; Cosmetic Act required safety testing before marketing — the birth of manufacturing oversight.</p>
+  <p>The 1962 Kefauver-Harris Amendments, forced by thalidomide, added the requirement of <em>Good Manufacturing Practice</em>. In 1975, the FDA codified cGMP in <em>21 CFR 210 and 211</em> — the founding scripture of pharmaceutical manufacturing. Every process validation, every deviation investigation, every batch record reviewed today traces its DNA to those regulations.</p>
+  <p>1982's Tylenol tampering added supply-chain security and tamper-evident packaging to the national vocabulary. In 1997, FDAMA expanded user-fee frameworks to manufacturing oversight. Between 2003 and 2015, the <em>ICH Q series</em> (Q8 Pharmaceutical Development, Q9 Quality Risk Management, Q10 Pharmaceutical Quality System, Q11 Drug Substance Development, Q12 Lifecycle Management, Q13 Continuous Manufacturing, Q14 Analytical Procedure Development) globally harmonized the language of pharmaceutical quality. The 2013 <em>Drug Supply Chain Security Act (DSCSA)</em> mandated serialization and track-and-trace, transforming pharma into a logistics-data business. COVID-19 in 2020–21 forced mRNA manufacturing from laboratory scale to billions of doses in under twelve months — a feat only possible because the ICH framework had quietly modernized for twenty years before anyone noticed.</p>
+  <p>Each reform was a response to a specific failure. Each failure left a permanent mark on how the next generation of manufacturers must think. CMC is a profession built on the accumulated scar tissue of the industry.</p>
+</section>
+
+<section id="map" class="wrap">
+  <div class="section-label">The concept web</div>
+  <h2>The full CMC &amp; supply chain lifecycle, in one diagram.</h2>
+  <p>The four sub-disciplines of CMC are not a sequence but a <em>continuous production system</em>. Process design feeds tech transfer; tech transfer feeds supply; supply feeds optimization; optimization feeds the next process design. The drug and its factory are in continuous conversation for the entire commercial life of the product.</p>
+  <div class="concept-map-wrap">
+    <div class="mermaid">
+flowchart LR
+  classDef central fill:#2E4E7E,stroke:#0F1B2D,color:#F5EFDF,stroke-width:2px,font-weight:600
+  classDef pillar fill:#EEE5CE,stroke:#0F1B2D,color:#0F1B2D,stroke-width:1.5px,font-weight:500
+  classDef sub fill:#F5EFDF,stroke:#0F1B2D,color:#2A3B52,stroke-width:1px,stroke-dasharray:3 3
+  CORE[The Plant:<br/>Continuous Process<br/>Operation]:::central
+  D[Process Design &amp;<br/>Scale-up]:::pillar
+  L[Tech Transfer,<br/>Validation &amp; Launch]:::pillar
+  S[Supply Chain<br/>Planning &amp; Distribution]:::pillar
+  O[In-Line Optimization &amp;<br/>End-of-Life]:::pillar
+  CORE --- D
+  CORE --- L
+  CORE --- S
+  CORE --- O
+  D --- d1[QbD &amp; design space]:::sub
+  D --- d2[CPP / CQA control]:::sub
+  D --- d3[PAT &amp; continuous mfg]:::sub
+  L --- l1[Sending ↔ receiving site]:::sub
+  L --- l2[PV stages 1-2-3 · PPQ]:::sub
+  L --- l3[PAI readiness]:::sub
+  S --- s1[S&amp;OP + demand sensing]:::sub
+  S --- s2[Cold chain · 3PL]:::sub
+  S --- s3[DSCSA serialization]:::sub
+  O --- o1[COGS + yield]:::sub
+  O --- o2[Supplier rationalization]:::sub
+  O --- o3[LOE tail-supply · wind-down]:::sub
+  D -.-&gt; L
+  L -.-&gt; S
+  S -.-&gt; O
+  O -.-&gt; D
+    </div>
+  </div>
+</section>
+
+<section id="day1" class="wrap">
+  <div class="section-label">Day 01 · The Factory Floor</div>
+  <h2>From gram to ton — the fundamentals of making medicine at scale.</h2>
+  <div class="phases-container">
+    <div class="phase open">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">01</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Remember + Understand · ~2.5 hrs</div><h3>Process development &amp; scale-up — <em>the fundamentals</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">A gram of API made by a PhD chemist at a bench costs perhaps ten dollars. The same gram, manufactured at commercial scale under GMP, can cost a few dollars <em>or</em> ten thousand, depending on the modality. The difference between those two numbers — and between reliable supply and intermittent failure — is what CMC exists to engineer.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 1</span>Learning objectives</h4>
+          <ul>
+            <li>Identify the unit operations of a biologic process (upstream / downstream) and a small-molecule synthesis route</li>
+            <li>Define the core QbD vocabulary: CPP, CQA, design space, control strategy</li>
+            <li>Distinguish batch, campaign, and continuous manufacturing paradigms</li>
+            <li>Understand Process Analytical Technology (PAT) as the sensor layer of modern manufacturing</li>
+            <li>Explain the basic economics of scale-up — why it is hard and where the risks concentrate</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--prussian);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Unit operations — the verbs of manufacturing</h4>
+            <p><strong>Biologic:</strong> upstream (cell bank → seed expansion → bioreactor → harvest) then downstream (clarification → capture chromatography → polishing → viral clearance → UF/DF → formulation → fill-finish). <strong>Small molecule:</strong> a synthesis route of 5–15 chemical steps, each a reaction or purification, ending in the API, then formulation (tableting, granulation, coating) and packaging. Every step is a unit operation with defined inputs, outputs, and controls.</p>
+            <div class="analogy">The individual stations on an assembly line — stamping, welding, painting, trim, final assembly. Each has its own tooling, cycle time, and quality check. The vehicle is the sum of its stations.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Quality by Design — CPP and CQA</h4>
+            <p>QbD (ICH Q8) is the paradigm shift away from "test quality in" toward "build quality in." A <strong>CQA — Critical Quality Attribute</strong> — is a product characteristic that must be controlled to ensure quality (purity, potency, stability, sterility). A <strong>CPP — Critical Process Parameter</strong> — is a process input that affects a CQA (temperature, pH, time, shear). The <strong>design space</strong> is the multidimensional region of CPP settings shown to produce acceptable CQAs. Inside the space, changes are not regulatory variations.</p>
+            <div class="analogy">Engineering specifications for an engine: the torque window that still delivers required horsepower without premature wear. Operate inside the window, and the engine works — every time. Operate outside, and you are running an experiment.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Batch vs. continuous manufacturing</h4>
+            <p><strong>Batch:</strong> a defined quantity made in one campaign, released as a unit. The overwhelming majority of pharma product today. Well understood, flexible for low-volume products, but punctuated — hold times, cleaning between batches, validation per campaign. <strong>Continuous:</strong> material flows through integrated unit operations without holds; enabled by PAT and real-time release. Smaller footprint, faster cycle times, lower COGS — but demanding on control systems and regulatory strategy.</p>
+            <div class="analogy">Job-shop manufacturing (batch, make-to-order) vs. Toyota-style continuous flow. Both make cars; the economics, control systems, and mindset are fundamentally different.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Process Analytical Technology (PAT)</h4>
+            <p>PAT is the FDA's 2004 initiative for <em>real-time</em> process measurement — NIR, Raman, MS, online HPLC, image analysis — used to control quality during manufacture rather than test it afterward. PAT is the nervous system of QbD. Without real-time measurement, the design space is unobservable and the control strategy is retrospective. With PAT, the process self-reports and can be actively controlled.</p>
+            <div class="analogy">Telemetry on a Formula 1 car. Every stint, sensors stream hundreds of channels — tire pressure, fuel burn, engine temp — and the pit wall intervenes before a failure. No pharma manufacturer reaches continuous-quality standards without it.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 1 · A typical biologic process train — unit operations, CPPs and CQAs</div>
+          <svg viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="140" width="420" height="100" fill="#EEE5CE" stroke="#0F1B2D" stroke-width="0.6" opacity="0.35"/>
+            <text x="40" y="160" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2E4E7E" letter-spacing="2">UPSTREAM PROCESSING</text>
+            <rect x="480" y="140" width="470" height="100" fill="#EEE5CE" stroke="#0F1B2D" stroke-width="0.6" opacity="0.55"/>
+            <text x="490" y="160" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2E4E7E" letter-spacing="2">DOWNSTREAM PROCESSING</text>
+            <defs><marker id="arr6" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#2E4E7E"/></marker></defs>
+            <line x1="50" y1="190" x2="930" y2="190" stroke="#2E4E7E" stroke-width="1.5" marker-end="url(#arr6)" opacity="0.6"/>
+            <g font-family="'Inter Tight', sans-serif">
+              <circle cx="70" cy="190" r="16" fill="#2E4E7E"/><text x="70" y="194" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">WCB</text>
+              <text x="70" y="222" text-anchor="middle" font-size="8" fill="#2A3B52">Cell bank</text>
+              <circle cx="150" cy="190" r="18" fill="#547494"/><text x="150" y="194" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Seed</text>
+              <text x="150" y="222" text-anchor="middle" font-size="8" fill="#2A3B52">Expansion</text>
+              <circle cx="250" cy="190" r="26" fill="#1C3456"/><text x="250" y="190" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="700">BIORX</text>
+              <text x="250" y="196" text-anchor="middle" font-size="7" fill="#C8984A">2000L</text>
+              <text x="250" y="230" text-anchor="middle" font-size="8" fill="#2A3B52">Bioreactor</text>
+              <circle cx="370" cy="190" r="20" fill="#547494"/><text x="370" y="194" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">HVST</text>
+              <text x="370" y="224" text-anchor="middle" font-size="8" fill="#2A3B52">Harvest</text>
+              <circle cx="520" cy="190" r="22" fill="#2E4E7E"/><text x="520" y="194" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Capture</text>
+              <text x="520" y="226" text-anchor="middle" font-size="8" fill="#2A3B52">Protein A</text>
+              <circle cx="620" cy="190" r="22" fill="#547494"/><text x="620" y="194" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Polish</text>
+              <text x="620" y="226" text-anchor="middle" font-size="8" fill="#2A3B52">Ion Exch.</text>
+              <circle cx="720" cy="190" r="22" fill="#1C3456"/><text x="720" y="190" text-anchor="middle" font-size="8" fill="#F5EFDF" font-weight="600">Viral</text>
+              <text x="720" y="200" text-anchor="middle" font-size="8" fill="#F5EFDF" font-weight="600">Clearance</text>
+              <text x="720" y="226" text-anchor="middle" font-size="8" fill="#2A3B52">NFF + UV</text>
+              <circle cx="820" cy="190" r="22" fill="#547494"/><text x="820" y="190" text-anchor="middle" font-size="8" fill="#F5EFDF" font-weight="600">UF / DF</text>
+              <text x="820" y="200" text-anchor="middle" font-size="8" fill="#F5EFDF" font-weight="600">+ Form.</text>
+              <text x="820" y="226" text-anchor="middle" font-size="8" fill="#2A3B52">Formulation</text>
+              <circle cx="910" cy="190" r="22" fill="#C8984A"/><text x="910" y="194" text-anchor="middle" font-size="9" fill="#0F1B2D" font-weight="600">Fill</text>
+              <text x="910" y="226" text-anchor="middle" font-size="8" fill="#2A3B52">Fill / Finish</text>
+            </g>
+            <g font-family="'JetBrains Mono', monospace" font-size="7" fill="#0F1B2D">
+              <text x="250" y="105" text-anchor="middle" font-weight="600">CPPs</text>
+              <text x="250" y="120" text-anchor="middle">temp, pH, DO, feed</text>
+              <line x1="250" y1="125" x2="250" y2="165" stroke="#0F1B2D" stroke-width="0.5" opacity="0.4"/>
+              <text x="620" y="105" text-anchor="middle" font-weight="600">CPPs</text>
+              <text x="620" y="120" text-anchor="middle">buffer, flow, load</text>
+              <line x1="620" y1="125" x2="620" y2="167" stroke="#0F1B2D" stroke-width="0.5" opacity="0.4"/>
+            </g>
+            <g font-family="'JetBrains Mono', monospace" font-size="7" fill="#A84B2A">
+              <text x="250" y="280" text-anchor="middle" font-weight="600">CQAs</text>
+              <text x="250" y="295" text-anchor="middle">titer, HCP, DNA</text>
+              <line x1="250" y1="238" x2="250" y2="270" stroke="#A84B2A" stroke-width="0.5" opacity="0.5"/>
+              <text x="720" y="280" text-anchor="middle" font-weight="600">CQAs</text>
+              <text x="720" y="295" text-anchor="middle">purity, aggregates, potency</text>
+              <line x1="720" y1="238" x2="720" y2="270" stroke="#A84B2A" stroke-width="0.5" opacity="0.5"/>
+            </g>
+            <rect x="30" y="320" width="920" height="38" fill="#2E4E7E" opacity="0.18" stroke="#2E4E7E" stroke-width="0.5"/>
+            <text x="44" y="337" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2E4E7E" letter-spacing="2">PAT SENSOR LAYER →</text>
+            <text x="44" y="350" font-family="'Inter Tight', sans-serif" font-size="9" fill="#2A3B52">NIR · Raman · mass spec · online HPLC · cell density probes · pressure / temperature / pH / DO continuous telemetry</text>
+            <text x="40" y="36" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">The recipe, rendered as chemical engineering. Every arrow is a handoff; every handoff is a risk.</text>
+            <text x="40" y="56" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">ILLUSTRATIVE MONOCLONAL ANTIBODY PROCESS · 10 CORE UNIT OPERATIONS · ~18–24 DAY CYCLE</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>I spent a year early in my career at a clinical-manufacturing facility, and the thing nobody writes in textbooks became obvious fast: <em>the hardest problems in CMC are not chemistry — they are physics and queuing</em>. Mixing time scales with vessel geometry. Heat transfer scales with surface area. Small-scale success guarantees nothing at commercial scale. When a process fails at tech transfer, it is almost never because the molecule changed. It is because the ten-liter bioreactor had perfect mixing and the two-thousand-liter one has dead zones the receiving site did not map. Engineering fundamentals, not cleverness, carry this work.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 1 checkpoint</h4>
+          <ul>
+            <li>List the major unit operations of a monoclonal antibody process, upstream through fill-finish</li>
+            <li>Give one CPP and one CQA for a bioreactor step, and explain how they relate</li>
+            <li>Contrast batch and continuous manufacturing in two sentences</li>
+            <li>Define PAT and name two sensor technologies used in it</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A colleague asks: "If QbD lets us define a design space, why do we still need validation batches? Isn't that just inspecting quality in?" How would you answer?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>The two complement rather than replace each other. <strong>QbD defines the design space on paper</strong> — the multidimensional region of CPPs mathematically shown to produce acceptable CQAs, based on DoE studies at small scale. <strong>Validation batches prove</strong> the full-scale commercial process can actually hit that design space consistently — with commercial equipment, commercial operators, commercial timing, and every source of variation that small-scale studies cannot reproduce. A design space without validation is a prediction; a validation without a design space is a history lesson. Regulators want both: the theory and the demonstration. And validation is not "inspecting in" — it is proving the system can reliably produce in-spec product without relying on final-unit inspection.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>U-D-F-F:</strong> the biologic process rhythm — <em>Upstream, Downstream, Formulation, Fill-finish.</em> Four stages; ten operations; one vial.<br>
+          <strong>C-P-Q-D:</strong> QbD's sacred vocabulary — <em>CPP, PAR, CQA, Design space.</em> Inputs that matter, outputs that matter, the window between.
+        </div>
+      </div>
+    </div>
+
+    <div class="phase" id="day2">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">02</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Understand + Apply · ~3 hrs</div><h3>Tech transfer, validation &amp; launch readiness — <em>moving the line</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">A process that runs flawlessly at Site A can fail catastrophically at Site B — not because anyone did anything wrong, but because a different chiller has a different thermal response, a different operator reads a turbidity probe differently, or the new facility's water-for-injection has trace metals the old one did not. Tech transfer is pharma's humbling reminder that a process is not a recipe — it is a recipe plus a building plus a crew plus a thousand invisible conditions.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 2</span>Learning objectives</h4>
+          <ul>
+            <li>Map the tech transfer lifecycle — sending vs. receiving site, gap analysis, comparability</li>
+            <li>Distinguish the three stages of process validation (ICH Q8/10; FDA PV Guidance 2011)</li>
+            <li>Understand PPQ batches — why three, what they prove, what happens when one fails</li>
+            <li>Prepare for a Pre-Approval Inspection (PAI) — what FDA inspectors look for</li>
+            <li>Plan a launch-readiness supply-chain risk assessment</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--prussian);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Tech transfer lifecycle</h4>
+            <p>The <strong>sending site</strong> is where the process was developed (often R&amp;D pilot plant); the <strong>receiving site</strong> is commercial manufacturing. Transfer requires: (1) complete documentation package — batch records, analytical methods, development reports; (2) gap analysis of equipment, utilities, personnel; (3) engineering runs at receiving site; (4) comparability studies proving receiving-site product matches sending-site product. Weeks to years, depending on modality complexity.</p>
+            <div class="analogy">Launching a second assembly line at a new plant. You cannot just ship blueprints — you must also qualify every press, every robot, every operator, and then build pre-production cars to prove the new line produces vehicles identical to the original.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Process validation — stages 1, 2, 3</h4>
+            <p>FDA's 2011 PV Guidance defines three lifecycle stages. <strong>Stage 1 (Process Design):</strong> translate development knowledge into a defined commercial process and control strategy. <strong>Stage 2 (Process Qualification):</strong> confirm the process — as designed — is capable of reproducible commercial manufacturing; includes facility/utility/equipment qualification and <strong>PPQ batches</strong>. <strong>Stage 3 (Continued Process Verification):</strong> ongoing assurance during commercial production that the process stays validated — via SPC, trending, annual product review.</p>
+            <div class="analogy">Design the car, build and certify the line, then monitor the line for life. Missing any stage breaks the chain — a great design with no continued verification drifts into failure within years.</div>
+          </div>
+          <div class="concept-card">
+            <h4>PPQ batches — the proof of capability</h4>
+            <p><strong>Process Performance Qualification</strong> batches are the first commercial-scale batches manufactured under full GMP conditions to prove the process is reproducible and capable. Typically three batches (though risk-based justification can adjust), all of which must meet acceptance criteria. If a PPQ batch fails, the root cause must be understood, corrective actions implemented, and the PPQ campaign restarted. PPQ failures are common causes of launch-date slippage.</p>
+            <div class="analogy">Pre-production run before a car model goes commercial. The bodies are real, the line is running at target rate, and any defects surfacing here are infinitely cheaper than defects after launch.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Pre-Approval Inspection (PAI)</h4>
+            <p>A PAI is FDA's on-site inspection of the commercial manufacturing site — always before NDA/BLA approval. Inspectors assess: facility design, personnel training, documentation integrity, data systems, validation package, QMS maturity, and specifically the product under review. <strong>Form 483</strong> observations can block approval if severe. Most PAI problems are documentation and data-integrity issues, not process failures — the facility must tell a coherent story about itself.</p>
+            <div class="analogy">Factory acceptance test before the buyer accepts delivery. The cars may look perfect; if the records of how they were made don't survive scrutiny, the shipment is refused.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 2 · The tech-transfer ladder — from engineering runs to commercial release</div>
+          <svg viewBox="0 0 980 360" xmlns="http://www.w3.org/2000/svg">
+            <line x1="60" y1="300" x2="920" y2="300" stroke="#0F1B2D" stroke-width="1.5"/>
+            <text x="60" y="328" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52" letter-spacing="2">TECH TRANSFER TIMELINE →</text>
+            <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52">
+              <line x1="140" y1="295" x2="140" y2="305" stroke="#0F1B2D"/><text x="140" y="318" text-anchor="middle">Gap analysis</text>
+              <line x1="340" y1="295" x2="340" y2="305" stroke="#0F1B2D"/><text x="340" y="318" text-anchor="middle">Engineering runs</text>
+              <line x1="540" y1="295" x2="540" y2="305" stroke="#0F1B2D"/><text x="540" y="318" text-anchor="middle">PPQ batches</text>
+              <line x1="740" y1="295" x2="740" y2="305" stroke="#0F1B2D"/><text x="740" y="318" text-anchor="middle">PAI</text>
+              <line x1="900" y1="295" x2="900" y2="305" stroke="#0F1B2D"/><text x="900" y="318" text-anchor="middle">Launch</text>
+            </g>
+            <rect x="70" y="240" width="130" height="50" fill="#7C9082" opacity="0.8" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="135" y="260" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#0F1B2D" font-weight="600">Gap assessment</text>
+            <text x="135" y="276" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">equipment · utility · analytical</text>
+            <rect x="220" y="200" width="130" height="90" fill="#547494" opacity="0.85" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="285" y="222" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="600">Engineering runs</text>
+            <text x="285" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">non-GMP at scale</text>
+            <text x="285" y="256" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">shakeout runs</text>
+            <text x="285" y="272" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">process characterization</text>
+            <rect x="400" y="170" width="130" height="120" fill="#2E4E7E" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="465" y="192" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#F5EFDF" font-weight="600">Comparability</text>
+            <text x="465" y="210" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">head-to-head data</text>
+            <text x="465" y="228" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">CQAs match sending site</text>
+            <text x="465" y="246" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">stability bridging</text>
+            <text x="465" y="264" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">regulatory strategy</text>
+            <rect x="600" y="130" width="140" height="160" fill="#1C3456" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="670" y="154" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="13" fill="#F5EFDF" font-weight="700">PPQ</text>
+            <text x="670" y="172" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Stage 2 validation</text>
+            <text x="670" y="188" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">3 consecutive batches</text>
+            <text x="670" y="204" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">full GMP</text>
+            <text x="670" y="220" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">all CQAs in spec</text>
+            <text x="670" y="244" text-anchor="middle" font-family="'Fraunces', serif" font-size="10" fill="#C8984A" font-style="italic">the proof of</text>
+            <text x="670" y="260" text-anchor="middle" font-family="'Fraunces', serif" font-size="10" fill="#C8984A" font-style="italic">capability</text>
+            <rect x="790" y="180" width="130" height="110" fill="#A84B2A" opacity="0.88" stroke="#0F1B2D" stroke-width="0.8"/>
+            <text x="855" y="202" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#F5EFDF" font-weight="600">PAI</text>
+            <text x="855" y="220" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">FDA on-site inspection</text>
+            <text x="855" y="236" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">documentation review</text>
+            <text x="855" y="252" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">data integrity focus</text>
+            <text x="855" y="270" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Form 483 risk</text>
+            <text x="60" y="30" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Each rung is higher risk than the last — and cheaper to fail than the one after.</text>
+            <defs><marker id="arrTt" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#2E4E7E"/></marker></defs>
+            <line x1="150" y1="90" x2="830" y2="90" stroke="#2E4E7E" stroke-width="0.8" opacity="0.5" stroke-dasharray="3 3" marker-end="url(#arrTt)"/>
+            <text x="490" y="82" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2E4E7E" letter-spacing="2">INCREASING GMP COMPLIANCE · INCREASING REGULATORY STAKES</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>One of the most experienced CMC leaders I've worked with said something I think about every time a program enters tech transfer: <em>"The receiving site either owns the process by the end of engineering runs, or they never will."</em> The temptation — driven by timelines and cost — is to treat tech transfer as a documentation exercise. Ship the batch records, hold a few meetings, approve and go. That path guarantees PPQ problems. The path that works is harder: embed sending-site process scientists at the receiving site for months, let receiving-site operators run the process under their supervision, and only exit when the receiving team is teaching back the process without help. Expensive, yes. Cheaper than a failed PPQ campaign — by an order of magnitude.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 2 checkpoint</h4>
+          <ul>
+            <li>Outline a tech transfer plan from R&amp;D pilot to commercial CMO in 5 major steps</li>
+            <li>Explain what each of PV Stages 1, 2, 3 covers and what marks the transition between them</li>
+            <li>Describe what a PPQ batch proves and what happens if one fails</li>
+            <li>Name three focus areas of a PAI and two common Form 483 observations</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>You're tech-transferring a mAb from a 2000L pilot bioreactor to a 15000L commercial bioreactor at a new site. What three comparability studies do you prioritize, and why?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p><strong>One — product quality attributes:</strong> glycosylation profile, charge variants, aggregate levels, host cell protein, host cell DNA. Scale and geometry changes mixing, shear, and gas-transfer, all of which can shift post-translational modifications. Side-by-side analytical comparison on matched lots. <strong>Two — process performance:</strong> titer, growth rate, viability curves, feed consumption, final titer, harvest clarification efficiency. Any deviation signals a scale-effect that may propagate to product quality. <strong>Three — impurity clearance:</strong> the downstream must clear HCP, DNA, aggregates, and any viral spike at the new scale; re-execute viral clearance studies if columns, buffers, or flow dynamics changed materially. The principle underlying all three: <em>the commercial material must be analytically indistinguishable from clinical-trial material, or you're launching a new drug from a regulatory perspective.</em></p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>S-R-C:</strong> the transfer triad — <em>Sending site, Receiving site, Comparability.</em> Everything else supports those three nouns.<br>
+          <strong>1-2-3:</strong> the PV stages — <em>Design, Qualification, Continued Verification.</em> Also: the number of PPQ batches, typically.
+        </div>
+      </div>
+    </div>
+
+    <div class="phase" id="day3">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">03</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Apply + Analyze · ~3.5 hrs</div><h3>Supply chain, serialization &amp; distribution — <em>last mile, first principles</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">A drug manufactured to perfection and stranded at customs is, to the patient, no drug at all. The hardest problem in pharma is often not making the molecule — it is getting it, at the right temperature, in the right pack, with a valid serial number, through customs, into the distributor's warehouse, out to the specialty pharmacy, and into the patient's hand, before the expiration date, on the day the prescription needs it.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 3</span>Learning objectives</h4>
+          <ul>
+            <li>Understand S&amp;OP — the rhythm of aligning demand forecasts with supply capacity</li>
+            <li>Grasp DSCSA requirements — serialization, aggregation, verification, and 2023 interoperable exchange</li>
+            <li>Distinguish cold chain from controlled room temperature logistics, and ultra-cold from standard cold</li>
+            <li>Understand 3PL (third-party logistics) models — what they do, where they add risk</li>
+            <li>Identify key supply-chain KPIs: OTIF, inventory turns, stockout rate, forecast accuracy</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--prussian);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>S&amp;OP — Sales &amp; Operations Planning</h4>
+            <p>The monthly cross-functional meeting where commercial forecast, manufacturing plan, inventory position, and financial projection are reconciled. <strong>Demand sensing</strong> (short-horizon) and <strong>demand planning</strong> (long-horizon) feed the top line; <strong>capacity planning</strong> and <strong>supply planning</strong> feed the bottom line. A mature S&amp;OP organization operates on monthly cycles with quarterly deep-dives and an executive review tier.</p>
+            <div class="analogy">The production control room at an automotive plant — where sales forecasts, model-mix, parts availability, and shift capacity reconcile into a weekly build plan that every downstream system commits to.</div>
+          </div>
+          <div class="concept-card">
+            <h4>DSCSA — serialization &amp; track-and-trace</h4>
+            <p>The 2013 <strong>Drug Supply Chain Security Act</strong> requires every US Rx drug package to carry a unique 2D barcode (GTIN + serial + lot + expiry) and to be electronically tracked at every change of ownership. November 2023 began full <strong>interoperable electronic exchange</strong> — manufacturers, wholesalers, dispensers all exchanging serialized, aggregated data in real time. Purposes: counterfeit detection, stolen-product interdiction, faster recalls.</p>
+            <div class="analogy">The VIN on every car — unique, traceable, standardized. Every dealer, body shop, state DMV, and repair chain reads it. Stolen cars, recalled cars, cars with open lawsuits — all flagged by the same identifier.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Cold chain &amp; specialty distribution</h4>
+            <p>Many biologics require <strong>2–8°C</strong>, some require <strong>-20°C</strong>, and mRNA vaccines famously required <strong>-70°C</strong>. Cold-chain integrity demands validated shippers, continuous temperature monitoring, trained handlers, and contingency plans for excursions. <strong>Specialty pharmacies</strong> distribute limited-network products (CGT, oncology, rare disease) with clinical support and payer coordination — a different business than retail.</p>
+            <div class="analogy">Specialized fleets — refrigerated trucks, climate-controlled containers, cryogenic shippers. Running a biologics supply chain on a standard logistics network is like delivering ice cream by mail.</div>
+          </div>
+          <div class="concept-card">
+            <h4>3PL governance &amp; GDP</h4>
+            <p><strong>Third-party logistics</strong> providers (McKesson, Cencora, Cardinal, DHL Life Sciences) warehouse and ship drugs on behalf of manufacturers. <strong>GDP — Good Distribution Practice</strong> — governs the standards: personnel training, facility qualification, temperature control, deviation management, transport validation. EU's <strong>FMD</strong> (Falsified Medicines Directive) adds anti-counterfeit serialization verification at the point of dispensing.</p>
+            <div class="analogy">The dealer network operated by someone other than the manufacturer. The cars are yours; the showroom, delivery logistics, and post-sale service are outsourced — but brand damage from a failure falls on you regardless.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 3 · The pharmaceutical supply network — from plant to patient, with DSCSA overlay</div>
+          <svg viewBox="0 0 980 400" xmlns="http://www.w3.org/2000/svg">
+            <g font-family="'Inter Tight', sans-serif">
+              <rect x="50" y="150" width="110" height="50" fill="#1C3456" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="105" y="170" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">API Plant</text>
+              <text x="105" y="188" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.8">Ireland / India</text>
+              <rect x="50" y="210" width="110" height="50" fill="#2E4E7E" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="105" y="230" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">DP Plant</text>
+              <text x="105" y="248" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.8">fill-finish</text>
+              <rect x="260" y="170" width="120" height="80" fill="#547494" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="320" y="198" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Central DC</text>
+              <text x="320" y="216" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">QP release</text>
+              <text x="320" y="232" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">cold storage</text>
+              <rect x="450" y="110" width="110" height="50" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="505" y="130" text-anchor="middle" font-size="10" fill="#0F1B2D" font-weight="600">3PL · East</text>
+              <text x="505" y="148" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" opacity="0.8">McKesson</text>
+              <rect x="450" y="175" width="110" height="50" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="505" y="195" text-anchor="middle" font-size="10" fill="#0F1B2D" font-weight="600">3PL · Central</text>
+              <text x="505" y="213" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" opacity="0.8">Cencora</text>
+              <rect x="450" y="240" width="110" height="50" fill="#C8984A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="505" y="260" text-anchor="middle" font-size="10" fill="#0F1B2D" font-weight="600">3PL · West</text>
+              <text x="505" y="278" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" opacity="0.8">Cardinal</text>
+              <rect x="650" y="80" width="110" height="40" fill="#4B6B4A" opacity="0.88" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="705" y="97" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Specialty Pharmacy</text>
+              <text x="705" y="112" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">oncology · CGT</text>
+              <rect x="650" y="135" width="110" height="40" fill="#4B6B4A" opacity="0.88" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="705" y="152" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Retail Pharmacy</text>
+              <text x="705" y="167" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">CVS / Walgreens</text>
+              <rect x="650" y="190" width="110" height="40" fill="#4B6B4A" opacity="0.88" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="705" y="207" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Hospital System</text>
+              <text x="705" y="222" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">GPO contracts</text>
+              <rect x="650" y="245" width="110" height="40" fill="#4B6B4A" opacity="0.88" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="705" y="262" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Home Infusion</text>
+              <text x="705" y="277" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">specialty nursing</text>
+              <rect x="650" y="300" width="110" height="40" fill="#4B6B4A" opacity="0.88" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="705" y="317" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Clinical Site</text>
+              <text x="705" y="332" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.85">trial supply</text>
+              <circle cx="890" cy="210" r="30" fill="#A84B2A" opacity="0.9" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="890" y="206" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="700">PATIENT</text>
+              <text x="890" y="220" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF">Rx in hand</text>
+            </g>
+            <defs><marker id="arrCh" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2A3B52"/></marker></defs>
+            <g stroke="#2A3B52" stroke-width="1" opacity="0.55" marker-end="url(#arrCh)" fill="none">
+              <line x1="160" y1="175" x2="260" y2="200"/>
+              <line x1="160" y1="235" x2="260" y2="220"/>
+              <line x1="380" y1="200" x2="450" y2="135"/>
+              <line x1="380" y1="210" x2="450" y2="200"/>
+              <line x1="380" y1="220" x2="450" y2="265"/>
+              <line x1="560" y1="135" x2="650" y2="100"/>
+              <line x1="560" y1="200" x2="650" y2="155"/>
+              <line x1="560" y1="200" x2="650" y2="210"/>
+              <line x1="560" y1="265" x2="650" y2="260"/>
+              <line x1="560" y1="265" x2="650" y2="315"/>
+              <line x1="760" y1="100" x2="860" y2="200"/>
+              <line x1="760" y1="155" x2="860" y2="205"/>
+              <line x1="760" y1="210" x2="860" y2="210"/>
+              <line x1="760" y1="265" x2="860" y2="215"/>
+            </g>
+            <rect x="50" y="340" width="830" height="38" fill="#2E4E7E" opacity="0.18" stroke="#2E4E7E" stroke-width="0.5"/>
+            <text x="62" y="358" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2E4E7E" letter-spacing="2">DSCSA SERIALIZED TELEMETRY →</text>
+            <text x="62" y="371" font-family="'Inter Tight', sans-serif" font-size="9" fill="#2A3B52">Every unit barcoded · every change-of-ownership recorded · real-time interoperable exchange (2023+) · 6-year retention</text>
+            <text x="50" y="30" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">A network — not a pipeline. Failure at any node cascades to the patient.</text>
+            <text x="50" y="50" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">ILLUSTRATIVE · MAJOR FLOWS ONLY · IN PRACTICE 100+ DISTRIBUTION ENDPOINTS</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The best supply-chain leader I know told me a thing worth repeating: <em>"Every supply chain is a chain of bets."</em> A bet on demand forecast. A bet on supplier reliability. A bet on customs clearing on time. A bet on the cold chain holding. Ten years of winning those bets builds complacency; one bad week — a tornado in North Carolina, a pandemic, a port strike, a single-source supplier going bankrupt — exposes every bet simultaneously. The mature supply-chain function doesn't try to win every bet. It designs so that no single bet's failure can take the network down.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 3 checkpoint</h4>
+          <ul>
+            <li>Describe the monthly S&amp;OP cycle and who participates</li>
+            <li>List the five elements of a DSCSA 2D barcode and explain why interoperable exchange matters</li>
+            <li>Distinguish three cold-chain regimes (2–8°C, -20°C, -70°C) and one drug example of each</li>
+            <li>Name five supply-chain KPIs and define OTIF precisely</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>An operations VP argues: "DSCSA serialization is just a compliance cost — it adds no value to our business." Make the counter-case in three points.</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p><strong>One — recall speed:</strong> without serialization, a recall must pull every unit of an affected lot from every downstream endpoint, since you cannot tell which units reached which patients. With serialized, interoperable data, recalls target the specific units that moved into the affected distribution channels — a day's work, not a month's, at a fraction of the inventory write-off. <strong>Two — counterfeit interdiction:</strong> serialized verification at the dispenser catches cloned packages that previously reached patients undetected; protects brand and patient safety. <strong>Three — real-time inventory visibility:</strong> the same data stream that satisfies DSCSA tells you where every unit of inventory sits in the channel, enabling dramatically better demand sensing, safety-stock optimization, and stockout prevention. Companies that treat DSCSA only as compliance spend the same money and get only compliance. Companies that build on it get a free supply-chain nerve system.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>S-O-P:</strong> <em>Sales, Operations, Planning.</em> The meeting that keeps demand and supply in a marriage.<br>
+          <strong>D-S-C-S-A:</strong> <em>Drug Supply Chain Security Act.</em> Serialize every unit, track every handoff, retain six years. <strong>OTIF</strong> — on-time, in-full — is the supply-chain heartbeat.
+        </div>
+      </div>
+    </div>
+
+    <div class="phase" id="day4">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">04</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Analyze + Evaluate · ~3 hrs</div><h3>Advanced manufacturing — <em>continuous, digital, resilient</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">In the year before COVID, the idea of manufacturing billions of doses of a novel mRNA therapeutic in under twelve months would have been dismissed by nearly every CMC veteran. The miracle that followed was not urgency alone. It was twenty quiet years of investment in continuous manufacturing, PAT, digital twins, and Quality 4.0 — unnoticed until the moment the industry had to execute them at civilizational scale.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 4</span>Learning objectives</h4>
+          <ul>
+            <li>Compare continuous manufacturing with batch — economics, regulatory pathway, use cases</li>
+            <li>Understand Real-Time Release Testing (RTRT) — how model-based release replaces end-product testing</li>
+            <li>Grasp digital twins and model-predictive control — simulating the plant to control the plant</li>
+            <li>Appreciate the manufacturing complexity of advanced modalities: CGT, mRNA-LNP, ADC, radiopharmaceuticals</li>
+            <li>Evaluate network resilience strategies — dual-sourcing, geographic redundancy, strategic stockpiles</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--prussian);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Continuous manufacturing</h4>
+            <p>Material flows continuously through integrated unit operations — no holds, no intermediate release testing. FDA approved Janssen's Prezista tablet shift (2016) and Vertex's Orkambi using continuous direct compression; Eli Lilly has built continuous processes for small molecules. Benefits: smaller footprint, 50–90% shorter cycle times, lower COGS, faster scale-up to demand. Demands: advanced PAT, robust control systems, comfortable regulators.</p>
+            <div class="analogy">The difference between stamping one body panel at a time and running a continuous roll-formed panel line. Same cars; different factory; different economics.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Real-Time Release Testing (RTRT)</h4>
+            <p>Instead of testing finished product in a QC lab (days later), <strong>RTRT</strong> uses in-process PAT data and a validated model to release batches as soon as manufacturing completes. The model must be robust, the data must be reliable, and the control strategy must be regulator-approved — but the payoff is hours to release rather than weeks. The logical endpoint of QbD + PAT.</p>
+            <div class="analogy">End-of-line vehicle verification by sensor-fused telemetry rather than a final inspection bay. The car certifies itself — and so does the data trail.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Digital twins &amp; model-predictive control</h4>
+            <p>A <strong>digital twin</strong> is a physics-plus-data model of the process — mechanistic equations for mass transfer and kinetics, coupled with machine-learning calibration on historical batches. Once validated, it predicts CQAs under any CPP setting; enables <strong>model-predictive control</strong> that adjusts inputs in real time to hold product quality. The same twin that runs the plant also trains operators, tests scenarios, and optimizes scale-up without wet experiments.</p>
+            <div class="analogy">The simulator that every Formula 1 team runs in parallel with the real car. Every lap the real car runs, the simulator runs ten; by the time a setup goes to the track, it has been explored in a thousand virtual versions.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Advanced modalities — a new manufacturing reality</h4>
+            <p><strong>Autologous CGT</strong> has a vein-to-vein logistics problem — patient's cells must be collected, shipped, engineered, QC'd, and returned within a narrow window. <strong>mRNA-LNP</strong> combines nucleic-acid manufacturing with lipid-nanoparticle assembly, requiring microfluidic precision at scale. <strong>ADC</strong> conjugation bridges biologics and small-molecule chemistry. <strong>Radiopharmaceuticals</strong> decay during manufacture. Each modality's manufacturing paradigm is fundamentally different from traditional biologics or small molecules.</p>
+            <div class="analogy">Building an electric vehicle, a fuel-cell vehicle, and a rocket-engined vehicle — all on the same assembly floor. Different physics, different supply chains, different regulatory frames. None of them learned from the gasoline-car playbook.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 4 · Batch vs. continuous manufacturing — a side-by-side of paradigms</div>
+          <svg viewBox="0 0 980 400" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="40" width="440" height="320" fill="#EEE5CE" stroke="#0F1B2D" stroke-width="0.6" opacity="0.4"/>
+            <text x="260" y="68" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" fill="#0F1B2D" font-weight="500">Batch Manufacturing</text>
+            <text x="260" y="84" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="2">DOMINANT PARADIGM · ~95% OF PRODUCT</text>
+            <g transform="translate(70, 115)">
+              <rect x="0" y="0" width="55" height="55" fill="#547494" opacity="0.85"/><text x="27" y="30" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Step 1</text><text x="27" y="44" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF">30d</text>
+              <text x="80" y="30" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2A3B52">→</text>
+              <rect x="100" y="0" width="55" height="55" fill="#547494" opacity="0.85"/><text x="127" y="30" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">HOLD</text><text x="127" y="44" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF">test 5d</text>
+              <text x="180" y="30" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2A3B52">→</text>
+              <rect x="200" y="0" width="55" height="55" fill="#547494" opacity="0.85"/><text x="227" y="30" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Step 2</text><text x="227" y="44" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF">25d</text>
+              <text x="280" y="30" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2A3B52">→</text>
+              <rect x="300" y="0" width="55" height="55" fill="#547494" opacity="0.85"/><text x="327" y="30" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">HOLD</text><text x="327" y="44" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF">test 7d</text>
+            </g>
+            <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#0F1B2D">
+              <text x="75" y="215">Cycle time</text>
+              <text x="200" y="215" fill="#A84B2A" font-weight="600">60–90 days</text>
+              <text x="75" y="235">Footprint</text>
+              <text x="200" y="235" fill="#A84B2A">large · dedicated</text>
+              <text x="75" y="255">Release</text>
+              <text x="200" y="255" fill="#A84B2A">QC lab · 2–4 wks post-mfg</text>
+              <text x="75" y="275">Flexibility</text>
+              <text x="200" y="275" fill="#4B6B4A">high · campaign-driven</text>
+              <text x="75" y="295">Scale-up risk</text>
+              <text x="200" y="295" fill="#A84B2A">high · each scale re-validates</text>
+              <text x="75" y="315">Regulator comfort</text>
+              <text x="200" y="315" fill="#4B6B4A">very high · well established</text>
+              <text x="75" y="335">COGS profile</text>
+              <text x="200" y="335" fill="#A84B2A">baseline</text>
+            </g>
+            <rect x="500" y="40" width="440" height="320" fill="#2E4E7E" stroke="#0F1B2D" stroke-width="0.6" opacity="0.12"/>
+            <text x="720" y="68" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" fill="#0F1B2D" font-weight="500">Continuous Manufacturing</text>
+            <text x="720" y="84" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="2">EMERGING · ICH Q13 · ~5% &amp; GROWING</text>
+            <g transform="translate(530, 115)">
+              <rect x="0" y="0" width="55" height="55" fill="#2E4E7E" opacity="0.95"/><text x="27" y="30" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Unit 1</text>
+              <rect x="60" y="0" width="55" height="55" fill="#2E4E7E" opacity="0.95"/><text x="87" y="30" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Unit 2</text>
+              <rect x="120" y="0" width="55" height="55" fill="#2E4E7E" opacity="0.95"/><text x="147" y="30" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Unit 3</text>
+              <rect x="180" y="0" width="55" height="55" fill="#2E4E7E" opacity="0.95"/><text x="207" y="30" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Unit 4</text>
+              <rect x="240" y="0" width="55" height="55" fill="#2E4E7E" opacity="0.95"/><text x="267" y="30" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Unit 5</text>
+              <rect x="300" y="0" width="55" height="55" fill="#C8984A" opacity="0.95"/><text x="327" y="30" text-anchor="middle" font-size="9" fill="#0F1B2D" font-weight="600">RTRT</text>
+              <text x="327" y="44" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#0F1B2D">model</text>
+            </g>
+            <line x1="530" y1="180" x2="885" y2="180" stroke="#C8984A" stroke-width="2" opacity="0.7"/>
+            <text x="710" y="195" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#9B7233" letter-spacing="2">CONTINUOUS PAT · MODEL-PREDICTIVE CONTROL</text>
+            <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#0F1B2D">
+              <text x="535" y="225">Cycle time</text>
+              <text x="660" y="225" fill="#4B6B4A" font-weight="600">3–10 days</text>
+              <text x="535" y="245">Footprint</text>
+              <text x="660" y="245" fill="#4B6B4A">~50% smaller</text>
+              <text x="535" y="265">Release</text>
+              <text x="660" y="265" fill="#4B6B4A">real-time · hours post-mfg</text>
+              <text x="535" y="285">Flexibility</text>
+              <text x="660" y="285" fill="#A84B2A">lower · process-dedicated</text>
+              <text x="535" y="305">Scale-up risk</text>
+              <text x="660" y="305" fill="#4B6B4A">low · scale-out, not scale-up</text>
+              <text x="535" y="325">Regulator comfort</text>
+              <text x="660" y="325" fill="#9B7233">growing · ICH Q13 maturing</text>
+              <text x="535" y="345">COGS profile</text>
+              <text x="660" y="345" fill="#4B6B4A">20–40% lower at scale</text>
+            </g>
+            <text x="40" y="30" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Two paradigms. The second is eating the first — slowly — wherever the math works.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The continuous-manufacturing debate I've watched for fifteen years is usually framed as <em>"which is better?"</em>. That is the wrong frame. The right frame is: <em>for which product, at which volume, in which regulatory jurisdiction, at which stage of the patent life — is each better?</em>. A blockbuster small molecule at five-hundred-million units annually might have screaming business case for continuous; a rare-disease biologic at ten-thousand doses a year would waste capital trying. The most sophisticated manufacturers run portfolios of both paradigms and move products between them as their commercial life evolves. Paradigm flexibility, not paradigm purity, is the mark of a modern network.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 4 checkpoint</h4>
+          <ul>
+            <li>Name three FDA-approved continuous-manufacturing products and a benefit claimed for each</li>
+            <li>Describe how RTRT replaces traditional QC testing — and what it requires to be accepted</li>
+            <li>Define a digital twin and name two things a validated twin can do that wet experiments cannot</li>
+            <li>Choose an advanced modality (CGT, mRNA-LNP, or ADC) and explain its unique manufacturing challenge</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A CFO asks: "Continuous manufacturing promises 30% lower COGS. Why isn't every company converting every product?" List three honest reasons.</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p><strong>One — capital and risk:</strong> converting an existing batch process to continuous requires rebuilding the plant, revalidating with the FDA (PAS-level), and accepting that early continuous runs will produce expensive failures before they produce expensive savings. The NPV breakeven is often 5–8 years — a very long time horizon for products already mid-life. <strong>Two — regulator heterogeneity:</strong> FDA is comfortable; EMA growing; NMPA and PMDA still catching up. A product sold globally may need to maintain batch manufacturing for non-continuous-ready jurisdictions anyway, negating the COGS benefit. <strong>Three — product-process fit:</strong> continuous works spectacularly for high-volume, stable small molecules; it works poorly for low-volume biologics, campaign products, and anything with rapid formulation changes. The 30% savings is a <em>best-case</em> for the right product. Applied to the wrong product, continuous can increase COGS. The math must be run per-asset, not per-company.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>B-C:</strong> the two paradigms — <em>Batch vs. Continuous.</em> Same drug, different factory, different economics.<br>
+          <strong>R-T-R-T:</strong> <em>Real-Time Release Testing.</em> Release at manufacture, not in the QC lab weeks later. The mature endpoint of QbD + PAT.
+        </div>
+      </div>
+    </div>
+
+    <div class="phase" id="day5">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">05</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Evaluate + Create · ~3 hrs</div><h3>In-line optimization &amp; end-of-life — <em>sustaining, then winding down</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">Every approved drug has two birthdays — launch day, and the day its last patient will need it. Between them, CMC's job is quietly evolving — from ramping capacity to tuning COGS, from chasing yield to honoring tail-supply obligations to patients who cannot switch. The second half of a drug's life is less glamorous than the first. It is also where most of the lifetime economic value is made or lost.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 5</span>Learning objectives</h4>
+          <ul>
+            <li>Identify the COGS levers available post-launch — yield, scale, supplier cost, automation</li>
+            <li>Plan a process optimization campaign — how to propose, validate, and implement</li>
+            <li>Understand LOE tail-supply obligations — what the company still owes after exclusivity ends</li>
+            <li>Navigate divestiture and wind-down — last-patient-on-drug, archival, regulatory handoff</li>
+            <li>Synthesize the D-L-D-S four-engine CMC thesis for an asset across its full lifecycle</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--prussian);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>COGS levers</h4>
+            <p>Post-launch cost reduction comes from: <strong>yield improvement</strong> (titer, downstream recovery, reject rate); <strong>scale-up</strong> (larger bioreactors, bigger tablet runs); <strong>supplier optimization</strong> (second source, volume-based renegotiation, raw-material substitution); <strong>automation</strong> (labor reduction, batch record digitization); <strong>cycle-time reduction</strong> (continuous, PAT, lean manufacturing). Mature products routinely achieve 30–50% COGS reduction between launch and mid-life.</p>
+            <div class="analogy">The continuous cost-out program every automotive plant runs — five percent a year, forever. Nobody celebrates it, but cumulative a decade of it is the difference between making money on a vehicle and losing money on it.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Optimization campaigns &amp; supplier rationalization</h4>
+            <p>Each significant process change triggers regulatory filings (CBE-30, PAS), comparability studies, stability bridging, and potentially clinical confirmation. Ambitious <strong>optimization campaigns</strong> bundle multiple changes into one regulatory package to minimize per-change friction. <strong>Supplier rationalization</strong> — reducing from three suppliers to one for a raw material — cuts unit cost but increases supply risk; dual-sourcing is the usual compromise.</p>
+            <div class="analogy">The mid-cycle refresh that combines a new engine, new infotainment, and new bodywork into one homologation event rather than three. Expensive once; cheaper than three separate homologations.</div>
+          </div>
+          <div class="concept-card">
+            <h4>LOE tail-supply obligations</h4>
+            <p>Patent expiry ≠ market exit. Many innovator products continue at much lower volumes for years post-LOE, serving patients who cannot switch, residual formulary positions, and rare-disease commitments. <strong>Tail-supply planning</strong> must secure: (1) enough API / intermediates for forecast demand; (2) stability coverage for long shelf-life declarations; (3) viable manufacturing contracts as internal capacity is redirected; (4) regulatory maintenance (PSURs, variations, renewals). Underinvestment here causes stockouts that damage reputation years after anyone is selling the drug in volume.</p>
+            <div class="analogy">The automotive aftermarket-parts obligation — ten years of guaranteed parts after model retirement. No revenue to speak of; the brand's reputation rests on it anyway.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Wind-down &amp; divestiture</h4>
+            <p>Eventual product discontinuation or divestiture requires: (1) <strong>last-patient-on-drug</strong> forecasting — what supply must be held for patients with no alternative; (2) formal patient communication and healthcare-provider notification; (3) regulatory deregistration in each jurisdiction; (4) data archival (batch records for years post-last-shipment); (5) facility / equipment repurposing or decommissioning. A mishandled wind-down can produce stranded patients, litigation, and reputational damage — often years after any commercial motive has ended.</p>
+            <div class="analogy">Plant closure — handled with years of planning by a mature manufacturer, hastily by an immature one. The difference between a legacy and a lawsuit.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 5 · The CMC lifecycle curve — capacity, COGS, and obligations across a product's life</div>
+          <svg viewBox="0 0 980 400" xmlns="http://www.w3.org/2000/svg">
+            <line x1="60" y1="340" x2="920" y2="340" stroke="#0F1B2D" stroke-width="1.5"/>
+            <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#0F1B2D">
+              <line x1="80" y1="335" x2="80" y2="345" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="80" y="362" text-anchor="middle" font-weight="600">Launch</text>
+              <line x1="260" y1="335" x2="260" y2="345" stroke="#0F1B2D"/>
+              <text x="260" y="362" text-anchor="middle">Ramp</text>
+              <line x1="440" y1="335" x2="440" y2="345" stroke="#0F1B2D"/>
+              <text x="440" y="362" text-anchor="middle">Peak</text>
+              <line x1="620" y1="335" x2="620" y2="345" stroke="#0F1B2D"/>
+              <text x="620" y="362" text-anchor="middle">Mid-life</text>
+              <line x1="800" y1="335" x2="800" y2="345" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="800" y="362" text-anchor="middle" font-weight="600">LOE</text>
+              <line x1="900" y1="335" x2="900" y2="345" stroke="#0F1B2D"/>
+              <text x="900" y="362" text-anchor="middle">Wind-down</text>
+            </g>
+            <path d="M 80 280 Q 200 180 440 130 Q 600 140 800 220 Q 860 280 900 310" fill="none" stroke="#2E4E7E" stroke-width="2.5"/>
+            <text x="440" y="118" text-anchor="middle" font-family="'Fraunces', serif" font-size="11" fill="#2E4E7E" font-style="italic">Capacity demand curve</text>
+            <path d="M 80 180 Q 260 220 440 260 Q 620 280 800 280 L 900 280" fill="none" stroke="#C8984A" stroke-width="2.5" stroke-dasharray="4 3"/>
+            <text x="520" y="275" text-anchor="middle" font-family="'Fraunces', serif" font-size="11" fill="#9B7233" font-style="italic">COGS per unit (declining)</text>
+            <rect x="80" y="40" width="400" height="20" fill="#2E4E7E" opacity="0.6"/>
+            <text x="95" y="54" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF" font-weight="600">Scale-up · capacity add · PPQ follow-on batches</text>
+            <rect x="200" y="62" width="500" height="20" fill="#547494" opacity="0.7"/>
+            <text x="215" y="76" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF" font-weight="600">Yield improvement · process optimization campaigns</text>
+            <rect x="400" y="84" width="400" height="20" fill="#C8984A" opacity="0.85"/>
+            <text x="415" y="98" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D" font-weight="600">Supplier rationalization · automation · CAPEX defense</text>
+            <rect x="700" y="106" width="200" height="20" fill="#A84B2A" opacity="0.85"/>
+            <text x="715" y="120" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF" font-weight="600">LOE tail-supply planning · wind-down</text>
+            <line x1="800" y1="30" x2="800" y2="340" stroke="#A84B2A" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.7"/>
+            <text x="820" y="60" font-family="'Fraunces', serif" font-size="11" font-style="italic" fill="#A84B2A">PATENT CLIFF</text>
+            <text x="60" y="30" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Capacity peaks in the middle. COGS declines throughout. Obligations never end.</text>
+            <text x="60" y="388" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">SCHEMATIC · PROFILE VARIES BY MODALITY AND COMMERCIAL HORIZON</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>A quiet truth of this work: <em>the best CMC leaders I know treat wind-down with the same seriousness as launch.</em> It is tempting, especially at a large company, to staff launch teams with A-players and staff end-of-life teams with whoever is available. That culture produces stockouts, patient abandonment, and lawsuits. The culture that produces legacy — the kind pharma ought to produce — staffs the entire lifecycle with capable people and measures success not just by peak sales but by the dignity with which the final doses reach the final patients. The product is a fifteen-year relationship; the last year matters.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 5 checkpoint</h4>
+          <ul>
+            <li>List four major COGS levers and what each costs to execute</li>
+            <li>Design a 3-year optimization campaign for a commercial mAb that bundles yield, automation, and supplier changes</li>
+            <li>Walk through tail-supply planning for an LOE'd rare-disease product with no substitute</li>
+            <li>Evaluate the D-L-D-S four-engine thesis on a real or hypothetical asset — name which engine is strongest and which is weakest</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A CFO proposes exiting all manufacturing for a small rare-disease product three years after LOE, outsourcing to a CMO. Walk through the three biggest risks you'd surface.</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p><strong>One — continuity of supply for non-switchable patients.</strong> If the product has patients with no alternative, a CMO transition failure produces stockouts that cannot be absorbed by the market. The CMO must complete tech transfer, comparability, PAS approval, and PPQ successfully — any of which can fail or delay. Bridge inventory and a formal patient-continuity plan are non-negotiable. <strong>Two — regulatory liability that survives the handoff.</strong> The MAH (marketing authorization holder) retains regulatory responsibility regardless of who manufactures. A CMO's quality failures become the innovator's 483s, warning letters, and lawsuits. Due diligence on CMO quality culture, not just capacity, is essential. <strong>Three — analytical-method drift.</strong> Many legacy products have analytical methods that are poorly documented outside the original site; reproducing them at a CMO can surface method-reproducibility problems that were invisible under single-site operation. Recommend: tech transfer to CMO two years before the proposed exit, run parallel manufacture for a year, validate comparability across both sites, <em>then</em> close internal capacity.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>D-L-D-S:</strong> the four CMC engines — <em>Design, Launch, Deliver, Sustain.</em> All four or the factory stalls somewhere.<br>
+          <strong>Capacity peaks. COGS falls. Obligations never end.</strong> The three lifetime curves that define the second half of every product.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="jargon" class="wrap-narrow">
+  <div class="section-label">Jargon decoder · three tiers</div>
+  <h2>The vocabulary of the plant.</h2>
+  <p>CMC blends chemistry, engineering, regulatory law, and logistics — four vocabularies at once. A minimal working set:</p>
+
+  <div class="jargon-tier">
+    <h3>Tier 1 · Everyday</h3>
+    <div class="tier-label">If you know these, you can read a CMC status update</div>
+    <dl>
+      <dt>API / DP</dt><dd>Active Pharmaceutical Ingredient / Drug Product — the molecule vs. the final formulated dose form.</dd>
+      <dt>GMP / cGMP</dt><dd>(Current) Good Manufacturing Practice — the foundational quality regulations, US codified in 21 CFR 210/211.</dd>
+      <dt>GDP</dt><dd>Good Distribution Practice — GMP's counterpart for warehousing, shipping, and 3PL operations.</dd>
+      <dt>CPP / CQA</dt><dd>Critical Process Parameter / Critical Quality Attribute — the inputs you control and the outputs that matter.</dd>
+      <dt>QbD</dt><dd>Quality by Design — build quality into the process, don't inspect it in at the end.</dd>
+      <dt>Batch record</dt><dd>The document capturing every step of a batch's manufacture; the contemporaneous legal record.</dd>
+      <dt>CMO / CDMO</dt><dd>Contract Manufacturing Organization / Contract Development &amp; Manufacturing Organization — outsourced partners.</dd>
+      <dt>OTIF</dt><dd>On-Time, In-Full — the core supply-chain delivery metric.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 2 · Technical</h3>
+    <div class="tier-label">You hear these in CMC and supply-chain meetings</div>
+    <dl>
+      <dt>PAT</dt><dd>Process Analytical Technology — real-time in-process measurement (NIR, Raman, mass spec).</dd>
+      <dt>PPQ</dt><dd>Process Performance Qualification — Stage 2 validation; typically three consecutive full-scale GMP batches.</dd>
+      <dt>PAI</dt><dd>Pre-Approval Inspection — FDA's pre-approval audit of the commercial manufacturing site.</dd>
+      <dt>DSCSA</dt><dd>Drug Supply Chain Security Act (2013) — US serialization + interoperable track-and-trace.</dd>
+      <dt>FMD</dt><dd>Falsified Medicines Directive — EU's equivalent serialization regime.</dd>
+      <dt>ICH Q8–Q13</dt><dd>The quality guideline series: Q8 Pharmaceutical Development, Q9 QRM, Q10 PQS, Q11 Drug Substance Dev, Q12 Lifecycle Management, Q13 Continuous Manufacturing.</dd>
+      <dt>CPV</dt><dd>Continued Process Verification — Stage 3 of the PV lifecycle; ongoing monitoring that process remains valid.</dd>
+      <dt>APQR / PQR</dt><dd>Annual Product Quality Review / Product Quality Review — yearly rollup of CQAs, deviations, complaints.</dd>
+      <dt>SPC</dt><dd>Statistical Process Control — run-rules (Nelson, Western Electric) on control charts to flag drift.</dd>
+      <dt>Comparability</dt><dd>Side-by-side analytical + stability demonstration that post-change product matches pre-change product.</dd>
+      <dt>Form 483</dt><dd>FDA inspector's list of observations at the conclusion of an inspection; must be responded to in 15 days.</dd>
+      <dt>Cold chain</dt><dd>End-to-end temperature-controlled distribution, typically 2–8°C, -20°C, or ultra-cold -70°C.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 3 · Specialist</h3>
+    <div class="tier-label">You hear these from CMC strategists and senior manufacturing leadership</div>
+    <dl>
+      <dt>Design space</dt><dd>Multidimensional region of CPP combinations shown to produce acceptable CQAs; changes within are not variations.</dd>
+      <dt>MPC / Digital twin</dt><dd>Model-Predictive Control driven by a physics-plus-data digital twin of the process.</dd>
+      <dt>RTRT</dt><dd>Real-Time Release Testing — release decision made from in-process PAT + validated model, not end-product QC.</dd>
+      <dt>Vein-to-vein</dt><dd>The CGT logistics paradigm: patient cells → manufacturing → patient, typically within a 2–4 week window.</dd>
+      <dt>MAH</dt><dd>Marketing Authorization Holder — the entity regulatorily responsible, regardless of who physically manufactures.</dd>
+      <dt>QP release</dt><dd>Qualified Person release — the EU legal requirement for a named individual to certify each batch for sale.</dd>
+      <dt>Analytical bridging</dt><dd>Side-by-side analytical comparison when method changes — ensuring historical trend data remains interpretable.</dd>
+      <dt>DoE</dt><dd>Design of Experiments — statistical framework for characterizing process space efficiently.</dd>
+      <dt>Kanban / Heijunka</dt><dd>Lean-manufacturing inventory-control and level-loading techniques; increasingly adopted in pharma operations.</dd>
+      <dt>OSD / LFD</dt><dd>Oral Solid Dose / Liquid Filled Dose — two dominant small-molecule drug-product form factors.</dd>
+      <dt>Last-patient-on-drug</dt><dd>The forecasting basis for wind-down tail-supply — how long must we continue to manufacture for patients with no alternative.</dd>
+      <dt>Lyophilization</dt><dd>Freeze-drying for biologic stability; energy-intensive and a capacity bottleneck for many mAb and mRNA products.</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="pitfalls" class="wrap">
+  <div class="section-label">Traps &amp; pitfalls</div>
+  <h2>Where CMC programs quietly damage themselves.</h2>
+  <p>Catastrophic CMC failures reach the news; quiet, slow-burn failures are endemic. Six traps that even experienced organizations still fall into:</p>
+
+  <div class="pitfall-grid">
+    <div class="pitfall"><div class="num">1</div>
+      <h4>Scaled from lab to plant without process characterization</h4>
+      <p>A promising Phase 2 process is scaled straight to commercial without DoE-driven characterization at intermediate scales. The design space is guessed rather than mapped. First out-of-spec batch at PPQ, everyone is surprised — except the process engineers who asked for characterization funding and were told to move faster.</p>
+      <p class="rescue">Rescue: invest in process characterization at Phase 2 even when the business case is ambiguous. Cheapest insurance in CMC.</p>
+    </div>
+    <div class="pitfall"><div class="num">2</div>
+      <h4>Tech transfer by paperwork</h4>
+      <p>Sending site ships batch records and SOPs; receiving site signs an acknowledgment. No shadow runs. No embedded process scientists. The assumption is that a documented process is a transferable process. It is not. PPQ reveals mixing dead zones, water-system differences, and operator-technique drift that nobody mapped.</p>
+      <p class="rescue">Rescue: embed sending-site scientists at receiving site through engineering runs and PPQ. Exit only when receiving team teaches the process back without prompts.</p>
+    </div>
+    <div class="pitfall"><div class="num">3</div>
+      <h4>Analytical drift during validation</h4>
+      <p>Analytical methods developed in R&amp;D are "transferred" as-is to commercial QC, but under higher sample throughput and different analyst rotation, precision and accuracy drift. The product has not changed; the <em>measurement</em> has, and now a specification trend looks real when it is artifactual.</p>
+      <p class="rescue">Rescue: re-qualify methods under commercial-realistic conditions before QC goes live. Monitor method-performance trends alongside product trends.</p>
+    </div>
+    <div class="pitfall"><div class="num">4</div>
+      <h4>Single-source supplier concentration</h4>
+      <p>A critical raw material is available from only one supplier. The contract is profitable; the lead time is manageable; nobody sees the risk until a plant fire, a geopolitical event, or a quality failure interrupts supply — at which point months of global stockouts follow because no qualified alternative exists.</p>
+      <p class="rescue">Rescue: maintain qualified second sources for all critical raw materials, even if primary allocation is 95/5. Qualification is expensive; stockout is fatal.</p>
+    </div>
+    <div class="pitfall"><div class="num">5</div>
+      <h4>Serialization as afterthought</h4>
+      <p>DSCSA deadlines treated as compliance boxes rather than operational transformation. Serial-number capture, aggregation, and interoperable exchange systems patched onto existing MES/WMS rather than designed in. Go-live reveals data-integrity gaps that cause shipment holds and angry distributors.</p>
+      <p class="rescue">Rescue: treat serialization as a digital-transformation program with an executive owner. Plan 18 months of parallel running before each deadline.</p>
+    </div>
+    <div class="pitfall"><div class="num">6</div>
+      <h4>Assumed stability data for novel modalities</h4>
+      <p>Accelerated stability projections (Arrhenius-based) that work well for small molecules applied to a mAb or mRNA-LNP product. Real-time stability reveals degradation pathways the accelerated model missed. By the time the data is in, the expiry-date labeling is already on thousands of units.</p>
+      <p class="rescue">Rescue: always run full real-time stability in parallel with accelerated, especially for novel modalities. Treat accelerated projections as hypotheses, not conclusions.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-label">Cross-domain connections</div>
+  <h2>Pharma manufacturing is a pattern humans have built before.</h2>
+  <p>If the automotive network is the closest mirror, three other domains illuminate why pharmaceutical CMC looks the way it does:</p>
+
+  <div class="crossdomain-grid">
+    <div class="crossdomain">
+      <div class="domain">Automotive manufacturing</div>
+      <h4>Toyota Production System &amp; lean</h4>
+      <p>The discipline most structurally parallel to pharma CMC. Unit operations, tolerances, takt time, mixed-model assembly, supplier quality, recall protocols, aftermarket-parts obligations. Much of modern pharma Operational Excellence vocabulary — kanban, heijunka, kaizen, andon — is loaned directly from Toyota.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Semiconductor fabrication</div>
+      <h4>Cleanrooms &amp; yield engineering</h4>
+      <p>A billion-dollar fab running ISO Class 1 cleanrooms, process-parameter control tighter than any pharma facility, and yield engineering as an executive-tier discipline. Pharma aseptic manufacturing increasingly borrows from semiconductor playbooks — isolator technology, particle-monitoring density, environmental-control sophistication.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Food &amp; beverage</div>
+      <h4>Cold-chain retail logistics</h4>
+      <p>Walmart and Amazon run grocery cold chains at a scale pharma cannot dream of, with tight temperature control, serialization (FSMA 204), and recall speed. Pharma supply-chain sophistication increasingly adopts their models — predictive demand sensing, control-tower visibility, resilience engineering.</p>
+    </div>
+  </div>
+</section>
+
+<section id="spaced" class="wrap">
+  <div class="section-label">Spaced repetition schedule</div>
+  <h2>Holding the plant in memory.</h2>
+  <p>CMC vocabulary fades fast without structured review. The 8-touch schedule below gives ~90% retention at the 3-month mark for about 2.5 hours of total review time:</p>
+
+  <div class="spaced-rep">
+    <div class="sr-timeline">
+      <div class="sr-day"><div class="day-num">1</div><div class="day-label">Learn</div><div class="day-task">Day 1 process fundamentals</div></div>
+      <div class="sr-day"><div class="day-num">2</div><div class="day-label">Review</div><div class="day-task">Day 1 checkpoint + Day 2 tech transfer</div></div>
+      <div class="sr-day"><div class="day-num">3</div><div class="day-label">Review</div><div class="day-task">Day 2 flip cards + Day 3 supply chain</div></div>
+      <div class="sr-day"><div class="day-num">4</div><div class="day-label">Review</div><div class="day-task">Jargon Tier 1 + 2, Day 4 advanced mfg</div></div>
+      <div class="sr-day"><div class="day-num">5</div><div class="day-label">Review</div><div class="day-task">Day 5 optimization + wind-down</div></div>
+      <div class="sr-day"><div class="day-num">7</div><div class="day-label">First lapse</div><div class="day-task">All 5 memory hooks</div></div>
+      <div class="sr-day"><div class="day-num">14</div><div class="day-label">Consolidation</div><div class="day-task">Redo all Feynman teach-backs</div></div>
+      <div class="sr-day"><div class="day-num">30</div><div class="day-label">Retention</div><div class="day-task">Draw concept map from memory</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap-narrow">
+    <div class="section-label" style="color: var(--ochre);">Mentor's parting wisdom</div>
+    <h2>Every vial is <em>somebody's shift</em> coming home.</h2>
+    <p>Five days cannot turn you into a CMC leader. The craft takes decades — learning the physics of the particular modality you work with, the personalities of the inspectors who visit your plants, the quirks of the suppliers who feed your line, the failure modes that teach you what textbooks cannot.</p>
+    <p>What five days can do is hand you the map. You now know that a process is a recipe plus a building plus a crew plus a thousand invisible conditions. You know why tech transfer is hard and why DSCSA matters. You know that the difference between a batch and a continuous plant is not equipment — it is paradigm. You know that the second half of a product's life demands the same seriousness as the first.</p>
+    <p class="mantra">The molecule is a hypothesis. The factory is the proof. The vial is the promise kept.</p>
+    <p>The next time you hold a blister pack or a vial, notice the VIN-like barcode, the tamper-evident seal, the expiry date, the lot number. Each is the trace of a supply chain that spans continents, a manufacturing process that spans years, a quality system that spans decades, and a promise to a patient who will never meet any of the people who kept it.</p>
+    <p style="margin-top: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ochre);">— End of Module 06 —</p>
+  </div>
+</section>
+
+</main>
+
+<footer>Module 06 · CMC &amp; Supply Chain · Five-Day Theoretical Roadmap</footer>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'base',
+    themeVariables: { fontFamily: 'Inter Tight, sans-serif', primaryColor: '#EEE5CE', primaryTextColor: '#0F1B2D', primaryBorderColor: '#0F1B2D', lineColor: '#2A3B52', secondaryColor: '#F5EFDF', tertiaryColor: '#2E4E7E', background: '#EEE5CE', mainBkg: '#EEE5CE', secondBkg: '#F5EFDF' }
+  });
+  function togglePhase(header) { header.parentElement.classList.toggle('open'); }
+  window.addEventListener('scroll', () => {
+    const pct = Math.min(100, (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>

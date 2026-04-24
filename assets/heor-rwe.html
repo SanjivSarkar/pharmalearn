@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Valuator's Ledger — HEOR &amp; RWE in 5 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<style>
+  :root {
+    --ink: #0F1B2D; --ink-soft: #2A3B52;
+    --paper: #F5EFDF; --paper-warm: #EEE5CE; --paper-dark: #E4D8B8;
+    --ochre: #C8984A; --ochre-deep: #9B7233;
+    --moss: #4B6B4A; --moss-soft: #7C9082;
+    --rust: #A84B2A; --rust-soft: #D67D5C;
+    --tobacco: #6B5A3A; --tobacco-deep: #4A3D22; --tobacco-soft: #95866A;
+    --rule: rgba(15,27,45,0.14); --rule-strong: rgba(15,27,45,0.3);
+    --shadow-soft: 0 2px 12px rgba(15,27,45,0.08);
+    --shadow-lift: 0 8px 32px rgba(15,27,45,0.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-weight: 400; line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(15,27,45,0.025) 1px, transparent 0); background-size: 24px 24px; pointer-events: none; z-index: 0; }
+  main, nav, header { position: relative; z-index: 1; }
+  h1, h2, h3, h4, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.015em; line-height: 1.1; color: var(--ink); }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 500; }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+  h4 { font-size: 1.05rem; font-weight: 600; font-family: 'Inter Tight', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+  p { max-width: 68ch; }
+  em { font-style: italic; color: var(--ink-soft); }
+  strong { font-weight: 600; color: var(--ink); }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: var(--paper-warm); padding: 0.1em 0.4em; border-radius: 3px; border: 1px solid var(--rule); }
+  nav.top { position: sticky; top: 0; background: rgba(245,239,223,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); padding: 0.8rem 2rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  nav.top .brand { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; }
+  nav.top .brand em { color: var(--tobacco); font-style: italic; }
+  nav.top ul { display: flex; gap: 0.4rem; list-style: none; flex-wrap: wrap; }
+  nav.top a { color: var(--ink-soft); text-decoration: none; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 20px; transition: all 0.2s ease; font-weight: 500; }
+  nav.top a:hover { background: var(--ink); color: var(--paper); }
+  .progress-track { position: sticky; top: 58px; height: 3px; background: rgba(15,27,45,0.08); z-index: 99; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--tobacco), var(--ochre)); width: 0%; transition: width 0.15s ease; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+  .hero { padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+  .hero-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--tobacco); margin-bottom: 1.5rem; }
+  .hero h1 { max-width: 18ch; margin-bottom: 1.8rem; }
+  .hero h1 em { color: var(--tobacco); font-style: italic; }
+  .hero .lede { font-family: 'Fraunces', serif; font-size: clamp(1.1rem, 1.6vw, 1.4rem); max-width: 54ch; color: var(--ink-soft); font-weight: 300; line-height: 1.5; }
+  .hero-ornament { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 380px; height: 380px; opacity: 0.58; pointer-events: none; }
+  .hook-card { background: var(--ink); color: var(--paper); padding: 3rem 2.5rem; border-radius: 2px; margin: 3rem 0; position: relative; box-shadow: var(--shadow-lift); }
+  .hook-card::before { content: '10'; position: absolute; top: 1rem; right: 1.5rem; font-family: 'Fraunces', serif; font-size: 4rem; color: var(--ochre); opacity: 0.4; font-style: italic; }
+  .hook-card .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 1rem; }
+  .hook-card p { font-family: 'Fraunces', serif; font-size: 1.4rem; line-height: 1.4; font-weight: 300; max-width: 54ch; }
+  .hook-card p em { color: var(--ochre); font-style: italic; }
+  section { padding: 4rem 0; position: relative; }
+  section + section { border-top: 1px solid var(--rule); }
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tobacco); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--tobacco); }
+  section h2 { margin-bottom: 1.8rem; max-width: 26ch; }
+  section p { margin-bottom: 1.1rem; }
+  .master-analogy { background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-dark) 100%); border: 1px solid var(--rule); border-left: 5px solid var(--tobacco); padding: 2.5rem 2.5rem 2.5rem 3rem; margin: 2.5rem 0; position: relative; border-radius: 2px; }
+  .master-analogy::before { content: '“'; position: absolute; top: -20px; left: 20px; font-family: 'Fraunces', serif; font-size: 6rem; color: var(--tobacco); line-height: 1; }
+  .master-analogy h4 { margin-bottom: 1rem; color: var(--tobacco); }
+  .master-analogy p { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 300; line-height: 1.55; }
+  .master-analogy p + p { margin-top: 0.8rem; }
+  .mapping-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem 1.5rem; align-items: center; margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px dashed var(--rule-strong); }
+  .mapping-grid .from { font-weight: 500; color: var(--ink); text-align: right; }
+  .mapping-grid .arrow { font-family: 'JetBrains Mono', monospace; color: var(--tobacco); font-size: 0.9rem; }
+  .mapping-grid .to { color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic; }
+  @media (max-width: 820px) { .mapping-grid { grid-template-columns: 1fr; gap: 0.3rem 0; } .mapping-grid .from { text-align: left; } .mapping-grid .arrow { display: none; } .mapping-grid .to { padding-left: 1rem; border-left: 2px solid var(--tobacco); margin-bottom: 0.8rem; } }
+  .concept-map-wrap { background: var(--paper-warm); padding: 2.5rem; border-radius: 2px; border: 1px solid var(--rule); overflow-x: auto; margin: 2rem 0; }
+  .mermaid { text-align: center; font-family: 'Inter Tight', sans-serif !important; }
+  .phases-container { margin-top: 2rem; }
+  .phase { border: 1px solid var(--rule); background: var(--paper-warm); margin-bottom: 1.2rem; border-radius: 2px; overflow: hidden; transition: all 0.3s ease; }
+  .phase:hover { box-shadow: var(--shadow-soft); }
+  .phase.open { background: var(--paper); box-shadow: var(--shadow-lift); }
+  .phase-header { padding: 1.8rem 2rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; cursor: pointer; user-select: none; }
+  .phase-number { font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 300; color: var(--tobacco); line-height: 1; font-style: italic; min-width: 3rem; }
+  .phase-title-wrap .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .phase-title-wrap h3 { font-weight: 500; color: var(--ink); }
+  .phase-title-wrap h3 em { color: var(--tobacco); font-style: italic; }
+  .phase-toggle { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--ink-soft); transition: transform 0.3s ease; }
+  .phase.open .phase-toggle { transform: rotate(45deg); color: var(--tobacco); }
+  .phase-body { max-height: 0; overflow: hidden; padding: 0 2rem; transition: max-height 0.4s ease, padding 0.4s ease; }
+  .phase.open .phase-body { max-height: 12000px; padding: 0 2rem 2.5rem; }
+  .curiosity-hook { font-family: 'Fraunces', serif; font-size: 1.2rem; font-style: italic; color: var(--ink-soft); border-left: 3px solid var(--tobacco); padding-left: 1.2rem; margin: 1.5rem 0 2rem; max-width: 58ch; line-height: 1.55; }
+  .objectives { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.8rem; margin: 1.5rem 0 2.5rem; border-radius: 2px; }
+  .objectives h4 { margin-bottom: 0.8rem; color: var(--tobacco); font-size: 0.8rem; }
+  .objectives ul { list-style: none; padding: 0; }
+  .objectives li { padding: 0.3rem 0 0.3rem 1.6rem; position: relative; font-size: 0.96rem; }
+  .objectives li::before { content: '◆'; position: absolute; left: 0; color: var(--tobacco); font-size: 0.6rem; top: 0.55rem; }
+  .bloom-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.2em 0.5em; border-radius: 3px; background: var(--tobacco); color: var(--paper); margin-right: 0.5em; text-transform: uppercase; font-weight: 500; }
+  .concept-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  @media (max-width: 780px) { .concept-cards { grid-template-columns: 1fr; } }
+  .concept-card { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.4rem 1.5rem; border-radius: 2px; border-left: 3px solid var(--ochre); position: relative; }
+  .concept-card:nth-child(2n) { border-left-color: var(--moss); }
+  .concept-card:nth-child(3n) { border-left-color: var(--rust); }
+  .concept-card:nth-child(4n) { border-left-color: var(--tobacco); }
+  .concept-card h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; }
+  .concept-card .analogy { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 0.92rem; margin: 0.5rem 0 0.8rem; border-top: 1px dashed var(--rule); padding-top: 0.7rem; }
+  .concept-card p { font-size: 0.93rem; margin-bottom: 0.4rem; max-width: none; }
+  .visual { background: var(--paper); border: 1px solid var(--rule); padding: 2rem; margin: 2rem 0; border-radius: 2px; position: relative; overflow-x: auto; }
+  .visual .caption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .visual svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .mentor-analogy { background: var(--ink); color: var(--paper); padding: 2rem 2.2rem; margin: 2rem 0; border-radius: 2px; position: relative; border-left: 4px solid var(--ochre); }
+  .mentor-analogy .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.8rem; }
+  .mentor-analogy p { font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.6; font-weight: 300; max-width: 58ch; }
+  .mentor-analogy p em { color: var(--ochre); font-style: italic; }
+  .checkpoint { border: 2px dashed var(--tobacco); background: transparent; padding: 1.5rem 1.8rem; margin: 2rem 0; border-radius: 2px; }
+  .checkpoint h4 { color: var(--tobacco); margin-bottom: 0.6rem; }
+  .checkpoint p { font-size: 0.94rem; margin-bottom: 0.4rem; }
+  .checkpoint ul { list-style: none; padding: 0; }
+  .checkpoint li { padding: 0.25rem 0 0.25rem 1.4rem; position: relative; font-size: 0.94rem; }
+  .checkpoint li::before { content: '□'; position: absolute; left: 0; color: var(--tobacco); font-family: 'JetBrains Mono', monospace; }
+  .flip-card { perspective: 1200px; height: 220px; margin: 2rem 0; cursor: pointer; }
+  .flip-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s ease; transform-style: preserve-3d; }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; padding: 1.8rem 2rem; border-radius: 2px; display: flex; flex-direction: column; justify-content: center; }
+  .flip-front { background: var(--paper-dark); border: 1px solid var(--rule-strong); }
+  .flip-front .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--tobacco); margin-bottom: 0.7rem; }
+  .flip-front h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+  .flip-front .hint { font-size: 0.82rem; color: var(--ink-soft); margin-top: 1rem; font-style: italic; }
+  .flip-back { background: var(--ink); color: var(--paper); transform: rotateY(180deg); border-left: 4px solid var(--ochre); }
+  .flip-back .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.7rem; }
+  .flip-back p { font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.55; max-width: none; font-weight: 300; }
+  .memory-hook { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 2px; font-size: 0.93rem; }
+  .memory-hook .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre-deep); margin-bottom: 0.4rem; }
+  .memory-hook strong { color: var(--tobacco); }
+  .jargon-tier { margin: 2rem 0; padding: 1.8rem 2rem; background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 2px; }
+  .jargon-tier h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 0.4rem; color: var(--tobacco); }
+  .jargon-tier .tier-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .jargon-tier dl { display: grid; grid-template-columns: 180px 1fr; gap: 0.8rem 1.5rem; }
+  .jargon-tier dt { font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+  .jargon-tier dd { color: var(--ink-soft); font-size: 0.93rem; }
+  @media (max-width: 680px) { .jargon-tier dl { grid-template-columns: 1fr; gap: 0.3rem 0; } .jargon-tier dd { margin-bottom: 0.8rem; padding-left: 0.8rem; border-left: 2px solid var(--tobacco); } }
+  .pitfall-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .pitfall-grid { grid-template-columns: 1fr; } }
+  .pitfall { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; border-top: 3px solid var(--rust); position: relative; }
+  .pitfall .num { position: absolute; top: 0.8rem; right: 1rem; font-family: 'Fraunces', serif; font-size: 1.8rem; color: var(--rust); font-style: italic; opacity: 0.5; line-height: 1; }
+  .pitfall h4 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; max-width: 90%; }
+  .pitfall p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .pitfall .rescue { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.88rem; color: var(--moss); padding-top: 0.5rem; margin-top: 0.5rem; border-top: 1px dashed var(--rule); }
+  .crossdomain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .crossdomain-grid { grid-template-columns: 1fr; } }
+  .crossdomain { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; }
+  .crossdomain .domain { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--tobacco); margin-bottom: 0.5rem; }
+  .crossdomain h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.7rem; }
+  .crossdomain p { font-size: 0.9rem; color: var(--ink-soft); }
+  .spaced-rep { background: var(--paper-warm); border: 1px solid var(--rule); padding: 2rem; border-radius: 2px; margin: 2rem 0; overflow-x: auto; }
+  .sr-timeline { display: grid; grid-template-columns: repeat(8, minmax(88px, 1fr)); gap: 0.8rem; margin-top: 1.5rem; min-width: 700px; }
+  .sr-day { padding: 1rem 0.8rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; text-align: center; position: relative; }
+  .sr-day::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: var(--tobacco); border-radius: 50%; }
+  .sr-day .day-num { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 500; color: var(--tobacco); font-style: italic; }
+  .sr-day .day-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.3rem; }
+  .sr-day .day-task { font-size: 0.78rem; margin-top: 0.5rem; color: var(--ink); line-height: 1.3; }
+  .closing { background: var(--ink); color: var(--paper); padding: 5rem 2rem; margin-top: 4rem; }
+  .closing h2 { color: var(--paper); max-width: 24ch; margin-bottom: 2rem; }
+  .closing h2 em { color: var(--ochre); font-style: italic; }
+  .closing p { font-family: 'Fraunces', serif; font-size: 1.2rem; line-height: 1.6; font-weight: 300; max-width: 58ch; color: rgba(245,239,223,0.88); }
+  .closing .mantra { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.5rem; color: var(--ochre); padding: 2rem 0; margin: 2rem 0; border-top: 1px solid rgba(200,152,74,0.3); border-bottom: 1px solid rgba(200,152,74,0.3); max-width: 54ch; }
+  footer { padding: 2rem; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); background: var(--paper); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="brand">The Valuator's <em>Ledger</em></div>
+  <ul>
+    <li><a href="#hook">Hook</a></li><li><a href="#analogy">Analogy</a></li><li><a href="#map">Map</a></li>
+    <li><a href="#day1">Day 1</a></li><li><a href="#day2">Day 2</a></li><li><a href="#day3">Day 3</a></li>
+    <li><a href="#day4">Day 4</a></li><li><a href="#day5">Day 5</a></li>
+    <li><a href="#jargon">Jargon</a></li><li><a href="#pitfalls">Pitfalls</a></li><li><a href="#spaced">Review</a></li>
+  </ul>
+</nav>
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+<main>
+
+<header class="hero wrap">
+  <div class="hero-meta">Module 10 · Health Economics, Outcomes Research &amp; Real-World Evidence · Five-Day Theoretical Roadmap</div>
+  <h1>The Valuator's <em>Ledger</em>.</h1>
+  <p class="lede">Every drug on the market has a price. Behind every price sits — somewhere, explicit or implicit — an argument about <em>what that drug is worth</em>. HEOR is the discipline that makes the argument visible, defensible, and subject to scrutiny by people whose job is to spend other people's money wisely.</p>
+  <svg class="hero-ornament" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="hg10" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6B5A3A" stop-opacity="0.4"/><stop offset="100%" stop-color="#6B5A3A" stop-opacity="0.05"/></radialGradient></defs>
+    <circle cx="190" cy="190" r="170" fill="none" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="2 6" opacity="0.25"/>
+    <circle cx="190" cy="190" r="150" fill="none" stroke="#0F1B2D" stroke-width="1.2" opacity="0.3"/>
+    <circle cx="190" cy="190" r="138" fill="url(#hg10)"/>
+    <circle cx="190" cy="190" r="138" fill="none" stroke="#6B5A3A" stroke-width="0.8" opacity="0.5"/>
+    <!-- Central ledger book open flat -->
+    <g transform="translate(190, 190)">
+      <!-- Ledger cover / base -->
+      <rect x="-80" y="-12" width="160" height="70" fill="#4A3D22" opacity="0.95" stroke="#C8984A" stroke-width="1"/>
+      <!-- Pages -->
+      <rect x="-75" y="-30" width="150" height="20" fill="#EEE5CE" opacity="0.95" stroke="#6B5A3A" stroke-width="0.5"/>
+      <rect x="-72" y="-36" width="144" height="8" fill="#F5EFDF" opacity="0.9" stroke="#6B5A3A" stroke-width="0.4"/>
+      <rect x="-68" y="-42" width="136" height="8" fill="#EEE5CE" opacity="0.85" stroke="#6B5A3A" stroke-width="0.4"/>
+      <!-- Ledger columns of numbers -->
+      <g stroke="#6B5A3A" stroke-width="0.4" opacity="0.55">
+        <line x1="-55" y1="-10" x2="-55" y2="50"/>
+        <line x1="-20" y1="-10" x2="-20" y2="50"/>
+        <line x1="15" y1="-10" x2="15" y2="50"/>
+        <line x1="50" y1="-10" x2="50" y2="50"/>
+        <line x1="-70" y1="0" x2="70" y2="0"/>
+        <line x1="-70" y1="12" x2="70" y2="12"/>
+        <line x1="-70" y1="24" x2="70" y2="24"/>
+        <line x1="-70" y1="36" x2="70" y2="36"/>
+      </g>
+      <!-- Small "number" marks in cells -->
+      <g fill="#6B5A3A" opacity="0.6">
+        <circle cx="-38" cy="6" r="1"/><circle cx="-35" cy="6" r="1"/><circle cx="-32" cy="6" r="1"/>
+        <circle cx="-3" cy="6" r="1"/><circle cx="0" cy="6" r="1"/><circle cx="3" cy="6" r="1"/>
+        <circle cx="32" cy="6" r="1"/><circle cx="35" cy="6" r="1"/>
+        <circle cx="-38" cy="18" r="1"/><circle cx="-35" cy="18" r="1"/>
+        <circle cx="0" cy="18" r="1"/><circle cx="3" cy="18" r="1"/><circle cx="6" cy="18" r="1"/>
+        <circle cx="32" cy="18" r="1"/><circle cx="35" cy="18" r="1"/><circle cx="38" cy="18" r="1"/>
+        <circle cx="-35" cy="30" r="1"/><circle cx="-32" cy="30" r="1"/>
+        <circle cx="3" cy="30" r="1"/><circle cx="6" cy="30" r="1"/>
+        <circle cx="32" cy="30" r="1"/>
+      </g>
+      <!-- Balance scale above -->
+      <g transform="translate(0, -70)">
+        <line x1="0" y1="-8" x2="0" y2="12" stroke="#C8984A" stroke-width="1.5"/>
+        <line x1="-30" y1="0" x2="30" y2="0" stroke="#C8984A" stroke-width="1.5"/>
+        <line x1="-30" y1="0" x2="-30" y2="10" stroke="#C8984A" stroke-width="0.8"/>
+        <line x1="30" y1="0" x2="30" y2="10" stroke="#C8984A" stroke-width="0.8"/>
+        <ellipse cx="-30" cy="13" rx="12" ry="3" fill="#C8984A" opacity="0.85"/>
+        <ellipse cx="30" cy="13" rx="12" ry="3" fill="#C8984A" opacity="0.85"/>
+        <circle cx="0" cy="-8" r="2" fill="#C8984A"/>
+      </g>
+    </g>
+    <!-- Orbital HEOR labels -->
+    <g font-family="'JetBrains Mono', monospace" font-size="8" fill="#4A3D22" letter-spacing="2" font-weight="600">
+      <text x="190" y="28" text-anchor="middle">QALY</text>
+      <text x="340" y="120" text-anchor="middle">ICER</text>
+      <text x="358" y="230" text-anchor="middle">BIM</text>
+      <text x="250" y="352" text-anchor="middle">RWE</text>
+      <text x="130" y="352" text-anchor="middle">PRO</text>
+      <text x="20" y="230" text-anchor="middle">HTA</text>
+      <text x="40" y="120" text-anchor="middle">OBA</text>
+    </g>
+    <g fill="#6B5A3A" opacity="0.55">
+      <circle cx="190" cy="40" r="2.5"/>
+      <circle cx="320" cy="108" r="2.5"/>
+      <circle cx="340" cy="218" r="2.5"/>
+      <circle cx="250" cy="340" r="2.5"/>
+      <circle cx="130" cy="340" r="2.5"/>
+      <circle cx="58" cy="218" r="2.5"/>
+      <circle cx="60" cy="108" r="2.5"/>
+    </g>
+  </svg>
+</header>
+
+<section id="hook" class="wrap-narrow">
+  <div class="hook-card">
+    <div class="label">The hook</div>
+    <p>On December 6, 2013, the FDA approved Gilead's sofosbuvir — Sovaldi — a once-daily oral tablet that cured hepatitis C in 90%+ of patients after a 12-week course. It was a genuine medical breakthrough, the kind of drug that had been impossible to imagine ten years earlier. Gilead priced it at <em>$84,000 per treatment course — roughly $1,000 per pill</em>. In the United States alone, an estimated 3 million people were chronically infected with HCV. At full uptake, the arithmetic was staggering: a single drug could demand <em>more than a quarter of total US outpatient drug spending</em>. State Medicaid programs triaged access; the VA restricted prescribing; commercial insurers imposed prior-authorization mazes; the Senate Finance Committee opened an 18-month investigation. Express Scripts formed the first major exclusionary formulary deal in pharmacy-benefit history. The Institute for Clinical and Economic Review — until then a quiet Boston non-profit — became the de facto HTA body for the United States. And every pharmaceutical company in the world realised, simultaneously, that the question "<em>is this drug worth what we are charging for it?</em>" was no longer a question they could answer for themselves. Someone else was going to do the math, and the math had teeth.</p>
+  </div>
+</section>
+
+<section id="analogy" class="wrap-narrow">
+  <div class="section-label">The elevator pitch</div>
+  <h2>HEOR is the actuarial profession of medicine.</h2>
+  <p>Before an insurance company will underwrite a policy, it hires actuaries to model the expected cash flows — premiums in, claims out, discount rates, mortality tables, reserves against tail risk. The actuaries are not selling insurance. They are producing a <em>defensible number</em>, grounded in transparent assumptions, subjected to stress-testing, and reviewed by regulators whose job is to ensure the firm has enough capital to pay tomorrow's claims. The actuary's output is an input to a commercial decision, but its legitimacy depends on it <em>not being a commercial argument</em>. It is a technical opinion produced to professional standards, signed by people who can be held accountable for their sign-off.</p>
+  <p>HEOR does exactly this work for pharmaceuticals, and Real-World Evidence is its claims-history audit. The cost-effectiveness model is the actuarial cash-flow projection. The QALY is the valuation unit. The willingness-to-pay threshold is the underwriting cutoff. The HTA body — NICE, IQWiG, ICER — is the reinsurance underwriter. And the outcomes-based agreement is the performance-based reinsurance contract, where the premium depends on whether the insured event actually happened the way the model said it would.</p>
+
+  <div class="master-analogy">
+    <h4>The master analogy — the actuarial chamber</h4>
+    <p>Picture a quiet chamber in a financial district. Inside, actuaries sit at ledgers with columns of numbers, running mortality tables against discount rates, stress-testing reserves against tail scenarios, producing reports that underwriters will use to decide whether to issue a policy — and at what premium. The actuarial work is slow, methodical, and profoundly consequential: an actuarial error compounded over decades can bankrupt an insurance firm; an actuarial omission can leave retirees uncovered when they need care most. The actuarial profession therefore operates under strict standards — professional credentialing (SOA, CAS, FIA), peer review, mandatory sensitivity analysis, transparent documentation. Actuaries cannot be "optimistic." The discipline requires that every assumption be defensible to an examiner with a red pen and a long memory.</p>
+    <p>HEOR is exactly this chamber, transplanted into medicine. The <em>health economist</em> is the actuary. The <em>cost-effectiveness model</em> (decision tree, Markov, partitioned survival) is the actuarial cash-flow projection. The <em>QALY</em> is the valuation unit — an actuarial construct that lets mortality reduction, symptom improvement, and quality of life be priced in a single currency. The <em>ICER</em> is the price per unit of value. <em>Willingness-to-pay thresholds</em> (£30K/QALY at NICE, $100–150K/QALY implicit in the US) are the underwriting cutoffs. <em>Probabilistic sensitivity analysis</em> is the actuarial stress test. <em>Real-world evidence</em> is the claims-history audit — the data that tells you whether your original projections matched reality. <em>HTA bodies</em> are the reinsurance underwriters: NICE in the UK, IQWiG and the G-BA in Germany, CADTH in Canada, the ICER Institute in the US, HAS in France. The <em>value dossier</em> (AMCP format in the US, GVD globally) is the policy application packet. And the <em>outcomes-based agreement</em> is the performance-based reinsurance contract — the price adjusts if the insured event (clinical benefit, cost offset) does or does not materialize as the model predicted.</p>
+
+    <div class="mapping-grid">
+      <div class="from">The actuary</div><div class="arrow">—→</div><div class="to">Health economist · HEOR scientist</div>
+      <div class="from">Actuarial cash-flow model</div><div class="arrow">—→</div><div class="to">CEA / CUA economic model (decision-tree, Markov, PSM)</div>
+      <div class="from">Valuation unit</div><div class="arrow">—→</div><div class="to">QALY · quality-adjusted life year · DALY variant</div>
+      <div class="from">Price per unit of coverage</div><div class="arrow">—→</div><div class="to">ICER — incremental cost-effectiveness ratio</div>
+      <div class="from">Underwriting cutoff</div><div class="arrow">—→</div><div class="to">Willingness-to-pay threshold (£30K/QALY · $100-150K/QALY)</div>
+      <div class="from">Reserve &amp; portfolio solvency test</div><div class="arrow">—→</div><div class="to">Budget impact model (BIM)</div>
+      <div class="from">Stress test · scenario analysis</div><div class="arrow">—→</div><div class="to">Probabilistic / deterministic sensitivity analysis</div>
+      <div class="from">Claims-history audit</div><div class="arrow">—→</div><div class="to">Real-world evidence · APLD · EHR · registries</div>
+      <div class="from">Reinsurance underwriter</div><div class="arrow">—→</div><div class="to">HTA body — NICE · IQWiG · ICER · CADTH · HAS</div>
+      <div class="from">Policy application packet</div><div class="arrow">—→</div><div class="to">Value dossier — AMCP · GVD · country-specific CVD</div>
+      <div class="from">Performance-based reinsurance</div><div class="arrow">—→</div><div class="to">Outcomes-based agreement (OBA · VBA · MEA)</div>
+      <div class="from">Actuarial professional standards</div><div class="arrow">—→</div><div class="to">ISPOR · CHEERS · IDSI standards</div>
+      <div class="from">Loss-experience review</div><div class="arrow">—→</div><div class="to">Target-trial emulation · comparative effectiveness</div>
+      <div class="from">Life table · mortality curve</div><div class="arrow">—→</div><div class="to">Survival extrapolation (flexible parametric · cure model)</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap-narrow">
+  <div class="section-label">Origin story</div>
+  <h2>How medicine learned to price itself — a profession written into being by fiscal arithmetic.</h2>
+  <p>For most of the 20th century, "the value of a medical treatment" was an implicit calculation made by individual clinicians and insurers, rarely articulated, almost never written down in a form anyone could challenge. Drugs were priced at what the market would bear; insurers covered what they felt they must; governments paid the residual. The arithmetic was private, proprietary, and largely unexamined.</p>
+  <p>The foundations of modern HEOR were laid in the 1970s. <em>Weinstein and Stason's 1977 NEJM article "Foundations of Cost-Effectiveness Analysis for Health and Medical Practices"</em> introduced the analytical machinery to American medicine. The <em>QALY concept — developed by Klarman, Francis, and Rosenthal in 1968 and elaborated by Torrance in the 1980s</em> — gave the field a common valuation unit. The <em>Oregon Health Plan's 1989 attempt to explicitly rank health services by cost-effectiveness</em> was the first high-profile, deeply controversial public application. But HEOR as a profession with codified standards emerged later. <em>ISPOR (the International Society for Pharmacoeconomics and Outcomes Research) was founded in 1995</em> and became the global guild. <em>NICE — the National Institute for Health and Care Excellence — was established in 1999</em> and, through its Technology Appraisal program, became the first national body to routinely say "no" to drugs priced above a published ICER threshold. <em>IQWiG and the German G-BA</em> followed with a different methodology (additional benefit assessment rather than explicit ICER). Within a decade, every major health system had a version.</p>
+  <p>Real-World Evidence as a regulated-grade discipline emerged on a separate track. <em>The Framingham Heart Study (from 1948)</em> established longitudinal observational epidemiology; the <em>Kaiser Permanente and other closed health-system datasets</em> pioneered linked claims-and-clinical analysis; the <em>FDA Sentinel Initiative (2010)</em> operationalized claims-based active surveillance at scale. But the crucial policy inflection came with the <em>21st Century Cures Act (2016)</em>, which directed the FDA to develop frameworks for using RWE to support regulatory decisions — approval of new indications, post-marketing study commitments, label changes. FDA's subsequent <em>RWE guidance documents (2018–2024)</em> specified when real-world data could substitute for or complement traditional trials. <em>OMOP — the Observational Medical Outcomes Partnership Common Data Model, now maintained by OHDSI</em> — became the shared schema that lets 800+ million patient records across dozens of global datasets be queried by a single analytical framework. <em>Target trial emulation (Hernán &amp; Robins, 2016+)</em> became the dominant methodological framework for rigorous causal inference from observational data.</p>
+  <p>The 2014 Sovaldi case was the <em>fiscal inflection</em> that forced these two streams — economic valuation and real-world evidence — into a single operating discipline. Before Sovaldi, HEOR was a specialist back-office function producing dossiers for payer relations. After Sovaldi, HEOR became the strategic function that co-designed launch plans, determined achievable prices, anticipated HTA objections, and shaped which real-world studies the company would need to defend those prices after approval. The profession matured under fire, and its subsequent growth — into rare disease, gene therapy, digital therapeutics, and now the global JCA (Joint Clinical Assessment) regime in the EU — has been continuous ever since.</p>
+</section>
+
+<section id="map" class="wrap">
+  <div class="section-label">The concept web</div>
+  <h2>The HEOR &amp; RWE operating system, in one diagram.</h2>
+  <p>The four engines of a modern HEOR function are not independent workstreams but a single <em>evidence-to-value loop</em> — <strong>Model, Measure, Monitor, Meet</strong>. Models translate evidence into value projections; measurement produces the evidence those models need; monitoring (via RWE) refines the models after launch; meeting payers and HTA bodies is where the value argument is tested. Done well, the loop runs for the entire life of the asset and produces continuous price refinement.</p>
+  <div class="concept-map-wrap">
+    <div class="mermaid">
+flowchart LR
+  classDef central fill:#6B5A3A,stroke:#0F1B2D,color:#F5EFDF,stroke-width:2px,font-weight:600
+  classDef pillar fill:#EEE5CE,stroke:#0F1B2D,color:#0F1B2D,stroke-width:1.5px,font-weight:500
+  classDef sub fill:#F5EFDF,stroke:#0F1B2D,color:#2A3B52,stroke-width:1px,stroke-dasharray:3 3
+  CORE[Defensible value:<br/>the argument payers<br/>and HTAs must accept]:::central
+  M[Model:<br/>CEA · CUA · BIM ·<br/>decision trees · Markov]:::pillar
+  E[Measure:<br/>endpoints · PROs ·<br/>utility · digital biomarkers]:::pillar
+  N[Monitor:<br/>RWE · claims · EHR ·<br/>target-trial emulation]:::pillar
+  T[Meet:<br/>HTA · payer dossiers ·<br/>OBA · negotiation]:::pillar
+  CORE --- M
+  CORE --- E
+  CORE --- N
+  CORE --- T
+  M --- m1[Structure · inputs · extrapolation]:::sub
+  M --- m2[PSA · DSA · CEAC]:::sub
+  M --- m3[MAIC · NMA · external controls]:::sub
+  E --- e1[RCT endpoints · surrogates]:::sub
+  E --- e2[COA — PRO · ClinRO · ObsRO · PerfO]:::sub
+  E --- e3[Digital endpoints · DDT qualification]:::sub
+  N --- n1[APLD · EHR · registries]:::sub
+  N --- n2[OMOP · Sentinel · fit-for-purpose]:::sub
+  N --- n3[Causal inference · confounding control]:::sub
+  T --- t1[AMCP · GVD · country dossiers]:::sub
+  T --- t2[NICE · IQWiG · ICER · CADTH · HAS]:::sub
+  T --- t3[OBA · VBA · MEA · reconciliation]:::sub
+  M -.-&gt; T
+  E -.-&gt; M
+  N -.-&gt; M
+  T -.-&gt; N
+    </div>
+  </div>
+</section>
+
+<!-- DAY 1 -->
+<section id="day1" class="wrap">
+  <div class="section-label">Day 01 · The Vocabulary</div>
+  <h2>HEOR foundations — value, utility, and the structure of a value argument.</h2>
+  <div class="phases-container">
+    <div class="phase open">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">01</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Remember + Understand · ~2.5 hrs</div><h3>HEOR vocabulary &amp; the value dossier — <em>the ledger's opening pages</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">There is a small, oddly precise vocabulary that separates people who work in HEOR from everyone else in pharma. Knowing exactly what a QALY is, and exactly how an ICER is computed, and exactly what "willingness-to-pay threshold" means, is the entry ticket. The vocabulary is deceptively simple — a dozen or so terms. But each term carries a philosophical argument about how to value a human life, and getting any of them wrong means getting the argument wrong.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 1</span>Learning objectives</h4>
+          <ul>
+            <li>Distinguish CEA, CUA, CBA, CMA, and BIM — and know when each is the right analytical tool</li>
+            <li>Define QALY and DALY precisely, and understand their philosophical commitments</li>
+            <li>Compute ICER from a pair of cost-and-outcome tuples; interpret what it means</li>
+            <li>Understand willingness-to-pay thresholds across major jurisdictions</li>
+            <li>Recognize the structure of a value dossier (AMCP, GVD, country-specific CVD)</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--tobacco);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The five analysis types — CEA, CUA, CBA, CMA, BIM</h4>
+            <p><strong>CEA (Cost-Effectiveness Analysis)</strong>: cost per unit of natural health outcome (cost per life saved, cost per case prevented, cost per event avoided). <strong>CUA (Cost-Utility Analysis)</strong>: cost per QALY — the most common form in HTA contexts. <strong>CBA (Cost-Benefit Analysis)</strong>: everything monetized including health outcomes (rarely used in medicine). <strong>CMA (Cost-Minimization Analysis)</strong>: when two interventions have equivalent outcomes, which is cheaper. <strong>BIM (Budget Impact Model)</strong>: total budget impact over a defined horizon — payers care about this as much as ICER.</p>
+            <div class="analogy">Five different actuarial products for five different underwriting questions. Term life vs. whole life vs. annuity vs. disability — each with its own math, each answering a different question the policyholder is trying to answer about their future.</div>
+          </div>
+          <div class="concept-card">
+            <h4>QALY — the valuation unit</h4>
+            <p>A <strong>Quality-Adjusted Life Year</strong> is one year of life lived in perfect health. One year at utility 0.5 (moderate disease) = 0.5 QALY. QALYs are produced by multiplying <strong>survival</strong> by <strong>health-state utility</strong>, aggregated across a patient's remaining lifetime. Utilities are elicited from preference-based instruments (EQ-5D, SF-6D, HUI) or discrete-choice experiments. The QALY is philosophically contested — it penalizes treatments for elderly patients, underweights severity, is culturally variable — but remains the dominant valuation currency in HTA worldwide.</p>
+            <div class="analogy">The "adjusted net present value" of an actuarial cash flow — converting unlike quantities (years of life, quality of those years, distant vs. near outcomes) into a single comparable number using transparent weighting rules. The rules are debatable; without them the comparison is impossible.</div>
+          </div>
+          <div class="concept-card">
+            <h4>ICER — the incremental cost-effectiveness ratio</h4>
+            <p>The <strong>ICER</strong> is the formal output of nearly every CEA: <span class="mono">ICER = (C_new − C_comp) / (E_new − E_comp)</span>. Numerator is incremental cost; denominator is incremental effect (usually QALYs). The ICER answers: "How much additional spending buys one additional QALY compared to the current standard of care?" The <strong>north-east quadrant</strong> (more expensive, more effective) is the dominant decision region. <strong>South-east</strong> (cheaper, more effective) dominates. <strong>North-west</strong> (more expensive, less effective) is dominated. <strong>South-west</strong> (cheaper, less effective) requires explicit trade-off judgment.</p>
+            <div class="analogy">The price-per-additional-unit-of-coverage in reinsurance. Extending coverage from $10M to $15M costs how much additional premium per extra dollar covered? The reinsurer writes the policy only when that price is below its underwriting threshold.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Willingness-to-pay thresholds</h4>
+            <p>Jurisdictional thresholds at which a technology is deemed cost-effective: <strong>NICE (UK)</strong>: £20K–30K/QALY typically, £50K+ for end-of-life and highly specialised technologies. <strong>Canada (CADTH)</strong>: CAD $50K–100K/QALY implicit. <strong>Germany (IQWiG / G-BA)</strong>: no fixed QALY threshold; assesses "additional benefit" on a 6-point ordinal scale, then negotiates price. <strong>US (ICER Institute)</strong>: publishes $50K, $100K, $150K/QALY thresholds. <strong>WHO (historical)</strong>: 1–3× GDP per capita (now deprecated as too rigid). Thresholds are contested — some consider them too high (affordability), some too low (innovation disincentive).</p>
+            <div class="analogy">The underwriting cutoff the reinsurance firm uses to decide which policies to issue. Below the cutoff, they write the business; above it, they decline or demand a different structure. Cutoffs are reviewed periodically against the firm's risk appetite.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 1 · The cost-effectiveness plane — where your drug lands determines the argument you must make</div>
+          <svg viewBox="0 0 980 440" xmlns="http://www.w3.org/2000/svg">
+            <!-- Axes -->
+            <g stroke="#0F1B2D" stroke-width="1.2">
+              <line x1="140" y1="60" x2="140" y2="400"/>
+              <line x1="140" y1="230" x2="900" y2="230"/>
+            </g>
+            <!-- Axis labels -->
+            <text x="140" y="42" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">More costly</text>
+            <text x="140" y="420" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Less costly</text>
+            <text x="920" y="234" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">More effective →</text>
+            <text x="130" y="234" text-anchor="end" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">← Less effective</text>
+            <!-- Quadrants -->
+            <!-- NW: more costly, less effective - DOMINATED -->
+            <rect x="142" y="62" width="378" height="166" fill="#A84B2A" opacity="0.18"/>
+            <text x="331" y="110" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#A84B2A" font-weight="600">NW · Dominated</text>
+            <text x="331" y="132" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#A84B2A" letter-spacing="1">more costly · less effective</text>
+            <text x="331" y="156" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D">Reject outright</text>
+            <text x="331" y="172" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D">No defensible case</text>
+            <!-- NE: more costly, more effective - ICER TRADE-OFF ZONE -->
+            <rect x="522" y="62" width="378" height="166" fill="#C8984A" opacity="0.2"/>
+            <text x="711" y="110" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#9B7233" font-weight="600">NE · ICER zone</text>
+            <text x="711" y="132" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#9B7233" letter-spacing="1">more costly · more effective</text>
+            <text x="711" y="156" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D">Compute ICER</text>
+            <text x="711" y="172" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D">Compare to WTP threshold</text>
+            <text x="711" y="188" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D" font-weight="700">Where most launches land</text>
+            <!-- SE: less costly, more effective - DOMINANT -->
+            <rect x="522" y="232" width="378" height="166" fill="#4B6B4A" opacity="0.2"/>
+            <text x="711" y="290" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#4B6B4A" font-weight="600">SE · Dominant</text>
+            <text x="711" y="312" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B6B4A" letter-spacing="1">less costly · more effective</text>
+            <text x="711" y="336" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D">Adopt immediately</text>
+            <text x="711" y="352" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D">Rare · often generic or biosimilar</text>
+            <!-- SW: less costly, less effective - TRADE-OFF -->
+            <rect x="142" y="232" width="378" height="166" fill="#7C9082" opacity="0.18"/>
+            <text x="331" y="290" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#4B6B4A" font-weight="600">SW · Trade-off</text>
+            <text x="331" y="312" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B6B4A" letter-spacing="1">less costly · less effective</text>
+            <text x="331" y="336" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D">Explicit trade-off needed</text>
+            <text x="331" y="352" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D">Acceptable savings per QALY lost?</text>
+            <!-- Origin label -->
+            <circle cx="140" cy="230" r="4" fill="#0F1B2D"/>
+            <text x="128" y="224" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">COMPARATOR</text>
+            <!-- ICER threshold line example -->
+            <line x1="522" y1="228" x2="900" y2="80" stroke="#6B5A3A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.75"/>
+            <text x="910" y="76" font-family="'JetBrains Mono', monospace" font-size="8" fill="#6B5A3A" letter-spacing="1">WTP THRESHOLD</text>
+            <text x="910" y="88" font-family="'JetBrains Mono', monospace" font-size="8" fill="#6B5A3A" letter-spacing="1">(BELOW = COST-EFFECTIVE)</text>
+            <!-- Title -->
+            <text x="490" y="24" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">The cost-effectiveness plane. Four quadrants. Four very different conversations with the payer.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The most important thing about HEOR that nobody tells you on day one is that <em>every commercial team thinks their drug will land in the south-east quadrant, and almost none of them do</em>. Dominance — cheaper <em>and</em> more effective — is genuinely rare; it happens when you are displacing an expensive standard of care with a cheaper mechanism of action that is also better, and outside of biosimilars and a few highly favourable oncology cases, it almost never happens for a genuinely new molecule. Most launches land in the north-east quadrant — more costly, more effective — and the entire argument you will spend your career constructing is about <em>where on the ICER line</em> the drug sits and whether that ICER is below the relevant threshold for the relevant jurisdiction. Internalizing this early matters because it changes how you think about launch price. The right question is never "what is the highest price we can get away with?" It is <em>"at what price does the ICER sit below the threshold, with enough cushion to survive sensitivity analysis, across the scenarios the HTA body will actually run?"</em> That price is your launch price. Everything above it is fantasy, and the fantasy will meet NICE or ICER soon enough.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 1 checkpoint</h4>
+          <ul>
+            <li>Distinguish CEA, CUA, CBA, CMA, and BIM — and give one question each is best at answering</li>
+            <li>Compute a QALY for a patient who lives 10 years at utility 0.8 followed by 5 years at utility 0.5</li>
+            <li>Compute an ICER from a 2×2 table of costs and QALYs for two comparators</li>
+            <li>Name four HTA bodies and the approximate WTP threshold (explicit or implicit) each uses</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A commercial leader says: "Our drug produces 0.3 additional QALYs per patient vs. standard of care at an additional cost of $45,000. Our ICER is $150,000/QALY. Is that acceptable?"</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>The answer is <strong>it depends on three things, and the real question is none of them</strong>. <strong>One — the jurisdiction.</strong> $150K/QALY is clearly above NICE's £30K/QALY base threshold (roughly $38K at current exchange) and almost certainly rejected as routine care; it would require end-of-life or highly-specialised-technology arguments to reach £50K/QALY, and even those are tight. In Germany, there is no explicit ICER threshold — the G-BA would assess additional benefit on the ordinal scale and negotiate price; the dossier must prove benefit category rather than clear a QALY bar. In the US, ICER Institute would likely classify $150K/QALY as at the upper end of their published thresholds (they typically publish $50K / $100K / $150K scenarios) and commercial payers would use this as ammunition for formulary exclusion or step therapy. <strong>Two — the uncertainty.</strong> $150K/QALY as a point estimate is one number from one model with specific assumptions. A CEAC (cost-effectiveness acceptability curve) from PSA might show that at $150K/QALY WTP, the drug has only 45% probability of being cost-effective under realistic parameter uncertainty. That is the number HTA bodies actually evaluate, not the deterministic point estimate. <strong>Three — the comparator and time horizon.</strong> Is standard of care the right comparator? Is a lifetime horizon appropriate, or should it be 5-10 years given survival uncertainty? Different choices produce materially different ICERs from the same evidence. <strong>The real question the commercial leader should be asking:</strong> "Given our target jurisdictions, what price produces an ICER with acceptable probability of cost-effectiveness under realistic assumptions?" If the answer is substantially below current list price, the launch strategy needs outcomes-based agreements, confidential rebates, managed-entry agreements, or indication-restricted pricing — not an argument that $150K/QALY is fine as headline ICER. It usually isn't.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>C-C-C-C-B:</strong> the five analytical tools — <em>CEA, CUA, CBA, CMA, BIM.</em> Each answering a different value question.<br>
+          <strong>Q-A-L-Y = survival × utility.</strong> The valuation unit that lets unlike outcomes be compared in one currency.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 2 -->
+    <div class="phase" id="day2">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">02</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Understand + Apply · ~3 hrs</div><h3>Economic models &amp; sensitivity analysis — <em>the actuary's projection</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">A cost-effectiveness model is a small simulated world. It has health states, transition probabilities, costs, and quality weights; patients move through the world at defined probabilities for defined cycle lengths; aggregate outcomes are computed. Every model is a simplification of reality; every simplification embeds an assumption; every assumption is a potential point of attack. Building a defensible model is as much about <em>which simplifications you will stand behind</em> as about any line of code.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 2</span>Learning objectives</h4>
+          <ul>
+            <li>Distinguish decision trees, Markov models, and partitioned survival models — when each is appropriate</li>
+            <li>Understand model inputs: transition probabilities, costs, utilities, discount rates</li>
+            <li>Master survival extrapolation beyond trial follow-up (parametric curves, flexible, cure)</li>
+            <li>Grasp PSA, DSA, one-way and scenario analyses — and the CEAC curve they produce</li>
+            <li>Understand MAIC, STC, and NMA for indirect treatment comparisons</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--tobacco);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Model structures — decision tree, Markov, PSM</h4>
+            <p><strong>Decision trees</strong> map discrete branching pathways for acute or time-limited conditions (single-episode treatments). <strong>Markov models</strong> represent chronic or progressive conditions via health states with per-cycle transition probabilities (e.g., well → sick → dead); lifetime simulations made tractable. <strong>Partitioned survival models (PSM)</strong> are preferred in oncology — they model progression-free survival and overall survival as independent curves and partition states based on the area between them. Each structure is defensible; each has failure modes when misapplied.</p>
+            <div class="analogy">Three actuarial templates. Decision trees = single-event claim modeling. Markov = multi-state health insurance reserving. PSM = competing-risk life-table actuarial modeling. The underwriter chooses the template that matches the risk structure.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Inputs — costs, utilities, transition probabilities, discount rates</h4>
+            <p>Every model draws from four input categories. <strong>Transition probabilities</strong> from the trial + RWE. <strong>Costs</strong> from micro-costing, DRG tariffs, Red Book (US), MIMS (UK), published studies. <strong>Utilities</strong> from EQ-5D, SF-6D, or condition-specific preference instruments. <strong>Discount rates</strong> for future costs and benefits (typically 3% US, 3.5% UK/NICE, 3% Germany, varies). Input sourcing must be transparently documented; every HTA will scrutinize every number and its provenance.</p>
+            <div class="analogy">The actuarial assumption schedule. Interest rates, mortality tables, expense ratios, claim frequencies — each sourced from defensible authorities, each subject to regulatory review, each stress-tested for sensitivity to change.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Survival extrapolation</h4>
+            <p>Clinical trials produce survival data over limited follow-up; economic models need lifetime survival projections. <strong>Parametric curves</strong> (exponential, Weibull, log-normal, log-logistic, Gompertz, generalized gamma) are fit to trial data and extrapolated beyond. <strong>Flexible parametric models</strong> (Royston-Parmar spline-based) handle complex hazard shapes. <strong>Cure models</strong> assume a fraction of patients reach background mortality — important in oncology. <strong>External data</strong> (registry, RWE, general population life tables) anchor long-term extrapolation. The chosen curve can shift an ICER by 50%+; extrapolation is often the single most-scrutinized model element.</p>
+            <div class="analogy">Projecting a mortality curve beyond the data you have observed. The actuary cannot wait 40 years to see how the cohort dies; they fit a curve to what has been observed, anchor it against population life tables, and stress-test under alternative shapes. HTA bodies scrutinize these choices with red pens.</div>
+          </div>
+          <div class="concept-card">
+            <h4>PSA, DSA, and the CEAC curve</h4>
+            <p><strong>Deterministic Sensitivity Analysis (DSA)</strong> varies one input at a time around its plausible range, producing a tornado diagram of which inputs drive results. <strong>Probabilistic Sensitivity Analysis (PSA)</strong> samples all inputs simultaneously from their distributions over many iterations (1000–10,000), producing a distribution of ICERs. The <strong>Cost-Effectiveness Acceptability Curve (CEAC)</strong> plots the probability that the intervention is cost-effective across a range of WTP thresholds. HTA bodies increasingly evaluate drugs on CEAC characteristics — point-estimate ICERs alone are no longer sufficient.</p>
+            <div class="analogy">The stress test and Monte Carlo simulation of actuarial cash flows. One-at-a-time stress tests (interest rate down 100bp, mortality up 5%) identify sensitivities; full Monte Carlo produces distributional statements. Regulators look at both.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 2 · A three-state Markov model — Progression-free / Progressed / Dead — with key quantities labeled</div>
+          <svg viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg">
+            <!-- Three state nodes -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- Progression-free -->
+              <circle cx="180" cy="190" r="70" fill="#4B6B4A" opacity="0.92" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="180" y="184" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#F5EFDF" font-weight="600">Progression-</text>
+              <text x="180" y="204" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#F5EFDF" font-weight="600">free</text>
+              <text x="180" y="230" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">u = 0.82</text>
+              <!-- Progressed -->
+              <circle cx="490" cy="190" r="70" fill="#C8984A" opacity="0.95" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="490" y="184" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#0F1B2D" font-weight="700">Progressed</text>
+              <text x="490" y="204" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#0F1B2D" font-weight="600">disease</text>
+              <text x="490" y="230" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#4A3D22" letter-spacing="2">u = 0.54</text>
+              <!-- Dead -->
+              <circle cx="800" cy="190" r="70" fill="#4A3D22" opacity="0.95" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="800" y="196" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#F5EFDF" font-weight="600">Dead</text>
+              <text x="800" y="230" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">u = 0</text>
+            </g>
+            <!-- Transition arrows -->
+            <defs><marker id="arrM" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#0F1B2D"/></marker></defs>
+            <g stroke="#0F1B2D" stroke-width="1.6" fill="none" marker-end="url(#arrM)">
+              <!-- PF → Progressed -->
+              <path d="M 250 190 Q 335 170 418 183"/>
+              <!-- Progressed → Dead -->
+              <path d="M 560 190 Q 645 170 728 183"/>
+              <!-- PF → Dead (curved over the top) -->
+              <path d="M 220 130 Q 490 30 760 130"/>
+            </g>
+            <!-- Self-loops (stay in state) -->
+            <g stroke="#4B6B4A" stroke-width="1.4" fill="none" marker-end="url(#arrM)" opacity="0.7">
+              <path d="M 130 138 Q 110 100 140 88 Q 170 78 200 120"/>
+            </g>
+            <g stroke="#C8984A" stroke-width="1.4" fill="none" marker-end="url(#arrM)" opacity="0.9">
+              <path d="M 440 138 Q 420 100 450 88 Q 480 78 510 120"/>
+            </g>
+            <!-- Transition probability labels -->
+            <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#0F1B2D">
+              <text x="335" y="162" text-anchor="middle" font-weight="600">p₁₂ = 0.18/cycle</text>
+              <text x="335" y="175" text-anchor="middle" opacity="0.7">progression</text>
+              <text x="645" y="162" text-anchor="middle" font-weight="600">p₂₃ = 0.24/cycle</text>
+              <text x="645" y="175" text-anchor="middle" opacity="0.7">death from disease</text>
+              <text x="490" y="52" text-anchor="middle" font-weight="600">p₁₃ = 0.02/cycle</text>
+              <text x="490" y="65" text-anchor="middle" opacity="0.7">death without progression</text>
+              <text x="140" y="80" text-anchor="middle" font-size="8">stay PF</text>
+              <text x="145" y="92" text-anchor="middle" font-size="8">1-p₁₂-p₁₃</text>
+              <text x="450" y="80" text-anchor="middle" font-size="8">stay progressed</text>
+              <text x="460" y="92" text-anchor="middle" font-size="8">1-p₂₃</text>
+            </g>
+            <!-- Legend / key -->
+            <rect x="50" y="290" width="880" height="70" fill="#EEE5CE" opacity="0.7" stroke="#6B5A3A" stroke-width="0.5"/>
+            <text x="70" y="312" font-family="'JetBrains Mono', monospace" font-size="8" fill="#4A3D22" letter-spacing="2" font-weight="600">MODEL ANATOMY</text>
+            <text x="70" y="330" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D"><tspan font-weight="600">Cycles:</tspan> 4-week intervals × lifetime (typically 40+ years for chronic disease, shorter for terminal)</text>
+            <text x="70" y="346" font-family="'Inter Tight', sans-serif" font-size="10" fill="#0F1B2D"><tspan font-weight="600">Outputs per cycle:</tspan>  state occupancy × (state cost + drug cost) · state occupancy × (utility × cycle length)</text>
+            <!-- Title -->
+            <text x="490" y="24" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Three states. Four transitions. A lifetime of cost and QALY accumulation — all derived from this skeleton.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>Every HEOR modeler I have worked with carries a private list of the inputs they are most worried about — the ones that, if an HTA body challenged them hard, could topple the model. Those inputs are never the headline trial endpoint. They are the mid-model assumptions: the choice of survival extrapolation curve beyond the trial data, the utility values used for the post-progression state, the dose intensity assumed for a costly biologic, the cost of adverse event management, the transition probability to a rare but expensive complication. These are the model's load-bearing beams, and they are the ones HTA reviewers — who have read dozens of analogous models — go after first. The defensive move is not to hide them; it is to <em>pre-specify the alternative scenarios for each</em> in your PSA and your scenario analyses, and to show that the ICER remains acceptable across realistic variations. A model that collapses under a single changed assumption is a model nobody should have submitted. A model that holds up across twenty variations is one the HTA body can actually approve without being embarrassed later. The difference is entirely in the sensitivity work.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 2 checkpoint</h4>
+          <ul>
+            <li>Explain when to use a decision tree vs. Markov vs. partitioned survival model — with one clinical example of each</li>
+            <li>Describe three common survival extrapolation approaches and their failure modes</li>
+            <li>Interpret a tornado diagram from a DSA and a CEAC from a PSA</li>
+            <li>Explain when MAIC or NMA is appropriate and what each requires</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>An HTA reviewer writes: "The lifetime ICER depends heavily on your choice of Weibull extrapolation for overall survival beyond the 36-month trial cut-off. The hazard assumed in years 5-15 is substantially more favourable than observed registry data for this population. How do you respond?"</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>This is one of the most common and most dangerous HTA objections, and the wrong response — defending Weibull on statistical goodness-of-fit grounds alone — loses the submission. The right response has four elements. <strong>One — acknowledge the concern.</strong> The reviewer is identifying a genuine methodological vulnerability: parametric extrapolation beyond observed data is uncertain, and different curves will produce different lifetime survival with material ICER consequences. Defensive posturing here signals fragility. <strong>Two — document why Weibull was preselected.</strong> Pre-specification of the curve selection approach (e.g., AIC/BIC-based selection + visual fit + clinical plausibility vs. hazard plots) protects against accusations of curve-shopping. If the AIC/BIC ranking genuinely favored Weibull and the hazard shape is clinically plausible, that is a legitimate defense. <strong>Three — present the full extrapolation sensitivity.</strong> Run the model with five alternative parametric curves (exponential, Weibull, log-normal, log-logistic, generalized gamma), plus a flexible parametric spline, plus a mixture cure model if the population supports one. Report ICERs under each. Demonstrate that, even under more conservative curves (e.g., exponential or log-normal), the ICER remains below the relevant WTP threshold with acceptable probability. If this is not true, the launch price needs revisiting, not the curve defended. <strong>Four — anchor to external data.</strong> Pull registry data, claims data, or natural-history studies for the target population and demonstrate that the chosen curve's predicted hazard is consistent with those external benchmarks — or explain the divergence (e.g., trial population healthier than registry average due to eligibility criteria, which is defensible if quantified). The deepest form of this argument is a <strong>blended extrapolation</strong>: trial hazard for the observed period, then blended toward registry/background mortality at a defensible convergence point. Reviewers have seen this pattern many times; it is respectable when done transparently. <strong>The underlying principle:</strong> survival extrapolation is the single most common failure point in oncology economic models. Treating it rigorously — with pre-specification, multiple curves, external anchoring, and blended approaches — is the difference between a submission that is corrected and re-reviewed vs. one that is dismissed. The reviewer is not your adversary; they are your first line of defense against a model that would have collapsed in the real world six months later.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>D-M-P:</strong> the three model structures — <em>Decision tree, Markov, Partitioned survival.</em> Acute, chronic-multistate, oncology-PFS/OS.<br>
+          <strong>P-S-A · D-S-A · C-E-A-C.</strong> Probabilistic sensitivity analysis produces the CEAC; deterministic one-at-a-time produces the tornado diagram. Submit both.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 3 -->
+    <div class="phase" id="day3">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">03</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Apply + Analyze · ~3 hrs</div><h3>Real-world evidence — <em>the claims-history audit</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">A randomized clinical trial is a perfectly controlled, highly artificial world — tight inclusion criteria, high adherence, intensive monitoring, protocol-defined endpoints. Real-world use is the opposite — messy populations, erratic adherence, variable monitoring, endpoints captured in passing by claims and notes. The RWE scientist's job is to extract credible causal inferences from the second world that inform decisions originally made on the first.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 3</span>Learning objectives</h4>
+          <ul>
+            <li>Navigate RWD sources — claims (APLD, Optum), EHR (Flatiron, OMOP), registries, wearables</li>
+            <li>Understand fit-for-purpose assessment — when is this dataset right for this question?</li>
+            <li>Grasp common data models — OMOP, Sentinel, PCORnet, i2b2</li>
+            <li>Master confounding control — propensity scores, IPTW, doubly robust estimators</li>
+            <li>Understand target trial emulation — the modern standard for RWE causal inference</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--tobacco);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>RWD sources &amp; their strengths</h4>
+            <p><strong>Claims (APLD)</strong> from Optum, Komodo, IQVIA, Symphony — broad population coverage, longitudinal, captures prescription fills and medical utilization, but thin clinical depth. <strong>EHR (Flatiron, TriNetX)</strong> — rich clinical variables (labs, imaging, pathology), narrower population, sometimes unstructured notes requiring NLP. <strong>Registries</strong> — deep curated data on specific conditions, often validated endpoints. <strong>Wearables &amp; PGHD</strong> — continuous physiological and behavioral data, growing. Each source has distinct selection, measurement, and missingness properties that shape what inferences are defensible.</p>
+            <div class="analogy">Four ways of auditing an insurance firm's historical claims experience. Internal policy-and-claims database (claims data), individual case files (EHR), condition-specific registries (registries), and real-time telematics (wearables). Each illuminates different parts of the truth; none alone is complete.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Fit-for-purpose assessment</h4>
+            <p>Before using any RWD for a specific question, HEOR and RWE scientists conduct a <strong>fit-for-purpose</strong> assessment: does this data source capture the target population, the exposure of interest, the outcome of interest, and the key confounders, with acceptable completeness and accuracy? FDA's RWE guidance (21st Century Cures Act operationalization) codifies this. <strong>FDA's RWE Program Framework</strong> and subsequent guidance (2018–2024) distinguish data relevance (captures what matters) from data reliability (captures it accurately and completely). A dataset fit for one purpose can be entirely unfit for another.</p>
+            <div class="analogy">The audit-scope decision. Before auditing a firm's commercial-property portfolio, you confirm the database captures the relevant asset class, covers the relevant period, and records the relevant valuation method. Otherwise, the audit produces confident numbers about irrelevant things.</div>
+          </div>
+          <div class="concept-card">
+            <h4>OMOP &amp; common data models</h4>
+            <p>The <strong>Observational Medical Outcomes Partnership Common Data Model (OMOP CDM)</strong>, now maintained by the <strong>OHDSI</strong> (Observational Health Data Sciences and Informatics) consortium, is the dominant global standard for harmonizing heterogeneous healthcare data into a single schema. An analysis written once in OMOP can run against 800+ million patient records across dozens of datasets worldwide. Other models — <strong>FDA Sentinel CDM</strong> (US active surveillance), <strong>PCORnet CDM</strong> (PCORI-funded), <strong>i2b2</strong> (academic) — serve adjacent purposes. Common data models are the plumbing that makes RWE at scale possible.</p>
+            <div class="analogy">IFRS or GAAP for healthcare data. Without a common schema, each dataset is its own walled bookkeeping system; with one, analytics become portable across firms, countries, and regulators.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Target trial emulation</h4>
+            <p><strong>Target trial emulation (TTE)</strong>, developed by Hernán and Robins (2016+), is the modern methodological standard for causal inference from observational data. The analyst explicitly specifies the target randomized trial they would have run if feasible — protocol, eligibility, treatment strategies, outcomes, follow-up, estimand — and then emulates that protocol as closely as possible in the observational data using appropriate causal methods (propensity scores, IPTW, doubly robust estimation, instrumental variables, g-methods). TTE is now the expected framing for FDA-submitted RWE and increasingly for HTA-submitted comparative effectiveness.</p>
+            <div class="analogy">Reconstructing an ideal controlled experiment from the audit trail of what actually happened. The auditor cannot re-run history, but by carefully specifying what the randomized experiment <em>would have looked like</em> and applying the right adjustments, they can extract the causal estimate the randomized experiment would have produced.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 3 · The RWE evidence ladder — from description to causal inference</div>
+          <svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Five rungs ascending -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- Bottom: descriptive -->
+              <rect x="140" y="340" width="700" height="50" fill="#E4D8B8" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="160" y="362" font-size="12" fill="#0F1B2D" font-weight="700">1 · Descriptive epidemiology</text>
+              <text x="160" y="378" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4A3D22">cross-section · incidence · prevalence · utilization patterns</text>
+              <text x="820" y="370" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6B5A3A" font-style="italic">no causation claimed</text>
+              <!-- 2: cohort comparison naive -->
+              <rect x="140" y="275" width="700" height="50" fill="#95866A" opacity="0.85" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="160" y="297" font-size="12" fill="#F5EFDF" font-weight="700">2 · Naive cohort comparison</text>
+              <text x="160" y="313" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">unadjusted HR/RR · confounded by indication &amp; selection</text>
+              <text x="820" y="305" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" font-style="italic" opacity="0.9">rarely defensible alone</text>
+              <!-- 3: adjusted -->
+              <rect x="140" y="210" width="700" height="50" fill="#6B5A3A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="160" y="232" font-size="12" fill="#F5EFDF" font-weight="700">3 · Propensity-adjusted · regression-adjusted</text>
+              <text x="160" y="248" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">PS matching · IPTW · Cox-adjusted — measured confounders only</text>
+              <text x="820" y="240" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" font-style="italic" opacity="0.9">working standard for HEOR</text>
+              <!-- 4: target trial emulation -->
+              <rect x="140" y="145" width="700" height="50" fill="#4A3D22" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="160" y="167" font-size="12" fill="#F5EFDF" font-weight="700">4 · Target trial emulation</text>
+              <text x="160" y="183" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C8984A" opacity="0.95">pre-specified protocol · g-methods · doubly robust · E-value</text>
+              <text x="820" y="175" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C8984A" font-style="italic" opacity="0.95">FDA-grade · current standard</text>
+              <!-- 5: multi-source, regulatory-grade -->
+              <rect x="140" y="80" width="700" height="50" fill="#0F1B2D" opacity="0.95" stroke="#C8984A" stroke-width="1"/>
+              <text x="160" y="102" font-size="12" fill="#F5EFDF" font-weight="700">5 · Regulatory-grade RWE with external anchoring</text>
+              <text x="160" y="118" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C8984A">multi-source · causal ML · synthetic control arm · instrumental variables</text>
+              <text x="820" y="110" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C8984A" font-style="italic">approval-grade · rare</text>
+              <!-- Side arrow indicating ascent -->
+              <defs><marker id="arrUp" markerWidth="10" markerHeight="8" refX="4" refY="0" orient="auto"><polygon points="0 8, 4 0, 8 8" fill="#6B5A3A"/></marker></defs>
+              <line x1="100" y1="390" x2="100" y2="88" stroke="#6B5A3A" stroke-width="2" marker-end="url(#arrUp)"/>
+              <text x="88" y="225" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#6B5A3A" letter-spacing="2" font-weight="600" transform="rotate(-90, 88, 225)">RIGOR · CAUSAL CREDIBILITY</text>
+            </g>
+            <text x="490" y="40" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Five rungs. Most RWE sits at rung 2 or 3. HTA and FDA demand rung 4+.</text>
+            <text x="490" y="410" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">EVERY ANALYSIS IS ONLY AS CREDIBLE AS THE RUNG IT ACTUALLY CLIMBED</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The single most useful thing I was ever taught about RWE is what I will now tell you: <em>the most dangerous RWE study is the one that looks like a randomized trial but isn't.</em> A propensity-matched observational comparison, presented in forest-plot format with hazard ratios and confidence intervals, can look identical at a glance to an RCT result — and can mislead readers into thinking it has RCT-grade causal credibility. It does not. Unmeasured confounding — factors that affected treatment choice and outcome but weren't in the dataset — can produce bias larger than the treatment effect itself, and no adjustment technique can fix what was never measured. The discipline that separates defensible RWE from misleading RWE is <em>explicit quantification of the residual bias risk</em>: reporting the <strong>E-value</strong> (how strong an unmeasured confounder would need to be to explain away the finding), conducting <strong>negative control</strong> analyses (repeating the analysis for outcomes that should not be affected — if the drug appears to prevent them, the model is biased), running <strong>sensitivity analyses</strong> to plausible unmeasured confounders. A study that reports a hazard ratio of 0.72 (95% CI 0.60–0.87) and an E-value of 1.3 is telling you that a modest unmeasured confounder could erase the result; a study reporting E-value 4.5 is telling you the result is robust. Most RWE studies never report this. The ones that do are the ones HTA reviewers actually trust.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 3 checkpoint</h4>
+          <ul>
+            <li>Match three RWD source types to three specific research questions each is well-suited to answer</li>
+            <li>Outline a fit-for-purpose assessment for an EHR-based comparative effectiveness study</li>
+            <li>Explain OMOP in 3-4 sentences and name one alternative common data model</li>
+            <li>Walk through a target trial emulation protocol specification — 5 required elements</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A product team wants to use a claims-database analysis to support a label expansion for a new indication, based on a comparative effectiveness finding against standard of care. What are the conditions under which FDA would accept this, and what are the key methodological requirements?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>FDA's acceptance of RWE for label expansion is governed by the 21st Century Cures Act framework (2016) and subsequent guidance (notably the 2018 RWE Program Framework and 2021–2024 topic-specific guidances). Acceptance is possible but not routine, and the hurdles are specific. <strong>One — fit-for-purpose data.</strong> The claims database must credibly capture (i) the target indication's patient population (diagnosis codes + clinical confirmation), (ii) the exposure of interest (drug initiation, dose, duration), (iii) the outcome of interest (endpoint operationalizable from claims with acceptable validity), and (iv) key confounders (comorbidities, severity proxies, concomitant medications). Pure administrative claims rarely suffice for sensitive outcomes; EHR linkage or chart-review validation of a sample is typically required. <strong>Two — target trial emulation protocol.</strong> A pre-specified protocol documenting the randomized trial being emulated, the causal estimand, the eligibility criteria, the treatment strategies (including grace period for treatment initiation, strategies for discontinuation), the outcome operationalization, the follow-up definition, and the statistical analysis plan — all locked before data analysis. Post-hoc specification is a near-automatic FDA rejection reason. <strong>Three — confounding control with explicit residual-bias assessment.</strong> Propensity score or IPTW adjustment for measured confounders, plus (a) negative control outcomes/exposures to detect residual bias, (b) E-value calculation to quantify unmeasured-confounder strength that would erase the result, (c) sensitivity analysis to plausible alternative specifications. <strong>Four — external validity assessment.</strong> How does the claims-derived population compare to the original trial population and to the general treated population? Are there important exclusions (age, comorbidity, geography) that would limit label generalizability? <strong>Five — transparency and replication.</strong> Code made available, data-access arrangements suitable for FDA inspection, pre-registration of the protocol, alignment with ISPOR/ISPE Good Practices for RWD. <strong>What FDA is likely to accept:</strong> a TTE-framed comparative effectiveness study in a fit-for-purpose dataset with rigorous confounding control and explicit E-value assessment, for a label expansion within an already-approved indication where RCT would be impractical (rare populations, rapidly-evolving standard of care, long-duration outcomes). <strong>What FDA will reject:</strong> unadjusted or lightly-adjusted observational comparisons, post-hoc analyses, studies without explicit residual-bias quantification, or any analysis where the dataset is not credibly fit for the specific question. <strong>The precondition for the conversation:</strong> pre-FDA engagement through a Type C meeting with a formal RWE briefing book, so the agency is not seeing the design for the first time at submission. Most successful RWE-based label expansions have had two or three FDA meetings in advance.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>R-W-D · R-W-E.</strong> Real-World Data is the input; Real-World Evidence is the inference drawn from it. Data is not evidence until it is analyzed against a defensible question.<br>
+          <strong>O-M-O-P:</strong> <em>Observational Medical Outcomes Partnership</em> common data model. 800M+ patients. One schema. The plumbing of global RWE.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 4 -->
+    <div class="phase" id="day4">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">04</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Analyze + Evaluate · ~3 hrs</div><h3>Endpoints, PROs &amp; humanistic outcomes — <em>what the ledger actually measures</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">A cost-effectiveness model is only as meaningful as the outcome it values. If the endpoint does not actually reflect patient experience — if it measures a surrogate instead of what patients care about, or if it captures one dimension while missing three others — the model can be mathematically perfect and philosophically wrong. The choice of endpoint is, in many ways, the most consequential scientific decision in an HEOR program.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 4</span>Learning objectives</h4>
+          <ul>
+            <li>Understand the endpoint taxonomy — clinical, surrogate, composite, PRO, digital</li>
+            <li>Master the COA taxonomy — PRO, ClinRO, ObsRO, PerfO — and which fits when</li>
+            <li>Grasp PRO instrument development and validation</li>
+            <li>Understand digital endpoints and FDA DDT (Drug Development Tool) qualification</li>
+            <li>Appreciate patient preference studies, DCE, and MCDA</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--tobacco);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The endpoint taxonomy</h4>
+            <p><strong>Clinical endpoints</strong> directly measure patient benefit — survival, stroke, infarction. <strong>Surrogate endpoints</strong> (biomarkers, imaging, lab values) are proxies for clinical benefit whose validity depends on the strength of their epidemiological link. <strong>Composite endpoints</strong> combine events (e.g., MACE = death + MI + stroke) for statistical power at the cost of interpretive clarity. <strong>PROs</strong> capture patient-reported experience. <strong>Digital endpoints</strong> use wearables or connected devices for continuous physiologic or behavioural measurement. Each category is governed by different evidence requirements for regulatory and HTA acceptance.</p>
+            <div class="analogy">The underwriter's choice of what event to insure against. Death, injury, illness, lost income, property loss — each has a different measurement regime, a different dispute-resolution regime, and a different cost structure. Getting the insured event right matters more than any other design choice.</div>
+          </div>
+          <div class="concept-card">
+            <h4>COA taxonomy — PRO, ClinRO, ObsRO, PerfO</h4>
+            <p><strong>Clinical Outcome Assessments (COAs)</strong> are FDA's umbrella taxonomy for measuring how a patient feels, functions, or survives. Four types: <strong>PRO (Patient-Reported)</strong> — direct patient self-report (EQ-5D, SF-36, disease-specific instruments). <strong>ClinRO (Clinician-Reported)</strong> — clinician assessment (HAMD for depression, EDSS for MS). <strong>ObsRO (Observer-Reported)</strong> — by non-clinician observer (parent for pediatric, caregiver for dementia). <strong>PerfO (Performance)</strong> — standardized task (6-minute walk, cognitive battery). Choice depends on what the intervention is intended to change and who can credibly report the change.</p>
+            <div class="analogy">Four ways of documenting an insurance claim. Self-report from the policyholder (PRO), adjuster's assessment (ClinRO), witness statement (ObsRO), functional test or inspection (PerfO). Each has different evidentiary weight; each has different failure modes.</div>
+          </div>
+          <div class="concept-card">
+            <h4>PRO development &amp; validation</h4>
+            <p>A PRO instrument cannot be used at will — it must be validated for the specific population and context. Validation involves: <strong>content validity</strong> (does it measure what matters to patients? qualitative patient interviews), <strong>construct validity</strong> (does it correlate with related measures?), <strong>reliability</strong> (test-retest, internal consistency Cronbach's α), <strong>responsiveness</strong> (does it change when clinical status changes?), <strong>minimal important difference (MID)</strong> (how much change is clinically meaningful?). FDA's 2009 PRO guidance and 2022 Patient-Focused Drug Development series codify these requirements. <strong>ISPOR's Good Practices for PROs</strong> is the operating standard.</p>
+            <div class="analogy">The calibration file for a measurement instrument. Before an actuary trusts a new mortality table or policy-valuation model, it must be back-tested against historical claims, stress-tested across subpopulations, and certified against industry benchmarks. Same for PROs.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Digital endpoints &amp; DDT qualification</h4>
+            <p><strong>Digital endpoints</strong> — derived from wearables, smartphones, smart sensors — offer continuous, passive, objective measurement. Examples: daily step count for heart failure, sleep quality for depression, fine-motor control for Parkinson's. <strong>FDA's Drug Development Tool (DDT) qualification</strong> pathway provides a formal route to regulatory acceptance — multiple drug sponsors can rely on a single qualification, and qualified tools can serve as primary endpoints. Notable qualifications include stride velocity 95th centile for Duchenne muscular dystrophy. Qualification requires extensive validation: analytical validity, clinical validity, usability.</p>
+            <div class="analogy">The IoT-enabled underwriting revolution in property insurance. Continuous monitoring of buildings, vehicles, or people replaces point-in-time assessment. When the sensor is certified, the industry converges on its outputs. Same trajectory for digital biomarkers.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 4 · The COA taxonomy — who reports, what is measured, when each is appropriate</div>
+          <svg viewBox="0 0 980 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Four quadrants -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- PRO -->
+              <rect x="80" y="60" width="400" height="140" fill="#6B5A3A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="100" y="86" font-family="'Fraunces', serif" font-size="17" fill="#C8984A" font-weight="600">PRO</text>
+              <text x="100" y="104" font-size="12" fill="#F5EFDF" font-weight="600">Patient-Reported Outcome</text>
+              <text x="100" y="128" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">who reports: the patient</text>
+              <text x="100" y="144" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">examples: EQ-5D · SF-36 · PROMIS</text>
+              <text x="100" y="168" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C8984A" opacity="0.95">when: symptoms · quality of life · treatment satisfaction</text>
+              <text x="100" y="184" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C8984A" opacity="0.95">limits: patient capacity to self-report (age, cognition)</text>
+              <!-- ClinRO -->
+              <rect x="500" y="60" width="400" height="140" fill="#4A3D22" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="520" y="86" font-family="'Fraunces', serif" font-size="17" fill="#C8984A" font-weight="600">ClinRO</text>
+              <text x="520" y="104" font-size="12" fill="#F5EFDF" font-weight="600">Clinician-Reported Outcome</text>
+              <text x="520" y="128" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">who reports: a trained clinician</text>
+              <text x="520" y="144" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.88">examples: HAM-D · EDSS · CGI-S</text>
+              <text x="520" y="168" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C8984A" opacity="0.95">when: signs · examination findings · clinician judgment</text>
+              <text x="520" y="184" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C8984A" opacity="0.95">limits: inter-rater variability · training burden</text>
+              <!-- ObsRO -->
+              <rect x="80" y="220" width="400" height="140" fill="#95866A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="100" y="246" font-family="'Fraunces', serif" font-size="17" fill="#4A3D22" font-weight="600">ObsRO</text>
+              <text x="100" y="264" font-size="12" fill="#F5EFDF" font-weight="600">Observer-Reported Outcome</text>
+              <text x="100" y="288" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">who reports: non-clinician observer</text>
+              <text x="100" y="304" font-family="'JetBrains Mono', monospace" font-size="9" fill="#F5EFDF" opacity="0.9">examples: parent for pediatric · caregiver for dementia</text>
+              <text x="100" y="328" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4A3D22" opacity="0.95">when: patient cannot self-report reliably</text>
+              <text x="100" y="344" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4A3D22" opacity="0.95">limits: observer bias · observable behaviours only</text>
+              <!-- PerfO -->
+              <rect x="500" y="220" width="400" height="140" fill="#C8984A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="520" y="246" font-family="'Fraunces', serif" font-size="17" fill="#4A3D22" font-weight="700">PerfO</text>
+              <text x="520" y="264" font-size="12" fill="#0F1B2D" font-weight="600">Performance Outcome</text>
+              <text x="520" y="288" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4A3D22">who reports: standardized task</text>
+              <text x="520" y="304" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4A3D22">examples: 6-MWT · cognitive battery · grip strength</text>
+              <text x="520" y="328" font-family="'JetBrains Mono', monospace" font-size="9" fill="#0F1B2D">when: objectively observable capacity</text>
+              <text x="520" y="344" font-family="'JetBrains Mono', monospace" font-size="9" fill="#0F1B2D">limits: effort · learning · transport logistics</text>
+            </g>
+            <!-- Central label -->
+            <rect x="380" y="180" width="220" height="40" fill="#0F1B2D" opacity="0.95"/>
+            <text x="490" y="204" text-anchor="middle" font-family="'Fraunces', serif" font-size="12" fill="#F5EFDF" font-style="italic">Four COA types. One patient.</text>
+            <text x="490" y="218" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">CHOOSE ALL THAT FIT</text>
+            <!-- Title -->
+            <text x="490" y="30" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">The measurement matters more than the number. Get the COA wrong, the entire value argument drifts.</text>
+            <text x="490" y="390" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">FDA COA TAXONOMY · 2009 PRO GUIDANCE · 2022 PATIENT-FOCUSED DRUG DEVELOPMENT SERIES</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>There is a quiet discipline in HEOR that separates programs that age well from those that age badly: <em>taking the patient-experience dimension seriously early, rather than bolting it on at submission.</em> Many programs treat PROs as a checkbox — collect EQ-5D at baseline and week 12, report mean change, hope it lines up with the clinical endpoint. This produces thin, under-powered PRO data that cannot support a value argument when the HTA reviewer asks "what does this treatment actually change for patients that clinical measures don't capture?" The programs that age well do the opposite — run qualitative patient interviews during Phase 2 to identify what patients actually notice about their disease; use that input to select or develop PRO instruments with documented content validity in the target population; power Phase 3 adequately to detect clinically meaningful PRO change; and pre-specify the PRO analyses so they are not treated as exploratory at submission. The programs that do this have a richer, more defensible value story and a better reception at NICE, ICER, and G-BA. The programs that don't are left arguing that clinical benefit "implies" patient benefit — and the HTA reviewer, who has read a hundred such arguments, rarely finds the implication sufficient.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 4 checkpoint</h4>
+          <ul>
+            <li>Match three endpoint types to three clinical scenarios where each would be the primary choice</li>
+            <li>Name the four COA types and one example instrument for each</li>
+            <li>List the five validation requirements for a PRO instrument</li>
+            <li>Outline the FDA DDT qualification pathway for a novel digital endpoint</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A clinical team says: "We have a phase 3 trial with a significant effect on our primary endpoint (MACE reduction) and a non-significant effect on our PRO (generic health utility EQ-5D). Can we still build a value story?"</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>Yes, but the value story must be constructed carefully and the non-significant PRO is a live issue HTA bodies will probe. <strong>First — understand why the PRO didn't move.</strong> Three common explanations, each with different implications: <strong>(a) insufficient statistical power</strong> — PRO effect sizes are often smaller than clinical event effects, and PRO arms of trials are frequently under-powered; if this is the case, absence of significance is not evidence of absence of effect, and the defensible response is to report the point estimate with confidence interval, noting power limitations. <strong>(b) EQ-5D insensitivity</strong> — generic utility instruments like EQ-5D often have <em>ceiling effects</em> and poor sensitivity to the specific symptom dimensions the drug improves; disease-specific PROs may have shown meaningful change. If a disease-specific PRO exists and was collected, use it; if not, acknowledge the measurement limitation transparently. <strong>(c) genuinely no quality-of-life benefit</strong> — the drug prevents events that would have hurt QoL had they occurred, but in the observed trial period, most patients didn't have those events, so the PRO averaged across event-experiencers and non-experiencers shows no clear change. This is a real pattern in cardiovascular and preventive drugs. <strong>Second — construct the value argument using utility derived from prevented events rather than directly-measured EQ-5D change.</strong> If MACE reduction is real, the QALY gain comes from the utility difference between the prevented event states and the event-free state — modeled using published utility decrements for MI, stroke, and heart-failure hospitalization. This is standard HEOR methodology and is widely accepted when direct PRO change is modest. <strong>Third — anticipate HTA scrutiny.</strong> Reviewers will ask (i) whether the published utility decrements used are appropriate for the target population, (ii) whether the trial's PRO null finding is consistent with the modeled utility gain, (iii) whether the duration of benefit is realistic. Pre-specify sensitivity analyses using conservative utility decrements. <strong>Fourth — consider patient preference evidence.</strong> If direct PROs are limited, a <strong>discrete-choice experiment (DCE)</strong> showing patients' willingness to accept treatment burden for reduced event risk can strengthen the humanistic value argument. <strong>The underlying principle:</strong> a non-significant PRO is a vulnerability, not a fatal flaw, if the value story is built on event-prevention utility with transparent modeling and appropriate caveats. The HTA submission that tries to hide or spin the PRO result is the one that gets rejected. The one that acknowledges it, explains it, and constructs the value story around robust modeled utility — with explicit sensitivity analysis — is the one that gets engaged with. Transparency is not a weakness here; it is the only defensible strategy.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>P-C-O-P:</strong> the COA taxonomy — <em>PRO, ClinRO, ObsRO, PerfO.</em> Four reporters, four measurement regimes, one patient.<br>
+          <strong>D-D-T:</strong> <em>Drug Development Tool</em> qualification. The regulatory pathway for a novel digital endpoint to earn FDA acceptance across sponsors.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 5 -->
+    <div class="phase" id="day5">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">05</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Evaluate + Create · ~3 hrs</div><h3>Payer evidence, HTA &amp; outcomes-based agreements — <em>where the ledger meets the buyer</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">The value dossier sits on the HTA reviewer's desk for weeks. The reviewer reads every page, checks every citation, runs the model in their own software, interrogates every input against their own literature, and arrives at a recommendation that will either open the market or close it. Nothing about the drug itself changes in this interval; what changes is whether a different institution, with its own remit and its own accountability, finds the value argument credible. That interval is where HEOR lives.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 5</span>Learning objectives</h4>
+          <ul>
+            <li>Understand the value dossier structure — AMCP (US), GVD (global), country-specific CVDs</li>
+            <li>Navigate the global HTA landscape — NICE, IQWiG/G-BA, ICER Institute, CADTH, HAS, PBAC</li>
+            <li>Grasp outcomes-based agreements (OBAs) — design, measurement, reconciliation</li>
+            <li>Understand EU JCA (Joint Clinical Assessment) under HTAR 2025</li>
+            <li>Synthesize the M-E-N-T integrated thesis (Model, Measure, Monitor, Meet)</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--tobacco);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The value dossier — AMCP, GVD, CVD</h4>
+            <p>The <strong>AMCP Format for Formulary Submissions</strong> (US standard, now in its 5th edition) specifies the structure payers expect: product background, clinical value, economic value, budget impact, supporting evidence. The <strong>Global Value Dossier (GVD)</strong> is the master version maintained centrally, localized into <strong>country-specific Core Value Dossiers (CVDs)</strong> for each HTA submission. Content includes the clinical evidence package, disease burden, standard of care limitations, economic model summary, budget impact analysis, and patient-experience evidence.</p>
+            <div class="analogy">The policy application packet. Every underwriter's diligence question pre-answered, every supporting document pre-attached, every reasonable objection anticipated. The dossier is the sponsor's written argument for coverage.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The global HTA landscape</h4>
+            <p><strong>NICE (UK)</strong> — QALY-based, explicit thresholds, influential globally. <strong>IQWiG / G-BA (Germany)</strong> — additional-benefit assessment on 6-point scale, price negotiation, no fixed ICER. <strong>CADTH / INESSS (Canada)</strong> — CEA-based, provincial implementation. <strong>ICER Institute (US)</strong> — non-governmental but de facto HTA for commercial payers. <strong>HAS / Transparency Commission (France)</strong> — SMR (service médical rendu) and ASMR (amélioration) ratings. <strong>PBAC (Australia)</strong> — CEA-based with explicit thresholds. <strong>TLV (Sweden)</strong>, <strong>ZIN (Netherlands)</strong>, <strong>KCE (Belgium)</strong> and many others. Each body has distinct methodology, timelines, and decision-making.</p>
+            <div class="analogy">The global reinsurance underwriting network. Each reinsurer with its own risk appetite, its own underwriting manual, its own pricing conventions. A global drug must satisfy multiple underwriters with conflicting preferences — and cannot tailor its clinical profile to each.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Outcomes-based agreements (OBAs)</h4>
+            <p><strong>Outcomes-Based Agreements</strong> (also VBAs, MEAs, managed-entry agreements) link payment to real-world outcomes: rebate if clinical endpoint not achieved, payment withheld until milestone, spread-payment for high-upfront-cost therapies. Key design elements: <strong>outcome definition</strong> (reliably measurable, attributable to drug), <strong>measurement method</strong> (claims, EHR, registry), <strong>reconciliation process</strong> (who computes the settlement, using what data), <strong>contract term</strong>. Most common for curative or high-cost therapies — gene therapy, CAR-T, rare disease. Reconciliation accuracy is the critical operational challenge: observed outcomes must be attributable to the drug, not to secular trends or other care.</p>
+            <div class="analogy">Performance-based reinsurance. The premium is adjusted ex-post based on whether the insured event materialized as expected. Requires both parties to agree on measurement method and reconciliation process before the contract is signed; otherwise the settlement becomes a lawsuit.</div>
+          </div>
+          <div class="concept-card">
+            <h4>EU JCA &amp; the M-E-N-T thesis</h4>
+            <p><strong>EU Joint Clinical Assessment (JCA)</strong>, under the 2021 HTA Regulation (HTAR) with staged implementation from January 2025 (oncology + ATMPs first), requires a single clinical-evidence assessment for all EU member states, conducted by an EU-level body. Economic evaluation remains national. This will fundamentally reshape global HTA strategy for EU-launched products. The <strong>M-E-N-T thesis</strong> — <em>Model, Measure, Monitor, Meet</em> — integrates the four engines of a modern HEOR function. Weakness in any one undermines all four; mature organizations run all four continuously, with RWE feedback refining models post-launch and negotiation outcomes feeding back into evidence priorities.</p>
+            <div class="analogy">The coordinated international reinsurance regime — multiple sovereign regulators converging on shared clinical evaluation while retaining local pricing autonomy. The sponsor's strategy must satisfy both levels simultaneously.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 5 · The M-E-N-T integrated HEOR operating model</div>
+          <svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer flywheel ring -->
+            <circle cx="490" cy="210" r="175" fill="none" stroke="#6B5A3A" stroke-width="2" opacity="0.35" stroke-dasharray="5 5"/>
+            <text x="490" y="206" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#6B5A3A">Defensible</text>
+            <text x="490" y="226" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#6B5A3A">value</text>
+            <!-- Four quadrants: M, E, N, T -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- Model - top -->
+              <g transform="translate(490, 40)">
+                <circle cx="0" cy="0" r="48" fill="#4A3D22" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#C8984A" font-weight="600">M</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Model</text>
+              </g>
+              <text x="490" y="110" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">CEA · Markov · PSA · CEAC</text>
+              <!-- Measure - right -->
+              <g transform="translate(700, 210)">
+                <circle cx="0" cy="0" r="48" fill="#6B5A3A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#C8984A" font-weight="600">E</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Measure</text>
+              </g>
+              <text x="640" y="275" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">endpoints · PROs · COAs · DDT</text>
+              <!-- Monitor - bottom -->
+              <g transform="translate(490, 380)">
+                <circle cx="0" cy="0" r="48" fill="#6B5A3A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#C8984A" font-weight="600">N</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#F5EFDF" font-weight="600">Monitor</text>
+              </g>
+              <text x="490" y="320" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">RWE · OMOP · TTE · causal ML</text>
+              <!-- Meet - left -->
+              <g transform="translate(280, 210)">
+                <circle cx="0" cy="0" r="48" fill="#C8984A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" fill="#0F1B2D" font-weight="700">T</text>
+                <text x="0" y="12" text-anchor="middle" font-size="11" fill="#0F1B2D" font-weight="600">Meet</text>
+              </g>
+              <text x="340" y="275" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">HTA · AMCP · OBA · JCA</text>
+            </g>
+            <!-- Arrows -->
+            <defs><marker id="arrMent" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#6B5A3A"/></marker></defs>
+            <g stroke="#6B5A3A" stroke-width="1.8" opacity="0.6" fill="none" marker-end="url(#arrMent)">
+              <path d="M 540 50 A 185 185 0 0 1 690 170"/>
+              <path d="M 700 260 A 185 185 0 0 1 540 370"/>
+              <path d="M 440 370 A 185 185 0 0 1 290 260"/>
+              <path d="M 280 170 A 185 185 0 0 1 440 50"/>
+            </g>
+            <text x="490" y="24" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Four engines. Each turn feeds the next. The loop runs for the life of the asset.</text>
+            <text x="490" y="406" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="2">HEALTH METRIC = TIME FROM RWE FINDING TO MODEL UPDATE · FASTER = MORE INTEGRATED</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The hardest thing to see from inside an HEOR team — and the thing that will shape the profession over the next decade — is that <em>the discipline's center of gravity is moving from launch to post-launch</em>. Twenty years ago, HEOR existed to build a value dossier before launch and defend it during payer negotiation. Today, HEOR exists to build the launch dossier <em>and</em> to maintain a continuously-refreshed ledger of real-world value across the asset's life, using RWE to confirm or refute the pre-launch model, using OBAs to contract on that refresh, and using the updated ledger to manage price throughout the life cycle. The teams that still think of HEOR as a pre-launch function are building their dossiers and then going dormant; the teams that will win the next decade are building their dossiers as <em>the first version</em> of a living economic model that will be revised quarterly with RWE and re-tendered annually against payer expectations. The skill sets these two models require are different. The first needs modelers. The second needs modelers plus RWE scientists plus data engineers plus HTA strategists plus contract managers, operating as a single team, using continuously-updated datasets, talking to payers with current numbers rather than launch numbers. If you are new to HEOR, build your career in the second model, because the first is being quietly retired.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 5 checkpoint</h4>
+          <ul>
+            <li>Outline the structure of an AMCP value dossier and explain what each section must contain</li>
+            <li>Compare NICE, IQWiG, and ICER Institute methodologies — where they agree and where they diverge</li>
+            <li>Design an outcomes-based agreement for a gene therapy — outcome definition, measurement, reconciliation</li>
+            <li>Explain the impact of EU JCA (from 2025) on global launch strategy</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A CEO asks: "We are launching a $2M gene therapy for a rare disease. Payers are pushing back hard. What's the strategic HEOR response — and specifically, how should we use OBAs?"</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>Four layers of response, together forming a defensible strategy. <strong>Layer 1 — the value argument itself.</strong> For a $2M gene therapy to clear reasonable WTP thresholds, it must deliver material QALY gain — typically 15-25+ QALYs per patient for pediatric rare-disease gene therapies where a one-time cure replaces decades of costly chronic care and lost productivity. The CEA must demonstrate this explicitly with lifetime horizon, appropriate discount rates, and carefully-documented cost offsets from avoided care. Run the ICER with PSA and present the CEAC showing probability of cost-effectiveness across WTP thresholds. Without a credible CEA at $2M, the OBA conversation is a distraction from the real problem — the drug may simply not be priced defensibly. <strong>Layer 2 — budget impact strategy.</strong> Rare-disease gene therapy's real problem is often not cost-effectiveness (the QALYs often justify the price) but <em>budget impact</em> — the single-year payer-budget shock of treating a back-log of prevalent patients in year 1. Address this with <strong>spread-payment OBAs</strong>: the $2M is paid over 5 years instead of upfront, conditional on continued clinical response at each milestone. This flattens the budget curve without reducing total value capture, and it gives the payer an exit if the drug fails. <strong>Layer 3 — outcomes-based warrants.</strong> The real pushback on gene therapy is existential — payers fear paying $2M for a drug that fails. The OBA must directly address this: define a meaningful clinical milestone (e.g., independent ambulation at year 2 for an SMA gene therapy), define how it will be measured (registry enrollment with defined measurement protocol), define the rebate or payment-withhold if not achieved (e.g., 50% rebate if milestone not met), and — critically — define the reconciliation process in detail, with dispute-resolution procedures. The contract must be operationally executable, not just conceptually elegant. <strong>Layer 4 — real-world evidence generation.</strong> The OBA only works if the data flows to support it, and the long-term evidence of durability justifies the initial premium. Commit to a registry enrollment mandate for all treated patients, pre-specify the long-term durability endpoints, co-design the study with payer input, and share aggregate results transparently. This RWE becomes the basis for future label expansions, future pricing negotiations, and future HTA reappraisals — a compounding asset. <strong>Strategic synthesis:</strong> the CEO is asking "how do we get payers to accept the $2M?" The right answer is "we don't ask them to accept a fixed $2M; we offer them a spread-payment, outcomes-contingent, evidence-generating arrangement where the payer's exposure is capped, the patient's access is enabled, and the long-term economics are genuinely aligned — because if the drug works, we both win, and if it doesn't, the contract limits the downside for both sides." The pharma industry that masters this is building a durable commercial model for high-cost transformative therapies. The industry that doesn't is setting up fights it will lose.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>M-E-N-T:</strong> the four engines — <em>Model, Measure, Monitor, Meet.</em> All four running or the value argument is brittle.<br>
+          <strong>O-B-A = Outcome · Measurement · Reconciliation.</strong> The three design elements that determine whether the contract is enforceable or a handshake.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JARGON -->
+<section id="jargon" class="wrap-narrow">
+  <div class="section-label">Jargon decoder · three tiers</div>
+  <h2>The vocabulary of the ledger.</h2>
+  <p>HEOR sits at the intersection of clinical science, economics, statistics, and policy — and its vocabulary draws freely from all four. A minimal working set:</p>
+
+  <div class="jargon-tier">
+    <h3>Tier 1 · Everyday</h3>
+    <div class="tier-label">If you know these, you can read an HEOR status update</div>
+    <dl>
+      <dt>CEA</dt><dd>Cost-Effectiveness Analysis — cost per unit of natural health outcome.</dd>
+      <dt>CUA</dt><dd>Cost-Utility Analysis — cost per QALY; the dominant form in HTA.</dd>
+      <dt>BIM</dt><dd>Budget Impact Model — total budget consequence of adoption over a defined horizon.</dd>
+      <dt>QALY</dt><dd>Quality-Adjusted Life Year — one year of life in perfect health; the valuation unit.</dd>
+      <dt>ICER</dt><dd>Incremental Cost-Effectiveness Ratio — cost per additional QALY vs. comparator.</dd>
+      <dt>WTP</dt><dd>Willingness-to-Pay threshold — the ICER cutoff for cost-effectiveness judgment.</dd>
+      <dt>HTA</dt><dd>Health Technology Assessment — the systematic evaluation of a health technology's value.</dd>
+      <dt>RWE</dt><dd>Real-World Evidence — inferences drawn from routine clinical data rather than trials.</dd>
+      <dt>PRO</dt><dd>Patient-Reported Outcome — patient self-report of symptoms, function, or experience.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 2 · Technical</h3>
+    <div class="tier-label">You hear these in HEOR meetings and value discussions</div>
+    <dl>
+      <dt>Markov model</dt><dd>Multi-state economic model with per-cycle transition probabilities.</dd>
+      <dt>PSM</dt><dd>Partitioned Survival Model — the dominant oncology economic model structure.</dd>
+      <dt>PSA</dt><dd>Probabilistic Sensitivity Analysis — Monte Carlo simulation across input uncertainty.</dd>
+      <dt>DSA</dt><dd>Deterministic Sensitivity Analysis — one-at-a-time variation producing tornado diagrams.</dd>
+      <dt>CEAC</dt><dd>Cost-Effectiveness Acceptability Curve — probability of cost-effectiveness vs. WTP.</dd>
+      <dt>MAIC</dt><dd>Matching-Adjusted Indirect Comparison — reweighting one trial's patients to match another's.</dd>
+      <dt>STC</dt><dd>Simulated Treatment Comparison — regression-based indirect comparison alternative to MAIC.</dd>
+      <dt>NMA</dt><dd>Network Meta-Analysis — indirect comparisons across multiple trials linked by common comparators.</dd>
+      <dt>OMOP</dt><dd>Observational Medical Outcomes Partnership — the dominant RWE common data model.</dd>
+      <dt>APLD</dt><dd>All-Payer Longitudinal Data — the broadest US claims dataset type.</dd>
+      <dt>IPTW</dt><dd>Inverse Probability of Treatment Weighting — propensity-score-based confounding adjustment.</dd>
+      <dt>Surrogate endpoint</dt><dd>A biomarker or measure used as a proxy for a clinical outcome; validity is empirical.</dd>
+      <dt>AMCP dossier</dt><dd>Academy of Managed Care Pharmacy Format — the US standard value-dossier structure.</dd>
+      <dt>OBA</dt><dd>Outcomes-Based Agreement — payment linked to real-world outcome realization.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 3 · Specialist</h3>
+    <div class="tier-label">You hear these from senior HEOR scientists, ISPOR members, and HTA leads</div>
+    <dl>
+      <dt>TTE</dt><dd>Target Trial Emulation — modern standard for causal inference from observational data.</dd>
+      <dt>g-methods</dt><dd>Robins's causal inference toolkit (g-computation, IPW, structural nested models) for time-varying treatments.</dd>
+      <dt>E-value</dt><dd>Unmeasured-confounder strength required to erase an observed association.</dd>
+      <dt>DDT</dt><dd>Drug Development Tool qualification — FDA pathway for endpoints, biomarkers, and COAs.</dd>
+      <dt>JCA</dt><dd>Joint Clinical Assessment — EU HTA Regulation's centralized clinical assessment from 2025.</dd>
+      <dt>GVD / CVD</dt><dd>Global Value Dossier / Core (country) Value Dossier — the evidence packet hierarchy.</dd>
+      <dt>PBAC / CADTH / HAS</dt><dd>Australia / Canada / France HTA bodies; each with distinct methodology and standards.</dd>
+      <dt>ICER Institute</dt><dd>US-based nonprofit; publishes value-framework assessments influencing commercial payer decisions.</dd>
+      <dt>Doubly robust estimator</dt><dd>Causal estimator correct if either outcome model or propensity model is correctly specified.</dd>
+      <dt>Flexible parametric survival</dt><dd>Royston-Parmar spline-based models for complex hazard shapes beyond standard parametrics.</dd>
+      <dt>Cure model</dt><dd>Mixture model assuming a fraction of patients reach background mortality after treatment.</dd>
+      <dt>DCE</dt><dd>Discrete Choice Experiment — patient preference elicitation via pairwise choice tasks.</dd>
+      <dt>MCDA</dt><dd>Multi-Criteria Decision Analysis — structured framework weighting multiple value dimensions.</dd>
+      <dt>CHEERS</dt><dd>Consolidated Health Economic Evaluation Reporting Standards — the field's reporting checklist.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- PITFALLS -->
+<section id="pitfalls" class="wrap">
+  <div class="section-label">Traps &amp; pitfalls</div>
+  <h2>Where HEOR programs quietly fail.</h2>
+  <p>The public failures — rejected dossiers, failed launches, reimbursement disasters — make headlines. The quiet failures are the slow-burn ones that degrade a program's credibility without a single defining event. Six patterns that even well-resourced HEOR organizations fall into:</p>
+
+  <div class="pitfall-grid">
+    <div class="pitfall"><div class="num">1</div>
+      <h4>Headline ICER that can't survive PSA</h4>
+      <p>The deterministic base-case ICER is below the WTP threshold by a comfortable margin. The PSA shows that probability of cost-effectiveness at the relevant WTP is under 50%. The submission leads with the base case; the HTA reviewer reads the PSA. The conversation that follows is about why the model is fragile, not about whether the drug is worth it.</p>
+      <p class="rescue">Rescue: every major communication leads with the CEAC, not the base-case ICER; pricing decisions made to produce robust probability of cost-effectiveness (typically 70%+ at the relevant threshold) rather than optimizing the point estimate.</p>
+    </div>
+    <div class="pitfall"><div class="num">2</div>
+      <h4>Survival extrapolation curve-shopping</h4>
+      <p>Multiple parametric curves are fit; the most favourable is selected for the base case; the unfavourable ones appear only in scenario analysis. Sophisticated reviewers notice. Even when the choice is defensible on statistical grounds, the pattern of selecting the favourable curve reads as advocacy and undermines credibility across the entire model.</p>
+      <p class="rescue">Rescue: pre-specify curve selection rules (AIC/BIC + visual fit + clinical plausibility + external-data consistency), document the selection process transparently, run the full suite as equally-weighted scenarios in the submission, not just in an appendix nobody reads.</p>
+    </div>
+    <div class="pitfall"><div class="num">3</div>
+      <h4>PRO as afterthought</h4>
+      <p>PROs are collected because someone insisted, not because they are powered to detect meaningful change, validated for the population, or aligned with the drug's mechanism. The trial reports a non-significant PRO; HTA reviewers ask what the drug actually does for patients that clinical measures don't capture; the team cannot answer. The humanistic value argument collapses.</p>
+      <p class="rescue">Rescue: patient interviews during Phase 2 to identify measurable experience dimensions; instrument selection with content-validity rigor; Phase 3 powered for PRO endpoints; pre-specified analyses; disease-specific instruments where generic utility is insensitive.</p>
+    </div>
+    <div class="pitfall"><div class="num">4</div>
+      <h4>RWE presented as RCT</h4>
+      <p>A propensity-matched observational study is presented in forest-plot format alongside RCT results, implying equivalent evidence weight. Sophisticated reviewers discount it; regulators reject it for labeling; payers use it as negotiating ammunition. The RWE, which could have been a legitimate complementary evidence stream, becomes a credibility liability.</p>
+      <p class="rescue">Rescue: target trial emulation framing, explicit residual-bias quantification (E-value, negative controls), transparent presentation of the RWE's evidentiary rung, ISPOR/ISPE Good Practices compliance, pre-FDA/HTA engagement on methodology before study execution.</p>
+    </div>
+    <div class="pitfall"><div class="num">5</div>
+      <h4>Dossier-by-consultant, without internal mastery</h4>
+      <p>The value dossier is outsourced end-to-end to a consulting firm. It is professionally produced, internally consistent, and technically sound. Nobody inside the sponsor can defend its assumptions in detail at an HTA meeting because nobody inside the sponsor built them. The assessor's follow-up questions go unanswered or are answered with consultant-mediated delay. Credibility erodes.</p>
+      <p class="rescue">Rescue: consultants as partners, not substitutes; every model has a named internal owner who can defend every input; internal review of the dossier against "could our own team defend this under interrogation?"; consulting engagements structured for knowledge transfer, not just deliverable production.</p>
+    </div>
+    <div class="pitfall"><div class="num">6</div>
+      <h4>OBA as theater</h4>
+      <p>The outcomes-based agreement is announced at launch for PR purposes. The outcome definition is vague; measurement is operationally impractical; reconciliation processes are unclear; neither side actually expects meaningful settlements. Two years in, disputes emerge; neither party wants to litigate; the OBA is quietly allowed to lapse; both sides conclude OBAs are more trouble than they are worth.</p>
+      <p class="rescue">Rescue: OBAs designed with operational detail — specific outcome definitions with validated measurement, clear data-flow arrangements, pre-agreed reconciliation processes, dispute-resolution procedures, explicit expected settlement magnitudes; piloted on a small scale before scaling; treated as substantive contracts, not press releases.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-DOMAIN -->
+<section class="wrap">
+  <div class="section-label">Cross-domain connections</div>
+  <h2>The HEOR problem pattern appears elsewhere.</h2>
+  <p>The challenge of valuing uncertain future outcomes with defensible methods, under review by independent experts, appears in three other mature domains with useful parallels:</p>
+
+  <div class="crossdomain-grid">
+    <div class="crossdomain">
+      <div class="domain">Insurance actuarial science</div>
+      <h4>Pricing under tail uncertainty</h4>
+      <p>The actuarial profession — SOA, CAS, FIA — has spent a century developing methods for pricing insurance products under deep uncertainty about future claim distributions. HEOR inherited many of these methods: discounting, expected value, sensitivity analysis, Markov processes, parametric survival modeling. The actuarial standards of transparency, professional accountability, and peer review directly parallel the emerging ISPOR/CHEERS standards for HEOR.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Bank regulatory stress testing</div>
+      <h4>Scenario-based risk valuation</h4>
+      <p>Post-2008, bank regulators (Fed CCAR, ECB stress tests) require systematic scenario analysis of portfolio values under adverse macroeconomic conditions. The methodologies — multi-scenario modeling, stressed input distributions, capital-adequacy thresholds — closely parallel PSA/DSA and CEAC in HEOR. The regulatory discipline of requiring banks to <em>publish</em> stress-test results parallels the HTA discipline of requiring sponsors to publish economic models.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Environmental economics</div>
+      <h4>Valuing non-market outcomes</h4>
+      <p>Environmental economists face the challenge of pricing goods without market prices (clean air, species preservation, long-horizon climate outcomes) using revealed-preference and stated-preference methods. The QALY is, philosophically, the healthcare analogue — a valuation unit for something without a natural market price. Environmental economics' methodological debates (discount rates for intergenerational outcomes, distributional weighting, uncertainty) map directly onto HEOR's ongoing debates about QALYs, equity, and rare-disease valuation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPACED REP -->
+<section id="spaced" class="wrap">
+  <div class="section-label">Spaced repetition schedule</div>
+  <h2>Holding the ledger in memory.</h2>
+  <p>HEOR vocabulary is unusually precise — small errors in definitions produce large errors in arguments. The 8-touch schedule gives ~90% retention at the 3-month mark for about 2.5 hours of total review:</p>
+
+  <div class="spaced-rep">
+    <div class="sr-timeline">
+      <div class="sr-day"><div class="day-num">1</div><div class="day-label">Learn</div><div class="day-task">Day 1 vocabulary + CE plane</div></div>
+      <div class="sr-day"><div class="day-num">2</div><div class="day-label">Review</div><div class="day-task">Day 1 checkpoint + Day 2 models</div></div>
+      <div class="sr-day"><div class="day-num">3</div><div class="day-label">Review</div><div class="day-task">Day 2 flip cards + Day 3 RWE</div></div>
+      <div class="sr-day"><div class="day-num">4</div><div class="day-label">Review</div><div class="day-task">Jargon Tier 1 + 2, Day 4 endpoints/COA</div></div>
+      <div class="sr-day"><div class="day-num">5</div><div class="day-label">Review</div><div class="day-task">Day 5 HTA + OBA + M-E-N-T</div></div>
+      <div class="sr-day"><div class="day-num">7</div><div class="day-label">First lapse</div><div class="day-task">All 5 memory hooks</div></div>
+      <div class="sr-day"><div class="day-num">14</div><div class="day-label">Consolidation</div><div class="day-task">Redo all Feynman teach-backs</div></div>
+      <div class="sr-day"><div class="day-num">30</div><div class="day-label">Retention</div><div class="day-task">Draw concept map from memory</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap-narrow">
+    <div class="section-label" style="color: var(--ochre);">Mentor's parting wisdom</div>
+    <h2>Every healthcare choice is already a valuation. HEOR just <em>shows the work</em>.</h2>
+    <p>Five days cannot make you an HEOR leader. The craft takes decades — learning which modelling structures fit which diseases, which HTA bodies reward which arguments, which RWE methods survive reviewer scrutiny, which OBAs actually reconcile cleanly, and how to balance the competing demands of payers who want lower prices, patients who want access, and shareholders who want returns. The profession is quiet, technical, consequential, and — when done well — invisible to almost everyone whose lives it touches.</p>
+    <p>What five days can do is hand you the map. You know now that HEOR is the actuarial profession of medicine — producing defensible value arguments under scrutiny by underwriters whose job it is to spend other people's money wisely. You know the vocabulary (CEA, CUA, BIM, QALY, ICER, WTP). You know the models (decision tree, Markov, partitioned survival, with PSA, DSA, and CEAC). You know how to audit the ledger (fit-for-purpose RWE, OMOP, target trial emulation, E-value). You know how to measure what matters (COA taxonomy, PRO validation, DDT qualification). And you know where the ledger meets the buyer (AMCP dossier, NICE, IQWiG, ICER Institute, CADTH, outcomes-based agreements, and the coming EU JCA regime).</p>
+    <p class="mantra">The number is the argument. The argument must survive ten years of scrutiny.</p>
+    <p>The next time you read a headline about a drug price — the outrage, the congressional hearings, the formulary exclusions, the NICE rejection that becomes a patient-advocacy campaign — remember what sits underneath. An economic model with thousands of lines of inputs. A survival extrapolation curve fit to 24 months of trial data and projected over 40 years. A PSA with 10,000 Monte Carlo draws producing a CEAC. A value dossier read by an HTA reviewer with a red pen and a long memory. An OBA being quietly reconciled in year 3 with registry data the sponsor committed to collect five years earlier. And, underneath all of it, the quiet discipline of a profession that treats every number as a promise to be kept — and every promise as subject to audit.</p>
+    <p style="margin-top: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ochre);">— End of Module 10 —</p>
+  </div>
+</section>
+
+</main>
+
+<footer>Module 10 · HEOR &amp; RWE · Five-Day Theoretical Roadmap</footer>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'base',
+    themeVariables: { fontFamily: 'Inter Tight, sans-serif', primaryColor: '#EEE5CE', primaryTextColor: '#0F1B2D', primaryBorderColor: '#0F1B2D', lineColor: '#2A3B52', secondaryColor: '#F5EFDF', tertiaryColor: '#6B5A3A', background: '#EEE5CE', mainBkg: '#EEE5CE', secondBkg: '#F5EFDF' }
+  });
+  function togglePhase(header) { header.parentElement.classList.toggle('open'); }
+  window.addEventListener('scroll', () => {
+    const pct = Math.min(100, (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>

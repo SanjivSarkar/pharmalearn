@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Standing Guard — Quality &amp; GxP in 5 Days</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+<style>
+  :root {
+    --ink: #0F1B2D; --ink-soft: #2A3B52;
+    --paper: #F5EFDF; --paper-warm: #EEE5CE; --paper-dark: #E4D8B8;
+    --ochre: #C8984A; --ochre-deep: #9B7233;
+    --moss: #4B6B4A; --moss-soft: #7C9082;
+    --rust: #A84B2A; --rust-soft: #D67D5C;
+    --plum: #4B2D42; --plum-deep: #331E2E; --plum-soft: #6D4C60;
+    --rule: rgba(15,27,45,0.14); --rule-strong: rgba(15,27,45,0.3);
+    --shadow-soft: 0 2px 12px rgba(15,27,45,0.08);
+    --shadow-lift: 0 8px 32px rgba(15,27,45,0.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-weight: 400; line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgba(15,27,45,0.025) 1px, transparent 0); background-size: 24px 24px; pointer-events: none; z-index: 0; }
+  main, nav, header { position: relative; z-index: 1; }
+  h1, h2, h3, h4, .display { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.015em; line-height: 1.1; color: var(--ink); }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 500; }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+  h4 { font-size: 1.05rem; font-weight: 600; font-family: 'Inter Tight', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+  p { max-width: 68ch; }
+  em { font-style: italic; color: var(--ink-soft); }
+  strong { font-weight: 600; color: var(--ink); }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: var(--paper-warm); padding: 0.1em 0.4em; border-radius: 3px; border: 1px solid var(--rule); }
+  nav.top { position: sticky; top: 0; background: rgba(245,239,223,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); padding: 0.8rem 2rem; z-index: 100; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  nav.top .brand { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; }
+  nav.top .brand em { color: var(--plum); font-style: italic; }
+  nav.top ul { display: flex; gap: 0.4rem; list-style: none; flex-wrap: wrap; }
+  nav.top a { color: var(--ink-soft); text-decoration: none; font-size: 0.82rem; padding: 0.35rem 0.8rem; border-radius: 20px; transition: all 0.2s ease; font-weight: 500; }
+  nav.top a:hover { background: var(--ink); color: var(--paper); }
+  .progress-track { position: sticky; top: 58px; height: 3px; background: rgba(15,27,45,0.08); z-index: 99; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--plum), var(--ochre)); width: 0%; transition: width 0.15s ease; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+  .hero { padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+  .hero-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--plum); margin-bottom: 1.5rem; }
+  .hero h1 { max-width: 18ch; margin-bottom: 1.8rem; }
+  .hero h1 em { color: var(--plum); font-style: italic; }
+  .hero .lede { font-family: 'Fraunces', serif; font-size: clamp(1.1rem, 1.6vw, 1.4rem); max-width: 54ch; color: var(--ink-soft); font-weight: 300; line-height: 1.5; }
+  .hero-ornament { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 380px; height: 380px; opacity: 0.58; pointer-events: none; }
+  .hook-card { background: var(--ink); color: var(--paper); padding: 3rem 2.5rem; border-radius: 2px; margin: 3rem 0; position: relative; box-shadow: var(--shadow-lift); }
+  .hook-card::before { content: '07'; position: absolute; top: 1rem; right: 1.5rem; font-family: 'Fraunces', serif; font-size: 4rem; color: var(--ochre); opacity: 0.4; font-style: italic; }
+  .hook-card .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 1rem; }
+  .hook-card p { font-family: 'Fraunces', serif; font-size: 1.4rem; line-height: 1.4; font-weight: 300; max-width: 54ch; }
+  .hook-card p em { color: var(--ochre); font-style: italic; }
+  section { padding: 4rem 0; position: relative; }
+  section + section { border-top: 1px solid var(--rule); }
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--plum); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--plum); }
+  section h2 { margin-bottom: 1.8rem; max-width: 26ch; }
+  section p { margin-bottom: 1.1rem; }
+  .master-analogy { background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-dark) 100%); border: 1px solid var(--rule); border-left: 5px solid var(--plum); padding: 2.5rem 2.5rem 2.5rem 3rem; margin: 2.5rem 0; position: relative; border-radius: 2px; }
+  .master-analogy::before { content: '“'; position: absolute; top: -20px; left: 20px; font-family: 'Fraunces', serif; font-size: 6rem; color: var(--plum); line-height: 1; }
+  .master-analogy h4 { margin-bottom: 1rem; color: var(--plum); }
+  .master-analogy p { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 300; line-height: 1.55; }
+  .master-analogy p + p { margin-top: 0.8rem; }
+  .mapping-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem 1.5rem; align-items: center; margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px dashed var(--rule-strong); }
+  .mapping-grid .from { font-weight: 500; color: var(--ink); text-align: right; }
+  .mapping-grid .arrow { font-family: 'JetBrains Mono', monospace; color: var(--plum); font-size: 0.9rem; }
+  .mapping-grid .to { color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic; }
+  @media (max-width: 820px) { .mapping-grid { grid-template-columns: 1fr; gap: 0.3rem 0; } .mapping-grid .from { text-align: left; } .mapping-grid .arrow { display: none; } .mapping-grid .to { padding-left: 1rem; border-left: 2px solid var(--plum); margin-bottom: 0.8rem; } }
+  .concept-map-wrap { background: var(--paper-warm); padding: 2.5rem; border-radius: 2px; border: 1px solid var(--rule); overflow-x: auto; margin: 2rem 0; }
+  .mermaid { text-align: center; font-family: 'Inter Tight', sans-serif !important; }
+  .phases-container { margin-top: 2rem; }
+  .phase { border: 1px solid var(--rule); background: var(--paper-warm); margin-bottom: 1.2rem; border-radius: 2px; overflow: hidden; transition: all 0.3s ease; }
+  .phase:hover { box-shadow: var(--shadow-soft); }
+  .phase.open { background: var(--paper); box-shadow: var(--shadow-lift); }
+  .phase-header { padding: 1.8rem 2rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; cursor: pointer; user-select: none; }
+  .phase-number { font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 300; color: var(--plum); line-height: 1; font-style: italic; min-width: 3rem; }
+  .phase-title-wrap .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.3rem; }
+  .phase-title-wrap h3 { font-weight: 500; color: var(--ink); }
+  .phase-title-wrap h3 em { color: var(--plum); font-style: italic; }
+  .phase-toggle { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: var(--ink-soft); transition: transform 0.3s ease; }
+  .phase.open .phase-toggle { transform: rotate(45deg); color: var(--plum); }
+  .phase-body { max-height: 0; overflow: hidden; padding: 0 2rem; transition: max-height 0.4s ease, padding 0.4s ease; }
+  .phase.open .phase-body { max-height: 12000px; padding: 0 2rem 2.5rem; }
+  .curiosity-hook { font-family: 'Fraunces', serif; font-size: 1.2rem; font-style: italic; color: var(--ink-soft); border-left: 3px solid var(--plum); padding-left: 1.2rem; margin: 1.5rem 0 2rem; max-width: 58ch; line-height: 1.55; }
+  .objectives { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.8rem; margin: 1.5rem 0 2.5rem; border-radius: 2px; }
+  .objectives h4 { margin-bottom: 0.8rem; color: var(--plum); font-size: 0.8rem; }
+  .objectives ul { list-style: none; padding: 0; }
+  .objectives li { padding: 0.3rem 0 0.3rem 1.6rem; position: relative; font-size: 0.96rem; }
+  .objectives li::before { content: '◆'; position: absolute; left: 0; color: var(--plum); font-size: 0.6rem; top: 0.55rem; }
+  .bloom-tag { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.2em 0.5em; border-radius: 3px; background: var(--plum); color: var(--paper); margin-right: 0.5em; text-transform: uppercase; font-weight: 500; }
+  .concept-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  @media (max-width: 780px) { .concept-cards { grid-template-columns: 1fr; } }
+  .concept-card { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.4rem 1.5rem; border-radius: 2px; border-left: 3px solid var(--ochre); position: relative; }
+  .concept-card:nth-child(2n) { border-left-color: var(--moss); }
+  .concept-card:nth-child(3n) { border-left-color: var(--rust); }
+  .concept-card:nth-child(4n) { border-left-color: var(--plum); }
+  .concept-card h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; }
+  .concept-card .analogy { font-family: 'Fraunces', serif; font-style: italic; color: var(--ink-soft); font-size: 0.92rem; margin: 0.5rem 0 0.8rem; border-top: 1px dashed var(--rule); padding-top: 0.7rem; }
+  .concept-card p { font-size: 0.93rem; margin-bottom: 0.4rem; max-width: none; }
+  .visual { background: var(--paper); border: 1px solid var(--rule); padding: 2rem; margin: 2rem 0; border-radius: 2px; position: relative; overflow-x: auto; }
+  .visual .caption { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .visual svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .mentor-analogy { background: var(--ink); color: var(--paper); padding: 2rem 2.2rem; margin: 2rem 0; border-radius: 2px; position: relative; border-left: 4px solid var(--ochre); }
+  .mentor-analogy .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.8rem; }
+  .mentor-analogy p { font-family: 'Fraunces', serif; font-size: 1.1rem; line-height: 1.6; font-weight: 300; max-width: 58ch; }
+  .mentor-analogy p em { color: var(--ochre); font-style: italic; }
+  .checkpoint { border: 2px dashed var(--plum); background: transparent; padding: 1.5rem 1.8rem; margin: 2rem 0; border-radius: 2px; }
+  .checkpoint h4 { color: var(--plum); margin-bottom: 0.6rem; }
+  .checkpoint p { font-size: 0.94rem; margin-bottom: 0.4rem; }
+  .checkpoint ul { list-style: none; padding: 0; }
+  .checkpoint li { padding: 0.25rem 0 0.25rem 1.4rem; position: relative; font-size: 0.94rem; }
+  .checkpoint li::before { content: '□'; position: absolute; left: 0; color: var(--plum); font-family: 'JetBrains Mono', monospace; }
+  .flip-card { perspective: 1200px; height: 220px; margin: 2rem 0; cursor: pointer; }
+  .flip-inner { position: relative; width: 100%; height: 100%; transition: transform 0.7s ease; transform-style: preserve-3d; }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; padding: 1.8rem 2rem; border-radius: 2px; display: flex; flex-direction: column; justify-content: center; }
+  .flip-front { background: var(--paper-dark); border: 1px solid var(--rule-strong); }
+  .flip-front .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--plum); margin-bottom: 0.7rem; }
+  .flip-front h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+  .flip-front .hint { font-size: 0.82rem; color: var(--ink-soft); margin-top: 1rem; font-style: italic; }
+  .flip-back { background: var(--ink); color: var(--paper); transform: rotateY(180deg); border-left: 4px solid var(--ochre); }
+  .flip-back .label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre); margin-bottom: 0.7rem; }
+  .flip-back p { font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.55; max-width: none; font-weight: 300; }
+  .memory-hook { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 2px; font-size: 0.93rem; }
+  .memory-hook .label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ochre-deep); margin-bottom: 0.4rem; }
+  .memory-hook strong { color: var(--plum); }
+  .jargon-tier { margin: 2rem 0; padding: 1.8rem 2rem; background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 2px; }
+  .jargon-tier h3 { font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 0.4rem; color: var(--plum); }
+  .jargon-tier .tier-label { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.2rem; }
+  .jargon-tier dl { display: grid; grid-template-columns: 180px 1fr; gap: 0.8rem 1.5rem; }
+  .jargon-tier dt { font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+  .jargon-tier dd { color: var(--ink-soft); font-size: 0.93rem; }
+  @media (max-width: 680px) { .jargon-tier dl { grid-template-columns: 1fr; gap: 0.3rem 0; } .jargon-tier dd { margin-bottom: 0.8rem; padding-left: 0.8rem; border-left: 2px solid var(--plum); } }
+  .pitfall-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .pitfall-grid { grid-template-columns: 1fr; } }
+  .pitfall { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; border-top: 3px solid var(--rust); position: relative; }
+  .pitfall .num { position: absolute; top: 0.8rem; right: 1rem; font-family: 'Fraunces', serif; font-size: 1.8rem; color: var(--rust); font-style: italic; opacity: 0.5; line-height: 1; }
+  .pitfall h4 { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.5rem; max-width: 90%; }
+  .pitfall p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .pitfall .rescue { font-family: 'Fraunces', serif; font-style: italic; font-size: 0.88rem; color: var(--moss); padding-top: 0.5rem; margin-top: 0.5rem; border-top: 1px dashed var(--rule); }
+  .crossdomain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .crossdomain-grid { grid-template-columns: 1fr; } }
+  .crossdomain { background: var(--paper); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; border-radius: 2px; }
+  .crossdomain .domain { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--plum); margin-bottom: 0.5rem; }
+  .crossdomain h4 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); text-transform: none; letter-spacing: normal; margin-bottom: 0.7rem; }
+  .crossdomain p { font-size: 0.9rem; color: var(--ink-soft); }
+  .spaced-rep { background: var(--paper-warm); border: 1px solid var(--rule); padding: 2rem; border-radius: 2px; margin: 2rem 0; overflow-x: auto; }
+  .sr-timeline { display: grid; grid-template-columns: repeat(8, minmax(88px, 1fr)); gap: 0.8rem; margin-top: 1.5rem; min-width: 700px; }
+  .sr-day { padding: 1rem 0.8rem; background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; text-align: center; position: relative; }
+  .sr-day::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; background: var(--plum); border-radius: 50%; }
+  .sr-day .day-num { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 500; color: var(--plum); font-style: italic; }
+  .sr-day .day-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.3rem; }
+  .sr-day .day-task { font-size: 0.78rem; margin-top: 0.5rem; color: var(--ink); line-height: 1.3; }
+  .closing { background: var(--ink); color: var(--paper); padding: 5rem 2rem; margin-top: 4rem; }
+  .closing h2 { color: var(--paper); max-width: 24ch; margin-bottom: 2rem; }
+  .closing h2 em { color: var(--ochre); font-style: italic; }
+  .closing p { font-family: 'Fraunces', serif; font-size: 1.2rem; line-height: 1.6; font-weight: 300; max-width: 58ch; color: rgba(245,239,223,0.88); }
+  .closing .mantra { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.5rem; color: var(--ochre); padding: 2rem 0; margin: 2rem 0; border-top: 1px solid rgba(200,152,74,0.3); border-bottom: 1px solid rgba(200,152,74,0.3); max-width: 54ch; }
+  footer { padding: 2rem; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); background: var(--paper); }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="brand">The Standing <em>Guard</em></div>
+  <ul>
+    <li><a href="#hook">Hook</a></li><li><a href="#analogy">Analogy</a></li><li><a href="#map">Map</a></li>
+    <li><a href="#day1">Day 1</a></li><li><a href="#day2">Day 2</a></li><li><a href="#day3">Day 3</a></li>
+    <li><a href="#day4">Day 4</a></li><li><a href="#day5">Day 5</a></li>
+    <li><a href="#jargon">Jargon</a></li><li><a href="#pitfalls">Pitfalls</a></li><li><a href="#spaced">Review</a></li>
+  </ul>
+</nav>
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+<main>
+
+<header class="hero wrap">
+  <div class="hero-meta">Module 07 · Quality &amp; GxP · Five-Day Theoretical Roadmap</div>
+  <h1>The Standing <em>Guard</em>.</h1>
+  <p class="lede">Most pharma functions have a job. Quality has a posture. It is the only discipline whose value is measured not in what it produces, but in what it prevents — the crises you never see, the recalls that never happen, the patients who never know the guard was ever awake.</p>
+  <svg class="hero-ornament" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="hg7" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4B2D42" stop-opacity="0.4"/><stop offset="100%" stop-color="#4B2D42" stop-opacity="0.05"/></radialGradient></defs>
+    <circle cx="190" cy="190" r="170" fill="none" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="2 6" opacity="0.25"/>
+    <circle cx="190" cy="190" r="150" fill="none" stroke="#0F1B2D" stroke-width="1.2" opacity="0.3"/>
+    <circle cx="190" cy="190" r="138" fill="url(#hg7)"/>
+    <circle cx="190" cy="190" r="138" fill="none" stroke="#4B2D42" stroke-width="0.8" opacity="0.5"/>
+    <!-- Shield shape -->
+    <g transform="translate(190, 190)">
+      <path d="M 0 -85 L 62 -60 L 62 20 Q 62 65 0 90 Q -62 65 -62 20 L -62 -60 Z" fill="#331E2E" opacity="0.92" stroke="#C8984A" stroke-width="1"/>
+      <path d="M 0 -75 L 52 -54 L 52 18 Q 52 58 0 80 Q -52 58 -52 18 L -52 -54 Z" fill="none" stroke="#6D4C60" stroke-width="0.8" opacity="0.7"/>
+      <!-- Cross emblem -->
+      <rect x="-3" y="-40" width="6" height="50" fill="#C8984A" opacity="0.9"/>
+      <rect x="-18" y="-20" width="36" height="6" fill="#C8984A" opacity="0.9"/>
+      <!-- Central dot -->
+      <circle cx="0" cy="45" r="6" fill="#C8984A" opacity="0.85"/>
+      <text x="0" y="69" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" letter-spacing="2">PATIENT</text>
+    </g>
+    <!-- GxP orbital labels -->
+    <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2" font-weight="600">
+      <text x="190" y="28" text-anchor="middle">GLP</text>
+      <text x="340" y="120" text-anchor="middle">GCP</text>
+      <text x="358" y="230" text-anchor="middle">GMP</text>
+      <text x="250" y="352" text-anchor="middle">GDP</text>
+      <text x="40" y="230" text-anchor="middle">GVP</text>
+      <text x="30" y="120" text-anchor="middle">GCLP</text>
+    </g>
+    <!-- Small circles at orbital positions -->
+    <g fill="#4B2D42" opacity="0.6">
+      <circle cx="190" cy="40" r="3"/>
+      <circle cx="320" cy="108" r="3"/>
+      <circle cx="340" cy="218" r="3"/>
+      <circle cx="250" cy="340" r="3"/>
+      <circle cx="58" cy="218" r="3"/>
+      <circle cx="50" cy="108" r="3"/>
+    </g>
+    <!-- Watchtower silhouettes at corners -->
+    <g fill="#4B2D42" opacity="0.42">
+      <g transform="translate(40, 32)"><rect x="6" y="14" width="14" height="20"/><polygon points="4,14 13,4 22,14"/><rect x="11" y="22" width="4" height="6" fill="#F5EFDF"/></g>
+      <g transform="translate(326, 32)"><rect x="6" y="14" width="14" height="20"/><polygon points="4,14 13,4 22,14"/><rect x="11" y="22" width="4" height="6" fill="#F5EFDF"/></g>
+      <g transform="translate(40, 318)"><rect x="6" y="14" width="14" height="20"/><polygon points="4,14 13,4 22,14"/><rect x="11" y="22" width="4" height="6" fill="#F5EFDF"/></g>
+      <g transform="translate(326, 318)"><rect x="6" y="14" width="14" height="20"/><polygon points="4,14 13,4 22,14"/><rect x="11" y="22" width="4" height="6" fill="#F5EFDF"/></g>
+    </g>
+  </svg>
+</header>
+
+<section id="hook" class="wrap-narrow">
+  <div class="hook-card">
+    <div class="label">The hook</div>
+    <p>In 2004, a scientist at Ranbaxy Laboratories in India opened an internal database of the company's US regulatory filings and began to see a pattern he could not unsee. Stability studies logged for molecules nobody had actually tested. Dissolution profiles identical across unrelated formulations. Bioequivalence data that did not match physical sample counts. The facility's GMP certificates were current; every batch record was signed; every QC release had passed. On paper, the plant was a gold standard. <em>In reality, a decade of data had been manufactured rather than measured.</em> When Dinesh Thakur raised the concerns internally, he was told to move on. When he went to the FDA, it took years of patient investigation. In May 2013, Ranbaxy pled guilty to seven federal criminal counts and paid <em>$500 million</em> — at the time the largest settlement ever with a generic manufacturer. By then, a generation of American patients had taken drugs whose real-world bioequivalence was, in some cases, fiction. The standing guard had been asleep for a decade — and nothing on any lab wall had given it away.</p>
+  </div>
+</section>
+
+<section id="analogy" class="wrap-narrow">
+  <div class="section-label">The elevator pitch</div>
+  <h2>Quality is pharma's immune system — and its standing guard.</h2>
+  <p>Quality is the function that exists because every other function, left to itself, will drift toward optimizing what it measures rather than what matters. Research drifts toward papers. Clinical drifts toward endpoints. Manufacturing drifts toward yield. Commercial drifts toward revenue. <em>Quality is the discipline whose job is the whole</em> — ensuring that the drugs a company makes are safe, the data is true, the processes are controlled, and the patient is protected. It does not make the drug. It does not run the trial. It does not ship the product. It ensures all three can be trusted. Without it, every other function is eventually discovered to have been performing theater.</p>
+
+  <div class="master-analogy">
+    <h4>The master analogy — the immune system (and the watchkeeper on the wall)</h4>
+    <p>The human immune system is not a single organ. It is a distributed, always-on network of sensors, responders, and memory cells that together keep the body alive while the rest of the body focuses on other things. Innate immunity holds a baseline; adaptive immunity learns from specific threats; memory cells retain what was learned; fever and inflammation are the visible signals of invisible investigations; autoimmune diseases are the overreactions; immune deficiency is the underreaction; sepsis is what happens when a real signal is ignored long enough.</p>
+    <p>A pharmaceutical Quality system is structurally identical. The <em>QMS</em> is innate immunity — baseline controls always active. <em>CAPA</em> is the adaptive response — learning from specific failures and producing tailored antibodies. <em>Knowledge management and trend analysis</em> are memory cells. <em>Deviation investigations</em> are the fever response — visible escalation when something is wrong. <em>Audits and inspections</em> are the lymph nodes where antigens are examined and catalogued. <em>Data integrity and ALCOA+</em> are the uncontaminated bloodstream that carries accurate information throughout the system. Over-investigation of every minor excursion is <em>autoimmune disease</em> — the system attacks itself. Under-investigation is <em>immune deficiency</em> — real threats slip through. An ignored signal that cascades to regulatory action is <em>sepsis</em>.</p>
+    <p>Layered on top of this biology is an older metaphor — the <em>standing guard</em>, the night watch, the sentry who walks the wall when everyone else is asleep. Quality is both: a living system of sensors, and a posture of vigilance that is cultural before it is procedural.</p>
+
+    <div class="mapping-grid">
+      <div class="from">Innate immunity — baseline, always active</div><div class="arrow">—→</div><div class="to">QMS (Pharmaceutical Quality System, ICH Q10)</div>
+      <div class="from">Adaptive immunity — learning from specific threats</div><div class="arrow">—→</div><div class="to">CAPA (Corrective and Preventive Action)</div>
+      <div class="from">Memory B cells — what was learned stays learned</div><div class="arrow">—→</div><div class="to">Knowledge management + trend analysis + APQR</div>
+      <div class="from">Fever response — visible escalation</div><div class="arrow">—→</div><div class="to">Deviation investigation + root cause analysis</div>
+      <div class="from">Antibodies — specific tailored controls</div><div class="arrow">—→</div><div class="to">Process-specific controls + quality agreements</div>
+      <div class="from">Lymph nodes — where antigens are examined</div><div class="arrow">—→</div><div class="to">Internal audits + external inspections</div>
+      <div class="from">Uncontaminated bloodstream</div><div class="arrow">—→</div><div class="to">Data integrity (ALCOA+, 21 CFR Part 11)</div>
+      <div class="from">Blood work — routine checkup</div><div class="arrow">—→</div><div class="to">Annual Product Quality Review (APQR)</div>
+      <div class="from">Vaccination — prepare before exposure</div><div class="arrow">—→</div><div class="to">Training + supplier qualification</div>
+      <div class="from">Autoimmune — system attacks itself</div><div class="arrow">—→</div><div class="to">Over-investigation · bureaucratic paralysis</div>
+      <div class="from">Immune deficiency — real threats unheard</div><div class="arrow">—→</div><div class="to">Under-investigation · data-integrity gaps</div>
+      <div class="from">Sepsis — ignored signal going systemic</div><div class="arrow">—→</div><div class="to">Consent decree · import ban · criminal referral</div>
+      <div class="from">The standing guard — culture of vigilance</div><div class="arrow">—→</div><div class="to">Quality culture · always-right vs. inspection-ready</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap-narrow">
+  <div class="section-label">Origin story</div>
+  <h2>How modern pharmaceutical quality was forged — disaster, statute, guidance, scar tissue.</h2>
+  <p>Before 1906, no US law compelled any pharmaceutical manufacturer to guarantee anything about its product — neither composition nor purity nor safety. The Pure Food and Drug Act of 1906 was the first federal statute to require honest labelling of contents. It was a scaffold without a building.</p>
+  <p>The sulfanilamide tragedy of 1937 (105 deaths, mostly children) forced the <em>1938 Food, Drug &amp; Cosmetic Act</em>, requiring safety testing before marketing. The thalidomide catastrophe of 1961 forced the <em>1962 Kefauver-Harris Amendments</em>, requiring proof of efficacy and establishing the foundational mandate for Good Manufacturing Practice. By 1975, FDA had codified cGMP in <em>21 CFR 210 and 211</em> — the founding scripture of pharmaceutical quality. Every deviation investigation, every CAPA, every APQR written today traces its DNA to those regulations.</p>
+  <p>The 1983 landmark ruling in <em>United States v. Barr Laboratories</em> established that out-of-specification (OOS) results could not be casually retested into compliance — they required formal investigation. The 1997 FDAMA and the 1999 introduction of <em>21 CFR Part 11</em> brought the electronic records era and the vocabulary of data integrity. Between 2005 and 2015, the ICH Q series globalized the language — <em>Q8 Pharmaceutical Development, Q9 Quality Risk Management, Q10 Pharmaceutical Quality System, Q12 Lifecycle Management</em>. In 2013, the Ranbaxy consent decree began the modern data-integrity era; <em>FDA's 2016 Data Integrity guidance</em> and the <em>MHRA 2018 GMP Data Integrity guidance</em> codified ALCOA+ into regulatory expectation. <em>ICH E6 R3</em> (2023) rewrote Good Clinical Practice for the era of decentralized and risk-based trials. FDA's <em>Quality Management Maturity (QMM)</em> program, proposed from 2022 onward, is the current frontier — moving quality from compliance accounting toward culture measurement.</p>
+  <p>Each step was written in response to a specific failure. Quality, uniquely among pharma's disciplines, is a profession whose every regulation exists because somebody, somewhere, once died or was harmed.</p>
+</section>
+
+<section id="map" class="wrap">
+  <div class="section-label">The concept web</div>
+  <h2>The full quality lifecycle, in one diagram.</h2>
+  <p>The four engines of a modern Quality function are not a pipeline but a living, feedback-driven system — <strong>Detect, Respond, Learn, Cultivate</strong>. Each engine feeds the next; the output of "Cultivate" is a more watchful "Detect," and the cycle begins again, continuously, forever.</p>
+  <div class="concept-map-wrap">
+    <div class="mermaid">
+flowchart LR
+  classDef central fill:#4B2D42,stroke:#0F1B2D,color:#F5EFDF,stroke-width:2px,font-weight:600
+  classDef pillar fill:#EEE5CE,stroke:#0F1B2D,color:#0F1B2D,stroke-width:1.5px,font-weight:500
+  classDef sub fill:#F5EFDF,stroke:#0F1B2D,color:#2A3B52,stroke-width:1px,stroke-dasharray:3 3
+  CORE[The Patient:<br/>Safe, Effective,<br/>Trustworthy Product]:::central
+  D[Detect:<br/>Signals · deviations ·<br/>complaints · audits]:::pillar
+  R[Respond:<br/>Investigation · CAPA ·<br/>recall · escalation]:::pillar
+  L[Learn:<br/>Trends · APQR ·<br/>knowledge management]:::pillar
+  C[Cultivate:<br/>Culture · training ·<br/>Quality 4.0 · readiness]:::pillar
+  CORE --- D
+  CORE --- R
+  CORE --- L
+  CORE --- C
+  D --- d1[GxP baseline controls]:::sub
+  D --- d2[ALCOA+ data integrity]:::sub
+  D --- d3[Risk-based monitoring]:::sub
+  R --- r1[Deviation workflow]:::sub
+  R --- r2[Root cause · CAPA]:::sub
+  R --- r3[Recall · field alert]:::sub
+  L --- l1[APQR · PQR]:::sub
+  L --- l2[Signal detection]:::sub
+  L --- l3[Knowledge mgmt]:::sub
+  C --- c1[Inspection readiness]:::sub
+  C --- c2[Quality Metrics · QMM]:::sub
+  C --- c3[Digital QMS · Q 4.0]:::sub
+  D -.-&gt; R
+  R -.-&gt; L
+  L -.-&gt; C
+  C -.-&gt; D
+    </div>
+  </div>
+</section>
+
+<!-- DAY 1 -->
+<section id="day1" class="wrap">
+  <div class="section-label">Day 01 · The Charter</div>
+  <h2>Quality system foundations — what GxP is, and why the taxonomy matters.</h2>
+  <div class="phases-container">
+    <div class="phase open">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">01</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Remember + Understand · ~2.5 hrs</div><h3>Quality system foundations — <em>the GxP taxonomy and QMS architecture</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">Every functional area in pharma has its specialty. Quality is the only one whose job is the <em>whole</em>. Quality does not make the drug — it ensures the making can be trusted. Quality does not run the trial — it ensures the evidence can be believed. Quality does not ship the product — it ensures the ship arrives. Its charter is not a process; it is a posture.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 1</span>Learning objectives</h4>
+          <ul>
+            <li>Identify the GxP taxonomy (GLP, GCP, GMP, GDP, GVP, GCLP) and what each covers</li>
+            <li>Understand QMS architecture per ICH Q10 and its four pillars</li>
+            <li>Grasp the role of ICH Q9 (Quality Risk Management) and Q12 (Lifecycle Management)</li>
+            <li>Navigate the key regulatory frameworks: 21 CFR 210/211, EU GMP, PIC/S</li>
+            <li>Understand how the QMS interacts with every other pharma function</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--plum);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The GxP taxonomy</h4>
+            <p><strong>GLP</strong> (Good Laboratory Practice, 21 CFR Part 58) governs non-clinical safety studies. <strong>GCP</strong> (Good Clinical Practice, ICH E6 R3) governs human clinical trials. <strong>GMP</strong> (Good Manufacturing Practice, 21 CFR 210/211) governs commercial drug manufacture. <strong>GDP</strong> (Good Distribution Practice) governs warehousing and transport. <strong>GVP</strong> (Good Pharmacovigilance Practice) governs post-market safety surveillance. <strong>GCLP</strong> (Good Clinical Laboratory Practice) governs labs analyzing clinical-trial samples. Together they form the closed system of pharmaceutical quality from molecule to patient.</p>
+            <div class="analogy">The immune system's organ division of labor — skin, mucus membranes, gut lining, bone marrow, thymus, lymph nodes. Each has a specialty; together they form a single defense network that no single organ could achieve alone.</div>
+          </div>
+          <div class="concept-card">
+            <h4>ICH Q10 — the four QMS pillars</h4>
+            <p>ICH Q10 defines the <strong>Pharmaceutical Quality System</strong> as resting on four pillars: (1) <strong>Process Performance &amp; Product Quality Monitoring</strong> — knowing continuously how the process and product are performing; (2) <strong>CAPA</strong> — responding to findings; (3) <strong>Change Management</strong> — governing deliberate modifications; (4) <strong>Management Review</strong> — senior oversight of the other three. All supported by <em>knowledge management</em> and <em>quality risk management</em> as enablers. Every mature QMS can be mapped to these four pillars.</p>
+            <div class="analogy">The four cardinal vital signs of a healthy organism — heart rate, respiration, temperature, blood pressure. Check all four; miss any one, and a silent pathology can hide.</div>
+          </div>
+          <div class="concept-card">
+            <h4>ICH Q9 — Quality Risk Management</h4>
+            <p><strong>QRM</strong> is the framework for systematically identifying, assessing, controlling, reviewing, and communicating risks throughout a product's lifecycle. Tools include <em>FMEA</em> (Failure Mode and Effects Analysis), <em>FTA</em> (Fault Tree Analysis), <em>HACCP</em> (Hazard Analysis and Critical Control Points), and <em>risk ranking and filtering</em>. Q9(R1) revision (2023) explicitly emphasized avoiding <strong>subjectivity bias</strong> — the tendency for risk assessments to reflect the assessor's comfort more than the actual risk landscape.</p>
+            <div class="analogy">The triage discipline in emergency medicine — a structured protocol for deciding what to treat first when you cannot treat everything at once. Without triage, you treat the loudest complaint; with it, you treat the deadliest.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Regulatory frameworks — 21 CFR, EU GMP, PIC/S</h4>
+            <p><strong>21 CFR 210/211</strong> is US cGMP for drugs; <strong>21 CFR Part 11</strong> governs electronic records and signatures. <strong>EU GMP</strong> consists of the main text plus annexes (Annex 1 for sterile manufacturing, substantially revised 2023). <strong>PIC/S</strong> — the Pharmaceutical Inspection Co-operation Scheme — harmonizes GMP across 50+ participating authorities and enables mutual recognition of inspections. Products sold globally must comply with the union of these frameworks, which look similar but diverge in detail.</p>
+            <div class="analogy">The law codes of three major jurisdictions governing the same human conduct. The principles rhyme; the statutes do not; a practitioner working globally keeps three rulebooks open and tracks the points where they diverge.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 1 · The GxP taxonomy — six disciplines, one patient at the center</div>
+          <svg viewBox="0 0 980 440" xmlns="http://www.w3.org/2000/svg">
+            <!-- Central patient circle -->
+            <circle cx="490" cy="220" r="62" fill="#4B2D42" opacity="0.95" stroke="#0F1B2D" stroke-width="1"/>
+            <circle cx="490" cy="220" r="62" fill="none" stroke="#C8984A" stroke-width="0.8" opacity="0.7"/>
+            <text x="490" y="212" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#F5EFDF" font-weight="500">The Patient</text>
+            <text x="490" y="230" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">SAFE · EFFECTIVE · TRUSTED</text>
+            <!-- Orbital ring -->
+            <circle cx="490" cy="220" r="140" fill="none" stroke="#4B2D42" stroke-width="0.8" opacity="0.4" stroke-dasharray="3 4"/>
+            <!-- Six GxP discipline nodes -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- GLP - top -->
+              <circle cx="490" cy="80" r="42" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="490" y="75" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">GLP</text>
+              <text x="490" y="90" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">non-clinical</text>
+              <text x="490" y="102" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">21 CFR Part 58</text>
+              <!-- GCP - upper right -->
+              <circle cx="610" cy="150" r="42" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="610" y="145" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">GCP</text>
+              <text x="610" y="160" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">clinical trials</text>
+              <text x="610" y="172" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">ICH E6 R3</text>
+              <!-- GMP - lower right -->
+              <circle cx="610" cy="290" r="42" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="610" y="285" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">GMP</text>
+              <text x="610" y="300" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">manufacturing</text>
+              <text x="610" y="312" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">21 CFR 210/211</text>
+              <!-- GDP - bottom -->
+              <circle cx="490" cy="360" r="42" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="490" y="355" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">GDP</text>
+              <text x="490" y="370" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">distribution</text>
+              <text x="490" y="382" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">WHO TRS 961</text>
+              <!-- GVP - lower left -->
+              <circle cx="370" cy="290" r="42" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="370" y="285" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">GVP</text>
+              <text x="370" y="300" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">pharmacovigilance</text>
+              <text x="370" y="312" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">EU GVP Modules</text>
+              <!-- GCLP - upper left -->
+              <circle cx="370" cy="150" r="42" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="370" y="145" text-anchor="middle" font-size="13" fill="#F5EFDF" font-weight="700">GCLP</text>
+              <text x="370" y="160" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">clinical lab</text>
+              <text x="370" y="172" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.85">sample analysis</text>
+            </g>
+            <!-- Connector lines -->
+            <g stroke="#4B2D42" stroke-width="0.8" opacity="0.4" fill="none">
+              <line x1="490" y1="122" x2="490" y2="158"/>
+              <line x1="578" y1="172" x2="540" y2="196"/>
+              <line x1="578" y1="268" x2="540" y2="244"/>
+              <line x1="490" y1="318" x2="490" y2="282"/>
+              <line x1="402" y1="268" x2="440" y2="244"/>
+              <line x1="402" y1="172" x2="440" y2="196"/>
+            </g>
+            <!-- QMS wrapper band at top -->
+            <rect x="60" y="20" width="860" height="26" fill="#4B2D42" opacity="0.18" stroke="#4B2D42" stroke-width="0.5"/>
+            <text x="490" y="38" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="3">↑ WRAPPED BY THE QMS (ICH Q10) · PROCESS MONITORING · CAPA · CHANGE MGMT · MGMT REVIEW ↑</text>
+            <!-- Culture wrapper at bottom -->
+            <rect x="60" y="400" width="860" height="26" fill="#4B2D42" opacity="0.18" stroke="#4B2D42" stroke-width="0.5"/>
+            <text x="490" y="418" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="3">↓ HELD UP BY QUALITY CULTURE · ALWAYS-RIGHT RATHER THAN INSPECTION-READY ↓</text>
+            <text x="60" y="14" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">SIX DISCIPLINES · ONE PATIENT · ONE SYSTEM</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The thing I wish every new analyst understood on day one: <em>Quality is not a department. It is a verb with a plural subject.</em> Every chemist who records raw data accurately, every clinical monitor who queries a data point that looks odd, every operator who refuses to override an out-of-spec alarm — they are Quality, acting. The Quality department's job is not to be Quality for them. It is to make it easy to do right, hard to do wrong, and impossible to stay silent about a problem. The day the Quality department is the only thing standing between a bad decision and the patient is the day the system has already failed.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 1 checkpoint</h4>
+          <ul>
+            <li>List the five core GxPs and give the governing regulation for each</li>
+            <li>Name the four pillars of ICH Q10 and what each accomplishes</li>
+            <li>Define Quality Risk Management and name two common QRM tools</li>
+            <li>Explain why 21 CFR 210/211, EU GMP, and PIC/S all matter for a global product</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A process-development scientist says: "The Quality team is slowing us down. Every change needs a risk assessment, every deviation needs a CAPA. Why not just fix things and move on?" How would you answer?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>The scientist has identified a real cost — and missed the corresponding benefit. "Just fix it and move on" is how every major pharma quality failure of the last forty years began. The <strong>purpose of formal risk assessments and CAPA</strong> is not ceremony; it is to ensure that (a) the fix addresses the <em>root cause</em> rather than the symptom, (b) the fix is <em>verified effective</em> rather than presumed, and (c) the <em>learning is captured</em> so the same failure does not recur in six months at a different site. When those three things are not done, the same deviation surfaces three more times, and eventually one of the three is not caught in time. The Quality process that feels slow is what converts incidents into permanent institutional memory. The alternative feels fast right up until it produces a consent decree. A mature organization experiences Quality as friction that is worth it — not friction that isn't.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>L-C-M-D-V:</strong> the five core GxPs — <em>Lab, Clinical, Manufacturing, Distribution, Vigilance.</em> Add GCLP if you work at the clinical lab intersection.<br>
+          <strong>Q-9-10-12:</strong> the three ICH quality pillars — <em>Q9 Risk, Q10 System, Q12 Lifecycle.</em> Q8 feeds process design into the system.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 2 -->
+    <div class="phase" id="day2">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">02</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Understand + Apply · ~3 hrs</div><h3>Clinical &amp; preclinical quality — <em>GLP, GCP, and the doctrine of data integrity</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">When the FDA's Bioresearch Monitoring program uncovers data fabrication at a clinical site — not errors but fabrication, visits that never occurred, patients who were never enrolled — the consequences cascade across every product that touched that site. Trials must be reanalyzed. Submissions can be withdrawn. Approved products can face re-examination. Clinical quality is not about paperwork. It is about whether the evidence supporting a new drug's approval is actually <em>real</em>.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 2</span>Learning objectives</h4>
+          <ul>
+            <li>Understand GLP — what it governs, what it does not, how it differs from research lab practice</li>
+            <li>Grasp GCP (ICH E6 R3, 2023) — the sponsor, investigator, and IRB responsibilities</li>
+            <li>Understand BIMO inspections — what FDA looks for at sponsor, site, IRB, and GLP inspections</li>
+            <li>Master ALCOA+ — the nine principles of data integrity, and why each matters</li>
+            <li>Recognize data integrity failure patterns — shared passwords, retrospective entry, "testing into compliance"</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--plum);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>GLP — Good Laboratory Practice</h4>
+            <p>Codified in <strong>21 CFR Part 58</strong>, GLP governs non-clinical laboratory studies submitted to regulators — toxicology, pharmacology, ADME, safety pharmacology. It is narrower than "lab practice" generally; it applies specifically to studies supporting regulatory submissions. Requires a <strong>Study Director</strong>, a <strong>QA unit independent of the conduct</strong>, a signed protocol, and the retention of raw data. Basic research labs publishing in journals need not be GLP; tox studies going to an IND must be.</p>
+            <div class="analogy">The bar exam evidence standard vs. everyday conversation. Most talk doesn't need notarization; courtroom testimony does. GLP is notarized science.</div>
+          </div>
+          <div class="concept-card">
+            <h4>GCP — ICH E6 R3 (2023)</h4>
+            <p>The renewed GCP framework (released 2023) substantially modernized a standard originally written for paper-era trials in 1996. E6 R3 emphasizes <strong>proportionate quality</strong> (risk-based monitoring, fit-for-purpose processes), <strong>sponsor oversight of outsourced activities</strong>, <strong>investigator responsibilities</strong>, <strong>IRB/ethics committee independence</strong>, and — importantly — <strong>data integrity across increasingly decentralized trial models</strong> (telehealth visits, wearables, electronic PROs, home nursing).</p>
+            <div class="analogy">The constitutional amendment of clinical research ethics. The founding 1996 version emerged from Nuremberg, Helsinki, and Belmont; the 2023 revision adapts the same principles to a trial conducted partly through the patient's smartphone.</div>
+          </div>
+          <div class="concept-card">
+            <h4>BIMO — Bioresearch Monitoring</h4>
+            <p>FDA's <strong>BIMO</strong> program inspects (a) sponsors, (b) clinical investigators, (c) IRBs, (d) non-clinical (GLP) labs, and (e) bioequivalence sites. Findings cascade: a site with data integrity problems can invalidate data across every trial it conducted; a sponsor with inadequate oversight can face <strong>Form 483</strong>, <strong>warning letters</strong>, or ultimately <strong>clinical hold / application withdrawal</strong>. BIMO classifications mirror manufacturing inspections: <strong>NAI</strong> (no action), <strong>VAI</strong> (voluntary action), <strong>OAI</strong> (official action).</p>
+            <div class="analogy">An IRS audit, but of scientific evidence rather than tax returns. Random selection plus risk-triggered; 483s that cite fabrication can undo years of work across multiple sponsors.</div>
+          </div>
+          <div class="concept-card">
+            <h4>ALCOA+ — the nine principles of data integrity</h4>
+            <p>Data must be <strong>Attributable</strong> (who), <strong>Legible</strong> (readable), <strong>Contemporaneous</strong> (at the time, not later), <strong>Original</strong> (not a copy-of-a-copy), <strong>Accurate</strong> (true). The "+" extensions are <strong>Complete</strong> (nothing omitted), <strong>Consistent</strong> (internally coherent), <strong>Enduring</strong> (permanent), <strong>Available</strong> (retrievable for review). FDA (2016) and MHRA (2018) guidance made ALCOA+ the global baseline expectation. Every data-integrity 483 in the last decade maps to a violation of at least one of these nine principles.</p>
+            <div class="analogy">The rules of evidence in a courtroom. A document that is unattributable, illegible, or retrospectively edited is not evidence. It is an assertion. Regulators treat data the same way.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 2 · ALCOA+ — the nine principles of trustworthy data</div>
+          <svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Center -->
+            <circle cx="490" cy="210" r="58" fill="#331E2E" opacity="0.95" stroke="#C8984A" stroke-width="1"/>
+            <text x="490" y="205" text-anchor="middle" font-family="'Fraunces', serif" font-size="17" fill="#F5EFDF" font-weight="600">ALCOA+</text>
+            <text x="490" y="224" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">DATA INTEGRITY</text>
+            <!-- Outer ring of 9 principles positioned roughly as 9-pointed star -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- A - Attributable -->
+              <circle cx="490" cy="70" r="38" fill="#4B2D42" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="490" y="62" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" fill="#C8984A" font-weight="600">A</text>
+              <text x="490" y="80" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Attributable</text>
+              <text x="490" y="92" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.8">who did what</text>
+              <!-- L - Legible -->
+              <circle cx="620" cy="115" r="38" fill="#4B2D42" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="620" y="107" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" fill="#C8984A" font-weight="600">L</text>
+              <text x="620" y="125" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Legible</text>
+              <text x="620" y="137" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.8">readable</text>
+              <!-- C - Contemporaneous -->
+              <circle cx="700" cy="210" r="38" fill="#4B2D42" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="700" y="202" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" fill="#C8984A" font-weight="600">C</text>
+              <text x="700" y="220" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Contemporaneous</text>
+              <text x="700" y="232" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.8">at the time</text>
+              <!-- O - Original -->
+              <circle cx="620" cy="305" r="38" fill="#4B2D42" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="620" y="297" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" fill="#C8984A" font-weight="600">O</text>
+              <text x="620" y="315" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Original</text>
+              <text x="620" y="327" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.8">raw, not a copy</text>
+              <!-- A - Accurate -->
+              <circle cx="490" cy="350" r="38" fill="#4B2D42" opacity="0.9" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="490" y="342" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" fill="#C8984A" font-weight="600">A</text>
+              <text x="490" y="360" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Accurate</text>
+              <text x="490" y="372" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.8">true</text>
+              <!-- + C Complete -->
+              <circle cx="360" cy="305" r="38" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="360" y="297" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" fill="#C8984A" font-weight="600">C</text>
+              <text x="360" y="315" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Complete</text>
+              <text x="360" y="327" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.8">nothing omitted</text>
+              <!-- + C Consistent -->
+              <circle cx="280" cy="210" r="38" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="280" y="202" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" fill="#C8984A" font-weight="600">C</text>
+              <text x="280" y="220" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Consistent</text>
+              <text x="280" y="232" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.8">coherent</text>
+              <!-- + E Enduring -->
+              <circle cx="360" cy="115" r="38" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="360" y="107" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" fill="#C8984A" font-weight="600">E</text>
+              <text x="360" y="125" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Enduring</text>
+              <text x="360" y="137" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.8">permanent</text>
+              <!-- + A Available -->
+              <circle cx="140" cy="210" r="38" fill="#6D4C60" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="140" y="202" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" fill="#C8984A" font-weight="600">A</text>
+              <text x="140" y="220" text-anchor="middle" font-size="9" fill="#F5EFDF" font-weight="600">Available</text>
+              <text x="140" y="232" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#F5EFDF" opacity="0.8">retrievable</text>
+            </g>
+            <!-- Connector lines -->
+            <g stroke="#4B2D42" stroke-width="0.6" opacity="0.35" fill="none" stroke-dasharray="2 3">
+              <line x1="490" y1="108" x2="490" y2="152"/>
+              <line x1="590" y1="138" x2="540" y2="175"/>
+              <line x1="665" y1="210" x2="548" y2="210"/>
+              <line x1="590" y1="283" x2="540" y2="245"/>
+              <line x1="490" y1="312" x2="490" y2="268"/>
+              <line x1="390" y1="283" x2="440" y2="245"/>
+              <line x1="315" y1="210" x2="432" y2="210"/>
+              <line x1="390" y1="138" x2="440" y2="175"/>
+              <line x1="175" y1="210" x2="245" y2="210"/>
+            </g>
+            <!-- Title -->
+            <text x="490" y="30" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Nine principles. Every data-integrity 483 violates at least one.</text>
+            <text x="490" y="410" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="2">FDA GUIDANCE 2016 · MHRA 2018 · INNER 5 = ALCOA · OUTER 4 = PLUS EXTENSIONS</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>The most instructive thing anyone ever said to me about data integrity came from a retired FDA inspector, and it went roughly: <em>"I have never once in my career found a lab that was honestly trying but accidentally non-compliant. Every data-integrity failure I've written up was the result of somebody knowing what was right and choosing a shortcut."</em> That stayed with me because it reframes the whole doctrine. ALCOA+ is not a compliance checklist; it is a diagnostic for <em>culture</em>. Shared passwords are not an administrative lapse — they are a tell. Retrospective data entry is not a time-pressure symptom — it is a tell. The question a mature quality leader asks is not "did we violate ALCOA?" but "what in our culture is producing behavior that violates ALCOA?" Fix that and the compliance follows. Fix only the compliance and the culture will produce the next violation next year.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 2 checkpoint</h4>
+          <ul>
+            <li>Distinguish GLP from general laboratory practice with one example each</li>
+            <li>Name three major changes ICH E6 R3 introduced compared to R2</li>
+            <li>List the five types of BIMO inspection and a typical Form 483 observation for each</li>
+            <li>Write out ALCOA+ from memory and give one practical example for each principle</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A QC analyst discovers an OOS result. The SOP says to investigate; the production manager says "just re-run it." What should happen, and why is the answer not "just re-run it"?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>The 1993 <em>US v. Barr Laboratories</em> ruling established the governing doctrine: an OOS result is <strong>not invalid by default</strong>; it is a data point requiring investigation. The correct sequence is <strong>Phase I (laboratory investigation)</strong> — analyst error, instrument issue, calculation mistake — which, if it finds a documented laboratory root cause, can justify invalidation and a retest. If Phase I finds no lab root cause, the OOS must be treated as <strong>presumptively valid</strong>, triggering <strong>Phase II (full investigation)</strong> — review of manufacturing history, raw materials, prior trends — which may reveal a process issue requiring batch rejection, CAPA, and possibly a field alert. "Just re-run it" violates ALCOA ("Original" — you cannot simply overwrite the original result), violates the Barr doctrine, and in an inspection will be the single observation that unravels the entire QC system. A 483 citing "testing into compliance" is one of the most damaging observations a firm can receive — because it implies systemic data integrity failure rather than an isolated incident.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>ALCOA+:</strong> <em>Attributable, Legible, Contemporaneous, Original, Accurate + Complete, Consistent, Enduring, Available.</em> Nine words. Every one of them the verdict at some point in some inspection.<br>
+          <strong>N-V-O:</strong> BIMO outcomes — <em>NAI, VAI, OAI.</em> The difference between a good day, an average day, and a career-defining day.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 3 -->
+    <div class="phase" id="day3">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">03</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Apply + Analyze · ~3 hrs</div><h3>Manufacturing &amp; distribution quality — <em>deviations, CAPA, and the annual review</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">When an inspection uncovers that operators have been discarding out-of-specification data points and retesting until they pass, the resulting Form 483 can run to dozens of pages. The manufacturer is technically producing in-spec product. They are also, systematically, refusing to hear their own data. Manufacturing quality is less about what you measure than about what you <em>honor</em> when the measurement inconveniences you.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 3</span>Learning objectives</h4>
+          <ul>
+            <li>Navigate 21 CFR 211 — the subpart structure and what each subpart governs</li>
+            <li>Master deviation management and the hierarchy of root-cause tools</li>
+            <li>Understand CAPA — the full loop including effectiveness verification</li>
+            <li>Grasp APQR / PQR as the yearly vital-signs check of a product</li>
+            <li>Appreciate supplier quality agreements and the shared-responsibility doctrine</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--plum);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>GMP deep dive — 21 CFR 211</h4>
+            <p>Subparts B (organization &amp; personnel), C (buildings &amp; facilities), D (equipment), E (control of components, containers, closures), F (production &amp; process controls), G (packaging &amp; labeling), H (holding &amp; distribution), I (laboratory controls), J (records &amp; reports), K (returned &amp; salvaged drug products). Every GMP inspection is effectively a sampled audit against these subparts. Most 483 observations can be mapped to a specific subpart citation.</p>
+            <div class="analogy">The body's anatomical regions in a physician's exam — head, neck, chest, abdomen, extremities. You don't skip regions; the issue you skipped is invariably where the pathology is hiding.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Deviation management &amp; root cause</h4>
+            <p>A <strong>deviation</strong> is any departure from approved instructions, specifications, or standards. Investigations follow a structured hierarchy: <strong>5-Whys</strong> (simple, interview-based), <strong>Fishbone / Ishikawa</strong> (multi-cause visualization), <strong>Fault Tree Analysis</strong> (logic-gate decomposition), <strong>Apollo root-cause</strong> (exhaustive causal chain). Weak investigations stop at the first plausible cause ("operator error"); strong investigations push until the answer is <em>actionable without blame</em>.</p>
+            <div class="analogy">The difference between a police blotter ("suspect was caught") and a crime-scene investigation ("how did the conditions that enabled this develop?"). The blotter closes the case; the investigation prevents the next one.</div>
+          </div>
+          <div class="concept-card">
+            <h4>CAPA — the closed loop</h4>
+            <p>A full CAPA cycle: <strong>Detect</strong> (issue identified), <strong>Investigate</strong> (root cause), <strong>Correct</strong> (immediate fix), <strong>Prevent</strong> (systemic change preventing recurrence), <strong>Verify Effectiveness</strong> (prove the change worked). The most common failure mode is closing CAPAs after "Prevent" without effectiveness verification — producing a file full of paper CAPAs while the same deviation keeps recurring. A healthy QMS measures CAPA <em>effectiveness rate</em>, not just CAPA closure rate.</p>
+            <div class="analogy">Treating a patient's infection. "Symptoms gone" is not "cured"; the culture must come back negative. CAPA effectiveness verification is the follow-up culture — without it, resistance develops and the infection returns.</div>
+          </div>
+          <div class="concept-card">
+            <h4>APQR &amp; supplier quality</h4>
+            <p>The <strong>Annual Product Quality Review</strong> (APQR / PQR) rolls up CQAs, deviations, complaints, stability data, supplier performance, and CAPA effectiveness for each product each year. It is the yearly vital-signs check — the pattern-level view no single batch reveals. <strong>Supplier quality agreements</strong> extend the QMS upstream: they define responsibilities, notification of change, audit rights, and quality metrics for every critical supplier. The MAH's QMS is only as strong as its weakest audited supplier.</p>
+            <div class="analogy">The annual physical plus the family medical history — not only is this patient healthy today, but are the trends stable, and are the inputs (food, water, air) to this system of a quality that supports long-term health?</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 3 · The CAPA lifecycle loop — with effectiveness verification, without which CAPA is theater</div>
+          <svg viewBox="0 0 980 380" xmlns="http://www.w3.org/2000/svg">
+            <!-- Central loop -->
+            <circle cx="490" cy="190" r="150" fill="none" stroke="#4B2D42" stroke-width="2" opacity="0.3" stroke-dasharray="4 4"/>
+            <text x="490" y="186" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#4B2D42">The CAPA</text>
+            <text x="490" y="205" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-style="italic" fill="#4B2D42">closed loop</text>
+            <!-- Six nodes around the circle -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- Detect -->
+              <g transform="translate(490, 40)">
+                <circle cx="0" cy="0" r="36" fill="#4B2D42" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-4" text-anchor="middle" font-size="12" fill="#F5EFDF" font-weight="700">1</text>
+                <text x="0" y="12" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Detect</text>
+              </g>
+              <text x="490" y="90" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">OOS · complaint · audit · trend</text>
+              <!-- Investigate -->
+              <g transform="translate(620, 120)">
+                <circle cx="0" cy="0" r="36" fill="#4B2D42" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-4" text-anchor="middle" font-size="12" fill="#F5EFDF" font-weight="700">2</text>
+                <text x="0" y="12" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Investigate</text>
+              </g>
+              <text x="690" y="125" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">Fishbone · FTA · 5 whys</text>
+              <!-- Root cause -->
+              <g transform="translate(620, 260)">
+                <circle cx="0" cy="0" r="36" fill="#4B2D42" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-4" text-anchor="middle" font-size="12" fill="#F5EFDF" font-weight="700">3</text>
+                <text x="0" y="12" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Root Cause</text>
+              </g>
+              <text x="690" y="265" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">actionable without blame</text>
+              <!-- Correct -->
+              <g transform="translate(490, 340)">
+                <circle cx="0" cy="0" r="36" fill="#4B2D42" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-4" text-anchor="middle" font-size="12" fill="#F5EFDF" font-weight="700">4</text>
+                <text x="0" y="12" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Correct</text>
+              </g>
+              <text x="490" y="304" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">immediate · local fix</text>
+              <!-- Prevent -->
+              <g transform="translate(360, 260)">
+                <circle cx="0" cy="0" r="36" fill="#4B2D42" opacity="0.92" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-4" text-anchor="middle" font-size="12" fill="#F5EFDF" font-weight="700">5</text>
+                <text x="0" y="12" text-anchor="middle" font-size="10" fill="#F5EFDF" font-weight="600">Prevent</text>
+              </g>
+              <text x="290" y="265" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">systemic · SOP change</text>
+              <!-- Verify -->
+              <g transform="translate(360, 120)">
+                <circle cx="0" cy="0" r="38" fill="#C8984A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.8"/>
+                <text x="0" y="-4" text-anchor="middle" font-size="12" fill="#0F1B2D" font-weight="700">6</text>
+                <text x="0" y="12" text-anchor="middle" font-size="10" fill="#0F1B2D" font-weight="600">Verify Eff.</text>
+              </g>
+              <text x="290" y="125" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="8" fill="#9B7233" font-weight="600">THE STEP OFTEN SKIPPED</text>
+            </g>
+            <!-- Arrows -->
+            <defs><marker id="arrCAPA" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4B2D42"/></marker></defs>
+            <g stroke="#4B2D42" stroke-width="1.5" opacity="0.5" fill="none" marker-end="url(#arrCAPA)">
+              <path d="M 526 58 A 140 140 0 0 1 602 105"/>
+              <path d="M 620 160 A 140 140 0 0 1 620 224"/>
+              <path d="M 602 278 A 140 140 0 0 1 526 324"/>
+              <path d="M 454 324 A 140 140 0 0 1 378 278"/>
+              <path d="M 360 224 A 140 140 0 0 1 360 160"/>
+              <path d="M 378 105 A 140 140 0 0 1 454 58"/>
+            </g>
+            <text x="490" y="24" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Six steps, not four. Step 6 is what makes CAPA real.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>A CAPA metric I saw at a mature manufacturer that changed how I think about the function: <em>"CAPA effectiveness rate — the percentage of closed CAPAs for which no recurrence of the same deviation is observed within 12 months."</em> At most companies, this metric is not tracked. CAPA closure rate — percentage closed on time — is tracked obsessively, and reaches 95%+. Effectiveness rate, where tracked, often runs 60–70%. Those thirty-to-forty percent of CAPAs that "closed on time" but did not actually prevent recurrence are not just inefficient — they are the seed crystal of every major quality crisis. A recurring deviation eventually crosses a tolerance threshold; when it does, the inspection will find five prior CAPAs that addressed the same pattern and did nothing. At that point, the finding is not one deviation — it is a systemic failure of the QMS itself. Track effectiveness. Accept the lower number. Do the harder work.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 3 checkpoint</h4>
+          <ul>
+            <li>List four subparts of 21 CFR 211 and give one representative requirement from each</li>
+            <li>Execute a 5-Whys investigation on a hypothetical OOS and reach an actionable root cause</li>
+            <li>Walk through a complete CAPA, including Step 6 — effectiveness verification</li>
+            <li>Describe the five major sections of an APQR and what each trend tells you</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>An APQR shows the same OOS pattern has recurred six times in 18 months, with a closed CAPA after each one. What is this telling you — and what should happen next?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>Six recurrences of the same deviation, with CAPAs closed after each, is the clearest possible diagnostic signal that the <strong>investigations are stopping at symptom rather than reaching root cause</strong>. The real root cause is either (a) deeper than any of the six investigations went, (b) organizational rather than technical (an incentive or resource issue the investigations are politically unable to surface), or (c) the effectiveness verifications were never done and the "prevention" never held. What should happen: <strong>escalate to Management Review</strong> (ICH Q10 fourth pillar), <strong>suspend the closure of any future CAPA on this topic</strong> pending a formal pattern investigation, <strong>conduct a fresh root-cause analysis treating the six prior investigations as evidence rather than conclusions</strong>, and — crucially — <strong>audit the surrounding organizational conditions</strong> that allowed six recurrences to be repeatedly accepted. The next inspection that finds this pattern in the APQR will not be asking about the deviation. It will be asking about the QMS. The honest answer at that point is: the QMS did not work. Fix the QMS first; the deviation will resolve as a consequence.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>D-I-R-C-P-V:</strong> the full CAPA loop — <em>Detect, Investigate, Root-cause, Correct, Prevent, Verify.</em> Stopping at step 5 is the most common failure mode in the industry.<br>
+          <strong>A-P-Q-R:</strong> the yearly vital signs — <em>Annual Product Quality Review.</em> Not a compliance exercise; a pattern-detection instrument.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 4 -->
+    <div class="phase" id="day4">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">04</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Analyze + Evaluate · ~3 hrs</div><h3>Post-market quality &amp; inspection readiness — <em>the escalation ladder</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">The first Form 483 observation you receive as an inspected facility is a question. The warning letter that follows is a statement. The consent decree that may follow <em>that</em> is a sentence. Post-market quality is the art of keeping yourself in the interrogative mood — forever answering questions, never making statements about your own performance that your inspector must contradict.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 4</span>Learning objectives</h4>
+          <ul>
+            <li>Understand the complaint, field alert, and recall framework (Class I/II/III)</li>
+            <li>Grasp signal detection — the intersection of quality data and pharmacovigilance</li>
+            <li>Navigate FDA inspection outcomes (NAI / VAI / OAI) and the 483 → WL → CD ladder</li>
+            <li>Contrast "inspection-ready" with "always-right" culture — and why only one survives sustained scrutiny</li>
+            <li>Plan a realistic inspection readiness program</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--plum);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Complaints, field alerts, recalls</h4>
+            <p>A <strong>product quality complaint</strong> is any external report alleging an issue with identity, strength, quality, or purity. A <strong>Field Alert Report (FAR)</strong> is required to FDA within 3 business days for specific events (contamination, significant failure of specs, stability). Recalls are tiered: <strong>Class I</strong> (reasonable probability of serious adverse consequences or death), <strong>Class II</strong> (temporary or medically reversible harm), <strong>Class III</strong> (unlikely to cause harm). The tier drives urgency, communication breadth, and regulatory reporting.</p>
+            <div class="analogy">A hospital's emergency triage protocol. A complaint is a walk-in; a FAR is an ambulance call; a Class I recall is a mass-casualty alert. The handling changes with the stakes — instantly, and by rule.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Signal detection — quality meets pharmacovigilance</h4>
+            <p>Quality complaints and pharmacovigilance reports (adverse events) are historically separate systems. Mature organizations integrate them — <strong>product complaint rate trending</strong> by SKU, by lot, by geography can be an earlier signal of a manufacturing drift than individual AE reports alone. Modern Quality 4.0 systems use statistical signal detection (change-point analysis, Bayesian trending) across integrated quality + safety streams.</p>
+            <div class="analogy">A cardiologist watching ECG and blood pressure on the same monitor rather than two separate screens. The pattern that neither shows alone, together points to the diagnosis.</div>
+          </div>
+          <div class="concept-card">
+            <h4>FDA inspection outcomes — NAI / VAI / OAI</h4>
+            <p><strong>NAI</strong> (No Action Indicated) — rare, effectively clean. <strong>VAI</strong> (Voluntary Action Indicated) — 483 observations requiring firm response but no formal FDA action. <strong>OAI</strong> (Official Action Indicated) — triggers <strong>Warning Letter</strong>, <strong>Consent Decree</strong>, <strong>Seizure</strong>, or <strong>Injunction</strong>. Warning letters are public and impact stock price, M&amp;A, and insurance. Consent decrees are judicial settlements with ongoing monitoring — often years-long rehabilitations.</p>
+            <div class="analogy">The military threat levels DEFCON 1–5. Peace, heightened alert, mobilization, declared war. NAI is peace; OAI is mobilization; a consent decree is a surrender with terms imposed by the victor.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Inspection-ready vs. always-right</h4>
+            <p>An <strong>inspection-ready</strong> culture prepares for scheduled inspections with sprints of cleanup, mock audits, and training. An <strong>always-right</strong> culture holds itself to inspection standards continuously — so a no-notice inspection finds exactly what a prepared one would. The first culture produces the pattern of firms that "always pass inspections" until the one they don't. The second produces decades of stable compliance — and, incidentally, dramatically lower operational risk.</p>
+            <div class="analogy">Two restaurants: one that deep-cleans before the annual health inspection, and one whose everyday state is the health inspector's standard. The customer cannot tell them apart on a good day. On a bad day, only one is still in business.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 4 · The escalation ladder — from a question to a criminal referral</div>
+          <svg viewBox="0 0 980 400" xmlns="http://www.w3.org/2000/svg">
+            <!-- Ladder background -->
+            <line x1="120" y1="340" x2="120" y2="50" stroke="#4B2D42" stroke-width="2" opacity="0.4"/>
+            <line x1="920" y1="340" x2="920" y2="50" stroke="#4B2D42" stroke-width="2" opacity="0.4"/>
+            <!-- Rungs -->
+            <g font-family="'Inter Tight', sans-serif">
+              <!-- Rung 1 -->
+              <rect x="120" y="320" width="800" height="40" fill="#7C9082" opacity="0.82" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="140" y="337" font-size="11" fill="#0F1B2D" font-weight="600">0. Inspection — no finding</text>
+              <text x="140" y="352" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" opacity="0.8">NAI · rare · confirms system maturity</text>
+              <!-- Rung 2 -->
+              <rect x="120" y="270" width="800" height="40" fill="#547494" opacity="0.82" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="140" y="287" font-size="11" fill="#F5EFDF" font-weight="600">1. Form 483 observations</text>
+              <text x="140" y="302" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.88">VAI · written at end of inspection · 15 business days to respond</text>
+              <!-- Rung 3 -->
+              <rect x="120" y="220" width="800" height="40" fill="#C8984A" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="140" y="237" font-size="11" fill="#0F1B2D" font-weight="600">2. Warning Letter</text>
+              <text x="140" y="252" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" opacity="0.85">public · OAI · 15 days to respond · stock impact · approval freeze risk</text>
+              <!-- Rung 4 -->
+              <rect x="120" y="170" width="800" height="40" fill="#D67D5C" opacity="0.92" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="140" y="187" font-size="11" fill="#0F1B2D" font-weight="600">3. Import Alert · seizure · injunction</text>
+              <text x="140" y="202" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" opacity="0.85">products blocked at border · physical product seizure · court-ordered stop</text>
+              <!-- Rung 5 -->
+              <rect x="120" y="120" width="800" height="40" fill="#A84B2A" opacity="0.95" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="140" y="137" font-size="11" fill="#F5EFDF" font-weight="600">4. Consent Decree</text>
+              <text x="140" y="152" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.88">judicial · multi-year third-party oversight · financial penalty · restructured QMS</text>
+              <!-- Rung 6 -->
+              <rect x="120" y="70" width="800" height="40" fill="#4B2D42" opacity="0.95" stroke="#0F1B2D" stroke-width="0.6"/>
+              <text x="140" y="87" font-size="11" fill="#F5EFDF" font-weight="600">5. Criminal referral · DOJ action</text>
+              <text x="140" y="102" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" opacity="0.88">personal liability for executives · corporate criminal pleas · DPA / NPA · debarment</text>
+            </g>
+            <!-- Stages labels -->
+            <text x="70" y="340" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2" font-weight="600">STAGE 0</text>
+            <text x="70" y="290" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2" font-weight="600">STAGE 1</text>
+            <text x="70" y="240" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2" font-weight="600">STAGE 2</text>
+            <text x="70" y="190" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2" font-weight="600">STAGE 3</text>
+            <text x="70" y="140" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2" font-weight="600">STAGE 4</text>
+            <text x="70" y="90" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2" font-weight="600">STAGE 5</text>
+            <!-- Upward arrow on the right -->
+            <defs><marker id="arrUp" markerWidth="10" markerHeight="10" refX="5" refY="2" orient="auto"><polygon points="0 8, 5 0, 10 8" fill="#A84B2A"/></marker></defs>
+            <line x1="955" y1="340" x2="955" y2="55" stroke="#A84B2A" stroke-width="1.2" opacity="0.7" marker-end="url(#arrUp)"/>
+            <text x="968" y="200" font-family="'JetBrains Mono', monospace" font-size="9" fill="#A84B2A" letter-spacing="2" writing-mode="tb">ESCALATION · PUBLIC · EXPENSIVE</text>
+            <text x="120" y="30" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">Every rung up is an order of magnitude more public, more expensive, and less recoverable.</text>
+            <text x="120" y="390" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">FIRM'S GOAL: STAY ON STAGE 0 OR 1 · RARELY STAGE 2 · NEVER STAGES 3-5</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>I'll tell you the single most useful thing a senior quality lead ever said in my hearing: <em>"Inspectors don't find things. They find the things you already know about and haven't fixed."</em> That sounds obvious until you realize how often it is precisely true. A surprise 483 observation that the firm had never previously noticed is extraordinarily rare. The common case is: the firm had seen the signal, had opened a CAPA, had not completed it, had rationalized the delay, and had stopped watching closely — and the inspector, walking through the site with fresh eyes, noticed the thing the organization had learned to stop noticing. The implication is a profoundly hopeful one. If inspectors find what you already know, then you can find it first. The standing guard is not a defensive posture about inspectors. It is an internal posture about your own ability to keep noticing what you have already seen.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 4 checkpoint</h4>
+          <ul>
+            <li>Distinguish Class I, II, III recalls with one example each</li>
+            <li>Describe the full chain from a 483 observation through a consent decree — roughly how long each transition takes and what drives it</li>
+            <li>Explain the operational difference between inspection-ready and always-right, in concrete terms</li>
+            <li>Design a 12-month inspection readiness program for a newly launched site</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>Your firm receives a Form 483 with 12 observations. Walk through the first 48 hours — what do you do, in order, and why?</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p><strong>Hour 0–8: Capture and classify.</strong> Convene the cross-functional response team (Quality, Operations, Regulatory, Legal, Senior Leadership). Read each observation aloud; classify by severity (systemic vs. isolated), by topic (data integrity / documentation / process / equipment), and by whether the observation points to a <em>broader</em> issue than stated. Do not yet commit to responses. <strong>Hour 8–24: Assess breadth.</strong> For each observation, honestly assess whether the pattern extends beyond what the inspector saw — to other products, other sites, other recent deviations. This internal assessment determines whether the response is narrow (fix what was cited) or broad (acknowledge systemic issues and commit to broader remediation). <strong>Hour 24–48: Draft the response skeleton.</strong> Each observation needs: (a) factual acknowledgment, (b) immediate correction, (c) systemic CAPA with effectiveness verification commitment, (d) owner, (e) timeline. The 15-business-day response clock is running. <strong>Throughout: Preserve records.</strong> All communications subject to discovery; all assessments subject to regulatory review. The response is not merely a compliance document — it is the firm's first public statement on the findings. The tone between "defensive and narrow" and "accountable and systemic" determines whether the 483 escalates to a warning letter or closes cleanly.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>N-V-O:</strong> inspection outcomes — <em>NAI, VAI, OAI.</em> The difference between "we pass," "we have homework," and "we have a problem."<br>
+          <strong>483 → WL → CD:</strong> the escalation acronym — <em>Form 483, Warning Letter, Consent Decree.</em> Plus seizure and DOJ referral as terminal states.
+        </div>
+      </div>
+    </div>
+
+<!-- DAY 5 -->
+    <div class="phase" id="day5">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">05</div>
+        <div class="phase-title-wrap"><div class="meta">Bloom · Evaluate + Create · ~3 hrs</div><h3>Quality culture &amp; Quality 4.0 — <em>from compliance to vigilance</em></h3></div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+        <p class="curiosity-hook">A pharmaceutical leader once observed that his organization did not have a quality problem — it had a culture of asking the wrong questions. Quality culture is not the posters or the training or even the policies. It is the set of questions an organization asks itself when nobody is watching. Do we ask <em>what does the data show?</em> or <em>what will the data show?</em> The difference between those two questions determines whether the standing guard is awake.</p>
+
+        <div class="objectives"><h4><span class="bloom-tag">Day 5</span>Learning objectives</h4>
+          <ul>
+            <li>Analyze quality culture using Schein's three-level model (artifacts, values, assumptions)</li>
+            <li>Understand Quality 4.0 — digital QMS, predictive analytics, integrated signals</li>
+            <li>Grasp FDA's Quality Management Maturity (QMM) program and why it matters strategically</li>
+            <li>Evaluate the D-R-L-C four-engine thesis of a mature quality organization</li>
+            <li>Synthesize an integrated quality strategy for a real or hypothetical commercial organization</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--plum);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Quality culture — Schein's three levels</h4>
+            <p>Edgar Schein's framework: (1) <strong>Artifacts</strong> — the visible — posters, training slides, SOPs, quality metrics on walls. Easy to change, easy to fake. (2) <strong>Espoused values</strong> — what the organization says it believes — "quality is everyone's responsibility." Easy to say, harder to live. (3) <strong>Underlying assumptions</strong> — the unspoken rules — "schedule beats quality when the two conflict," or the inverse. Invisible to insiders. Nearly impossible to change. Only the third level predicts behavior under stress.</p>
+            <div class="analogy">The iceberg — ten percent above water, ninety percent below. The ten percent above is compliance documentation; the ninety percent below is what actually happens when a tired analyst sees an out-of-spec result at 5 PM on a Friday.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Quality 4.0 — the digital Quality system</h4>
+            <p>The convergence of Industry 4.0 technologies with pharmaceutical Quality. <strong>Digital QMS</strong> (Veeva, TrackWise, MasterControl) replaces paper batch records and CAPA files. <strong>Predictive analytics</strong> on historical data predicts deviations before they occur. <strong>Integrated signal detection</strong> across quality, safety, and manufacturing data surfaces patterns no single system reveals. <strong>Real-time release testing</strong> (from Module 6) is Quality 4.0 applied to batch release. The paper QMS of 1995 cannot detect what a digital QMS routinely catches.</p>
+            <div class="analogy">The difference between a physician reading one x-ray and an AI scanning ten thousand looking for the subtle pattern that is statistically out of band. Quality 4.0 does not replace the QMS — it lets the QMS see at scales and speeds the paper version never could.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Quality Metrics &amp; QMM</h4>
+            <p>FDA's <strong>Quality Management Maturity</strong> program (proposed in stages from 2022 onward) aims to shift inspection from compliance accounting to culture measurement. Proposed metrics include invalidated out-of-specification rate, CAPA effectiveness, employee turnover in quality roles, complaint rate trending, supplier quality — indicators that together predict system health better than any individual 483 observation. A mature QMM rating may eventually influence inspection frequency, expedited approvals, and manufacturing site prioritization.</p>
+            <div class="analogy">The shift from medical insurance underwriting on individual claims to underwriting on population health indicators. Looks at the patient differently; prices risk differently; rewards the prevention rather than the treatment.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The integrated D-R-L-C thesis</h4>
+            <p>The four engines of a living quality system — <strong>Detect</strong> (signals, data integrity, GxP baseline controls), <strong>Respond</strong> (investigation, CAPA, recall), <strong>Learn</strong> (APQR, signal detection, knowledge management), <strong>Cultivate</strong> (culture, Quality 4.0, QMM, readiness). Weak on any one and the system stumbles somewhere. Mature organizations invest in all four simultaneously; immature ones over-invest in Respond while neglecting Learn and Cultivate — and end up firefighting forever.</p>
+            <div class="analogy">The cardiovascular system — heart, lungs, vessels, blood. None alone is life; all together is life. Optimize any one to the exclusion of the others and the system fails at the link you neglected.</div>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="caption">Figure 5 · Quality culture — Schein's three levels and what lives at each</div>
+          <svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Waterline -->
+            <line x1="60" y1="150" x2="920" y2="150" stroke="#2E4E7E" stroke-width="1.5" opacity="0.4" stroke-dasharray="4 4"/>
+            <text x="930" y="148" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2E4E7E" letter-spacing="2">VISIBILITY LINE</text>
+            <!-- Iceberg shape -->
+            <polygon points="400,60 580,60 650,150 750,400 230,400 330,150" fill="#547494" opacity="0.25" stroke="#4B2D42" stroke-width="1"/>
+            <polygon points="400,60 580,60 650,150 330,150" fill="#C8984A" opacity="0.32"/>
+            <!-- Artifacts layer -->
+            <text x="490" y="88" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-weight="500" fill="#0F1B2D">Artifacts</text>
+            <text x="490" y="106" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#9B7233" letter-spacing="2">VISIBLE · EASY TO CHANGE</text>
+            <text x="490" y="125" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#2A3B52">Posters · SOPs · training slides · quality dashboards · metrics walls</text>
+            <!-- Espoused values layer -->
+            <text x="490" y="200" text-anchor="middle" font-family="'Fraunces', serif" font-size="16" font-weight="500" fill="#0F1B2D">Espoused values</text>
+            <text x="490" y="218" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2">STATED · HARDER TO LIVE</text>
+            <text x="490" y="237" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#2A3B52">"Quality is everyone's responsibility" · "patients first" · "speak up culture"</text>
+            <!-- Underlying assumptions -->
+            <text x="490" y="305" text-anchor="middle" font-family="'Fraunces', serif" font-size="18" font-weight="500" fill="#F5EFDF">Underlying assumptions</text>
+            <text x="490" y="323" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#C8984A" letter-spacing="2">INVISIBLE · NEARLY IMMUTABLE</text>
+            <text x="490" y="345" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="500">"When quality and schedule conflict, what actually wins?"</text>
+            <text x="490" y="364" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" opacity="0.85">"Is it safe to raise a concern to my manager's boss?"</text>
+            <text x="490" y="380" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="10" fill="#F5EFDF" opacity="0.85">"Do we reward the messenger or shoot them?"</text>
+            <!-- Arrow indicating importance -->
+            <defs><marker id="arrImp" markerWidth="10" markerHeight="8" refX="8" refY="4" orient="auto"><polygon points="0 0, 10 4, 0 8" fill="#4B2D42"/></marker></defs>
+            <line x1="130" y1="90" x2="130" y2="380" stroke="#4B2D42" stroke-width="1.5" opacity="0.6" marker-end="url(#arrImp)"/>
+            <text x="110" y="235" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2" writing-mode="tb">PREDICTS ACTUAL BEHAVIOR →</text>
+            <!-- Right side -->
+            <line x1="850" y1="380" x2="850" y2="90" stroke="#4B2D42" stroke-width="1.5" opacity="0.6" marker-end="url(#arrImp)"/>
+            <text x="870" y="235" font-family="'JetBrains Mono', monospace" font-size="9" fill="#4B2D42" letter-spacing="2" writing-mode="tb">← DIFFICULTY TO CHANGE</text>
+            <text x="60" y="30" font-family="'Fraunces', serif" font-size="14" font-style="italic" fill="#0F1B2D">What you can see is ten percent. What predicts behavior under stress is ninety.</text>
+            <text x="60" y="48" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">EDGAR SCHEIN · ORGANIZATIONAL CULTURE AND LEADERSHIP · 1985/2017</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy"><div class="label">Mentor's note</div>
+          <p>I will close with the most important thing anyone ever told me about this profession: <em>quality is an attitude toward reality</em>. Everything else is scaffolding. A QMS is a way to make that attitude collective and durable. ALCOA+ is a way to make it resilient to individual temptation. CAPA is a way to make it teach future decisions. QMM is a way to make regulators able to recognize it. Take any one of those away and the attitude still works — imperfectly, but it works. Take the attitude away and none of the rest matter. A brilliant QMS staffed by people who treat reality as an obstacle to be managed produces a consent decree eventually; a mediocre QMS staffed by people who treat reality as the thing worth knowing produces stable compliance for decades. Hire for the attitude. Build the scaffolding. In that order.</p>
+        </div>
+
+        <div class="checkpoint"><h4>Day 5 checkpoint</h4>
+          <ul>
+            <li>Apply Schein's three-level model to a hypothetical organization — what would you look at to read its real culture?</li>
+            <li>List three Quality 4.0 technologies and the specific quality capability each adds</li>
+            <li>Explain why FDA's QMM program could reshape how companies prioritize quality investment</li>
+            <li>Evaluate the D-R-L-C four-engine thesis on a real or hypothetical organization — name the weakest engine</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+          <div class="flip-front"><div class="label">Feynman teach-back</div>
+            <h4>A CEO asks: "We just passed our FDA inspection cleanly. Shouldn't we reduce our quality headcount? What's the argument against?"</h4>
+            <div class="hint">click to reveal →</div>
+          </div>
+          <div class="flip-back"><div class="label">One articulation</div>
+            <p>Passing an inspection is a <em>lagging indicator</em> of quality system performance — it reflects the culture, controls, and investments of the prior two-to-five years, not current performance. Reducing quality headcount after a clean inspection is like cutting the life insurance policy after surviving a heart attack. Three specific risks: <strong>One — the next inspection is 18–24 months away.</strong> Cuts made now produce erosion — missed trending, CAPAs closed without verification, drift in signal detection — that will not surface until the next inspection, by which point the damage has compounded. <strong>Two — the system is in its best state precisely because the staffing has been what it is.</strong> The inspection outcome is the evidence that the current headcount is approximately right; reducing it is a deliberate experiment in "how much can we weaken this before failure." <strong>Three — culture degrades faster than it rebuilds.</strong> Quality professionals laid off after a success send a clear signal to the organization — that the function is discretionary, not foundational. That signal, once sent, shows up in the assumptions layer of Schein's model, and takes five to ten years to reverse if reversing is even possible. The better answer to "we just passed" is not to cut — it is to ask what we learned that we should invest in <em>more</em>, so the next inspection is not merely passed but passed effortlessly. The objective is not to minimize quality cost; it is to minimize the <em>total</em> cost of quality, of which failure cost dominates the equation when the system degrades.</p>
+          </div>
+        </div></div>
+
+        <div class="memory-hook"><div class="label">Memory hook</div>
+          <strong>A-V-A:</strong> Schein's three levels — <em>Artifacts, Values, Assumptions.</em> The third predicts behavior; the first two decorate it.<br>
+          <strong>D-R-L-C:</strong> the four engines of a living Quality system — <em>Detect, Respond, Learn, Cultivate.</em> All four active, or the guard is standing at an empty post.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JARGON -->
+<section id="jargon" class="wrap-narrow">
+  <div class="section-label">Jargon decoder · three tiers</div>
+  <h2>The vocabulary of the guard.</h2>
+  <p>Quality's language is deceptively precise — every term has regulatory weight, and misuse is itself a finding. A working set:</p>
+
+  <div class="jargon-tier">
+    <h3>Tier 1 · Everyday</h3>
+    <div class="tier-label">If you know these, you can read a quality status update</div>
+    <dl>
+      <dt>GxP</dt><dd>Umbrella term covering GLP, GCP, GMP, GDP, GVP, GCLP — "Good [something] Practice."</dd>
+      <dt>QMS</dt><dd>Quality Management System — the integrated system of processes, documents, and responsibilities that delivers quality.</dd>
+      <dt>Deviation</dt><dd>Any departure from approved instructions, specs, or standards; must be documented and investigated.</dd>
+      <dt>CAPA</dt><dd>Corrective and Preventive Action — the closed-loop response to a deviation or finding.</dd>
+      <dt>SOP</dt><dd>Standard Operating Procedure — the controlled document describing how a task is to be performed.</dd>
+      <dt>Specification</dt><dd>The documented criteria a material, intermediate, or product must meet to be acceptable.</dd>
+      <dt>Batch record</dt><dd>The contemporaneous legal document capturing every step of a batch's manufacture.</dd>
+      <dt>Audit</dt><dd>Systematic, independent examination of compliance with a defined standard.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 2 · Technical</h3>
+    <div class="tier-label">You hear these in quality meetings and on 483s</div>
+    <dl>
+      <dt>OOS</dt><dd>Out of Specification — a test result failing defined acceptance criteria; requires formal investigation.</dd>
+      <dt>OOT</dt><dd>Out of Trend — a result within spec but statistically unusual compared to historical data.</dd>
+      <dt>ALCOA+</dt><dd>Attributable, Legible, Contemporaneous, Original, Accurate + Complete, Consistent, Enduring, Available. Data integrity foundation.</dd>
+      <dt>APQR / PQR</dt><dd>Annual Product Quality Review / Product Quality Review — the yearly pattern-level review.</dd>
+      <dt>BIMO</dt><dd>Bioresearch Monitoring — FDA inspections of clinical trial sponsors, investigators, IRBs, GLP labs.</dd>
+      <dt>Form 483</dt><dd>FDA inspector's list of observations at inspection conclusion; 15 business days to respond.</dd>
+      <dt>Warning Letter</dt><dd>Public FDA notice of significant violations; can trigger approval holds, stock impact, M&amp;A delays.</dd>
+      <dt>Consent Decree</dt><dd>Judicial settlement with FDA; multi-year third-party monitoring, financial penalty, QMS restructuring.</dd>
+      <dt>Recall classes</dt><dd>Class I (serious harm or death), Class II (reversible or temporary), Class III (unlikely harm).</dd>
+      <dt>FAR</dt><dd>Field Alert Report — required to FDA within 3 business days for defined quality events.</dd>
+      <dt>Supplier Quality Agreement</dt><dd>The formal contract defining quality responsibilities between MAH and supplier.</dd>
+      <dt>Change Control</dt><dd>The governance process for evaluating, approving, and implementing deliberate changes.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 3 · Specialist</h3>
+    <div class="tier-label">You hear these from senior quality leaders and FDA staff</div>
+    <dl>
+      <dt>NAI / VAI / OAI</dt><dd>FDA inspection classifications — No Action / Voluntary Action / Official Action Indicated.</dd>
+      <dt>Data Integrity</dt><dd>The property of data that makes it reliable enough to base regulatory decisions on. ALCOA+ operationalizes it.</dd>
+      <dt>QMM</dt><dd>Quality Management Maturity — FDA's emerging rating framework for site quality culture and performance.</dd>
+      <dt>PQS</dt><dd>Pharmaceutical Quality System — the ICH Q10 formal framework; broader than QMS.</dd>
+      <dt>ICH Q9(R1)</dt><dd>Quality Risk Management, revised 2023, emphasizing avoidance of subjectivity in risk assessment.</dd>
+      <dt>21 CFR Part 11</dt><dd>Electronic records and electronic signatures — the foundational regulation for digital QMS and PAT.</dd>
+      <dt>PIC/S</dt><dd>Pharmaceutical Inspection Co-operation Scheme — cross-jurisdiction GMP harmonization body.</dd>
+      <dt>EU GMP Annex 1</dt><dd>Sterile manufacturing annex, substantially revised 2022/2023 with contamination-control strategy focus.</dd>
+      <dt>Quality Metrics</dt><dd>Site- or product-level indicators (e.g., invalidated OOS rate, CAPA effectiveness) reported to regulators.</dd>
+      <dt>Effectiveness check</dt><dd>Formal verification that a CAPA actually prevented recurrence over a defined observation window.</dd>
+      <dt>Quality culture</dt><dd>The organization's underlying assumptions about reality, quality, and accountability; predicts behavior under stress.</dd>
+      <dt>Subjectivity bias</dt><dd>The tendency for risk assessments to reflect the assessor's comfort more than the actual risk; Q9(R1) focus.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- PITFALLS -->
+<section id="pitfalls" class="wrap">
+  <div class="section-label">Traps &amp; pitfalls</div>
+  <h2>Where quality systems quietly fail.</h2>
+  <p>Catastrophic quality failures are rare. Quiet, slow-burn failures are endemic. Six patterns even experienced organizations fall into:</p>
+
+  <div class="pitfall-grid">
+    <div class="pitfall"><div class="num">1</div>
+      <h4>Paper-only CAPA</h4>
+      <p>CAPAs are opened, a corrective action is written, closure is documented on time — and nobody ever verifies the change actually prevented recurrence. Six months later, the same deviation returns under a different name. The QMS looks healthy on metrics; the reality is a slow leak.</p>
+      <p class="rescue">Rescue: track CAPA effectiveness rate — recurrences within 12 months of closure — not just closure rate. Accept the lower number. Do the harder work.</p>
+    </div>
+    <div class="pitfall"><div class="num">2</div>
+      <h4>Data integrity shortcuts</h4>
+      <p>Shared passwords. Retrospective data entry ("we did the test yesterday but logged it today"). Overwriting original readings. "Testing into compliance" — rerunning OOS results until one passes. These shortcuts look innocuous to tired operators. To inspectors, they are the unmistakable signature of systemic data integrity failure.</p>
+      <p class="rescue">Rescue: audit data integrity culture quarterly — not just records but behaviors. Reward the operator who escalates an OOS rather than reruns it.</p>
+    </div>
+    <div class="pitfall"><div class="num">3</div>
+      <h4>Over-investigated vs. under-investigated deviations</h4>
+      <p>Either extreme harms the organization. Over-investigation creates <em>autoimmune disease</em> — every minor excursion triggers a multi-week investigation, CAPA queues balloon, operations slow, morale drops. Under-investigation creates <em>immune deficiency</em> — real signals are dismissed as noise, and the pattern that would have been visible is missed.</p>
+      <p class="rescue">Rescue: risk-based investigation triage. Define what gets a 2-hour review, what gets a 2-week investigation, what gets a cross-functional deep-dive — and update the triage rules quarterly based on findings.</p>
+    </div>
+    <div class="pitfall"><div class="num">4</div>
+      <h4>Quality as inspection-prep, not always-right</h4>
+      <p>The organization treats scheduled inspections as events requiring sprint-mode cleanup: training refreshers, mock audits, records review, housekeeping. In between inspections, the same rigor lapses. A no-notice inspection or one arriving during an unusually stressful operational period reveals what the between-inspection state actually is.</p>
+      <p class="rescue">Rescue: measure inspection readiness continuously, not situationally. Internal audits on the same standards and frequency FDA would apply.</p>
+    </div>
+    <div class="pitfall"><div class="num">5</div>
+      <h4>Decoupling quality from operations</h4>
+      <p>Quality becomes a silo: separate leadership, separate meetings, separate metrics, separate performance reviews. Operations decisions are made and then "submitted to Quality" for approval — creating a review-and-approve dynamic rather than a partnership. Over time, Quality is perceived as an obstacle, loses visibility into early decisions, and becomes reactive rather than preventive.</p>
+      <p class="rescue">Rescue: embed Quality in operations decision-making from inception. Make QA a voting member of scheduling, sourcing, and process-change forums — not a subsequent reviewer.</p>
+    </div>
+    <div class="pitfall"><div class="num">6</div>
+      <h4>Optimizing metrics rather than quality</h4>
+      <p>When metrics become targets, they cease to measure. CAPA closure rate trends upward not because CAPAs are completing better but because effectiveness checks are being skipped. Deviation count trends downward not because fewer deviations occur but because investigations are being classified as lower-severity events. The dashboard looks healthy; the underlying reality is degrading.</p>
+      <p class="rescue">Rescue: pair every efficiency metric with a quality metric. CAPA closure rate <em>and</em> effectiveness rate. Deviation count <em>and</em> recurrence rate. Never either alone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-DOMAIN -->
+<section class="wrap">
+  <div class="section-label">Cross-domain connections</div>
+  <h2>Pharma quality is not the only profession built on this problem.</h2>
+  <p>The pattern — life-critical operations requiring distributed vigilance under scrutiny — shows up in several other mature industries. Each has something useful to teach:</p>
+
+  <div class="crossdomain-grid">
+    <div class="crossdomain">
+      <div class="domain">Aviation safety</div>
+      <h4>FAA, ICAO, airline safety culture</h4>
+      <p>The pioneer discipline of safety culture. Concepts pharma has borrowed include the <em>just culture</em> model (distinguishing honest error from negligence from recklessness), crew resource management, and near-miss reporting systems that reward disclosure rather than punish. Aviation's safety record is a case study in what sustained culture investment can achieve.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Nuclear power</div>
+      <h4>NRC oversight &amp; INPO peer evaluation</h4>
+      <p>The Institute of Nuclear Power Operations (INPO) runs peer evaluations across the US nuclear fleet — site staff auditing each other's plants with the same rigor as regulators. The model directly inspired PIC/S peer inspection philosophies. Nuclear's approach to configuration management and human-factors engineering is increasingly relevant to pharma's Quality 4.0 agenda.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Food safety</div>
+      <h4>HACCP &amp; FSMA</h4>
+      <p>Hazard Analysis and Critical Control Points — the preventive framework food safety developed from NASA spaceflight nutrition research — directly parented pharma's Quality Risk Management approach. FSMA (2011) brought supplier verification and preventive controls into US food law; many of its concepts now echo in pharma DSCSA and supply-chain quality regulation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPACED REP -->
+<section id="spaced" class="wrap">
+  <div class="section-label">Spaced repetition schedule</div>
+  <h2>Holding the guard in memory.</h2>
+  <p>Quality vocabulary is regulatory language — precise, load-bearing, easy to forget between uses. The 8-touch schedule gives ~90% retention at the 3-month mark for about 2.5 hours of total review:</p>
+
+  <div class="spaced-rep">
+    <div class="sr-timeline">
+      <div class="sr-day"><div class="day-num">1</div><div class="day-label">Learn</div><div class="day-task">Day 1 GxP foundations</div></div>
+      <div class="sr-day"><div class="day-num">2</div><div class="day-label">Review</div><div class="day-task">Day 1 checkpoint + Day 2 ALCOA+</div></div>
+      <div class="sr-day"><div class="day-num">3</div><div class="day-label">Review</div><div class="day-task">Day 2 flip cards + Day 3 CAPA</div></div>
+      <div class="sr-day"><div class="day-num">4</div><div class="day-label">Review</div><div class="day-task">Jargon Tier 1 + 2, Day 4 escalation</div></div>
+      <div class="sr-day"><div class="day-num">5</div><div class="day-label">Review</div><div class="day-task">Day 5 culture + Quality 4.0</div></div>
+      <div class="sr-day"><div class="day-num">7</div><div class="day-label">First lapse</div><div class="day-task">All 5 memory hooks</div></div>
+      <div class="sr-day"><div class="day-num">14</div><div class="day-label">Consolidation</div><div class="day-task">Redo all Feynman teach-backs</div></div>
+      <div class="sr-day"><div class="day-num">30</div><div class="day-label">Retention</div><div class="day-task">Draw concept map from memory</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap-narrow">
+    <div class="section-label" style="color: var(--ochre);">Mentor's parting wisdom</div>
+    <h2>The guard is silent when it <em>works</em>.</h2>
+    <p>Five days cannot make you a quality leader. The craft is a decades-long apprenticeship to reality — to the specific failure modes of specific processes, to the regulatory personalities of specific inspectors, to the cultural gravity of specific organizations, and above all to the quiet discipline of noticing what you have already learned to stop noticing.</p>
+    <p>What five days can do is hand you the map. You now know that Quality is not a department — it is a posture, distributed across every person who touches the product. You know what ALCOA+ actually means and why every data-integrity 483 maps to a violation of at least one of its nine principles. You know the CAPA loop has six steps, not four, and that effectiveness verification is what makes the difference. You know the escalation ladder from observation to consent decree. You know that culture, not controls, is what predicts behavior when nobody is watching.</p>
+    <p class="mantra">Quality is what you do when nobody is watching — because somebody always is.</p>
+    <p>The next time you hold a medicine and notice how ordinary it feels — that it simply worked, that it was in the right place at the right dose at the right time — remember what stood behind that ordinariness. A quality system. A thousand procedures. A million entries in a million batch records. And, at every single link in that chain, at least one person who chose to honor reality over convenience when no inspector was in the room. That is the standing guard. That is what quality is.</p>
+    <p style="margin-top: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ochre);">— End of Module 07 —</p>
+  </div>
+</section>
+
+</main>
+
+<footer>Module 07 · Quality &amp; GxP · Five-Day Theoretical Roadmap</footer>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'base',
+    themeVariables: { fontFamily: 'Inter Tight, sans-serif', primaryColor: '#EEE5CE', primaryTextColor: '#0F1B2D', primaryBorderColor: '#0F1B2D', lineColor: '#2A3B52', secondaryColor: '#F5EFDF', tertiaryColor: '#4B2D42', background: '#EEE5CE', mainBkg: '#EEE5CE', secondBkg: '#F5EFDF' }
+  });
+  function togglePhase(header) { header.parentElement.classList.toggle('open'); }
+  window.addEventListener('scroll', () => {
+    const pct = Math.min(100, (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>

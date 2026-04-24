@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Flight Envelope — Preclinical in 5 Days</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+
+<style>
+  :root {
+    --ink:         #0F1B2D;
+    --ink-soft:    #2A3B52;
+    --paper:       #F5EFDF;
+    --paper-warm:  #EEE5CE;
+    --paper-dark:  #E4D8B8;
+    --ochre:       #C8984A;
+    --ochre-deep:  #9B7233;
+    --moss:        #4B6B4A;
+    --moss-soft:   #7C9082;
+    --rust:        #A84B2A;
+    --rust-soft:   #D67D5C;
+    --steel:       #1E5A6E;  /* module 3 accent — cockpit instrumentation teal */
+    --steel-deep:  #124354;
+    --steel-soft:  #5B8A9B;
+    --rule:        rgba(15,27,45,0.14);
+    --rule-strong: rgba(15,27,45,0.3);
+    --shadow-soft: 0 2px 12px rgba(15,27,45,0.08);
+    --shadow-lift: 0 8px 32px rgba(15,27,45,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter Tight', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(15,27,45,0.025) 1px, transparent 0);
+    background-size: 24px 24px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main, nav, header { position: relative; z-index: 1; }
+
+  h1, h2, h3, h4, .display {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 400; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 500; }
+  h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; }
+  h4 { font-size: 1.05rem; font-weight: 600; font-family: 'Inter Tight', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-soft); }
+  p { max-width: 68ch; }
+  em { font-style: italic; color: var(--ink-soft); }
+  strong { font-weight: 600; color: var(--ink); }
+  code, .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: var(--paper-warm); padding: 0.1em 0.4em; border-radius: 3px; border: 1px solid var(--rule); }
+
+  /* Nav */
+  nav.top {
+    position: sticky; top: 0;
+    background: rgba(245,239,223,0.92);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.8rem 2rem;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  nav.top .brand { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1rem; letter-spacing: -0.01em; }
+  nav.top .brand em { color: var(--steel); font-style: italic; }
+  nav.top ul { display: flex; gap: 0.4rem; list-style: none; flex-wrap: wrap; }
+  nav.top a {
+    color: var(--ink-soft); text-decoration: none;
+    font-size: 0.82rem; padding: 0.35rem 0.8rem;
+    border-radius: 20px; transition: all 0.2s ease; font-weight: 500;
+  }
+  nav.top a:hover { background: var(--ink); color: var(--paper); }
+
+  .progress-track { position: sticky; top: 58px; height: 3px; background: rgba(15,27,45,0.08); z-index: 99; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--steel), var(--ochre)); width: 0%; transition: width 0.15s ease; }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .wrap-narrow { max-width: 820px; margin: 0 auto; padding: 0 2rem; }
+
+  /* Hero */
+  .hero { padding: 7rem 2rem 5rem; position: relative; overflow: hidden; }
+  .hero-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--steel); margin-bottom: 1.5rem;
+  }
+  .hero h1 { max-width: 18ch; margin-bottom: 1.8rem; }
+  .hero h1 em { color: var(--steel); font-style: italic; }
+  .hero .lede {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    max-width: 54ch; color: var(--ink-soft);
+    font-weight: 300; line-height: 1.5;
+  }
+  .hero-ornament {
+    position: absolute; right: -80px; top: 50%;
+    transform: translateY(-50%);
+    width: 380px; height: 380px; opacity: 0.58; pointer-events: none;
+  }
+
+  /* Hook card */
+  .hook-card {
+    background: var(--ink); color: var(--paper);
+    padding: 3rem 2.5rem; border-radius: 2px;
+    margin: 3rem 0; position: relative; box-shadow: var(--shadow-lift);
+  }
+  .hook-card::before {
+    content: '03'; position: absolute; top: 1rem; right: 1.5rem;
+    font-family: 'Fraunces', serif; font-size: 4rem;
+    color: var(--ochre); opacity: 0.4; font-style: italic;
+  }
+  .hook-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--ochre); margin-bottom: 1rem;
+  }
+  .hook-card p {
+    font-family: 'Fraunces', serif; font-size: 1.4rem;
+    line-height: 1.4; font-weight: 300; max-width: 54ch;
+  }
+  .hook-card p em { color: var(--ochre); font-style: italic; }
+
+  section { padding: 4rem 0; position: relative; }
+  section + section { border-top: 1px solid var(--rule); }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--steel); margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--steel); }
+
+  section h2 { margin-bottom: 1.8rem; max-width: 26ch; }
+  section p { margin-bottom: 1.1rem; }
+
+  /* Master analogy card */
+  .master-analogy {
+    background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper-dark) 100%);
+    border: 1px solid var(--rule);
+    border-left: 5px solid var(--steel);
+    padding: 2.5rem 2.5rem 2.5rem 3rem;
+    margin: 2.5rem 0; position: relative; border-radius: 2px;
+  }
+  .master-analogy::before {
+    content: '“'; position: absolute; top: -20px; left: 20px;
+    font-family: 'Fraunces', serif; font-size: 6rem; color: var(--steel); line-height: 1;
+  }
+  .master-analogy h4 { margin-bottom: 1rem; color: var(--steel); }
+  .master-analogy p { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 300; line-height: 1.55; }
+  .master-analogy p + p { margin-top: 0.8rem; }
+
+  .mapping-grid {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: 1rem 1.5rem; align-items: center;
+    margin-top: 1.8rem; padding-top: 1.8rem;
+    border-top: 1px dashed var(--rule-strong);
+  }
+  .mapping-grid .from { font-weight: 500; color: var(--ink); text-align: right; }
+  .mapping-grid .arrow { font-family: 'JetBrains Mono', monospace; color: var(--steel); font-size: 0.9rem; }
+  .mapping-grid .to { color: var(--ink-soft); font-family: 'Fraunces', serif; font-style: italic; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  @media (max-width: 820px) {
+    .two-col { grid-template-columns: 1fr; gap: 2rem; }
+    .mapping-grid { grid-template-columns: 1fr; gap: 0.3rem 0; }
+    .mapping-grid .from { text-align: left; }
+    .mapping-grid .arrow { display: none; }
+    .mapping-grid .to { padding-left: 1rem; border-left: 2px solid var(--steel); margin-bottom: 0.8rem; }
+  }
+
+  .concept-map-wrap {
+    background: var(--paper-warm); padding: 2.5rem;
+    border-radius: 2px; border: 1px solid var(--rule);
+    overflow-x: auto; margin: 2rem 0;
+  }
+  .mermaid { text-align: center; font-family: 'Inter Tight', sans-serif !important; }
+
+  /* Phase accordion */
+  .phases-container { margin-top: 2rem; }
+  .phase {
+    border: 1px solid var(--rule); background: var(--paper-warm);
+    margin-bottom: 1.2rem; border-radius: 2px; overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .phase:hover { box-shadow: var(--shadow-soft); }
+  .phase.open { background: var(--paper); box-shadow: var(--shadow-lift); }
+
+  .phase-header {
+    padding: 1.8rem 2rem;
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 1.5rem; align-items: center;
+    cursor: pointer; user-select: none;
+  }
+  .phase-number {
+    font-family: 'Fraunces', serif; font-size: 2.6rem; font-weight: 300;
+    color: var(--steel); line-height: 1; font-style: italic;
+    min-width: 3rem;
+  }
+  .phase-title-wrap .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 0.3rem;
+  }
+  .phase-title-wrap h3 { font-weight: 500; color: var(--ink); }
+  .phase-title-wrap h3 em { color: var(--steel); font-style: italic; }
+  .phase-toggle {
+    font-family: 'JetBrains Mono', monospace; font-size: 1.2rem;
+    color: var(--ink-soft); transition: transform 0.3s ease;
+  }
+  .phase.open .phase-toggle { transform: rotate(45deg); color: var(--steel); }
+
+  .phase-body {
+    max-height: 0; overflow: hidden; padding: 0 2rem;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+  }
+  .phase.open .phase-body { max-height: 12000px; padding: 0 2rem 2.5rem; }
+
+  .curiosity-hook {
+    font-family: 'Fraunces', serif; font-size: 1.2rem;
+    font-style: italic; color: var(--ink-soft);
+    border-left: 3px solid var(--steel);
+    padding-left: 1.2rem; margin: 1.5rem 0 2rem;
+    max-width: 58ch; line-height: 1.55;
+  }
+
+  .objectives {
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: 1.5rem 1.8rem; margin: 1.5rem 0 2.5rem; border-radius: 2px;
+  }
+  .objectives h4 { margin-bottom: 0.8rem; color: var(--steel); font-size: 0.8rem; }
+  .objectives ul { list-style: none; padding: 0; }
+  .objectives li {
+    padding: 0.3rem 0 0.3rem 1.6rem; position: relative;
+    font-size: 0.96rem;
+  }
+  .objectives li::before {
+    content: '◆'; position: absolute; left: 0;
+    color: var(--steel); font-size: 0.6rem; top: 0.55rem;
+  }
+  .bloom-tag {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.15em;
+    padding: 0.2em 0.5em; border-radius: 3px;
+    background: var(--steel); color: var(--paper);
+    margin-right: 0.5em; text-transform: uppercase; font-weight: 500;
+  }
+
+  /* Concept cards */
+  .concept-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  @media (max-width: 780px) { .concept-cards { grid-template-columns: 1fr; } }
+  .concept-card {
+    background: var(--paper-warm); border: 1px solid var(--rule);
+    padding: 1.4rem 1.5rem; border-radius: 2px;
+    border-left: 3px solid var(--ochre); position: relative;
+  }
+  .concept-card:nth-child(2n) { border-left-color: var(--moss); }
+  .concept-card:nth-child(3n) { border-left-color: var(--rust); }
+  .concept-card:nth-child(4n) { border-left-color: var(--steel); }
+  .concept-card h4 {
+    font-family: 'Fraunces', serif; font-size: 1.1rem;
+    font-weight: 600; color: var(--ink); text-transform: none;
+    letter-spacing: normal; margin-bottom: 0.5rem;
+  }
+  .concept-card .analogy {
+    font-family: 'Fraunces', serif; font-style: italic;
+    color: var(--ink-soft); font-size: 0.92rem;
+    margin: 0.5rem 0 0.8rem; border-top: 1px dashed var(--rule);
+    padding-top: 0.7rem;
+  }
+  .concept-card p { font-size: 0.93rem; margin-bottom: 0.4rem; max-width: none; }
+
+  /* Visual SVG container */
+  .visual {
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: 2rem; margin: 2rem 0; border-radius: 2px;
+    position: relative; overflow-x: auto;
+  }
+  .visual .caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--ink-soft);
+    margin-bottom: 1.2rem;
+  }
+  .visual svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+
+  /* Mentor analogy callout */
+  .mentor-analogy {
+    background: var(--ink); color: var(--paper);
+    padding: 2rem 2.2rem; margin: 2rem 0;
+    border-radius: 2px; position: relative;
+    border-left: 4px solid var(--ochre);
+  }
+  .mentor-analogy .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--ochre); margin-bottom: 0.8rem;
+  }
+  .mentor-analogy p {
+    font-family: 'Fraunces', serif; font-size: 1.1rem;
+    line-height: 1.6; font-weight: 300; max-width: 58ch;
+  }
+  .mentor-analogy p em { color: var(--ochre); font-style: italic; }
+
+  /* Checkpoint box */
+  .checkpoint {
+    border: 2px dashed var(--steel);
+    background: transparent;
+    padding: 1.5rem 1.8rem; margin: 2rem 0; border-radius: 2px;
+  }
+  .checkpoint h4 { color: var(--steel); margin-bottom: 0.6rem; }
+  .checkpoint p { font-size: 0.94rem; margin-bottom: 0.4rem; }
+  .checkpoint ul { list-style: none; padding: 0; }
+  .checkpoint li { padding: 0.25rem 0 0.25rem 1.4rem; position: relative; font-size: 0.94rem; }
+  .checkpoint li::before {
+    content: '□'; position: absolute; left: 0; color: var(--steel);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Flip card */
+  .flip-card {
+    perspective: 1200px; height: 220px;
+    margin: 2rem 0; cursor: pointer;
+  }
+  .flip-inner {
+    position: relative; width: 100%; height: 100%;
+    transition: transform 0.7s ease; transform-style: preserve-3d;
+  }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back {
+    position: absolute; inset: 0; backface-visibility: hidden;
+    padding: 1.8rem 2rem; border-radius: 2px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .flip-front {
+    background: var(--paper-dark); border: 1px solid var(--rule-strong);
+  }
+  .flip-front .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--steel); margin-bottom: 0.7rem;
+  }
+  .flip-front h4 { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); text-transform: none; letter-spacing: normal; }
+  .flip-front .hint { font-size: 0.82rem; color: var(--ink-soft); margin-top: 1rem; font-style: italic; }
+  .flip-back {
+    background: var(--ink); color: var(--paper);
+    transform: rotateY(180deg); border-left: 4px solid var(--ochre);
+  }
+  .flip-back .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--ochre); margin-bottom: 0.7rem;
+  }
+  .flip-back p { font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.55; max-width: none; font-weight: 300; }
+
+  /* Memory hook */
+  .memory-hook {
+    background: var(--paper-warm); border: 1px solid var(--rule);
+    padding: 1.2rem 1.5rem; margin: 1.5rem 0; border-radius: 2px;
+    font-size: 0.93rem;
+  }
+  .memory-hook .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--ochre-deep); margin-bottom: 0.4rem;
+  }
+  .memory-hook strong { color: var(--steel); }
+
+  /* Jargon decoder */
+  .jargon-tier {
+    margin: 2rem 0; padding: 1.8rem 2rem;
+    background: var(--paper-warm); border: 1px solid var(--rule); border-radius: 2px;
+  }
+  .jargon-tier h3 {
+    font-family: 'Fraunces', serif; font-size: 1.3rem; margin-bottom: 0.4rem;
+    color: var(--steel);
+  }
+  .jargon-tier .tier-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 1.2rem;
+  }
+  .jargon-tier dl {
+    display: grid; grid-template-columns: 160px 1fr; gap: 0.8rem 1.5rem;
+  }
+  .jargon-tier dt {
+    font-weight: 600; color: var(--ink);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
+  }
+  .jargon-tier dd { color: var(--ink-soft); font-size: 0.93rem; }
+  @media (max-width: 680px) {
+    .jargon-tier dl { grid-template-columns: 1fr; gap: 0.3rem 0; }
+    .jargon-tier dd { margin-bottom: 0.8rem; padding-left: 0.8rem; border-left: 2px solid var(--steel); }
+  }
+
+  /* Pitfall cards */
+  .pitfall-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .pitfall-grid { grid-template-columns: 1fr; } }
+  .pitfall {
+    background: var(--paper-warm); border: 1px solid var(--rule);
+    padding: 1.5rem 1.6rem; border-radius: 2px;
+    border-top: 3px solid var(--rust); position: relative;
+  }
+  .pitfall .num {
+    position: absolute; top: 0.8rem; right: 1rem;
+    font-family: 'Fraunces', serif; font-size: 1.8rem;
+    color: var(--rust); font-style: italic; opacity: 0.5; line-height: 1;
+  }
+  .pitfall h4 {
+    font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600;
+    color: var(--ink); text-transform: none; letter-spacing: normal;
+    margin-bottom: 0.5rem; max-width: 90%;
+  }
+  .pitfall p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .pitfall .rescue {
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: 0.88rem; color: var(--moss);
+    padding-top: 0.5rem; margin-top: 0.5rem;
+    border-top: 1px dashed var(--rule);
+  }
+
+  /* Cross-domain grid */
+  .crossdomain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin: 2rem 0; }
+  @media (max-width: 780px) { .crossdomain-grid { grid-template-columns: 1fr; } }
+  .crossdomain {
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: 1.5rem 1.6rem; border-radius: 2px;
+  }
+  .crossdomain .domain {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--steel); margin-bottom: 0.5rem;
+  }
+  .crossdomain h4 {
+    font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 600;
+    color: var(--ink); text-transform: none; letter-spacing: normal;
+    margin-bottom: 0.7rem;
+  }
+  .crossdomain p { font-size: 0.9rem; color: var(--ink-soft); }
+
+  /* Spaced repetition */
+  .spaced-rep {
+    background: var(--paper-warm); border: 1px solid var(--rule);
+    padding: 2rem; border-radius: 2px; margin: 2rem 0;
+    overflow-x: auto;
+  }
+  .sr-timeline {
+    display: grid; grid-template-columns: repeat(8, minmax(88px, 1fr));
+    gap: 0.8rem; margin-top: 1.5rem; min-width: 700px;
+  }
+  .sr-day {
+    padding: 1rem 0.8rem; background: var(--paper); border: 1px solid var(--rule);
+    border-radius: 2px; text-align: center; position: relative;
+  }
+  .sr-day::before {
+    content: ''; position: absolute; top: -6px; left: 50%;
+    transform: translateX(-50%); width: 10px; height: 10px;
+    background: var(--steel); border-radius: 50%;
+  }
+  .sr-day .day-num {
+    font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 500;
+    color: var(--steel); font-style: italic;
+  }
+  .sr-day .day-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-soft); margin-top: 0.3rem;
+  }
+  .sr-day .day-task {
+    font-size: 0.78rem; margin-top: 0.5rem; color: var(--ink);
+    line-height: 1.3;
+  }
+
+  /* Closing */
+  .closing {
+    background: var(--ink); color: var(--paper);
+    padding: 5rem 2rem; margin-top: 4rem;
+  }
+  .closing h2 { color: var(--paper); max-width: 24ch; margin-bottom: 2rem; }
+  .closing h2 em { color: var(--ochre); font-style: italic; }
+  .closing p {
+    font-family: 'Fraunces', serif; font-size: 1.2rem;
+    line-height: 1.6; font-weight: 300; max-width: 58ch;
+    color: rgba(245,239,223,0.88);
+  }
+  .closing .mantra {
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: 1.5rem; color: var(--ochre);
+    padding: 2rem 0; margin: 2rem 0;
+    border-top: 1px solid rgba(200,152,74,0.3);
+    border-bottom: 1px solid rgba(200,152,74,0.3);
+    max-width: 54ch;
+  }
+
+  footer {
+    padding: 2rem; text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-soft); background: var(--paper);
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="brand">The Flight <em>Envelope</em></div>
+  <ul>
+    <li><a href="#hook">Hook</a></li>
+    <li><a href="#analogy">Analogy</a></li>
+    <li><a href="#map">Map</a></li>
+    <li><a href="#day1">Day 1</a></li>
+    <li><a href="#day2">Day 2</a></li>
+    <li><a href="#day3">Day 3</a></li>
+    <li><a href="#day4">Day 4</a></li>
+    <li><a href="#day5">Day 5</a></li>
+    <li><a href="#jargon">Jargon</a></li>
+    <li><a href="#pitfalls">Pitfalls</a></li>
+    <li><a href="#spaced">Review</a></li>
+  </ul>
+</nav>
+<div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+
+<main>
+
+<header class="hero wrap">
+  <div class="hero-meta">Module 03 · Preclinical · Five-Day Theoretical Roadmap</div>
+  <h1>The Flight <em>Envelope</em>.</h1>
+  <p class="lede">Before any drug ever meets a human, it must survive a progressively more punishing series of tests — in cells, in rodents, in non-rodents, in simulators. This is how an airworthy molecule is certified.</p>
+
+  <svg class="hero-ornament" viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+    <!-- Aviation instrument / altimeter inspired ornament -->
+    <defs>
+      <linearGradient id="heroGrad3" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1E5A6E" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#C8984A" stop-opacity="0.5"/>
+      </linearGradient>
+    </defs>
+    <!-- Outer ring: instrument bezel -->
+    <circle cx="190" cy="190" r="170" fill="none" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="2 6" opacity="0.25"/>
+    <circle cx="190" cy="190" r="150" fill="none" stroke="#0F1B2D" stroke-width="1.2" opacity="0.3"/>
+    <circle cx="190" cy="190" r="138" fill="none" stroke="#0F1B2D" stroke-width="0.6" opacity="0.2"/>
+    <!-- Tick marks around bezel -->
+    <g stroke="#0F1B2D" stroke-width="1" opacity="0.5">
+      <g transform="translate(190,190)">
+        <line x1="0" y1="-150" x2="0" y2="-140"/>
+        <g transform="rotate(30)"><line x1="0" y1="-150" x2="0" y2="-144"/></g>
+        <g transform="rotate(60)"><line x1="0" y1="-150" x2="0" y2="-144"/></g>
+        <g transform="rotate(90)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+        <g transform="rotate(120)"><line x1="0" y1="-150" x2="0" y2="-144"/></g>
+        <g transform="rotate(150)"><line x1="0" y1="-150" x2="0" y2="-144"/></g>
+        <g transform="rotate(180)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+        <g transform="rotate(210)"><line x1="0" y1="-150" x2="0" y2="-144"/></g>
+        <g transform="rotate(240)"><line x1="0" y1="-150" x2="0" y2="-144"/></g>
+        <g transform="rotate(270)"><line x1="0" y1="-150" x2="0" y2="-140"/></g>
+        <g transform="rotate(300)"><line x1="0" y1="-150" x2="0" y2="-144"/></g>
+        <g transform="rotate(330)"><line x1="0" y1="-150" x2="0" y2="-144"/></g>
+      </g>
+    </g>
+    <!-- Arcs: safe zone (moss), caution (ochre), danger (rust) -->
+    <g transform="translate(190,190)" fill="none" stroke-width="4" opacity="0.7">
+      <path d="M -120 0 A 120 120 0 0 1 60 -103.9" stroke="#4B6B4A"/>
+      <path d="M 60 -103.9 A 120 120 0 0 1 120 0" stroke="#C8984A"/>
+      <path d="M 120 0 A 120 120 0 0 1 60 103.9" stroke="#A84B2A"/>
+    </g>
+    <!-- Needle -->
+    <g transform="translate(190,190) rotate(-45)">
+      <polygon points="0,-100 -5,5 0,12 5,5" fill="#1E5A6E" stroke="#0F1B2D" stroke-width="1"/>
+      <circle cx="0" cy="0" r="9" fill="#0F1B2D"/>
+      <circle cx="0" cy="0" r="4" fill="#C8984A"/>
+    </g>
+    <!-- Corner labels -->
+    <text x="190" y="14" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#1E5A6E" letter-spacing="2">NOAEL</text>
+    <text x="190" y="374" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#1E5A6E" letter-spacing="2">FIH DOSE</text>
+    <text x="56" y="195" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#4B6B4A" letter-spacing="1">SAFE</text>
+    <text x="325" y="195" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#A84B2A" letter-spacing="1">LIMIT</text>
+  </svg>
+</header>
+
+<!-- HOOK -->
+<section id="hook" class="wrap-narrow">
+  <div class="hook-card">
+    <div class="label">The hook</div>
+    <p>In 2006, six healthy volunteers in a London clinic received their first dose of TGN1412 — a monoclonal antibody that had cleared rodent and primate studies. Within ninety minutes, all six were in multi-organ failure. The preclinical package had said <em>safe</em>. The humans said otherwise. The flight envelope exists to make that kind of disaster <em>impossibly rare</em>.</p>
+  </div>
+</section>
+
+<!-- ELEVATOR PITCH + MASTER ANALOGY -->
+<section id="analogy" class="wrap-narrow">
+  <div class="section-label">The elevator pitch</div>
+  <h2>Preclinical is the bridge between molecule and human.</h2>
+  <p>Preclinical sits between Discovery's candidate nomination and the first dose in a human volunteer. It is where four disciplines run in parallel: <strong>pharmacology</strong> confirms the drug does what Discovery promised; <strong>toxicology</strong> maps what kills, when, and how reversibly; <strong>CMC &amp; formulation</strong> turns a molecule into a manufacturable medicine; and <strong>regulatory strategy</strong> assembles the IND package that asks an agency for permission to dose humans. Miss anything and the program either pauses, pivots, or quietly dies at a pre-IND meeting.</p>
+
+  <div class="master-analogy">
+    <h4>The master analogy — the test pilot's flight envelope</h4>
+    <p>A new aircraft does not take off with passengers on day one. It begins with engine runs. Then taxi tests. Then low-speed flight at controlled altitude. Then progressively — high speed, high altitude, aerobatic limits, stress limits — the <em>envelope</em> is expanded. Every test instruments the airframe. Every failure is documented. Only after the envelope is fully mapped does an airworthiness certificate issue, and only then does a pilot fly the aircraft alone.</p>
+    <p>Preclinical is the same discipline, applied to a molecule. The candidate must survive <em>in-vitro</em> taxi tests, then rodent low-altitude flights, then non-rodent full-envelope trials. Every organ system is instrumented. Toxicology finds the ceiling. Pharmacology confirms the performance. CMC ensures every unit coming off the line is the same aircraft. The IND package <em>is</em> the airworthiness certificate — and the FIH (first-in-human) study is the first crewed flight.</p>
+
+    <div class="mapping-grid">
+      <div class="from">Mission specification</div>
+      <div class="arrow">—→</div>
+      <div class="to">Target Product Profile inherited from Discovery</div>
+
+      <div class="from">Wind tunnel + unmanned taxi</div>
+      <div class="arrow">—→</div>
+      <div class="to">In-vitro assays, organoid / MPS models</div>
+
+      <div class="from">Low-altitude test flight</div>
+      <div class="arrow">—→</div>
+      <div class="to">Rodent efficacy &amp; PK/PD studies</div>
+
+      <div class="from">High-altitude stress flight</div>
+      <div class="arrow">—→</div>
+      <div class="to">Non-rodent (NHP / dog) toxicology</div>
+
+      <div class="from">Maximum G-load before airframe damage</div>
+      <div class="arrow">—→</div>
+      <div class="to">NOAEL — No Observed Adverse Effect Level</div>
+
+      <div class="from">Safety margin from operational load</div>
+      <div class="arrow">—→</div>
+      <div class="to">Therapeutic Index (TI)</div>
+
+      <div class="from">Airframe mass-production line</div>
+      <div class="arrow">—→</div>
+      <div class="to">CMC process + QbD design space</div>
+
+      <div class="from">Airworthiness certificate</div>
+      <div class="arrow">—→</div>
+      <div class="to">IND clearance by FDA / CTA by EMA</div>
+
+      <div class="from">First crewed test flight</div>
+      <div class="arrow">—→</div>
+      <div class="to">FIH Phase 1 single-ascending-dose study</div>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN STORY -->
+<section class="wrap-narrow">
+  <div class="section-label">Origin story</div>
+  <h2>Why preclinical is non-negotiable.</h2>
+  <p>The modern preclinical regime was not designed in a conference room. It was built, painfully, on the backs of catastrophes. The 1937 sulfanilamide elixir killed 105 Americans — mostly children — because no one had tested the solvent (diethylene glycol) for toxicity. It triggered the 1938 US Food, Drug, and Cosmetic Act, mandating safety data before marketing. In 1961, thalidomide caused roughly 10,000 cases of severe limb malformations across Europe; regulators had not required reproductive toxicology. The 1962 Kefauver-Harris amendments then mandated proof of efficacy <em>and</em> expanded preclinical safety requirements.</p>
+  <p>Then came TGN1412 (2006) — a CD28 superagonist antibody that had cleared cynomolgus monkey studies at 500× the human dose and still triggered cytokine storm in six volunteers. That disaster produced the concept of the Minimum Anticipated Biological Effect Level (MABEL) for high-risk biologics, and the end of "same-day" dosing in FIH studies. Every rule in modern preclinical is a scar.</p>
+  <p>The job of preclinical is therefore not to "prove the drug is safe" — no drug is universally safe. The job is to <em>characterize the risk surface</em> so thoroughly that when Phase 1 volunteers receive their first dose, the team already knows what organ systems to monitor, at what exposure levels concerns emerge, and what to do if they do.</p>
+</section>
+
+<!-- CONCEPT MAP -->
+<section id="map" class="wrap">
+  <div class="section-label">The concept web</div>
+  <h2>How the four preclinical engines interlock.</h2>
+  <p>The four sub-disciplines feed a single output — an IND package that permits first-in-human dosing. <strong>Pharmacology</strong> answers <em>does it work?</em>, <strong>toxicology &amp; ADME</strong> answer <em>is it safe enough?</em>, <strong>CMC</strong> answers <em>can we make it reliably?</em>, and <strong>regulatory strategy</strong> answers <em>will the agency say yes?</em>. All four must converge on a yes within roughly 12–18 months:</p>
+
+  <div class="concept-map-wrap">
+    <div class="mermaid">
+flowchart LR
+  classDef central fill:#1E5A6E,stroke:#0F1B2D,color:#F5EFDF,stroke-width:2px,font-weight:600
+  classDef pillar fill:#EEE5CE,stroke:#0F1B2D,color:#0F1B2D,stroke-width:1.5px,font-weight:500
+  classDef sub fill:#F5EFDF,stroke:#0F1B2D,color:#2A3B52,stroke-width:1px,stroke-dasharray:3 3
+
+  CORE[IND Clearance &amp; FIH Ready]:::central
+
+  P1[Pharmacology<br/>in vitro &amp; in vivo]:::pillar
+  T1[Toxicology · ADME<br/>· Safety Pharmacology]:::pillar
+  C1[Early CMC<br/>&amp; Formulation]:::pillar
+  R1[IND-Enabling<br/>&amp; Regulatory Strategy]:::pillar
+
+  CORE --- P1
+  CORE --- T1
+  CORE --- C1
+  CORE --- R1
+
+  P1 --- p1a[Target engagement]:::sub
+  P1 --- p1b[Translational PK/PD]:::sub
+  P1 --- p1c[QSP modeling]:::sub
+
+  T1 --- t1a[GLP tox studies]:::sub
+  T1 --- t1b[NOAEL / MABEL]:::sub
+  T1 --- t1c[hERG · CV · CNS]:::sub
+
+  C1 --- c1a[API &amp; DP]:::sub
+  C1 --- c1b[QbD / CPP / CQA]:::sub
+  C1 --- c1c[Stability · Scale-up]:::sub
+
+  R1 --- r1a[IND modules]:::sub
+  R1 --- r1b[Pre-IND meeting]:::sub
+  R1 --- r1c[FIH protocol]:::sub
+
+  P1 -.-&gt; T1
+  T1 -.-&gt; C1
+  C1 -.-&gt; R1
+  R1 -.-&gt; P1
+    </div>
+  </div>
+</section>
+
+<!-- ================ DAY 1 ================ -->
+<section id="day1" class="wrap">
+  <div class="section-label">Day 01 · The Pharmacology Floor</div>
+  <h2>Does it work where it's supposed to?</h2>
+
+  <div class="phases-container">
+    <div class="phase open">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">01</div>
+        <div class="phase-title-wrap">
+          <div class="meta">Bloom · Remember + Understand · ~2.5 hrs</div>
+          <h3>Proving efficacy — <em>from dish to whole organism</em></h3>
+        </div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+
+        <p class="curiosity-hook">Roughly <em>half</em> of compounds that show stunning efficacy in mouse models of cancer show zero effect in humans. Half. A discipline built on non-predictive models would be useless — yet preclinical pharmacology persists because when done well, it predicts the <em>direction</em> of effect, the <em>dose range</em>, and the <em>biomarker</em> that will matter in humans. Those three are enough.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 1</span>Learning objectives</h4>
+          <ul>
+            <li>Distinguish target engagement, proximal pharmacodynamics, and distal efficacy</li>
+            <li>Navigate the animal model taxonomy: rodent, non-human primate (NHP), humanized, patient-derived xenograft (PDX), genetically engineered mouse models (GEMM)</li>
+            <li>Grasp PK/PD fundamentals: Cmax, AUC, half-life, and their link to dosing regimen</li>
+            <li>Understand allometric scaling — how animal exposure projects to human starting doses</li>
+            <li>Recognize quantitative systems pharmacology (QSP) as the state-of-the-art bridge from preclinical to clinical</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--steel);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The three tiers of efficacy evidence</h4>
+            <p><strong>Target engagement:</strong> does the drug bind its target in the living organism? <strong>Proximal PD:</strong> does binding produce the expected downstream biological change (e.g. a phosphorylation, a transcript)? <strong>Distal efficacy:</strong> does that change translate into a disease-relevant phenotype — tumor shrinkage, glucose lowering, inflammation reduction?</p>
+            <div class="analogy">A pilot's pre-flight: does the throttle move (engagement), does the engine respond (proximal), does the aircraft accelerate (distal). Skipping a tier invites mid-air surprises.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Animal model taxonomy</h4>
+            <p>Rodents — cheap, fast, genetically tractable. NHPs — closer to human immunology and pharmacology, expensive and ethically constrained. Humanized mice — human immune cells in mouse hosts. PDX — human patient tumors implanted in immunodeficient mice. GEMM — transgenic mice engineered to recapitulate a disease. Each answers different questions.</p>
+            <div class="analogy">A flight-test fleet: scale models for wind-tunnel, reduced-scale prototype for taxi, full-scale airframe for envelope expansion. You cannot skip scales, but you never forget each scale has its own physics.</div>
+          </div>
+          <div class="concept-card">
+            <h4>PK/PD fundamentals</h4>
+            <p><strong>PK:</strong> what the body does to the drug — absorption, distribution, metabolism, excretion, quantified by Cmax (peak), AUC (total exposure), T½ (half-life), Vd (volume of distribution). <strong>PD:</strong> what the drug does to the body — receptor occupancy, biomarker modulation, disease change. The PK/PD link determines dose and schedule.</p>
+            <div class="analogy">Fuel load curve (PK) vs. thrust delivered over the flight (PD). A badly timed fuel injection can give perfect peak thrust but miserable cruise performance.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Allometric scaling &amp; QSP</h4>
+            <p>Animal exposure cannot be applied to humans linearly — body weight, organ mass, and metabolic rate scale non-linearly. Classic allometry uses exponents (~0.75 for clearance). Modern <strong>QSP</strong> builds mechanistic ODE models of whole biological pathways, combining preclinical data into virtual human populations that predict Phase 1 behavior — including dose range and variability.</p>
+            <div class="analogy">Scaling wind-tunnel results to full aircraft: the ratios are not simple. Modern aircraft design uses integrated flight simulators that model airframe, propulsion, atmosphere, and pilot in one system. QSP is the drug's flight simulator.</div>
+          </div>
+        </div>
+
+        <!-- Visual: Translational ladder -->
+        <div class="visual">
+          <div class="caption">Figure 1 · The translational ladder — each rung carries a PK/PD signature</div>
+          <svg viewBox="0 0 1040 360" xmlns="http://www.w3.org/2000/svg">
+            <!-- Axis -->
+            <line x1="60" y1="290" x2="990" y2="290" stroke="#0F1B2D" stroke-width="1.5"/>
+            <text x="60" y="320" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52" letter-spacing="2">TRANSLATIONAL DISTANCE FROM HUMAN →</text>
+            <!-- Rungs (rectangles) -->
+            <g>
+              <rect x="90" y="220" width="130" height="60" fill="#5B8A9B" opacity="0.8" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="155" y="246" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="600">Cell lines</text>
+              <text x="155" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">in-vitro</text>
+            </g>
+            <g>
+              <rect x="240" y="220" width="130" height="60" fill="#1E5A6E" opacity="0.85" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="305" y="246" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="600">Organoid / MPS</text>
+              <text x="305" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">3D · microphysiological</text>
+            </g>
+            <g>
+              <rect x="390" y="220" width="130" height="60" fill="#C8984A" opacity="0.85" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="455" y="246" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#0F1B2D" font-weight="600">Rodent</text>
+              <text x="455" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">mouse · rat</text>
+            </g>
+            <g>
+              <rect x="540" y="220" width="130" height="60" fill="#9B7233" opacity="0.85" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="605" y="246" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="600">Non-rodent</text>
+              <text x="605" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">dog · NHP</text>
+            </g>
+            <g>
+              <rect x="690" y="220" width="130" height="60" fill="#4B6B4A" opacity="0.85" stroke="#0F1B2D" stroke-width="0.8"/>
+              <text x="755" y="246" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="600">Humanized / PDX</text>
+              <text x="755" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">human cells · tissues</text>
+            </g>
+            <g>
+              <rect x="840" y="220" width="130" height="60" fill="#A84B2A" opacity="0.9" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="905" y="246" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="600">FIH Phase 1</text>
+              <text x="905" y="262" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">first-in-human</text>
+            </g>
+
+            <!-- PK/PD curves per rung -->
+            <g opacity="0.88">
+              <!-- cell -->
+              <path d="M 105 180 Q 130 130 155 150 T 205 175" fill="none" stroke="#2A3B52" stroke-width="1.2"/>
+              <!-- organoid -->
+              <path d="M 255 180 Q 280 125 305 145 T 355 168" fill="none" stroke="#2A3B52" stroke-width="1.2"/>
+              <!-- rodent -->
+              <path d="M 405 180 Q 430 120 455 135 T 505 160" fill="none" stroke="#2A3B52" stroke-width="1.5"/>
+              <!-- non-rodent -->
+              <path d="M 555 180 Q 580 115 605 130 T 655 158" fill="none" stroke="#2A3B52" stroke-width="1.5"/>
+              <!-- human proj -->
+              <path d="M 705 180 Q 730 120 755 135 T 805 163" fill="none" stroke="#4B6B4A" stroke-width="1.8" stroke-dasharray="4 3"/>
+              <!-- FIH -->
+              <path d="M 855 185 Q 880 130 905 142 T 955 170" fill="none" stroke="#A84B2A" stroke-width="2"/>
+            </g>
+
+            <!-- Labels above -->
+            <text x="60" y="40" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Each rung yields a PK/PD signature. Allometric scaling and QSP project the last preclinical rung into the dashed human curve.</text>
+            <text x="60" y="62" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">Y-AXIS · concentration over time (C-t curves, schematic)</text>
+
+            <!-- Arrow below showing progression -->
+            <defs>
+              <marker id="arrowFlow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+                <polygon points="0 0, 10 4, 0 8" fill="#1E5A6E"/>
+              </marker>
+            </defs>
+            <line x1="220" y1="198" x2="240" y2="198" stroke="#1E5A6E" stroke-width="1.2" marker-end="url(#arrowFlow)"/>
+            <line x1="370" y1="198" x2="390" y2="198" stroke="#1E5A6E" stroke-width="1.2" marker-end="url(#arrowFlow)"/>
+            <line x1="520" y1="198" x2="540" y2="198" stroke="#1E5A6E" stroke-width="1.2" marker-end="url(#arrowFlow)"/>
+            <line x1="670" y1="198" x2="690" y2="198" stroke="#1E5A6E" stroke-width="1.2" marker-end="url(#arrowFlow)"/>
+            <line x1="820" y1="198" x2="840" y2="198" stroke="#A84B2A" stroke-width="1.5" marker-end="url(#arrowFlow)"/>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy">
+          <div class="label">Mentor's note</div>
+          <p>A common rookie error is to treat preclinical pharmacology as a <em>checkbox</em> — show efficacy in mice, move on. A good preclinical pharmacologist treats every animal study as a <em>translation experiment</em>: what is this telling me about the human I will dose six months from now? The question is not "did it work here?" but <em>"what dose, what biomarker, what side effect should I watch for in the first human to receive this?"</em></p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 1 checkpoint</h4>
+          <p>You should now be able to:</p>
+          <ul>
+            <li>Define target engagement and name one assay that measures it in vivo</li>
+            <li>List three animal model types and the specific question each answers</li>
+            <li>Sketch a PK curve and label Cmax, Tmax, T½, AUC</li>
+            <li>Explain why allometric scaling is not simply "multiply by body weight"</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="label">Feynman teach-back</div>
+              <h4>A colleague says "the drug worked great in mice, so we're ready for the clinic." Give three reasons to push back — without sounding dismissive.</h4>
+              <div class="hint">click to reveal →</div>
+            </div>
+            <div class="flip-back">
+              <div class="label">One articulation</div>
+              <p><strong>One:</strong> mouse immunology, metabolism, and target biology can differ enough that efficacy does not translate — we need the biomarker that tracked effect in mice measurable in humans too, or we are flying blind. <strong>Two:</strong> we need at least a rough allometric or QSP projection of the human efficacious dose before committing to a Phase 1 dose range. <strong>Three:</strong> efficacy alone doesn't open the IND — we still need the toxicology, safety pharmacology, and CMC packages to support the first-in-human dose. Enthusiasm isn't a regulatory filing.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-hook">
+          <div class="label">Memory hook</div>
+          <strong>T-P-D:</strong> <em>Target engagement → Proximal pharmacodynamics → Distal efficacy.</em> Three rungs. Skip one and the ladder breaks.<br>
+          <strong>C-A-T:</strong> <em>Cmax, AUC, Time (half-life).</em> The three letters every PK curve speaks.
+        </div>
+      </div>
+    </div>
+
+<!-- ================ DAY 2 ================ -->
+    <div class="phase" id="day2">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">02</div>
+        <div class="phase-title-wrap">
+          <div class="meta">Bloom · Understand + Apply · ~3 hrs</div>
+          <h3>Mapping the safety envelope — <em>toxicology, ADME &amp; safety pharmacology</em></h3>
+        </div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+
+        <p class="curiosity-hook">In 1993 Merck was developing fialuridine for hepatitis B. Phase 2 trials were underway. Five of fifteen patients died of delayed mitochondrial toxicity — a finding that had been invisible in rodents, because the transporter responsible (ENT1) behaves differently in humans. Toxicology is not the art of seeing everything; it is the art of knowing <em>where you cannot see</em>, and what margins to leave.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 2</span>Learning objectives</h4>
+          <ul>
+            <li>Differentiate GLP (Good Laboratory Practice) from non-GLP and explain why regulatory studies require the former</li>
+            <li>Name the safety pharmacology core battery: cardiovascular, central nervous system, respiratory</li>
+            <li>Define NOAEL, STD10, HNSTD, and MABEL — and when each drives the FIH starting dose</li>
+            <li>Compute a simple therapeutic index and explain why it reshapes trial design</li>
+            <li>Understand hERG, QT prolongation, and why cardiac liability kills more programs than any other single issue</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--steel);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>GLP &amp; the regulatory tox battery</h4>
+            <p>GLP is a quality system — not a scientific standard. It ensures studies are documented, reproducible, and audit-traceable. Required tox battery: repeat-dose (2–13 weeks typical for Phase 1), genetic toxicology (Ames + in vitro micronucleus), safety pharmacology, local tolerance, and (later) carcinogenicity and reproductive tox.</p>
+            <div class="analogy">Flight-test data must be certified, timestamped, and signed. A brilliant off-the-books test result doesn't appear on the airworthiness certificate.</div>
+          </div>
+          <div class="concept-card">
+            <h4>NOAEL, MABEL, and the FIH starting dose</h4>
+            <p><strong>NOAEL</strong> — highest dose with no observed adverse effect. <strong>STD10</strong> — severely toxic dose in 10% of animals (oncology convention). <strong>HNSTD</strong> — highest non-severely-toxic dose (NHP). <strong>MABEL</strong> — minimum anticipated biological effect level (post-TGN1412, mandatory for high-risk biologics). The FIH dose is divided from these by a safety factor (typically 10×–100×).</p>
+            <div class="analogy">Four different ways of estimating "airframe structural limit" depending on aircraft type. The pilot's operational ceiling is always many multiples below the limit.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Therapeutic Index</h4>
+            <p>TI = NOAEL ÷ efficacious exposure. A drug with TI of 100 is a comfort; a TI of 3 is a knife-edge program. TI shapes dose selection, monitoring intensity, patient population, and labeling. Oncology drugs often live with TI of 2–5 because the alternative is death. Chronic outpatient drugs need TI in double digits to be commercial.</p>
+            <div class="analogy">The safety margin between cruise speed and airframe failure. A fighter jet can fly right up to the edge; a passenger aircraft cannot. Different purposes demand different margins.</div>
+          </div>
+          <div class="concept-card">
+            <h4>hERG and the QT killer</h4>
+            <p>The hERG potassium channel in cardiac myocytes governs the heart's repolarization. Drugs that block hERG can prolong the QT interval, triggering torsades de pointes — a potentially fatal arrhythmia. hERG is screened early (in vitro patch-clamp), then confirmed in telemetry dog studies. Programs die at hERG.</p>
+            <div class="analogy">One critical rotor blade. If any test shows fatigue in this blade, the entire aircraft class is grounded until it is redesigned. hERG is that blade.</div>
+          </div>
+        </div>
+
+        <!-- Visual: NOAEL → FIH dose derivation -->
+        <div class="visual">
+          <div class="caption">Figure 2 · From NOAEL to FIH starting dose — the safety-factor ladder</div>
+          <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+            <!-- Vertical dose axis -->
+            <line x1="120" y1="40" x2="120" y2="380" stroke="#0F1B2D" stroke-width="1.5"/>
+            <text x="70" y="210" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52" letter-spacing="2" transform="rotate(-90, 70, 210)">DOSE (log scale)</text>
+
+            <!-- Dose bands -->
+            <g>
+              <!-- Toxic zone -->
+              <rect x="125" y="40" width="680" height="50" fill="#A84B2A" opacity="0.35"/>
+              <text x="130" y="65" font-family="'Inter Tight', sans-serif" font-size="11" fill="#0F1B2D" font-weight="600">Toxic zone</text>
+              <text x="130" y="80" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">observed adverse effects</text>
+              <line x1="125" y1="90" x2="805" y2="90" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="3 2"/>
+              <text x="815" y="70" font-family="'Fraunces', serif" font-size="12" font-style="italic" fill="#A84B2A">LOAEL</text>
+              <text x="815" y="95" font-family="'Fraunces', serif" font-size="12" font-style="italic" fill="#A84B2A">NOAEL</text>
+            </g>
+
+            <!-- Safety gap -->
+            <rect x="125" y="90" width="680" height="130" fill="#C8984A" opacity="0.25"/>
+            <text x="130" y="115" font-family="'Inter Tight', sans-serif" font-size="11" fill="#0F1B2D" font-weight="600">Safety-factor band</text>
+            <text x="130" y="132" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">typically 10× for small mol, up to 100× for high-risk biologics</text>
+            <text x="130" y="148" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">+ species correction (HED: human equivalent dose)</text>
+            <!-- Arrow -->
+            <line x1="260" y1="155" x2="260" y2="215" stroke="#9B7233" stroke-width="2"/>
+            <polygon points="260,220 255,210 265,210" fill="#9B7233"/>
+            <text x="270" y="190" font-family="'JetBrains Mono', monospace" font-size="9" fill="#9B7233" letter-spacing="1">÷ safety factor</text>
+
+            <!-- Anticipated therapeutic window -->
+            <rect x="125" y="220" width="680" height="70" fill="#4B6B4A" opacity="0.3"/>
+            <text x="130" y="245" font-family="'Inter Tight', sans-serif" font-size="11" fill="#0F1B2D" font-weight="600">Anticipated therapeutic window</text>
+            <text x="130" y="262" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">MABEL · pharmacologically active exposure</text>
+            <line x1="125" y1="290" x2="805" y2="290" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="3 2"/>
+            <text x="815" y="255" font-family="'Fraunces', serif" font-size="12" font-style="italic" fill="#4B6B4A">MABEL</text>
+
+            <!-- FIH starting dose -->
+            <rect x="125" y="290" width="680" height="50" fill="#1E5A6E" opacity="0.45"/>
+            <text x="130" y="315" font-family="'Inter Tight', sans-serif" font-size="11" fill="#F5EFDF" font-weight="600">FIH starting dose</text>
+            <text x="130" y="330" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">low enough to be &lt; MABEL · typically 1/10 to 1/100 of scaled NOAEL</text>
+            <text x="815" y="320" font-family="'Fraunces', serif" font-size="12" font-style="italic" fill="#1E5A6E">FIH</text>
+
+            <!-- Cohort dose escalation -->
+            <g transform="translate(125, 350)">
+              <text x="0" y="0" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52" letter-spacing="1">COHORT ESCALATION →</text>
+              <g>
+                <circle cx="100" cy="0" r="5" fill="#1E5A6E"/>
+                <circle cx="180" cy="-8" r="5" fill="#1E5A6E" opacity="0.85"/>
+                <circle cx="260" cy="-18" r="5" fill="#1E5A6E" opacity="0.7"/>
+                <circle cx="340" cy="-32" r="5" fill="#C8984A" opacity="0.85"/>
+                <circle cx="420" cy="-50" r="5" fill="#C8984A"/>
+                <circle cx="500" cy="-72" r="5" fill="#9B7233"/>
+                <circle cx="580" cy="-95" r="5" fill="#A84B2A" opacity="0.9"/>
+              </g>
+              <line x1="100" y1="0" x2="580" y2="-95" stroke="#2A3B52" stroke-width="0.6" stroke-dasharray="2 2"/>
+              <text x="620" y="-95" font-family="'JetBrains Mono', monospace" font-size="8" fill="#A84B2A">MTD</text>
+            </g>
+
+            <!-- Title -->
+            <text x="120" y="28" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">The FIH dose is not "safe" — it is demonstrably below the pharmacologically active exposure, with a wide documented margin.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy">
+          <div class="label">Mentor's note</div>
+          <p>The most common failure of preclinical toxicology is not <em>missing a finding</em> — it is <em>understating a finding</em> in the tox report. A pre-IND meeting where the FDA asks "so your NOAEL is actually the LOAEL minus one dose level?" is where programs die. Conservative readouts, transparent limitations, and pre-planned bridging studies buy you credibility with regulators. Hiding data buys you a clinical hold.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 2 checkpoint</h4>
+          <ul>
+            <li>Explain NOAEL, MABEL, HED (human equivalent dose), and when each drives the FIH starting dose</li>
+            <li>List the three safety pharmacology core battery systems</li>
+            <li>Calculate a therapeutic index given NOAEL and efficacious exposure values</li>
+            <li>Articulate why hERG is tested early and what QT prolongation means clinically</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="label">Feynman teach-back</div>
+              <h4>A program has NOAEL = 30 mg/kg in cynomolgus monkey, efficacious exposure (AUC) in mouse = 100 ng·h/mL. A senior leader asks "what's our FIH starting dose and our TI?" Walk through the reasoning.</h4>
+              <div class="hint">click to reveal →</div>
+            </div>
+            <div class="flip-back">
+              <div class="label">One articulation</div>
+              <p>First, convert NHP NOAEL to human equivalent dose using allometric scaling (~1/3 in body surface area for cyno-to-human) → roughly 10 mg/kg HED. Apply a 10× safety factor → FIH starting dose ~1 mg/kg (assuming small molecule, modest risk profile). Second, we cannot compute TI directly from a mouse efficacy number and an NHP tox number — we need to project both to <em>human equivalent exposure</em> first via PK/PD modeling. The right answer to the leader is: <em>"the arithmetic gives me ~1 mg/kg starting dose, but I need the QSP model to put both efficacy and tox on the same exposure scale before I'll quote a TI."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-hook">
+          <div class="label">Memory hook</div>
+          <strong>C-C-R:</strong> the safety pharmacology core battery — <em>Cardiovascular, CNS, Respiratory.</em> The three systems that kill fastest when a drug misfires.<br>
+          <strong>N-M-F:</strong> <em>NOAEL → MABEL → FIH.</em> Three dose anchors, descending order. The FIH should always be the smallest.
+        </div>
+      </div>
+    </div>
+
+<!-- ================ DAY 3 ================ -->
+    <div class="phase" id="day3">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">03</div>
+        <div class="phase-title-wrap">
+          <div class="meta">Bloom · Apply + Analyze · ~3 hrs</div>
+          <h3>Building the assembly line — <em>CMC &amp; formulation</em></h3>
+        </div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+
+        <p class="curiosity-hook">A molecule can be exquisite in a research lab and catastrophic at scale. In 2010, Genzyme's manufacturing plant in Allston was found to have viral contamination in its Cerezyme and Fabrazyme lines — patients with lysosomal storage diseases faced drug rationing for two years. <em>The molecule was the same. The manufacturing process was the whole problem.</em> CMC is where science becomes engineering.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 3</span>Learning objectives</h4>
+          <ul>
+            <li>Distinguish API (active pharmaceutical ingredient) from drug product (DP) and explain why each has its own CMC package</li>
+            <li>Understand salt and polymorph selection — and why the wrong polymorph can cancel a launch (Ritonavir 1998)</li>
+            <li>Apply Quality by Design (QbD): critical quality attributes (CQAs), critical process parameters (CPPs), design of experiments (DoE), design space</li>
+            <li>Interpret process capability (Cpk) and why Cpk ≥ 1.33 is the informal industry threshold</li>
+            <li>Recognize modality-specific CMC challenges: biologics, LNP-mRNA, AAV, autologous cell therapy</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--steel);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>API vs. drug product</h4>
+            <p>The <strong>API</strong> is the pharmacologically active substance itself — a crystalline powder for small molecules, a purified protein solution for biologics, a cell suspension for cell therapies. The <strong>drug product</strong> is what the patient actually receives — tablet, capsule, vial, infusion, auto-injector. Each requires separate CMC development, separate stability data, and separate regulatory sections.</p>
+            <div class="analogy">API is the engine; DP is the aircraft. A perfect engine installed in a broken airframe still doesn't fly. Both need type certification.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Salt, polymorph, and crystal form</h4>
+            <p>Small molecules often exist in multiple crystal forms (polymorphs) — each with different solubility, stability, and bioavailability. A late-stage polymorph switch can require new clinical bridging studies. Salt selection (HCl, mesylate, tartrate…) tunes solubility and PK. These choices lock in early — change them at your peril.</p>
+            <div class="analogy">The aircraft's metallurgy. Two alloys that look identical can fatigue at radically different rates. Choose the wrong one and every aircraft on the line inherits the flaw.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Quality by Design (QbD)</h4>
+            <p>Instead of "test at the end," QbD designs quality in. Start from the <em>quality target product profile</em>, identify <strong>CQAs</strong> (purity, potency, dissolution), map to <strong>CPPs</strong> (temperature, pH, agitation rate), then use <strong>DoE</strong> to build a <strong>design space</strong> — a multidimensional region where the process is proven to produce acceptable product. Operating within the design space is not a regulatory change.</p>
+            <div class="analogy">A pilot's flight envelope, exactly. Anywhere inside the envelope, the aircraft behaves. Outside, you file a new certification. QbD is airworthiness engineering for manufacturing.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Process capability &amp; modality CMC</h4>
+            <p><strong>Cpk</strong> measures how tightly a process hugs its specifications. Cpk ≥ 1.33 means roughly 99.99% of lots meet spec. Biologics CMC adds cell-line development, bioreactor scale-up, viral safety. LNP-mRNA adds lipid formulation and mRNA IVT (in-vitro transcription). AAV adds plasmid production and capsid purification. Cell therapy adds autologous vein-to-vein logistics. Each modality has its own CMC physics.</p>
+            <div class="analogy">Piston engines, turbofans, rocket engines, reusable first stages — the same airworthiness <em>principle</em>, radically different engineering disciplines.</div>
+          </div>
+        </div>
+
+        <!-- Visual: QbD design space -->
+        <div class="visual">
+          <div class="caption">Figure 3 · The QbD design space — CPPs mapped against CQA performance</div>
+          <svg viewBox="0 0 880 480" xmlns="http://www.w3.org/2000/svg">
+            <!-- Axes -->
+            <line x1="80" y1="420" x2="820" y2="420" stroke="#0F1B2D" stroke-width="1.5"/>
+            <line x1="80" y1="60" x2="80" y2="420" stroke="#0F1B2D" stroke-width="1.5"/>
+            <text x="450" y="455" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#0F1B2D" letter-spacing="2">CPP 1 · BIOREACTOR TEMPERATURE →</text>
+            <text x="35" y="240" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#0F1B2D" letter-spacing="2" transform="rotate(-90, 35, 240)">CPP 2 · pH →</text>
+
+            <!-- Knowledge space (outer) -->
+            <rect x="120" y="90" width="660" height="310" fill="none" stroke="#0F1B2D" stroke-width="1" stroke-dasharray="4 3" opacity="0.45"/>
+            <text x="130" y="105" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52" letter-spacing="1">KNOWLEDGE SPACE — explored operating range</text>
+
+            <!-- Design space (filled oblong) -->
+            <ellipse cx="450" cy="255" rx="230" ry="100" fill="#4B6B4A" opacity="0.25" stroke="#4B6B4A" stroke-width="1.8"/>
+            <text x="450" y="250" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" font-style="italic" fill="#4B6B4A" font-weight="500">Design space</text>
+            <text x="450" y="270" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#4B6B4A" letter-spacing="1">CQAs in-spec · regulatory-endorsed flex zone</text>
+
+            <!-- Control space (inner tight zone) -->
+            <ellipse cx="450" cy="255" rx="90" ry="40" fill="#1E5A6E" opacity="0.35" stroke="#1E5A6E" stroke-width="1.5"/>
+            <text x="450" y="260" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#0F1B2D" font-weight="600">Control space</text>
+
+            <!-- NOR setpoint -->
+            <circle cx="450" cy="255" r="5" fill="#A84B2A"/>
+            <line x1="450" y1="255" x2="510" y2="190" stroke="#A84B2A" stroke-width="0.7"/>
+            <text x="515" y="185" font-family="'JetBrains Mono', monospace" font-size="8" fill="#A84B2A">NOR</text>
+            <text x="515" y="195" font-family="'JetBrains Mono', monospace" font-size="7" fill="#A84B2A">normal operating range</text>
+
+            <!-- Failure regions (scattered) -->
+            <circle cx="180" cy="130" r="6" fill="#A84B2A" opacity="0.7"/>
+            <text x="195" y="125" font-family="'JetBrains Mono', monospace" font-size="7" fill="#A84B2A">out-of-spec</text>
+            <text x="195" y="135" font-family="'JetBrains Mono', monospace" font-size="7" fill="#A84B2A">aggregation ↑</text>
+
+            <circle cx="740" cy="380" r="6" fill="#A84B2A" opacity="0.7"/>
+            <text x="695" y="378" font-family="'JetBrains Mono', monospace" font-size="7" fill="#A84B2A" text-anchor="end">titer ↓</text>
+
+            <circle cx="260" cy="360" r="6" fill="#A84B2A" opacity="0.7"/>
+            <text x="275" y="358" font-family="'JetBrains Mono', monospace" font-size="7" fill="#A84B2A">impurity ↑</text>
+
+            <!-- Tick marks -->
+            <g stroke="#0F1B2D" stroke-width="0.6" opacity="0.4" font-family="'JetBrains Mono', monospace" font-size="8" fill="#2A3B52">
+              <line x1="120" y1="420" x2="120" y2="425"/>
+              <text x="120" y="438" text-anchor="middle">32°C</text>
+              <line x1="450" y1="420" x2="450" y2="425"/>
+              <text x="450" y="438" text-anchor="middle">37°C</text>
+              <line x1="780" y1="420" x2="780" y2="425"/>
+              <text x="780" y="438" text-anchor="middle">42°C</text>
+
+              <line x1="75" y1="90" x2="80" y2="90"/>
+              <text x="70" y="93" text-anchor="end">7.4</text>
+              <line x1="75" y1="255" x2="80" y2="255"/>
+              <text x="70" y="258" text-anchor="end">7.0</text>
+              <line x1="75" y1="400" x2="80" y2="400"/>
+              <text x="70" y="403" text-anchor="end">6.6</text>
+            </g>
+
+            <!-- Title/legend -->
+            <text x="80" y="40" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">The QbD flight envelope — Normal Operating Range sits inside a Control Space, inside the Design Space, inside explored Knowledge Space.</text>
+
+            <!-- Legend -->
+            <g transform="translate(520, 90)">
+              <rect x="0" y="0" width="240" height="70" fill="#F5EFDF" stroke="#0F1B2D" stroke-width="0.6" rx="2"/>
+              <text x="10" y="18" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" letter-spacing="1">CQAs tracked</text>
+              <text x="10" y="34" font-family="'Inter Tight', sans-serif" font-size="9" fill="#2A3B52">Purity (HPLC ≥ 98%)</text>
+              <text x="10" y="47" font-family="'Inter Tight', sans-serif" font-size="9" fill="#2A3B52">Aggregation (≤ 2%)</text>
+              <text x="10" y="60" font-family="'Inter Tight', sans-serif" font-size="9" fill="#2A3B52">Titer (≥ 3 g/L), Potency (≥ 90%)</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy">
+          <div class="label">Mentor's note</div>
+          <p>In 1998, Abbott discovered that Ritonavir — already launched as Norvir for HIV — had spontaneously converted to a new, more stable crystal form (Form II) that was dramatically less soluble. The product had to be withdrawn and reformulated. An entire launch nearly collapsed over crystallography. The lesson: <em>what you didn't characterize will characterize you</em>. Preclinical CMC is not a box to tick before Phase 1 — it is a foundation that will be audited every year of the product's commercial life.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 3 checkpoint</h4>
+          <ul>
+            <li>Explain the difference between a CPP and a CQA using one concrete example</li>
+            <li>State why polymorph selection locks in early and what happens if it changes late</li>
+            <li>Interpret a Cpk of 0.8 vs. 1.33 vs. 2.0</li>
+            <li>Name two modality-specific CMC challenges unique to cell and gene therapies</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="label">Feynman teach-back</div>
+              <h4>Your process team wants to change the bioreactor temperature from 37°C to 38°C to improve titer. What questions do you ask before approving? Frame in QbD terms.</h4>
+              <div class="hint">click to reveal →</div>
+            </div>
+            <div class="flip-back">
+              <div class="label">One articulation</div>
+              <p><strong>One:</strong> is 38°C inside our approved design space? If yes, no regulatory filing is needed, but we still need to verify CQAs remain in-spec. <strong>Two:</strong> what DoE data do we have at 38°C — was it modeled, or are we extrapolating? <strong>Three:</strong> which CQAs are temperature-sensitive (aggregation, glycosylation profile for biologics)? <strong>Four:</strong> if we are outside the design space, this is a post-approval change requiring comparability studies and likely a regulatory filing — timeline and cost implications. Approving blindly is how post-market recalls begin.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-hook">
+          <div class="label">Memory hook</div>
+          <strong>C-C-C-D:</strong> <em>CQA, CPP, Control strategy, Design space.</em> QbD's four-letter alphabet.<br>
+          <strong>A-D:</strong> <em>API is the molecule, DP is the medicine.</em> Both need their own CMC filing.
+        </div>
+      </div>
+    </div>
+
+<!-- ================ DAY 4 ================ -->
+    <div class="phase" id="day4">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">04</div>
+        <div class="phase-title-wrap">
+          <div class="meta">Bloom · Analyze + Evaluate · ~3.5 hrs</div>
+          <h3>Asking permission — <em>IND-enabling &amp; regulatory strategy</em></h3>
+        </div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+
+        <p class="curiosity-hook">The average IND submission is about <em>ten thousand pages</em>. The FDA has 30 days to review it. If they don't send a clinical hold letter, the sponsor can dose humans. That 30-day window is why pre-IND meetings exist — to align with the agency on the plan <em>before</em> the reviewers see the bulk of the paperwork.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 4</span>Learning objectives</h4>
+          <ul>
+            <li>Map the eCTD (electronic Common Technical Document) structure: Modules 1–5 and what each contains</li>
+            <li>Name the Investigator's Brochure (IB) and explain its role as the physician's operating manual</li>
+            <li>Understand the pre-IND meeting — purpose, timing, briefing document, and typical agency questions</li>
+            <li>Design a FIH protocol: dose levels, cohort size, intra-/inter-cohort escalation rules, stopping rules</li>
+            <li>Differentiate standard IND from accelerated regulatory pathways: Fast Track, Breakthrough Therapy, RMAT, Orphan, Pediatric Priority Review Voucher</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--steel);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>The eCTD module architecture</h4>
+            <p><strong>Module 1</strong> — regional administrative. <strong>Module 2</strong> — summaries (quality, nonclinical, clinical). <strong>Module 3</strong> — Quality / CMC. <strong>Module 4</strong> — Nonclinical (pharmacology, PK, toxicology). <strong>Module 5</strong> — Clinical (protocols, IB, safety reports). The same architecture carries the molecule all the way from IND to NDA/BLA.</p>
+            <div class="analogy">An aircraft's full type-certification dossier — airframe, powerplant, avionics, systems, operations manuals. Every aspect indexed, cross-referenced, and inspectable.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The Investigator's Brochure (IB)</h4>
+            <p>A standalone document given to every clinical investigator before they dose a patient. Contains the target, mechanism, relevant preclinical pharmacology and tox, prior human experience (if any), dose rationale, risk/benefit framing, and stopping rules. Updated at minimum annually and whenever a significant safety finding emerges. The IB is the physician's operating manual.</p>
+            <div class="analogy">The pilot's operating handbook. Every pilot of every aircraft reads the same document. No flying without it. Every safety bulletin updates it.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The pre-IND meeting</h4>
+            <p>A voluntary but nearly universal meeting between sponsor and FDA before submitting an IND. The sponsor sends a briefing document (~50 pages) describing the program, proposed FIH design, and specific questions. The agency responds in writing, then meets (virtually or in person) to align. Well-run pre-INDs de-risk Phase 1 substantially. Skipping is legal but rarely wise.</p>
+            <div class="analogy">The pilot's meeting with air-traffic control before takeoff — flight plan reviewed, weather discussed, conflicts resolved before the engines start.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Accelerated regulatory pathways</h4>
+            <p><strong>Fast Track</strong> — for serious conditions with unmet need; rolling review. <strong>Breakthrough Therapy</strong> — preliminary clinical evidence of substantial improvement; intensive FDA guidance. <strong>RMAT</strong> — regenerative medicine advanced therapy designation. <strong>Orphan</strong> — rare disease (≤200,000 US patients); tax credits, 7-year market exclusivity. <strong>Pediatric PRV</strong> — priority review voucher tradeable to another program. Each pathway has eligibility criteria and strategic implications.</p>
+            <div class="analogy">Express air corridors, priority landing slots, certain types of cargo granted expedited handling. The aircraft is the same; the regulatory routing differs.</div>
+          </div>
+        </div>
+
+        <!-- Visual: eCTD IND module map -->
+        <div class="visual">
+          <div class="caption">Figure 4 · The eCTD module architecture — the IND package at a glance</div>
+          <svg viewBox="0 0 960 440" xmlns="http://www.w3.org/2000/svg">
+            <!-- Pyramid / tree layout -->
+            <!-- Top: M1 -->
+            <g>
+              <rect x="390" y="30" width="180" height="55" fill="#1E5A6E" opacity="0.9" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="480" y="55" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#F5EFDF" font-weight="600">Module 1</text>
+              <text x="480" y="72" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Regional administrative</text>
+            </g>
+
+            <!-- M2 -->
+            <g>
+              <rect x="390" y="130" width="180" height="55" fill="#5B8A9B" opacity="0.9" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="480" y="155" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#F5EFDF" font-weight="600">Module 2</text>
+              <text x="480" y="172" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Summaries · overviews</text>
+            </g>
+
+            <!-- Connector lines -->
+            <line x1="480" y1="85" x2="480" y2="130" stroke="#2A3B52" stroke-width="1.5"/>
+            <line x1="480" y1="185" x2="480" y2="230" stroke="#2A3B52" stroke-width="1.5"/>
+            <line x1="180" y1="230" x2="780" y2="230" stroke="#2A3B52" stroke-width="1"/>
+            <line x1="180" y1="230" x2="180" y2="270" stroke="#2A3B52" stroke-width="1"/>
+            <line x1="480" y1="230" x2="480" y2="270" stroke="#2A3B52" stroke-width="1"/>
+            <line x1="780" y1="230" x2="780" y2="270" stroke="#2A3B52" stroke-width="1"/>
+
+            <!-- M3 CMC -->
+            <g>
+              <rect x="90" y="270" width="180" height="130" fill="#C8984A" opacity="0.88" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="180" y="295" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#0F1B2D" font-weight="600">Module 3 · Quality</text>
+              <text x="180" y="313" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D">CMC</text>
+              <text x="180" y="335" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• API synthesis &amp; characterization</text>
+              <text x="180" y="352" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• Drug product formulation</text>
+              <text x="180" y="369" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• Stability</text>
+              <text x="180" y="386" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#0F1B2D">• Manufacturing &amp; controls</text>
+            </g>
+
+            <!-- M4 Nonclinical -->
+            <g>
+              <rect x="390" y="270" width="180" height="130" fill="#9B7233" opacity="0.88" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="480" y="295" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#F5EFDF" font-weight="600">Module 4 · Nonclinical</text>
+              <text x="480" y="313" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Preclinical data</text>
+              <text x="480" y="335" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF">• Primary pharmacology</text>
+              <text x="480" y="352" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF">• Safety pharmacology</text>
+              <text x="480" y="369" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF">• PK / ADME</text>
+              <text x="480" y="386" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF">• GLP toxicology</text>
+            </g>
+
+            <!-- M5 Clinical -->
+            <g>
+              <rect x="690" y="270" width="180" height="130" fill="#A84B2A" opacity="0.88" stroke="#0F1B2D" stroke-width="1"/>
+              <text x="780" y="295" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="12" fill="#F5EFDF" font-weight="600">Module 5 · Clinical</text>
+              <text x="780" y="313" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF">Study protocols · reports</text>
+              <text x="780" y="335" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF">• FIH protocol</text>
+              <text x="780" y="352" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF">• Investigator's Brochure</text>
+              <text x="780" y="369" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF">• Prior human experience</text>
+              <text x="780" y="386" text-anchor="middle" font-family="'Inter Tight', sans-serif" font-size="9" fill="#F5EFDF">• Safety reports</text>
+            </g>
+
+            <!-- Title -->
+            <text x="480" y="20" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#0F1B2D">Same architecture at IND, same architecture at NDA/BLA — the package grows in volume, not structure.</text>
+
+            <!-- Bottom: outcome -->
+            <g>
+              <rect x="390" y="420" width="180" height="15" fill="#0F1B2D" opacity="0"/>
+              <text x="480" y="430" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#2A3B52" letter-spacing="2">→ 30-DAY FDA REVIEW · CLEARANCE OR HOLD</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy">
+          <div class="label">Mentor's note</div>
+          <p>The most valuable skill in regulatory strategy is not knowing the rules. It is knowing <em>how the agency thinks</em>. A reviewer reads your tox summary and silently asks: <em>"Would I let my sister take this dose?"</em> Your job is to make that answer obvious. Over-document the things they will worry about. Pre-empt the questions in the briefing package. Bring a narrative, not just data. A clean pre-IND sets the tone for every interaction that follows.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 4 checkpoint</h4>
+          <ul>
+            <li>Name the five eCTD modules and the primary content of each</li>
+            <li>Describe what belongs in an Investigator's Brochure</li>
+            <li>Outline a FIH single-ascending-dose (SAD) protocol with 5 dose levels and cohort escalation rules</li>
+            <li>Differentiate Fast Track, Breakthrough, RMAT, and Orphan designations on at least two dimensions</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="label">Feynman teach-back</div>
+              <h4>You're running a pre-IND meeting next month for a first-in-class oncology biologic. What are the top three questions you'd proactively ask the FDA in your briefing document?</h4>
+              <div class="hint">click to reveal →</div>
+            </div>
+            <div class="flip-back">
+              <div class="label">One articulation</div>
+              <p><strong>One:</strong> "We propose to select the FIH starting dose using MABEL rather than NOAEL; does the Agency agree?" (High-risk biologic, post-TGN1412 paradigm.) <strong>Two:</strong> "We plan to enroll cancer patients rather than healthy volunteers given the risk profile; does the Agency concur?" (Patient vs. healthy volunteer choice is a decision requiring concurrence.) <strong>Three:</strong> "Our proposed stopping rules use PK-based pharmacology targets rather than fixed dose increments — is this acceptable?" These are the three where FDA alignment matters most, where disagreement is most costly to discover later, and where a pre-IND is uniquely valuable.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-hook">
+          <div class="label">Memory hook</div>
+          <strong>1-2-3-4-5:</strong> <em>Admin, Summaries, Quality, Nonclinical, Clinical.</em> Know the eCTD by count.<br>
+          <strong>F-B-R-O:</strong> the four common US accelerated designations — <em>Fast Track, Breakthrough, RMAT, Orphan.</em>
+        </div>
+      </div>
+    </div>
+
+<!-- ================ DAY 5 ================ -->
+    <div class="phase" id="day5">
+      <div class="phase-header" onclick="togglePhase(this)">
+        <div class="phase-number">05</div>
+        <div class="phase-title-wrap">
+          <div class="meta">Bloom · Evaluate + Create · ~3 hrs</div>
+          <h3>Translational integration — <em>the QSP-driven FIH dose</em></h3>
+        </div>
+        <div class="phase-toggle">+</div>
+      </div>
+      <div class="phase-body">
+
+        <p class="curiosity-hook">In 2015, a paper in <em>Clinical Pharmacology &amp; Therapeutics</em> reported that QSP-based FIH dose projections, compared against the classical allometric + safety-factor approach, reduced the median number of cohorts needed to reach the efficacious dose by roughly 40%. Translation: the first-in-human study that used to take 14 months took 8. That is what integration means — not new tools, but <em>old tools in a new loop</em>.</p>
+
+        <div class="objectives">
+          <h4><span class="bloom-tag">Day 5</span>Learning objectives</h4>
+          <ul>
+            <li>Describe Quantitative Systems Pharmacology (QSP) — what it integrates and what it predicts</li>
+            <li>Understand virtual-patient populations as the bridge from deterministic animal data to uncertain human outcomes</li>
+            <li>Integrate the four preclinical disciplines into a single FIH readiness thesis: pharmacology + tox + CMC + regulatory</li>
+            <li>Recognize the IND-to-Phase-1 handoff: what carries forward, what triggers an IB update, when the flight envelope re-opens</li>
+            <li>Evaluate a preclinical program's "FIH-readiness" with a structured lens</li>
+          </ul>
+        </div>
+
+        <h4 style="margin: 2rem 0 1rem; color: var(--steel);">The four key concepts</h4>
+        <div class="concept-cards">
+          <div class="concept-card">
+            <h4>Quantitative Systems Pharmacology</h4>
+            <p>QSP builds a mechanistic mathematical model of a biological pathway — receptors, enzymes, signaling cascades, cell populations, organ-level dynamics — parameterized from preclinical data and human physiology. A virtual patient is a specific parameter set. A virtual population is thousands of such patients with plausible variability. QSP simulates the FIH response before the first volunteer walks in.</p>
+            <div class="analogy">The integrated flight simulator. Before a single test flight, thousands of virtual flights explore wind conditions, pilot errors, system failures. QSP is that simulator for biology.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The integrated preclinical package</h4>
+            <p>An IND-ready program has four converging stories: <em>pharmacology</em> says the drug engages the target and modulates the biomarker at exposures achievable in humans; <em>tox</em> says those exposures are many-fold below where organ injury begins; <em>CMC</em> says the lot that will be dosed is identical to the lots that generated the tox data; <em>regulatory</em> says the agency has been consulted and the trial design is aligned. Any missing thread unravels the others.</p>
+            <div class="analogy">Four independent airworthiness inspections — airframe, engine, avionics, operations. All four sign the certificate. Any unsigned, and the aircraft does not fly.</div>
+          </div>
+          <div class="concept-card">
+            <h4>Handoff to Phase 1</h4>
+            <p>IND clearance (or CTA in EU/UK) opens a narrow door: the sponsor can dose the protocol as submitted. Any substantial change — new cohort, new schedule, new dose above pre-specified — requires amendment. The Investigator's Brochure becomes a living document. Any adverse event during Phase 1 that is serious and unexpected may trigger a 7-day or 15-day safety report. The flight envelope never actually closes — it just shifts from preclinical to clinical instruments.</p>
+            <div class="analogy">Airworthiness certified → the aircraft enters operations, but every flight generates new data. The certificate is conditionally renewed every year, and a significant incident reopens the whole file.</div>
+          </div>
+          <div class="concept-card">
+            <h4>The FIH-readiness lens</h4>
+            <p>Four questions a preclinical lead asks the mirror before submitting an IND: (1) <em>Can we project a human efficacious dose with a specific biomarker?</em> (2) <em>Do we have a tox margin that leadership and regulators will both accept?</em> (3) <em>Is the clinical material representative of what was tested?</em> (4) <em>Has the Agency seen the plan and pushed back?</em> Any "no" means the door isn't yet open.</p>
+            <div class="analogy">Pre-flight checklist. Fuel adequate? Systems green? Weather flyable? ATC cleared? Four yeses, then takeoff.</div>
+          </div>
+        </div>
+
+        <!-- Visual: Integrated preclinical-to-FIH loop -->
+        <div class="visual">
+          <div class="caption">Figure 5 · The integration layer — four preclinical engines converging on FIH</div>
+          <svg viewBox="0 0 820 540" xmlns="http://www.w3.org/2000/svg">
+            <!-- Central hub -->
+            <circle cx="410" cy="270" r="78" fill="#0F1B2D" stroke="#1E5A6E" stroke-width="2.5"/>
+            <text x="410" y="262" text-anchor="middle" font-family="'Fraunces', serif" font-size="15" fill="#F5EFDF" font-style="italic">IND filing</text>
+            <text x="410" y="280" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#C8984A" letter-spacing="2">FIH READY</text>
+            <text x="410" y="296" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7" fill="#5B8A9B" letter-spacing="1">QSP-integrated</text>
+
+            <!-- Four nodes -->
+            <!-- Pharmacology (top) -->
+            <g>
+              <circle cx="410" cy="80" r="58" fill="#1E5A6E" fill-opacity="0.9" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="410" y="74" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#F5EFDF" font-weight="500">Pharmacology</text>
+              <text x="410" y="92" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" letter-spacing="1" opacity="0.85">DOES IT WORK?</text>
+            </g>
+            <!-- Toxicology (right) -->
+            <g>
+              <circle cx="640" cy="270" r="58" fill="#A84B2A" fill-opacity="0.88" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="640" y="264" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#F5EFDF" font-weight="500">Toxicology</text>
+              <text x="640" y="282" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" letter-spacing="1" opacity="0.85">WHAT KILLS?</text>
+            </g>
+            <!-- CMC (bottom) -->
+            <g>
+              <circle cx="410" cy="460" r="58" fill="#C8984A" fill-opacity="0.88" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="410" y="454" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#0F1B2D" font-weight="500">CMC</text>
+              <text x="410" y="472" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#0F1B2D" letter-spacing="1">CAN WE MAKE IT?</text>
+            </g>
+            <!-- Regulatory (left) -->
+            <g>
+              <circle cx="180" cy="270" r="58" fill="#4B6B4A" fill-opacity="0.9" stroke="#0F1B2D" stroke-width="1.5"/>
+              <text x="180" y="264" text-anchor="middle" font-family="'Fraunces', serif" font-size="14" fill="#F5EFDF" font-weight="500">Regulatory</text>
+              <text x="180" y="282" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#F5EFDF" letter-spacing="1" opacity="0.85">WILL THEY SAY YES?</text>
+            </g>
+
+            <!-- QSP integration layer (dashed outer ring) -->
+            <circle cx="410" cy="270" r="230" fill="none" stroke="#5B8A9B" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.55"/>
+            <text x="410" y="36" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#5B8A9B" letter-spacing="3">QSP INTEGRATION LAYER</text>
+
+            <!-- Arrows -->
+            <defs>
+              <marker id="arr3" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+                <polygon points="0 0, 8 3, 0 6" fill="#2A3B52"/>
+              </marker>
+            </defs>
+            <path d="M 410 140 L 410 190" stroke="#2A3B52" stroke-width="1.3" marker-end="url(#arr3)" opacity="0.7"/>
+            <path d="M 580 270 L 490 270" stroke="#2A3B52" stroke-width="1.3" marker-end="url(#arr3)" opacity="0.7"/>
+            <path d="M 410 400 L 410 350" stroke="#2A3B52" stroke-width="1.3" marker-end="url(#arr3)" opacity="0.7"/>
+            <path d="M 240 270 L 330 270" stroke="#2A3B52" stroke-width="1.3" marker-end="url(#arr3)" opacity="0.7"/>
+
+            <!-- Bottom arrow → FIH -->
+            <path d="M 410 348 L 410 525" stroke="#A84B2A" stroke-width="0" />
+            <text x="410" y="525" text-anchor="middle" font-family="'Fraunces', serif" font-size="13" font-style="italic" fill="#2A3B52">No engine fires alone. QSP integrates preclinical PK, PD, tox, and manufacturing variability into one virtual-patient-population predicting Phase 1.</text>
+          </svg>
+        </div>
+
+        <div class="mentor-analogy">
+          <div class="label">Mentor's note</div>
+          <p>The preclinical team that wins the next decade is not the one with the flashiest mouse model or the most powerful QSP software. It is the one whose <em>pharmacology, tox, CMC, and reg affairs functions talk to each other in real time</em>. A tox finding should update the CMC strategy within a week, not a quarter. A CMC change should trigger a bridging-tox decision within days. If these functions meet monthly, you are too slow; if they meet weekly with shared data, you are the rare team the agency trusts.</p>
+        </div>
+
+        <div class="checkpoint">
+          <h4>Day 5 checkpoint</h4>
+          <ul>
+            <li>Explain QSP in plain language, including what it integrates and what it outputs</li>
+            <li>Articulate the four-question FIH-readiness lens in your own words</li>
+            <li>Describe what happens between IND clearance and the first dose to a volunteer</li>
+            <li>Given a fictional preclinical program, identify its weakest engine — pharm, tox, CMC, reg — and propose an action</li>
+          </ul>
+        </div>
+
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="label">Feynman teach-back</div>
+              <h4>A colleague argues that QSP modeling is "expensive and unnecessary — we already have allometric scaling." Make the strongest counter-argument that a good QSP model justifies its cost.</h4>
+              <div class="hint">click to reveal →</div>
+            </div>
+            <div class="flip-back">
+              <div class="label">One articulation</div>
+              <p>Allometric scaling gives you a single projected human exposure from a single animal dose. It assumes linear physiology and ignores inter-patient variability. A QSP model does three things allometry cannot: <strong>(1)</strong> integrates pharmacology, PK, and tox into a single system — so a change in one updates all three projections; <strong>(2)</strong> outputs a <em>distribution</em> of predicted human responses, enabling probability-based trial design (e.g. "80% of virtual patients reach biomarker target at 50 mg"); <strong>(3)</strong> lets you simulate trial amendments — dose increases, cohort sizes — before executing them in humans. For a $50M Phase 1, even a 20% shorter timeline pays for the modeling ten times over.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="memory-hook">
+          <div class="label">Memory hook</div>
+          <strong>P-T-C-R:</strong> <em>Pharmacology, Tox, CMC, Regulatory.</em> Four engines. All four or no flight.<br>
+          <strong>Q-V-P:</strong> <em>QSP → Virtual Population → Probabilistic FIH.</em> The integration layer that replaces point-estimates with distributions.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- JARGON DECODER -->
+<section id="jargon" class="wrap-narrow">
+  <div class="section-label">Jargon decoder · three tiers</div>
+  <h2>The vocabulary of the envelope.</h2>
+  <p>Preclinical vocabulary is dense — part pharmacology, part toxicology, part engineering, part regulatory. The minimum working set:</p>
+
+  <div class="jargon-tier">
+    <h3>Tier 1 · Everyday</h3>
+    <div class="tier-label">If you can define these, you can follow any preclinical review</div>
+    <dl>
+      <dt>PK / PD</dt><dd>Pharmacokinetics (what the body does to the drug) / Pharmacodynamics (what the drug does to the body).</dd>
+      <dt>NOAEL</dt><dd>No Observed Adverse Effect Level — the highest tested dose with no observed toxicity.</dd>
+      <dt>IND / CTA</dt><dd>Investigational New Drug (US) / Clinical Trial Application (EU, UK) — the regulatory filing that permits human dosing.</dd>
+      <dt>FIH</dt><dd>First-in-Human — the first clinical study of a new molecule, usually Phase 1.</dd>
+      <dt>GLP</dt><dd>Good Laboratory Practice — the quality system required for regulatory-submitted nonclinical studies.</dd>
+      <dt>API / DP</dt><dd>Active Pharmaceutical Ingredient / Drug Product — the molecule vs. the dosage form patients receive.</dd>
+      <dt>CMC</dt><dd>Chemistry, Manufacturing &amp; Controls — the entire quality &amp; production package.</dd>
+      <dt>Therapeutic Index</dt><dd>Ratio of safe exposure to efficacious exposure. Higher = wider margin.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 2 · Technical</h3>
+    <div class="tier-label">You hear these in preclinical review meetings</div>
+    <dl>
+      <dt>MABEL</dt><dd>Minimum Anticipated Biological Effect Level — FIH dose anchor for high-risk biologics, post-TGN1412.</dd>
+      <dt>HED</dt><dd>Human Equivalent Dose — animal dose converted to human via body-surface-area scaling.</dd>
+      <dt>hERG</dt><dd>A potassium channel in cardiac cells. Drugs blocking it can prolong QT interval → arrhythmia risk.</dd>
+      <dt>Cmax / AUC / T½</dt><dd>Peak concentration / total exposure / half-life — the three canonical PK metrics.</dd>
+      <dt>NHP</dt><dd>Non-Human Primate (usually cynomolgus monkey) — key toxicology species for biologics.</dd>
+      <dt>PDX / GEMM</dt><dd>Patient-Derived Xenograft (human tumor in immunodeficient mouse) / Genetically Engineered Mouse Model.</dd>
+      <dt>QbD</dt><dd>Quality by Design — structured CMC approach mapping CQAs to CPPs via DoE.</dd>
+      <dt>CQA / CPP</dt><dd>Critical Quality Attribute (output) / Critical Process Parameter (controllable input).</dd>
+      <dt>DoE</dt><dd>Design of Experiments — statistical multivariate experimentation to map the process design space.</dd>
+      <dt>Cpk</dt><dd>Process capability index. Cpk ≥ 1.33 = capable. Industry informal benchmark.</dd>
+      <dt>eCTD</dt><dd>electronic Common Technical Document — the universal regulatory submission format, Modules 1–5.</dd>
+      <dt>IB</dt><dd>Investigator's Brochure — the clinical investigator's operating manual for the molecule.</dd>
+    </dl>
+  </div>
+
+  <div class="jargon-tier">
+    <h3>Tier 3 · Specialist</h3>
+    <div class="tier-label">You hear these from preclinical leads and regulatory strategists</div>
+    <dl>
+      <dt>QSP</dt><dd>Quantitative Systems Pharmacology — mechanistic ODE models of biological systems for translation.</dd>
+      <dt>Virtual patient population</dt><dd>Simulated cohort of QSP parameter sets spanning plausible human variability.</dd>
+      <dt>STD10 / HNSTD</dt><dd>Severely Toxic Dose in 10% (oncology) / Highest Non-Severely Toxic Dose (NHP). FIH dose anchors.</dd>
+      <dt>Allometric scaling</dt><dd>Interspecies scaling of dose/exposure via body weight or surface area exponents.</dd>
+      <dt>PBPK</dt><dd>Physiologically-Based Pharmacokinetics — mechanistic whole-body PK model parameterized by organ physiology.</dd>
+      <dt>AOP</dt><dd>Adverse Outcome Pathway — a causal chain from molecular initiating event to organ-level toxicity.</dd>
+      <dt>NOR / PAR</dt><dd>Normal Operating Range / Proven Acceptable Range — QbD terminology for process control tightness.</dd>
+      <dt>ICH guidelines</dt><dd>International Council for Harmonisation — the globally recognized technical guidance set (e.g. ICH M3, ICH Q8).</dd>
+      <dt>Comparability</dt><dd>Demonstration that pre-change and post-change material are equivalent; required after any material CMC change.</dd>
+      <dt>Bridging study</dt><dd>Short clinical or preclinical study that links earlier data to a modified product, formulation, or population.</dd>
+      <dt>MTD</dt><dd>Maximum Tolerated Dose — highest human dose with acceptable toxicity; classical Phase 1 endpoint in oncology.</dd>
+      <dt>Comparability protocol</dt><dd>Pre-agreed plan with a regulator for handling specified future CMC changes without new filings each time.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- PITFALLS -->
+<section id="pitfalls" class="wrap">
+  <div class="section-label">Traps &amp; pitfalls</div>
+  <h2>Where preclinical programs crash before takeoff.</h2>
+  <p>Most preclinical failures are not data failures — they are <em>judgment failures</em>. Six traps that catch experienced teams:</p>
+
+  <div class="pitfall-grid">
+    <div class="pitfall">
+      <div class="num">1</div>
+      <h4>Wrong-species tox</h4>
+      <p>Running toxicology in a species where the drug's target has divergent biology — the drug binds human target but not mouse target, or vice versa. Tox findings then tell you nothing about humans.</p>
+      <p class="rescue">Rescue: confirm target homology and pharmacology in both rodent and non-rodent species <em>before</em> committing to GLP tox. Add a pharmacologically responsive species if needed.</p>
+    </div>
+    <div class="pitfall">
+      <div class="num">2</div>
+      <h4>The exposure-blind NOAEL</h4>
+      <p>Reporting NOAEL as a dose (mg/kg) without the exposure (AUC, Cmax) it produced. A 100 mg/kg NOAEL in a species with saturable absorption may correspond to lower exposure than 10 mg/kg in a species with linear PK.</p>
+      <p class="rescue">Rescue: always report NOAEL and the exposure at NOAEL. Compute the safety margin from exposure, not dose.</p>
+    </div>
+    <div class="pitfall">
+      <div class="num">3</div>
+      <h4>Late CMC process change</h4>
+      <p>The manufacturing process used to make clinical material differs materially from the process used for GLP tox batches. A late-stage change may require bridging tox studies, which can delay the program by 6–12 months.</p>
+      <p class="rescue">Rescue: lock the representative process before GLP tox starts. Document every change thereafter with comparability data.</p>
+    </div>
+    <div class="pitfall">
+      <div class="num">4</div>
+      <h4>Under-planned pre-IND</h4>
+      <p>The team sends a briefing document covering what <em>they</em> want to discuss, not what the <em>agency</em> will question. The written response is tepid, the meeting is awkward, and issues that should have surfaced in month 18 surface in month 30.</p>
+      <p class="rescue">Rescue: write the briefing document from the reviewer's chair. Seed it with the hardest anticipated questions and answer them preemptively.</p>
+    </div>
+    <div class="pitfall">
+      <div class="num">5</div>
+      <h4>Over-engineered FIH</h4>
+      <p>A FIH protocol with 10 dose levels, elaborate crossovers, and 80+ subjects — when a lean 5-level SAD/MAD design would answer the key questions faster and cheaper. Complexity delays enrollment and diffuses the signal.</p>
+      <p class="rescue">Rescue: every element in the FIH protocol earns its place by answering a specific decision. Cut what doesn't.</p>
+    </div>
+    <div class="pitfall">
+      <div class="num">6</div>
+      <h4>Preclinical-to-clinical baton drop</h4>
+      <p>The preclinical team hands over to clinical after IND clearance and disengages. A Phase 1 safety signal then arrives — and the preclinical context that would illuminate it has left the room.</p>
+      <p class="rescue">Rescue: maintain a translational working group that spans preclinical and Phase 1. Keep the IB living. Budget for it explicitly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CROSS-DOMAIN CONNECTIONS -->
+<section class="wrap">
+  <div class="section-label">Cross-domain connections</div>
+  <h2>Envelope expansion is a pattern, not a pharma concept.</h2>
+  <p>If the test pilot's flight envelope is the closest mirror, three other domains illuminate how humans have learned to de-risk high-stakes premieres.</p>
+
+  <div class="crossdomain-grid">
+    <div class="crossdomain">
+      <div class="domain">Civil aviation</div>
+      <h4>Type certification</h4>
+      <p>A new aircraft undergoes thousands of hours of ground, unmanned, and test-pilot flight before a commercial pilot takes passengers. Every component is inspected, every failure mode documented. The parallel to preclinical is nearly one-to-one — same cultural DNA of "don't fly what you haven't characterized."</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Spaceflight</div>
+      <h4>Rocket incremental test</h4>
+      <p>SpaceX's Falcon 9 went through pad hot-fires, hops, staged flights, and recovery experiments before crewed Dragon launches. Each iteration retired specific risks. Preclinical similarly retires risks in a specific order — never all at once, never all upstream.</p>
+    </div>
+    <div class="crossdomain">
+      <div class="domain">Software SRE</div>
+      <h4>Canary deployments</h4>
+      <p>A new software release first goes to 1% of servers, then 10%, then 100% — with automated rollback if error rates spike. Phase 1's single-ascending-dose design is the pharmaceutical canary deployment. Preclinical is the load test before the canary ever rolls out.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPACED REPETITION -->
+<section id="spaced" class="wrap">
+  <div class="section-label">Spaced repetition schedule</div>
+  <h2>Holding the envelope in memory.</h2>
+  <p>Dense technical vocabulary fades fast without structured review. The 8-touch schedule below is designed for about 2.5 hours of total review spread across a month, giving ~90% retention at the 3-month mark.</p>
+
+  <div class="spaced-rep">
+    <div class="sr-timeline">
+      <div class="sr-day">
+        <div class="day-num">1</div>
+        <div class="day-label">Learn</div>
+        <div class="day-task">Day 1 pharmacology</div>
+      </div>
+      <div class="sr-day">
+        <div class="day-num">2</div>
+        <div class="day-label">Review</div>
+        <div class="day-task">Day 1 checkpoint + Day 2 tox</div>
+      </div>
+      <div class="sr-day">
+        <div class="day-num">3</div>
+        <div class="day-label">Review</div>
+        <div class="day-task">Day 2 flip cards + Day 3 CMC</div>
+      </div>
+      <div class="sr-day">
+        <div class="day-num">4</div>
+        <div class="day-label">Review</div>
+        <div class="day-task">Jargon Tier 1 + 2, Day 4 reg</div>
+      </div>
+      <div class="sr-day">
+        <div class="day-num">5</div>
+        <div class="day-label">Review</div>
+        <div class="day-task">Day 5 integration</div>
+      </div>
+      <div class="sr-day">
+        <div class="day-num">7</div>
+        <div class="day-label">First lapse</div>
+        <div class="day-task">All 5 memory hooks</div>
+      </div>
+      <div class="sr-day">
+        <div class="day-num">14</div>
+        <div class="day-label">Consolidation</div>
+        <div class="day-task">Redo all Feynman teach-backs</div>
+      </div>
+      <div class="sr-day">
+        <div class="day-num">30</div>
+        <div class="day-label">Retention</div>
+        <div class="day-task">Draw concept map from memory</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="wrap-narrow">
+    <div class="section-label" style="color: var(--ochre);">Mentor's parting wisdom</div>
+    <h2>Every molecule that ever saved a life first <em>survived preclinical</em>.</h2>
+    <p>Five days cannot turn you into a preclinical lead, any more than five days can teach you to fly a supersonic aircraft. That was never the promise. The promise was to give you the <em>map of the envelope</em> — enough vocabulary and mental model that when a preclinical scientist shows you their data package, you can tell whether the pharmacology is translational, the tox is honest, the CMC is stable, and the regulatory plan is agency-aligned.</p>
+    <p>The commercial life of a drug begins, in a very real sense, the day its preclinical package is reviewed. Every subsequent Phase, every launch decision, every pricing argument, every safety update on a prescribing label traces back to choices made in these twelve to eighteen months.</p>
+
+    <p class="mantra">Characterize what you cannot see. Leave margins wider than you think you need. Never hide data from regulators. Integrate, or crash.</p>
+
+    <p>The next time you see a new drug approved, remember: before any of the clinical glamour, there was a room of preclinical scientists who argued for weeks about the right species, the right dose, the right starting point. Everything downstream of them is interpretation of choices they made. Respect that room. And if you find yourself in it, carry the flight envelope in your head.</p>
+    <p style="margin-top: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ochre);">— End of Module 03 —</p>
+  </div>
+</section>
+
+</main>
+
+<footer>Module 03 · Preclinical · Five-Day Theoretical Roadmap</footer>
+
+<script>
+  // Mermaid init
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: 'Inter Tight, sans-serif',
+      primaryColor: '#EEE5CE',
+      primaryTextColor: '#0F1B2D',
+      primaryBorderColor: '#0F1B2D',
+      lineColor: '#2A3B52',
+      secondaryColor: '#F5EFDF',
+      tertiaryColor: '#1E5A6E',
+      background: '#EEE5CE',
+      mainBkg: '#EEE5CE',
+      secondBkg: '#F5EFDF'
+    }
+  });
+
+  function togglePhase(header) {
+    const phase = header.parentElement;
+    phase.classList.toggle('open');
+  }
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.min(100, (scrollTop / docHeight) * 100);
+    document.getElementById('progressBar').style.width = pct + '%';
+  });
+</script>
+
+</body>
+</html>
