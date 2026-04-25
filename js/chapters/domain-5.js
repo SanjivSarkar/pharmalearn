@@ -198,194 +198,293 @@ PL.addChapters({
 },
 
 "5-1": {
-  id:"5-1", title:"Healthcare Data Foundations", domain:"Data Science & Pharma Use Cases", domain_id:5,
-  level:"Beginner", mins:35, available:true,
-  tags:["Healthcare Data","Claims","EMR","HIPAA","Data Governance","OMOP"],
-  objectives:["Map the US healthcare data ecosystem and key data types","Understand claims data structure: medical, pharmacy, and eligibility files","Navigate HIPAA requirements for PHI and de-identification","Apply OMOP CDM for cross-database analytics","Identify data quality issues common in healthcare datasets"],
+  id:"5-1", title:"Feature Engineering & Selection", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:38, available:true,
+  tags:["Feature Engineering","Feature Selection","Data Preparation","Missing Data","Encoding","Feature Stores"],
+  objectives:["Understand why feature engineering determines model performance more than algorithm choice","Apply the main transformations for numeric, categorical, and date features","Select the right feature selection strategy for your problem size","Handle missing values and outliers in a principled way","Understand what a feature store is and why it matters in production"],
   toc:[
-    {id:"s1",title:"The Healthcare Data Ecosystem",level:"h2"},
-    {id:"s2",title:"Claims Data Architecture",level:"h2"},
-    {id:"s3",title:"HIPAA & Data Governance",level:"h2"},
-    {id:"s4",title:"OMOP Common Data Model",level:"h2"},
-    {id:"s5",title:"Data Quality in Healthcare",level:"h2"},
-    {id:"s6",title:"Key Takeaways",level:"h2"}
+    {id:"s1",title:"Why Feature Engineering Matters",level:"h2"},
+    {id:"s2",title:"Numeric & Date Feature Transformations",level:"h2"},
+    {id:"s3",title:"Categorical Encoding",level:"h2"},
+    {id:"s4",title:"Handling Missing Data & Outliers",level:"h2"},
+    {id:"s5",title:"Feature Selection Methods",level:"h2"},
+    {id:"s6",title:"Feature Stores",level:"h2"},
+    {id:"s7",title:"Key Takeaways",level:"h2"}
   ],
   sections:[
-    {id:"s1",content:`<h2 id="s1">The Healthcare Data Ecosystem</h2>
-<p>Healthcare data exists across a fragmented ecosystem of systems and stakeholders. No single source captures the complete patient picture:</p>
-<table><thead><tr><th>Data Type</th><th>Source System</th><th>Key Content</th><th>Coverage</th></tr></thead>
-<tbody>
-<tr><td>Medical Claims</td><td>Payers, clearinghouses (IQVIA, Komodo)</td><td>Diagnoses (ICD-10), procedures (CPT/HCPCS), provider, date, cost</td><td>Commercially insured; 3–6 month lag</td></tr>
-<tr><td>Pharmacy Claims</td><td>PBMs, retail pharmacy chains</td><td>Drug (NDC), days supply, quantity, copay, prescriber</td><td>Retail Rx; misses buy-and-bill</td></tr>
-<tr><td>EMR/EHR</td><td>Epic, Cerner, Allscripts</td><td>Clinical notes, labs, vitals, problem lists, orders</td><td>Biased toward integrated health systems</td></tr>
-<tr><td>Lab Data</td><td>Quest, LabCorp, specialty labs</td><td>Lab values, test codes (LOINC), results, reference ranges</td><td>Outpatient; some gaps in inpatient</td></tr>
-<tr><td>Genomic/Molecular</td><td>Foundation Medicine, Tempus, Guardant</td><td>Mutations, biomarkers, tumor mutational burden</td><td>Academic/specialty centers; growing community</td></tr>
-<tr><td>Patient-Generated</td><td>Wearables, apps, surveys</td><td>Activity, sleep, PROs, symptoms</td><td>Biased toward engaged, tech-savvy patients</td></tr>
+    {id:"s1",content:`<h2 id="s1">Why Feature Engineering Matters</h2>
+<p>Feature engineering is the process of transforming raw data into inputs that a machine learning model can learn from effectively. It is consistently the single biggest lever on model performance — far more impactful than algorithm selection. A great feature set with a simple model almost always beats a poor feature set with a sophisticated model.</p>
+<div class="callout info"><div class="callout-title">The Rule of Thumb</div><p>In industry ML competitions and production deployments, experienced practitioners spend 80% of their time on feature engineering and 20% on model selection and tuning. The opposite allocation — jumping to complex models with poorly engineered features — is the most common mistake made by data scientists early in their careers.</p></div>
+<h3>What Makes a Good Feature?</h3>
+<table><thead><tr><th>Property</th><th>What It Means</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Predictive</strong></td><td>Carries signal about the target variable</td><td>Days since last refill predicts adherence risk</td></tr>
+<tr><td><strong>Available at prediction time</strong></td><td>The feature value exists when the model needs to score</td><td>Cannot use "next 30 days' sales" as a feature — it doesn't exist yet at prediction time</td></tr>
+<tr><td><strong>Not leaking the target</strong></td><td>Does not encode the answer before the model has to predict it</td><td>Using "discontinued = 1" as a feature in a discontinuation model is pure data leakage</td></tr>
+<tr><td><strong>Stable over time</strong></td><td>The feature's distribution and meaning don't shift unpredictably</td><td>A feature based on a data feed that changes format monthly will degrade model performance silently</td></tr>
 </tbody></table>
-<div class="callout"><div class="callout-title">The Data Completeness Challenge</div><p>Even the largest commercial claims databases cover only ~60–70% of the US population (excluding uninsured, VA, some Medicaid). Within the covered population, data capture varies by site of care, data submission practices, and claims adjudication timing. Always characterize your database's coverage before making population-level inferences.</p></div>`},
-    {id:"s2",content:`<h2 id="s2">Claims Data Architecture</h2>
-<p>A standard commercial claims database has three core tables that must be linked by patient identifier:</p>
-
-<p>Key linking considerations:</p>
+<h3>The Feature Engineering Pipeline</h3>
+<div class="flow-box">Raw Data → Data Cleaning → Feature Extraction → Feature Transformation → Feature Selection → Feature Store / Model Input</div>`},
+    {id:"s2",content:`<h2 id="s2">Numeric & Date Feature Transformations</h2>
+<h3>Numeric Transformations</h3>
+<table><thead><tr><th>Transformation</th><th>How It Works</th><th>When to Use</th></tr></thead><tbody>
+<tr><td><strong>Standardisation (Z-score)</strong></td><td>Subtract mean, divide by standard deviation. Result: mean=0, std=1</td><td>Linear models, SVMs, neural networks — anything sensitive to feature scale</td></tr>
+<tr><td><strong>Min-Max Scaling</strong></td><td>Rescale to [0, 1]: (x − min) / (max − min)</td><td>Neural networks; when you need bounded inputs</td></tr>
+<tr><td><strong>Log Transform</strong></td><td>Apply log(x+1) to compress right-skewed distributions</td><td>Highly skewed features: income, claim counts, prescription volume</td></tr>
+<tr><td><strong>Binning / Discretisation</strong></td><td>Convert continuous values into ordered categorical buckets (e.g., age: 0–18, 19–34, 35–54, 55+)</td><td>When the relationship with the target is non-linear within a range; when interpretability matters</td></tr>
+<tr><td><strong>Interaction Terms</strong></td><td>Multiply two features together to capture their joint effect</td><td>When domain knowledge says two features interact (e.g., call frequency × market access score)</td></tr>
+<tr><td><strong>Polynomial Features</strong></td><td>Raise a feature to a power (x², x³) to capture curves</td><td>When the feature-target relationship is non-linear and you're using a linear model</td></tr>
+</tbody></table>
+<div class="callout"><div class="callout-title">Tree Models Don't Need Scaling</div><p>Gradient boosted trees (XGBoost, LightGBM, Random Forest) are scale-invariant — they split on rank, not magnitude. Standardisation and min-max scaling have no effect on tree model performance. Only apply scaling for linear models, SVMs, k-NN, and neural networks.</p></div>
+<h3>Date & Time Features</h3>
+<p>Dates are often stored as a single timestamp but contain many extractable signals:</p>
 <ul>
-<li>Always join through eligibility to ensure patients were enrolled during the analysis period</li>
-<li>ICD-10 codes can appear in any position (dx_1 through dx_25) — searching only primary diagnosis misses 30–50% of cases</li>
-<li>NDC codes are 11-digit and change with package size changes — use drug class or ingredient-level lookups for brand tracking</li>
+<li><strong>Time deltas:</strong> Days between events (days from diagnosis to treatment start, days since last refill, days since last HCP call)</li>
+<li><strong>Cyclical encoding:</strong> Month-of-year and day-of-week are cyclical — December and January are adjacent, not far apart. Encode as sin/cos pairs: sin(2π × month / 12) and cos(2π × month / 12)</li>
+<li><strong>Event flags:</strong> Binary indicator for whether an event occurred in the past N days (e.g., "had a hospitalisation in prior 90 days")</li>
+<li><strong>Rolling statistics:</strong> Mean, max, count of a value over a trailing window (3-month rolling TRx, 6-month rolling PDC)</li>
 </ul>`},
-    {id:"s3",content:`<h2 id="s3">HIPAA & Data Governance</h2>
-<p>The Health Insurance Portability and Accountability Act (HIPAA) governs the use of Protected Health Information (PHI). For pharma analytics, two de-identification standards apply:</p>
-<table><thead><tr><th>Method</th><th>Description</th><th>Result</th><th>Use Case</th></tr></thead>
-<tbody>
-<tr><td><strong>Expert Determination</strong></td><td>Statistician certifies risk of re-identification is very small</td><td>De-identified data; retains more granularity</td><td>Research, analytics (most pharma RWE)</td></tr>
-<tr><td><strong>Safe Harbor</strong></td><td>Remove 18 specific PHI identifiers (name, DOB, zip code to 3 digits, etc.)</td><td>De-identified but loses geographic/temporal granularity</td><td>Public data releases, basic analytics</td></tr>
+    {id:"s3",content:`<h2 id="s3">Categorical Encoding</h2>
+<p>Most ML algorithms require numeric inputs. Categorical variables (HCP specialty, payer type, drug name, geographic region) must be encoded into numbers without imposing false ordinal relationships.</p>
+<table><thead><tr><th>Encoding Method</th><th>How It Works</th><th>When to Use</th><th>Drawback</th></tr></thead><tbody>
+<tr><td><strong>One-Hot Encoding</strong></td><td>Create one binary column per category value. "Cardiology" becomes [1,0,0], "Neurology" [0,1,0]</td><td>Low-cardinality categories (&lt;20 unique values) with linear/logistic regression</td><td>Creates huge sparse matrices for high-cardinality features</td></tr>
+<tr><td><strong>Ordinal Encoding</strong></td><td>Map ordered categories to integers (Beginner=1, Intermediate=2, Advanced=3)</td><td>Genuinely ordered categories where the order is meaningful</td><td>Imposes a magnitude relationship — use only when order truly matters</td></tr>
+<tr><td><strong>Target Encoding</strong></td><td>Replace each category value with the mean target value for that category (e.g., "Oncology" → mean dropout rate for oncologists)</td><td>High-cardinality categoricals with tree models</td><td>Prone to overfitting — always apply within cross-validation folds, never on full training set</td></tr>
+<tr><td><strong>Frequency / Count Encoding</strong></td><td>Replace each category with its frequency in the training data</td><td>High-cardinality categoricals when target mean is unavailable or unstable</td><td>Conflates rare categories that happen to have similar frequencies</td></tr>
+<tr><td><strong>Embedding</strong></td><td>Learn a dense vector representation through a neural network layer</td><td>Very high-cardinality (thousands of unique values: drug codes, zip codes) with neural networks</td><td>Requires significant training data and a neural network framework</td></tr>
 </tbody></table>
-<p><strong>The 18 Safe Harbor identifiers include:</strong> Names, geographic data smaller than state, dates (except year), phone numbers, fax numbers, email addresses, SSNs, medical record numbers, health plan beneficiary numbers, account numbers, certificate/license numbers, VINs, device identifiers, URLs, IP addresses, biometric identifiers, full-face photos, any unique identifier.</p>
-<div class="callout warning"><div class="callout-title">Re-identification Risk</div><p>Research has shown that 87% of Americans can be uniquely identified using only date of birth, gender, and 5-digit ZIP code. "De-identified" datasets that retain geographic and temporal granularity can be re-identified. Always treat de-identified healthcare data with appropriate access controls and data use agreements (DUAs).</p></div>`},
-    {id:"s4",content:`<h2 id="s4">OMOP Common Data Model</h2>
-<p>The <strong>OMOP CDM (Observational Medical Outcomes Partnership Common Data Model)</strong> standardizes disparate healthcare data into a common structure and vocabulary, enabling federated cross-database analytics:</p>
-
-<div class="callout info"><div class="callout-title">OMOP Vocabularies</div><p>OMOP maps raw codes to standardized concepts: ICD-10 → SNOMED-CT (conditions), NDC/RxNorm → RxNorm (drugs), CPT → SNOMED (procedures), LOINC stays as LOINC (labs). The concept_ancestor table enables hierarchical queries — finding all descendants of a SNOMED concept retrieves all sub-diagnoses without listing every ICD-10 code explicitly.</p></div>`},
-    {id:"s5",content:`<h2 id="s5">Data Quality in Healthcare</h2>
-<p>Healthcare data quality problems are ubiquitous and must be systematically characterized before analysis:</p>
-<table><thead><tr><th>Quality Issue</th><th>Example</th><th>Impact</th><th>Detection Method</th></tr></thead>
-<tbody>
-<tr><td>Coding variation</td><td>Same condition coded as C83.1 vs C83.19 vs C83.9</td><td>Undercounting of cases</td><td>Hierarchical concept search (OMOP)</td></tr>
-<tr><td>Diagnosis coding for payment</td><td>Principal diagnosis reflects reimbursement optimization, not clinical priority</td><td>Misclassification of condition prevalence</td><td>Require ≥2 diagnosis codes on ≥2 dates</td></tr>
-<tr><td>Claim adjudication lag</td><td>December services appear in February data</td><td>Undercounting recent activity</td><td>Add 3–6 month buffer before cutting data</td></tr>
-<tr><td>Patient de-duplication</td><td>Same patient with different IDs across payer changes</td><td>Double-counting, broken longitudinal records</td><td>Probabilistic linkage using DOB, gender, geography</td></tr>
-<tr><td>Drug switching noise</td><td>Patients appear to switch drugs due to NDC packaging changes</td><td>False treatment discontinuations</td><td>Map NDC to ingredient; use drug class instead</td></tr>
+<div class="callout info"><div class="callout-title">Target Encoding Leakage Risk</div><p>Target encoding must be computed within each fold of cross-validation, using only the training portion of that fold. Computing target encoding on the full dataset before splitting will leak target information into the features, inflating validation scores and producing a model that performs worse in production than estimated.</p></div>`},
+    {id:"s4",content:`<h2 id="s4">Handling Missing Data & Outliers</h2>
+<h3>Why Data Goes Missing</h3>
+<p>Understanding <em>why</em> data is missing determines the correct treatment strategy:</p>
+<table><thead><tr><th>Missing Mechanism</th><th>Definition</th><th>Example</th><th>Treatment</th></tr></thead><tbody>
+<tr><td><strong>MCAR</strong> (Missing Completely at Random)</td><td>Missingness is unrelated to any variable</td><td>Random system glitch drops 2% of records</td><td>Any imputation or complete-case analysis is valid</td></tr>
+<tr><td><strong>MAR</strong> (Missing at Random)</td><td>Missingness depends on other observed variables but not on the missing value itself</td><td>Lab values missing more often for patients with fewer clinic visits</td><td>Multiple imputation or model-based imputation using observed predictors</td></tr>
+<tr><td><strong>MNAR</strong> (Missing Not at Random)</td><td>Missingness depends on the missing value itself</td><td>High lab values are more likely to be missing because extreme results trigger repeat testing and reporting delays</td><td>Requires domain knowledge; missingness itself is informative — add a binary "was missing" indicator as a feature</td></tr>
 </tbody></table>
-<div class="callout"><div class="callout-title">The 2-Code Rule</div><p>Requiring ≥2 diagnosis codes on ≥2 separate dates (at least 30 days apart) dramatically reduces false positives in case identification. A single diagnosis code may reflect a "rule-out" or administrative coding error. Two codes on two dates indicates clinical confirmation of the condition.</p></div>`},
-    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
-<div class="takeaway"><div class="takeaway-num">1</div><div>No single healthcare database captures the complete patient — the best pharma analytics programs integrate claims (breadth), EMR (clinical depth), and specialty pharmacy (adherence) with explicit characterization of each source's coverage gaps.</div></div>
-<div class="takeaway"><div class="takeaway-num">2</div><div>Claims data has three core tables — eligibility, medical claims, and pharmacy claims — always join through eligibility to ensure patients were enrolled during the analysis period.</div></div>
-<div class="takeaway"><div class="takeaway-num">3</div><div>The 2-code rule (≥2 diagnosis codes on ≥2 separate dates) dramatically reduces false positives in case identification — a single diagnosis code may represent a rule-out, not a confirmed diagnosis.</div></div>
-<div class="takeaway"><div class="takeaway-num">4</div><div>OMOP CDM enables cross-database federated analytics by standardizing all raw codes to SNOMED/RxNorm/LOINC vocabularies — the concept_ancestor table enables hierarchical searches that are the key to OMOP's power.</div></div>`}],
-  questions:[
-    {id:"q1",text:"You need to identify all patients with CLL (chronic lymphocytic leukemia) in a claims database. Which approach is most robust?",
-     options:["Search for ICD-10 code C83.1 only","Search for all ICD-10 codes in the C83 family across all diagnosis positions (primary and secondary) on at least 2 separate dates","Search only the primary diagnosis field for C83.1","Use drug claims for BTK inhibitors as a proxy for CLL diagnosis"],
-     correct:1,explanation:"Robust case identification requires: (1) searching all ICD-10 codes in the C83.x family (not just C83.1, as coding varies), (2) searching ALL diagnosis positions (not just primary), and (3) requiring ≥2 codes on ≥2 dates to reduce false positives from rule-out coding. Using drugs as a proxy misses unmedicated patients and is confounded by indication changes."},
-    {id:"q2",text:"A claims analysis shows a spike in drug utilization in December vs November. Before reporting this as a real trend, what data quality issue should you rule out?",
-     options:["Seasonal prescription behavior","Claim adjudication lag — November services may still be appearing in December data, inflating December counts artificially","Holiday prescribing patterns","Formulary changes effective January 1"],
-     correct:1,explanation:"Claim adjudication lag means that claims for services rendered in a given month are often submitted and paid weeks to months later. In a database snapshot cut in December, November claims may be underrepresented because many haven't been adjudicated yet — making December appear artificially higher by comparison. Always add a 3–6 month buffer to the end of any claims analysis period."},
-    {id:"q3",text:"In OMOP CDM, what is the advantage of querying via concept_ancestor versus listing individual ICD-10 codes?",
-     options:["concept_ancestor queries are faster","Hierarchical queries via concept_ancestor automatically include all child concepts (ICD-10 sub-codes) under a parent SNOMED concept, ensuring complete case capture without manually enumerating every code variant","concept_ancestor is required by HIPAA","Individual ICD-10 codes are not available in OMOP"],
-     correct:1,explanation:"The concept_ancestor table stores the full ontological hierarchy — a single query for ancestor_concept_id = [CLL SNOMED code] retrieves all descendant concepts, including every ICD-10 sub-code (C83.10, C83.11, C83.19, etc.) that maps to CLL in the vocabulary. This eliminates the need to manually maintain lists of ICD codes and automatically adapts as vocabulary mappings are updated."}
+<h3>Imputation Strategies</h3>
+<table><thead><tr><th>Method</th><th>Approach</th><th>Best For</th></tr></thead><tbody>
+<tr><td>Mean / Median imputation</td><td>Replace missing with the column average or median</td><td>Quick baseline; numeric features with MCAR/MAR and &lt;5% missingness</td></tr>
+<tr><td>Mode imputation</td><td>Replace missing with the most frequent category</td><td>Categorical features with low missingness</td></tr>
+<tr><td>Model-based (KNN, regression)</td><td>Predict the missing value using other features</td><td>Higher missingness rates; MCAR and MAR mechanisms</td></tr>
+<tr><td>Indicator flag + fill</td><td>Add binary "was_missing" feature AND fill with median</td><td>MNAR — missingness itself is predictive</td></tr>
+</tbody></table>
+<h3>Outlier Treatment</h3>
+<p>Outliers can be errors (data quality problem) or genuine extreme values (high prescribers, very long-stay patients). Never remove outliers without investigating first:</p>
+<ul>
+<li><strong>IQR method:</strong> Flag values below Q1 − 1.5×IQR or above Q3 + 1.5×IQR</li>
+<li><strong>Winsorisation:</strong> Cap extreme values at the 1st and 99th percentile rather than removing them — preserves the row while reducing leverage</li>
+<li><strong>Log transform:</strong> Compresses the right tail, naturally reducing outlier influence in many distributions</li>
+</ul>`},
+    {id:"s5",content:`<h2 id="s5">Feature Selection Methods</h2>
+<p>More features is not always better. Irrelevant or redundant features add noise, slow training, increase overfitting risk, and make models harder to explain. Feature selection is the systematic process of identifying which features to keep.</p>
+<h3>Three Families of Feature Selection</h3>
+<table><thead><tr><th>Family</th><th>How It Works</th><th>Advantage</th><th>Drawback</th></tr></thead><tbody>
+<tr><td><strong>Filter Methods</strong></td><td>Score each feature independently of the model using a statistical test (correlation, mutual information, chi-squared). Remove features below a threshold.</td><td>Fast; no model needed; good for initial pruning of very large feature sets</td><td>Ignores feature interactions — a feature weak alone may be powerful in combination</td></tr>
+<tr><td><strong>Wrapper Methods</strong></td><td>Use model performance to evaluate feature subsets. Recursive Feature Elimination (RFE) trains the model, removes the least important feature, retrains, repeats.</td><td>Finds the best subset for a specific model</td><td>Computationally expensive; can overfit to the validation set</td></tr>
+<tr><td><strong>Embedded Methods</strong></td><td>Feature selection happens during model training. LASSO regression drives irrelevant feature coefficients to exactly zero. Tree models produce feature importances that identify low-value features.</td><td>Fast; naturally accounts for feature interactions; no separate selection step</td><td>Model-specific; LASSO assumes linear relationships</td></tr>
+</tbody></table>
+<h3>Permutation Feature Importance</h3>
+<p>After training, randomly shuffle one feature's values and measure the drop in model performance. A large drop means the feature was important; a small drop (or improvement) means the feature was irrelevant or harmful. This method works for any model and respects feature interactions — it is more reliable than tree-based feature importance scores which can be biased toward high-cardinality features.</p>
+<div class="flow-box">For each feature: Shuffle values → Measure performance drop → Importance = baseline performance − shuffled performance</div>`},
+    {id:"s6",content:`<h2 id="s6">Feature Stores</h2>
+<p>A feature store is a centralised platform that computes, stores, versions, and serves features for ML training and real-time prediction. It solves the most common production ML problem: <strong>training-serving skew</strong> — the model was trained on features computed one way, but the production system computes them differently, leading to silent performance degradation.</p>
+<h3>Feature Store Architecture</h3>
+<div class="flow-box">Offline Store (training): Data warehouse → Transform → Feature values → Feature Store ← Online Store (serving): Real-time event stream → Transform → Feature values</div>
+<table><thead><tr><th>Component</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><strong>Offline store</strong></td><td>Historical feature values used to create training datasets. Backed by a data warehouse or data lake. Supports point-in-time correct feature retrieval — crucial to prevent data leakage during training.</td></tr>
+<tr><td><strong>Online store</strong></td><td>Low-latency storage for the most recent feature values used during real-time model serving. Backed by Redis, DynamoDB, or similar key-value stores. Returns features in &lt;10ms for real-time scoring.</td></tr>
+<tr><td><strong>Feature registry</strong></td><td>Catalogue of all available features with documentation, ownership, and lineage. Enables feature reuse across teams — a feature built for one model (days_since_last_refill) can be reused in five others without recomputing.</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Point-in-Time Correctness</div><p>When creating a training dataset, you must use only feature values that were available <em>at the time each training label was created</em> — not future feature values. A feature store with point-in-time lookups ensures this automatically. Without it, your training data accidentally includes "future" feature values that leak information about the target, inflating training metrics and producing models that fail in production.</p></div>`},
+    {id:"s7",content:`<h2 id="s7">Key Takeaways</h2>
+<ul>
+<li><strong>Feature engineering outweighs algorithm choice</strong> — invest 80% of effort here before tuning models.</li>
+<li><strong>Tree models are scale-invariant</strong> — standardisation and min-max scaling are unnecessary; apply only for linear models, SVMs, and neural networks.</li>
+<li><strong>Target encoding must happen within cross-validation folds</strong> — computing it on the full dataset before splitting leaks the target and produces optimistic but false validation scores.</li>
+<li><strong>Understand why data is missing</strong> before choosing an imputation strategy — MNAR missingness is informative and should be encoded as a binary indicator feature.</li>
+<li><strong>Permutation feature importance</strong> is more reliable than tree-based importance for feature selection — it respects feature interactions and is not biased toward high-cardinality variables.</li>
+<li><strong>Feature stores solve training-serving skew</strong> — the single most common cause of production ML models performing worse than their validation metrics suggested.</li>
+</ul>`}
+  ],
+  quiz:[
+    {q:"A data scientist standardises (Z-scores) all features before training an XGBoost model. What is the effect on model performance?",options:["Performance improves because features are on the same scale","No effect — tree-based models like XGBoost split on rank, not magnitude, making them invariant to feature scaling","Performance decreases","The model will fail to train"],answer:1},
+    {q:"You want to encode 'HCP specialty' (50 unique values) as a feature in a logistic regression. What is the biggest risk of one-hot encoding at this cardinality?",options:["One-hot encoding does not work with logistic regression","Creating 50 binary columns increases dimensionality and risks overfitting when training data per category is sparse","One-hot encoding always produces data leakage","Logistic regression cannot handle binary features"],answer:1},
+    {q:"A feature's values are missing because very high values trigger delayed laboratory processing (the high values themselves cause the missingness). This is an example of:",options:["MCAR — add the feature without modification","MNAR — missingness is informative; add a binary 'was_missing' indicator alongside any imputed value","MAR — impute with the column mean","Data corruption — remove the feature entirely"],answer:1},
+    {q:"Permutation feature importance is preferred over tree-based feature importance because:",options:["It is faster to compute","It is model-agnostic and not biased toward high-cardinality features, unlike impurity-based tree importance which favours features with many split points","It requires no validation data","It always selects fewer features"],answer:1},
+    {q:"What problem does a feature store's 'point-in-time correct' retrieval mechanism prevent?",options:["Feature scaling inconsistencies","Data leakage — it ensures training features only include values available at the time each training label was created, not future values","Storage costs","Slow model serving"],answer:1}
   ]
 },
 
 "5-2": {
-  id:"5-2", title:"SQL for Pharma Analytics", domain:"Data Science & Pharma Use Cases", domain_id:5,
-  level:"Intermediate", mins:40, available:true,
-  tags:["SQL","Analytics","Claims SQL","Window Functions","CTEs","Performance"],
-  objectives:["Write efficient SQL for large-scale claims data analysis","Master window functions for time-series and ranking analytics","Build complex patient cohort queries using CTEs","Optimize query performance for billion-row claims tables","Apply advanced SQL patterns: gaps-and-islands, sessionization, running totals"],
+  id:"5-2", title:"Model Interpretability & Explainability", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:35, available:true,
+  tags:["SHAP","LIME","Explainability","Interpretability","Partial Dependence","Feature Importance","Responsible AI"],
+  objectives:["Distinguish intrinsic interpretability from post-hoc explainability","Apply SHAP to explain both global model behaviour and individual predictions","Use PDPs and ICE plots to visualise feature-target relationships","Select the right explainability tool for a given model and audience","Understand responsible AI obligations in regulated pharma contexts"],
   toc:[
-    {id:"s1",title:"Pharma SQL Patterns",level:"h2"},
-    {id:"s2",title:"Window Functions",level:"h2"},
-    {id:"s3",title:"CTE Architecture",level:"h2"},
-    {id:"s4",title:"Advanced Patterns",level:"h2"},
-    {id:"s5",title:"Performance Optimization",level:"h2"},
-    {id:"s6",title:"Key Takeaways",level:"h2"}
+    {id:"s1",title:"Why Interpretability Matters",level:"h2"},
+    {id:"s2",title:"Intrinsic vs Post-Hoc Methods",level:"h2"},
+    {id:"s3",title:"SHAP — SHapley Additive Explanations",level:"h2"},
+    {id:"s4",title:"Partial Dependence & ICE Plots",level:"h2"},
+    {id:"s5",title:"LIME & Counterfactual Explanations",level:"h2"},
+    {id:"s6",title:"Responsible AI in Regulated Contexts",level:"h2"},
+    {id:"s7",title:"Key Takeaways",level:"h2"}
   ],
   sections:[
-    {id:"s1",content:`<h2 id="s1">Pharma SQL Patterns</h2>
-<p>Pharma analytics has a standard set of SQL patterns that appear repeatedly across projects. Mastering these accelerates delivery significantly:</p>
+    {id:"s1",content:`<h2 id="s1">Why Interpretability Matters</h2>
+<p>A model that predicts accurately but cannot be explained is often unusable in practice. Interpretability is not a luxury — it is a business and regulatory requirement in pharma.</p>
+<table><thead><tr><th>Stakeholder</th><th>Why They Need Explanations</th><th>What They Want</th></tr></thead><tbody>
+<tr><td>Field Sales Rep</td><td>Must understand why an HCP is flagged as high-priority to have a credible conversation</td><td>"Why is Dr Smith in my top 10?" — a specific, actionable reason</td></tr>
+<tr><td>Brand Team</td><td>Needs to trust the model before acting on its recommendations</td><td>Confirmation that the model captures known business drivers</td></tr>
+<tr><td>Regulatory / Compliance</td><td>AI decisions affecting patients or prescribers may require audit trails</td><td>Evidence that protected attributes (race, gender) are not driving outputs</td></tr>
+<tr><td>Data Scientist</td><td>Model debugging — understanding where the model fails and why</td><td>Feature-level diagnosis of errors and drift</td></tr>
+<tr><td>Legal / Ethics</td><td>Liability for automated decisions requires explainable processes</td><td>Documentation of the decision logic at a population and individual level</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Accuracy vs Interpretability Is a False Trade-Off</div><p>Modern explainability tools (especially SHAP) can explain complex models like XGBoost and neural networks with sufficient precision for most business and regulatory needs. The choice is rarely "interpretable model or accurate model" — it is "accurate model with post-hoc explanation" vs "interpretable model with lower accuracy." Start with the best-performing model, then explain it.</p></div>`},
+    {id:"s2",content:`<h2 id="s2">Intrinsic vs Post-Hoc Methods</h2>
+<table><thead><tr><th>Category</th><th>What It Is</th><th>Examples</th><th>Best For</th></tr></thead><tbody>
+<tr><td><strong>Intrinsic (white-box)</strong></td><td>The model's structure is itself interpretable — no additional explanation tool needed</td><td>Linear regression (coefficients), Logistic regression, Decision tree (visual flowchart), Rule-based systems</td><td>Regulatory submissions, field-facing tools where simplicity is paramount</td></tr>
+<tr><td><strong>Post-hoc, model-specific</strong></td><td>Explanation method designed for one model type</td><td>Tree feature importance (Gini impurity), attention weights (Transformers)</td><td>Quick sanity checks during development; not reliable for final explanations</td></tr>
+<tr><td><strong>Post-hoc, model-agnostic</strong></td><td>Explanation method that works for any model — treats it as a black box</td><td>SHAP, LIME, PDP, ICE plots, permutation importance</td><td>Production explainability for complex models (XGBoost, neural networks)</td></tr>
+</tbody></table>
+<h3>Scope: Global vs Local Explanations</h3>
+<table><thead><tr><th>Scope</th><th>Question Answered</th><th>Use Case</th></tr></thead><tbody>
+<tr><td><strong>Global</strong></td><td>"What does this model do in general? Which features matter most overall?"</td><td>Model validation, brand team briefings, regulatory documentation</td></tr>
+<tr><td><strong>Local</strong></td><td>"Why did this model make this specific prediction for this specific HCP/patient?"</td><td>Field rep conversations ("Here's why Dr Smith is your priority"), individual appeal processes</td></tr>
+</tbody></table>`},
+    {id:"s3",content:`<h2 id="s3">SHAP — SHapley Additive Explanations</h2>
+<p>SHAP is the gold standard for ML explainability. It is grounded in cooperative game theory: each feature is treated as a "player" in a game, and SHAP values measure each player's fair contribution to the final prediction. The key property is <strong>additivity</strong> — SHAP values for all features sum exactly to the difference between the model's prediction for this instance and the model's average prediction across all instances.</p>
+<div class="flow-box">Model prediction = Base value (average prediction) + SHAP(feature_1) + SHAP(feature_2) + ... + SHAP(feature_n)</div>
+<h3>How SHAP Values Are Computed</h3>
+<p>For each feature and each data point, SHAP computes the average marginal contribution of that feature across all possible subsets of features. In practice:</p>
 <ul>
-<li><strong>Index date identification:</strong> Finding first event (first Rx, first diagnosis)</li>
-<li><strong>Continuous enrollment:</strong> Ensuring patient was insured during the study period</li>
-<li><strong>Pre/post period analysis:</strong> Comparing patient outcomes before and after an event</li>
-<li><strong>Treatment gaps:</strong> Identifying breaks in therapy (gaps-and-islands problem)</li>
-<li><strong>LOT derivation:</strong> Sequencing drug regimens into lines of therapy</li>
-<li><strong>Patient funnel:</strong> Tracking conversion rates through sequential clinical events</li>
+<li><strong>TreeSHAP</strong> (for XGBoost, LightGBM, Random Forest): Exact computation in polynomial time — fast and exact. The standard for most pharma ML work.</li>
+<li><strong>KernelSHAP</strong> (model-agnostic): Approximates SHAP values using a weighted linear model around each prediction. Slower but works for any model including neural networks.</li>
+<li><strong>LinearSHAP</strong> (for linear models): Exact and instant — SHAP values are simply the feature coefficient × (feature value − mean).</li>
 </ul>
-`},
-    {id:"s2",content:`<h2 id="s2">Window Functions</h2>
-<p>Window functions are essential for time-series pharma analytics — they compute values across a defined "window" of rows without collapsing the result set:</p>
-`},
-    {id:"s3",content:`<h2 id="s3">CTE Architecture</h2>
-<p>Complex pharma queries should be built as layered CTEs — each CTE performing one logical step, building on the prior:</p>
-`},
-    {id:"s4",content:`<h2 id="s4">Advanced Patterns</h2>
-<p><strong>Gaps-and-Islands:</strong> Identifying continuous therapy episodes separated by gaps</p>
-`},
-    {id:"s5",content:`<h2 id="s5">Performance Optimization</h2>
-<p>Claims databases contain billions of rows. Performance optimization is critical:</p>
+<h3>Reading SHAP Outputs</h3>
+<table><thead><tr><th>Plot Type</th><th>Shows</th><th>Use It When</th></tr></thead><tbody>
+<tr><td><strong>Bar chart (global)</strong></td><td>Mean absolute SHAP value per feature — overall feature importance ranking</td><td>Model validation, confirming known drivers are captured</td></tr>
+<tr><td><strong>Beeswarm plot</strong></td><td>Each dot = one data point; position = SHAP value; colour = feature value. Shows distribution of impacts across the population</td><td>Understanding non-linear relationships; identifying segments where a feature helps vs hurts</td></tr>
+<tr><td><strong>Waterfall plot (local)</strong></td><td>For one specific prediction: shows each feature's push up or down from the base value to the final score</td><td>Explaining a single HCP's or patient's score to a field rep or case reviewer</td></tr>
+<tr><td><strong>SHAP dependence plot</strong></td><td>SHAP value vs raw feature value for one feature — reveals non-linear relationships and interactions</td><td>Understanding exactly how a feature affects predictions across its range</td></tr>
+</tbody></table>`},
+    {id:"s4",content:`<h2 id="s4">Partial Dependence & ICE Plots</h2>
+<h3>Partial Dependence Plots (PDP)</h3>
+<p>A PDP shows the marginal effect of one (or two) features on the model's predicted outcome, averaged across the entire dataset. It answers: "Holding all other features at their actual values, how does varying <em>this feature</em> change the average prediction?"</p>
+<div class="flow-box">For each value v of feature X: fix X = v for all observations → get model predictions → average predictions → plot average vs v</div>
+<p><strong>Reading a PDP:</strong> The y-axis shows the predicted outcome (or log-odds). A rising PDP line means higher feature values increase the prediction; a flat line means the feature has no marginal effect; a non-monotonic line indicates a complex relationship.</p>
+<h3>ICE Plots (Individual Conditional Expectation)</h3>
+<p>ICE plots are PDPs disaggregated to the individual level — instead of averaging, each observation gets its own line. ICE plots reveal <strong>heterogeneity</strong>: if the ICE lines all move in the same direction as the PDP, the effect is homogeneous. If some lines go up while others go down, the feature's effect is moderated by other features (an interaction).</p>
+<div class="callout"><div class="callout-title">PDP Assumption — Independence</div><p>PDPs assume features are independent when marginalising. This assumption fails for correlated features. If "field call frequency" and "market access score" are correlated, a PDP that varies call frequency while holding market access fixed is unrealistic — it creates artificial data points that never exist in nature. SHAP dependence plots handle this more gracefully because they condition on the actual observed distribution.</p></div>
+<h3>2D PDP — Interaction Effects</h3>
+<p>A two-way PDP plots the joint effect of two features on the prediction — the resulting surface shows interactions. A flat surface = no interaction; a tilted/curved surface = the two features interact in predicting the outcome.</p>`},
+    {id:"s5",content:`<h2 id="s5">LIME & Counterfactual Explanations</h2>
+<h3>LIME (Local Interpretable Model-Agnostic Explanations)</h3>
+<p>LIME explains an individual prediction by fitting a simple interpretable model (typically a linear model) locally around that prediction. It generates perturbed versions of the input, gets model predictions for each, and fits a linear model to those predictions — the linear model's coefficients are the explanation.</p>
+<div class="flow-box">Original input → Perturb inputs (random noise) → Get model predictions for perturbed inputs → Fit weighted linear model on perturbed inputs → Linear coefficients = local explanation</div>
+<p><strong>LIME vs SHAP in practice:</strong></p>
+<table><thead><tr><th>Dimension</th><th>LIME</th><th>SHAP</th></tr></thead><tbody>
+<tr><td>Consistency</td><td>Stochastic — repeated calls can give different explanations for the same point</td><td>Deterministic (for tree models)</td></tr>
+<tr><td>Additivity</td><td>Does not guarantee coefficients sum to the prediction</td><td>Guaranteed to sum to prediction − base value</td></tr>
+<tr><td>Speed</td><td>Slow — requires many model calls</td><td>Fast with TreeSHAP</td></tr>
+<tr><td>Text/image data</td><td>Works well — perturbs word tokens or superpixels</td><td>Less natural for unstructured data</td></tr>
+</tbody></table>
+<h3>Counterfactual Explanations</h3>
+<p>A counterfactual answers: "What is the minimum change to the input that would change the model's prediction?" This is the most actionable form of explanation for end users.</p>
+<p><strong>Example:</strong> "HCP Dr Jones scored 0.28 (below threshold). If his prior 90-day TRx in class increased from 3 to 8, his score would be 0.72 (above threshold)." This tells a manager what the HCP needs to do (or the rep needs to drive) to move to the high-priority tier.</p>`},
+    {id:"s6",content:`<h2 id="s6">Responsible AI in Regulated Contexts</h2>
+<p>In pharma, ML models may influence which HCPs receive field attention, which patients get intervention calls, or which clinical decisions are supported. This carries regulatory and ethical obligations.</p>
+<h3>Bias & Fairness Checks</h3>
+<p>Before deploying any model that affects people:</p>
 <ul>
-<li><strong>Filter early:</strong> Apply date filters and diagnosis/drug filters in the first CTE before any joins</li>
-<li><strong>Use covering indexes:</strong> Indexes on (patient_id, service_date) and (icd10_dx_1, service_date) dramatically accelerate common queries</li>
-<li><strong>Avoid SELECT *:</strong> Specify only needed columns — reduces I/O on columnar databases</li>
-<li><strong>Partition pruning:</strong> If table is partitioned by year, always include date filters to enable partition pruning</li>
-<li><strong>DISTINCT vs GROUP BY:</strong> On large tables, GROUP BY often outperforms DISTINCT</li>
-<li><strong>CTEs vs temp tables:</strong> For complex multi-step queries, materializing intermediate results as temp tables can dramatically outperform repeated CTE reference</li>
+<li><strong>Disparate impact analysis:</strong> Does the model systematically score differently across demographic groups (gender, race/ethnicity, geography)?</li>
+<li><strong>Protected attribute leakage:</strong> Do proxy features (zip code, payer type) encode protected attributes and drive predictions?</li>
+<li><strong>Calibration by subgroup:</strong> Is the model equally well-calibrated across segments, or does it systematically over-predict for some groups and under-predict for others?</li>
 </ul>
-`},
-    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
-<div class="takeaway"><div class="takeaway-num">1</div><div>Window functions (LAG, LEAD, ROW_NUMBER, NTILE, SUM OVER) are the most important SQL skill for pharma analytics — they enable time-series analysis, first-event identification, decile ranking, and running totals without self-joins.</div></div>
-<div class="takeaway"><div class="takeaway-num">2</div><div>Build complex queries as layered CTEs — each CTE performing one logical operation makes queries readable, debuggable, and maintainable; deeply nested subqueries are never acceptable in production code.</div></div>
-<div class="takeaway"><div class="takeaway-num">3</div><div>The gaps-and-islands pattern is essential for therapy episode identification — using LAG + cumulative SUM to group continuous fills into episodes is more reliable than any rule-based approach.</div></div>
-<div class="takeaway"><div class="takeaway-num">4</div><div>Performance optimization on billion-row claims tables requires: filter early in the first CTE, use partition pruning with date filters, avoid SELECT *, and materialize large intermediate results as temp tables for reuse.</div></div>`}],
-  questions:[
-    {id:"q1",text:"You need to identify the first prescription for each patient in a drug class. Which SQL approach is most efficient on a large claims database?",
-     options:["SELECT MIN(fill_date) with GROUP BY patient_id","Use ROW_NUMBER() OVER (PARTITION BY patient_id ORDER BY fill_date) and filter WHERE rank=1","Use a correlated subquery checking NOT EXISTS for prior fills","Use DISTINCT with ORDER BY fill_date"],
-     correct:1,explanation:"ROW_NUMBER() with PARTITION BY patient_id ORDER BY fill_date assigns sequential ranks within each patient's fills. Filtering WHERE rank=1 retrieves only the first fill per patient — this is the most efficient approach on columnar databases. MIN() with GROUP BY also works but cannot easily extend to carry forward other columns from that first-fill row without additional joins."},
-    {id:"q2",text:"A query on a 3-billion-row medical claims table uses WHERE icd10_dx_1 LIKE 'C%'. What performance issue does this create?",
-     options:["LIKE patterns are always efficient on indexed columns","LIKE 'C%' (leading wildcard on left side) prevents index seeks; use BETWEEN 'C00' AND 'C99' with partition pruning for 100x+ performance improvement","No issue — LIKE is the only way to search ICD codes","The query will return incorrect results"],
-     correct:1,explanation:"LIKE 'C%' with a wildcard on the RIGHT side of the pattern can use an index range scan. However, LIKE 'C%' on a 3B-row table without partition pruning still scans all rows. The best practice is: (1) always include partition column (service_year) to enable pruning, (2) use BETWEEN for range queries on indexed columns, (3) explicitly filter out NULLs to enable index seeks."},
-    {id:"q3",text:"In a gaps-and-islands analysis for therapy persistence, you define a gap as >30 days with no medication supply. A patient has fills on Jan 1 (30 days supply), Feb 5 (30 days supply), and April 1 (30 days supply). How many therapy episodes does this patient have?",
-     options:["1 episode (all fills within 90 days)","2 episodes: Jan 1–Mar 2 (continuous), April 1 onward (new episode after gap)","3 episodes (one per fill)","Cannot determine without more information"],
-     correct:1,explanation:"Episode 1: Jan 1 fill (30 days) covers through Jan 31. Feb 5 fill is 5 days after Jan 31 expiry — within the 30-day gap allowance — so it extends the episode through Mar 6. Episode 1 ends Mar 6. April 1 is 26 days after Mar 6 — within the 30-day gap allowance, so actually this should be one episode. Let's recalculate: Jan 1 + 30 days = Jan 31. Feb 5 - Jan 31 = 5 days gap (< 30), so continuous. Feb 5 + 30 = Mar 7. Apr 1 - Mar 7 = 25 days gap (< 30), also continuous. So actually 1 episode. The answer 2 episodes would apply if the second gap exceeded 30 days."}
+<h3>FDA Guidance on AI/ML in Drug Development</h3>
+<p>The FDA's 2021 Action Plan for AI/ML in drug development requires:</p>
+<ul>
+<li>Good Machine Learning Practice (GMLP) principles analogous to GCP/GMP</li>
+<li>Documented data management, model development, and validation processes</li>
+<li>Transparency about model limitations and intended use population</li>
+<li>Monitoring plans for model drift post-deployment</li>
+</ul>
+<div class="callout info"><div class="callout-title">EU AI Act Impact on Pharma</div><p>The EU AI Act (2024) classifies AI systems used in healthcare as "high-risk" — subject to conformity assessments, technical documentation requirements, human oversight obligations, and post-market monitoring. Pharma companies using ML in clinical decision support, patient risk stratification, or pharmacovigilance will need to comply as they deploy AI tools across EU markets.</p></div>`},
+    {id:"s7",content:`<h2 id="s7">Key Takeaways</h2>
+<ul>
+<li><strong>SHAP is the gold standard</strong> for ML explainability — it is additive (values sum to the prediction), consistent, and works for any model via KernelSHAP or efficiently via TreeSHAP.</li>
+<li><strong>Global explanations</strong> (bar chart, beeswarm) validate model behaviour at a population level; <strong>local explanations</strong> (waterfall) justify individual predictions to end users.</li>
+<li><strong>PDPs show average marginal effects</strong> but assume feature independence — use ICE plots to detect heterogeneity and interactions that PDPs mask.</li>
+<li><strong>LIME is stochastic and non-additive</strong> — prefer SHAP for tabular data; LIME adds value for text and image explanations.</li>
+<li><strong>Counterfactual explanations</strong> are the most actionable form — they answer "what would need to change to flip this prediction?"</li>
+<li><strong>Bias and fairness audits are non-optional</strong> in regulated pharma contexts — check for disparate impact, proxy variable leakage, and subgroup calibration before deployment.</li>
+</ul>`}
+  ],
+  quiz:[
+    {q:"A SHAP waterfall plot for HCP Dr Chen shows: base value = 0.35, days_since_last_rx SHAP = +0.18, call_frequency SHAP = +0.09, payer_mix SHAP = −0.05. What is Dr Chen's predicted score?",options:["0.35","0.57","0.62","0.47"],answer:1},
+    {q:"You plot a PDP for 'call_frequency' and it shows a strong positive slope — more calls = higher prescribing probability. A colleague notes that ICE lines show some going up while others go down. What does this mean?",options:["The PDP is wrong — ICE is always correct","The feature's effect is heterogeneous — call frequency helps with some HCP segments but may actually reduce prescribing for others. Interactions with other features should be investigated.","ICE lines always go in different directions — this is normal noise","The model should be retrained"],answer:1},
+    {q:"Why is LIME considered less reliable than SHAP for tabular data explanations?",options:["LIME is slower than SHAP","LIME is stochastic (repeated calls can give different explanations) and does not guarantee that explanation values sum to the model prediction, unlike SHAP's additive guarantee","LIME requires more training data","LIME only works for decision trees"],answer:1},
+    {q:"A model scoring patients for adherence risk has a mean absolute SHAP value of 0.15 for 'zip_code'. This is concerning because:",options:["Zip code is not a valid feature for any model","Zip code is a proxy for race, income, and access — a high SHAP value indicates the model may be encoding protected demographic attributes, requiring a bias and fairness audit","SHAP values above 0.1 indicate model errors","Zip code should always have zero SHAP value"],answer:1},
+    {q:"A counterfactual explanation says: 'Patient A would move from low-risk to high-risk if their days_since_last_refill increased from 5 to 48'. Who finds this most actionable?",options:["The data scientist tuning the model","A patient support programme nurse — this tells them that the patient's refill delay is the key intervention target","The regulatory team filing the PSUR","The IT team deploying the model"],answer:1}
   ]
 },
 
 "5-3": {
-  id:"5-3", title:"Python for Pharma Analytics", domain:"Data Science & Pharma Use Cases", domain_id:5,
-  level:"Intermediate", mins:45, available:true,
-  tags:["Python","Pandas","Data Analysis","Pharma Analytics","Visualization","Pipeline"],
-  objectives:["Build a complete pharma analytics pipeline using pandas","Master time-series operations for claims data analysis","Create publication-quality visualizations for commercial analytics","Implement efficient data processing patterns for large datasets","Structure reusable analytics code as modular Python functions"],
-  toc:[
-    {id:"s1",title:"Pharma Analytics Stack",level:"h2"},
-    {id:"s2",title:"Claims Data Processing in Pandas",level:"h2"},
-    {id:"s3",title:"Time-Series Analytics",level:"h2"},
-    {id:"s4",title:"Visualization for Pharma",level:"h2"},
-    {id:"s5",title:"Code Architecture",level:"h2"},
-    {id:"s6",title:"Key Takeaways",level:"h2"}
-  ],
+  id:"5-3", title:"Time Series Analysis", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:38, available:true,
+  tags:["Time Series","Decomposition","Stationarity","ARIMA","ACF","Seasonality","Walk-Forward Validation"],
+  objectives:["Explain what makes time series data different from cross-sectional data","Decompose a series into trend, seasonality, and residuals","Test for stationarity and apply differencing to achieve it","Interpret ACF and PACF plots to select ARIMA parameters","Evaluate time series forecasts correctly using walk-forward validation"],
   sections:[
-    {id:"s1",content:`<h2 id="s1">Pharma Analytics Stack</h2>
-<p>The standard Python stack for pharma analytics:</p>
-<table><thead><tr><th>Library</th><th>Version</th><th>Primary Use</th></tr></thead>
-<tbody>
-<tr><td>pandas</td><td>≥2.0</td><td>Data manipulation, claims processing, aggregation</td></tr>
-<tr><td>numpy</td><td>≥1.24</td><td>Numerical computing, array operations</td></tr>
-<tr><td>scipy</td><td>≥1.10</td><td>Statistical tests, optimization, distributions</td></tr>
-<tr><td>statsmodels</td><td>≥0.14</td><td>Regression, time series, econometrics (MMM)</td></tr>
-<tr><td>scikit-learn</td><td>≥1.3</td><td>ML models, propensity scores, segmentation</td></tr>
-<tr><td>lifelines</td><td>≥0.27</td><td>Survival analysis, Kaplan-Meier, Cox models</td></tr>
-<tr><td>matplotlib/seaborn</td><td>≥3.7/0.12</td><td>Visualization, publication charts</td></tr>
-<tr><td>plotly</td><td>≥5.15</td><td>Interactive dashboards, funnel charts</td></tr>
-<tr><td>SQLAlchemy</td><td>≥2.0</td><td>Database connectivity (claims databases)</td></tr>
-<tr><td>pyarrow</td><td>≥12.0</td><td>Parquet I/O for large datasets</td></tr>
+    {id:"s1",content:`<h2 id="s1">What Makes Time Series Data Special</h2>
+<p>Time series data is a sequence of observations ordered in time. This ordering creates dependencies that violate the core assumption of most standard ML models — that observations are independent and identically distributed (i.i.d.). Ignoring the temporal structure leads to flawed analyses and misleading forecasts.</p>
+<table><thead><tr><th>Property</th><th>Cross-Sectional Data</th><th>Time Series Data</th></tr></thead><tbody>
+<tr><td>Order matters?</td><td>No — rows are interchangeable</td><td>Yes — the sequence is the data</td></tr>
+<tr><td>Observations independent?</td><td>Assumed yes</td><td>No — today depends on yesterday (autocorrelation)</td></tr>
+<tr><td>Train/test split method</td><td>Random split is valid</td><td>Must use temporal split — future data cannot train the model</td></tr>
+<tr><td>Primary challenge</td><td>Feature selection, class imbalance</td><td>Stationarity, seasonality, forecasting horizon</td></tr>
 </tbody></table>
-<div class="flow-box"><div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>Standard pharma analytics imports</strong></div></div>
-<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>Configure pandas display</strong></div></div>
-</div>`},
-    {id:"s2",content:`<h2 id="s2">Claims Data Processing in Pandas</h2>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Med = pd.read parquet(medical path, dtype backend='pyarrow')</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Rx = pd.read parquet(pharmacy path, dtype backend='pyarrow')</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Elig = pd.read parquet(eligibility path)</div>
-</div>`},
-    {id:"s3",content:`<h2 id="s3">Time-Series Analytics</h2>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Freq = 'ME', rolling weeks=13):</div>
+<div class="callout info"><div class="callout-title">Why Random Train/Test Split Fails for Time Series</div><p>If you randomly assign 20% of weekly Rx records to the test set, the model trains on data from both before and after test observations. This means the model has "seen the future" relative to some test points — its performance looks excellent but is meaningless. Always split time series data temporally: train on all observations up to date T, test on all observations after T.</p></div>
+<h3>Core Time Series Concepts</h3>
+<table><thead><tr><th>Concept</th><th>Definition</th></tr></thead><tbody>
+<tr><td><strong>Autocorrelation</strong></td><td>Correlation between a time series and a lagged copy of itself. Rx this week is correlated with Rx last week.</td></tr>
+<tr><td><strong>Stationarity</strong></td><td>Statistical properties (mean, variance, autocorrelation) do not change over time. Most models require stationary data.</td></tr>
+<tr><td><strong>Seasonality</strong></td><td>Regular, predictable cycles: January formulary resets, Q4 prescription spikes before plan year ends, summer visit slowdowns.</td></tr>
+<tr><td><strong>Trend</strong></td><td>Long-term directional movement: brand uptake curve, market share trajectory.</td></tr>
+</tbody></table>`},
+    {id:"s2",content:`<h2 id="s2">Time Series Decomposition</h2>
+<p>Decomposition separates a time series into its constituent structural components, making it easier to model each component separately and understand what is driving observed patterns.</p>
+<div class="flow-box">Observed Series = Trend + Seasonality + Residual (Additive model)<br>Observed Series = Trend × Seasonality × Residual (Multiplicative model)</div>
+<p>Use the <strong>additive</strong> model when seasonal variation is roughly constant in magnitude regardless of the trend level. Use the <strong>multiplicative</strong> model when seasonal swings grow proportionally with the trend (common in growing brands — a 10% holiday spike on $100M is bigger than on $10M).</p>
+<h3>The Three Components</h3>
+<table><thead><tr><th>Component</th><th>Definition</th><th>Pharma Example</th></tr></thead><tbody>
+<tr><td><strong>Trend (T)</strong></td><td>Smooth long-term direction — can be linear, polynomial, or piecewise</td><td>Brand's TRx growing 3% per quarter post-launch; then plateauing after loss of exclusivity</td></tr>
+<tr><td><strong>Seasonality (S)</strong></td><td>Regular, repeating cycles at a fixed frequency (weekly, monthly, annual)</td><td>Annual: Q4 spike before plan-year end; Monthly: prescriptions drop in August (vacation); Weekly: Mondays highest for office visits</td></tr>
+<tr><td><strong>Residual / Noise (R)</strong></td><td>What remains after removing trend and seasonality — random fluctuation or unexplained signal</td><td>A drug shortage in March, a competitor recall in June, a formulary change in January</td></tr>
+</tbody></table>
+<h3>STL Decomposition</h3>
+<p>STL (Seasonal-Trend decomposition using LOESS) is the most flexible decomposition method. Unlike classical decomposition, STL handles any seasonality period, is robust to outliers, and allows the seasonal component to change gradually over time — important for long-running brands where seasonal patterns shift.</p>`},
+    {id:"s3",content:`<h2 id="s3">Stationarity, ACF & PACF</h2>
+<h3>Stationarity</h3>
+<p>A time series is <strong>stationary</strong> if its statistical properties do not change over time: constant mean, constant variance, and autocorrelation that depends only on lag length, not on time. Most forecasting models (ARIMA, exponential smoothing) require stationary data.</p>
+<p>Common sources of non-stationarity in pharma data:</p>
+<ul>
+<li><strong>Trend:</strong> A brand growing 5% per quarter has an increasing mean</li>
+<li><strong>Variance growth:</strong> A maturing brand with volatile market share has increasing variance</li>
+<li><strong>Structural break:</strong> A formulary change or patent expiry permanently shifts the series level</li>
+</ul>
+<h3>Making a Series Stationary</h3>
+<table><thead><tr><th>Non-Stationarity Type</th><th>Fix</th></tr></thead><tbody>
+<tr><td>Trend</td><td><strong>First differencing:</strong> Subtract each observation from the previous one. New series = ΔY_t = Y_t − Y_{t−1}. Repeat (second differencing) if a single diff is insufficient.</td></tr>
+<tr><td>Growing variance</td><td><strong>Log transform</strong> before differencing — stabilises variance across the series range</td></tr>
+<tr><td>Structural break</td><td>Add a dummy variable marking the break, or model pre/post break as separate series</td></tr>
+</tbody></table>
+<p>The <strong>Augmented Dickey-Fuller (ADF) test</strong> formally tests for a unit root (a key sign of non-stationarity). A p-value &lt; 0.05 rejects the null hypothesis of a unit root — the series is stationary.</p>
+<h3>ACF and PACF</h3>
+<p>Before fitting ARIMA, examine the autocorrelation structure of the differenced series:</p>
+<table><thead><tr><th>Plot</th><th>What It Shows</th><th>How to Read It</th></tr></thead><tbody>
+<tr><td><strong>ACF (Autocorrelation Function)</strong></td><td>Correlation between the series and each of its lags, including indirect effects through intermediate lags</td><td>Decays slowly → non-stationary (difference more). Sharp cutoff at lag q → MA(q) term. Gradual decay → AR component.</td></tr>
+<tr><td><strong>PACF (Partial Autocorrelation Function)</strong></td><td>Direct correlation between the series and each lag, controlling for all shorter lags</td><td>Sharp cutoff at lag p → AR(p) term. Gradual decay → MA component.</td></tr>
+</tbody></table>`},
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -410,52 +509,52 @@ PL.addChapters({
   <div class="formula-label">Formula</div>
   <div class="formula-main">Baseline = merged[</div>
 </div>`},
-    {id:"s4",content:`<h2 id="s4">Visualization for Pharma</h2>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Fig, Ax = plt.subplots(figsize=(12, 6))</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Color = PHARMA PALETTE[0], linewidth=2.5, label=brand name, zorder=3)</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Color = PHARMA PALETTE[0], linewidth=1.5, linestyle=' −  − ',</div>
-</div>
-<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
-<tr><td>ax is None</td><td>fig, ax = plt.subplots(figsize=(12, 6))</td></tr>
-<tr><td>latest share &lt; prior share</td><td>ax.set facecolor('#fff5f5')</td></tr>
+    {id:"s4",content:`<h2 id="s4">ARIMA Models</h2>
+<p>ARIMA (AutoRegressive Integrated Moving Average) is the classical statistical model for univariate time series forecasting. It combines three mechanisms:</p>
+<table><thead><tr><th>Component</th><th>Parameter</th><th>Mechanism</th><th>Captures</th></tr></thead><tbody>
+<tr><td><strong>AutoRegressive (AR)</strong></td><td>p</td><td>Regresses the series on its own past p values</td><td>Momentum — "recent values predict today's value"</td></tr>
+<tr><td><strong>Integrated (I)</strong></td><td>d</td><td>Number of times the series is differenced to achieve stationarity</td><td>Trend removal</td></tr>
+<tr><td><strong>Moving Average (MA)</strong></td><td>q</td><td>Regresses on past q forecast errors (shocks)</td><td>Error correction — smooths out past surprises</td></tr>
+</tbody></table>
+<p>Written as ARIMA(p, d, q). For seasonal data, SARIMA adds seasonal components: SARIMA(p,d,q)(P,D,Q)[m] where m is the seasonal period (12 for monthly, 52 for weekly).</p>
+<h3>How to Select p, d, q</h3>
+<div class="flow-box">Step 1: Plot series → check for trend/seasonality<br>Step 2: Difference until stationary (d = number of differences; verify with ADF test)<br>Step 3: Plot ACF of differenced series → cutoff at lag q gives MA(q)<br>Step 4: Plot PACF of differenced series → cutoff at lag p gives AR(p)<br>Step 5: Fit model → check residuals are white noise (no autocorrelation remaining)</div>
+<h3>Exponential Smoothing (ETS)</h3>
+<p>ETS models forecast by weighting recent observations more heavily than older ones, with the weight decaying exponentially into the past. Three variants handle different combinations of trend and seasonality:</p>
+<table><thead><tr><th>Model</th><th>Trend</th><th>Seasonality</th><th>Best For</th></tr></thead><tbody>
+<tr><td>Simple ES</td><td>None</td><td>None</td><td>Flat series with random noise</td></tr>
+<tr><td>Holt's</td><td>Linear</td><td>None</td><td>Trending series without seasonality</td></tr>
+<tr><td>Holt-Winters</td><td>Linear</td><td>Additive or Multiplicative</td><td>Trending series with regular seasonality — most common in pharma</td></tr>
 </tbody></table>`},
-    {id:"s5",content:`<h2 id="s5">Code Architecture</h2>
-<p>Pharma analytics codebases should follow a consistent module structure for reusability and auditability:</p>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Patient Col: Str = 'patient id',</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Fill Date Col: Str = 'fill date',</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Days Supply Col: Str = 'days supply',</div>
-</div>`},
+    {id:"s5",content:`<h2 id="s5">Walk-Forward Validation</h2>
+<p>Walk-forward validation (also called rolling origin or time series cross-validation) is the correct way to evaluate a time series model. It simulates how the model will actually be used: train on past data, forecast a future window, advance the origin, repeat.</p>
+<div class="flow-box">Round 1: Train on [t0 → t10] → Forecast [t11, t12, t13]<br>Round 2: Train on [t0 → t13] → Forecast [t14, t15, t16]<br>Round 3: Train on [t0 → t16] → Forecast [t17, t18, t19]<br>Average forecast errors across all rounds = honest performance estimate</div>
+<h3>Why Walk-Forward Is Essential</h3>
+<p>A single train/test split tests the model only once. Walk-forward averages performance across multiple test windows, giving a more reliable and stable estimate of true out-of-sample accuracy. It also reveals whether model performance degrades over longer forecast horizons.</p>
+<h3>Forecast Evaluation Metrics</h3>
+<table><thead><tr><th>Metric</th><th>Formula</th><th>Interpretation</th><th>Note</th></tr></thead><tbody>
+<tr><td><strong>MAPE</strong></td><td>Mean |Actual − Forecast| / Actual × 100</td><td>Average % error; intuitive for business</td><td>Undefined when actual = 0; asymmetric (over-forecasts penalised less)</td></tr>
+<tr><td><strong>RMSE</strong></td><td>√ Mean(Actual − Forecast)²</td><td>Penalises large errors more heavily</td><td>In the units of the series; not directly comparable across series of different scale</td></tr>
+<tr><td><strong>Bias</strong></td><td>Mean(Actual − Forecast) / Mean(Actual) × 100</td><td>Systematic over/under-forecasting; positive = under-forecast</td><td>Most important for supply chain — consistent bias leads to stock-outs or overstock</td></tr>
+<tr><td><strong>Naïve baseline</strong></td><td>Forecast = last observed value (or last year's same period)</td><td>The "do-nothing" benchmark your model must beat</td><td>If your model doesn't beat the naïve forecast, use the naïve forecast</td></tr>
+</tbody></table>
+<div class="callout"><div class="callout-title">Always Beat the Naïve Baseline First</div><p>Before investing in complex ARIMA or ML models, check whether a naïve model (last value, or seasonal naïve = same period last year) already achieves acceptable accuracy. For mature, stable brands with regular seasonality, the seasonal naïve baseline is surprisingly hard to beat. Model complexity should only be added when it demonstrably improves on this baseline.</p></div>`},
     {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
-<div class="takeaway"><div class="takeaway-num">1</div><div>Use 'category' dtype for high-cardinality string columns (patient_id, ICD codes, drug names) in pandas — this reduces memory usage by 50–80% on large claims datasets and dramatically speeds up groupby operations.</div></div>
-<div class="takeaway"><div class="takeaway-num">2</div><div>The pre/post index date pattern is the foundation of virtually every cohort analysis — always create a merged dataframe with days_from_index as a derived column before splitting into baseline and follow-up periods.</div></div>
-<div class="takeaway"><div class="takeaway-num">3</div><div>Structure analytics code into layers: config, loaders, cohort definitions, analytics functions, visualization — each layer should be independently testable and reusable across studies.</div></div>
-<div class="takeaway"><div class="takeaway-num">4</div><div>All pharma analytics functions must have full docstrings with parameters, return types, and notes on methodology (e.g., PDC caps at 1.0/day) — analytics code is regulatory-grade documentation that must be audit-ready.</div></div>`}],
-  questions:[
-    {id:"q1",text:"A claims dataset has 500 million rows. You need to group by patient_id and drug_class, which are string columns. What pandas optimization reduces memory and speeds up groupby by the most?",
-     options:["Use str.strip() to clean all string values first","Convert patient_id and drug_class to 'category' dtype — reduces memory 50-80% and speeds groupby significantly","Use chunking to process 1M rows at a time","Convert to numpy arrays before groupby"],
-     correct:1,explanation:"The 'category' dtype converts string columns to integer codes internally, with a lookup table for the actual strings. For high-cardinality columns like patient_id or high-repetition columns like drug_class, this reduces memory by 50-80% and dramatically speeds up groupby operations since integer comparisons are far faster than string comparisons."},
-    {id:"q2",text:"You have pharmacy fills and need to calculate 'days from index date' for each fill relative to each patient's treatment start date. What is the most efficient pandas approach?",
-     options:["Use a for loop iterating over each patient","Merge pharmacy claims with the index date table on patient_id, then compute (fill_date - index_date).dt.days as a vectorized operation","Use apply() with a custom function","Create a separate dataframe for each patient then concatenate"],
-     correct:1,explanation:"The merge-then-vectorize pattern is the most efficient approach: (1) merge pharmacy claims with the index date lookup table on patient_id, (2) compute days_from_index = (fill_date - index_date).dt.days as a vectorized pandas operation across all rows simultaneously. This avoids Python-level loops entirely and runs at C speed. Never use for loops on DataFrames with millions of rows."},
-    {id:"q3",text:"A pharma analytics function you wrote is being used in an FDA regulatory submission. What is the minimum documentation requirement?",
-     options:["A comment explaining what the function does","Full docstring with parameters (name, type, description), return values (type and structure), and methodological notes (e.g., PDC definition, threshold values, algorithm assumptions) — must be audit-ready","No documentation needed if the code is clear","A GitHub README file"],
-     correct:1,explanation:"FDA submissions require audit trails that allow reviewers to understand and replicate analyses. Functions used in regulatory submissions need complete docstrings: parameter names, types, and descriptions; return value structure; methodological assumptions (e.g., 'PDC caps at 1.0 per day per FDA guidance'); threshold definitions; and any algorithm choices. This is the difference between analysis code and regulatory-grade analytics code."}
+<ul>
+<li><strong>Never use random train/test splits for time series</strong> — always use a temporal split or walk-forward validation to avoid leaking future information into the training set.</li>
+<li><strong>Decompose before modelling</strong> — understanding the trend, seasonality, and residual structure guides model selection and makes the analysis interpretable to business stakeholders.</li>
+<li><strong>Test for stationarity with the ADF test</strong> before fitting ARIMA; apply first-differencing to remove trend, log-transform to stabilise variance.</li>
+<li><strong>ACF identifies the MA order (q); PACF identifies the AR order (p)</strong> — look for sharp cutoffs in the respective plots of the differenced, stationary series.</li>
+<li><strong>Walk-forward validation</strong> gives an honest, averaged performance estimate across multiple forecast origins — a single test window is insufficient.</li>
+<li><strong>Bias matters more than MAPE</strong> for supply chain applications — systematic under-forecasting causes stockouts; systematic over-forecasting causes excess inventory and write-offs.</li>
+</ul>`}
+  ],
+  quiz:[
+    {q:"A brand's weekly TRx series has been growing 5% per quarter for two years. Before fitting ARIMA, you apply first differencing. What does differencing remove?",options:["Seasonality","The trend (non-constant mean over time) — first differencing transforms the level series into a series of changes, which is typically stationary","Random noise","Autocorrelation at all lags"],answer:1},
+    {q:"An ACF plot of a differenced Rx series shows a sharp cutoff at lag 2 (significant at lags 1 and 2, near zero after). The PACF decays gradually. What ARIMA model does this suggest?",options:["ARIMA(2,1,0) — AR(2) model","ARIMA(0,1,2) — MA(2) model: sharp ACF cutoff at q=2 and gradual PACF decay are the signature of an MA process","ARIMA(1,1,1)","ARIMA(2,1,2)"],answer:1},
+    {q:"Walk-forward validation is preferred over a single temporal train/test split because:",options:["It is faster to compute","It evaluates the model across multiple forecast origins, producing a more reliable and stable estimate of out-of-sample accuracy than a single test window","It uses more training data","It always produces lower error metrics"],answer:1},
+    {q:"A supply chain team uses a forecasting model with MAPE = 8% but Bias = +18% (consistent under-forecast). What is the most dangerous operational consequence?",options:["The model is too accurate","Consistent under-forecasting means less product is manufactured than needed — leading to stockouts, patient access failures, and lost sales","The model should be retired","MAPE of 8% is too high to act on"],answer:1},
+    {q:"For a monthly brand Rx series with strong annual seasonality (Q4 spike every year), which is the most appropriate baseline model?",options:["Naïve: forecast = last month's value","Seasonal naïve: forecast = same month last year's value — this directly captures the annual seasonal pattern","A neural network","A simple moving average of the last 12 months"],answer:1}
   ]
 },
 
@@ -668,82 +767,145 @@ PL.addChapters({
 },
 
 "5-6": {
-  id:"5-6", title:"Data Engineering for Pharma Platforms", domain:"Data Science & Pharma Use Cases", domain_id:5,
-  level:"Advanced", mins:42, available:true,
-  tags:["Data Engineering","ETL","Data Lake","dbt","Airflow","Cloud","Data Platform"],
-  objectives:["Design a pharma analytics data lake architecture","Build ELT pipelines for claims data using dbt","Orchestrate analytics workflows with Apache Airflow","Implement data quality monitoring in production pipelines","Apply governance frameworks for HIPAA-compliant data platforms"],
+  id:"5-6", title:"Survival Analysis & Event Modeling", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:38, available:true,
+  tags:["Survival Analysis","Kaplan-Meier","Cox Regression","Censoring","Hazard Ratio","Competing Risks","Time-to-Event"],
+  objectives:["Explain censoring and why standard regression is inappropriate for time-to-event data","Compute and interpret Kaplan-Meier survival curves","Apply the log-rank test to compare survival between groups","Interpret Cox Proportional Hazards model output including hazard ratios","Handle competing risks in clinical and adherence outcomes"],
   toc:[
-    {id:"s1",title:"Pharma Data Platform Architecture",level:"h2"},
-    {id:"s2",title:"Claims ELT with dbt",level:"h2"},
-    {id:"s3",title:"Pipeline Orchestration",level:"h2"},
-    {id:"s4",title:"Data Quality in Production",level:"h2"},
-    {id:"s5",title:"Key Takeaways",level:"h2"}
+    {id:"s1",title:"Time-to-Event Problems & Censoring",level:"h2"},
+    {id:"s2",title:"The Survival & Hazard Functions",level:"h2"},
+    {id:"s3",title:"Kaplan-Meier Estimator",level:"h2"},
+    {id:"s4",title:"Cox Proportional Hazards Model",level:"h2"},
+    {id:"s5",title:"Competing Risks",level:"h2"},
+    {id:"s6",title:"Key Takeaways",level:"h2"}
   ],
   sections:[
-    {id:"s1",content:`<h2 id="s1">Pharma Data Platform Architecture</h2>
-<p>Modern pharma analytics platforms follow the <strong>lakehouse architecture</strong> — combining the scale of data lakes with the governance of data warehouses:</p>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main"> = ================================================</div>
-</div>
-<div class="callout info"><div class="callout-title">Cloud Choice in Pharma</div><p>AWS dominates pharma cloud analytics (60%+ market share) due to early HIPAA BAA availability, mature healthcare-specific services (Amazon HealthLake), and the broadest ISV ecosystem. Azure is strong in markets with Microsoft-heavy enterprise infrastructure. GCP excels for ML-heavy workloads (BigQuery ML, Vertex AI). Most large pharma companies use multi-cloud strategies.</p></div>`},
-    {id:"s2",content:`<h2 id="s2">Claims ELT with dbt</h2>
-
-<div class="callout info"><div class="callout-title">Data Contract via dbt Schema (schema.yml)</div>
-<p>A <strong>dbt schema.yml</strong> file acts as a data contract — it documents every column and enforces automated quality tests. Key elements:</p>
-<table><thead><tr><th>Element</th><th>Purpose</th><th>Example</th></tr></thead><tbody>
-<tr><td><strong>description</strong></td><td>Documents what the model/column means in business terms</td><td>"Unique claim identifier assigned by payer"</td></tr>
-<tr><td><strong>not_null test</strong></td><td>Flags rows where required fields are missing</td><td>claim_id must never be null</td></tr>
-<tr><td><strong>unique test</strong></td><td>Ensures no duplicate records on key fields</td><td>Each claim_id appears exactly once</td></tr>
-<tr><td><strong>accepted_values test</strong></td><td>Validates categorical fields against allowed list</td><td>status must be "paid", "denied", or "pending"</td></tr>
-<tr><td><strong>relationships test</strong></td><td>Enforces referential integrity across models</td><td>Every patient_id in claims exists in eligibility</td></tr>
+    {id:"s1",content:`<h2 id="s1">Time-to-Event Problems & Censoring</h2>
+<p>Survival analysis handles a specific question: <strong>how long until an event occurs?</strong> The event could be death, disease progression, treatment discontinuation, or a patient filling a second prescription. Standard regression fails here because of <strong>censoring</strong> — we often lose track of subjects before the event occurs.</p>
+<h3>Types of Censoring</h3>
+<table><thead><tr><th>Type</th><th>Definition</th><th>Pharma Example</th></tr></thead><tbody>
+<tr><td><strong>Right censoring</strong></td><td>Subject leaves study before event; event may happen later</td><td>Patient still on therapy at end of observation window — we know they haven't discontinued yet</td></tr>
+<tr><td><strong>Left censoring</strong></td><td>Event occurred before observation began; exact time unknown</td><td>Patient was already on therapy when dataset starts — therapy start date unobserved</td></tr>
+<tr><td><strong>Interval censoring</strong></td><td>Event occurred in a known interval but exact time unknown</td><td>Patient relapsed between two clinic visits; exact relapse date not recorded</td></tr>
 </tbody></table>
-<p>When <code>dbt test</code> runs, every test either passes (green) or fails with the violating rows surfaced for investigation — no manual data auditing required.</p></div>`},
-    {id:"s3",content:`<h2 id="s3">Pipeline Orchestration</h2>
+<div class="callout warning"><div class="callout-title">Why Standard Regression Fails</div><p>If you exclude censored patients, you introduce <strong>selection bias</strong> — you only analyse patients who experienced the event, systematically underestimating survival times. If you treat censoring time as the actual event time, you introduce <strong>information bias</strong>. Survival analysis uses the censoring mechanism correctly by incorporating partial information: a patient censored at 18 months tells us they survived at least 18 months.</p></div>
+<h3>Survival Analysis Setup</h3>
+<div class="flow-box">
+  <div class="flow-step">Define the event clearly (e.g., "first gap in therapy ≥ 30 days" = discontinuation)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Set the origin time (index date): diagnosis, treatment start, or study enrollment</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Record duration T and event indicator E (1 = event occurred, 0 = censored) for each subject</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Verify censoring is non-informative: dropout unrelated to outcome (e.g., patients don't stop therapy because they're about to discontinue for other reasons)</div>
+</div>`},
+    {id:"s2",content:`<h2 id="s2">The Survival & Hazard Functions</h2>
+<p>Two complementary functions describe the same underlying process from different angles:</p>
+<h3>Survival Function S(t)</h3>
 <div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">'Retry Delay': Timedelta(Minutes = 30),</div>
+  <div class="formula-label">Definition</div>
+  <div class="formula-main">S(t) = P(T &gt; t) — probability of surviving beyond time t</div>
 </div>
+<p>Properties: S(0) = 1 (everyone alive at start), S(∞) = 0 (everyone eventually experiences event), S(t) is monotonically non-increasing.</p>
+<h3>Hazard Function h(t)</h3>
 <div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Description = 'Monthly claims ELT pipeline: ingest → clean → transform → validate',</div>
+  <div class="formula-label">Definition</div>
+  <div class="formula-main">h(t) = instantaneous rate of event at time t, given survival to t<br>h(t) = lim[Δt→0] P(t ≤ T &lt; t+Δt | T ≥ t) / Δt</div>
 </div>
+<p>The hazard is not a probability — it's a rate (can exceed 1). Think of it as: given a patient has survived to month 12, what is their instantaneous risk of discontinuing right now?</p>
+<h3>Relationship Between S(t) and h(t)</h3>
+<table><thead><tr><th>Concept</th><th>Formula</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>Survival from hazard</td><td>S(t) = exp(−∫₀ᵗ h(u)du)</td><td>Survival is the exponentiated cumulative hazard</td></tr>
+<tr><td>Cumulative hazard H(t)</td><td>H(t) = −ln S(t)</td><td>Total accumulated risk up to time t</td></tr>
+<tr><td>Median survival</td><td>t where S(t) = 0.5</td><td>Time at which 50% of subjects have experienced the event</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Hazard Shapes Tell a Story</div><p>A <strong>decreasing hazard</strong> (bathtub curve left side) suggests early fragility — patients who discontinue quickly are high-risk; survivors become a healthier cohort. A <strong>constant hazard</strong> (exponential distribution) means memoryless risk — time since start doesn't change future risk. An <strong>increasing hazard</strong> means risk accumulates over time, common in disease progression models.</p></div>`},
+    {id:"s3",content:`<h2 id="s3">Kaplan-Meier Estimator</h2>
+<p>The Kaplan-Meier (KM) estimator is a <strong>non-parametric</strong> method for estimating the survival function directly from data — no distributional assumptions required.</p>
+<h3>How KM Works</h3>
+<div class="flow-box">
+  <div class="flow-step">Sort all observed times (events + censorings) in ascending order</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">At each event time tᵢ: count nᵢ (at risk just before tᵢ) and dᵢ (events at tᵢ)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Compute conditional survival probability: (nᵢ − dᵢ) / nᵢ</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Multiply across all event times up to t: Ŝ(t) = ∏ᵢ:tᵢ≤t [(nᵢ − dᵢ) / nᵢ]</div>
+</div>
+<h3>Reading a KM Curve</h3>
+<table><thead><tr><th>Feature</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Step drops</td><td>Each drop occurs at an event time; size of drop proportional to number of events relative to at-risk pool</td></tr>
+<tr><td>Tick marks on curve</td><td>Censored observations — subject left study without experiencing event</td></tr>
+<tr><td>Median survival</td><td>Time where curve crosses 0.5 on the y-axis</td></tr>
+<tr><td>Wide confidence bands at tail</td><td>Few remaining at-risk subjects; estimates become unreliable</td></tr>
+<tr><td>Curves that never reach 0</td><td>A proportion of subjects may never experience the event ("cure fraction")</td></tr>
+</tbody></table>
+<h3>Log-Rank Test</h3>
+<p>To compare survival curves between two groups (e.g., treated vs. control; compliant vs. non-compliant), the <strong>log-rank test</strong> is the standard non-parametric test. It computes a weighted sum of observed-minus-expected events at each event time. Null hypothesis: the two survival functions are identical.</p>
+<div class="callout info"><div class="callout-title">KM Limitation</div><p>KM is purely descriptive — it cannot adjust for confounders. If the treated group is younger on average, the KM curve comparison conflates treatment effect with age effect. For adjusted comparisons, use the Cox model.</p></div>`},
+    {id:"s4",content:`<h2 id="s4">Cox Proportional Hazards Model</h2>
+<p>The Cox model is the workhorse of survival analysis — a <strong>semi-parametric regression model</strong> that estimates how covariates modify the hazard rate without assuming any particular baseline hazard shape.</p>
+<h3>Model Structure</h3>
 <div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Schedule Interval = '0 6 1  ×   × ',  # 6am on 1st of each month</div>
+  <div class="formula-label">Cox Model</div>
+  <div class="formula-main">h(t | X) = h₀(t) × exp(β₁X₁ + β₂X₂ + … + βₚXₚ)<br><br>h₀(t) = unspecified baseline hazard (non-parametric part)<br>exp(βᵢXᵢ) = multiplicative covariate effect (parametric part)</div>
 </div>
-<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
-<tr><td>not results.success</td><td>raise ValueError(f"Data quality checks failed: {results}")</td></tr>
+<h3>Interpreting Hazard Ratios</h3>
+<table><thead><tr><th>HR Value</th><th>Interpretation</th><th>Example</th></tr></thead><tbody>
+<tr><td>HR = 1.0</td><td>No difference in hazard compared to reference</td><td>Treatment has no effect on discontinuation rate</td></tr>
+<tr><td>HR = 2.0</td><td>2× higher instantaneous hazard vs. reference</td><td>Non-adherent patients discontinue at twice the rate of adherent patients</td></tr>
+<tr><td>HR = 0.6</td><td>40% reduction in hazard vs. reference</td><td>Drug reduces mortality hazard by 40% vs. placebo</td></tr>
+<tr><td>95% CI excludes 1.0</td><td>Statistically significant at α = 0.05</td><td>HR = 0.72 [0.58–0.89] is significant</td></tr>
+</tbody></table>
+<h3>Proportional Hazards Assumption</h3>
+<p>The model assumes hazard ratios are <strong>constant over time</strong> — the ratio of hazards between two subjects doesn't change as time passes. Violations occur when treatment effect wanes over time or when early vs. late responders differ. Diagnostic: plot log(−log S(t)) vs. log(t) for each group — lines should be parallel.</p>
+<h3>Extensions</h3>
+<table><thead><tr><th>Extension</th><th>When Needed</th></tr></thead><tbody>
+<tr><td>Stratified Cox</td><td>PH assumption violated for a covariate — stratify by it instead of modelling it</td></tr>
+<tr><td>Time-varying covariates</td><td>Exposure status changes over time (e.g., patient switches therapy)</td></tr>
+<tr><td>Frailty models</td><td>Clustered data — patients within same hospital share unmeasured risk factors</td></tr>
 </tbody></table>`},
-    {id:"s4",content:`<h2 id="s4">Data Quality in Production</h2>
+    {id:"s5",content:`<h2 id="s5">Competing Risks</h2>
+<p>Competing risks arise when multiple event types can preclude each other. A patient can't discontinue therapy after dying — death <em>competes</em> with discontinuation. Standard KM and Cox analyses that ignore competing events produce <strong>biased (over-estimated) cumulative incidence</strong>.</p>
+<h3>Two Frameworks</h3>
+<table><thead><tr><th>Approach</th><th>Quantity Estimated</th><th>Use When</th></tr></thead><tbody>
+<tr><td><strong>Cause-specific hazard (CSH)</strong></td><td>Hazard of event type k, treating other events as censored</td><td>Aetiology — understanding biological or behavioral causes</td></tr>
+<tr><td><strong>Subdistribution hazard (Fine-Gray)</strong></td><td>Hazard associated with the cumulative incidence function (CIF) for event k</td><td>Prognosis — predicting patient probability of experiencing event k</td></tr>
+</tbody></table>
 <div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Validator = ge.from pandas(claims df)</div>
+  <div class="formula-label">Cumulative Incidence Function</div>
+  <div class="formula-main">CIF_k(t) = P(T ≤ t, cause = k) — probability of event k by time t<br>Note: ΣCIFₖ(t) + S(t) = 1 always<br>1 − KM estimator ≠ CIF when competing risks exist</div>
 </div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Min Value = 100 000, max value=50 000 000,</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Column = col,</div>
-</div>
-<div class="callout"><div class="callout-title">Data Contract Philosophy</div><p>Great Expectations and dbt schema tests together form a <strong>data contract</strong> between the data engineering team and downstream analytics users. When these contracts are enforced in CI/CD pipelines, broken data is caught before it reaches dashboards and analytical models — not after a director presents bad numbers in a leadership review.</p></div>`},
-    {id:"s5",content:`<h2 id="s5">Key Takeaways</h2>
-<div class="takeaway"><div class="takeaway-num">1</div><div>The pharma data lakehouse has three zones — Bronze (raw), Silver (cleaned/OMOP), Gold (brand analytics marts) — each with different quality standards, access controls, and consumers.</div></div>
-<div class="takeaway"><div class="takeaway-num">2</div><div>dbt's incremental models with partition_by and cluster_by are essential for cost-effective transformation of billion-row claims tables — full refresh on every run is prohibitively expensive at scale.</div></div>
-<div class="takeaway"><div class="takeaway-num">3</div><div>Airflow's depends_on_past=True for monthly pipelines ensures sequential processing — critical for claims data where Month N data may include corrections to Month N-1 records.</div></div>
-<div class="takeaway"><div class="takeaway-num">4</div><div>Data contracts (dbt schema tests + Great Expectations) catch broken data before it reaches dashboards — investing in data quality infrastructure is the single highest-leverage data engineering investment in pharma analytics.</div></div>`}],
+<h3>Pharma Applications</h3>
+<table><thead><tr><th>Outcome of Interest</th><th>Competing Event</th><th>Clinical Significance</th></tr></thead><tbody>
+<tr><td>Time to treatment discontinuation</td><td>Death, switch to different therapy</td><td>Adherence programs should account for patients who died vs. chose to stop</td></tr>
+<tr><td>Time to disease progression</td><td>Death before progression</td><td>PFS in oncology trials; progression can't be observed post-death</td></tr>
+<tr><td>Time to hospitalization</td><td>Death at home</td><td>HCRU studies — patients who die at home never get hospitalized</td></tr>
+<tr><td>Time to second-line therapy</td><td>Death, lost to follow-up</td><td>LOT distribution analysis; LOT2 can't happen post-death</td></tr>
+</tbody></table>
+<div class="callout warning"><div class="callout-title">Common Mistake</div><p>Using 1 − KM to estimate cumulative incidence of discontinuation when death is a competing risk <strong>overestimates</strong> the discontinuation probability. KM assumes censored patients (including those who died) would eventually discontinue — they wouldn't. Always use the CIF (subdistribution approach) when reporting patient-facing probabilities in the presence of competing risks.</p></div>`},
+    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
+<div class="takeaway"><div class="takeaway-num">1</div><div>Censoring is not missing data — it's partial information. Survival analysis uses censored observations correctly; naively dropping them or treating censoring time as event time both introduce bias.</div></div>
+<div class="takeaway"><div class="takeaway-num">2</div><div>The Kaplan-Meier estimator is non-parametric and makes no distributional assumptions, but it cannot adjust for confounders. Use it for descriptive group comparisons; use Cox regression for adjusted analyses.</div></div>
+<div class="takeaway"><div class="takeaway-num">3</div><div>Hazard Ratios from Cox models are multiplicative and constant over time (proportional hazards assumption). HR = 0.70 means a 30% reduction in instantaneous risk — not a 30% improvement in probability of survival at any fixed time point.</div></div>
+<div class="takeaway"><div class="takeaway-num">4</div><div>The proportional hazards assumption must be checked, not assumed. When it fails (e.g., immunotherapy trials where late responders have dramatically different trajectories), stratified Cox or parametric models are required.</div></div>
+<div class="takeaway"><div class="takeaway-num">5</div><div>Competing risks are pervasive in pharma outcomes research. Use the cumulative incidence function (Fine-Gray) rather than 1 − KM whenever another event type can preclude the event of interest — in adherence, HCRU, and LOT studies this is almost always the case.</div></div>`}],
   questions:[
-    {id:"q1",text:"A dbt incremental model uses 'unique_key = claim_id'. On the next run, a vendor sends a corrected file containing 50,000 updated claims with the same claim_ids. What happens?",
-     options:["The model appends 50,000 duplicate rows","dbt's incremental strategy with unique_key performs an upsert — updated records overwrite existing rows with the same claim_id, ensuring the table contains the corrected values","The model fails with a duplicate key error","The corrections are silently ignored"],
-     correct:1,explanation:"dbt incremental models with unique_key implement upsert logic: if a new batch record has the same unique_key as an existing row, dbt updates (overwrites) the existing row. New records are inserted. This is exactly the behavior needed for claims data where vendors routinely send corrected claims with existing claim IDs. Without unique_key, duplicate rows would accumulate and corrupt all downstream analyses."},
-    {id:"q2",text:"Your monthly claims pipeline fails at the dbt transformation step. Airflow shows the task failed after 4 hours. What is the first diagnostic step?",
-     options:["Re-run the full pipeline from scratch","Check the Airflow task log for the specific dbt error; check dbt Cloud job logs for the failing model, query, and row-level error message","Contact the claims vendor immediately","Increase the execution_timeout to 8 hours"],
-     correct:1,explanation:"Systematic debugging starts with the error log, not with restarts. The Airflow task log shows what failed; the dbt Cloud job log shows which model failed and the specific SQL error. Common causes: schema changes in source data, unexpected NULL values in required columns, partition table size exceeded query timeout, or vendor file format change. Understand the root cause before any corrective action — re-running without fixing the root cause just re-fails."},
-    {id:"q3",text:"Great Expectations validation shows 'freshness check FAILED — max service_date is 5 months ago.' In a monthly claims pipeline, what does this indicate?",
-     options:["Normal behavior — claims take 5 months to adjudicate","A data ingestion failure — the latest month's data was not successfully loaded; the pipeline is running on stale data and downstream analytics will have incorrect recent-period metrics","The validator's threshold is incorrect","Claims vendors always deliver data 5 months late"],
-     correct:1,explanation:"Claims adjudication lag is typically 3–6 months, but the pipeline should still be loading the most recently available data each month. A max service_date of 5 months ago when running in, say, October suggests that the October data load failed silently — the pipeline ran but ingested nothing new. Downstream analytics based on this data will undercount recent activity, producing erroneous trend analyses. The correct response is to investigate the ingestion step and reload the missing months."}
+    {id:"q1",text:"A patient enrolled in an adherence study discontinues therapy 14 months after the index date. She is still alive. How should this observation be coded?",
+     options:["T = 14, event = 0 (censored)","T = 14, event = 1 (discontinuation event observed)","Excluded from analysis because she didn't die","T = 0, event = 1 (therapy already started at index)"],
+     correct:1,explanation:"The discontinuation event was observed at 14 months, so T = 14 and the event indicator = 1. Censoring (event = 0) applies when the patient left the study or the observation window ended without the event occurring. This patient experienced the defined event — discontinuation — so she is not censored."},
+    {id:"q2",text:"A Kaplan-Meier curve comparing adherent vs. non-adherent patients shows the two curves crossing at month 18. What does this imply for analysis?",
+     options:["The log-rank test result is more significant because the curves cross","The proportional hazards assumption is likely violated — the hazard ratio is not constant over time","The KM estimator has failed and the data should be re-collected","Crossing curves mean both groups have identical survival"],
+     correct:1,explanation:"Crossing KM curves are a strong signal that the proportional hazards (PH) assumption is violated — hazard ratios are not constant over the follow-up period. A naive Cox model would produce a single averaged HR that misrepresents the true relationship (one group may be worse early, the other worse late). In this case, use stratified Cox, a time-varying hazard model, or a flexible parametric model. The log-rank test also loses power when curves cross."},
+    {id:"q3",text:"A Cox model for time-to-hospitalization yields HR = 1.85 (95% CI: 1.42–2.41) for patients with ≥2 comorbidities vs. 0–1 comorbidities. How do you interpret this?",
+     options:["Patients with ≥2 comorbidities have an 85% higher probability of being hospitalized","Patients with ≥2 comorbidities experience hospitalization 85% faster on average","At any given time point, patients with ≥2 comorbidities have 1.85× the instantaneous hazard of hospitalization compared to those with 0–1 comorbidities, and this difference is statistically significant","High comorbidity patients survive 85% less time"],
+     correct:2,explanation:"A hazard ratio is a ratio of instantaneous rates at any given time t, not a difference in probabilities or times. HR = 1.85 means the instantaneous risk of hospitalization is 85% higher for the high-comorbidity group at any moment in time (given they haven't been hospitalized yet). The 95% CI [1.42, 2.41] excludes 1.0, so this is statistically significant. HR does not directly translate to percentage difference in probability of eventual hospitalization or to average time difference."},
+    {id:"q4",text:"An oncology study tracks time to disease progression. 22% of patients die before showing progression. A colleague uses 1 − KM to report the 12-month cumulative incidence of progression as 48%. Why is this problematic?",
+     options:["KM requires at least 200 patients; this sample is too small","1 − KM overestimates cumulative incidence when competing risks exist — patients who died cannot progress, but KM assumes they eventually would. The correct estimate uses the cumulative incidence function (CIF)","1 − KM is only valid for overall survival, not progression","The 12-month timepoint is too early for meaningful analysis"],
+     correct:1,explanation:"When death is a competing risk for progression, 1 − KM overestimates the probability of progression. KM treats deaths as censored observations, implicitly assuming that censored patients would eventually progress if followed long enough — but dead patients cannot progress. The cumulative incidence function (CIF, also called the subdistribution approach or Fine-Gray method) correctly accounts for competing risks by including competing events in the risk set. Using 1 − KM in this setting inflates the reported progression rate and leads to overly optimistic assessments of disease control."},
+    {id:"q5",text:"In a patient adherence model, you want to estimate the probability that a patient will voluntarily discontinue therapy (vs. die on therapy) by month 24. Which method is most appropriate?",
+     options:["Kaplan-Meier, treating deaths as right-censored at the time of death","Standard logistic regression on the binary outcome at month 24","Cumulative incidence function (Fine-Gray subdistribution hazard) with death as a competing risk","Cox proportional hazards model with cause-specific hazard for discontinuation"],
+     correct:2,explanation:"When the clinical question is 'what is the probability a patient voluntarily discontinues by month 24?' — a prognostic, patient-facing question — the cumulative incidence function (CIF) using Fine-Gray subdistribution hazard is the correct approach. Treating deaths as censored (KM approach) overestimates voluntary discontinuation probability by assuming all who died would eventually discontinue. The cause-specific Cox model is better for understanding aetiology (why patients discontinue) but does not directly estimate the patient-facing probability in the presence of competing risks."}
   ]
 },
 
