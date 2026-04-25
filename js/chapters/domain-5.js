@@ -2087,6 +2087,381 @@ PL.addChapters({
     {q:"In the signal management workflow, what happens during the 'Validation' stage?",options:["The statistical algorithm runs disproportionality analysis","A medical reviewer confirms the signal is not an artefact (reporting bias, duplicates, or confounding) before full evaluation","The label is updated","The PSUR is submitted to the regulator"],answer:1},
     {q:"Which NLP task in pharmacovigilance directly addresses the problem of the same adverse event being reported by the patient, their doctor, and the manufacturer?",options:["Named entity recognition","MedDRA coding","Duplicate detection","Causality assessment"],answer:2}
   ]
+},
+
+"5-17": {
+  id:"5-17", title:"Patient Finding Models", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:38, available:true,
+  tags:["Patient Finding","Disease Identification","Phenotyping","NLP","Rare Disease","Claims Analytics"],
+  objectives:["Explain what patient finding models are and why undiagnosed patient populations exist","Build a claims-based phenotyping algorithm to identify likely-diagnosed patients","Apply ML to find patients at risk of disease progression or eligible for advanced therapy","Use NLP on clinical notes to surface undiagnosed or undercoded patients","Validate a patient finding model and measure its commercial impact"],
+  toc:[
+    {id:"s1",title:"The Undiagnosed Patient Problem",level:"h2"},
+    {id:"s2",title:"Data Sources & Feature Engineering",level:"h2"},
+    {id:"s3",title:"Rule-Based Phenotyping vs ML Approaches",level:"h2"},
+    {id:"s4",title:"Rare Disease Patient Finding",level:"h2"},
+    {id:"s5",title:"NLP on Clinical Notes",level:"h2"},
+    {id:"s6",title:"Key Takeaways",level:"h2"}
+  ],
+  sections:[
+    {id:"s1",content:`<h2 id="s1">The Undiagnosed Patient Problem</h2>
+<p>In many disease areas — particularly rare diseases, chronic inflammatory conditions, and complex metabolic disorders — a substantial fraction of patients with the disease have never received an official diagnosis. These patients may be seen by physicians regularly, have suggestive symptoms in their records, and still slip through without a correct code being applied. Patient finding models exist to surface these individuals so that diagnosis, treatment, and brand adoption can occur.</p>
+<h3>Why Patients Go Undiagnosed</h3>
+<table><thead><tr><th>Reason</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Diagnostic complexity</strong></td><td>ATTR cardiomyopathy mimics heart failure — most cardiologists default to the more common diagnosis</td></tr>
+<tr><td><strong>Coding under-specificity</strong></td><td>A patient with Crohn's disease may be coded as "unspecified IBD" (K52.9) for months before the definitive code (K50.x) appears</td></tr>
+<tr><td><strong>Specialist bottlenecks</strong></td><td>Rare diseases often require a specialist to confirm diagnosis; patients sit in primary care limbo for years</td></tr>
+<tr><td><strong>Symptom overlap</strong></td><td>Hereditary angioedema episodes are often treated as allergic reactions in the ED without a definitive workup</td></tr>
+<tr><td><strong>Lab / biomarker gap</strong></td><td>Patients with elevated PSA or amyloid biomarkers may not have had the confirmatory test ordered</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Commercial Impact</div><p>For a rare disease brand with a known prevalence of 50,000 US patients but only 12,000 currently diagnosed and treated, a patient finding model that helps identify even 5,000 additional patients represents a multi-hundred-million-dollar revenue opportunity. Patient finding is therefore one of the highest-ROI analytics investments in specialty and rare disease commercialisation.</p></div>
+<h3>Three Core Use Cases</h3>
+<table><thead><tr><th>Use Case</th><th>Goal</th><th>Model Output</th></tr></thead><tbody>
+<tr><td><strong>Undiagnosed patient identification</strong></td><td>Find patients who likely have the disease but lack a diagnosis code</td><td>Patient-level propensity score; list for HCP outreach</td></tr>
+<tr><td><strong>Progression risk scoring</strong></td><td>Among diagnosed patients, identify those most likely to progress to advanced disease requiring a higher LOT</td><td>Risk score used in patient support programmes and field alerts</td></tr>
+<tr><td><strong>Treatment eligibility finding</strong></td><td>Among diagnosed patients on suboptimal therapy, identify those who meet label criteria for a newer agent</td><td>Patient list shared with HCP as part of clinical decision support</td></tr>
+</tbody></table>`},
+    {id:"s2",content:`<h2 id="s2">Data Sources & Feature Engineering</h2>
+<p>Patient finding models require linking multiple data sources to build a comprehensive picture of each patient's clinical journey. No single source is sufficient.</p>
+<table><thead><tr><th>Data Source</th><th>What It Provides</th><th>Limitation</th></tr></thead><tbody>
+<tr><td><strong>Medical claims (ICD codes)</strong></td><td>Diagnosis codes, procedure codes, care setting, provider specialty</td><td>Coding errors, under-specificity; diagnosis may be absent in undiagnosed patients by definition</td></tr>
+<tr><td><strong>Pharmacy claims (NDC/Rx)</strong></td><td>Drug dispensing — what therapy the patient is on, at what dose and frequency</td><td>Fills ≠ adherence; no insight into clinical rationale</td></tr>
+<tr><td><strong>Lab results</strong></td><td>Biomarker levels (e.g., BNP, eGFR, HbA1c, amyloid markers) that indicate disease presence or severity</td><td>Results in EHR, not usually in claims; expensive to obtain at scale</td></tr>
+<tr><td><strong>EHR / clinical notes</strong></td><td>Free-text physician notes, symptom descriptions, test order rationale</td><td>Unstructured — requires NLP to extract signal</td></tr>
+<tr><td><strong>Specialty pharmacy data</strong></td><td>High-touch therapy dispensing with rich clinical metadata (REMS data, hub enrolment)</td><td>Only covers patients already on specialty Rx</td></tr>
+</tbody></table>
+<h3>Key Features for Patient Finding Models</h3>
+<div class="flow-box">
+  <div class="flow-step">Symptom proxy codes — ICD codes for symptoms (dyspnoea, fatigue, oedema) that co-occur before a definitive diagnosis is made</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Diagnostic journey length — number of months between symptom onset (proxy codes) and diagnosis; longer journeys suggest diagnostic delay</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Specialist visit patterns — referrals to disease-relevant specialists (cardiologist, rheumatologist, neurologist) without a definitive diagnosis</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Negative workup signals — procedures ordered to rule out other conditions suggest differential diagnosis is ongoing</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Drug proxy — use of disease-relevant medications without the expected ICD code (e.g., immunosuppressants without an autoimmune diagnosis)</div>
+</div>`},
+    {id:"s3",content:`<h2 id="s3">Rule-Based Phenotyping vs ML Approaches</h2>
+<h3>Rule-Based Phenotyping</h3>
+<p>A phenotyping algorithm is a set of logic rules applied to structured data to classify patients into disease categories. They are transparent, auditable, and often used in academic RWE studies.</p>
+<table><thead><tr><th>Algorithm Type</th><th>Structure</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Simple code-based</strong></td><td>Patients with ≥1 claim with specific ICD code(s)</td><td>Any claim with K50.x → Crohn's patient</td></tr>
+<tr><td><strong>Count-based</strong></td><td>Patients with ≥N claims with the code within M months</td><td>≥2 claims with E11.x within 12 months → confirmed T2D (reduces upcoding)</td></tr>
+<tr><td><strong>Algorithm-based</strong></td><td>Combination of diagnosis codes + procedure codes + pharmacy claims</td><td>ICD K50.x + biological Rx (infliximab/adalimumab) → moderate-to-severe Crohn's</td></tr>
+<tr><td><strong>Symptom-based</strong></td><td>Cluster of symptom codes in absence of definitive diagnosis</td><td>Dyspnoea + bilateral oedema + BNP elevated + no HF diagnosis → candidate for HF workup</td></tr>
+</tbody></table>
+<h3>ML-Based Patient Finding</h3>
+<p>ML models can capture non-linear combinations of hundreds of features that a rule-based algorithm would miss. The trade-off is interpretability — a gradient boosted model may be highly accurate but harder to explain to a medical affairs or compliance reviewer.</p>
+<table><thead><tr><th>Model Type</th><th>When to Use</th><th>Interpretability</th></tr></thead><tbody>
+<tr><td>Logistic Regression</td><td>Large patient universe, need regulatory defensibility, linear signal dominates</td><td>High — coefficients are interpretable</td></tr>
+<tr><td>XGBoost / LightGBM</td><td>Complex non-linear interactions, large feature set, performance is paramount</td><td>Medium — SHAP values required for explanation</td></tr>
+<tr><td>Deep learning (LSTM / Transformer)</td><td>Sequential EHR data where temporal patterns matter (e.g., diagnostic journey)</td><td>Low — requires post-hoc explanation methods</td></tr>
+</tbody></table>
+<div class="callout warning"><div class="callout-title">Label Construction Is the Hardest Part</div><p>ML models need labelled training data — known positive (confirmed disease) and negative (no disease) patients. In patient finding, the "confirmed disease" label is itself uncertain: ICD codes have imperfect precision and recall. Gold-standard labels require chart review by clinicians, which is expensive. Many patient finding projects fail not because of model complexity but because of noisy or biased labels.</p></div>`},
+    {id:"s4",content:`<h2 id="s4">Rare Disease Patient Finding</h2>
+<p>Rare disease patient finding is one of the most impactful and challenging analytics problems in pharma. With prevalences often below 1:10,000, even a modest improvement in model precision translates directly into patients receiving life-changing therapies.</p>
+<h3>Characteristics That Make Rare Disease Harder</h3>
+<table><thead><tr><th>Challenge</th><th>Why It Matters</th><th>Mitigation</th></tr></thead><tbody>
+<tr><td>Extreme class imbalance</td><td>True positives may be 1 in 50,000+ in the claims universe; standard models optimise for majority class</td><td>Oversample positives; use precision-recall AUC (not ROC AUC); tune classification threshold</td></tr>
+<tr><td>Small labelled dataset</td><td>Few confirmed cases available for training — sometimes fewer than 500 nationally</td><td>Transfer learning from similar diseases; semi-supervised learning; synthetic patient generation</td></tr>
+<tr><td>Long diagnostic odyssey</td><td>Average time to diagnosis for rare diseases is 4–7 years; the signal is spread over many claims periods</td><td>Use long lookback windows (3–5 years); build journey-length features</td></tr>
+<tr><td>Misdiagnosis codes</td><td>Patients are coded with the wrong disease before eventual correct diagnosis; these codes appear as false signal</td><td>Model the "path to diagnosis" rather than point-in-time features</td></tr>
+</tbody></table>
+<h3>Deployment: How Patient Lists Reach HCPs</h3>
+<div class="flow-box">
+  <div class="flow-step">Model scores patients across the entire claims universe (de-identified)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">High-score patients linked back to their treating HCPs (prescribers in their claims history)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Field reps receive alerts: "Dr Smith has 3 patients who may benefit from diagnostic workup" (no patient names — HIPAA compliant)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">MSL or rep initiates educational conversation about the disease, diagnostic criteria, and available tests</div>
+</div>
+<div class="callout info"><div class="callout-title">Privacy & Compliance</div><p>Patient finding models operate on de-identified or pseudonymised data. Field teams receive HCP-level alerts (count of potential patients per HCP), not individual patient identifiers. The model output is used to direct educational outreach about disease awareness and testing — not to target individual patients directly.</p></div>`},
+    {id:"s5",content:`<h2 id="s5">NLP on Clinical Notes</h2>
+<p>Structured claims data captures only what was coded. Clinical notes contain the full diagnostic reasoning — symptoms described in free text, test results mentioned in narrative form, and differential diagnoses that never became ICD codes. NLP unlocks this unstructured signal for patient finding.</p>
+<h3>Key NLP Tasks in Patient Finding</h3>
+<table><thead><tr><th>Task</th><th>What It Extracts</th><th>Patient Finding Value</th></tr></thead><tbody>
+<tr><td><strong>Named Entity Recognition (NER)</strong></td><td>Symptoms, diagnoses, medications, biomarkers mentioned in notes</td><td>Finds patients where disease terms appear in notes but no corresponding ICD code was assigned</td></tr>
+<tr><td><strong>Negation detection</strong></td><td>Distinguishes "patient has dyspnoea" from "no dyspnoea noted"</td><td>Prevents false positives from symptom mentions that were ruled out</td></tr>
+<tr><td><strong>Temporal extraction</strong></td><td>Dates and durations associated with symptoms ("symptoms for 6 months")</td><td>Builds the diagnostic journey timeline from unstructured data</td></tr>
+<tr><td><strong>Section classification</strong></td><td>Identifies whether text is in History, Assessment, Plan, Impression sections</td><td>Features from "Assessment" section carry more diagnostic weight than "History"</td></tr>
+</tbody></table>
+<h3>NLP Pipeline for Patient Finding</h3>
+<div class="flow-box">
+  <div class="flow-step">Ingest clinical notes from EHR (typically HL7 FHIR or HL7 v2 ADT feeds)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Pre-process: de-identify (remove PHI), segment into sections, normalise abbreviations</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">NER + negation detection using clinical NLP model (cTAKES, MedSpaCy, or fine-tuned BioBERT)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Map extracted entities to standardised medical ontologies (SNOMED CT, UMLS, MedDRA)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Combine structured NLP features with claims features in patient finding model</div>
+</div>`},
+    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
+<div class="takeaway"><div class="takeaway-num">1</div><div>Undiagnosed patient populations exist because of diagnostic complexity, coding under-specificity, and specialist bottlenecks — not because patients are absent from the healthcare system. Their claims contain diagnostic signals even without a definitive ICD code.</div></div>
+<div class="takeaway"><div class="takeaway-num">2</div><div>Rule-based phenotyping (ICD code combinations) is transparent and auditable; ML-based approaches (XGBoost + SHAP) capture non-linear patterns in hundreds of features. Production systems often combine both: rules for confirmed positives, ML for probable positives.</div></div>
+<div class="takeaway"><div class="takeaway-num">3</div><div>Label construction is the hardest part of patient finding. Noisy or biased labels (e.g., treating any ICD code as confirmed) propagate into the model and undermine clinical validity. Chart review gold-standard labels are expensive but essential for high-stakes rare disease programs.</div></div>
+<div class="takeaway"><div class="takeaway-num">4</div><div>Rare disease patient finding requires special handling: extreme class imbalance demands precision-recall optimisation over ROC AUC; small positive sets may require transfer learning or semi-supervised approaches; long diagnostic odyssey signals span multi-year lookback windows.</div></div>
+<div class="takeaway"><div class="takeaway-num">5</div><div>NLP on clinical notes adds signal invisible to claims analytics — symptoms described in free text, diagnostic reasoning, and differential diagnoses that never received an ICD code. Negation detection is essential: "no signs of X" and "X present" must not be conflated.</div></div>`}],
+  questions:[
+    {id:"q1",text:"A claims-based patient finding model for an autoimmune disease achieves 97% accuracy on a balanced test set. Why might this metric be misleading for deployment?",
+     options:["97% accuracy is always sufficient for production models","The test set may be artificially balanced; in the real patient universe, true positives (undiagnosed disease patients) may be 1 in 5,000+ — a model predicting 'no disease' for everyone would achieve 99.98% accuracy. Precision-recall metrics are more informative.","Accuracy of 97% means the model will miss 3% of patients, which is acceptable","The model should have been tested on a random sample"],
+     correct:1,explanation:"In extreme class imbalance scenarios, overall accuracy is a misleading metric. If only 0.02% of patients have the disease, a model that always predicts 'no disease' achieves 99.98% accuracy while finding zero patients. For patient finding, precision (of those flagged, how many truly have the disease?) and recall (of all true patients, how many were found?) are the relevant metrics. The PR-AUC curve captures the trade-off between them across all classification thresholds."},
+    {id:"q2",text:"A patient has two claims with code K50.x (Crohn's disease) 18 months apart, but no biologics or immunomodulators. What phenotyping category does this most likely represent?",
+     options:["Confirmed moderate-to-severe Crohn's disease","Probable mild or inactive Crohn's disease — the code appears but without therapy escalation suggesting moderate-to-severe disease; may also represent upcoding or incidental coding","Undiagnosed Crohn's disease","A healthy patient with an erroneous code"],
+     correct:1,explanation:"Two ICD-10 K50.x claims confirm the diagnosis is in the system, but the absence of biologics (infliximab, adalimumab, vedolizumab) or immunomodulators (azathioprine, methotrexate) suggests either mild/inactive disease or a patient who is under-treated. For a patient finding model targeting advanced therapy candidates, this patient would score lower than one with steroid dependency + biologic-naïve status. Claims phenotyping must distinguish disease presence from disease severity."},
+    {id:"q3",text:"Your rare disease patient finding model's SHAP analysis shows the top positive-predictive feature is 'visits to a specialist who treats this disease in the past 12 months.' What does this tell the field team?",
+     options:["The model is overfit","HCPs with the highest concentration of model-scored patients are likely specialty practices already treating similar conditions — prioritise outreach to these specialists who already have high clinical awareness","The feature should be removed to avoid circular logic","Specialist visits predict nothing useful"],
+     correct:1,explanation:"SHAP analysis revealing that specialist visits are the strongest predictor tells you something actionable: patients on the cusp of diagnosis are already being seen by the right kind of doctor. This means the field team's most efficient strategy is to educate disease-relevant specialists (neurologists, cardiologists, rheumatologists) about diagnostic criteria and testing pathways — these HCPs already have the likely-undiagnosed patients in their panel."}
+  ]
+},
+
+"5-18": {
+  id:"5-18", title:"Key Driver Analysis", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:35, available:true,
+  tags:["Key Driver Analysis","Relative Importance","Shapley Regression","MaxDiff","Brand Perception","Survey Analytics"],
+  objectives:["Explain the difference between stated importance and derived importance in KDA","Apply Shapley regression and relative weights analysis to quantify driver importance","Design and interpret MaxDiff surveys for measuring attribute preferences","Link KDA insights to commercial strategy — messaging, positioning, and resource allocation","Avoid common KDA pitfalls including multicollinearity and halo effects"],
+  toc:[
+    {id:"s1",title:"What Is Key Driver Analysis & When to Use It",level:"h2"},
+    {id:"s2",title:"Derived Importance Methods",level:"h2"},
+    {id:"s3",title:"Survey-Based KDA: MaxDiff & Stated Importance",level:"h2"},
+    {id:"s4",title:"Drivers of Prescribing Behavior",level:"h2"},
+    {id:"s5",title:"Interpreting & Acting on KDA Results",level:"h2"},
+    {id:"s6",title:"Key Takeaways",level:"h2"}
+  ],
+  sections:[
+    {id:"s1",content:`<h2 id="s1">What Is Key Driver Analysis & When to Use It</h2>
+<p>Key Driver Analysis (KDA) answers the question: <em>which factors most strongly influence an outcome we care about?</em> The outcome might be an HCP's likelihood to prescribe a brand, a patient's satisfaction with treatment, or overall brand preference. KDA identifies which attributes to improve, message, and invest in — and which are table-stakes or irrelevant.</p>
+<h3>KDA in the Pharma Commercial Context</h3>
+<table><thead><tr><th>Business Question</th><th>KDA Outcome Variable</th><th>Drivers Evaluated</th></tr></thead><tbody>
+<tr><td>What drives HCP brand preference?</td><td>Intent to prescribe / overall brand rating</td><td>Efficacy, tolerability, dosing convenience, payer access, rep quality, disease education</td></tr>
+<tr><td>What drives patient adherence?</td><td>PDC score / days on therapy</td><td>Side effect burden, injection frequency, cost, nurse support, disease understanding</td></tr>
+<tr><td>What drives payer formulary preference?</td><td>Formulary tier / rebate acceptance</td><td>Clinical differentiation, ICER, HEOR evidence, patient access programs, competitive rebates</td></tr>
+<tr><td>What drives HCP satisfaction with sales rep?</td><td>Rep satisfaction score</td><td>Scientific knowledge, responsiveness, clinical insight, frequency of visits, digital tools</td></tr>
+</tbody></table>
+<h3>Two Types of Importance</h3>
+<div class="flow-box">
+  <div class="flow-step"><strong>Stated importance:</strong> Ask respondents directly — "How important is dosing convenience to your prescribing decision?" They rate each attribute. Problem: social desirability bias — respondents say efficacy is most important but actually switch brands over access/cost.</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Derived importance:</strong> Infer importance statistically from what respondents actually choose or how they rate overall satisfaction, regressing the outcome on attribute ratings. More predictive of real behaviour.</div>
+</div>
+<div class="callout warning"><div class="callout-title">Stated ≠ Derived</div><p>In virtually every pharma KDA, stated and derived importance diverge. HCPs consistently over-state efficacy as their #1 driver and under-state access/payer coverage, rep relationship quality, and dosing convenience. Derived importance methods reveal the true levers. A brand team that acts on stated importance alone will over-invest in efficacy messaging when the real constraint is formulary access.</p></div>`},
+    {id:"s2",content:`<h2 id="s2">Derived Importance Methods</h2>
+<p>Several statistical methods exist to derive driver importance from survey or behavioural data. Each makes different assumptions and handles multicollinearity differently.</p>
+<table><thead><tr><th>Method</th><th>Approach</th><th>Handles Multicollinearity</th><th>Best For</th></tr></thead><tbody>
+<tr><td><strong>Pearson/Spearman Correlation</strong></td><td>Bivariate correlation between each driver and the outcome</td><td>No — double-counts shared variance</td><td>Quick screen only; not suitable as final KDA</td></tr>
+<tr><td><strong>OLS Regression Coefficients</strong></td><td>Standardised β coefficients from multivariate regression</td><td>Partially — but inflated/deflated by collinear drivers</td><td>When drivers are largely independent</td></tr>
+<tr><td><strong>Relative Weights Analysis (RWA)</strong></td><td>Orthogonalises predictors before regression; partitions R² among drivers</td><td>Yes — stable even with correlated drivers</td><td>Most common KDA method; balances rigour with interpretability</td></tr>
+<tr><td><strong>Shapley Regression</strong></td><td>Uses Shapley values from game theory to fairly distribute R² contribution across all subsets of predictors</td><td>Yes — theoretically optimal partition</td><td>High-collinearity scenarios; gold standard for attribution of variance</td></tr>
+<tr><td><strong>Random Forest / XGBoost Importance</strong></td><td>Feature importance from tree-based models</td><td>Partially — mean decrease impurity has known bias; SHAP values preferred</td><td>Large datasets with many potential drivers; non-linear effects</td></tr>
+</tbody></table>
+<h3>Interpreting a KDA Output</h3>
+<div class="flow-box">
+  <div class="flow-step">Rank drivers by derived importance score (% of total R² or relative weight)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Overlay performance scores: how does the brand rate on each driver?</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Create a 2×2: High Importance / High Performance = Strengths to amplify; High Importance / Low Performance = Gaps to fix; Low Importance / Low Performance = Acceptable; Low Importance / High Performance = Over-invested</div>
+</div>
+<div class="callout info"><div class="callout-title">Multicollinearity Is the Core Challenge</div><p>In pharma KDA, efficacy perceptions and safety perceptions are almost always correlated — HCPs who perceive a drug as more effective also tend to rate it as safer. OLS regression assigns importance unstably in this scenario: small changes in the data produce large swings in which driver appears most important. Relative Weights or Shapley regression resolve this by distributing shared variance proportionally.</p></div>`},
+    {id:"s3",content:`<h2 id="s3">Survey-Based KDA: MaxDiff & Stated Importance</h2>
+<h3>Direct Rating Scales</h3>
+<p>The simplest stated importance approach: ask respondents to rate the importance of each attribute on a 1–10 or 5-point Likert scale. Limitations: all attributes tend to score highly (positive skew), scale compression reduces discrimination between drivers, and response biases (acquiescence, social desirability) are pervasive.</p>
+<h3>MaxDiff (Best-Worst Scaling)</h3>
+<p>MaxDiff is a forced-choice experimental design that overcomes the rating scale biases. Respondents see subsets of attributes and choose the <em>most</em> and <em>least</em> important in each set. The repeated forced trade-offs produce discrimination that rating scales cannot.</p>
+<div class="flow-box">
+  <div class="flow-step">Design: Show respondents sets of 4–5 attributes from a larger list (e.g., 12 total drivers)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Task: "Which of these is MOST important to your prescribing decision? Which is LEAST important?"</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Repeat across 10–15 sets covering all attributes in a balanced design</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Estimate utilities via conditional logit or HB (Hierarchical Bayes) — produces interval-scaled importances that can be compared and aggregated</div>
+</div>
+<table><thead><tr><th>Feature</th><th>Direct Rating</th><th>MaxDiff</th></tr></thead><tbody>
+<tr><td>Scale discrimination</td><td>Poor (ratings cluster at top)</td><td>High (forced choice reveals true rank)</td></tr>
+<tr><td>Respondent burden</td><td>Low</td><td>Moderate (multiple choice tasks)</td></tr>
+<tr><td>Individual-level scores</td><td>Yes</td><td>Yes (with HB estimation)</td></tr>
+<tr><td>Zero-point</td><td>Arbitrary</td><td>Meaningful (anchored)</td></tr>
+<tr><td>Recommended use</td><td>Quick pulse surveys</td><td>Strategic brand positioning research</td></tr>
+</tbody></table>`},
+    {id:"s4",content:`<h2 id="s4">Drivers of Prescribing Behavior</h2>
+<p>In pharma commercial analytics, KDA is most commonly applied to understand what drives HCPs to prescribe — or not prescribe — a specific brand. These analyses combine survey data (perception ratings) with actual prescribing behaviour (claims data) for maximum insight.</p>
+<h3>Typical Driver Framework for HCP Prescribing</h3>
+<table><thead><tr><th>Driver Category</th><th>Specific Drivers</th><th>Notes</th></tr></thead><tbody>
+<tr><td><strong>Clinical factors</strong></td><td>Efficacy in clinical trials, real-world effectiveness, onset of action, durability of response, safety profile</td><td>Typically high stated importance; actual prescribing driven more by access and habit</td></tr>
+<tr><td><strong>Access & reimbursement</strong></td><td>Formulary tier, prior authorization burden, co-pay support, specialty pharmacy friction</td><td>Often the #1 derived driver — PA denials and coverage barriers directly block prescribing</td></tr>
+<tr><td><strong>Convenience</strong></td><td>Dosing frequency, route of administration, self-injection vs. infusion, storage requirements</td><td>Key for patient-initiated therapy — also matters for HCP recommendation in self-administered drugs</td></tr>
+<tr><td><strong>Commercial support</strong></td><td>Rep quality and frequency, samples/starter packs, nurse educator support, patient assistance programs</td><td>Under-stated by HCPs but often high derived importance — especially in complex therapies</td></tr>
+<tr><td><strong>Familiarity & inertia</strong></td><td>Time since first prescription, peer usage in practice, KOL endorsement</td><td>Habit and social proof are strong behavioural drivers, especially for new entrants</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Linking Survey KDA to Claims Data</div><p>The most powerful KDA designs link survey perceptions (what HCPs say) with actual prescribing behaviour from claims (what HCPs do). An HCP who rates the brand highly on efficacy but has low actual prescribing has a perception-behaviour gap — likely caused by an access barrier. Identifying these HCPs is a high-priority target for access team intervention.</p></div>`},
+    {id:"s5",content:`<h2 id="s5">Interpreting & Acting on KDA Results</h2>
+<h3>The Importance-Performance Map</h3>
+<p>The standard KDA deliverable is an importance-performance map (also called a gap analysis or driver map). Each driver is plotted on two axes: derived importance (x or y) and brand performance/rating (the other axis). This creates four actionable quadrants:</p>
+<table><thead><tr><th>Quadrant</th><th>Importance</th><th>Performance</th><th>Strategic Implication</th></tr></thead><tbody>
+<tr><td><strong>Leverage (Strengths)</strong></td><td>High</td><td>High</td><td>Actively message and amplify — these are your differentiators; risk of losing them must be monitored</td></tr>
+<tr><td><strong>Fix (Critical Gaps)</strong></td><td>High</td><td>Low</td><td>Highest priority — address through messaging, evidence generation, access programs, or product improvement</td></tr>
+<tr><td><strong>Maintain (Table Stakes)</strong></td><td>Low</td><td>High</td><td>Low investment needed — do not over-message; HCPs expect this as baseline</td></tr>
+<tr><td><strong>Monitor (Low Priority)</strong></td><td>Low</td><td>Low</td><td>Not worth investing in; revisit if importance rises</td></tr>
+</tbody></table>
+<h3>Common KDA Pitfalls</h3>
+<table><thead><tr><th>Pitfall</th><th>Description</th><th>Fix</th></tr></thead><tbody>
+<tr><td><strong>Halo effect</strong></td><td>HCPs who like the brand rate all attributes highly, inflating correlations</td><td>Use difference scores (brand minus competitor rating) as outcome; normalise by respondent</td></tr>
+<tr><td><strong>Endogeneity</strong></td><td>High prescribers like the drug more because they prescribe it, not the other way round</td><td>Segment analysis by prescribing behaviour; look for causal mechanisms not just correlations</td></tr>
+<tr><td><strong>Sample bias</strong></td><td>Surveying only existing prescribers misses non-prescribers' barrier-driven perspectives</td><td>Include competitive prescribers and lapsed prescribers in KDA samples</td></tr>
+<tr><td><strong>Static analysis</strong></td><td>Drivers change over lifecycle — launch drivers differ from LOE defence drivers</td><td>Run KDA at regular intervals (quarterly or bi-annually); track driver importance trends over time</td></tr>
+</tbody></table>`},
+    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
+<div class="takeaway"><div class="takeaway-num">1</div><div>Stated importance (what HCPs say matters) consistently diverges from derived importance (what actually drives their behaviour). Acting on stated importance alone leads to over-investment in efficacy messaging and under-investment in access and convenience improvements.</div></div>
+<div class="takeaway"><div class="takeaway-num">2</div><div>Relative Weights Analysis and Shapley Regression are the preferred methods for derived KDA because they handle multicollinearity — the common pharma scenario where efficacy, safety, and tolerability perceptions are correlated.</div></div>
+<div class="takeaway"><div class="takeaway-num">3</div><div>MaxDiff produces better discriminating importance scores than direct rating scales by forcing trade-off choices — critical when all attributes cluster near "very important" on a rating scale.</div></div>
+<div class="takeaway"><div class="takeaway-num">4</div><div>The importance-performance map is the core KDA deliverable: high importance + low performance = fix first; high importance + high performance = message loudly; low importance = do not over-invest.</div></div>
+<div class="takeaway"><div class="takeaway-num">5</div><div>Linking survey perceptions to actual claims prescribing data reveals perception-behaviour gaps — HCPs who say the brand is excellent but don't prescribe it. These gaps almost always point to access barriers, not clinical objections.</div></div>`}],
+  questions:[
+    {id:"q1",text:"A pharma brand team runs a KDA and finds that HCPs rate 'efficacy in Phase 3 trials' as their #1 most important prescribing driver (stated importance). However, derived importance analysis puts 'formulary tier and prior authorization burden' as #1. What should the brand team do?",
+     options:["Discard the derived importance analysis — HCPs know what matters to them","Prioritise access-focused interventions (payer contracting, co-pay cards, PA support tools) over increasing efficacy messaging, since derived importance reflects what actually predicts prescribing behaviour","Increase clinical trial messaging to reinforce the HCP-stated driver","Survey a larger sample until stated and derived importance align"],
+     correct:1,explanation:"Derived importance reflects what actually drives prescribing behaviour — HCPs state that efficacy is most important because it is socially desirable to say so, but their actual prescribing decisions are constrained by formulary access. The brand team should prioritise market access improvements, PA burden reduction, and coverage communication over additional efficacy messaging. This doesn't mean ignoring efficacy — it means recognising that access is the binding constraint."},
+    {id:"q2",text:"In a KDA for an oncology brand, efficacy rating and safety rating have a Pearson correlation of 0.82 with each other. An OLS regression assigns 45% importance to efficacy and 8% to safety. A Shapley regression assigns 28% to efficacy and 25% to safety. Which result is more reliable?",
+     options:["OLS — it uses more standard statistical methods","Shapley regression — it distributes shared variance fairly across correlated predictors rather than arbitrarily assigning it to the first correlated variable that enters the model","OLS — Shapley is only for game theory, not regression","Neither — the correlation means KDA cannot be run"],
+     correct:1,explanation:"With a 0.82 correlation between efficacy and safety ratings, these drivers share substantial variance. OLS regression produces unstable estimates in this scenario — the coefficients are highly sensitive to which variable enters the model first and to small sample fluctuations. Shapley regression uses a combinatorial approach (averaging contribution across all subsets of predictors) to distribute shared R² fairly, producing stable and interpretable importance weights even under high multicollinearity."},
+    {id:"q3",text:"A MaxDiff survey shows that 'once-daily dosing' has the highest importance utility score. The brand currently requires twice-daily dosing. The brand team considers a label change to request a once-daily indication. What additional analysis should precede this decision?",
+     options:["Run the KDA again with a larger sample","Cross the MaxDiff finding with actual adherence data from claims — if twice-daily patients already have high PDC, dosing frequency may not be the actual barrier to prescribing or adherence in practice. Check if once-daily competitors are gaining share on the convenience story before committing to a clinical program.","Cancel the label change — MaxDiff is not statistically valid","Accept the MaxDiff result directly — it is the gold standard for preference measurement"],
+     correct:1,explanation:"MaxDiff tells you what HCPs say they value, but stated preference must be triangulated with behavioural data before making a major strategic investment. If twice-daily patients have high real-world adherence (high PDC in claims) and the brand is not losing share to once-daily competitors, dosing frequency may not be the actual commercial barrier. The MaxDiff finding is a hypothesis to investigate, not a direct investment mandate. Cross-validating with claims behaviour prevents expensive misdirected investments."}
+  ]
+},
+
+"5-19": {
+  id:"5-19", title:"Marketing Mix Models (MMM)", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Advanced", mins:40, available:true,
+  tags:["Marketing Mix Modeling","MMM","Adstock","ROI","Attribution","Media Spend","Promotional Response"],
+  objectives:["Explain what MMM measures and how it differs from multi-touch attribution","Build a pharma MMM with base and incremental sales decomposition","Model adstock and saturation effects for each promotional channel","Calculate ROI and optimal budget allocation across channels","Validate an MMM and interpret its limitations for stakeholders"],
+  toc:[
+    {id:"s1",title:"What MMM Measures & Why It Matters",level:"h2"},
+    {id:"s2",title:"MMM Model Structure & Variables",level:"h2"},
+    {id:"s3",title:"Adstock, Carryover & Saturation Effects",level:"h2"},
+    {id:"s4",title:"Estimating ROI & Optimising Budget Allocation",level:"h2"},
+    {id:"s5",title:"Validation, Limitations & MMM vs MTA",level:"h2"},
+    {id:"s6",title:"Key Takeaways",level:"h2"}
+  ],
+  sections:[
+    {id:"s1",content:`<h2 id="s1">What MMM Measures & Why It Matters</h2>
+<p>Marketing Mix Modeling (MMM) is a regression-based analytical approach that quantifies the contribution of each marketing and promotional activity to sales (or TRx) outcomes. It answers the fundamental commercial question: <em>for every dollar spent on detailing, DTC, samples, or digital promotion, how many additional prescriptions did we generate?</em></p>
+<h3>Pharma Promotional Channels in an MMM</h3>
+<table><thead><tr><th>Channel</th><th>Metric Used in Model</th><th>Expected Effect Type</th></tr></thead><tbody>
+<tr><td><strong>Sales force detailing</strong></td><td>Call equivalents, detail frequency by territory, rep reach</td><td>Strong, lagged, decays quickly</td></tr>
+<tr><td><strong>Samples</strong></td><td>Sample units dispensed by rep and through dispensing programs</td><td>Fast, direct trial conversion; short carryover</td></tr>
+<tr><td><strong>Direct-to-Consumer (DTC)</strong></td><td>GRP (gross rating points) or impressions by media type (TV, digital, print)</td><td>Slower build; longer carryover; awareness-driven</td></tr>
+<tr><td><strong>Digital promotion (HCP)</strong></td><td>Email opens, banner clicks, rep-triggered digital content, eDetailer completions</td><td>Moderate; measurable at HCP level; short carryover</td></tr>
+<tr><td><strong>Speaker programs / events</strong></td><td>Program attendees, speaker fees (used as proxy for KOL reach)</td><td>Peer influence effect; slow build, long duration</td></tr>
+<tr><td><strong>Patient support programs</strong></td><td>Hub enrolments, co-pay card activations, nurse educator contacts</td><td>Retention / adherence support; reduces discontinuation</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Why MMM Matters More Than Ever</div><p>As third-party cookies deprecate and multi-touch attribution becomes harder to execute (particularly in HCP digital channels where individual tracking raises compliance concerns), MMM has seen a resurgence. It does not require individual-level tracking data — it operates on aggregated spend and aggregate sales, making it inherently privacy-safe and compliant in pharma's heavily regulated promotional environment.</p></div>`},
+    {id:"s2",content:`<h2 id="s2">MMM Model Structure & Variables</h2>
+<p>An MMM decomposes total sales/TRx into <strong>base</strong> (what would have sold without any promotion) and <strong>incremental</strong> (what promotion contributed) components.</p>
+<div class="formula-box">
+  <div class="formula-label">MMM Core Equation</div>
+  <div class="formula-main">TRx(t) = Base(t) + β₁·Adstock_Detailing(t) + β₂·Adstock_Samples(t) + β₃·Adstock_DTC(t) + … + Controls(t) + ε(t)<br><br>Base(t) = underlying demand without promotion (trend + seasonality + competition effects)<br>Incremental(t) = sum of all promotional contributions</div>
+</div>
+<h3>Variable Categories</h3>
+<table><thead><tr><th>Variable Type</th><th>Examples</th><th>Purpose</th></tr></thead><tbody>
+<tr><td><strong>Promotional variables</strong></td><td>Detailing calls, samples, DTC GRPs, digital impressions (after adstock transformation)</td><td>Estimate incremental Rx attributable to each channel</td></tr>
+<tr><td><strong>Base drivers</strong></td><td>Trend, seasonal index, disease incidence, new patient starts</td><td>Capture underlying market dynamics independent of promotion</td></tr>
+<tr><td><strong>Competitive variables</strong></td><td>Competitor detailing intensity, competitor launches, competitor price changes</td><td>Control for market dynamics that suppress or boost brand sales</td></tr>
+<tr><td><strong>Distribution / access</strong></td><td>Formulary coverage %, payer mix changes, specialty pharmacy availability</td><td>Access often drives more volume than promotion — must be modelled separately</td></tr>
+<tr><td><strong>Price / GTN</strong></td><td>Net price changes, co-pay card adjustments, formulary tier shifts</td><td>Price elasticity estimation; controls for GTN changes that affect demand</td></tr>
+<tr><td><strong>External shocks</strong></td><td>COVID impact, competitor recall, safety label change, product shortage</td><td>Dummy variables absorb one-time events that would otherwise confound promotion effects</td></tr>
+</tbody></table>
+<div class="callout warning"><div class="callout-title">Omitting Competition Variables Biases Coefficients</div><p>If a competitor launches during the observation window and you omit competitor activity from the model, the drop in your brand's TRx will be falsely attributed to a decline in your own promotional effectiveness. Always include competitive detailing and share-of-voice variables. In pharma, formulary access changes are the most common confound — a formulary win in Q3 looks like a detailing win if not modelled separately.</p></div>`},
+    {id:"s3",content:`<h2 id="s3">Adstock, Carryover & Saturation Effects</h2>
+<p>Promotional effects are not instantaneous — a detailing call made in week 1 may influence prescribing in weeks 2, 3, and 4. Similarly, promotional response does not grow linearly with spend — doubling the detailing budget does not double the incremental Rx. MMM models these dynamics explicitly.</p>
+<h3>Adstock (Carryover) Transformation</h3>
+<div class="formula-box">
+  <div class="formula-label">Geometric Adstock</div>
+  <div class="formula-main">Adstock(t) = Spend(t) + λ · Adstock(t−1)<br><br>λ = decay rate (0 to 1); higher λ = longer memory of past spend<br>λ = 0: only current period spend matters (immediate effect, no carryover)<br>λ = 0.7: past spend decays at 30% per period; ~2–3 week effective window<br>λ = 0.9: slow decay; past spend remains influential for 1–2 months</div>
+</div>
+<h3>Typical Adstock Decay Rates by Channel</h3>
+<table><thead><tr><th>Channel</th><th>Typical λ Range</th><th>Rationale</th></tr></thead><tbody>
+<tr><td>Sales force detailing</td><td>0.4 – 0.7</td><td>Message recalled for a few weeks; fades quickly without reinforcement</td></tr>
+<tr><td>Samples</td><td>0.1 – 0.3</td><td>Trial effect is immediate; patient starts right away or not at all</td></tr>
+<tr><td>TV / DTC broadcast</td><td>0.6 – 0.85</td><td>Brand awareness builds slowly and persists; patients may see an ad then wait months before asking about the drug</td></tr>
+<tr><td>Digital (HCP email)</td><td>0.2 – 0.5</td><td>Email read-rate and click effect is short-lived</td></tr>
+<tr><td>Speaker programs</td><td>0.7 – 0.9</td><td>Peer influence has long duration — a talk by a KOL influences prescribing for months</td></tr>
+</tbody></table>
+<h3>Saturation (Diminishing Returns)</h3>
+<p>After a certain spend level, additional investment yields progressively smaller incremental returns. This is modelled using a <strong>Hill function</strong> or <strong>S-curve transformation</strong> applied to the adstocked spend variable:</p>
+<div class="formula-box">
+  <div class="formula-label">Saturation (Hill Function)</div>
+  <div class="formula-main">Saturated(x) = x^α / (K^α + x^α)<br><br>K = spend at half-saturation (inflection point)<br>α = slope of the S-curve; controls how quickly saturation kicks in<br>Result: bounded between 0 and 1; input spend mapped to diminishing marginal effect</div>
+</div>`},
+    {id:"s4",content:`<h2 id="s4">Estimating ROI & Optimising Budget Allocation</h2>
+<h3>Calculating Channel ROI</h3>
+<p>Once coefficients are estimated, ROI for each promotional channel is calculated by comparing the gross margin from incremental TRx to the cost of the promotional activity:</p>
+<div class="formula-box">
+  <div class="formula-label">Channel ROI</div>
+  <div class="formula-main">Incremental TRx(channel) = β_channel × adstocked_spend(channel) over period<br>Incremental Revenue = Incremental TRx × Net Revenue Per Rx<br>ROI = (Incremental Revenue − Channel Spend) / Channel Spend<br>ROAS = Incremental Revenue / Channel Spend</div>
+</div>
+<table><thead><tr><th>Channel</th><th>Typical Pharma ROI Range</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Sales force detailing</td><td>$1.50 – $4.00 per $1 spent</td><td>Highest absolute spend; ROI highly sensitive to territory design and HCP targeting quality</td></tr>
+<tr><td>Samples</td><td>$3.00 – $8.00 per $1 spent</td><td>High ROI when converting naïve patients; lower when given to existing users (no incremental lift)</td></tr>
+<tr><td>DTC (TV/digital)</td><td>$0.80 – $2.50 per $1 spent</td><td>High variance; brand awareness lifts HCP prescribing through patient demand but difficult to isolate</td></tr>
+<tr><td>Speaker programs</td><td>$2.00 – $6.00 per $1 spent</td><td>High ROI when well-targeted (right KOL, right audience); diminishing returns at high frequency</td></tr>
+</tbody></table>
+<h3>Budget Optimisation</h3>
+<p>MMM enables <strong>budget simulation</strong>: given a fixed total promotional budget, find the allocation across channels that maximises incremental TRx. This is a constrained optimisation problem:</p>
+<div class="flow-box">
+  <div class="flow-step">Estimate response curves for each channel (incremental TRx as function of spend, including saturation)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Set constraints: total budget cap, minimum and maximum spend per channel (business constraints)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Use gradient-based or evolutionary optimiser to find spend allocations that maximise total incremental TRx</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Present "what-if" scenarios to brand team: e.g., shift 20% from detailing to DTC — net impact on TRx and ROI</div>
+</div>`},
+    {id:"s5",content:`<h2 id="s5">Validation, Limitations & MMM vs MTA</h2>
+<h3>Validating an MMM</h3>
+<table><thead><tr><th>Validation Check</th><th>What to Look For</th></tr></thead><tbody>
+<tr><td><strong>In-sample fit</strong></td><td>R² ≥ 0.85 for weekly/monthly data; residuals should be white noise (no autocorrelation)</td></tr>
+<tr><td><strong>Out-of-sample holdout</strong></td><td>Exclude last 3–6 months from training; model should forecast holdout TRx within ±10% MAPE</td></tr>
+<tr><td><strong>Directional validity</strong></td><td>All promotional coefficients should be positive (spending more should not decrease sales); base should be stable</td></tr>
+<tr><td><strong>Decomposition plausibility</strong></td><td>Base contribution typically 50–70% of total TRx for established brands; promotional share higher at launch</td></tr>
+<tr><td><strong>Business triangulation</strong></td><td>Channel ROI estimates should be consistent with operational knowledge — if detailing ROI appears 10× higher than samples, investigate before reporting</td></tr>
+</tbody></table>
+<h3>MMM Limitations</h3>
+<table><thead><tr><th>Limitation</th><th>Implication</th></tr></thead><tbody>
+<tr><td>Requires long time series (2+ years weekly)</td><td>New brands or recently-launched channels have insufficient history</td></tr>
+<tr><td>Cannot measure individual-level effects</td><td>Cannot distinguish which HCP types respond to which channels</td></tr>
+<tr><td>Multicollinearity across channels</td><td>When detailing and sampling are always deployed together, the model cannot separate their effects</td></tr>
+<tr><td>Does not capture cross-channel synergy</td><td>DTC may amplify detailing — sequential effects are hard to model in standard MMM</td></tr>
+</tbody></table>
+<h3>MMM vs Multi-Touch Attribution (MTA)</h3>
+<table><thead><tr><th>Dimension</th><th>MMM</th><th>Multi-Touch Attribution</th></tr></thead><tbody>
+<tr><td>Data granularity</td><td>Aggregate (brand-level weekly/monthly)</td><td>Individual-level touchpoint data</td></tr>
+<tr><td>Privacy requirement</td><td>None — aggregated data only</td><td>Requires cookies or identifier matching</td></tr>
+<tr><td>Channels covered</td><td>All channels including offline (detailing, samples)</td><td>Primarily digital touchpoints</td></tr>
+<tr><td>Latency</td><td>Monthly to quarterly cadence</td><td>Near real-time</td></tr>
+<tr><td>Regulatory compliance</td><td>Fully compliant; no PHI/PII involved</td><td>HCP tracking requires careful compliance review</td></tr>
+<tr><td>Recommended use</td><td>Strategic budget allocation, annual planning</td><td>Tactical digital campaign optimisation</td></tr>
+</tbody></table>`},
+    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
+<div class="takeaway"><div class="takeaway-num">1</div><div>MMM decomposes total TRx into base (organic demand) and incremental (promotion-driven) components. Understanding this split is essential — over-attributing to promotion leads to wasteful spend; under-attributing leads to under-investment in effective channels.</div></div>
+<div class="takeaway"><div class="takeaway-num">2</div><div>Adstock transformation captures the carryover effect of promotion — the fact that a detailing call or a DTC impression does not only influence prescribing this week but continues to decay over future periods. Incorrectly assuming instantaneous effects produces biased coefficients.</div></div>
+<div class="takeaway"><div class="takeaway-num">3</div><div>Omitting competitive and access variables is the most common MMM failure mode in pharma. A competitor launch or formulary win that is unmodelled will corrupt promotional coefficient estimates, leading to wrong ROI conclusions.</div></div>
+<div class="takeaway"><div class="takeaway-num">4</div><div>MMM ROI should be used directionally, not precisely. Confidence intervals on promotional coefficients are wide; the value is in ranking channels (detailing vs. DTC vs. speaker programs) and identifying saturation thresholds, not in reporting ROI to two decimal places.</div></div>
+<div class="takeaway"><div class="takeaway-num">5</div><div>MMM and Multi-Touch Attribution are complementary, not competing. MMM is better for strategic budget allocation across all channels (including offline); MTA is better for tactical digital optimisation. Pharma's privacy constraints make MMM the more viable primary method — individual HCP tracking faces significant compliance scrutiny.</div></div>`}],
+  questions:[
+    {id:"q1",text:"A pharma brand team increases detailing from 2 calls per rep per day to 4 calls per day for 6 months, but the MMM shows only a 15% increase in incremental TRx from detailing (not the expected 100%). What effect does this most likely illustrate?",
+     options:["The model is broken — doubling inputs should double outputs","Saturation / diminishing returns — the brand's detailing response curve has flattened at 2 calls/day; the 3rd and 4th call generate little incremental lift because the addressable HCPs have already been reached","The adstock decay rate is too high","Detailing has a negative coefficient above 2 calls/day"],
+     correct:1,explanation:"Diminishing returns (saturation) is a fundamental property of promotional response curves. After the most-receptive HCPs have been reached at an optimal call frequency, additional detailing contacts reach either already-converted HCPs (who no longer need persuading) or low-potential HCPs (who are unlikely to convert regardless of call frequency). The Hill function / S-curve transformation in the MMM captures this: beyond the saturation threshold, incremental spend generates progressively smaller incremental TRx. This finding should trigger a territory design review — redirect excess calls to untargeted high-potential HCPs."},
+    {id:"q2",text:"An MMM for a specialty brand uses two years of weekly data. The model assigns 80% of TRx to 'base' and 20% to all promotional activity combined. The brand team is concerned that promotion has little effect. What is the most likely correct interpretation?",
+     options:["80% base means promotion is ineffective — cut the budget","For a mature brand with strong formulary access, 70–80% base is typical and expected — it reflects established patient demand, formulary coverage, and physician habit. The 20% incremental is still commercially significant and worth optimising. A high base is a sign of brand health, not a failure of promotion.","The model is incorrect — base should never exceed promotional contribution","Reduce the observation window to show a lower base percentage"],
+     correct:1,explanation:"High base contributions are normal and expected for established brands. Base reflects: existing patient demand, HCPs who already prescribe habitually, formulary access secured by prior contracting, and market dynamics. For a brand that has been on the market for 5+ years with broad formulary coverage, 70–80% base is typical. The 20% promotional incremental is still worth measuring and optimising — on a $1B brand, 20% incremental = $200M driven by promotions, which justifies the entire promotional budget many times over. A low base percentage is more common at launch, when promotional seeding is essential to build initial prescribing habits."},
+    {id:"q3",text:"You are building an MMM for a brand that was heavily advertised on TV (DTC) in H1 but not in H2. Competitor activity was also high in H1. Your promotional TV coefficient is negative. What is the most likely cause?",
+     options:["DTC always has a negative effect in pharma","Multicollinearity and omitted variable bias — TV spend and competitor spend are correlated in H1; the model cannot separate their effects and may assign the competitor's negative impact to your TV variable. Adding a competitor activity variable and checking for VIF should diagnose this.","The campaign creative was ineffective","Adstock should be removed from the TV variable"],
+     correct:1,explanation:"A negative promotional coefficient is a red flag that almost always indicates a modelling problem rather than a genuine negative effect of advertising. When TV spend and a negative factor (competitor activity, formulary loss) co-occur in the same time period, and the negative factor is omitted from the model, the regression assigns the negative impact to TV — producing a spurious negative coefficient. The diagnostic is: add the omitted variable (competitor GRPs, formulary coverage index) and check if the TV coefficient becomes positive. VIF > 10 among promotional variables indicates harmful multicollinearity that requires remediation (e.g., dimension reduction, longer observation window, or orthogonalisation)."}
+  ]
 }
 
 }); // end PL.addChapters Domain 5
