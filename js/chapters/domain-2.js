@@ -603,174 +603,118 @@ PL.addChapters({
 
 
 "2-5": {
-  id:"2-5", title:"Marketing Mix Modeling (MMM)", domain:"Commercial Analytics", domain_id:2,
-  level:"Advanced", mins:60, available:true,
-  tags:["MMM","Marketing Mix","Adstock","ROI","Channel Attribution","Budget Optimization"],
-  objectives:["Explain the fundamentals of marketing mix modeling and sales decomposition","Identify required data inputs for pharma MMM","Model adstock, carry-over, and diminishing returns effects","Calculate channel-level ROI and optimize budget allocation","Understand Bayesian MMM approaches and their advantages","Apply MMM insights to pharma brand-specific decision making"],
+  id:"2-5", title:"Referral Networks & Influence Analytics", domain:"Commercial Analytics", domain_id:2,
+  level:"Intermediate", mins:45, available:true,
+  tags:["Referral Networks","Network Analysis","KOL","Influence","Graph Analytics","HCP Targeting"],
+  objectives:["Explain how referral networks form and why they matter for pharma commercial strategy","Identify KOLs and hidden influencers using network centrality measures","Map patient referral flows between PCPs and specialists to find prescribing gatekeepers","Apply graph analytics to prioritise field force deployment along referral pathways","Measure cascade adoption and peer influence in prescribing diffusion"],
   toc:[
-    {id:"s1",title:"MMM Fundamentals",level:"h2"},
-    {id:"s2",title:"Data Inputs & Preparation",level:"h2"},
-    {id:"s3",title:"Adstock & Carry-Over Effects",level:"h2"},
-    {id:"s4",title:"Diminishing Returns & Saturation",level:"h2"},
-    {id:"s5",title:"Channel Contribution & ROI",level:"h2"},
-    {id:"s6",title:"Bayesian MMM Approaches",level:"h2"},
-    {id:"s7",title:"Pharma-Specific Considerations",level:"h2"},
-    {id:"s8",title:"Key Takeaways",level:"h2"}
+    {id:"s1",title:"Why Referral Networks Matter in Pharma",level:"h2"},
+    {id:"s2",title:"Building the Referral Network",level:"h2"},
+    {id:"s3",title:"Network Centrality & KOL Identification",level:"h2"},
+    {id:"s4",title:"Prescribing Diffusion & Peer Influence",level:"h2"},
+    {id:"s5",title:"Commercial Applications & Field Strategy",level:"h2"},
+    {id:"s6",title:"Key Takeaways",level:"h2"}
   ],
   sections:[
-    {id:"s1",content:`<h2 id="s1">MMM Fundamentals</h2>
-<p><strong>Marketing Mix Modeling (MMM)</strong> is a statistical approach that decomposes total sales (or prescriptions) into the contributions of individual marketing drivers. It answers the fundamental commercial question: <em>What is driving our sales, and how should we allocate our budget?</em></p>
-<h3>Sales Decomposition</h3>
-<p>MMM decomposes total sales into three categories:</p>
-<ul>
-<li><strong>Base sales:</strong> What would happen with zero promotional activity — driven by brand equity, disease prevalence, and market dynamics. Typically 50-70% of total sales for established brands.</li>
-<li><strong>Incremental sales from own promotion:</strong> Sales attributable to your marketing activities — field force, DTC, digital, sampling, speaker programs. Typically 20-40%.</li>
-<li><strong>External factors:</strong> Competition, seasonality, formulary changes, guidelines, macro trends. Typically 5-15%.</li>
-</ul>
-<p>The standard MMM equation:</p>
-<div class="flow-box"><div class="rule-step"><div class="rule-step-num">1</div><div class="rule-step-body"><strong>Multiplicative MMM model (log-log specification)</strong></div></div>
-<div class="rule-step"><div class="rule-step-num">2</div><div class="rule-step-body"><strong>log(Sales) = B0 + B1*log(Details) + B2*log(Samples)</strong></div></div>
-<div class="rule-step"><div class="rule-step-num">3</div><div class="rule-step-body"><strong>+ B3*log(DTC_GRPs) + B4*log(Digital)</strong></div></div>
-<div class="rule-step"><div class="rule-step-num">4</div><div class="rule-step-body"><strong>+ B5*Competitor_NRx + B6*Seasonality + error</strong></div></div>
-<div class="rule-step"><div class="rule-step-num">5</div><div class="rule-step-body"><strong>Coefficients = elasticities (% change in sales per % change in driver)</strong></div></div>
+    {id:"s1",content:`<h2 id="s1">Why Referral Networks Matter in Pharma</h2>
+<p>In most disease areas, patients do not arrive directly at the specialist who will ultimately prescribe a brand. They travel through a <strong>referral network</strong> — a chain of providers that begins with a primary care physician, passes through diagnostic or intermediate specialists, and terminates at the treating specialist. Understanding these networks reveals where commercial effort should be concentrated and which HCPs are gatekeepers to patient flow.</p>
+<h3>The Referral Chain in Specialty Pharma</h3>
+<div class="flow-box">
+  <div class="flow-step"><strong>PCP / GP</strong> — First point of contact; diagnoses or suspects condition; initiates specialist referral</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Diagnostic specialist</strong> (e.g., neurologist for MS, cardiologist for heart failure) — Confirms diagnosis; may prescribe standard-of-care or refer to subspecialist</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Subspecialist / KOL</strong> (e.g., MS specialist, heart failure clinic) — Prescribes advanced or biologic therapy; the primary commercial target</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Co-managing HCP</strong> — Monitors ongoing therapy; may renew prescriptions; important for adherence outcomes</div>
 </div>
-<div class="callout"><div class="callout-title">MMM vs. MTA</div><p>MMM uses aggregate data (weekly/monthly, national/regional) and works without individual-level tracking. Multi-Touch Attribution (MTA) uses individual-level data. In pharma, privacy constraints and long sales cycles make MMM the dominant approach, though hybrid models combining both are emerging.</p></div>`},
-    {id:"s2",content:`<h2 id="s2">Data Inputs & Preparation</h2>
-<p>MMM requires minimum 2-3 years of weekly or monthly data across all channels. Data quality and completeness directly determine model reliability.</p>
-<h3>Required Data Elements</h3>
-<table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Category</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Variables</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Source</th></tr></thead>
-<tbody>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Dependent variable</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">TRx, NRx, revenue, market share</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">IQVIA, Symphony</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Personal promotion</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Details, samples, speaker programs</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Veeva CRM, IQVIA DDD</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Non-personal promotion</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">DTC spend (TV, print, digital GRPs), HCP digital</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Kantar, internal spend data</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Competitive</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Competitor TRx, share, promotional spend</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">IQVIA, Kantar competitive tracking</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Market factors</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Formulary changes, guidelines, seasonality</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Internal tracking, MMIT</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Macro factors</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Insurance coverage rates, economic indicators</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Census, CMS</td></tr>
+<h3>Why Network Position Determines Prescribing Volume</h3>
+<table><thead><tr><th>Network Role</th><th>Influence Type</th><th>Commercial Priority</th></tr></thead><tbody>
+<tr><td><strong>Hub specialist</strong></td><td>Receives referrals from many PCPs; high patient throughput</td><td>Highest — converting one hub HCP unlocks many patients</td></tr>
+<tr><td><strong>Referring PCP (gateway)</strong></td><td>Sends patients to specific specialists; steers the diagnostic journey</td><td>High — influencing which specialist they refer to shapes brand exposure</td></tr>
+<tr><td><strong>Isolated specialist</strong></td><td>Treats independently; few inbound referrals; self-contained panel</td><td>Moderate — direct relationship needed; no network leverage</td></tr>
+<tr><td><strong>Peripheral PCP</strong></td><td>Rarely refers; low disease prevalence in panel</td><td>Low — digital or low-touch only</td></tr>
 </tbody></table>
-<h3>Data Preparation Best Practices</h3>
-<ul>
-<li><strong>Granularity alignment:</strong> All variables at the same time granularity (weekly preferred)</li>
-<li><strong>Geographic alignment:</strong> National model first, then regional if sufficient variation exists</li>
-<li><strong>Outlier treatment:</strong> Identify and handle holiday weeks, supply disruptions, COVID period</li>
-<li><strong>Multicollinearity check:</strong> Personal and non-personal promotion often move together — VIF analysis is essential</li>
-</ul>`},
-    {id:"s3",content:`<h2 id="s3">Adstock & Carry-Over Effects</h2>
-<p>Marketing activities have effects that persist beyond the week they occur. <strong>Adstock transformation</strong> models this carry-over effect by creating a decaying weighted average of current and past promotional activity.</p>
-<h3>Adstock Formula</h3>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">0 = no carry − over, 1 = infinite carry − over</div>
+<div class="callout info"><div class="callout-title">The Hidden Gatekeeper Problem</div><p>Traditional HCP targeting ranks physicians by their own prescribing volume. This misses the referring PCP who sends 40 patients per year to a prescribing specialist — that PCP generates more brand-eligible patients than many mid-tier specialists, but appears in zero Rx data. Network analytics surfaces these invisible gatekeepers.</p></div>`},
+    {id:"s2",content:`<h2 id="s2">Building the Referral Network</h2>
+<p>Referral networks are constructed from claims data by inferring relationships between providers based on shared patients within a defined time window.</p>
+<h3>Network Construction from Claims</h3>
+<div class="flow-box">
+  <div class="flow-step">Identify shared patients: any patient who has a claim with Provider A followed by a claim with Provider B within 90 days is a candidate referral</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Filter by specialty pair and service sequence: PCP → specialist (not reverse); match on disease-relevant service codes</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Count co-occurrences: edge weight between A→B = number of patients referred in observation period</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Apply minimum threshold (e.g., ≥3 shared patients) to remove noise edges and spurious co-occurrences</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Result: directed weighted graph — nodes are HCPs, edges are referral relationships, weights are referral volume</div>
 </div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Adstocked = np.zeros(len(x))</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Adstocked[0] = x[0]</div>
-</div>
-<h3>Interpreting Carry-Over</h3>
-<p>A decay rate of 0.7 means 70% of this week's effect carries into next week, 49% (0.7^2) into the week after, and so on. The <strong>half-life</strong> — the number of periods for the effect to halve — is calculated as: half-life = log(0.5) / log(decay_rate). For decay=0.7, half-life = 1.94 weeks.</p>
-<div class="callout callout-tip"><div class="callout-title">Why Adstock Matters</div><p>Without adstock transformation, MMM attributes all impact to the week of spend, systematically underestimating channels with long carry-over (TV, speaker programs) and overestimating channels with short memory (email, digital ads). Getting adstock right can shift channel ROI estimates by 30-50%.</p></div>`},
-    {id:"s4",content:`<h2 id="s4">Diminishing Returns & Saturation</h2>
-<p>All marketing channels exhibit <strong>diminishing returns</strong> — each additional dollar of spend generates less incremental impact than the previous dollar. This is modeled using saturation curves.</p>
-<h3>Common Saturation Functions</h3>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Steepness: Shape Parameter (Higher = more S − curve, lower = more concave)</div>
-</div>
-<h3>Practical Implications</h3>
-<p>Saturation analysis directly informs budget allocation:</p>
-<ul>
-<li><strong>Under-saturated channels:</strong> Additional spend generates strong incremental returns — increase investment</li>
-<li><strong>Near-saturation channels:</strong> Spend is in the flat portion of the curve — reallocate dollars elsewhere</li>
-<li><strong>Optimal allocation:</strong> Equalize marginal ROI across channels (allocate until the next dollar generates the same return everywhere)</li>
-</ul>
-<table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Channel</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Current Spend</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Saturation %</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Marginal ROI</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Recommendation</th></tr></thead>
-<tbody>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Field details</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">$40M</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">82%</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">$1.20</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Flat/reduce</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">DTC TV</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">$25M</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">70%</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">$2.50</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Increase</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Digital HCP</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">$5M</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">45%</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">$4.00</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Increase significantly</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Speaker programs</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">$10M</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">75%</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">$1.80</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Maintain</td></tr>
+<h3>Data Sources for Network Construction</h3>
+<table><thead><tr><th>Data Source</th><th>What It Provides</th><th>Coverage</th></tr></thead><tbody>
+<tr><td><strong>Medical claims (commercial + Medicare)</strong></td><td>Provider NPI, date of service, diagnosis codes, procedure codes — enables inferring patient flow between providers</td><td>Broad population; includes most insured patients</td></tr>
+<tr><td><strong>CMS Open Payments / Sunshine Act</strong></td><td>Financial relationships between manufacturers and HCPs — proxy for professional ties and KOL relationships</td><td>US only; lags by ~18 months</td></tr>
+<tr><td><strong>Medicare Part B (CMS)</strong></td><td>Referral patterns directly available in CMS Physician Shared Patient data — pairs of providers sharing ≥11 patients</td><td>Medicare population (65+ and disabled); free, public</td></tr>
+<tr><td><strong>Specialty pharmacy / hub data</strong></td><td>Prescribing HCP + referring HCP fields on intake forms — direct referral linkage for specialty brands</td><td>Brand-specific; highly precise but narrow</td></tr>
 </tbody></table>`},
-    {id:"s5",content:`<h2 id="s5">Channel Contribution & ROI</h2>
-<p>The primary output of MMM is the <strong>due-to analysis</strong> — quantifying how many incremental prescriptions each channel generates and its return on investment.</p>
-<h3>Due-To Decomposition</h3>
-<p>Total incremental TRx is decomposed by channel. Each channel's contribution is calculated by comparing predicted sales with that channel's effect vs. without it (setting the channel's adstocked values to zero).</p>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Pred Full = model.predict(data)</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Data Zeroed = data.copy()</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Pred Without = model.predict(data zeroed)</div>
-</div>
-<h3>ROI by Channel</h3>
-<p>Channel ROI = (Incremental Revenue - Channel Cost) / Channel Cost. In pharma, typical ROI ranges are:</p>
-<ul>
-<li><strong>Sampling:</strong> 3-8x (high because samples directly drive trial)</li>
-<li><strong>Speaker programs:</strong> 2-5x (peer influence is powerful but expensive)</li>
-<li><strong>Field details:</strong> 1.5-4x (highest absolute contribution but expensive per touch)</li>
-<li><strong>DTC advertising:</strong> 1.5-3x (broad reach but diluted impact per dollar)</li>
-<li><strong>Digital HCP:</strong> 2-6x (low cost per touch, growing effectiveness)</li>
-</ul>`},
-    {id:"s6",content:`<h2 id="s6">Bayesian MMM Approaches</h2>
-<p>Traditional frequentist MMM has significant limitations in pharma: limited data history, multicollinearity between channels, and inability to incorporate prior knowledge. <strong>Bayesian MMM</strong> addresses these through probabilistic modeling.</p>
-<h3>Advantages of Bayesian MMM</h3>
-<ul>
-<li><strong>Informative priors:</strong> Incorporate domain knowledge (e.g., "TV ROI is typically 1.5-3x") as prior distributions, preventing implausible coefficient estimates</li>
-<li><strong>Uncertainty quantification:</strong> Every parameter has a credible interval, not just a point estimate. Leadership sees the range of possible ROIs, not just the "best guess"</li>
-<li><strong>Works with shorter data:</strong> Priors stabilize estimates when historical data is limited (e.g., post-launch brands with 18 months of data)</li>
-<li><strong>Built-in adstock and saturation:</strong> Modern frameworks jointly estimate decay rates and saturation parameters</li>
-</ul>
-<h3>Modern Bayesian MMM Frameworks</h3>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Mmm = DelayedSaturatedMMM(</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Date Column = 'week',</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Adstock Max Lag = 8,  # max weeks of carry − over</div>
-</div>
-<div class="callout"><div class="callout-title">Industry Adoption</div><p>Google's Meridian, Meta's Robyn, and PyMC-Marketing are open-source Bayesian MMM frameworks gaining rapid adoption in pharma. They democratize what was previously a $500K+ consulting engagement into a reproducible, in-house capability.</p></div>`},
-    {id:"s7",content:`<h2 id="s7">Pharma-Specific MMM Considerations</h2>
-<p>Pharma MMM differs from CPG/retail MMM in several critical ways:</p>
-<h3>Key Differences</h3>
-<table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Factor</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">CPG/Retail MMM</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Pharma MMM</th></tr></thead>
-<tbody>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Decision maker</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Consumer</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">HCP (prescriber) + patient + payer</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Sales channel</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Direct to consumer</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Through prescriber and pharmacy</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Price sensitivity</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">High (promotions/coupons)</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Low (insurance insulates)</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Personal selling</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Minimal</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Dominant channel (30-50% of spend)</td></tr>
-<tr><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Regulation</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Light</td><td style="padding:8px;border-bottom:1px solid #1e293b;font-size:13px;vertical-align:top">Heavy (fair balance, off-label restrictions)</td></tr>
+    {id:"s3",content:`<h2 id="s3">Network Centrality & KOL Identification</h2>
+<p>Graph theory provides a set of <strong>centrality measures</strong> that quantify the importance of each node (HCP) within the network. Different centrality measures capture different types of influence.</p>
+<table><thead><tr><th>Centrality Measure</th><th>Definition</th><th>Pharma Interpretation</th></tr></thead><tbody>
+<tr><td><strong>Degree centrality</strong></td><td>Number of direct connections (edges) a node has</td><td>HCP with high degree has many direct referral relationships — broad reach in the local community</td></tr>
+<tr><td><strong>In-degree centrality</strong></td><td>Number of inbound referral edges (directed graph)</td><td>How many other HCPs refer patients to this specialist — identifies hub prescribers</td></tr>
+<tr><td><strong>Out-degree centrality</strong></td><td>Number of outbound referral edges</td><td>How many specialists this HCP refers to — identifies high-volume referring PCPs</td></tr>
+<tr><td><strong>Betweenness centrality</strong></td><td>How often a node lies on the shortest path between two other nodes</td><td>HCPs who bridge otherwise disconnected groups — removing them would fragment patient flow; critical brokers</td></tr>
+<tr><td><strong>PageRank / eigenvector centrality</strong></td><td>Importance weighted by the importance of one's connections</td><td>HCPs influential because they are connected to other influential HCPs — true KOLs in the scientific/clinical community</td></tr>
+<tr><td><strong>Clustering coefficient</strong></td><td>Degree to which an HCP's neighbours are also connected to each other</td><td>High clustering = tight referral community; low clustering = bridge between otherwise separate practice communities</td></tr>
 </tbody></table>
-<h3>Pharma MMM Pitfalls</h3>
-<ul>
-<li><strong>Sampling endogeneity:</strong> Samples are often given to high-volume prescribers, creating a spurious correlation. Instrumental variable approaches or Bayesian priors can mitigate this</li>
-<li><strong>Payer confounding:</strong> Formulary status changes can dwarf promotional effects. Include formulary coverage as a control variable</li>
-<li><strong>Indication expansion:</strong> Label expansions increase the addressable market independent of promotion. Model structural breaks at approval dates</li>
-<li><strong>Multi-brand effects:</strong> Detailing one product in a portfolio may lift the entire portfolio. Consider umbrella or halo effects in multi-product models</li>
-</ul>`},
-    {id:"s8",content:`<h2 id="s8">Key Takeaways</h2>
-<div class="takeaway"><div class="takeaway-num">1</div><div><strong>MMM decomposes sales into base, promotional, and external drivers.</strong> Base sales (50-70% for established brands) represent the brand equity floor. Incremental sales from promotion are what the marketing budget is actually buying.</div></div>
-<div class="takeaway"><div class="takeaway-num">2</div><div><strong>Adstock transformation is essential for accurate channel attribution.</strong> Without it, channels with long carry-over (TV, speaker programs) are systematically undervalued, leading to suboptimal budget allocation.</div></div>
-<div class="takeaway"><div class="takeaway-num">3</div><div><strong>Optimize at the margin, not the average.</strong> Average ROI tells you the historical return. Marginal ROI tells you the return on the next dollar. Equalize marginal ROI across channels for optimal allocation.</div></div>
-<div class="takeaway"><div class="takeaway-num">4</div><div><strong>Bayesian MMM is the new standard.</strong> Open-source frameworks (PyMC-Marketing, Google Meridian) make Bayesian approaches accessible. The ability to incorporate priors and quantify uncertainty makes Bayesian MMM strictly superior for pharma applications with limited data.</div></div>`}
+<div class="callout info"><div class="callout-title">Degree vs PageRank in Practice</div><p>A rural PCP may have high degree (refers to many local specialists) but low PageRank (those specialists are also low-influence locally). A KOL at an academic medical centre may have moderate degree but very high PageRank because their connections are other high-PageRank academic specialists. For brand advocacy and peer influence programs, target high-PageRank HCPs. For patient volume access, target high in-degree specialists and high out-degree PCPs.</p></div>`},
+    {id:"s4",content:`<h2 id="s4">Prescribing Diffusion & Peer Influence</h2>
+<p>New drug adoption follows a diffusion process through the HCP network. The structure of the referral network determines how fast and how widely adoption spreads — understanding this process allows commercial teams to accelerate diffusion through targeted seeding.</p>
+<h3>The Bass Diffusion Model Applied to HCPs</h3>
+<table><thead><tr><th>Adopter Category</th><th>Timing</th><th>Characteristics</th><th>Network Strategy</th></tr></thead><tbody>
+<tr><td><strong>Innovators</strong></td><td>Launch + 0–3 months</td><td>High-PageRank KOLs; trial investigators; academic thought leaders</td><td>MSL engagement, advisory boards, early access programs</td></tr>
+<tr><td><strong>Early adopters</strong></td><td>Launch + 3–12 months</td><td>High in-degree specialists connected to innovators; willing to act on peer recommendations</td><td>Speaker programmes featuring innovators; KOL-to-peer events</td></tr>
+<tr><td><strong>Early majority</strong></td><td>Year 1–2</td><td>Community specialists with high betweenness; influenced by local practice norms</td><td>Sales force focus; evidence-based clinical messaging</td></tr>
+<tr><td><strong>Late majority</strong></td><td>Year 2–4</td><td>Lower-centrality HCPs; prescribe once the drug is established; access-sensitive</td><td>Formulary win messaging; simplified initiation support</td></tr>
+</tbody></table>
+<h3>Seeding Strategy: Where to Start Diffusion</h3>
+<div class="flow-box">
+  <div class="flow-step">Identify high-PageRank + high in-degree nodes — these are the "super-spreaders" of prescribing behaviour</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Seed these nodes first (MSL engagement, investigator programs, early access) to create a critical mass of adopters</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Monitor adoption spread along network edges — which early adopters are connected to the next tier?</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">Cascade field force deployment along proven referral pathways — deploy reps where network edges predict next wave of adoption</div>
+</div>
+<div class="callout warning"><div class="callout-title">Peer Influence ≠ Correlation</div><p>HCPs who are connected may adopt a drug around the same time because of peer influence — OR because they serve the same patient population, attend the same congress, or face the same formulary change. Network analysis identifies candidates for peer influence; causal attribution requires a difference-in-differences or instrument variable design comparing connected vs. unconnected HCPs.</p></div>`},
+    {id:"s5",content:`<h2 id="s5">Commercial Applications & Field Strategy</h2>
+<p>Referral network analytics translate directly into commercial execution decisions — who to call on, in what order, and with what message.</p>
+<h3>Territory Planning with Network Data</h3>
+<table><thead><tr><th>Application</th><th>How Network Data Is Used</th><th>Outcome</th></tr></thead><tbody>
+<tr><td><strong>Call list prioritisation</strong></td><td>Rank all HCPs in territory by a composite score: prescribing volume × in-degree centrality × brand conversion rate</td><td>Field reps call on high-network-impact HCPs first, not just high-volume ones</td></tr>
+<tr><td><strong>Pull-through targeting</strong></td><td>Identify PCPs whose referred patients flow to a specialist who is already prescribing the brand</td><td>Rep visits the PCP with the message: "Your patients with [condition] would benefit from early referral to Dr X" — completes the referral loop</td></tr>
+<tr><td><strong>White space identification</strong></td><td>Find specialists with high in-degree in a territory who have zero brand prescribing — high-value unconverted targets</td><td>Prioritise these HCPs for MSL or senior rep engagement</td></tr>
+<tr><td><strong>Account-based targeting</strong></td><td>In integrated delivery networks (IDNs) and academic medical centres, map the entire institutional referral pattern</td><td>Deploy account managers at the system level, not just individual HCP level</td></tr>
+</tbody></table>
+<h3>Measuring Network Model Lift</h3>
+<p>To prove commercial value, compare prescribing outcomes for HCPs targeted using network analytics vs. those targeted using traditional volume-only segmentation:</p>
+<table><thead><tr><th>Metric</th><th>Network-Targeted HCPs</th><th>Volume-Only HCPs</th></tr></thead><tbody>
+<tr><td>New brand prescribers (activation rate)</td><td>Higher — network HCPs have referral relationships that accelerate trial</td><td>Lower — high-volume HCPs are often already competitors' loyalists</td></tr>
+<tr><td>Pull-through conversion</td><td>Higher — targeting both referring PCP and specialist closes the loop</td><td>Lower — one-sided targeting leaves referral chain incomplete</td></tr>
+<tr><td>TRx per called-on HCP</td><td>Higher return per call when targeting gatekeepers</td><td>Standard return; diminishing returns on over-called Tier 1 HCPs</td></tr>
+</tbody></table>`},
+    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
+<div class="takeaway"><div class="takeaway-num">1</div><div>Referral networks reveal the invisible commercial landscape — the PCPs and intermediate specialists who route patients to prescribers. Targeting only the prescribing specialist misses the gatekeepers who control patient flow upstream.</div></div>
+<div class="takeaway"><div class="takeaway-num">2</div><div>Network centrality measures serve different commercial purposes: in-degree identifies high-volume specialists (patient throughput); betweenness identifies brokers and bridges between practice communities; PageRank identifies true KOLs whose influence cascades through the network.</div></div>
+<div class="takeaway"><div class="takeaway-num">3</div><div>Drug adoption follows a diffusion pattern across the referral network. Seeding high-PageRank innovators first and then cascading deployment along referral edges accelerates brand uptake faster than uniform territory coverage.</div></div>
+<div class="takeaway"><div class="takeaway-num">4</div><div>Pull-through strategy links the referring PCP to the prescribing specialist — completing the referral loop is often more impactful than calling on the prescribing specialist a 5th time, particularly in specialty disease areas with a gatekeeper referral model.</div></div>
+<div class="takeaway"><div class="takeaway-num">5</div><div>Network-targeted field deployment consistently outperforms volume-only segmentation on new prescriber activation rate and TRx per call — but requires investment in network data (CMS shared patient, commercial claims) and analytical capability to build the graph.</div></div>`}
   ],
   questions:[
-    {id:"q1",type:"mcq",difficulty:"Advanced",question:"An MMM shows field details with an adstock decay of 0.7 and digital with 0.3. What does this imply about budget timing?",options:[{id:"a",text:"Field details should be pulsed; digital should be continuous"},{id:"b",text:"Digital should be pulsed; field details can be more continuous due to longer carry-over"},{id:"c",text:"Both channels should be pulsed simultaneously"},{id:"d",text:"Decay rates do not affect timing decisions"}],correct:"b",explanation:"Higher decay (0.7 for details) means the effect persists longer, so the channel can tolerate gaps between bursts of activity. Lower decay (0.3 for digital) means the effect fades quickly, so continuous presence is needed or the effect drops to near zero. However, field details are often continuous for relationship reasons."},
-    {id:"q2",type:"mcq",difficulty:"Advanced",question:"What is the primary advantage of Bayesian MMM over frequentist MMM in pharma?",options:[{id:"a",text:"It runs faster on larger datasets"},{id:"b",text:"It incorporates prior knowledge and quantifies uncertainty in all parameters"},{id:"c",text:"It eliminates the need for adstock transformation"},{id:"d",text:"It works without historical data"}],correct:"b",explanation:"Bayesian MMM allows incorporation of informative priors (domain knowledge about plausible ROI ranges) and produces credible intervals for every parameter. This is critical in pharma where data history is limited, channels are correlated, and leadership needs to understand the range of possible outcomes, not just point estimates."},
-    {id:"q3",type:"mcq",difficulty:"Intermediate",question:"An MMM shows DTC TV at 70% saturation and digital HCP at 45% saturation. With $5M incremental budget, where should it go?",options:[{id:"a",text:"All to DTC TV because it has higher absolute contribution"},{id:"b",text:"All to digital HCP because it is further from saturation"},{id:"c",text:"Split equally between the two channels"},{id:"d",text:"Cannot determine without knowing marginal ROI curves"}],correct:"d",explanation:"Saturation percentage alone does not determine optimal allocation. You need the marginal ROI at current spend levels for each channel. Digital at 45% saturation likely has higher marginal ROI, but the absolute contribution per dollar depends on the shape of each channel's saturation curve and the revenue coefficient."},
-    {id:"q4",type:"mcq",difficulty:"Intermediate",question:"In pharma MMM, why is sampling often endogenous and what problem does this create?",options:[{id:"a",text:"Samples expire quickly, creating measurement error"},{id:"b",text:"Samples are given to high-volume prescribers, inflating the estimated causal effect of sampling"},{id:"c",text:"Samples are regulated differently than other channels"},{id:"d",text:"Sample data is not available at the weekly level"}],correct:"b",explanation:"Samples are preferentially distributed to high-prescribing HCPs, creating reverse causality: HCPs receive more samples because they prescribe more, not necessarily the other way around. This endogeneity inflates the estimated ROI of sampling unless corrected through instrumental variables or Bayesian priors."},
-    {id:"q5",type:"mcq",difficulty:"Advanced",question:"What percentage of total sales is typically attributable to base (non-promotional) factors for an established pharma brand?",options:[{id:"a",text:"10-20%"},{id:"b",text:"30-40%"},{id:"c",text:"50-70%"},{id:"d",text:"80-95%"}],correct:"c",explanation:"For established brands, base sales (driven by brand equity, disease prevalence, formulary position, and prescribing inertia) account for 50-70% of total sales. This means only 30-50% of sales are attributable to current promotional activity — a critical insight for budgeting and for understanding what happens if promotion is reduced."}
+    {id:"q1",type:"mcq",difficulty:"Intermediate",question:"A PCP in a territory has zero brand prescriptions but appears in the top 10% for out-degree centrality in the referral network. Why should a field rep prioritise visiting this PCP?",options:[{id:"a",text:"Out-degree centrality is not relevant to commercial strategy"},{id:"b",text:"High out-degree means this PCP refers patients to many specialists — influencing their referral destination steers patients toward brand-prescribing specialists, generating downstream brand Rx without the PCP ever writing a prescription"},{id:"c",text:"The PCP should be deprioritised because they have no prescribing history"},{id:"d",text:"Out-degree centrality indicates this PCP receives many inbound referrals"}],correct:"b",explanation:"Out-degree centrality measures how many outbound referrals an HCP sends. A PCP with high out-degree is a gatekeeper — they route many patients to specialists. If the rep can influence which specialist this PCP refers to (e.g., toward a specialist known to prescribe the brand), the downstream impact on brand TRx far exceeds what a single PCP prescription would generate. This pull-through strategy is particularly valuable in specialty diseases where PCPs diagnose but specialists prescribe."},
+    {id:"q2",type:"mcq",difficulty:"Advanced",question:"A brand's network analysis identifies two specialists: Specialist A has in-degree = 45 (many PCPs refer to them) but prescribes no brand. Specialist B has in-degree = 8 but is already a brand champion prescribing heavily. Which should be the higher commercial priority?",options:[{id:"a",text:"Specialist B — they are already a brand champion and should be reinforced"},{id:"b",text:"Specialist A — converting a high in-degree specialist who currently prescribes no brand represents a larger incremental opportunity; each converted prescription likely reflects 45 upstream referral relationships that will now funnel patients to a brand prescriber"},{id:"c",text:"Both equally — network centrality and prescribing volume are equally important"},{id:"d",text:"Neither — focus on PCPs only"}],correct:"b",explanation:"Specialist A represents a high-value unconverted target. Their in-degree of 45 means 45 PCPs are already routing patients to them — the referral infrastructure is already in place. Converting Specialist A from zero prescribing to brand adoption has a large multiplier effect: those 45 referring PCPs' patients will now be exposed to the brand. Specialist B is already contributing, so incremental investment yields smaller marginal gains. In commercial resource allocation, unconverted high-centrality HCPs typically have higher return on investment than continued investment in already-converted ones."},
+    {id:"q3",type:"mcq",difficulty:"Intermediate",question:"What distinguishes betweenness centrality from degree centrality in a referral network, and when is betweenness more commercially relevant?",options:[{id:"a",text:"They are the same measure calculated differently"},{id:"b",text:"Degree counts direct connections; betweenness measures how often an HCP lies on the shortest path between two others. Betweenness is more relevant when identifying broker HCPs who connect otherwise separate referral communities — disrupting their practice (e.g., retirement) would fragment patient flow between communities"},{id:"c",text:"Betweenness centrality is only relevant for social network analysis, not healthcare"},{id:"d",text:"Degree centrality is always more commercially relevant than betweenness"}],correct:"b",explanation:"Degree centrality counts how many direct connections an HCP has. Betweenness centrality measures structural brokerage — an HCP with high betweenness sits on the bridge between otherwise disconnected parts of the network. In pharma, this means they are the sole channel through which patients travel between a primary care community and a specialist community. Commercially, these bridge HCPs are critical for brand adoption in new geographies or new practice communities: if the bridge HCP adopts the brand, adoption cascades into the connected community. They are often mid-tier by prescribing volume but disproportionately influential in expansion strategy."}
   ]
 },
 
