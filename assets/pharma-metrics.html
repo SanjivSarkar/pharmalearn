@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharma Analytics — Complete Metrics Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:      #0F1B2D;
+    --navy-mid:  #162236;
+    --navy-soft: #1E2F45;
+    --navy-rim:  #2A3B52;
+    --gold:      #C8984A;
+    --gold-dim:  #9B7233;
+    --gold-pale: #E8C87A;
+    --cream:     #F5EFDF;
+    --parchment: #EEE5CE;
+    --cream-dim: #C8BFA8;
+    --green:     #4B6B4A;
+    --green-dim: #2D4A2D;
+    --rust:      #A84B2A;
+    --rust-dim:  #7A3520;
+    --slate:     #2A3B52;
+    --muted:     #8A9BB0;
+    --border:    rgba(200,152,74,0.18);
+    --border-lg: rgba(200,152,74,0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,27,45,0.97);
+    border-bottom: 1px solid var(--border-lg);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 52px;
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    margin-right: auto;
+    padding-right: 2rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+
+  .nav-links a {
+    color: var(--cream-dim);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 0 14px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--border);
+    transition: color 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--gold); background: rgba(200,152,74,0.06); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 2rem 4rem;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: var(--gold-dim);
+    opacity: 0.5;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--cream);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--cream-dim);
+    max-width: 580px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.75;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border: 1px solid var(--border-lg);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .stat {
+    flex: 1;
+    padding: 14px 18px;
+    text-align: center;
+    border-right: 1px solid var(--border-lg);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-l {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN WRAPPER ── */
+  .main {
+    position: relative;
+    z-index: 1;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  /* ── CONTROLS ── */
+  .controls {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .search-wrap {
+    position: relative;
+    margin-bottom: 1.25rem;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  #search {
+    width: 100%;
+    background: var(--navy);
+    border: 1px solid var(--border-lg);
+    border-radius: 3px;
+    padding: 10px 14px 10px 42px;
+    color: var(--cream);
+    font-family: 'EB Garamond', serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #search::placeholder { color: var(--muted); }
+  #search:focus { border-color: var(--gold); }
+
+  .filter-group {
+    margin-bottom: 10px;
+  }
+  .filter-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 7px;
+    display: block;
+  }
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .pill {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    color: var(--cream-dim);
+    background: transparent;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .pill:hover { border-color: var(--gold-dim); color: var(--gold-pale); }
+  .pill.active {
+    background: rgba(200,152,74,0.12);
+    border-color: var(--gold);
+    color: var(--gold-pale);
+  }
+
+  .result-count {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-top: 10px;
+  }
+
+  /* ── SECTIONS ── */
+  .section { margin-bottom: 3rem; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .domain-badge {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .lc-badge {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+
+  .metric-count {
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── METRIC GRID ── */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+  }
+
+  .card {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 14px 16px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .card:hover {
+    border-color: rgba(200,152,74,0.4);
+    background: var(--navy-soft);
+  }
+
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+
+  .card-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    background: rgba(15,27,45,0.8);
+    border-left: 2px solid var(--gold-dim);
+    padding: 7px 10px;
+    color: var(--gold-pale);
+    line-height: 1.6;
+    margin-bottom: 8px;
+    word-break: break-word;
+    border-radius: 0 2px 2px 0;
+  }
+
+  .card-note {
+    font-size: 12px;
+    color: var(--cream-dim);
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  /* ── LIFECYCLE COLOR THEMING ── */
+  .lc-preclinical   { color: #A89FD0; border-color: #A89FD0; }
+  .lc-clinical      { color: #7BA8D4; border-color: #7BA8D4; }
+  .lc-regulatory    { color: #7DB88A; border-color: #7DB88A; }
+  .lc-access        { color: #C8984A; border-color: #C8984A; }
+  .lc-prelaunch     { color: #C87A55; border-color: #C87A55; }
+  .lc-launch        { color: #C87AA0; border-color: #C87AA0; }
+  .lc-inline        { color: #90B870; border-color: #90B870; }
+  .lc-loe           { color: #8A9BB0; border-color: #8A9BB0; }
+
+  .domain-preclinical   { color: #C8C0E8; }
+  .domain-clinical      { color: #9EC8F0; }
+  .domain-regulatory    { color: #9ED8A8; }
+  .domain-access        { color: var(--gold-pale); }
+  .domain-prelaunch     { color: #E8A080; }
+  .domain-launch        { color: #E89EC8; }
+  .domain-inline        { color: #B0D888; }
+  .domain-loe           { color: #A8B8C8; }
+
+  /* ── DIVIDER ── */
+  .ornament {
+    text-align: center;
+    color: var(--gold-dim);
+    font-size: 18px;
+    letter-spacing: 0.5em;
+    margin: 2.5rem 0;
+    opacity: 0.5;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  footer em { color: var(--gold-dim); font-style: normal; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .main { padding: 0 1.25rem 4rem; }
+    .hero-stats { flex-direction: column; max-width: 260px; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border-lg); }
+    .stat:last-child { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">Pharma Analytics · Metrics Reference</span>
+  <div class="nav-links" id="navLinks"></div>
+</nav>
+
+<header class="hero">
+  <div class="hero-eyebrow">Complete Reference · All Functional Areas</div>
+  <h1>The <em>Analyst's</em> Metrics Compendium</h1>
+  <p class="hero-sub">Every quantitative measure in pharmaceutical analytics — organized by functional domain and lifecycle stage, from pre-clinical discovery to loss of exclusivity.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-n" id="totalMetrics">—</span><span class="stat-l">Metrics</span></div>
+    <div class="stat"><span class="stat-n" id="totalDomains">—</span><span class="stat-l">Domains</span></div>
+    <div class="stat"><span class="stat-n">8</span><span class="stat-l">Lifecycle Stages</span></div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="controls">
+    <div class="search-wrap">
+      <svg width="16" height="16" fill="none" stroke="#C8984A" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Search metric name, formula, or keyword…" oninput="render()">
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Lifecycle Stage</span>
+      <div class="filter-pills" id="lcFilters"></div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Functional Domain</span>
+      <div class="filter-pills" id="domFilters"></div>
+    </div>
+    <div class="result-count" id="resultCount"></div>
+  </div>
+
+  <div id="output"></div>
+</main>
+
+<footer>
+  <em>Pharma Analytics · Metrics Compendium</em> · All functional areas · Complete lifecycle coverage
+</footer>
+
+<script>
+const STYLE = {
+  "Pre-clinical & Discovery":   { lc: "lc-preclinical",  dom: "domain-preclinical"  },
+  "Clinical Development":       { lc: "lc-clinical",     dom: "domain-clinical"     },
+  "Regulatory & HTA":           { lc: "lc-regulatory",   dom: "domain-regulatory"   },
+  "Market Access & Pricing":    { lc: "lc-access",       dom: "domain-access"       },
+  "Pre-launch":                 { lc: "lc-prelaunch",    dom: "domain-prelaunch"    },
+  "Launch":                     { lc: "lc-launch",       dom: "domain-launch"       },
+  "In-line / Growth":           { lc: "lc-inline",       dom: "domain-inline"       },
+  "Loss of Exclusivity":        { lc: "lc-loe",          dom: "domain-loe"          },
+};
+
+const DATA = [
+  // ── PRE-CLINICAL & DISCOVERY ──────────────────────────────────────────
+  { d:"Target Identification & Validation", lc:"Pre-clinical & Discovery", m:[
+    { n:"Hit Rate", f:"Hits / Compounds Screened × 100", t:"% of screened compounds showing desired target activity in primary assay" },
+    { n:"Lead Optimization Success Rate", f:"Advanced Leads / Total Lead Series × 100", t:"Progression rate from confirmed hit to optimized lead with ADMET profile" },
+    { n:"Selectivity Ratio", f:"IC₅₀ Off-target / IC₅₀ On-target", t:"Higher = more selective; critical ADMET filter to reduce toxicity risk" },
+    { n:"ADMET Pass Rate", f:"Compounds Passing All ADMET Criteria / Compounds Tested × 100", t:"Absorption, distribution, metabolism, excretion, toxicity composite screen pass rate" },
+    { n:"Bioavailability (%F)", f:"(AUC oral / AUC IV) × (Dose IV / Dose oral) × 100", t:"Fraction of oral dose reaching systemic circulation unchanged" },
+    { n:"Binding Affinity (Kd)", f:"[Receptor][Ligand] / [Complex] at equilibrium", t:"Lower Kd = tighter binding; measured by SPR, ITC, or radioligand binding" },
+  ]},
+  { d:"Portfolio & Pipeline Analytics", lc:"Pre-clinical & Discovery", m:[
+    { n:"Pipeline Value (rNPV)", f:"Σ (Peak Sales × Probability of Success × Discount Factor) across all assets", t:"Risk-adjusted net present value; standard pipeline valuation currency" },
+    { n:"Probability of Technical & Regulatory Success (PTRS)", f:"P(Phase I success) × P(II|I) × P(III|II) × P(Approval|III)", t:"Cumulative success probability from IND to approval; varies by TA" },
+    { n:"R&D Productivity Index", f:"NMEs Approved / R&D Spend (USD bn) over rolling 5 years", t:"Pipeline output efficiency per billion invested; industry avg declining" },
+    { n:"Cost per NME", f:"Total R&D Spend / NMEs Launched", t:"Industry avg ~$2.5–3bn; used in portfolio ROI planning and therapeutic area commitment" },
+    { n:"Portfolio Diversification Index", f:"1 − Σ (TA Share²)", t:"Herfindahl-style measure across therapeutic areas; lower = more diversified" },
+    { n:"Cycle Time (Discovery to IND)", f:"Calendar Days from Target Identification to IND Filing", t:"Benchmark: 4–6 years for small molecules; 5–8 for biologics" },
+    { n:"Patent Life Remaining at Launch", f:"Patent Expiry Date − Commercial Launch Date (years)", t:"Drives revenue window modelling; shorter life compresses rNPV" },
+  ]},
+
+  // ── CLINICAL DEVELOPMENT ──────────────────────────────────────────────
+  { d:"Clinical Trial Operations", lc:"Clinical Development", m:[
+    { n:"Enrollment Rate", f:"Patients Enrolled / Planned Patients × 100 (per period)", t:"Tracks recruitment velocity vs. protocol target; delays cost ~$600K/day for Phase 3" },
+    { n:"Screen-to-Enroll Ratio", f:"Patients Screened / Patients Enrolled", t:"Higher ratio signals strict eligibility criteria or poor site selection quality" },
+    { n:"Screen Failure Rate", f:"Patients Screened but Not Enrolled / Patients Screened × 100", t:"High rate drives up site costs and timeline; investigate eligibility criteria" },
+    { n:"Dropout / Attrition Rate", f:"Patients Who Withdrew / Enrolled Patients × 100", t:"Tracked by reason: AE, lack of efficacy, non-compliance, consent withdrawal" },
+    { n:"Protocol Deviation Rate", f:"Protocol Deviations / Subject-Visits × 100", t:"Higher rates risk GCP compliance and data integrity; benchmark <2%" },
+    { n:"Site Activation Cycle Time", f:"Days from Site Selection to First Patient In (FPI)", t:"Industry benchmark: 6–9 months; each month delay = extended timeline and cost" },
+    { n:"Data Query Rate", f:"Queries Raised / Data Points Entered × 100", t:"EDC data quality metric; target <5%; high rate signals CRF design issues" },
+    { n:"Database Lock Cycle Time", f:"Days from Last Patient Out (LPO) to Database Lock", t:"Drives regulatory submission timeline; benchmark 60–90 days for complex studies" },
+    { n:"Site Retention Rate", f:"Sites Active at Study End / Sites Activated × 100", t:"Low retention indicates site burden or lack of patient flow" },
+    { n:"Informed Consent Rate", f:"Patients Consenting / Patients Approached × 100", t:"Ethics and patient engagement measure; low rate triggers IRB review" },
+  ]},
+  { d:"Clinical Efficacy & Safety Endpoints", lc:"Clinical Development", m:[
+    { n:"Absolute Risk Reduction (ARR)", f:"Event Rate Control − Event Rate Treatment", t:"Primary efficacy measure; basis of NNT calculation" },
+    { n:"Relative Risk Reduction (RRR)", f:"ARR / Event Rate Control × 100", t:"Proportional benefit vs. control; often overstated in promotional materials" },
+    { n:"Number Needed to Treat (NNT)", f:"1 / ARR", t:"Lower NNT = greater clinical benefit per patient treated" },
+    { n:"Hazard Ratio (HR)", f:"Hazard Rate Treatment / Hazard Rate Control", t:"Time-to-event outcomes (OS, PFS); HR<1 = treatment benefit; key regulatory endpoint" },
+    { n:"Overall Survival (OS)", f:"% Patients Alive at Defined Timepoint (median or rate)", t:"Gold standard efficacy endpoint in oncology; required for full approval in many TAs" },
+    { n:"Progression-Free Survival (PFS)", f:"Time from Randomization to Disease Progression or Death", t:"Surrogate for OS; commonly used for accelerated approval; requires post-marketing confirmation" },
+    { n:"Overall Response Rate (ORR)", f:"(Complete Response + Partial Response) / Total Evaluable Patients × 100", t:"Objective tumor response; supports accelerated approval in oncology" },
+    { n:"Duration of Response (DoR)", f:"Time from First Response to Confirmed Progression", t:"Complements ORR with durability of benefit; important for label language" },
+    { n:"Event-Free Survival (EFS)", f:"Time from Randomization to Event (relapse, progression, death)", t:"Composite endpoint; used in pediatric oncology and hematology" },
+    { n:"Complete Remission Rate (CRR)", f:"Patients Achieving CR / Total Patients × 100", t:"Key endpoint in hematologic malignancies (AML, CLL, DLBCL)" },
+    { n:"Incidence Rate (Adverse Events)", f:"AEs Observed / Total Person-Time at Risk", t:"Exposure-adjusted safety rate; enables comparison across arms with different duration" },
+    { n:"Number Needed to Harm (NNH)", f:"1 / Absolute Risk Increase", t:"Safety counterpart to NNT; informs benefit-risk ratio analysis" },
+    { n:"Serious Adverse Event (SAE) Rate", f:"SAEs / Patients Exposed × 100", t:"Regulatory threshold metric; SAE = hospitalization, life-threatening, fatal, disability" },
+    { n:"Benefit-Risk Ratio (composite)", f:"Clinical Benefit Score / Risk Score (MCDA or BRAT framework)", t:"Formal quantitative frameworks: MCDA, BRAT; used in regulatory submissions" },
+  ]},
+  { d:"Biostatistics & Study Design", lc:"Clinical Development", m:[
+    { n:"Statistical Power (1−β)", f:"1 − β; typically set at 80–90%", t:"Probability of detecting true treatment effect if it exists; β = Type II error" },
+    { n:"Sample Size", f:"n = 2σ²(z_α/2 + z_β)² / δ²", t:"Driven by assumed effect size (δ), variance (σ²), power (1−β), and significance level (α)" },
+    { n:"P-value", f:"P(observed data | H₀)", t:"Probability of observing result under null; regulatory threshold typically 0.05 or 0.025 one-sided" },
+    { n:"Confidence Interval (95% CI)", f:"Estimate ± 1.96 × Standard Error", t:"Range containing true parameter value with 95% probability; width reflects precision" },
+    { n:"Effect Size (Cohen's d)", f:"(μ₁ − μ₂) / Pooled Standard Deviation", t:"Standardized magnitude of difference; 0.2 small, 0.5 medium, 0.8 large" },
+    { n:"Intraclass Correlation Coefficient (ICC)", f:"Between-group Variance / (Between + Within-group Variance)", t:"Reliability and clustering measure; important in multi-center trials for sample size inflation" },
+    { n:"Alpha Spending (O'Brien-Fleming)", f:"α*(t) = 2[1 − Φ(z_α/2 / √t)]", t:"Controls Type I error rate across multiple interim analyses in adaptive trials" },
+    { n:"Bayesian Posterior Probability", f:"P(H₁ | Data) = P(Data | H₁) × P(H₁) / P(Data)", t:"Used in adaptive trials and platform designs; replaces or augments frequentist testing" },
+    { n:"Number of Events Required", f:"E = 4(z_α/2 + z_β)² / [ln(HR)]²", t:"Event-driven trial planning for time-to-event endpoints; drives enrollment size" },
+  ]},
+  { d:"Health Economics & Outcomes Research (HEOR)", lc:"Clinical Development", m:[
+    { n:"Quality-Adjusted Life Year (QALY)", f:"Life Years Gained × Health Utility Score (0 = death, 1 = perfect health)", t:"Core HEOR currency; used in cost-utility analysis and HTA submissions globally" },
+    { n:"Incremental Cost-Effectiveness Ratio (ICER)", f:"(Cost Treatment A − Cost B) / (QALY A − QALY B)", t:"<£30K/QALY NICE threshold (UK); varies by country and disease severity premium" },
+    { n:"Cost of Illness (COI)", f:"Direct Medical Costs + Indirect Costs (productivity loss, caregiver burden)", t:"Disease burden quantification; cornerstone of payer value dossier and budget impact" },
+    { n:"Disability-Adjusted Life Year (DALY)", f:"Years of Life Lost (YLL) + Years Lived with Disability (YLD)", t:"WHO global burden metric; relevant in rare disease and global health submissions" },
+    { n:"Net Monetary Benefit (NMB)", f:"QALY Gained × Willingness-to-Pay Threshold − Incremental Cost", t:"Positive NMB = cost-effective at given WTP threshold; used in probabilistic sensitivity analysis" },
+    { n:"Budget Impact Analysis (BIA)", f:"Cost of New Treatment × Uptake − Cost of Displaced Treatment × Displacement", t:"Payer affordability metric over 3–5 year horizon; distinct from ICER (population, not per-patient)" },
+    { n:"Health Utility Score (EQ-5D / SF-6D)", f:"Mapped from standardized preference-based instrument responses to 0–1 scale", t:"Instrument-specific; EQ-5D most common for UK NICE; HUI2/3 used in some markets" },
+    { n:"Avoided Hospitalizations per Patient Year", f:"(Hospitalization Rate Control − Rate Treatment) × Patient Years", t:"HCRU reduction claim; directly translates to budget impact for payer audiences" },
+    { n:"Cost per Responder", f:"Total Treatment Cost / Number of Responders (ORR or defined threshold)", t:"Simpler payer metric in oncology and immunology; complements ICER" },
+  ]},
+
+  // ── REGULATORY & HTA ──────────────────────────────────────────────────
+  { d:"Regulatory Affairs Analytics", lc:"Regulatory & HTA", m:[
+    { n:"Approval Cycle Time", f:"Days from NDA/BLA Submission to Approval Action", t:"PDUFA target: 10 months standard review, 6 months priority review; biosimilars 12 months" },
+    { n:"Complete Response Letter (CRL) Rate", f:"CRLs Issued / NDAs Submitted × 100", t:"Signals approval package quality risk; industry average ~15–25%; oncology lower" },
+    { n:"First-Cycle Approval Rate", f:"Approvals Without CRL / Total Applications × 100", t:"Higher = better regulatory package quality; tracked per company and TA" },
+    { n:"Breakthrough Designation Success Rate", f:"Products with BTD Approved / Products Granted BTD × 100", t:"BTD doubles approval probability; approval rate ~90% once granted" },
+    { n:"Post-Marketing Commitment (PMC) Completion Rate", f:"PMCs Completed on Schedule / Total PMCs × 100", t:"FDA tracks publicly; non-compliance triggers safety notices and label reviews" },
+    { n:"Pharmacovigilance Signal Detection Rate", f:"Validated Safety Signals / Total Cases Reviewed × 100", t:"Adverse event monitoring post-approval; PSUR/PBRER submission metric" },
+    { n:"Label Claim Achievement Rate", f:"Label Claims Approved / Label Claims Submitted × 100", t:"How much of the target label language survives FDA/EMA negotiation" },
+    { n:"Expedited Pathway Utilization Rate", f:"Submissions Using Expedited Pathways / Total Submissions × 100", t:"BTD + Fast Track + Accelerated Approval + Priority Review utilization" },
+  ]},
+  { d:"HTA & Payer Evidence Generation", lc:"Regulatory & HTA", m:[
+    { n:"NICE Positive Decision Rate", f:"Positive HTA Recommendations / Submissions × 100", t:"Can be conditional, restricted, or CDF-based; full positive ~50–60% in oncology" },
+    { n:"Time to Positive HTA Decision", f:"Days from Dossier Submission to Final Committee Recommendation", t:"Drives market access timeline; NICE target 90 days from last submission" },
+    { n:"AMNOG Added Benefit Rating", f:"Quantified as: Major / Considerable / Minor / Non-quantifiable / No added benefit", t:"German HTA gate; drives rebate negotiation with GKV-SV; 'no benefit' = price pressure" },
+    { n:"Dossier Acceptance Rate", f:"Dossiers Accepted Without Major Queries / Submitted × 100", t:"Proxy for evidentiary quality; rejected dossiers reset the clock" },
+    { n:"Indirect Treatment Comparison (ITC) Acceptance Rate", f:"ITC Claims Accepted by HTA / ITC Claims Submitted × 100", t:"NMA/MAIC validity judgement; critical when no head-to-head data available" },
+    { n:"Patient-Reported Outcome (PRO) Responder Rate", f:"Patients with ≥ Minimal Important Difference (MID) Improvement / Total × 100", t:"Supports humanistic label claims; MID varies by instrument and condition" },
+    { n:"Evidence Gap Score", f:"Composite of Missing Comparators + Data Maturity + Population Gaps", t:"Internal HTA readiness audit tool; higher = higher HTA rejection risk" },
+  ]},
+
+  // ── MARKET ACCESS & PRICING ───────────────────────────────────────────
+  { d:"Pricing Strategy & Reimbursement", lc:"Market Access & Pricing", m:[
+    { n:"International Reference Price Index", f:"Country Net Price / Average of Reference Basket Prices × 100", t:"IRP exposure metric; basket composition varies (e.g., 15 EU countries for Germany)" },
+    { n:"Price Premium vs. Standard of Care", f:"(Brand Price − SoC Price) / SoC Price × 100", t:"Justified by demonstrated clinical benefit delta; payers scrutinize closely" },
+    { n:"Effective Net Price per Unit", f:"WAC − (Mandatory Rebates + Contractual Discounts + Chargebacks + Volume Agreements)", t:"Realized price after all statutory and contractual offsets; true revenue driver" },
+    { n:"Gross-to-Net (GTN%)", f:"(WAC − Net Price) / WAC × 100", t:"US specialty brands: typically 35–65%; driven by payer mix, channel, and formulary tier" },
+    { n:"WAC-to-Net Spread (absolute)", f:"WAC − Effective Net Price (in USD per unit)", t:"Revenue leakage per dispensed unit; drives GTN reserve calculation" },
+    { n:"Rebate per Unit", f:"Total Rebates Paid / Total Units Sold", t:"Payer-level granularity for formulary contract performance tracking" },
+    { n:"Chargeback Rate", f:"Total Chargebacks / Gross Revenue × 100", t:"Primarily 340B, GPO, VA/DoD, Medicaid government channel offsets" },
+    { n:"Co-pay Assistance Utilization Rate", f:"Commercially Insured Patients Using Copay Support / Total Commercial Patients × 100", t:"High rate signals significant OOP burden or poor formulary tier placement" },
+    { n:"Patient Out-of-Pocket (OOP) Cost", f:"Patient Cost-Share after Insurance Benefits + Any Remaining Balance", t:"Critical adherence driver; specialty brands often >$100/month patient share" },
+    { n:"Value-Based Contract (VBC) Outcome Performance", f:"Actual Patient Outcomes / Contracted Outcome Threshold × 100", t:"Rebate triggered if outcomes below threshold; increasingly common in rare disease" },
+    { n:"DDD-Based Net Cost Recovery", f:"Net Revenue / Defined Daily Doses Sold (WHO DDD standard)", t:"Enables international price-per-treatment-day benchmarking across pack sizes" },
+    { n:"Price Realization Rate", f:"Net Price / WAC × 100", t:"Higher = better pricing power vs. payer pressure; inverse of GTN%" },
+  ]},
+  { d:"Formulary & Payer Access Analytics", lc:"Market Access & Pricing", m:[
+    { n:"Formulary Coverage Rate (Any Tier)", f:"Covered Lives at Any Formulary Tier / Total Commercially Insured Lives × 100", t:"Payer access breadth; baseline threshold typically targeted >70% within 6 months" },
+    { n:"Preferred Formulary Coverage Rate", f:"Lives on Tier 1 or Tier 2 / Total Commercial Lives × 100", t:"Strong driver of NRx volume and patient co-pay competitiveness at shelf" },
+    { n:"Unrestricted Coverage Rate", f:"Lives with No PA / No Step Edit Requirements / Total Covered Lives × 100", t:"Step therapy and prior auth restrictions reduce real-world access materially" },
+    { n:"Step Therapy Exposure Rate", f:"Covered Lives Requiring Step Therapy Before Brand / Total Covered Lives × 100", t:"Common in MS, RA, psoriasis; delays brand initiation by weeks to months" },
+    { n:"Prior Authorization (PA) Approval Rate", f:"PAs Approved (incl. appeals) / PAs Submitted × 100", t:"Low rate indicates access friction; triggers hub and SP intervention programs" },
+    { n:"PA Turnaround Time", f:"Average Days from PA Submission to Final Payer Decision", t:"Benchmark: <3 days standard, <24 hours urgent/peer-to-peer; delays drive abandonment" },
+    { n:"PA Appeals Overturn Rate", f:"Denied PAs Overturned on Appeal / Total Denied PAs Appealed × 100", t:"Higher overturn rate = weak initial denial rationale; leverage for contract negotiation" },
+    { n:"Time to Formulary Access", f:"Days from FDA Approval to Preferred/Non-Restricted Formulary Status", t:"Launch readiness metric; benchmark: 6–18 months post-approval for specialty brands" },
+    { n:"Medicare Part D Coverage Rate", f:"Medicare Beneficiaries with Part D Coverage / Total Medicare Beneficiaries × 100", t:"Critical for products with elderly/chronic patient population" },
+    { n:"Medicaid Best Price Compliance Rate", f:"Reported Best Price Submissions / Required Submissions × 100", t:"Regulatory requirement; non-compliance triggers HRSA/CMS investigation" },
+  ]},
+
+  // ── PRE-LAUNCH ────────────────────────────────────────────────────────
+  { d:"Commercial Readiness & Launch Preparation", lc:"Pre-launch", m:[
+    { n:"Launch Readiness Score", f:"Composite (Field Hiring % + Training % + Access % + Awareness %) vs. plan", t:"Dashboard KPI; typically scored 0–100 across functional work streams" },
+    { n:"HCP Target List Completion Rate", f:"Validated Targets / Planned Target Universe × 100", t:"Field readiness: segmentation, tiering, and CRM load completion before Day 1" },
+    { n:"HCP Awareness Rate (pre-launch)", f:"HCPs Aware of Product / Total Surveyed HCPs × 100", t:"Tracked via advisory boards and market research; typically target >60% at P-3 months" },
+    { n:"HCP Intent to Prescribe Rate", f:"HCPs Indicating Intent to Prescribe / HCPs Surveyed × 100", t:"Leading indicator of NRx velocity at launch; >30% in target segment = positive signal" },
+    { n:"Patient Identification / Diagnosis Rate", f:"Diagnosed & Treatment-Eligible Patients Identified / Estimated True Pool × 100", t:"Rare disease readiness; often <50% pre-launch; drives disease awareness programs" },
+    { n:"Key Account Coverage Rate", f:"Key Accounts Engaged by Medical / Market Access / Total Key Accounts × 100", t:"Academic medical centers, IDNs, specialty pharmacies; critical for hospital products" },
+    { n:"Medical Affairs Engagement Score", f:"Weighted Sum (KOL Calls + Advisory Boards + Publications + Congress Presence)", t:"Scientific exchange readiness; higher scores correlate with faster HCP adoption" },
+    { n:"Payer Access Pre-Launch Coverage Rate", f:"Lives with Pre-Approved/Provisional Coverage / Total Lives × 100", t:"Formulary decisions pre-submission; rare disease often requires P&T committee education" },
+  ]},
+  { d:"Epidemiology & Patient Finding", lc:"Pre-launch", m:[
+    { n:"Total (True) Prevalence", f:"Existing Cases / Total Population × multiplier (per 1,000 or 100,000)", t:"Point or period prevalence; basis of TAM sizing; often estimated from literature" },
+    { n:"Diagnosed Prevalence", f:"Total Prevalence × Diagnosis Rate", t:"Typically 40–70% of true prevalence in rare conditions; lower in stigmatized diseases" },
+    { n:"Annual Incidence Rate", f:"New Cases per Year / At-Risk Population × 100,000", t:"New patient flow into market; drives new patient start model forecast" },
+    { n:"Treatment Gap", f:"Diagnosed Patients − Currently Treated Patients (all therapies)", t:"Unmet need quantification; largest gap signals opportunity for disease awareness" },
+    { n:"Diagnostic Odyssey Duration", f:"Average Years from First Symptom to Correct Diagnosis", t:"Rare disease metric (e.g., gMG avg 3 years, FSHD avg 5–7 years)" },
+    { n:"Specialist Referral Rate", f:"Patients Referred to Specialist / Patients Diagnosed in Primary Care × 100", t:"Disease journey bottleneck; low rate = opportunity for HCP education programs" },
+    { n:"Patient Funnel Conversion Rate", f:"Patients at Stage N / Patients at Stage N−1 × 100", t:"Applied at every funnel step: prevalence → diagnosed → eligible → treated → brand" },
+    { n:"Genotype/Biomarker Prevalence Rate", f:"Patients with Target Biomarker / Total Diagnosed × 100", t:"Precision medicine segmentation; critical for targeted therapy market sizing" },
+  ]},
+
+  // ── LAUNCH ────────────────────────────────────────────────────────────
+  { d:"Launch Performance & Velocity", lc:"Launch", m:[
+    { n:"Launch Ramp Index", f:"Cumulative Brand Rx at Week N / Best-in-Class Analogue Rx at Same Relative Week × 100", t:"Benchmarks launch velocity vs. historical analogue; >100 = outperforming benchmark" },
+    { n:"Rx-to-Patient Conversion Rate", f:"Dispensed Rxs / Written Rxs × 100", t:"Gap between prescribing intent and actual fill; <75% signals access or OOP barrier" },
+    { n:"Prescription Abandonment Rate", f:"1 − (Dispensed Rxs / Prescribed Rxs)", t:"High abandonment = formulary, copay, or patient access friction; tracked at hub/SP" },
+    { n:"Time to First Prescription", f:"Days from FDA Approval to First NRx Written", t:"Near-zero ideal; delays signal label constraints, coverage gaps, or HCP hesitance" },
+    { n:"HCP Adoption Velocity (new prescribers/week)", f:"New Unique Prescribers Writing Brand / Week post-Launch", t:"Tracked vs. forecast adoption S-curve; decline = pull-through or detailing issue" },
+    { n:"Early Adopter Rate", f:"Prescribers Writing in First 90 Days / Total Target HCPs × 100", t:"KOL-driven early adoption predicts peak share trajectory and analogue performance" },
+    { n:"Early Treatment Abandonment Rate", f:"Patients Discontinuing in First 90 Days / New Starts × 100", t:"Signals tolerability, efficacy, or access failures before commercial traction builds" },
+    { n:"Pull-Through Rate", f:"Brand Rxs in Territory / Covered Commercial Lives in Territory × expected rate", t:"Tests whether payer access translates into actual prescribing behavior by HCPs" },
+    { n:"Breadth of Prescribing (HCP)", f:"Total Unique Prescribers / Total HCPs in Target Universe × 100", t:"Breadth vs. depth of adoption; top-heavy prescribing = concentration risk" },
+  ]},
+  { d:"Demand & Market Share", lc:"Launch", m:[
+    { n:"TRx (Total Prescriptions)", f:"All Prescription Fills in Period (all refills + new starts)", t:"Standard volume metric; primary IQVIA NPA/Xponent output; lags NRx in ramp" },
+    { n:"NRx (New Prescriptions)", f:"First-Time Fills for a Patient-Brand-Period combination", t:"New patient acquisition metric; leads TRx share in ramp phase by 2–4 weeks" },
+    { n:"TRx Market Share", f:"Brand TRx / Total Market TRx × 100", t:"Most common competitive benchmark; calculated for NRx, TRx, units, and value" },
+    { n:"NRx Market Share", f:"Brand NRx / Total Market NRx × 100", t:"Acquisition share; forward indicator of TRx share momentum" },
+    { n:"New-to-Brand (NtB) Patients", f:"Patients with First-Ever Brand Rx in Period (no prior 12-month brand history)", t:"IQVIA-flagged metric; key launch momentum KPI; distinct from new-to-market" },
+    { n:"New Patient Starts (NPS)", f:"Eligible Pool × Diagnosis Rate × Treatment Rate × Brand Capture Rate", t:"Patient-based forecast model primary output; driven by funnel conversion rates" },
+    { n:"Units per Prescription (UPP)", f:"Total Units / Dispensed Rxs in Period", t:"Driven by dosing regimen and pack size; affects revenue-per-Rx calculation" },
+    { n:"Days Supply per Rx", f:"Total Days Supply Dispensed / Total Rxs", t:"Fills completeness; specialty pharmacies often dispense <30-day initial supply" },
+  ]},
+
+  // ── IN-LINE / GROWTH ──────────────────────────────────────────────────
+  { d:"Patient Retention & Adherence", lc:"In-line / Growth", m:[
+    { n:"Medication Possession Ratio (MPR)", f:"Days Supply Dispensed / Days in Observation Period × 100", t:"≥80% = adherent; most common claims-based adherence metric; may exceed 100% with early refills" },
+    { n:"Proportion of Days Covered (PDC)", f:"Non-Overlapping Days Covered / Observation Period Length × 100", t:"More conservative than MPR; preferred by NCQA, PBMs, and outcomes researchers" },
+    { n:"Persistence Rate", f:"% Patients Continuously on Therapy Without ≥30-Day Gap at Timepoint", t:"Measured at 6, 12, 24 months; higher than MPR for assessing continuous treatment" },
+    { n:"Days on Therapy (DoT)", f:"Average Days from Initiation to Discontinuation per Patient", t:"Specialty pharmacy sourced; higher DoT = better retention and revenue per patient" },
+    { n:"Refill Rate", f:"Refill Rxs Dispensed / Expected Refill Opportunities (based on DoT) × 100", t:"Gap in refill = early adherence warning; triggers hub outreach intervention" },
+    { n:"Time to First Gap in Therapy", f:"Days from Therapy Initiation to First ≥30-Day Gap in Coverage", t:"Durability metric; shorter time-to-gap signals tolerability or access issue" },
+    { n:"Restart Rate", f:"Patients Restarting after ≥30-Day Gap / Total Discontinued Patients × 100", t:"Recovery metric; higher in chronic conditions; indicative of re-access programs" },
+    { n:"Discontinuation Rate", f:"Patients Stopping Therapy in Period / Active Patients × 100", t:"Tracked by reason: AE, perceived lack of efficacy, cost/insurance, physician switch" },
+  ]},
+  { d:"Commercial Operations & Revenue Analytics", lc:"In-line / Growth", m:[
+    { n:"Net Revenue", f:"Gross Revenue × (1 − GTN%)", t:"P&L line after all GTN deductions; differs materially from WAC-based gross sales" },
+    { n:"Revenue per Patient per Year", f:"Net Revenue / Average Patients on Therapy in Period", t:"Combines net price, adherence, and pack efficiency; key rare disease metric" },
+    { n:"Gross Margin", f:"(Net Revenue − COGS) / Net Revenue × 100", t:"Manufacturing cost efficiency; branded pharma typically 70–85%; biosimilars lower" },
+    { n:"Promotional ROI", f:"Incremental Revenue Attributable to Promotion / Total Promotional Spend", t:"Calculated via marketing mix modeling (MMM) or matched-market A/B analysis" },
+    { n:"Return on Field Investment (ROFI)", f:"Incremental Rx Value from Field Activities / Total Field Force Cost", t:"Territory-level productivity metric; basis for sizing and resource allocation" },
+    { n:"Customer Lifetime Value (CLV)", f:"Net Revenue per Patient × Average Duration of Therapy (years)", t:"Foundation of rare disease economics; drives patient support investment justification" },
+    { n:"Operating Expense Ratio", f:"(SG&A + R&D) / Net Revenue × 100", t:"Commercial efficiency benchmark; varies significantly by lifecycle stage and scale" },
+    { n:"Revenue Forecast Accuracy (MAPE)", f:"Mean(|Actual − Forecast| / Actual) × 100 over rolling periods", t:"<10% = high accuracy; tracked monthly for S&OP alignment with commercial planning" },
+    { n:"Brand Contribution Margin", f:"(Brand Revenue − Direct Brand Costs) / Brand Revenue × 100", t:"Profitability before shared overhead allocation; basis for lifecycle investment decisions" },
+  ]},
+  { d:"Field Force Effectiveness", lc:"In-line / Growth", m:[
+    { n:"Call Rate Attainment", f:"Calls Made / Call Frequency Target × 100", t:"Activity metric; 80–85% attainment typically on-target; below 70% triggers review" },
+    { n:"HCP Reach %", f:"HCPs Called ≥1× in Period / Total Target HCPs × 100", t:"Coverage breadth; distinct from frequency; typically measured monthly and quarterly" },
+    { n:"Call Frequency per HCP", f:"Total Calls / Unique HCPs Reached in Period", t:"Average detailing touches per reached HCP; benchmark varies by TA and tier" },
+    { n:"Response Index (RI)", f:"(NRx Post-Call Cohort − NRx Baseline Cohort) / NRx Baseline × 100", t:"Rx lift attributable to rep call; core ROFI driver; measured via matched cohort design" },
+    { n:"Decile Distribution of Target List", f:"% of Target HCPs from Top 2 Deciles by Brand Rx Volume or Potential", t:"Target list quality indicator; high-decile share = higher field productivity potential" },
+    { n:"Call Quality Score", f:"Average of Observation / Coaching Scores across Field Team", t:"Qualitative effectiveness; measured via recorded calls, ride-alongs, and MSL reviews" },
+    { n:"Territory Workload Balance Index", f:"Coefficient of Variation of HCP Potential across All Territories", t:"Lower CV = more equitable alignment; high imbalance = some reps under/over-worked" },
+    { n:"HCP Engagement Score (composite)", f:"Weighted Sum of (Call Depth + Sample + Co-pay Card + Digital Touch + Event)", t:"Multi-channel engagement intensity per HCP; input into targeting prioritization" },
+    { n:"Incentive Compensation Attainment", f:"Actual Performance Metric / IC Plan Target × 100 (per rep)", t:"Market share gain, NRx, or account-based IC plans; tracked quarterly for adjustment" },
+  ]},
+  { d:"Marketing Mix & Omnichannel Analytics", lc:"In-line / Growth", m:[
+    { n:"Share of Voice (SOV)", f:"Brand Promotional Spend / Total Category Promotional Spend × 100", t:"SOV > Share of Market (SOM) = growth signal; SOV < SOM = defensive posture" },
+    { n:"Email Open Rate", f:"Emails Opened / Emails Delivered (not bounced) × 100", t:"HCP email benchmark: 20–30%; below 15% signals list quality or content issues" },
+    { n:"Email Click-Through Rate (CTR)", f:"Clicks / Emails Delivered × 100", t:"Engagement depth beyond open; HCP benchmark: 3–8%; DTC: 1–3%" },
+    { n:"Content Engagement Score", f:"(Views × w₁) + (Downloads × w₂) + (Video Completions × w₃) [w = weights]", t:"Multi-asset digital content performance composite; tracked by HCP segment" },
+    { n:"Next-Best-Action (NBA) Adoption Rate", f:"NBA Recommendations Accepted by Rep / Total NBA Recommendations × 100", t:"Rep adoption of AI-driven channel/message suggestions; low rate = field trust issue" },
+    { n:"Attribution-Adjusted Rx Lift (per channel)", f:"Incremental Rx Attributable to Channel / Total Rx in Period × 100", t:"Multi-touch or last-touch attribution model output; drives MMM budget reallocation" },
+    { n:"Channel Mix Efficiency", f:"Incremental Rx per Dollar Spent (by channel, MMM-derived)", t:"Basis for promotional budget optimization across field, digital, events, media" },
+    { n:"Sampling-to-Rx Conversion Rate", f:"NRx from Sampled HCPs / Samples Distributed per HCP", t:"Measures sample program ROI; declining rate signals formulary or access barriers" },
+    { n:"HCP Digital Engagement Index", f:"Σ (Weighted Digital Touchpoints: email + web + webinar + portal per HCP per period)", t:"Composite of non-personal digital interactions; complements field call data" },
+  ]},
+  { d:"Medical Affairs & KOL Analytics", lc:"In-line / Growth", m:[
+    { n:"Publication Rate", f:"Peer-Reviewed Publications / Year (clinical + RWE + HEOR)", t:"Tracks evidence generation output; input into HTA dossier pipeline planning" },
+    { n:"KOL Engagement Score", f:"Weighted Sum (Advisory Boards + Congress Presentations + Publications + MSL Calls)", t:"Stakeholder influence mapping composite; tracked by geography and specialty" },
+    { n:"Medical Information Request Rate", f:"Unsolicited MI Requests / Total HCP Interactions × 100", t:"Proxy for scientific curiosity and off-label interest; flagged for pharmacovigilance" },
+    { n:"Real-World Evidence (RWE) Publication Index", f:"RWE Publications per Year vs. Competitor RWE Publication Benchmark", t:"Post-marketing evidence strategy tracker; important for payer dossier re-submissions" },
+    { n:"Congress Presence Score", f:"Abstracts + Posters + Oral Presentations at Key Congresses (weighted by tier)", t:"Scientific share of voice at major medical meetings; tracked vs. competitors" },
+    { n:"Patient Registry Enrollment Rate", f:"Patients Enrolled in Registry / Eligible Patients Identified × 100", t:"Rare disease natural history and RWE generation; supports label expansion dossiers" },
+    { n:"MSL Coverage Rate", f:"KOLs / Key Accounts with ≥1 MSL Contact / Total Target × 100", t:"Scientific engagement reach; MSL calls often tracked separately from field calls" },
+  ]},
+  { d:"Patient Services & Hub Analytics", lc:"In-line / Growth", m:[
+    { n:"Hub Enrollment Rate", f:"Patients Enrolled in Hub Program / Total Brand New Starts × 100", t:"Specialty pharma support capture; higher = better patient navigation and adherence" },
+    { n:"Time to First Fill (TTFF)", f:"Days from Prescription Receipt to First Specialty Pharmacy Dispense", t:"Benchmark: <7 business days; delays >14 days significantly increase abandonment risk" },
+    { n:"Benefits Investigation (BI) Completion Rate", f:"BIs Completed / BIs Initiated × 100", t:"Hub efficiency for insurance verification; industry benchmark >95% within 2 days" },
+    { n:"Financial Assistance Approval Rate", f:"Patients Approved for PAP or Free First Fill / Patients Who Applied × 100", t:"PAP = Patient Assistance Program for uninsured/underinsured patients" },
+    { n:"Case Abandonment Rate", f:"Patients Lost Before First Fill / Hub Enrollments × 100", t:"Composite of PA denials + OOP barriers + site-of-care friction + lost-to-follow-up" },
+    { n:"Specialty Pharmacy (SP) Capture Rate", f:"SP-Reported Units / Projected Demand Units × 100", t:"Data completeness metric for SP channel; <85% = significant reporting gap" },
+    { n:"Nurse Educator Engagement Rate", f:"Nurse Educator Touches / Enrolled Patients in Program × 100", t:"Patient support intensity metric; higher engagement correlates with better persistence" },
+    { n:"Copay Card Redemption Rate", f:"Copay Cards Redeemed / Copay Cards Activated × 100", t:"Patient engagement with financial support; low rate signals distribution or UX issue" },
+  ]},
+  { d:"Real-World Data & Evidence Analytics", lc:"In-line / Growth", m:[
+    { n:"RWE Comparative Effectiveness (adjusted)", f:"Outcome Rate Brand / Outcome Rate Comparator (adjusted HR or OR from regression)", t:"Claims or EHR-based; propensity-matched or IPTW-adjusted; supports payer re-submissions" },
+    { n:"Real-World Adherence vs. Clinical Trial", f:"Real-World PDC − Clinical Trial Protocol Adherence Rate", t:"Identifies real-world efficacy gap; informs patient support program investment" },
+    { n:"Database Coverage Rate", f:"Study Population in RWD Source / Estimated True Disease Population × 100", t:"Representativeness of claims, EHR, or registry source; selection bias indicator" },
+    { n:"Time to Treatment Initiation (TTTI)", f:"Median Days from Diagnosis to First Prescription in Real-World Data", t:"Disease journey analytics; benchmark for hub/access program intervention timing" },
+    { n:"Treatment Pathway Frequency", f:"% Patients Following Each Distinct Treatment Sequence (line by line)", t:"Line-of-therapy analytics from claims/EHR; identifies positioning and switching patterns" },
+    { n:"Healthcare Resource Utilization (HCRU)", f:"Hospitalizations + ER Visits + Specialist Visits per Patient per Year", t:"Economic burden metric; before-vs-after treatment; key payer value story element" },
+    { n:"Unplanned Hospitalization Rate", f:"Unplanned Hospital Admissions / Patient Years on Therapy", t:"Clinical outcome metric in RWE studies; supports value-based contract design" },
+  ]},
+  { d:"Competitive Intelligence Analytics", lc:"In-line / Growth", m:[
+    { n:"Competitive NRx Share", f:"Brand NRx / Total Market NRx × 100 (tracked per competitor)", t:"New patient acquisition competitive position; leading indicator of market dynamics" },
+    { n:"New-to-Brand vs. New-to-Market Ratio", f:"Brand NtB Share / New-to-Market Share × 100", t:"Indicates whether brand is growing the overall market or taking existing share" },
+    { n:"Competitor Launch Velocity Index", f:"Competitor Cumulative NRx at Week N / Brand NRx at Equivalent Launch Week", t:"Benchmarks new entrant curves; >100 = competitor outpacing brand at same stage" },
+    { n:"Win/Loss Rate (Switching)", f:"Switch-In Rate / (Switch-In Rate + Switch-Out Rate) × 100", t:"Net competitive position in patient switching dynamics; >50% = net winner" },
+    { n:"Switch-In Rate", f:"Patients Switching TO Brand in Period / Total Eligible Patients × 100", t:"Competitive acquisition from rivals; sourced from longitudinal Rx or claims data" },
+    { n:"Switch-Out Rate", f:"Patients Switching FROM Brand in Period / Total Patients on Brand × 100", t:"Competitive vulnerability; high switch-out to specific competitor = actionable signal" },
+    { n:"Threat Index (competitive asset)", f:"Competitor PoS × Expected Peak Sales × Differentiation Score × Access Likelihood", t:"Composite prioritization score for monitoring pipeline threats across competitors" },
+    { n:"Competitor SOV Index", f:"Competitor Promo Spend in TA / Total TA Promo Spend × 100", t:"Tracks competitive field and non-personal share of voice by therapeutic area" },
+  ]},
+  { d:"Supply Chain & Operations Analytics", lc:"In-line / Growth", m:[
+    { n:"Days Inventory Outstanding (DIO)", f:"Average Inventory Balance / (COGS / 365)", t:"Lower = leaner; too low = stockout risk; specialty biologics typically 60–90 days" },
+    { n:"Demand Forecast Accuracy (Supply Chain)", f:"1 − MAPE (Sales & Operations Planning version)", t:"S&OP forecast quality; <15% MAPE target for manufacturing planning cycles" },
+    { n:"Order Fill Rate", f:"Orders Fulfilled On Time and In Full (OTIF) / Total Orders × 100", t:"Customer service level; industry target ≥98% for specialty pharmacy channel" },
+    { n:"Stockout Rate", f:"SKUs with Zero Inventory / Total Active SKUs × 100", t:"Any stockout directly impacts patient access and revenue; zero tolerance standard" },
+    { n:"Product Waste / Expiry Rate", f:"Units Expired or Wasted / Units Produced × 100", t:"Critical for biologics, cell therapies, and cold-chain products; cost and sustainability" },
+    { n:"Cold Chain Excursion Rate", f:"Shipments Experiencing Temperature Excursion / Total Shipments × 100", t:"Biologics/vaccines; excursion may render product non-viable; QA investigation trigger" },
+    { n:"Serialization Compliance Rate", f:"Serialized Units / Total Units Released × 100", t:"Track-and-trace regulatory requirement (DSCSA in US, FMD in EU); 100% required" },
+    { n:"Batch Yield", f:"Actual Output / Theoretical Maximum Output × 100", t:"Manufacturing efficiency; low yield = COGS pressure; critical for biologic products" },
+  ]},
+  { d:"Finance & Business Analytics", lc:"In-line / Growth", m:[
+    { n:"Net Present Value (NPV)", f:"Σ [Cash Flow_t / (1 + r)^t] for t = 0 to N", t:"Core asset and brand valuation metric; discount rate (r) reflects cost of capital" },
+    { n:"Risk-Adjusted NPV (rNPV)", f:"Σ [Cash Flow_t × PoS_t / (1 + r)^t]", t:"NPV with probability of success baked in; standard pharma pipeline valuation currency" },
+    { n:"Internal Rate of Return (IRR)", f:"Discount rate r at which NPV = 0", t:"Compared to WACC; IRR > WACC = value creation; used in brand investment cases" },
+    { n:"Payback Period", f:"Initial Investment / Annual Net Cash Flow (years)", t:"Years to recoup brand or program investment; simpler supplement to NPV" },
+    { n:"EBIT Margin", f:"Earnings Before Interest & Tax / Net Revenue × 100", t:"Operational profitability benchmark; varies significantly by product lifecycle stage" },
+    { n:"Brand Promotional ROI", f:"(Net Revenue Uplift from Promotion − Promo Spend) / Promo Spend × 100", t:"Program-level return; MMM or regression-derived; input to annual budget planning" },
+    { n:"Revenue per FTE", f:"Net Revenue / Total Commercial FTEs", t:"Commercial organization productivity benchmark; varies by geography and TA" },
+    { n:"Working Capital Ratio (Current Ratio)", f:"Current Assets / Current Liabilities", t:"Liquidity measure; important for specialty pharma cash management cycles" },
+  ]},
+  { d:"Digital Health & Patient Technology", lc:"In-line / Growth", m:[
+    { n:"Digital Therapeutic (DTx) Engagement Rate", f:"Active Users / Enrolled Users × 100 in Period", t:"Retention of prescribed digital therapeutics; <60% at 90 days = engagement failure" },
+    { n:"Remote Patient Monitoring (RPM) Adherence", f:"% Days Device Used / Total Days in Monitoring Period × 100", t:"Wearable/device compliance in commercial or clinical settings; threshold varies" },
+    { n:"App Session Frequency", f:"Total Sessions / Active Users per Week", t:"Patient app engagement depth; 2–3x/week = high engagement for most condition apps" },
+    { n:"Connected Device Data Completeness", f:"Data Points Captured / Expected Data Points per Protocol × 100", t:"Missingness rate in IoT/wearable data streams; affects endpoint validity in studies" },
+    { n:"E-Prescribing Adoption Rate", f:"Electronic Prescriptions / Total Prescriptions × 100", t:">90% in US retail pharmacy; lower in specialty and hospital institutional settings" },
+    { n:"Telehealth Prescription Rate", f:"Rxs Written from Telehealth Encounters / Total Brand Rxs × 100", t:"Growing channel; affects call planning territory design and access strategy" },
+    { n:"Patient Engagement App DAU/MAU Ratio", f:"Daily Active Users / Monthly Active Users", t:"Stickiness metric; >0.25 = strong daily habit formation; critical for DTx value proof" },
+  ]},
+
+  // ── LOSS OF EXCLUSIVITY ───────────────────────────────────────────────
+  { d:"Loss of Exclusivity (LOE) Management", lc:"Loss of Exclusivity", m:[
+    { n:"Generic Erosion Rate", f:"(Brand TRx at t₀ − Brand TRx at Month N) / Brand TRx at t₀ × 100", t:"Tracked monthly; small molecule brands lose 80–90% of Rx volume within 12 months" },
+    { n:"Generic Penetration Rate", f:"Generic TRx / Total Market TRx × 100", t:"Inverse of brand retention; reaches 80–95% within 12–18 months for most small molecules" },
+    { n:"Brand Retention Rate at LOE", f:"Brand TRx at Month N / Brand TRx at t₀ × 100", t:"Loyal brand patient retention; driven by formulary inertia and patient preference" },
+    { n:"Price Erosion Rate (brand)", f:"(Brand WAC at t₀ − Brand WAC at Month N) / WAC at t₀ × 100", t:"Brand WAC typically maintained; net price erodes faster via formulary tier demotion" },
+    { n:"Authorized Generic Volume Share", f:"Authorized Generic Units / Total Generic Market Units × 100", t:"AG cannibalization vs. revenue defense trade-off analysis; first-filer dynamics" },
+    { n:"LOE Revenue Impact (absolute)", f:"Pre-LOE Annual Net Revenue − Post-LOE Year 1 Net Revenue", t:"Financial exposure quantification; input to LOE provisions and lifecycle investment" },
+    { n:"Biosimilar Switching Rate", f:"Reference Biologic Patients Switched to Biosimilar / Total Reference Patients × 100", t:"Biologic LOE; driven by payer substitution policies, interchangeability, and rebates" },
+    { n:"Interchangeability Designation Impact", f:"Switching Rate Post-Interchangeability vs. Pre-Designation Switching Rate", t:"FDA interchangeable biosimilars enable pharmacist substitution; accelerates erosion" },
+  ]},
+  { d:"Lifecycle Extension & Defence Strategy", lc:"Loss of Exclusivity", m:[
+    { n:"Line Extension Revenue Contribution", f:"Revenue from New Formulation / Indication / Patient Segment / Total Brand Revenue × 100", t:"Measures success of lifecycle management investment in extending revenue curve" },
+    { n:"New Indication Uptake Rate", f:"NRx from New Approved Indication / Total Eligible Patients in New Indication × 100", t:"Tracks label expansion commercial performance vs. pre-launch forecast" },
+    { n:"Formulation Switch Rate (LOE defence)", f:"Patients Switching to Extended-Release / Novel Formulation / Patients on IR × 100", t:"Retention tactic; requires formulary re-negotiation; effectiveness varies by TA" },
+    { n:"Patient Retention via Switch Program", f:"Patients Retained via Formulation or Pack Switch / Total Patients at LOE Risk × 100", t:"LOE defence program performance; ROI compared to revenue otherwise lost" },
+    { n:"Secondary Patent Life Extension (days)", f:"Secondary Patent Expiry Date − Primary LOE Date (calendar days)", t:"IP strategy effectiveness in extending exclusivity window beyond composition patent" },
+    { n:"Post-LOE Long-Tail Revenue", f:"Net Revenue in Year 2–5 Post-LOE as % of Peak Brand Revenue", t:"Loyal patient and formulary residual; varies from 5–25% depending on brand equity" },
+  ]},
+
+  // ── IQVIA DATA ASSETS (cross-lifecycle) ───────────────────────────────
+  { d:"IQVIA & Data Asset Analytics", lc:"In-line / Growth", m:[
+    { n:"NPA Coverage Rate", f:"Prescriptions Captured in NPA Panel / Estimated Total National Prescriptions × 100", t:"~90–95% projected nationally; projection factor applied to gross-up to national estimate" },
+    { n:"MIDAS DDD Market Share", f:"Brand DDDs (Defined Daily Doses) / Total Market DDDs × 100", t:"WHO DDD-standardized volume share; comparable across formulations, pack sizes, countries" },
+    { n:"SP Capture Rate", f:"Specialty Pharmacy-Reported Units / Projected Demand Units × 100", t:"Data completeness for SP channel; <85% = significant unreported volume gap" },
+    { n:"NPA Projection Factor", f:"Estimated Total National Rxs / Captured Rxs in Panel", t:"Applied to NPA/Xponent to gross-up from sampled panel to national estimate" },
+    { n:"Channel Mix Share", f:"Rx or Units by Channel / Total × 100 (retail vs. mail vs. specialty vs. hospital)", t:"Critical for GTN modeling, SP analytics, and patient services strategy" },
+    { n:"Data Reporting Lag", f:"Days from Prescription Date to Availability in IQVIA Feed", t:"Typically 4–8 weeks; affects in-period demand estimates; requires lag adjustment" },
+    { n:"IQVIA DDD-Adjusted Demand", f:"IMS MIDAS Volume × Standard DDD per Unit / Country DDD Adjustment", t:"Normalized demand volume for cross-country or cross-formulation comparison" },
+    { n:"PlanTrak Access Coverage Rate", f:"Lives Under Tracked Plans with Coverage / Total Lives in PlanTrak Universe × 100", t:"Access tracking completeness; gaps in PlanTrak coverage distort formulary analytics" },
+  ]},
+];
+
+const allLC = [...new Set(DATA.map(s => s.lc))];
+const allDomains = [...new Set(DATA.map(s => s.d))];
+let activeLCs = new Set();
+let activeDoms = new Set();
+
+function getStyle(lc) {
+  return STYLE[lc] || { lc: "lc-inline", dom: "domain-inline" };
+}
+
+function buildNav() {
+  const el = document.getElementById("navLinks");
+  const lcShort = {
+    "Pre-clinical & Discovery": "Pre-clinical",
+    "Clinical Development": "Clinical",
+    "Regulatory & HTA": "Regulatory & HTA",
+    "Market Access & Pricing": "Market Access",
+    "Pre-launch": "Pre-launch",
+    "Launch": "Launch",
+    "In-line / Growth": "In-line",
+    "Loss of Exclusivity": "LOE"
+  };
+  el.innerHTML = allLC.map(lc =>
+    `<a href="#lc-${lc.replace(/[^a-z0-9]/gi,'_')}">${lcShort[lc] || lc}</a>`
+  ).join("");
+}
+
+function buildFilters() {
+  const lcEl = document.getElementById("lcFilters");
+  lcEl.innerHTML = allLC.map(lc => {
+    const s = getStyle(lc);
+    return `<button class="pill" data-type="lc" data-val="${lc}" onclick="toggleFilter('lc','${lc}')">${lc}</button>`;
+  }).join("");
+  const domEl = document.getElementById("domFilters");
+  domEl.innerHTML = allDomains.map(d => {
+    const sec = DATA.find(s => s.d === d);
+    const s = getStyle(sec ? sec.lc : "");
+    return `<button class="pill" data-type="dom" data-val="${d}" onclick="toggleFilter('dom','${d}')">${d}</button>`;
+  }).join("");
+}
+
+function toggleFilter(type, val) {
+  if (type === 'lc') {
+    if (activeLCs.has(val)) activeLCs.delete(val);
+    else activeLCs.add(val);
+  } else {
+    if (activeDoms.has(val)) activeDoms.delete(val);
+    else activeDoms.add(val);
+  }
+  document.querySelectorAll(`[data-type="${type}"]`).forEach(b => {
+    b.classList.toggle('active', type === 'lc' ? activeLCs.has(b.dataset.val) : activeDoms.has(b.dataset.val));
+  });
+  render();
+}
+
+function render() {
+  const q = document.getElementById("search").value.toLowerCase();
+  let totalMetrics = 0, totalDoms = 0;
+  let html = "";
+  let lastLC = null;
+
+  DATA.forEach(section => {
+    const lcMatch = activeLCs.size === 0 || activeLCs.has(section.lc);
+    const domMatch = activeDoms.size === 0 || activeDoms.has(section.d);
+    if (!lcMatch || !domMatch) return;
+
+    const filtered = section.m.filter(m =>
+      !q || (m.n + m.f + m.t).toLowerCase().includes(q)
+    );
+    if (!filtered.length) return;
+
+    totalMetrics += filtered.length;
+    totalDoms++;
+
+    if (section.lc !== lastLC) {
+      if (lastLC !== null) html += `<div class="ornament">· · ·</div>`;
+      lastLC = section.lc;
+    }
+
+    const s = getStyle(section.lc);
+    html += `
+      <div class="section" id="lc-${section.lc.replace(/[^a-z0-9]/gi,'_')}">
+        <div class="section-header">
+          <span class="domain-badge ${s.dom}">${section.d}</span>
+          <span class="lc-badge ${s.lc}">${section.lc}</span>
+          <span class="metric-count">${filtered.length} metrics</span>
+        </div>
+        <div class="metric-grid">
+          ${filtered.map(m => `
+            <div class="card">
+              <div class="card-name">${m.n}</div>
+              <div class="card-formula">${m.f}</div>
+              <div class="card-note">${m.t}</div>
+            </div>
+          `).join("")}
+        </div>
+      </div>`;
+  });
+
+  document.getElementById("output").innerHTML =
+    html || `<div class="empty">No metrics match your current filters.</div>`;
+  document.getElementById("resultCount").textContent =
+    `Showing ${totalMetrics} metrics across ${totalDoms} domains`;
+  document.getElementById("totalMetrics").textContent = totalMetrics;
+  document.getElementById("totalDomains").textContent = totalDoms;
+}
+
+buildNav();
+buildFilters();
+render();
+
+// Update totals on load
+const allM = DATA.reduce((a,s) => a + s.m.length, 0);
+document.getElementById("totalMetrics").textContent = allM;
+document.getElementById("totalDomains").textContent = DATA.length;
+document.getElementById("resultCount").textContent =
+  `Showing ${allM} metrics across ${DATA.length} domains`;
+</script>
+</body>
+</html>

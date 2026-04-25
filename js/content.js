@@ -75,7 +75,8 @@ window.PL.domains = [
     description: "Data engineering fundamentals, modern data stack, data modeling, pipelines, quality & governance — plus every pharma dataset (Rx, claims, EHR, genomics, supply chain) and the KPIs calculated from them.",
     chapters: ["6-1","6-2","6-3","6-4","6-5","6-6","6-7","6-8","6-9","6-10","6-11","6-12","6-13"],
     resources: [
-      { title: "AI-Ready Data Architecture", subtitle: "15-Day Theoretical Roadmap", tag: "Architecture", href: "assets/ai-data-architecture.html" }
+      { title: "AI-Ready Data Architecture", subtitle: "15-Day Theoretical Roadmap", tag: "Architecture", href: "assets/ai-data-architecture.html" },
+      { title: "Pharma Analytics — Complete Metrics Reference", subtitle: "KPIs & Metrics Guide", tag: "Metrics", href: "assets/pharma-metrics.html" }
     ]
   }
 ];
