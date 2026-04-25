@@ -485,30 +485,6 @@ PL.addChapters({
 <tr><td><strong>ACF (Autocorrelation Function)</strong></td><td>Correlation between the series and each of its lags, including indirect effects through intermediate lags</td><td>Decays slowly → non-stationary (difference more). Sharp cutoff at lag q → MA(q) term. Gradual decay → AR component.</td></tr>
 <tr><td><strong>PACF (Partial Autocorrelation Function)</strong></td><td>Direct correlation between the series and each lag, controlling for all shorter lags</td><td>Sharp cutoff at lag p → AR(p) term. Gradual decay → MA component.</td></tr>
 </tbody></table>`},
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Freq : Aggregation Frequency ('W' = weekly, 'ME'=month − end, 'QE'=quarter − end)</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Df = rx df.copy()</div>
-</div>
-<table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
-<tr><td>specialty</td><td>df = df[df['prescriber specialty'] == specialty]</td></tr>
-</tbody></table>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Merged = rx df.merge(index date df[['patient id','index date']], on='patient id')</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Merged['Days From Index'] = (merged['fill date']  −  merged['index date']).dt.days</div>
-</div>
-<div class="formula-box">
-  <div class="formula-label">Formula</div>
-  <div class="formula-main">Baseline = merged[</div>
-</div>`},
     {id:"s4",content:`<h2 id="s4">ARIMA Models</h2>
 <p>ARIMA (AutoRegressive Integrated Moving Average) is the classical statistical model for univariate time series forecasting. It combines three mechanisms:</p>
 <table><thead><tr><th>Component</th><th>Parameter</th><th>Mechanism</th><th>Captures</th></tr></thead><tbody>
