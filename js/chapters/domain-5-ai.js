@@ -2,7 +2,7 @@
 PL.addChapters({
 
 "5-11": {
-  id:"5-11", title:"AI Concepts & Generative AI", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-11", title:"AI Concepts & Generative AI", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Intermediate", mins:55, available:true,
   tags:["AI","LLMs","GenAI","Prompt Engineering","RAG","AI Agents","Foundation Models","Responsible AI","Transformers"],
   objectives:[

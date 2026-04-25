@@ -1395,11 +1395,11 @@ PL.addChapters({
      options:["No action — PSI below 0.25 is within normal range","PSI of 0.23 indicates significant distribution shift (PSI > 0.2 = major drift threshold) — investigate why days_since_last_rx has shifted, determine if the model's learned relationship still holds, and likely retrain on recent data","Increase the monitoring frequency to daily","Archive the model and stop serving predictions"],
      correct:1,explanation:"PSI thresholds: &lt;0.1 = no drift (no action), 0.1–0.2 = moderate drift (monitor closely), &gt;0.2 = major drift (investigate and likely retrain). PSI of 0.23 crosses the major drift threshold for days_since_last_rx, which is likely a highly predictive feature. This means the feature's distribution in production differs significantly from training — the model's learned cutoffs for this feature may no longer apply. Investigate cause (formulary change? COVID care gap? Data pipeline issue?) then retrain with recent data if the shift is real."}
   ]
-}
+},
 
 
-"5-11": {
-  id:"5-11", title:"HCP Targeting & Next Best Action", domain:"Data Science & Pharma Use Cases", domain_id:5,
+"5-12": {
+  id:"5-12", title:"HCP Targeting & Next Best Action", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Intermediate", mins:35, available:true,
   tags:["HCP Targeting","Propensity Scoring","Next Best Action","Segmentation","Channel Optimization"],
   objectives:["Build a propensity-to-prescribe model from claims data","Understand Next Best Action (NBA) frameworks for field force and digital engagement","Apply contextual bandit models to channel and message selection","Measure model lift to prove commercial value of ML targeting"],
@@ -1527,8 +1527,8 @@ PL.addChapters({
   ]
 },
 
-"5-12": {
-  id:"5-12", title:"Patient Adherence & Journey Analytics", domain:"Data Science & Pharma Use Cases", domain_id:5,
+"5-13": {
+  id:"5-13", title:"Patient Adherence & Journey Analytics", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Intermediate", mins:35, available:true,
   tags:["Patient Journey","Adherence","Survival Analysis","Risk Stratification","Claims Analytics"],
   objectives:["Map a patient journey from diagnosis to discontinuation using claims data","Apply survival analysis to model time-to-discontinuation","Build a patient adherence risk model for early intervention","Understand patient support programme (PSP) analytics"],
@@ -1642,8 +1642,8 @@ PL.addChapters({
   ]
 },
 
-"5-13": {
-  id:"5-13", title:"Commercial Forecasting with ML", domain:"Data Science & Pharma Use Cases", domain_id:5,
+"5-14": {
+  id:"5-14", title:"Commercial Forecasting with ML", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Intermediate", mins:35, available:true,
   tags:["Forecasting","Demand Planning","Time Series","Launch Forecast","ARIMA","Prophet","ML Forecasting"],
   objectives:["Distinguish the types of commercial forecast used in pharma and their purposes","Apply time-series methods (ARIMA, Prophet) to Rx forecasting","Build an ML-based demand forecast with external predictors","Design a launch forecast using analogues and epidemiology","Measure forecast accuracy with MAPE, WAPE, and bias"],
@@ -1749,8 +1749,8 @@ PL.addChapters({
   ]
 },
 
-"5-14": {
-  id:"5-14", title:"Drug Discovery & Clinical Trial AI", domain:"Data Science & Pharma Use Cases", domain_id:5,
+"5-15": {
+  id:"5-15", title:"Drug Discovery & Clinical Trial AI", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Advanced", mins:35, available:true,
   tags:["Drug Discovery","Target Identification","QSAR","Clinical Trial AI","Biomarker Discovery","Adaptive Trials","Patient Recruitment"],
   objectives:["Understand AI applications across the drug discovery pipeline","Explain QSAR models and structure-based drug design","Apply ML to clinical trial patient recruitment and dropout prediction","Understand adaptive trial design and its data requirements","Describe biomarker discovery workflows using genomics and imaging data"],
@@ -1852,8 +1852,8 @@ PL.addChapters({
   ]
 },
 
-"5-15": {
-  id:"5-15", title:"Pharmacovigilance & Safety Signal Detection", domain:"Data Science & Pharma Use Cases", domain_id:5,
+"5-16": {
+  id:"5-16", title:"Pharmacovigilance & Safety Signal Detection", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Advanced", mins:35, available:true,
   tags:["Pharmacovigilance","Safety Signal","FAERS","Disproportionality Analysis","NLP","Adverse Events"],
   objectives:["Understand the adverse event reporting ecosystem (FAERS, EudraVigilance, VigiBase)","Apply disproportionality analysis methods (PRR, ROR, EBGM) to detect safety signals","Use NLP to extract structured safety information from unstructured narratives","Describe the signal management workflow from detection to regulatory action"],
