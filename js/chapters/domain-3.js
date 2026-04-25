@@ -54,11 +54,11 @@ PL.addChapters({
     {id:"s4",content:`<h2 id="s4">Formulary Analytics</h2>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Merged = formulary df.merge(patient lives df, on=['payer','plan name'])</div>
+  <div class="formula-main">Join: Formulary table ⋈ Enrolled Lives table on [Payer, Plan Name] → one row per drug-plan combination with enrolled lives attached</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Merged['Access Cat'] = merged.apply(access category, axis=1)</div>
+  <div class="formula-main">Access Category = f(Formulary Status, PA Required, Step Required) → {Preferred, Non-Preferred, Restricted (PA+Step), Excluded}</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -398,21 +398,21 @@ PL.addChapters({
     {id:"s2",content:`<h2 id="s2">Access Quality Scoring</h2>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Df = formulary df.copy()</div>
+  <div class="formula-main">Starting table: one row per drug-payer-plan combination with tier, PA status, step therapy, and enrolled lives</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Df['Tier Score'] = df['tier'].map(tier map).fillna(1)</div>
+  <div class="formula-main">Tier Score: Preferred Brand = 1.0 | Non-Preferred = 0.6 | Specialty Tier = 0.4 | Not Listed = 0</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Df['Pa Penalty'] = df['pa required'].map({True:  − 1.0, False: 0})</div>
+  <div class="formula-main">PA Penalty = −1.0 if Prior Authorization Required, else 0<br>Step Therapy Penalty = −0.5 if Step Edit Required, else 0</div>
 </div>`},
     {id:"s3",content:`<h2 id="s3">Identifying Pull-Through Gaps</h2>
 <p>Pull-through gaps are identified by comparing actual Rx share to expected share given the access quality in each market segment:</p>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Merged = rx df.merge(access df, on=geography level)</div>
+  <div class="formula-main">Join: Rx share data ⋈ Access quality scores on [Geography / Plan] → enables comparison of actual vs. expected Rx share by access tier</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -420,7 +420,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Merged['Expected Rx Share'] = model.predict(merged[['access quality score']])</div>
+  <div class="formula-main">Expected Rx Share = β₀ + β₁ × Access Quality Score — regression fit across payer segments; gap = Actual Share − Expected Share</div>
 </div>`},
     {id:"s4",content:`<h2 id="s4">Field Pull-Through Action Plans</h2>
 <p>Pull-through action plans translate access intelligence into field activities:</p>
@@ -493,7 +493,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Cohort = np.zeros(n states)</div>
+  <div class="formula-main">Initial Cohort Vector: [N, 0, 0, …] — all N patients start in the first Markov state at cycle 0</div>
 </div>
 <div class="callout info"><div class="callout-title">Uncertainty Analysis</div><p>Every HEOR model requires a Probabilistic Sensitivity Analysis (PSA) — Monte Carlo simulation across thousands of parameter draws to characterize the distribution of ICER outcomes. HTA bodies reject models without PSA. The result is a cost-effectiveness acceptability curve (CEAC) showing the probability of being cost-effective at each WTP threshold.</p></div>`},
     {id:"s3",content:`<h2 id="s3">Budget Impact Analysis</h2>
@@ -837,7 +837,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Updated Prices = current prices.copy()</div>
+  <div class="formula-main">Start with: approved list prices and net prices per country, used as baseline before IRP ceiling is applied</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -880,11 +880,11 @@ PL.addChapters({
 <p>A <strong>price corridor</strong> is the acceptable range between the highest and lowest net prices across markets — narrow enough to limit IRP cascade risk while allowing market-specific access optimization.</p>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Prices Df = pd.DataFrame([</div>
+  <div class="formula-main">Country price table: rows = countries, columns = [List Price, Net Price, IRP Reference Countries, IRP Floor]</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Max Net = prices df['net price'].max()</div>
+  <div class="formula-main">IRP Ceiling = max(net prices across all IRP reference countries for this market)</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>

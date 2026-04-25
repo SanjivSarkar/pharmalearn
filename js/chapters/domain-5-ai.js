@@ -243,11 +243,11 @@ PL.addChapters({
 <h3>Commercial AI Applications</h3>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Y = (hcp engagement df['best action'] == action).astype(int)</div>
+  <div class="formula-main">Label: Y = 1 if action k was the best-performing engagement for this HCP, 0 otherwise — one binary classifier trained per action</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Models[Action] = GradientBoostingClassifier(n estimators=200).fit(</div>
+  <div class="formula-main">Per-action model: P(positive response | HCP features, action = k) — trained on historical engagement outcomes for action k</div>
 </div>
 
 <h3>AI Beyond Pharma — Transferable Lessons</h3>

@@ -563,11 +563,11 @@ PL.addChapters({
     {id:"s2",content:`<h2 id="s2">Prescribing Prediction Models</h2>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">X = hcp features df[feature cols].fillna(0)</div>
+  <div class="formula-main">Feature matrix X: HCP-level features (prescribing history, patient mix, engagement history); missing values set to 0</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Y = hcp features df[target col]</div>
+  <div class="formula-main">Target Y: binary label — 1 if HCP prescribed brand in the next 90-day window, 0 otherwise</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -576,7 +576,7 @@ PL.addChapters({
     {id:"s3",content:`<h2 id="s3">Patient Segmentation</h2>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">X = patient features df[feature cols].fillna(patient features df[feature cols].median())</div>
+  <div class="formula-main">Feature matrix X: patient-level features (demographics, diagnosis history, prior therapy); missing values imputed with column median</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -593,7 +593,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Model = AutoModel.from pretrained(model name)</div>
+  <div class="formula-main">Pre-trained model: load transformer encoder weights (e.g., BioBERT, ClinicalBERT) fine-tuned for clinical NLP tasks</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -602,11 +602,11 @@ PL.addChapters({
     {id:"s5",content:`<h2 id="s5">Model Explainability (SHAP)</h2>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Explainer = shap.TreeExplainer(model.named steps['model'])</div>
+  <div class="formula-main">SHAP explainer: TreeSHAP algorithm computes exact Shapley values for tree-based models (XGBoost, LightGBM, Random Forest)</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">X Test Scaled = model.named steps['scaler'].transform(X test)</div>
+  <div class="formula-main">Feature scaling (inference): X_scaled = (X − μ_train) / σ_train — must use training-set statistics to avoid data leakage</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -682,7 +682,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Df = panel df.copy()</div>
+  <div class="formula-main">Panel data structure: rows = (HCP × time period), columns = [TRx, Treated indicator, Post indicator, control variables]</div>
 </div>
 <table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
 <tr><td>controls</td><td>formula += " + " + " + ".join(controls)</td></tr>
@@ -708,7 +708,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Model = IV2SLS.from formula(formula, data=df).fit(cov type='robust')</div>
+  <div class="formula-main">2SLS estimation: Stage 1 regresses treatment on instrument → Stage 2 regresses outcome on instrumented treatment; robust SEs for heteroskedasticity</div>
 </div>`},
     {id:"s5",content:`<h2 id="s5">Synthetic Control Method</h2>
 <p>The <strong>Synthetic Control</strong> method constructs a weighted combination of control units that best matches the treated unit's pre-intervention outcomes — creating a plausible counterfactual at the market/geography level:</p>
@@ -914,15 +914,15 @@ PL.addChapters({
 </tbody></table>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Stat Sw, P Sw = stats.shapiro(data) if len(data) <= 5000 else (None, None)</div>
+  <div class="formula-main">Shapiro-Wilk normality test: H₀ = data is normally distributed; p &lt; 0.05 rejects normality; recommended for n ≤ 5,000</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Mu, Sigma = np.mean(data), np.std(data)</div>
+  <div class="formula-main">Estimated parameters: μ̂ = sample mean, σ̂ = sample standard deviation — used as reference for KS test and distribution plots</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Stat Ks, P Ks = stats.kstest(data, 'norm', args=(mu, sigma))</div>
+  <div class="formula-main">Kolmogorov-Smirnov test: compares empirical CDF to theoretical Normal(μ̂, σ̂); preferred for n &gt; 5,000 where Shapiro-Wilk is overpowered</div>
 </div>`},
     {id:"s2",content:`<h2 id="s2">Hypothesis Testing Framework</h2>
 <p>A hypothesis test answers: "Is the pattern we observe in data likely to have occurred by chance?" The framework has five steps:</p>
@@ -945,15 +945,15 @@ PL.addChapters({
 </tbody></table>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Group A = np.array([12, 15, 14, 10, 13, 16, 11, 14, 15, 13])</div>
+  <div class="formula-main">Group A (Drug A, n=10): TRx counts = {12, 15, 14, 10, 13, 16, 11, 14, 15, 13};  x̄_A = 13.3</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Group B = np.array([18, 20, 19, 22, 17, 21, 19, 20, 18, 22])</div>
+  <div class="formula-main">Group B (Drug B, n=10): TRx counts = {18, 20, 19, 22, 17, 21, 19, 20, 18, 22};  x̄_B = 19.6</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main"> , P Norm A = stats.shapiro(group a)</div>
+  <div class="formula-main">Normality pre-check: Shapiro-Wilk on each group; if p &gt; 0.05 → use Welch's t-test; else → use non-parametric Mann-Whitney U test</div>
 </div>
 <table><thead><tr><th>Condition</th><th>Result</th></tr></thead><tbody>
 <tr><td>p norm a &gt; 0.05 and p norm b &gt; 0.05</td><td>t stat, p val = stats.ttest ind(group a, group b, equal var=False)  # Welch's t-test</td></tr>
@@ -1018,11 +1018,11 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Ctrl Posterior = stats.beta(prior alpha  +  control conv,</div>
+  <div class="formula-main">Control posterior: Beta(α_prior + control conversions, β_prior + control non-conversions)</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Var Posterior = stats.beta(prior alpha  +  variant conv,</div>
+  <div class="formula-main">Variant posterior: Beta(α_prior + variant conversions, β_prior + variant non-conversions)</div>
 </div>`},
     {id:"s6",content:`<h2 id="s6">Power Analysis & Sample Size</h2>
 <p>An underpowered study wastes resources and produces unreliable results. Power analysis determines the sample size needed before you collect data — not after.</p>
@@ -1115,7 +1115,7 @@ PL.addChapters({
 <p>Regularization techniques:</p>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Optimizer = torch.optim.AdamW(model.parameters(), lr=1e − 3, weight decay=1e − 4)</div>
+  <div class="formula-main">AdamW optimizer: learning rate η = 0.001, weight decay λ = 0.0001 — decoupled L2 regularization prevents over-regularizing adaptive gradients</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -1283,7 +1283,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Doc Embeddings = model.encode(documents)</div>
+  <div class="formula-main">Document embeddings: each document → dense vector in ℝᵈ (d = 384 for MiniLM-L6); semantic similarity = cosine(e_i, e_j) ∈ [−1, 1]</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -1515,7 +1515,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Data = pd.DataFrame([features.dict()])</div>
+  <div class="formula-main">API input: feature vector constructed from request payload, formatted as single-row model input matching training schema</div>
 </div>`},
     {id:"s7",content:`<h2 id="s7">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>Training-serving skew is the most common production ML failure — feature stores solve it by ensuring the exact same feature computation logic is used in both training and inference.</div></div>

@@ -58,7 +58,7 @@ PL.addChapters({
 <p>The <strong>propensity score</strong> is the probability of receiving treatment given observed covariates — a single summary score that, when balanced between groups, eliminates confounding from all included variables:</p>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">X = df[covariates].fillna(df[covariates].median())</div>
+  <div class="formula-main">Feature matrix X: one row per patient, p covariates (age, comorbidities, prior therapy); missing values imputed with column median</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -129,7 +129,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Drug A First = (claims df[claims df['ndc'].isin(index drug ndc)]</div>
+  <div class="formula-main">Drug A cohort: patients with ≥1 claim with a Drug A NDC in the index window, with no prior use of Drug A in the 12-month baseline</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -146,7 +146,7 @@ PL.addChapters({
 </ul>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Pts = claims df[claims df['patient id'].isin(patient ids)]</div>
+  <div class="formula-main">Follow-up claims: all service dates for matched patients within the 12-month follow-up window post index date</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -243,11 +243,11 @@ PL.addChapters({
 </ul>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Recent = inquiry df[</div>
+  <div class="formula-main">Filter: inquiries submitted within the rolling look-back window (e.g., last 6 months from analysis date)</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Inquiry Df['Date'] > = pd.Timestamp.now()  −  pd.DateOffset(months=period months)</div>
+  <div class="formula-main">Date filter: Inquiry Date ≥ (Analysis Date − look-back months)</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -310,15 +310,15 @@ PL.addChapters({
 <p>This formula means: a disease with low incidence but long duration (e.g., chronic conditions like MS, HIV) has high prevalence, creating a large market. A disease with high incidence but short duration (acute infections) may have lower prevalence.</p>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">New Cases = (claims df[</div>
+  <div class="formula-main">New Cases(year): patients with First Diagnosis Year = year</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">(Claims Df['First Dx Year'] = = year) &</div>
+  <div class="formula-main">AND: no prior diagnosis code for the condition in the 24-month baseline period</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">(Claims Df['Has Prior Dx'] = = False)</div>
+  <div class="formula-main">= Incident cases; excludes patients with pre-existing diagnosis (prevalent cases)</div>
 </div>`},
     {id:"s2",content:`<h2 id="s2">Survival Analysis</h2>
 <p><strong>Kaplan-Meier (KM)</strong> survival analysis estimates the probability of surviving (or remaining event-free) to each time point, accounting for censored observations (patients who leave the study before experiencing the event).</p>
@@ -342,7 +342,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Cox Df = df[[duration col, event col]  +  covariates].dropna()</div>
+  <div class="formula-main">Cox input: [T, E, X₁, X₂, …, Xₚ] — observed duration, event indicator (1=event, 0=censored), and covariate columns; complete cases only</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -419,11 +419,11 @@ PL.addChapters({
 </ul>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Quality Report['Completeness'] = pd.Series(completeness)</div>
+  <div class="formula-main">Completeness Score = (non-missing values / total expected values) × 100, computed per key variable across all enrolled patients</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Site Completeness = registry df.groupby(site col)[key variables].apply(</div>
+  <div class="formula-main">Site-level Completeness = mean completeness across key variables for each contributing site; flags sites below threshold for remediation</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>

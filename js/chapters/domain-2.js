@@ -78,7 +78,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Coverage = np.zeros(obs days)</div>
+  <div class="formula-main">Coverage array: one cell per observation day, initialized to 0 (no drug on board)</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -458,7 +458,7 @@ PL.addChapters({
 <p>ARIMA is the workhorse of time-series forecasting in pharma. It models the data as a combination of autoregressive (past values), differencing (stationarity), and moving average (past errors) components.</p>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Trx Data = pd.read csv('monthly trx.csv', index col='month', parse dates=True)</div>
+  <div class="formula-main">Input: monthly TRx series (time-indexed); minimum 24–36 periods recommended for reliable ARIMA estimation</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -466,7 +466,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Results = model.fit()</div>
+  <div class="formula-main">ARIMA(p, d, q) fitted via maximum likelihood; parameters estimated from historical TRx series</div>
 </div>
 <h3>Exponential Smoothing (ETS)</h3>
 <p>ETS models capture level, trend, and seasonality with exponentially decaying weights. Holt-Winters triple exponential smoothing is commonly used for seasonal pharma data (e.g., flu products, seasonal allergy).</p>
@@ -482,7 +482,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Future Df['Trx Forecast'] = model.predict(future df)</div>
+  <div class="formula-main">TRx Forecast(t) = β₀ + β₁·Competitor_TRx(t) + β₂·Formulary_Coverage(t) + Trend(t) + Seasonality(t)</div>
 </div>`},
     {id:"s3",content:`<h2 id="s3">Patient-Based Forecasting</h2>
 <p>Patient-based forecasting is the gold standard for specialty and rare disease products. It builds demand from first principles by modeling the patient flow from epidemiology through treatment to brand selection.</p>
@@ -543,7 +543,7 @@ PL.addChapters({
 </tbody></table>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Actual, Forecast = np.array(actual), np.array(forecast)</div>
+  <div class="formula-main">Error(t) = Actual(t) − Forecast(t)    for each period t in the evaluation window</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -551,7 +551,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Abs Errors = np.abs(errors)</div>
+  <div class="formula-main">|Error(t)| = |Actual(t) − Forecast(t)|    used in MAPE = Mean(|Error(t)| / Actual(t)) × 100</div>
 </div>
 <div class="callout callout-tip"><div class="callout-title">Bias is More Dangerous Than Error</div><p>A forecast with 8% MAPE but +7% bias consistently over-predicts, leading to excess inventory and missed earnings. Unbiased forecasts with moderate error are preferable to low-error forecasts with systematic bias. Track both metrics independently.</p></div>`},
     {id:"s6",content:`<h2 id="s6">Scenario Planning & Consensus Process</h2>
@@ -778,7 +778,7 @@ PL.addChapters({
 <h3>Building an Analogue Comparison</h3>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Df = weekly trx.copy()</div>
+  <div class="formula-main">Normalize each analogue curve: Index(t) = TRx(t) / Peak_TRx × 100 — rescales all analogues to a 0–100 scale for comparison</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -1082,7 +1082,7 @@ PL.addChapters({
 <h3>Implementation Approach</h3>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Prob = response model.predict proba(features)[1]</div>
+  <div class="formula-main">P(positive response | HCP, action, context) = model output probability score ∈ [0, 1]</div>
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
@@ -1758,7 +1758,7 @@ PL.addChapters({
 </div>
 <div class="formula-box">
   <div class="formula-label">Formula</div>
-  <div class="formula-main">Safety Stock = z  ×  demand std  ×  np.sqrt(lead time days)</div>
+  <div class="formula-main">Safety Stock = z × σ_demand × √(lead time in days)<br>z = 1.65 for 95% service level; z = 2.33 for 99% service level</div>
 </div>
 <div class="callout callout-tip"><div class="callout-title">Inventory Agreements</div><p>Most manufacturers have Inventory Management Agreements (IMAs) with the Big 3 wholesalers that cap inventory at specific DOH levels (typically 2-4 weeks). These agreements prevent wholesaler speculation (buying ahead of price increases) and smooth demand signals. Track IMA compliance to ensure channel inventory does not distort demand.</p></div>`},
     {id:"s5",content:`<h2 id="s5">Channel Data & Analytics Sources</h2>
