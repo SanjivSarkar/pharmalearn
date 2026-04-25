@@ -1,8 +1,8 @@
-/* Domain 5: Data Science & Analytics Engineering */
+/* Domain 5: Data Science & Pharma Use Cases */
 PL.addChapters({
 
 "5-0": {
-  id:"5-0", title:"Machine Learning Fundamentals", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-0", title:"Machine Learning Fundamentals", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Beginner", mins:40, available:true,
   tags:["Machine Learning","Supervised Learning","Unsupervised Learning","Model Evaluation","Feature Importance","Pharma AI"],
   objectives:["Distinguish the three major categories of ML and when each applies in pharma","Select the right algorithm for a given pharma analytics problem","Read and interpret common model outputs: coefficients, feature importance, confusion matrix, ROC-AUC","Understand bias-variance tradeoff and what overfitting means in practice","Know what makes a model production-ready vs. a prototype"],
@@ -198,7 +198,7 @@ PL.addChapters({
 },
 
 "5-1": {
-  id:"5-1", title:"Healthcare Data Foundations", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-1", title:"Healthcare Data Foundations", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Beginner", mins:35, available:true,
   tags:["Healthcare Data","Claims","EMR","HIPAA","Data Governance","OMOP"],
   objectives:["Map the US healthcare data ecosystem and key data types","Understand claims data structure: medical, pharmacy, and eligibility files","Navigate HIPAA requirements for PHI and de-identification","Apply OMOP CDM for cross-database analytics","Identify data quality issues common in healthcare datasets"],
@@ -275,7 +275,7 @@ PL.addChapters({
 },
 
 "5-2": {
-  id:"5-2", title:"SQL for Pharma Analytics", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-2", title:"SQL for Pharma Analytics", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Intermediate", mins:40, available:true,
   tags:["SQL","Analytics","Claims SQL","Window Functions","CTEs","Performance"],
   objectives:["Write efficient SQL for large-scale claims data analysis","Master window functions for time-series and ranking analytics","Build complex patient cohort queries using CTEs","Optimize query performance for billion-row claims tables","Apply advanced SQL patterns: gaps-and-islands, sessionization, running totals"],
@@ -338,7 +338,7 @@ PL.addChapters({
 },
 
 "5-3": {
-  id:"5-3", title:"Python for Pharma Analytics", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-3", title:"Python for Pharma Analytics", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Intermediate", mins:45, available:true,
   tags:["Python","Pandas","Data Analysis","Pharma Analytics","Visualization","Pipeline"],
   objectives:["Build a complete pharma analytics pipeline using pandas","Master time-series operations for claims data analysis","Create publication-quality visualizations for commercial analytics","Implement efficient data processing patterns for large datasets","Structure reusable analytics code as modular Python functions"],
@@ -460,7 +460,7 @@ PL.addChapters({
 },
 
 "5-4": {
-  id:"5-4", title:"Machine Learning in Pharma", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-4", title:"Machine Learning in Pharma", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Advanced", mins:48, available:true,
   tags:["Machine Learning","Predictive Analytics","NLP","Prescribing Prediction","Patient Segmentation"],
   objectives:["Apply classification models to HCP prescribing prediction","Build patient segmentation using clustering algorithms","Use NLP to extract insights from clinical notes and medical literature","Implement model validation frameworks for regulatory-grade ML","Explain model outputs using SHAP for stakeholder communication"],
@@ -557,7 +557,7 @@ PL.addChapters({
 },
 
 "5-5": {
-  id:"5-5", title:"Causal Inference & Advanced Analytics", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-5", title:"Causal Inference & Advanced Analytics", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Advanced", mins:45, available:true,
   tags:["Causal Inference","A/B Testing","Difference-in-Differences","Instrumental Variables","Synthetic Control"],
   objectives:["Apply causal inference methods to pharma commercial questions","Design A/B tests for field force interventions","Implement difference-in-differences for policy impact analysis","Use instrumental variables for endogenous treatment assignment","Build synthetic control groups for market-level causal analysis"],
@@ -668,7 +668,7 @@ PL.addChapters({
 },
 
 "5-6": {
-  id:"5-6", title:"Data Engineering for Pharma Platforms", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-6", title:"Data Engineering for Pharma Platforms", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Advanced", mins:42, available:true,
   tags:["Data Engineering","ETL","Data Lake","dbt","Airflow","Cloud","Data Platform"],
   objectives:["Design a pharma analytics data lake architecture","Build ELT pipelines for claims data using dbt","Orchestrate analytics workflows with Apache Airflow","Implement data quality monitoring in production pipelines","Apply governance frameworks for HIPAA-compliant data platforms"],
@@ -748,7 +748,7 @@ PL.addChapters({
 },
 
 "5-7": {
-  id:"5-7", title:"Statistics Fundamentals for Data Scientists", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-7", title:"Statistics Fundamentals for Data Scientists", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Foundational", mins:60, available:true,
   tags:["Statistics","Probability","Hypothesis Testing","A/B Testing","Distributions","Bayesian","Power Analysis"],
   objectives:["Master probability distributions and when to apply each","Design and interpret hypothesis tests correctly","Avoid common statistical fallacies","Run valid A/B tests from design to decision","Apply Bayesian reasoning to real-world problems"],
@@ -927,7 +927,7 @@ PL.addChapters({
 },
 
 "5-8": {
-  id:"5-8", title:"Advanced Machine Learning & Deep Learning", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-8", title:"Advanced Machine Learning & Deep Learning", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Advanced", mins:60, available:true,
   tags:["Deep Learning","Neural Networks","CNNs","Transformers","Ensemble Methods","Regularization","Transfer Learning"],
   objectives:["Understand neural network architecture and training","Apply CNNs for image data and RNNs/Transformers for sequences","Select and tune ensemble methods","Apply regularization techniques to prevent overfitting","Use transfer learning to accelerate model development"],
@@ -1090,7 +1090,7 @@ PL.addChapters({
 },
 
 "5-9": {
-  id:"5-9", title:"NLP & Large Language Models", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-9", title:"NLP & Large Language Models", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Advanced", mins:55, available:true,
   tags:["NLP","Transformers","BERT","GPT","LLMs","RAG","Embeddings","Prompt Engineering","Fine-Tuning"],
   objectives:["Understand the NLP pipeline from tokenization to inference","Explain Transformer self-attention and why it works","Apply embeddings for semantic search and similarity","Design effective prompts for LLM applications","Implement RAG systems for domain-specific Q&A","Evaluate LLM outputs in production"],
@@ -1247,7 +1247,7 @@ PL.addChapters({
 },
 
 "5-10": {
-  id:"5-10", title:"MLOps & Model Deployment", domain:"Data Science & Analytics Engineering", domain_id:5,
+  id:"5-10", title:"MLOps & Model Deployment", domain:"Data Science & Pharma Use Cases", domain_id:5,
   level:"Advanced", mins:50, available:true,
   tags:["MLOps","Model Deployment","Feature Store","Model Registry","CI/CD for ML","Model Monitoring","Drift Detection"],
   objectives:["Design an end-to-end MLOps lifecycle","Build feature stores for training and serving consistency","Version models and datasets with experiment tracking","Implement CI/CD pipelines for ML models","Monitor models in production for drift and degradation"],
@@ -1394,6 +1394,560 @@ PL.addChapters({
     {id:"q3",text:"The Population Stability Index (PSI) for the 'days_since_last_rx' feature is 0.23. What action is indicated?",
      options:["No action — PSI below 0.25 is within normal range","PSI of 0.23 indicates significant distribution shift (PSI > 0.2 = major drift threshold) — investigate why days_since_last_rx has shifted, determine if the model's learned relationship still holds, and likely retrain on recent data","Increase the monitoring frequency to daily","Archive the model and stop serving predictions"],
      correct:1,explanation:"PSI thresholds: &lt;0.1 = no drift (no action), 0.1–0.2 = moderate drift (monitor closely), &gt;0.2 = major drift (investigate and likely retrain). PSI of 0.23 crosses the major drift threshold for days_since_last_rx, which is likely a highly predictive feature. This means the feature's distribution in production differs significantly from training — the model's learned cutoffs for this feature may no longer apply. Investigate cause (formulary change? COVID care gap? Data pipeline issue?) then retrain with recent data if the shift is real."}
+  ]
+}
+
+
+"5-11": {
+  id:"5-11", title:"HCP Targeting & Next Best Action", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:35, available:true,
+  tags:["HCP Targeting","Propensity Scoring","Next Best Action","Segmentation","Channel Optimization"],
+  objectives:["Build a propensity-to-prescribe model from claims data","Understand Next Best Action (NBA) frameworks for field force and digital engagement","Apply contextual bandit models to channel and message selection","Measure model lift to prove commercial value of ML targeting"],
+  toc:[
+    {id:"s1",title:"HCP Segmentation & Targeting",level:"h2"},
+    {id:"s2",title:"Propensity-to-Prescribe Modeling",level:"h2"},
+    {id:"s3",title:"Next Best Action (NBA) Frameworks",level:"h2"},
+    {id:"s4",title:"Channel & Message Optimization",level:"h2"},
+    {id:"s5",title:"Measuring Model Lift",level:"h2"},
+    {id:"s6",title:"Key Takeaways",level:"h2"}
+  ],
+  sections:[
+    {id:"s1",content:`<h2 id="s1">HCP Segmentation & Targeting</h2>
+<p>HCP targeting is the process of identifying which healthcare providers are most likely to adopt a brand and directing sales force and digital resources toward them. Without data-driven targeting, field teams spread effort uniformly — visiting both high-potential and no-potential HCPs at the same frequency.</p>
+<h3>Traditional Segmentation</h3>
+<p>Classic segmentation uses a small number of rules to bucket HCPs into tiers:</p>
+<table><thead><tr><th>Tier</th><th>Criteria</th><th>Field Effort</th></tr></thead><tbody>
+<tr><td>Tier 1 (Target)</td><td>High volume in class, some brand prescribing or competitive use</td><td>Monthly calls, lunch programs</td></tr>
+<tr><td>Tier 2 (Secondary)</td><td>Moderate volume, limited brand history</td><td>Quarterly calls, digital follow-up</td></tr>
+<tr><td>Tier 3 (Low Priority)</td><td>Low volume or retired/non-prescribers</td><td>Digital only or no coverage</td></tr>
+</tbody></table>
+<p>Traditional tiering misses nuance: an HCP may write no prescriptions today but be highly persuadable. ML propensity scoring captures this latent potential.</p>
+<h3>Feature Engineering for HCP Models</h3>
+<p>The predictive features for HCP models come from multiple data sources:</p>
+<table><thead><tr><th>Feature Category</th><th>Examples</th><th>Data Source</th></tr></thead><tbody>
+<tr><td>Prescribing history</td><td>TRx (brand, class, competitor), trend, NRx rate</td><td>IQVIA, Symphony</td></tr>
+<tr><td>Patient population</td><td>Diagnosis mix, disease severity, payer mix in their patients</td><td>Claims, EMR</td></tr>
+<tr><td>HCP profile</td><td>Specialty, practice setting (solo/group/hospital), years in practice</td><td>NPPES, IQVIA universe</td></tr>
+<tr><td>Engagement history</td><td>Prior sales calls, sample requests, speaker bureau participation, digital interactions</td><td>CRM (Veeva), digital platform</td></tr>
+<tr><td>Network influence</td><td>KOL status, publication history, referral patterns</td><td>Definitive Healthcare, Clarivate</td></tr>
+</tbody></table>`},
+    {id:"s2",content:`<h2 id="s2">Propensity-to-Prescribe Modeling</h2>
+<p>A propensity-to-prescribe (P2P) model predicts the probability that an HCP will write a prescription for a brand within a defined time horizon (e.g., next 90 days). It is a binary classification problem: prescriber (1) vs. non-prescriber (0) within the window.</p>
+<h3>Model Development Steps</h3>
+<table><thead><tr><th>Step</th><th>What Happens</th></tr></thead><tbody>
+<tr><td>1. Define the outcome</td><td>Label HCPs as 1 (wrote ≥1 Rx in next 90 days) or 0 (wrote 0 Rx)</td></tr>
+<tr><td>2. Build feature matrix</td><td>Assemble prescribing, patient, HCP, and engagement features at the observation date</td></tr>
+<tr><td>3. Train-test split</td><td>Use temporal split — train on HCPs observed before date X, test on HCPs observed after X (prevents data leakage)</td></tr>
+<tr><td>4. Train model</td><td>XGBoost or Logistic Regression; tune via cross-validation</td></tr>
+<tr><td>5. Score all HCPs</td><td>Produce a score 0–1 for every HCP in the universe</td></tr>
+<tr><td>6. Rank and target</td><td>Field team is assigned the top N HCPs per territory by score</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Temporal Split Is Critical</div><p>In HCP targeting models, you must never use a random train-test split. A random split would allow the model to learn from HCPs who have "future" data in the training set, inflating performance. Always split by time: train on period T, test on period T+1. This mirrors real deployment where the model scores today's universe to predict tomorrow's prescribing.</p></div>
+<h3>Key Model Outputs</h3>
+<ul>
+<li><strong>Probability score (0–1):</strong> The raw model output; used to rank and prioritise HCPs.</li>
+<li><strong>Decile/segment:</strong> HCPs ranked into 10 equal groups; top 2 deciles typically receive heaviest coverage.</li>
+<li><strong>SHAP feature importance:</strong> For each HCP, which features drove the score up or down — enables field reps to have informed conversations ("your patients have high PA denial rates, here's our support programme").</li>
+</ul>`},
+    {id:"s3",content:`<h2 id="s3">Next Best Action (NBA) Frameworks</h2>
+<p>Next Best Action moves beyond static targeting to dynamic, real-time decisioning: given everything known about this HCP right now, what is the single most valuable action to take next — a detailing visit, a sample drop, a digital message, a congress invitation, nothing?</p>
+<h3>NBA vs Traditional Targeting</h3>
+<table><thead><tr><th>Dimension</th><th>Traditional Targeting</th><th>Next Best Action</th></tr></thead><tbody>
+<tr><td>Frequency</td><td>Updated quarterly or semi-annually</td><td>Updated daily or real-time</td></tr>
+<tr><td>Output</td><td>A tier or segment</td><td>A specific action with a channel and message</td></tr>
+<tr><td>Input signals</td><td>Prescribing data only</td><td>Prescribing + CRM + digital + sample + payer + recent triggers</td></tr>
+<tr><td>Optimises for</td><td>Volume potential</td><td>Incremental lift given this HCP's current state</td></tr>
+</tbody></table>
+<h3>Contextual Bandit Models</h3>
+<p>The core ML engine in NBA is often a <strong>contextual bandit</strong> — a reinforcement learning framework that learns which action (arm) produces the best reward (HCP engagement, prescription) given the HCP's context (features at this moment).</p>
+<div class="flow-box">Context (HCP features) → Model selects Action → Observe Reward → Update Model</div>
+<p>Unlike a full RL model, bandits operate action-by-action without planning multi-step sequences. This makes them practical to deploy in commercial pharma environments where feedback loops (a new prescription) arrive weekly or monthly.</p>
+<h3>Common NBA Actions in Pharma</h3>
+<ul>
+<li><strong>Field visit:</strong> In-person detailing by rep</li>
+<li><strong>Digital email/push:</strong> Brand content, clinical data, access information</li>
+<li><strong>Sample:</strong> Starter samples to reduce first-prescription barrier</li>
+<li><strong>Speaker programme invitation:</strong> Peer-to-peer education for high-influence HCPs</li>
+<li><strong>Patient support referral:</strong> Alert HCP that their patient qualified for co-pay assistance</li>
+<li><strong>No action:</strong> Model correctly identifies HCPs where outreach has negative or zero expected value</li>
+</ul>`},
+    {id:"s4",content:`<h2 id="s4">Channel & Message Optimization</h2>
+<p>Even if you know which HCPs to target, you need to know <em>how</em> to reach them and <em>what</em> to say. Channel and message optimization applies ML to maximise engagement rates and ultimately prescription lift.</p>
+<h3>Channel Preference Modeling</h3>
+<p>A channel preference model predicts — for each HCP — which channel (field, email, webinar, social, remote call) produces the highest open/engagement rate. It is a multi-class classification or separate binary models per channel.</p>
+<table><thead><tr><th>Channel</th><th>Best for</th><th>KPI</th></tr></thead><tbody>
+<tr><td>Field detailing</td><td>High-value target prescribers; complex data conversations</td><td>Call quality score, sample requests, prescription change in 4 weeks post-call</td></tr>
+<tr><td>Email/digital</td><td>Tier 2–3, reactive HCPs, digital-first practices</td><td>Open rate, click-through rate, content engagement time</td></tr>
+<tr><td>Remote/virtual call</td><td>Rural HCPs, time-constrained specialists</td><td>Session completion rate, follow-up request</td></tr>
+<tr><td>Speaker programme</td><td>KOLs and mid-tier opinion leaders</td><td>Programme attendance, peer advocacy actions</td></tr>
+</tbody></table>
+<h3>Message Testing (A/B at Scale)</h3>
+<p>With NBA platforms, every HCP interaction is an experiment. The model explores different messages and learns which resonate with which HCP profiles. Key message dimensions tested:</p>
+<ul>
+<li><strong>Clinical data emphasis:</strong> Efficacy (OS/PFS data) vs. safety (tolerability) vs. patient quality of life</li>
+<li><strong>Access/reimbursement:</strong> Formulary coverage details, patient assistance programme information</li>
+<li><strong>Patient type relevance:</strong> Messages tailored to the HCP's actual patient population (e.g., "for your EGFR-mutant NSCLC patients specifically...")</li>
+</ul>`},
+    {id:"s5",content:`<h2 id="s5">Measuring Model Lift</h2>
+<p>The business value of ML targeting is proved through lift — the incremental prescribing generated by model-directed targeting compared to a control (random or no targeting). Without measuring lift, you cannot prove the model adds value over intuition or legacy rules.</p>
+<h3>Lift Curve</h3>
+<p>A lift curve shows how much better than random the model performs at each decile. If targeting the top 20% of model-scored HCPs generates 50% of total prescriptions, the lift is 2.5× (50% ÷ 20%).</p>
+<div class="flow-box">Lift at Decile K = (% of prescriptions in top K deciles) ÷ (K ÷ 10)</div>
+<h3>A/B Test Design for Targeting Models</h3>
+<p>To prove incremental lift from a new NBA model:</p>
+<ol>
+<li><strong>Randomise at territory level</strong> (not HCP level) — HCPs within a territory share the same rep, so randomising within territory would contaminate the experiment</li>
+<li><strong>Treatment arm:</strong> Reps follow NBA model recommendations</li>
+<li><strong>Control arm:</strong> Reps follow legacy targeting rules</li>
+<li><strong>Primary KPI:</strong> NBRx or TRx growth per territory in the 90–180 day test window</li>
+<li><strong>Analyse with DiD:</strong> Compare pre-post prescription change between treatment and control territories</li>
+</ol>
+<h3>Key Lift Metrics</h3>
+<table><thead><tr><th>Metric</th><th>Definition</th></tr></thead><tbody>
+<tr><td>Raw lift</td><td>Avg prescriptions per targeted HCP ÷ Avg prescriptions per untargeted HCP</td></tr>
+<tr><td>Incremental Rx</td><td>Prescriptions attributable to targeting beyond baseline trend</td></tr>
+<tr><td>Return on targeting investment (ROTI)</td><td>Incremental revenue from lift ÷ Cost of field calls or digital campaigns</td></tr>
+</tbody></table>`},
+    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
+<ul>
+<li><strong>Propensity-to-prescribe</strong> is a binary classification problem trained on historical prescribing behaviour with temporal (not random) train-test split.</li>
+<li><strong>NBA goes beyond targeting</strong> — it recommends a specific action and channel, updated dynamically as new data arrives.</li>
+<li><strong>Contextual bandits</strong> are the ML engine behind NBA: they learn which action produces the best reward given each HCP's current context.</li>
+<li><strong>Feature engineering</strong> matters more than algorithm choice — prescribing trends, patient mix, engagement history, and network influence are all predictive signals.</li>
+<li><strong>SHAP values</strong> make model outputs actionable: field reps understand <em>why</em> an HCP is scored high and can tailor their conversation accordingly.</li>
+<li><strong>Prove value through lift curves and controlled A/B tests</strong> — randomise at territory level to avoid contamination between treatment and control HCPs.</li>
+</ul>`}
+  ],
+  quiz:[
+    {q:"Why must HCP propensity models use a temporal train-test split rather than a random split?",options:["Random splits use too much data","A temporal split prevents the model learning from future data it would not have in real deployment","Temporal splits produce higher AUC scores","HCP data is too small for random splits"],answer:1},
+    {q:"A propensity model scores all HCPs 0–1. The top 20% of HCPs account for 60% of total prescriptions. What is the lift at the top 2 deciles?",options:["3×","2×","1.2×","0.6×"],answer:0},
+    {q:"What differentiates Next Best Action from traditional HCP tiering?",options:["NBA uses more data fields","NBA recommends a specific action and channel in real-time, updated dynamically","NBA only applies to field force","NBA ignores prescribing history"],answer:1},
+    {q:"Why is territory-level randomisation preferred over HCP-level randomisation in NBA A/B tests?",options:["It is cheaper","HCPs within a territory share the same rep, so HCP-level randomisation would contaminate the experiment","Territories are always equal in size","HCP-level data is not available"],answer:1},
+    {q:"SHAP values in an HCP targeting model are most useful for:",options:["Improving model AUC","Helping field reps understand why a specific HCP is high-priority and tailor their conversation","Reducing model training time","Removing outlier HCPs from the scoring universe"],answer:1}
+  ]
+},
+
+"5-12": {
+  id:"5-12", title:"Patient Adherence & Journey Analytics", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:35, available:true,
+  tags:["Patient Journey","Adherence","Survival Analysis","Risk Stratification","Claims Analytics"],
+  objectives:["Map a patient journey from diagnosis to discontinuation using claims data","Apply survival analysis to model time-to-discontinuation","Build a patient adherence risk model for early intervention","Understand patient support programme (PSP) analytics"],
+  toc:[
+    {id:"s1",title:"Patient Journey from Claims Data",level:"h2"},
+    {id:"s2",title:"Survival Analysis for Adherence",level:"h2"},
+    {id:"s3",title:"Adherence Prediction Models",level:"h2"},
+    {id:"s4",title:"Risk Stratification & Early Intervention",level:"h2"},
+    {id:"s5",title:"Patient Support Programme Analytics",level:"h2"},
+    {id:"s6",title:"Key Takeaways",level:"h2"}
+  ],
+  sections:[
+    {id:"s1",content:`<h2 id="s1">Patient Journey from Claims Data</h2>
+<p>A patient journey is the sequence of clinical events — diagnosis, treatment initiation, adherence, dose changes, treatment switches, and discontinuation — reconstructed from claims data. Claims data does not tell us why patients do things; it tells us <em>what</em> happened and <em>when</em>.</p>
+<h3>Reconstructing the Journey</h3>
+<table><thead><tr><th>Event</th><th>How to Identify in Claims</th></tr></thead><tbody>
+<tr><td>Diagnosis</td><td>ICD-10 diagnosis code on a medical claim</td></tr>
+<tr><td>Treatment initiation</td><td>First pharmacy claim for the drug after diagnosis (no prior fill in 12-month look-back)</td></tr>
+<tr><td>Dose escalation</td><td>Increase in days supply or NDC code change to higher strength</td></tr>
+<tr><td>Treatment switch</td><td>New drug claim in same class within 30 days of last fill of previous drug</td></tr>
+<tr><td>Discontinuation</td><td>Gap in pharmacy claims exceeding a threshold (typically 45–60 days beyond days supply)</td></tr>
+<tr><td>Restart</td><td>New fill after a discontinuation gap — patient re-initiates therapy</td></tr>
+<tr><td>Hospitalisation</td><td>Inpatient facility claim — a complication or disease progression event</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Defining the Discontinuation Threshold</div><p>The gap threshold (e.g., 45 days after days supply expires) is a study design choice that affects how many patients are classified as discontinued. A narrow gap (30 days) flags many short refill delays as discontinuations. A wide gap (90 days) undercounts discontinuations. Most adherence studies use 45–60 days and conduct sensitivity analyses at other thresholds.</p></div>
+<h3>Sankey Diagrams for Journey Visualisation</h3>
+<p>A Sankey diagram maps patient flows across treatment states over time. Each column represents a time point (Month 3, Month 6, Month 12) and each band represents patients moving between states (On Brand A → Switched to Brand B → Discontinued → Restarted Brand A). Sankeys are the standard output for treatment pattern analytics in oncology and specialty disease.</p>`},
+    {id:"s2",content:`<h2 id="s2">Survival Analysis for Adherence</h2>
+<p>Survival analysis models the time until an event — in adherence analytics, the event is discontinuation. It handles <strong>censoring</strong>: patients who have not yet discontinued at the end of the observation window are not excluded; they contribute data up to their last known date.</p>
+<h3>Kaplan-Meier (KM) Estimator</h3>
+<p>KM produces a survival curve: the probability that a patient remains on therapy at each time point.</p>
+<div class="flow-box">S(t) = Π [1 − (events at t) / (patients at risk at t)]</div>
+<p><strong>Reading a KM curve:</strong></p>
+<ul>
+<li>Y-axis: probability of still being on therapy (1.0 at start, declining over time)</li>
+<li>X-axis: time from initiation (days or months)</li>
+<li>Median persistence: where the curve crosses 0.50 — the point at which 50% of patients have discontinued</li>
+<li>Tick marks: censored patients (still on therapy at end of follow-up)</li>
+</ul>
+<h3>Log-Rank Test</h3>
+<p>Compares survival curves between two groups (e.g., patients with co-pay assistance vs. without). A significant log-rank p-value means the groups have different discontinuation patterns — not just at one time point but across the entire follow-up period.</p>
+<h3>Cox Proportional Hazards Model</h3>
+<p>Cox regression extends survival analysis to multiple predictors simultaneously — modelling which patient characteristics are associated with faster or slower discontinuation.</p>
+<div class="flow-box">h(t|X) = h₀(t) × exp(β₁X₁ + β₂X₂ + ... + βₙXₙ)</div>
+<p>Output: <strong>Hazard Ratios (HR)</strong>. HR = 1.40 for "no co-pay assistance" means patients without co-pay support are 40% more likely to discontinue at any given time point than patients with support — a direct measure of the programme's value.</p>`},
+    {id:"s3",content:`<h2 id="s3">Adherence Prediction Models</h2>
+<p>Rather than measuring adherence after the fact, a predictive model identifies patients at high risk of discontinuation <em>early</em> — while there is still time to intervene through a patient support programme, nurse educator call, or co-pay assistance outreach.</p>
+<h3>Problem Framing</h3>
+<p>This is a binary classification problem: will this patient discontinue within the next 60 days? The model is retrained and scored periodically (weekly or monthly) so risk scores stay current.</p>
+<h3>Predictive Features</h3>
+<table><thead><tr><th>Feature Category</th><th>Examples</th></tr></thead><tbody>
+<tr><td>Refill behaviour</td><td>Days to first refill, PDC at Month 1, refill gap trend</td></tr>
+<tr><td>Cost / access</td><td>Patient OOP at last fill, PA status, formulary tier, co-pay card usage</td></tr>
+<tr><td>Disease severity</td><td>Comorbidity index, number of concomitant medications, hospitalisation history</td></tr>
+<tr><td>Demographics</td><td>Age, geographic region, payer type (commercial vs Medicare vs Medicaid)</td></tr>
+<tr><td>HCP engagement</td><td>Months since last HCP visit, specialist vs PCP prescriber</td></tr>
+</tbody></table>
+<div class="callout"><div class="callout-title">Early Refill Signal</div><p>One of the strongest adherence predictors is the time between prescription fill and refill relative to the days supply. A patient who refills on Day 35 of a 30-day supply is showing engagement. A patient who refills on Day 45 is already showing a gap. A patient who hasn't refilled on Day 50 is very likely to discontinue. This simple time-delta feature often ranks in the top 3 SHAP features.</p></div>
+<h3>Model Evaluation Metrics</h3>
+<p>Standard binary classification metrics apply, but the business priority shapes which to optimise:</p>
+<table><thead><tr><th>Metric</th><th>When to optimise</th></tr></thead><tbody>
+<tr><td>Precision (PPV)</td><td>Intervention is expensive (nurse call) — minimise wasted outreach on low-risk patients</td></tr>
+<tr><td>Recall (Sensitivity)</td><td>Missing a high-risk patient is costly — catch as many at-risk patients as possible</td></tr>
+<tr><td>AUC-ROC</td><td>Overall model discrimination — threshold-independent summary statistic</td></tr>
+</tbody></table>`},
+    {id:"s4",content:`<h2 id="s4">Risk Stratification & Early Intervention</h2>
+<p>A risk score is only valuable if it triggers an action. Risk stratification maps model output scores into actionable tiers with corresponding interventions.</p>
+<table><thead><tr><th>Risk Tier</th><th>Score Range</th><th>% of Patients</th><th>Intervention</th></tr></thead><tbody>
+<tr><td><strong>High Risk</strong></td><td>0.70–1.00</td><td>~10–15%</td><td>Proactive nurse educator call within 7 days; co-pay assistance outreach; HCP alert</td></tr>
+<tr><td><strong>Medium Risk</strong></td><td>0.40–0.69</td><td>~25–30%</td><td>Automated refill reminder (SMS/email); digital engagement; co-pay card reminder</td></tr>
+<tr><td><strong>Low Risk</strong></td><td>0–0.39</td><td>~55–65%</td><td>Standard programme touchpoints; no special intervention</td></tr>
+</tbody></table>
+<h3>Measuring Intervention Effectiveness</h3>
+<p>To prove the intervention — not just the risk model — adds value, use a randomised holdout within the high-risk cohort:</p>
+<ul>
+<li><strong>Treatment group:</strong> High-risk patients who receive the intervention</li>
+<li><strong>Control group:</strong> High-risk patients randomly withheld from intervention</li>
+<li><strong>Primary endpoint:</strong> Persistence rate at 90 days — is the treatment group's curve significantly higher?</li>
+</ul>
+<div class="callout info"><div class="callout-title">The Ethical Consideration</div><p>Withholding a potentially beneficial intervention from control patients raises ethics questions. Best practice: use a minimum detectable effect calculation to size the test as small as possible, run the test for the minimum required duration, then roll out intervention to all high-risk patients once effectiveness is proved.</p></div>`},
+    {id:"s5",content:`<h2 id="s5">Patient Support Programme Analytics</h2>
+<p>Patient Support Programmes (PSPs) — also called hubs or patient services — provide co-pay assistance, adherence calls, specialty pharmacy coordination, and prior auth support for specialty drugs. Analytics teams measure PSP performance and optimise programme design.</p>
+<h3>Key PSP KPIs</h3>
+<table><thead><tr><th>KPI</th><th>Formula</th><th>What It Signals</th></tr></thead><tbody>
+<tr><td>Enrolment rate</td><td>Patients enrolled ÷ Patients initiated × 100</td><td>How many patients are connected to support</td></tr>
+<tr><td>Activation rate</td><td>Enrolled patients who receive first dispense ÷ Enrolled × 100</td><td>Conversion from enrolment to actual therapy start</td></tr>
+<tr><td>Abandonment rate</td><td>Prescriptions abandoned ÷ Prescriptions submitted × 100</td><td>Patient access friction — cost, PA denials</td></tr>
+<tr><td>90-day persistence</td><td>% of enrolled patients still on therapy at Day 90</td><td>Programme's short-term adherence impact</td></tr>
+<tr><td>PA approval rate</td><td>PA approvals ÷ PA submissions × 100</td><td>Payer access environment quality</td></tr>
+<tr><td>Co-pay assistance utilisation</td><td>Patients using co-pay card ÷ Eligible patients × 100</td><td>Access programme penetration</td></tr>
+</tbody></table>
+<h3>PSP vs. Non-PSP Patient Comparison</h3>
+<p>A key analytics deliverable is comparing outcomes between patients enrolled in the PSP and those not enrolled. Because enrolment is not random (sicker, higher-cost patients self-select into PSPs), naive comparison overstates PSP impact. Propensity score matching (PSM) controls for selection bias by creating a matched control group of non-enrolled patients with similar baseline characteristics.</p>
+<div class="flow-box">PSM Steps: Estimate propensity to enrol (logistic regression) → Match enrolled + non-enrolled patients on propensity score → Compare outcomes in matched cohort</div>`},
+    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
+<ul>
+<li><strong>Claims data reconstructs the patient journey</strong> through a sequence of pharmacy and medical claim events; discontinuation is defined as a gap beyond a threshold (typically 45–60 days after days supply expires).</li>
+<li><strong>Kaplan-Meier curves</strong> visualise persistence; the median persistence is where the curve crosses 0.50.</li>
+<li><strong>Cox Hazard Ratios</strong> quantify the impact of patient characteristics on discontinuation risk; HR &gt; 1 = increased hazard (faster discontinuation).</li>
+<li><strong>Adherence prediction models</strong> are binary classifiers; the single strongest feature is often the early refill behaviour — the time between days supply expiry and actual refill date.</li>
+<li><strong>Risk stratification maps model scores to actions</strong> — high risk triggers a nurse call, medium risk triggers a digital reminder, low risk gets standard touchpoints.</li>
+<li><strong>PSP analytics requires propensity score matching</strong> to control for selection bias when comparing enrolled vs. non-enrolled patient outcomes.</li>
+</ul>`}
+  ],
+  quiz:[
+    {q:"In claims data, how is treatment discontinuation typically identified?",options:["Patient calls the pharmacy to cancel","A gap in pharmacy claims exceeding a defined threshold (e.g., 45–60 days) beyond the last days supply","The ICD-10 code for treatment cessation","The HCP submits a cancellation form"],answer:1},
+    {q:"A KM curve for Brand A crosses 0.50 at Month 8. What does this mean?",options:["50% of patients have experienced an adverse event by Month 8","The median persistence on Brand A is 8 months","80% of patients are still on therapy at Month 8","The drug was approved at Month 8"],answer:1},
+    {q:"A Cox proportional hazards model gives HR = 1.35 for 'no co-pay assistance'. What does this mean?",options:["Patients with co-pay assistance are 35% more likely to discontinue","Patients without co-pay assistance are 35% more likely to discontinue at any given time","Co-pay assistance has no statistical effect","The result is not interpretable without the full model"],answer:1},
+    {q:"Why is propensity score matching used when comparing PSP-enrolled vs. non-enrolled patients?",options:["PSP data is smaller than non-PSP data","PSP enrolment is not random — sicker patients self-select in, creating selection bias","Randomised trials are not allowed in pharma","Propensity scores improve model AUC"],answer:1},
+    {q:"Which feature is typically one of the strongest predictors in a patient adherence risk model?",options:["Patient age","Time between days supply expiry and actual refill date (early vs. late refill behaviour)","Number of prior hospitalizations","Patient zip code"],answer:1}
+  ]
+},
+
+"5-13": {
+  id:"5-13", title:"Commercial Forecasting with ML", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:35, available:true,
+  tags:["Forecasting","Demand Planning","Time Series","Launch Forecast","ARIMA","Prophet","ML Forecasting"],
+  objectives:["Distinguish the types of commercial forecast used in pharma and their purposes","Apply time-series methods (ARIMA, Prophet) to Rx forecasting","Build an ML-based demand forecast with external predictors","Design a launch forecast using analogues and epidemiology","Measure forecast accuracy with MAPE, WAPE, and bias"],
+  toc:[
+    {id:"s1",title:"Types of Commercial Forecast in Pharma",level:"h2"},
+    {id:"s2",title:"Time-Series Methods",level:"h2"},
+    {id:"s3",title:"ML-Based Forecasting",level:"h2"},
+    {id:"s4",title:"Launch Forecasting",level:"h2"},
+    {id:"s5",title:"Forecast Accuracy Metrics",level:"h2"},
+    {id:"s6",title:"Key Takeaways",level:"h2"}
+  ],
+  sections:[
+    {id:"s1",content:`<h2 id="s1">Types of Commercial Forecast in Pharma</h2>
+<p>Pharma forecasting spans multiple time horizons, purposes, and teams. The same brand may have five different forecasts produced simultaneously for different business decisions.</p>
+<table><thead><tr><th>Forecast Type</th><th>Horizon</th><th>Purpose</th><th>Primary Input</th></tr></thead><tbody>
+<tr><td><strong>Short-term demand forecast</strong></td><td>4–13 weeks</td><td>Supply chain — how much to manufacture and ship</td><td>Point-of-sale data, wholesaler inventory, seasonality</td></tr>
+<tr><td><strong>Brand performance forecast</strong></td><td>Rolling 12–18 months</td><td>Brand P&amp;L, budget vs. actual tracking</td><td>IQVIA/Symphony prescribing data, field activity</td></tr>
+<tr><td><strong>Strategic / LRP forecast</strong></td><td>5–10 years</td><td>Long-Range Plan — investor guidance, pipeline valuation</td><td>Epidemiology, market growth assumptions, competitive scenario</td></tr>
+<tr><td><strong>Launch forecast</strong></td><td>Years 1–5 post-launch</td><td>Set expectations, resource allocation, supply planning</td><td>Analogues, epidemiology, market research</td></tr>
+<tr><td><strong>GTN / net revenue forecast</strong></td><td>Annual + quarterly</td><td>Finance P&amp;L — net revenue after rebates and chargebacks</td><td>Brand forecast × net price assumptions</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Forecast ≠ Target</div><p>A commercial forecast is a probability-weighted estimate of what will happen given current assumptions. A target is a performance goal the organisation commits to achieving. These are often confused — a brand team that engineers the forecast to match the target destroys the forecast's value as an unbiased planning tool.</p></div>`},
+    {id:"s2",content:`<h2 id="s2">Time-Series Methods</h2>
+<p>Time-series methods model the Rx data itself — its trend, seasonality, and autocorrelation — to extrapolate forward. They are effective for mature brands with stable, predictable patterns.</p>
+<h3>ARIMA (AutoRegressive Integrated Moving Average)</h3>
+<p>ARIMA decomposes the series into three components:</p>
+<table><thead><tr><th>Component</th><th>Parameter</th><th>What It Captures</th></tr></thead><tbody>
+<tr><td>AutoRegressive (AR)</td><td>p</td><td>Correlation with past values — "last week's Rx predicts this week's"</td></tr>
+<tr><td>Integrated (I)</td><td>d</td><td>Differencing to remove trend — how many times to difference for stationarity</td></tr>
+<tr><td>Moving Average (MA)</td><td>q</td><td>Correlation with past forecast errors — smooths out noise spikes</td></tr>
+</tbody></table>
+<p>ARIMA(p,d,q) is written with these parameters. Auto-ARIMA algorithms select the best (p,d,q) combination via AIC/BIC minimisation.</p>
+<h3>Prophet (Meta)</h3>
+<p>Prophet is a time-series library designed for business forecasting. Its key advantages for pharma:</p>
+<ul>
+<li><strong>Handles missing data</strong> and irregular time points (common with IQVIA monthly drops)</li>
+<li><strong>Automatic seasonality detection</strong> — weekly, monthly, and annual patterns</li>
+<li><strong>Holiday and event effects</strong> — models discrete events like formulary changes, competitor launches, or COVID impact</li>
+<li><strong>Trend changepoints</strong> — automatically detects when the brand's growth trajectory shifted</li>
+<li><strong>Uncertainty intervals</strong> — returns high/low confidence bands around the forecast</li>
+</ul>
+<h3>Seasonal Decomposition</h3>
+<p>Before modelling, decompose the series to understand its components:</p>
+<div class="flow-box">Series = Trend + Seasonality + Residual</div>
+<p>Pharma-specific seasonality patterns: Q4 prescription spikes before plan year resets; summer lulls in HCP office visits; January formulary coverage changes (Medicare PDPs reset).</p>`},
+    {id:"s3",content:`<h2 id="s3">ML-Based Forecasting</h2>
+<p>ML forecasting treats the prediction problem as a standard supervised regression: engineer lag features and external predictors, train a model on historical data, predict the future period.</p>
+<h3>Feature Engineering for Rx Forecasting</h3>
+<table><thead><tr><th>Feature Type</th><th>Examples</th></tr></thead><tbody>
+<tr><td>Lag features</td><td>TRx at t−1, t−2, t−4 (last week, two weeks ago, one month ago)</td></tr>
+<tr><td>Rolling statistics</td><td>4-week rolling mean, 8-week rolling standard deviation, momentum (t vs. t−4)</td></tr>
+<tr><td>Seasonality</td><td>Month of year, week of year, quarter — encoded as cyclical features (sin/cos) or one-hot</td></tr>
+<tr><td>Competitive signals</td><td>Class TRx, competitor NBRx share, new competitor launch date flags</td></tr>
+<tr><td>Market access events</td><td>Formulary tier change date, PA policy change, step-edit addition</td></tr>
+<tr><td>Field activity</td><td>Number of HCP calls in prior week, sample drops, speaker programme events</td></tr>
+<tr><td>Macro signals</td><td>New diagnosis rates, population growth, Medicare enrolment</td></tr>
+</tbody></table>
+<h3>Gradient Boosting for Forecasting</h3>
+<p>LightGBM and XGBoost with lag features frequently outperform ARIMA on pharma Rx series with many external drivers. They handle non-linear interactions (e.g., field effort effect is higher when formulary coverage is strong) that ARIMA cannot capture.</p>
+<h3>Ensemble Forecasting</h3>
+<p>Best-in-class commercial forecasts combine multiple methods: ARIMA captures autocorrelation; Prophet captures seasonality; LightGBM captures external drivers. A simple average or stacked meta-model of these three often beats any single method by 5–15% MAPE improvement.</p>`},
+    {id:"s4",content:`<h2 id="s4">Launch Forecasting</h2>
+<p>Pre-launch, there is no historical Rx data for the brand. Launch forecasting relies on analogue analysis, epidemiology, and market research.</p>
+<h3>Analogue-Based Forecasting</h3>
+<p>Select 3–5 brands that launched in a similar indication, with similar mechanism of action and competitive context. Map their launch trajectories (months 1–24 post-launch normalised to launch TRx = 100) and create a range: base case, upside, downside.</p>
+<table><thead><tr><th>Analogue Selection Criteria</th><th>Why It Matters</th></tr></thead><tbody>
+<tr><td>Same or similar indication</td><td>Patient population and diagnosis rate should be comparable</td></tr>
+<tr><td>Similar mechanism (1st in class vs. me-too)</td><td>First-in-class drugs ramp faster; me-too drugs with differentiated profiles can too</td></tr>
+<tr><td>Similar launch era (within 5 years)</td><td>Market access environment, payer landscape, and digital engagement norms change over time</td></tr>
+<tr><td>Similar formulary access at launch</td><td>A drug with preferred formulary at launch 3 months post-approval ramps very differently than one without</td></tr>
+</tbody></table>
+<h3>Epidemiology-Based Patient Flow</h3>
+<div class="flow-box">Addressable patients = Diagnosed prevalent patients × Treated rate × Brand share assumption</div>
+<p>Each assumption carries a range; scenario analysis explores the impact of each assumption on Year-1 and Year-3 forecasts. Epidemiology inputs come from published literature, IMS Health data, or primary market research.</p>`},
+    {id:"s5",content:`<h2 id="s5">Forecast Accuracy Metrics</h2>
+<p>Forecast accuracy metrics quantify how far off the forecast was from actuals. Tracking these over time drives model improvement and builds credibility with finance and brand teams.</p>
+<table><thead><tr><th>Metric</th><th>Formula</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td><strong>MAPE</strong></td><td>Mean |Actual − Forecast| ÷ Actual × 100</td><td>Average percentage error; penalises large misses equally above and below</td></tr>
+<tr><td><strong>WAPE</strong></td><td>Σ|Actual − Forecast| ÷ Σ Actual × 100</td><td>Weighted by volume — large territory errors count more than small territory errors</td></tr>
+<tr><td><strong>Bias</strong></td><td>Mean (Actual − Forecast) ÷ Actual × 100</td><td>Systematic over- or under-forecast; positive = under-forecasting (actuals exceed forecast)</td></tr>
+<tr><td><strong>RMSE</strong></td><td>√ Mean(Actual − Forecast)²</td><td>Penalises large errors more than MAPE; good when large misses are particularly costly</td></tr>
+</tbody></table>
+<div class="callout"><div class="callout-title">Bias Is More Important Than MAPE</div><p>A model with 12% MAPE but zero bias is more trustworthy than one with 8% MAPE and +15% bias (consistently under-forecasting). Systematic bias means the model has a structural flaw — an unmodelled trend, a competitive assumption that is always wrong, or a seasonality factor that is inverted. Track bias by period and by segment (by territory, by payer) to find where the structural error lives.</p></div>
+<h3>Forecast Value Added (FVA)</h3>
+<p>FVA compares model forecast accuracy to a naïve baseline (e.g., the last observed value, or last year's same period). If the model's MAPE is not better than the naïve baseline, the model adds no value — ship the simpler approach.</p>
+<div class="flow-box">FVA = Naïve Baseline MAPE − Model MAPE (positive FVA = model is better)</div>`},
+    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
+<ul>
+<li><strong>Different forecast types serve different decisions</strong> — supply chain needs weekly precision; LRP needs scenario ranges; launch forecasts need analogue benchmarks.</li>
+<li><strong>ARIMA and Prophet</strong> are the workhorses for mature brand time-series forecasting; ARIMA models autocorrelation, Prophet handles trend changepoints and irregular events.</li>
+<li><strong>ML forecasting</strong> (LightGBM, XGBoost with lag features) adds value when external drivers (competitive events, formulary changes, field activity) explain more variance than the series itself.</li>
+<li><strong>Ensemble forecasting</strong> — averaging ARIMA, Prophet, and ML outputs — consistently outperforms any single model by 5–15%.</li>
+<li><strong>Bias matters more than MAPE</strong>: systematic over- or under-forecasting signals a structural model flaw, not just random noise.</li>
+<li><strong>Launch forecasting without Rx history</strong> relies on analogues and epidemiology patient flow models — formulary access at launch is the single biggest driver of uptake speed.</li>
+</ul>`}
+  ],
+  quiz:[
+    {q:"A pharma company needs a weekly forecast to decide how much product to ship to wholesalers this month. Which forecast type is most relevant?",options:["5-year LRP forecast","Short-term demand forecast (4–13 weeks)","Launch analogue forecast","GTN net revenue forecast"],answer:1},
+    {q:"Prophet's main advantage over ARIMA for pharma Rx forecasting is:",options:["It always produces more accurate forecasts","It handles trend changepoints, holidays/events, and missing data with minimal manual tuning","It requires no historical data","It models competitive dynamics automatically"],answer:1},
+    {q:"A forecast consistently under-predicts actuals by +12% across all months. This is a sign of:",options:["High MAPE","Systematic positive bias — the model has a structural flaw that should be investigated","Random noise","Good model performance — 12% is acceptable"],answer:1},
+    {q:"Forecast Value Added (FVA) is negative. What does this mean?",options:["The model is very accurate","The model is less accurate than a naïve baseline — the simpler approach should be used","The brand is under-performing","The forecast was not run correctly"],answer:1},
+    {q:"In analogue-based launch forecasting, why must analogues be selected from a similar launch era?",options:["Because older data is unavailable","Market access environment, payer landscape, and competitive norms change over time — a 10-year-old launch may not reflect today's conditions","Regulatory requirements changed","Older analogues have different ICD-10 codes"],answer:1}
+  ]
+},
+
+"5-14": {
+  id:"5-14", title:"Drug Discovery & Clinical Trial AI", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Advanced", mins:35, available:true,
+  tags:["Drug Discovery","Target Identification","QSAR","Clinical Trial AI","Biomarker Discovery","Adaptive Trials","Patient Recruitment"],
+  objectives:["Understand AI applications across the drug discovery pipeline","Explain QSAR models and structure-based drug design","Apply ML to clinical trial patient recruitment and dropout prediction","Understand adaptive trial design and its data requirements","Describe biomarker discovery workflows using genomics and imaging data"],
+  toc:[
+    {id:"s1",title:"AI in Target Identification & Validation",level:"h2"},
+    {id:"s2",title:"ML in Compound Screening (QSAR)",level:"h2"},
+    {id:"s3",title:"Clinical Trial AI: Recruitment & Retention",level:"h2"},
+    {id:"s4",title:"Adaptive Trial Design",level:"h2"},
+    {id:"s5",title:"Biomarker Discovery",level:"h2"},
+    {id:"s6",title:"Key Takeaways",level:"h2"}
+  ],
+  sections:[
+    {id:"s1",content:`<h2 id="s1">AI in Target Identification & Validation</h2>
+<p>Drug discovery starts with identifying a biological target — a protein, gene, or pathway whose modulation could treat a disease. AI accelerates this by mining vast biomedical data that would take decades to analyse manually.</p>
+<h3>Key Data Types for Target ID</h3>
+<table><thead><tr><th>Data Type</th><th>What It Reveals</th><th>AI Application</th></tr></thead><tbody>
+<tr><td>Genomics / GWAS</td><td>Genetic variants associated with disease risk (SNPs)</td><td>ML to prioritise targets where human genetics supports causality (reduces development risk)</td></tr>
+<tr><td>Transcriptomics (RNA-Seq)</td><td>Gene expression differences between diseased and healthy tissue</td><td>Differential expression + network analysis to find hub genes driving disease state</td></tr>
+<tr><td>Proteomics</td><td>Protein abundance and modification patterns</td><td>Clustering and graph networks to identify druggable protein interactions</td></tr>
+<tr><td>Literature mining (NLP)</td><td>Published findings on gene-disease associations across millions of papers</td><td>Knowledge graph construction; entity extraction linking genes, diseases, and drugs</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">Human Genetics as Drug Discovery Signal</div><p>Targets with human genetic evidence (a GWAS variant associated with the disease colocalising with a cis-eQTL for the target gene) have roughly 2× higher clinical success rates than targets without genetic support. AI tools like Open Targets and GeneBayes score every potential target on genetic evidence, saving years of wet-lab validation work.</p></div>
+<h3>Knowledge Graph Approaches</h3>
+<p>A knowledge graph connects entities (genes, proteins, diseases, drugs, pathways) with typed relationships (gene ENCODES protein, protein INTERACTS_WITH protein, drug INHIBITS target, target ASSOCIATED_WITH disease). Graph neural networks (GNNs) traverse these relationships to predict novel gene-disease associations or drug repurposing opportunities.</p>`},
+    {id:"s2",content:`<h2 id="s2">ML in Compound Screening (QSAR)</h2>
+<p>After identifying a target, the next step is finding a molecule that modulates it — ideally with high potency, good selectivity, and drug-like properties. ML dramatically reduces the experimental burden of hit-to-lead optimisation.</p>
+<h3>QSAR Models (Quantitative Structure-Activity Relationship)</h3>
+<p>QSAR models predict a molecule's biological activity from its chemical structure. The model learns: given this molecular fingerprint (a vector representation of the molecule's structure), predict the IC50 against the target of interest.</p>
+<div class="flow-box">Molecular Structure → Featurisation (fingerprints, descriptors, graphs) → ML Model → Predicted Activity / Property</div>
+<h3>Molecular Representation Methods</h3>
+<table><thead><tr><th>Representation</th><th>Description</th><th>Used By</th></tr></thead><tbody>
+<tr><td>Morgan Fingerprints (ECFP)</td><td>Circular bit vectors encoding local chemical environment around each atom</td><td>Classical ML (Random Forest, XGBoost)</td></tr>
+<tr><td>SMILES strings</td><td>Text-based encoding of molecular structure</td><td>Transformer and RNN models (treat molecule like a sentence)</td></tr>
+<tr><td>Molecular graphs</td><td>Atoms = nodes, bonds = edges</td><td>Graph Neural Networks (GNNs) — most expressive representation</td></tr>
+</tbody></table>
+<h3>Generative AI for De Novo Drug Design</h3>
+<p>Instead of screening existing molecules, generative models (variational autoencoders, diffusion models like DiffSBDD) <em>design new molecules</em> optimised for multiple objectives simultaneously: high target binding, low toxicity, good solubility, and synthesisability. AlphaFold 3 (2024) extended this to predicting how generated molecules interact with proteins at atomic resolution.</p>`},
+    {id:"s3",content:`<h2 id="s3">Clinical Trial AI: Recruitment & Retention</h2>
+<p>Clinical trials fail most often not because of scientific reasons but because of operational ones: slow recruitment, protocol violations, high dropout, and site underperformance. ML addresses each of these.</p>
+<h3>Patient Recruitment Prediction</h3>
+<p>Predicting which sites will enrol patients quickly — and which will underperform — allows sponsors to allocate resources before problems emerge.</p>
+<table><thead><tr><th>Feature</th><th>Source</th></tr></thead><tbody>
+<tr><td>Site's prior trial enrolment rate</td><td>Internal trial database</td></tr>
+<tr><td>Local disease prevalence</td><td>Epidemiology, ICD-10 claims in the site's catchment area</td></tr>
+<tr><td>PI's publication record in indication</td><td>PubMed / NLM</td></tr>
+<tr><td>Electronic health record eligibility screen rate</td><td>EHR / CTMS</td></tr>
+<tr><td>Protocol complexity score</td><td>Number of eligibility criteria, visit frequency, biomarker requirements</td></tr>
+</tbody></table>
+<h3>Electronic Health Record (EHR) Screening</h3>
+<p>Natural language processing on clinical notes and structured EHR data identifies patients who meet trial eligibility criteria before the site team manually reviews charts. This reduces screen failure rates and accelerates enrolment.</p>
+<div class="flow-box">NLP on clinical notes → Extract diagnosis, labs, medications → Match against inclusion/exclusion criteria → Flag potential eligible patients for site team review</div>
+<h3>Dropout Prediction</h3>
+<p>A binary classification model trained on prior trial data predicts which enrolled patients are at high risk of dropping out. Features: visit compliance, adverse event burden, protocol deviation history, travel distance to site, caregiver support. High-risk patients receive proactive retention calls or protocol amendments.</p>`},
+    {id:"s4",content:`<h2 id="s4">Adaptive Trial Design</h2>
+<p>Adaptive trials use pre-specified interim analyses to modify the trial based on accumulating data — without compromising statistical integrity. AI and advanced statistics enable more efficient, faster, and more ethical trials.</p>
+<h3>Types of Adaptations</h3>
+<table><thead><tr><th>Adaptation</th><th>What Changes</th><th>When Used</th></tr></thead><tbody>
+<tr><td>Sample size re-estimation</td><td>Adjust enrolment target based on observed effect size at interim</td><td>When true effect size was uncertain at design</td></tr>
+<tr><td>Arm dropping</td><td>Drop placebo or inferior dose arms based on interim efficacy</td><td>Multi-arm dose-finding studies</td></tr>
+<tr><td>Adaptive enrichment</td><td>Narrow eligibility to a biomarker-positive subgroup if interim shows differential response</td><td>Precision medicine trials with a biomarker hypothesis</td></tr>
+<tr><td>Response-adaptive randomisation</td><td>Increase randomisation probability to the better-performing arm as data accumulates</td><td>Ethical improvement when one arm is clearly better</td></tr>
+</tbody></table>
+<h3>Bayesian Adaptive Trials</h3>
+<p>Bayesian trials update the probability that a treatment is effective at every interim look, using prior evidence (preclinical data, earlier trials) combined with the accumulating trial data. This is more efficient than frequentist fixed-sample designs — trials can stop early for success or futility with stronger statistical confidence.</p>
+<div class="callout"><div class="callout-title">Regulatory Acceptance</div><p>The FDA's 2019 guidance on adaptive designs and Bayesian clinical trials explicitly supports their use for well-controlled trials with pre-specified adaptation rules. The key requirement: all adaptation rules must be defined in the statistical analysis plan (SAP) before the trial begins — no ad-hoc changes after unblinding.</p></div>`},
+    {id:"s5",content:`<h2 id="s5">Biomarker Discovery</h2>
+<p>Biomarkers are biological measurements — genetic variants, protein levels, imaging features, gene expression signatures — that predict response to treatment, prognosis, or disease presence. Biomarker-selected trials (where only biomarker-positive patients receive the drug) dramatically improve success rates.</p>
+<h3>Biomarker Types</h3>
+<table><thead><tr><th>Type</th><th>Definition</th><th>Example</th></tr></thead><tbody>
+<tr><td><strong>Predictive biomarker</strong></td><td>Predicts differential treatment effect (responders vs. non-responders)</td><td>EGFR mutation → predicts response to erlotinib in NSCLC</td></tr>
+<tr><td><strong>Prognostic biomarker</strong></td><td>Predicts disease outcome regardless of treatment</td><td>High Ki-67 → poor prognosis in breast cancer regardless of therapy</td></tr>
+<tr><td><strong>Pharmacodynamic biomarker</strong></td><td>Confirms target engagement — the drug is hitting its target</td><td>Reduction in ctDNA after treatment initiation</td></tr>
+<tr><td><strong>Safety biomarker</strong></td><td>Predicts adverse events before they are clinically apparent</td><td>Elevated troponin → cardiotoxicity risk from chemotherapy</td></tr>
+</tbody></table>
+<h3>ML for Genomic Biomarker Discovery</h3>
+<p>With tens of thousands of genomic features and hundreds of patients, biomarker discovery is a high-dimensional variable selection problem:</p>
+<ul>
+<li><strong>LASSO regression:</strong> Penalises model complexity to select a small number of predictive genomic features from thousands of candidates</li>
+<li><strong>Random Forest feature importance:</strong> Non-parametric ranking of genomic features associated with response</li>
+<li><strong>Survival models:</strong> Identify genomic signatures associated with time-to-progression or OS</li>
+</ul>
+<div class="callout info"><div class="callout-title">Overfitting Risk in Biomarker Discovery</div><p>With 20,000 genetic features and 150 patients, random chance will produce thousands of "statistically significant" associations. Biomarker discovery requires: held-out validation cohort, cross-validation, and ideally prospective validation in a separate trial. A biomarker found only in the discovery set is hypothesis-generating, not clinically actionable.</p></div>`},
+    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
+<ul>
+<li><strong>Human genetic evidence</strong> (GWAS + eQTL colocalisation) roughly doubles clinical success rates — AI tools score every target on genetic support automatically.</li>
+<li><strong>QSAR models</strong> predict molecular activity from structure using fingerprints (for tree models) or molecular graphs (for GNNs); generative models now design new molecules from scratch.</li>
+<li><strong>AlphaFold</strong> solved the protein folding problem — structure prediction that took years now takes minutes, dramatically accelerating structure-based drug design.</li>
+<li><strong>Clinical trial AI</strong> reduces recruitment timelines and dropout by predicting site performance and patient eligibility from EHR data before manual chart review.</li>
+<li><strong>Adaptive trial designs</strong> with pre-specified rules stop trials early for success or futility, saving cost and reducing patient exposure to ineffective therapies.</li>
+<li><strong>Biomarker discovery requires external validation</strong> — a biomarker found in the discovery dataset is only hypothesis-generating until confirmed in an independent cohort.</li>
+</ul>`}
+  ],
+  quiz:[
+    {q:"Why do drug targets with human genetic support (GWAS evidence) have higher clinical success rates?",options:["They are cheaper to test","Human genetics provides causal evidence that the target is involved in the disease — reducing biology risk","They have more published literature","They are easier to formulate into drugs"],answer:1},
+    {q:"A QSAR model receives a molecular fingerprint as input and outputs a predicted IC50. This is an example of:",options:["Unsupervised clustering","Supervised regression — predicting a continuous biological activity value from molecular structure","Anomaly detection","Reinforcement learning"],answer:1},
+    {q:"In an adaptive enrichment trial design, what triggers the narrowing of the eligible patient population?",options:["Budget constraints","Interim data showing that a biomarker-positive subgroup responds significantly better than the overall population","Regulatory request","Site performance issues"],answer:1},
+    {q:"A biomarker is described as 'predictive'. What does this mean?",options:["It predicts disease prognosis regardless of treatment","It predicts differential treatment effect — identifies patients more likely to respond to a specific treatment","It predicts adverse events","It measures whether the drug is hitting its target"],answer:1},
+    {q:"Why is a random train-test split inappropriate for biomarker discovery with 20,000 features and 150 patients?",options:["It uses too much data","Random splits do not prevent overfitting in high-dimensional settings — external validation in a separate cohort is required","Genomic data cannot be randomly split","Random splits produce lower AUC"],answer:1}
+  ]
+},
+
+"5-15": {
+  id:"5-15", title:"Pharmacovigilance & Safety Signal Detection", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Advanced", mins:35, available:true,
+  tags:["Pharmacovigilance","Safety Signal","FAERS","Disproportionality Analysis","NLP","Adverse Events"],
+  objectives:["Understand the adverse event reporting ecosystem (FAERS, EudraVigilance, VigiBase)","Apply disproportionality analysis methods (PRR, ROR, EBGM) to detect safety signals","Use NLP to extract structured safety information from unstructured narratives","Describe the signal management workflow from detection to regulatory action"],
+  toc:[
+    {id:"s1",title:"Adverse Event Reporting & Data Sources",level:"h2"},
+    {id:"s2",title:"Disproportionality Analysis",level:"h2"},
+    {id:"s3",title:"NLP on Safety Narratives",level:"h2"},
+    {id:"s4",title:"Signal Management Workflow",level:"h2"},
+    {id:"s5",title:"Key Takeaways",level:"h2"}
+  ],
+  sections:[
+    {id:"s1",content:`<h2 id="s1">Adverse Event Reporting & Data Sources</h2>
+<p>Pharmacovigilance (PV) is the science of monitoring drug safety after approval. Pre-approval trials identify common adverse events, but rare events (1 in 10,000 or rarer) and long-term effects only emerge once millions of patients take the drug in real-world conditions.</p>
+<h3>Adverse Event Reporting Systems</h3>
+<table><thead><tr><th>Database</th><th>Region</th><th>Reporter</th><th>Data Volume</th></tr></thead><tbody>
+<tr><td><strong>FAERS</strong> (FDA Adverse Event Reporting System)</td><td>US</td><td>Patients, HCPs, manufacturers (mandatory for serious events)</td><td>~20M+ reports (public quarterly extracts)</td></tr>
+<tr><td><strong>EudraVigilance</strong></td><td>EU/EEA</td><td>Marketing authorisation holders, national competent authorities</td><td>~30M+ individual case safety reports (ICSRs)</td></tr>
+<tr><td><strong>VigiBase</strong> (WHO)</td><td>Global</td><td>National PV centres from 130+ countries</td><td>~30M+ reports — largest global safety database</td></tr>
+<tr><td><strong>Sentinel</strong></td><td>US</td><td>Claims + EHR data from ~600M patient records</td><td>Active surveillance — queries run against distributed data</td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-title">FAERS Limitations</div><p>FAERS is a spontaneous reporting database. Reports are voluntary (except for serious events from manufacturers), duplicates exist, severity is over-reported (journalists and plaintiff lawyers drive reporting spikes after negative press), and the denominator (how many patients took the drug) is unknown. Signal detection methods account for these biases statistically, but FAERS alone cannot prove causality — it identifies signals that require further investigation.</p></div>
+<h3>Case Types</h3>
+<table><thead><tr><th>Case Type</th><th>Definition</th><th>Mandatory Reporting Timeframe</th></tr></thead><tbody>
+<tr><td><strong>Serious unexpected (SAE)</strong></td><td>Death, life-threatening, hospitalisation, disability, congenital anomaly</td><td>15 days (expedited report)</td></tr>
+<tr><td><strong>Serious expected</strong></td><td>Listed in the current label but still serious</td><td>15 days expedited (first occurrence) or periodic</td></tr>
+<tr><td><strong>Non-serious</strong></td><td>All other adverse events</td><td>Included in Periodic Safety Update Reports (PSURs)</td></tr>
+</tbody></table>`},
+    {id:"s2",content:`<h2 id="s2">Disproportionality Analysis</h2>
+<p>Disproportionality analysis asks: is the combination of Drug A and Adverse Event B reported more often than we would expect by chance, given how frequently Drug A and Event B each appear in the database independently? If yes, a signal may exist.</p>
+<h3>The 2×2 Contingency Table</h3>
+<p>The foundation of all disproportionality methods is a 2×2 table:</p>
+<table><thead><tr><th></th><th>Drug A</th><th>All Other Drugs</th></tr></thead><tbody>
+<tr><td><strong>AE of interest</strong></td><td>a</td><td>b</td></tr>
+<tr><td><strong>All other AEs</strong></td><td>c</td><td>d</td></tr>
+</tbody></table>
+<h3>Proportional Reporting Ratio (PRR)</h3>
+<div class="flow-box">PRR = [a / (a+c)] ÷ [b / (b+d)]</div>
+<p>PRR &gt; 1 means the AE is proportionally more reported with Drug A than with all other drugs. UK MHRA signal criteria: PRR ≥ 2, χ² ≥ 4, and a ≥ 3 cases.</p>
+<h3>Reporting Odds Ratio (ROR)</h3>
+<div class="flow-box">ROR = (a × d) ÷ (b × c)</div>
+<p>Analogous to the odds ratio from epidemiology. Preferred by EudraVigilance. ROR &gt; 1 with lower 95% CI &gt; 1 is a signal threshold.</p>
+<h3>EBGM (Empirical Bayes Geometric Mean)</h3>
+<p>Used by FDA's MGPS algorithm and VigiBase's VigiRank. EBGM is a Bayesian shrinkage estimate that stabilises PRR for drug-event combinations with few reports, reducing false positives from small cell sizes. EBGM05 (5th percentile of the posterior) ≥ 2 is the typical signal threshold.</p>
+<table><thead><tr><th>Method</th><th>Used By</th><th>Advantage</th><th>Threshold</th></tr></thead><tbody>
+<tr><td>PRR</td><td>MHRA, EMA</td><td>Simple, interpretable</td><td>PRR ≥ 2, χ² ≥ 4, n ≥ 3</td></tr>
+<tr><td>ROR</td><td>EudraVigilance</td><td>Standard epidemiology analogue</td><td>Lower 95% CI &gt; 1</td></tr>
+<tr><td>EBGM</td><td>FDA, VigiBase</td><td>Bayesian shrinkage — fewer false positives with rare events</td><td>EBGM05 ≥ 2</td></tr>
+</tbody></table>`},
+    {id:"s3",content:`<h2 id="s3">NLP on Safety Narratives</h2>
+<p>Adverse event case narratives are free text — a patient or HCP describes what happened in their own words. Structuring this text is essential for signal detection, case coding, and regulatory submission. NLP automates what was previously done entirely by hand by trained pharmacovigilance specialists.</p>
+<h3>Key NLP Tasks in PV</h3>
+<table><thead><tr><th>Task</th><th>What It Does</th><th>Output</th></tr></thead><tbody>
+<tr><td><strong>Named entity recognition (NER)</strong></td><td>Extracts drug names, dose, adverse event terms, dates, outcomes from unstructured text</td><td>Structured data fields for the safety database</td></tr>
+<tr><td><strong>MedDRA coding</strong></td><td>Maps extracted adverse event terms to the standardised MedDRA hierarchy (PT/HLT/SOC)</td><td>Coded AE term for signal detection</td></tr>
+<tr><td><strong>Causality assessment</strong></td><td>Predicts the reporter's implied drug-event relationship (probable, possible, unlikely)</td><td>Assists case processor — reduces manual review burden</td></tr>
+<tr><td><strong>Duplicate detection</strong></td><td>Identifies the same case reported by multiple sources (patient + HCP + manufacturer)</td><td>De-duplicated case count — prevents inflated signal statistics</td></tr>
+<tr><td><strong>Social media monitoring</strong></td><td>Scans Twitter/X, patient forums, Reddit for unsolicited adverse event mentions</td><td>Signal detection from non-traditional sources; regulatory obligation in some jurisdictions</td></tr>
+</tbody></table>
+<div class="callout"><div class="callout-title">MedDRA Hierarchy</div><p>MedDRA (Medical Dictionary for Regulatory Activities) is the international standard for coding adverse events. It has 5 levels: System Organ Class (SOC) → High Level Group Term (HLGT) → High Level Term (HLT) → Preferred Term (PT) → Lowest Level Term (LLT). Signal detection is typically done at the PT level; SMQ (Standardised MedDRA Queries) are pre-defined groupings of PTs for specific conditions (e.g., hepatotoxicity SMQ).</p></div>`},
+    {id:"s4",content:`<h2 id="s4">Signal Management Workflow</h2>
+<p>Detecting a statistical signal is the first step. Signal management is the structured process of evaluating whether the signal represents a genuine new safety concern and deciding what action to take.</p>
+<h3>Signal Lifecycle</h3>
+<div class="flow-box">Signal Detection → Signal Validation → Signal Evaluation → Signal Prioritisation → Risk Assessment → Regulatory Action</div>
+<table><thead><tr><th>Stage</th><th>What Happens</th><th>Key Output</th></tr></thead><tbody>
+<tr><td><strong>Detection</strong></td><td>Disproportionality algorithm flags a drug-event combination above threshold</td><td>Signal candidate list</td></tr>
+<tr><td><strong>Validation</strong></td><td>Medical reviewer confirms the signal is not an artefact (reporting bias, duplicate cases, concomitant drug confounding)</td><td>Valid signal or dismissed signal</td></tr>
+<tr><td><strong>Evaluation</strong></td><td>Full clinical assessment: review all cases, search literature, analyse RWE, assess biological plausibility</td><td>Signal assessment report</td></tr>
+<tr><td><strong>Prioritisation</strong></td><td>Score signals by seriousness, frequency, reversibility, and availability of alternative treatments</td><td>Priority rank for action</td></tr>
+<tr><td><strong>Risk assessment</strong></td><td>Benefit-risk evaluation — does the new safety finding change the benefit-risk balance?</td><td>Risk minimisation measures (label update, REMS, Dear HCP letter, drug withdrawal)</td></tr>
+</tbody></table>
+<h3>Regulatory Reporting Obligations</h3>
+<p>Sponsors must report new safety signals to health authorities promptly. Key mechanisms:</p>
+<ul>
+<li><strong>SUSAR</strong> (Suspected Unexpected Serious Adverse Reaction) — in clinical trials, unexpected SAEs must be reported within 7–15 days</li>
+<li><strong>PSUR / PBRER</strong> (Periodic Safety Update Report / Benefit-Risk Evaluation Report) — comprehensive periodic safety reviews submitted to EMA, FDA, and other regulators</li>
+<li><strong>PADER</strong> (Periodic Adverse Drug Experience Report) — US equivalent of PSUR for post-market</li>
+<li><strong>Signal assessment report</strong> — submitted when a validated signal requires regulatory discussion</li>
+</ul>`},
+    {id:"s5",content:`<h2 id="s5">Key Takeaways</h2>
+<ul>
+<li><strong>FAERS, EudraVigilance, and VigiBase</strong> are the primary spontaneous reporting databases — they detect signals but cannot prove causality; the denominator (patients exposed) is unknown.</li>
+<li><strong>Disproportionality analysis (PRR, ROR, EBGM)</strong> measures whether a drug-event combination is over-represented relative to the database background; it is the standard statistical method for signal detection.</li>
+<li><strong>EBGM/MGPS is preferred for rare events</strong> because Bayesian shrinkage reduces false positives from small case counts that inflate PRR/ROR.</li>
+<li><strong>NLP automates case processing</strong> — NER, MedDRA coding, duplicate detection, and social media monitoring — reducing the manual burden on PV specialists and enabling real-time signal surveillance.</li>
+<li><strong>A statistical signal is not a safety finding</strong> — it must pass through validation, clinical evaluation, and benefit-risk assessment before regulatory action is warranted.</li>
+<li><strong>Sentinel active surveillance</strong> (claims + EHR) complements spontaneous reporting by providing a known denominator and enabling formal epidemiological study designs for hypothesis testing.</li>
+</ul>`}
+  ],
+  quiz:[
+    {q:"What is the primary limitation of FAERS for safety signal detection?",options:["It only covers European drugs","Reporting is voluntary (except serious events from manufacturers), duplicates exist, and the denominator (patients exposed) is unknown — preventing direct incidence rate calculation","It only contains post-2010 reports","It uses a different coding system from MedDRA"],answer:1},
+    {q:"A drug-AE combination has PRR = 3.2, χ² = 8.5, and 7 cases. Using MHRA signal criteria (PRR ≥ 2, χ² ≥ 4, n ≥ 3), is this a signal?",options:["No — PRR must be > 5","Yes — all three MHRA criteria are met","No — the number of cases is insufficient","Cannot determine without EBGM"],answer:1},
+    {q:"Why is EBGM preferred over PRR for rare drug-event combinations with very few reports?",options:["EBGM is easier to calculate","Bayesian shrinkage in EBGM stabilises the estimate for small cell sizes, reducing false positives that PRR produces when a = 1 or 2","EBGM does not require a 2×2 table","Regulators mandate EBGM for all signal detection"],answer:1},
+    {q:"In the signal management workflow, what happens during the 'Validation' stage?",options:["The statistical algorithm runs disproportionality analysis","A medical reviewer confirms the signal is not an artefact (reporting bias, duplicates, or confounding) before full evaluation","The label is updated","The PSUR is submitted to the regulator"],answer:1},
+    {q:"Which NLP task in pharmacovigilance directly addresses the problem of the same adverse event being reported by the patient, their doctor, and the manufacturer?",options:["Named entity recognition","MedDRA coding","Duplicate detection","Causality assessment"],answer:2}
   ]
 }
 

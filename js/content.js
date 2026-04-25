@@ -56,11 +56,11 @@ window.PL.domains = [
   },
   {
     id: 5,
-    title: "Data Science & Analytics Engineering",
+    title: "Data Science & Pharma Use Cases",
     icon: "⚙️",
     color: "#A84B2A",
-    description: "Healthcare data, SQL, Python, ML, causal inference, statistics fundamentals, deep learning, NLP & LLMs, MLOps, and AI concepts.",
-    chapters: ["5-0","5-1","5-2","5-3","5-4","5-5","5-6","5-7","5-8","5-9","5-10","5-11"],
+    description: "Core data science fundamentals — statistics, ML, deep learning, NLP, causal inference, MLOps — then applied pharma use cases: HCP targeting, adherence modeling, commercial forecasting, drug discovery AI, and pharmacovigilance.",
+    chapters: ["5-0","5-1","5-2","5-3","5-4","5-5","5-6","5-7","5-8","5-9","5-10","5-11","5-12","5-13","5-14","5-15"],
     resources: [
       { title: "Zero to AI Fluency", subtitle: "15-Day Learning Roadmap", tag: "Roadmap", href: "assets/ds-roadmap.html" },
       { title: "Agentic AI Fluency", subtitle: "15-Day Roadmap", tag: "Agentic AI", href: "assets/agentic-ai-roadmap.html" },
