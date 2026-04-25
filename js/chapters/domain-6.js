@@ -609,7 +609,7 @@ PL.addChapters({
 <tr><td>Quantity sold</td><td>Units transferred in the transaction</td></tr>
 <tr><td>Transaction date</td><td>Date of the sale/shipment</td></tr>
 </tbody></table>
-<div class="rule-step"><span class="rule-step-num">852 vs 867 Summary</span><span>852 = inventory position (how much is sitting in each warehouse/pharmacy). 867 = what actually moved from distributor to pharmacy. Together they give a complete picture of the distribution channel — inventory levels, sell-in velocity, and sell-through to dispensers.</span></div>`},
+<div class="rule-step"><span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);white-space:nowrap;flex-shrink:0;padding-top:2px">852 vs 867 Summary</span><span>852 = inventory position (how much is sitting in each warehouse/pharmacy). 867 = what actually moved from distributor to pharmacy. Together they give a complete picture of the distribution channel — inventory levels, sell-in velocity, and sell-through to dispensers.</span></div>`},
     {id:"s5",content:`<h2 id="s5">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>IQVIA and Symphony Health are the two dominant Rx data providers. IQVIA provides projected market-level data; Symphony provides patient-level longitudinal data. Both are essential for commercial analytics.</div></div>
 <div class="takeaway"><div class="takeaway-num">2</div><div>Specialty pharmacy data is the most granular source for patient-level access and adherence analytics on specialty products — covering dispense records, PA outcomes, copay utilisation, and discontinuation reasons.</div></div>
