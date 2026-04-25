@@ -134,14 +134,14 @@ PL.addChapters({
 <p>How much data you move in each pipeline run determines cost, freshness, and complexity. Three main strategies exist:</p>
 <h3>Full Load</h3>
 <p>The entire source dataset is replaced at every run. Simple to implement but expensive for large tables.</p>
-<div class="rule-step"><span class="rule-step-num">When to use</span><span>Small reference tables (drug formularies, territory alignments, diagnosis code lists) that change rarely and are small enough to reload cheaply.</span></div>
+<div class="rule-step"><span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);white-space:nowrap;flex-shrink:0;padding-top:2px">When to use</span><span>Small reference tables (drug formularies, territory alignments, diagnosis code lists) that change rarely and are small enough to reload cheaply.</span></div>
 <h3>Incremental Load</h3>
 <p>Only new or changed records since the last run are extracted and loaded. Requires a reliable "high watermark" — typically an updated_at timestamp or auto-incrementing ID in the source.</p>
 <div class="formula-box"><div class="formula-label">Incremental Logic</div><div class="formula-main">Load records WHERE updated_at > last_successful_run_timestamp</div></div>
-<div class="rule-step"><span class="rule-step-num">When to use</span><span>Large transactional tables — claims, prescription fills, adverse events — where reloading everything each run is prohibitively expensive.</span></div>
+<div class="rule-step"><span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);white-space:nowrap;flex-shrink:0;padding-top:2px">When to use</span><span>Large transactional tables — claims, prescription fills, adverse events — where reloading everything each run is prohibitively expensive.</span></div>
 <h3>Change Data Capture (CDC)</h3>
 <p>CDC reads the database transaction log (or similar mechanism) to capture every insert, update, and delete event in near-real-time. This is the most complete picture of changes but requires source database access and more complex pipeline infrastructure.</p>
-<div class="rule-step"><span class="rule-step-num">When to use</span><span>When you need a complete history of every change (not just the current state), or when the source system doesn't have reliable timestamps for incremental loads.</span></div>
+<div class="rule-step"><span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);white-space:nowrap;flex-shrink:0;padding-top:2px">When to use</span><span>When you need a complete history of every change (not just the current state), or when the source system doesn't have reliable timestamps for incremental loads.</span></div>
 <table><thead><tr><th>Strategy</th><th>Complexity</th><th>Freshness</th><th>Cost</th></tr></thead><tbody>
 <tr><td>Full Load</td><td>Low</td><td>At each run</td><td>High for large tables</td></tr>
 <tr><td>Incremental</td><td>Medium</td><td>Near-current</td><td>Low</td></tr>
@@ -210,7 +210,7 @@ PL.addChapters({
 </tbody></table>
 <h3>Normalization Trade-offs for Analytics</h3>
 <p>A fully normalised 3NF schema requires joining many tables to answer a single business question. In a data warehouse serving analytical workloads, this is too slow. Analytics models intentionally <em>denormalize</em> — trading some redundancy for dramatically faster query performance.</p>
-<div class="rule-step"><span class="rule-step-num">Rule of Thumb</span><span>Normalize source/OLTP models. Denormalize analytical/OLAP models. The transformation layer (dbt, Spark) is where normalization is undone to create query-friendly structures.</span></div>`},
+<div class="rule-step"><span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);white-space:nowrap;flex-shrink:0;padding-top:2px">Rule of Thumb</span><span>Normalize source/OLTP models. Denormalize analytical/OLAP models. The transformation layer (dbt, Spark) is where normalization is undone to create query-friendly structures.</span></div>`},
     {id:"s3",content:`<h2 id="s3">Dimensional Modeling</h2>
 <p><strong>Dimensional modeling</strong>, introduced by Ralph Kimball, is the standard approach for designing analytical databases. It organises data into two types of tables: <strong>facts</strong> and <strong>dimensions</strong>.</p>
 <h3>Facts vs Dimensions</h3>
@@ -225,7 +225,7 @@ PL.addChapters({
 <p>A <strong>snowflake schema</strong> normalises dimension tables into sub-dimensions (e.g., dim_hcp links to dim_specialty, dim_specialty links to dim_specialty_group). This reduces storage but requires more joins and is generally harder to query. For most modern cloud warehouses where storage is cheap, star schemas are preferred.</p>
 <h3>Grain</h3>
 <p>The <strong>grain</strong> of a fact table defines what one row represents. Declaring grain explicitly before building is the most important design decision in dimensional modeling.</p>
-<div class="rule-step"><span class="rule-step-num">Example grains</span><span>One row per prescription fill per patient per day. One row per sales call per HCP per rep. One row per adverse event report per patient. Mixing grain levels in one table is the most common modeling mistake.</span></div>`},
+<div class="rule-step"><span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);white-space:nowrap;flex-shrink:0;padding-top:2px">Example grains</span><span>One row per prescription fill per patient per day. One row per sales call per HCP per rep. One row per adverse event report per patient. Mixing grain levels in one table is the most common modeling mistake.</span></div>`},
     {id:"s4",content:`<h2 id="s4">Slowly Changing Dimensions</h2>
 <p>Dimensions change over time — an HCP moves territory, a patient changes insurance plan, a drug gets a new indication. How you handle these changes determines whether your historical reports stay accurate. This is the problem of <strong>Slowly Changing Dimensions (SCDs)</strong>.</p>
 <table><thead><tr><th>SCD Type</th><th>How It Works</th><th>History Preserved?</th><th>Best For</th></tr></thead><tbody>
@@ -370,7 +370,7 @@ PL.addChapters({
     {id:"s4",content:`<h2 id="s4">Data Lineage, Cataloging & Governance</h2>
 <h3>Data Lineage</h3>
 <p><strong>Data lineage</strong> tracks how data flows from source systems through transformations to final consumption — visualising the complete chain of custody for every metric and report. When a number looks wrong, lineage lets you trace it back to the exact source table and transformation step where the error was introduced.</p>
-<div class="rule-step"><span class="rule-step-num">Example</span><span>Brand market share metric → gold_market_share model → silver_trx_fact → bronze_iqvia_raw → IQVIA weekly data feed file received 2024-01-07. Lineage makes root-cause analysis fast.</span></div>
+<div class="rule-step"><span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);white-space:nowrap;flex-shrink:0;padding-top:2px">Example</span><span>Brand market share metric → gold_market_share model → silver_trx_fact → bronze_iqvia_raw → IQVIA weekly data feed file received 2024-01-07. Lineage makes root-cause analysis fast.</span></div>
 <h3>Data Catalog</h3>
 <p>A <strong>data catalog</strong> is a searchable inventory of all datasets in the organisation. It records what each dataset contains, who owns it, when it was last updated, how it is calculated, and who is using it. Without a catalog, analysts waste hours searching for the right dataset or unknowingly use duplicate or stale tables.</p>
 <h3>Data Governance</h3>
@@ -441,7 +441,7 @@ PL.addChapters({
 <p>Lambda architecture maintains two parallel processing paths: a <strong>batch layer</strong> for accurate, complete historical processing and a <strong>speed layer</strong> for low-latency approximate real-time results. A <strong>serving layer</strong> merges results from both. Criticised for its complexity — maintaining two codebases for the same logic.</p>
 <h3>Kappa Architecture</h3>
 <p>Kappa simplifies by using <strong>only one streaming system</strong> for both real-time and historical data. Historical reprocessing is done by replaying past events through the streaming system. Simpler to maintain but requires a robust event storage system (Kafka with long retention) and stream processing that can handle high-volume replay.</p>
-<div class="rule-step"><span class="rule-step-num">Guidance</span><span>For most pharma use cases, start with batch. Adopt micro-batch for near-real-time needs. Reserve full streaming for genuine real-time requirements (pharmacovigilance signals, cold-chain temperature monitoring). Premature streaming adds cost and complexity without corresponding business value.</span></div>`},
+<div class="rule-step"><span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);white-space:nowrap;flex-shrink:0;padding-top:2px">Guidance</span><span>For most pharma use cases, start with batch. Adopt micro-batch for near-real-time needs. Reserve full streaming for genuine real-time requirements (pharmacovigilance signals, cold-chain temperature monitoring). Premature streaming adds cost and complexity without corresponding business value.</span></div>`},
     {id:"s4",content:`<h2 id="s4">When to Use Streaming in Pharma</h2>
 <table><thead><tr><th>Use Case</th><th>Genuine Need for Streaming?</th><th>Rationale</th></tr></thead><tbody>
 <tr><td>Weekly brand dashboards</td><td>No — batch is fine</td><td>Business rhythm is weekly; data arrives from IQVIA on a weekly schedule anyway</td></tr>
@@ -523,7 +523,7 @@ PL.addChapters({
 </ul>
 <h3>Semantic Layer</h3>
 <p>A <strong>semantic layer</strong> (also called a metrics layer or headless BI layer) sits between the data warehouse and consumption tools. It defines business metrics — market share, TRx, PDC — once, in a central place, so every dashboard and analyst uses the same calculation. It eliminates the "multiple versions of truth" problem where different teams compute the same metric differently.</p>
-<div class="rule-step"><span class="rule-step-num">Example</span><span>"Market share" defined once in the semantic layer as (Brand TRx / Class TRx) × 100, filtered to the active formulary. Every tool — Tableau, Power BI, ad-hoc SQL — pulls from this definition. No team can accidentally use a different formula.</span></div>`},
+<div class="rule-step"><span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);white-space:nowrap;flex-shrink:0;padding-top:2px">Example</span><span>"Market share" defined once in the semantic layer as (Brand TRx / Class TRx) × 100, filtered to the active formulary. Every tool — Tableau, Power BI, ad-hoc SQL — pulls from this definition. No team can accidentally use a different formula.</span></div>`},
     {id:"s5",content:`<h2 id="s5">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>DataOps applies software engineering discipline to data work: version control, automated testing, CI/CD, and monitoring. It reduces deployment cycles from quarters to days.</div></div>
 <div class="takeaway"><div class="takeaway-num">2</div><div>Data Mesh decentralises data ownership to domain teams. Its four principles — domain ownership, data as a product, self-serve platform, and federated governance — address bottlenecks in large organisations.</div></div>
