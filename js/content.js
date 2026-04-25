@@ -63,8 +63,7 @@ window.PL.domains = [
     chapters: ["5-0","5-1","5-2","5-3","5-4","5-5","5-6","5-7","5-8","5-9","5-10","5-11","5-12","5-13","5-14","5-15","5-16"],
     resources: [
       { title: "Zero to AI Fluency", subtitle: "15-Day Learning Roadmap", tag: "Roadmap", href: "assets/ds-roadmap.html" },
-      { title: "Agentic AI Fluency", subtitle: "15-Day Roadmap", tag: "Agentic AI", href: "assets/agentic-ai-roadmap.html" },
-      { title: "AI-Ready Data Architecture", subtitle: "15-Day Theoretical Roadmap", tag: "Architecture", href: "assets/ai-data-architecture.html" }
+      { title: "Agentic AI Fluency", subtitle: "15-Day Roadmap", tag: "Agentic AI", href: "assets/agentic-ai-roadmap.html" }
     ]
   },
   {
@@ -76,7 +75,8 @@ window.PL.domains = [
     chapters: ["6-1","6-2","6-3","6-4","6-5","6-6","6-7","6-8","6-9","6-10","6-11","6-12","6-13"],
     resources: [
       { title: "AI-Ready Data Architecture", subtitle: "15-Day Theoretical Roadmap", tag: "Architecture", href: "assets/ai-data-architecture.html" },
-      { title: "Pharma Analytics — Complete Metrics Reference", subtitle: "KPIs & Metrics Guide", tag: "Metrics", href: "assets/pharma-metrics.html" }
+      { title: "Pharma Analytics — Complete Metrics Reference", subtitle: "KPIs & Metrics Guide", tag: "Metrics", href: "assets/pharma-metrics.html" },
+      { title: "Pharma Datasets Caveat", subtitle: "Reference Guide", tag: "Datasets", href: "assets/pharma-datasets-caveat.html" }
     ]
   }
 ];
