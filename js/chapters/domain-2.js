@@ -46,7 +46,7 @@ PL.addChapters({
     {id:"s3",content:`<h2 id="s3">Funnel Analytics & Conversion Rates</h2>
 <p>A <strong>patient funnel</strong> quantifies how many patients progress through each journey stage and where they drop out. This is the most important deliverable in patient journey analytics because it directly identifies revenue opportunities.</p>
 <h3>Building the Funnel with Claims Data</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <p>Typical funnel leakage points and commercial actions:</p>
 <ul>
 <li><strong>Diagnosed but not tested:</strong> Invest in biomarker education programs and testing partnerships</li>
@@ -57,7 +57,7 @@ PL.addChapters({
     {id:"s4",content:`<h2 id="s4">Time-to-Treatment & Treatment Gap Analysis</h2>
 <p><strong>Time-to-treatment (TTT)</strong> measures the interval between diagnosis and first therapy administration. Extended TTT correlates with worse outcomes and represents a commercial opportunity — every day a patient waits is a day of lost therapy and potentially lost revenue.</p>
 <h3>Calculating Time-to-Treatment</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <h3>Treatment Gap Identification</h3>
 <p>Treatment gaps occur when patients have periods without active therapy that are not clinically intended. Identifying gaps requires analyzing the interval between the end of one prescription's days supply and the next fill date:</p>
 <ul>
@@ -182,12 +182,12 @@ PL.addChapters({
 </tbody></table>
 <h3>Prescribing Trend Analysis</h3>
 <p>Beyond point-in-time metrics, trend analysis reveals HCP behavior trajectories:</p>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <p><strong>Brand share</strong> at the HCP level is equally critical: Brand Share = Brand TRx / Class TRx. An HCP writing 100 class TRx with 10% brand share represents far more opportunity than one writing 20 class TRx with 50% share.</p>`},
     {id:"s3",content:`<h2 id="s3">Decile Analysis & Segmentation</h2>
 <p><strong>Decile analysis</strong> ranks all HCPs by prescribing volume and divides them into 10 equal groups. This is the most fundamental segmentation in pharma commercial analytics and drives resource allocation decisions across every brand.</p>
 <h3>Building Deciles</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <h3>The 80/20 Rule in Pharma</h3>
 <p>Pharma prescribing follows a power law: the top 2 deciles (20% of HCPs) typically generate 60-80% of total prescriptions. This concentration drives the industry-standard tiered targeting model:</p>
 <table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Tier</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Deciles</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">% of HCPs</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">% of TRx</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Typical Call Frequency</th></tr></thead>
@@ -355,7 +355,7 @@ PL.addChapters({
 <p>Analyzing individual rep performance requires controlling for territory differences. A rep in a high-potential territory will naturally produce more volume than one in a low-potential territory, so raw volume comparisons are misleading.</p>
 <h3>Fair Share Analysis</h3>
 <p><strong>Fair share</strong> adjusts for territory potential to create an apples-to-apples comparison:</p>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <h3>Goal Attainment Distribution</h3>
 <p>A healthy IC plan produces a bell-curve distribution of goal attainment centered around 100%. Warning signs include:</p>
 <ul>
@@ -801,7 +801,7 @@ PL.addChapters({
 <li><strong>Payer landscape:</strong> Current class coverage, prior auth requirements, step therapy protocols</li>
 </ul>
 <h3>Prescriber Universe Identification</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <h3>Patient Identification</h3>
 <p>For biomarker-driven therapies, pre-launch patient identification quantifies the addressable market: How many patients have the relevant biomarker? What percentage are currently tested? What is the gap between tested and treated?</p>`},
     {id:"s2",content:`<h2 id="s2">Launch Readiness KPIs</h2>
@@ -854,7 +854,7 @@ PL.addChapters({
     {id:"s5",content:`<h2 id="s5">Pull-Through Analytics</h2>
 <p><strong>Pull-through</strong> measures the conversion of formulary access into actual prescriptions. Having formulary coverage is necessary but not sufficient — prescribers must still choose your product and patients must fill the prescription.</p>
 <h3>Pull-Through Rate Calculation</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <p>Typical pull-through dynamics:</p>
 <ul>
 <li><strong>Unrestricted access:</strong> 15-25% brand share (the baseline access benefit)</li>
@@ -1386,7 +1386,7 @@ PL.addChapters({
     {id:"s2",content:`<h2 id="s2">Market Share Analytics</h2>
 <p>Market share is the most fundamental competitive metric. It must be analyzed at multiple levels to reveal meaningful patterns:</p>
 <h3>Share Hierarchy</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <h3>Share Decomposition</h3>
 <p>Share changes can be decomposed into three components:</p>
 <ul>
@@ -1398,7 +1398,7 @@ PL.addChapters({
     {id:"s3",content:`<h2 id="s3">Prescriber Switching Patterns</h2>
 <p>Switching analysis reveals which brands are gaining patients from which competitors and why. This directly informs competitive messaging and targeting.</p>
 <h3>Switching Matrix</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <h3>Brand Loyalty Metrics</h3>
 <ul>
 <li><strong>Retention rate:</strong> % of patients remaining on brand after 12 months (inverse of switching rate)</li>
@@ -1410,7 +1410,7 @@ PL.addChapters({
     {id:"s4",content:`<h2 id="s4">Share of Voice Analysis</h2>
 <p><strong>Share of Voice (SOV)</strong> measures your brand's promotional presence relative to competitors. It is calculated across all promotional channels and compared to market share to identify over- or under-investment.</p>
 <h3>SOV Calculation</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <h3>SOV/SOM Ratio Interpretation</h3>
 <table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">SOV/SOM Ratio</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Interpretation</th><th style="text-align:left;padding:8px;border-bottom:2px solid #334155;font-size:12px">Action</th></tr></thead>
 <tbody>
@@ -1428,7 +1428,7 @@ PL.addChapters({
 <li><strong>Competitive exchanges:</strong> Plans that move a competitor up while moving you down (or vice versa)</li>
 </ul>
 <h3>Impact Quantification</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <p>A formulary win affecting a million lives with 5pp share lift represents a significantly larger impact than a win affecting 100K lives with 15pp lift. Always weight by lives covered.</p>`},
     {id:"s6",content:`<h2 id="s6">Pipeline Monitoring & Threat Assessment</h2>
 <p>Proactive competitive intelligence monitors the clinical pipeline for future threats and opportunities.</p>
@@ -1506,7 +1506,7 @@ PL.addChapters({
 <li><strong>Adherence-outcome link:</strong> Patients with PDC>0.80 vs. <0.80 — difference in clinical outcomes</li>
 </ul>
 <h3>Economic Outcomes</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <p>The key insight for commercial teams: a higher-cost drug that reduces hospitalizations by 20% may have a <strong>lower total cost of care</strong> than a cheaper alternative. This "offset" narrative is the foundation of value-based positioning.</p>`},
     {id:"s3",content:`<h2 id="s3">Value Story Development</h2>
 <p>A <strong>value story</strong> is the evidence-based narrative that connects your product's clinical benefits to economic value for specific stakeholders.</p>
@@ -1548,7 +1548,7 @@ PL.addChapters({
 <li><strong>Abandonment rate:</strong> Patients who start but never complete enrollment (target: <15%)</li>
 </ul>
 <h3>Specialty Pharmacy Analytics</h3>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <div class="callout callout-tip"><div class="callout-title">SP Selection Matters</div><p>Specialty pharmacy performance varies significantly. The difference between a top-quartile and bottom-quartile SP can be 15-20% in fulfillment rate and 10% in persistence. Use analytics to hold SP partners accountable and shift volume to higher performers.</p></div>`},
     {id:"s6",content:`<h2 id="s6">Adherence Program ROI</h2>
 <p>Demonstrating ROI of adherence programs requires connecting program investment to incremental persistence, which translates to incremental prescriptions and revenue.</p>

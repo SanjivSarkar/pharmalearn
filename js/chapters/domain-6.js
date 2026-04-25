@@ -119,7 +119,7 @@ PL.addChapters({
 </tbody></table>
 <div class="callout info"><div class="callout-title">Grain is Everything</div><p>Defining the grain (the most atomic row in a fact table) is the most important decision in dimensional modeling. The prescription grain should be one row per fill per patient per drug — never aggregate before storing in the fact table. Aggregations are fast in modern warehouses; you can always roll up but you can never roll down.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Star Schema Design</h2>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>`},
+`},
     {id:"s3",content:`<h2 id="s3">Slowly Changing Dimensions (SCD)</h2>
 <p>HCP and patient attributes change over time — specialty changes, practice relocations, payer plan changes. <strong>Slowly Changing Dimensions (SCD)</strong> handle this gracefully:</p>
 <table><thead><tr><th>SCD Type</th><th>Behavior</th><th>When to Use in Pharma</th></tr></thead>
@@ -129,7 +129,7 @@ PL.addChapters({
 <tr><td><strong>Type 3</strong></td><td>Add column — keep current + previous value only</td><td>Two-period comparisons (this year vs last year territory)</td></tr>
 <tr><td><strong>Type 6</strong></td><td>Hybrid (Type 1 + 2 + 3) — current value on all rows plus history</td><td>Payer formulary tier — need both current status and historical changes</td></tr>
 </tbody></table>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>`},
+`},
     {id:"s4",content:`<h2 id="s4">Data Vault for Audit Trails</h2>
 <p><strong>Data Vault 2.0</strong> is an alternative modeling approach designed for auditability, parallelism, and handling schema changes gracefully. It is increasingly used for FDA-grade regulatory data:</p>
 <p>Data Vault has three entity types:</p>
@@ -138,10 +138,10 @@ PL.addChapters({
 <li><strong>Links:</strong> Relationships between hubs (patient prescribed drug by provider on date)</li>
 <li><strong>Satellites:</strong> Descriptive attributes and their historical changes (attached to hubs or links)</li>
 </ul>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <div class="callout info"><div class="callout-title">Data Vault for FDA Compliance</div><p>Data Vault's complete historical tracking with load dates and record sources on every table makes it naturally compliant with FDA 21 CFR Part 11 (electronic records) requirements. Every insert is immutable — you can prove exactly what data existed at any point in time, who loaded it, and from which source system.</p></div>`},
     {id:"s5",content:`<h2 id="s5">dbt Model Patterns</h2>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <p><strong>dbt model naming convention:</strong> <code>stg_</code> → <code>int_</code> → <code>fct_</code> / <code>dim_</code> — each prefix signals maturity and transformation depth to any reader.</p>`},
     {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>Grain defines dimensional model quality — always store the most atomic fact (one row per prescription fill, not aggregated) and let the warehouse do the aggregations; you can always roll up, never roll down.</div></div>
@@ -176,10 +176,10 @@ PL.addChapters({
   sections:[
     {id:"s1",content:`<h2 id="s1">Snowflake for Pharma Analytics</h2>
 <p>Snowflake's separation of storage and compute makes it ideal for pharma's variable workload patterns — heavy month-end claims refresh, then lighter daily analytics queries.</p>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <div class="callout info"><div class="callout-title">Snowflake Clustering Keys</div><p>On claims tables with billions of rows, clustering by (service_year, drug_class, prescriber_state) means queries filtered on those columns scan only the relevant micro-partitions — typically reducing query time from minutes to seconds. Without clustering, every query scans the full table. Choose clustering keys based on the columns used most frequently in WHERE clauses.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Snowflake Performance & Cost</h2>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <p><strong>Snowflake cost optimization checklist:</strong></p>
 <ul>
 <li>Set AUTO_SUSPEND to ≤ 60 seconds for all warehouses — idle compute is the #1 cost driver</li>

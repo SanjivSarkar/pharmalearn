@@ -225,7 +225,7 @@ PL.addChapters({
 <div class="callout"><div class="callout-title">The Data Completeness Challenge</div><p>Even the largest commercial claims databases cover only ~60–70% of the US population (excluding uninsured, VA, some Medicaid). Within the covered population, data capture varies by site of care, data submission practices, and claims adjudication timing. Always characterize your database's coverage before making population-level inferences.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Claims Data Architecture</h2>
 <p>A standard commercial claims database has three core tables that must be linked by patient identifier:</p>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <p>Key linking considerations:</p>
 <ul>
 <li>Always join through eligibility to ensure patients were enrolled during the analysis period</li>
@@ -243,7 +243,7 @@ PL.addChapters({
 <div class="callout warning"><div class="callout-title">Re-identification Risk</div><p>Research has shown that 87% of Americans can be uniquely identified using only date of birth, gender, and 5-digit ZIP code. "De-identified" datasets that retain geographic and temporal granularity can be re-identified. Always treat de-identified healthcare data with appropriate access controls and data use agreements (DUAs).</p></div>`},
     {id:"s4",content:`<h2 id="s4">OMOP Common Data Model</h2>
 <p>The <strong>OMOP CDM (Observational Medical Outcomes Partnership Common Data Model)</strong> standardizes disparate healthcare data into a common structure and vocabulary, enabling federated cross-database analytics:</p>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <div class="callout info"><div class="callout-title">OMOP Vocabularies</div><p>OMOP maps raw codes to standardized concepts: ICD-10 → SNOMED-CT (conditions), NDC/RxNorm → RxNorm (drugs), CPT → SNOMED (procedures), LOINC stays as LOINC (labs). The concept_ancestor table enables hierarchical queries — finding all descendants of a SNOMED concept retrieves all sub-diagnoses without listing every ICD-10 code explicitly.</p></div>`},
     {id:"s5",content:`<h2 id="s5">Data Quality in Healthcare</h2>
 <p>Healthcare data quality problems are ubiquitous and must be systematically characterized before analysis:</p>
@@ -298,16 +298,16 @@ PL.addChapters({
 <li><strong>LOT derivation:</strong> Sequencing drug regimens into lines of therapy</li>
 <li><strong>Patient funnel:</strong> Tracking conversion rates through sequential clinical events</li>
 </ul>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>`},
+`},
     {id:"s2",content:`<h2 id="s2">Window Functions</h2>
 <p>Window functions are essential for time-series pharma analytics — they compute values across a defined "window" of rows without collapsing the result set:</p>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>`},
+`},
     {id:"s3",content:`<h2 id="s3">CTE Architecture</h2>
 <p>Complex pharma queries should be built as layered CTEs — each CTE performing one logical step, building on the prior:</p>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>`},
+`},
     {id:"s4",content:`<h2 id="s4">Advanced Patterns</h2>
 <p><strong>Gaps-and-Islands:</strong> Identifying continuous therapy episodes separated by gaps</p>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>`},
+`},
     {id:"s5",content:`<h2 id="s5">Performance Optimization</h2>
 <p>Claims databases contain billions of rows. Performance optimization is critical:</p>
 <ul>
@@ -318,7 +318,7 @@ PL.addChapters({
 <li><strong>DISTINCT vs GROUP BY:</strong> On large tables, GROUP BY often outperforms DISTINCT</li>
 <li><strong>CTEs vs temp tables:</strong> For complex multi-step queries, materializing intermediate results as temp tables can dramatically outperform repeated CTE reference</li>
 </ul>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>`},
+`},
     {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
 <div class="takeaway"><div class="takeaway-num">1</div><div>Window functions (LAG, LEAD, ROW_NUMBER, NTILE, SUM OVER) are the most important SQL skill for pharma analytics — they enable time-series analysis, first-event identification, decile ranking, and running totals without self-joins.</div></div>
 <div class="takeaway"><div class="takeaway-num">2</div><div>Build complex queries as layered CTEs — each CTE performing one logical operation makes queries readable, debuggable, and maintainable; deeply nested subqueries are never acceptable in production code.</div></div>
@@ -688,7 +688,7 @@ PL.addChapters({
 </div>
 <div class="callout info"><div class="callout-title">Cloud Choice in Pharma</div><p>AWS dominates pharma cloud analytics (60%+ market share) due to early HIPAA BAA availability, mature healthcare-specific services (Amazon HealthLake), and the broadest ISV ecosystem. Azure is strong in markets with Microsoft-heavy enterprise infrastructure. GCP excels for ML-heavy workloads (BigQuery ML, Vertex AI). Most large pharma companies use multi-cloud strategies.</p></div>`},
     {id:"s2",content:`<h2 id="s2">Claims ELT with dbt</h2>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <div class="callout info"><div class="callout-title">Data Contract via dbt Schema (schema.yml)</div>
 <p>A <strong>dbt schema.yml</strong> file acts as a data contract — it documents every column and enforces automated quality tests. Key elements:</p>
 <table><thead><tr><th>Element</th><th>Purpose</th><th>Example</th></tr></thead><tbody>

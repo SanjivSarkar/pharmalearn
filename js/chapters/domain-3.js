@@ -713,7 +713,7 @@ PL.addChapters({
 <tr><td>Diagnosis confirmation</td><td>Approved indication required</td><td>Prescription, diagnosis codes</td></tr>
 </tbody></table>
 <p>PAP analytics — measuring program reach and gaps:</p>
-<div class="callout info"><div class="callout-title">Process Logic</div><p>Business Logic</p></div>
+
 <div class="callout info"><div class="callout-title">Bridge Programs</div><p>Bridge programs provide free drug for a defined short period (30-90 days) while insurance coverage is being established or while a PAP application is pending. They prevent treatment gaps for patients who have been prescribed the drug but face a coverage delay. Bridge programs are tracked separately from PAP and from commercial copay programs in GTN accounting.</p></div>`},
     {id:"s4",content:`<h2 id="s4">Hub Services & Case Management</h2>
 <p>A <strong>hub</strong> is a centralized patient support service organization (often third-party) that coordinates benefits investigation, prior authorization support, copay enrollment, SP referral, and ongoing adherence support for specialty patients.</p>
