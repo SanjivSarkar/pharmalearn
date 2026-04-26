@@ -76,7 +76,8 @@ window.PL.domains = [
     resources: [
       { title: "AI-Ready Data Architecture", subtitle: "15-Day Theoretical Roadmap", tag: "Architecture", href: "assets/ai-data-architecture.html" },
       { title: "Pharma Analytics — Complete Metrics Reference", subtitle: "KPIs & Metrics Guide", tag: "Metrics", href: "assets/pharma-metrics.html" },
-      { title: "Pharma Datasets Caveat", subtitle: "Reference Guide", tag: "Datasets", href: "assets/pharma-datasets-caveat.html" }
+      { title: "Pharma Datasets Caveat", subtitle: "Reference Guide", tag: "Datasets", href: "assets/pharma-datasets-caveat.html" },
+      { title: "Pharma TA Coding", subtitle: "Reference Guide", tag: "TA Coding", href: "assets/pharma-ta-coding.html" }
     ]
   }
 ];
