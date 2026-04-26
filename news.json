@@ -1,6 +1,13 @@
 {
-  "updated": "2026-04-25T19:00:07Z",
+  "updated": "2026-04-26T03:28:40Z",
   "items": [
+    {
+      "title": "Regulatory tracker: FDA delays decision on Sanofi's subcutaneous Sarclisa",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Apr 22",
+      "timestamp": 1776841200000
+    },
     {
       "title": "Best Biotech Stocks of 2026 and How to Invest in Them",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
@@ -21,13 +28,6 @@
       "source": "Pharma Voice",
       "date": "Mar 4",
       "timestamp": 1772611200000
-    },
-    {
-      "title": "Ascendis gains more altitude with FDA approval for dwarfism drug Yuviwel",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNN2M0X0FXZGVVYjVpYmlpWEJKMlNfVGg2UHBxQ1FpWEx0VmFMSnpjWndWREFvbkxCcl92a2N4dE1lLXNvZzdoTU95S1ROWUJHcDdZZGg3NkNQdlViN1hJTWVFTGZaS3J1LTFSeHh2Sm9QTkRpbTNQWDBJUHlNSXMxTkxhdENqdG84RXhjREdNQk1tZ1djVzl2Q0l0UkdYQkgt?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Mar 2",
-      "timestamp": 1772438400000
     },
     {
       "title": "Top 10 most anticipated drug launches of 2026",
@@ -58,13 +58,6 @@
       "timestamp": 1767600000000
     },
     {
-      "title": "Regulatory tracker: FDA delays decision on Sanofi's subcutaneous Sarclisa",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 2",
-      "timestamp": 1767365493000
-    },
-    {
       "title": "2025 FDA approvals",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5VMlhtZHBzSEFBTFpaR25BbUtUUHcxZUJ5ZHVXUFhYbm5LaW1tX3pCdEl6M3VUWnhzN2l1QXdWc3h5YXpXazV4WUFUb0xMdnJsbkdMWG5vTHdoZFlxcnJZ?oc=5",
       "source": "Nature",
@@ -77,6 +70,13 @@
       "source": "Fierce Pharma",
       "date": "Dec 17",
       "timestamp": 1765958400000
+    },
+    {
+      "title": "US FDA proposes moves to speed availability of some cheaper biotech medicines",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQOXZzeFd5a3g4MnVSa25VaDRzU0lKUjF5WWVURWJHVGNaUzJSb3N1UWVXLWtHeFpibDFOV2dLZzFtbWtQQUw4RWI3bkNjTi1Mb2VRZEJ3dldjbTl0clNvTUhZenJqeEVjVFVma3lzYlVsbHZpWmxPWE1aMnBydUlvTFZoOU5ZZEFZamk3b0V5Y25zUzQtcGYyd2lmaHFjQTRjOTJYaXQ4RUhzeG9kcXpsZmZBT3Nva2ZfNU9LMFl3?oc=5",
+      "source": "Reuters",
+      "date": "Oct 29",
+      "timestamp": 1761721200000
     },
     {
       "title": "AstraZeneca cuts US drug pricing deal; FDA declares Novo plant out of compliance",
@@ -100,18 +100,18 @@
       "timestamp": 1759302000000
     },
     {
+      "title": "Crinetics wins FDA approval for acromegaly drug, faces competition with Novartis and Ipsen",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYlZPaTVLYmx4LTBGUDhVbm80RTVqMS05Q3RQTXhxckhuWEEyNDluZzRUaHpiR0gyWUUwTTFMbXpJWEtvN2hjcV9hSkpFY3EtOVc2R0V0aGhQVGpMU1VkZWF3TVJpd05hWjdablVnaXMzb0o5bXZKdGRDQmFDbUFsZVJLbjhkVGVldmI4Vm5WcDhreENtNzBPUmJYLWk2RDJPMHFGR3YtQmo?oc=5",
+      "source": "statnews.com",
+      "date": "Sep 25",
+      "timestamp": 1758783600000
+    },
+    {
       "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWkFSZXVGSzlqZmw2MFNaR2JQaHVQdVp3cjNrMm1CMFh5SXM2QlRNSVg4NXBKbF9aVk5TSEgzdWlqVEtLMkMxTUZORTQxTS1nSXpmOFNTS3BpZE1ZOWxyb3M0dDRLbnNTb1Ywd1J3b1lNYTNqYUxSRm85bmJJbDY1Qi1vVHFxeEY1amIzd3ZrbWp0Q0VHTFJrbXYyRWZ6Zw?oc=5",
       "source": "Fierce Pharma",
       "date": "Aug 29",
       "timestamp": 1756450800000
-    },
-    {
-      "title": "FDA approves Ionis drug that prevents swelling attacks caused by a rare disease",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQck1KRXItZ3Vydzh6Y1BfS282cW5BNzNndnJWeTJRSndjUDhTdy03QTBrMVhiRjhFYTZYY01nRF9zdmJEVDRWMk01MDlScXpzR2t0Y21rNnFQUVRfN1ZrQ0o0ZnplQUVqNDk2eVBxcHZ1V1FKV2s3WklYX2J4LUJ0cmNiNERCSEhjWEpKSXJsVQ?oc=5",
-      "source": "statnews.com",
-      "date": "Aug 21",
-      "timestamp": 1755759600000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
@@ -135,18 +135,18 @@
       "timestamp": 1753167600000
     },
     {
-      "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jul 11",
-      "timestamp": 1752217200000
-    },
-    {
       "title": "Biotech CEOs to FDA: Don\u2019t Let Politics Override Science on Abortion Pill",
       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZE5lUHNkbmJXUXRWb3R1Z05WV2pqV2Z6U1hXM2JQMVY0WFk5LTRSbWNUajc4bzVOQmJBc1h4elZVN3kzcjRoUEFpaXRpeWxVYU9vM0tCam9IeTB2czAtUDEzdmJDdmpXcXlESGhVMV9qZ2Z1RzlTaEhkM2xOWS16ZVNlZ0IweGVOanZ2RzVqV29WVHI3X1Y4VVRVVkNpaWNCdlpuOHhrQXNTQ2VOWUE4cg?oc=5",
       "source": "Ms. Magazine",
       "date": "Jul 10",
       "timestamp": 1752130800000
+    },
+    {
+      "title": "KalVista bounces back from FDA delay with approval for oral rare disease med Ekterly",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPd3k3MU93Y3gyQVlQcXcyUjZXMnBNZ1podk5VMG8yampqTW44LUlSZlZmeEhPeXY2Qkx1ZnhKUkVEVFpzelB1VjliTFRyZU1sQzl5cE5zMlRGdjhKbG1yaHZOeVFxT0xGZHFOVW42SWFSbTdpbzFqd01iRURocGdOb2o0WjVkY01nQVNIUEVnUl8wU2IyQ3hKMmRYY2dhZ1dRX2t3dDBkVUo1Zw?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 7",
+      "timestamp": 1751871600000
     },
     {
       "title": "Biotech Stocks Facing FDA Decision In July 2025",
@@ -247,6 +247,13 @@
       "timestamp": 1743404400000
     },
     {
+      "title": "Biotech Sponsors Dominate 2024 FDA Approvals",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNRHpQbXJZY3BuNGg5bm1KZ21UcjFQd091MDNQMDlXS2hpNWpDMi1YbDMyVEx5czdKcjlwcGVCcF9wN0ptbmlObjgyS3NSU0R2LXNaVG5wN1V1VHUySGQtT2RrcTJUUVRnVnY3aERwd3dQZVFveXVSWGh3NXY5a2diNF83YmI2MGl0dzdMcFVjbE42aDg?oc=5",
+      "source": "evaluate.com",
+      "date": "Feb 17",
+      "timestamp": 1739803381000
+    },
+    {
       "title": "Top 10 most anticipated drug launches of 2025",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdXR2cHZPdWp0djFfWnlOSnhpSkJpd2ZJTmZVWnJaVElmNzFnZHREZ1Vza1NuRVhIREdRejV6NUhGMjdsSnktSGlzaEFvdUpJSDR6VHFBVXBtWGhrTFFuZHYtYVlEcVFZMWtGelVlQzY3QkhvcXNfRHJ4UF9UZ3QxVDdEUjk2WWM1?oc=5",
       "source": "Fierce Pharma",
@@ -266,13 +273,6 @@
       "source": "Reuters",
       "date": "Dec 19",
       "timestamp": 1734595200000
-    },
-    {
-      "title": "Healthy Returns: Trump\u2019s FDA pick Makary may be a relief for biotech and pharma, analysts say",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOR2dzYlZfdG1Md1hPdTB2M2dfZEdDMFVrZFF3ZXBKSUl2VG9nY0dLWjBzb0tpY2h5dkxIODV5ZFRSTG9JcmlYMWE2MGpmVHo2bElOLXpobWVjUVNSWVc4SENXbnpPRDNyclZZUS1nekwtbjlvclg4aC1acWR3M3oxYXJKQnUwWVNOamVPcEhLbVZzN1c5QnI0R29zZ3JBUEZYaWNfNTlVNnRhUTBKRlHSAbMBQVVfeXFMTjU5bmgxeEhnYTJUbnNRZjdQWGVodHBBT1FfeEpzX1JNNVFDY0FYU2NkYWlHTE5FdGV2ZE15UE5KNXlkeHBFMC1SaTVTbHBFZUU1b2tjOWxPcUtMNjg3bl9jUllDSlpNY3RteU1ndHVONkxqdDhvaThrTnpGcUtYdVMxWkd4NzBMNktjX2VBZVFPbk5qYzhtX0p0YXlNN242aF9vUVhPemFaR2lLRW5xR0FLZDg?oc=5",
-      "source": "CNBC",
-      "date": "Nov 26",
-      "timestamp": 1732608000000
     },
     {
       "title": "US FDA approvals bounce back in 2023, sparking hopes of a biotech recovery",
