@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-26T03:28:40Z",
+  "updated": "2026-04-26T07:46:10Z",
   "items": [
     {
       "title": "Regulatory tracker: FDA delays decision on Sanofi's subcutaneous Sarclisa",
@@ -79,13 +79,6 @@
       "timestamp": 1761721200000
     },
     {
-      "title": "AstraZeneca cuts US drug pricing deal; FDA declares Novo plant out of compliance",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQQjlKVDlrZUdZUmFnOG5nMWZTZjgyZW9jeUNOOUhGaG5BV1Z2TmRKTkUwREhJSl9iNzdrcUp1TkZVSUpUM0RaWF9XWGNkNTZ0MjBoNUthNlRwRTQ2WHM0Z3RkVDUzeE5oMVlTamFuVHBGUnNEMDVzNTNTMmlXZVBHX244b21iWDF5WGlPSnNGMFUtZjA5SFE2RA?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Oct 14",
-      "timestamp": 1760425200000
-    },
-    {
       "title": "FDA declares Novo Nordisk plant, key to drug manufacturing for some biotechs, out of compliance",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaloyaGtUNW1Jb2NXUTJrbW1zcUJ1c3pjdXZYY1hYZWZCNXFQckNNQ1FQNWltcllfOHBpZUEwajhBNnFtZ1VLY3pIUGxBTThTNHZVclZ2NHBSRGZWMko0NW5tOTVmeTcxUGk3YVlNX1d5U0hvXzhZMEJncFduakFaQmtCeGV4NEpj?oc=5",
       "source": "statnews.com",
@@ -100,11 +93,11 @@
       "timestamp": 1759302000000
     },
     {
-      "title": "Crinetics wins FDA approval for acromegaly drug, faces competition with Novartis and Ipsen",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYlZPaTVLYmx4LTBGUDhVbm80RTVqMS05Q3RQTXhxckhuWEEyNDluZzRUaHpiR0gyWUUwTTFMbXpJWEtvN2hjcV9hSkpFY3EtOVc2R0V0aGhQVGpMU1VkZWF3TVJpd05hWjdablVnaXMzb0o5bXZKdGRDQmFDbUFsZVJLbjhkVGVldmI4Vm5WcDhreENtNzBPUmJYLWk2RDJPMHFGR3YtQmo?oc=5",
+      "title": "U.S. pressures U.K. as pharma pauses investments there",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOTldWRm0wdXBPajZ0Tjd1c2sxcGxVak42Q1RkM2lfbjJueW1reFRMMUEwY2Y3VU1NWUhyUi0za0JnVzl5cUc4YlVCc3hkRTNBR3Eta09HS0ZlMS1Ra3ZncFdoYVN3akhLUTJzN1ZyNEt6WGE5XzJjS0Fxd2RWaUs5MWZWQ2JJUQ?oc=5",
       "source": "statnews.com",
-      "date": "Sep 25",
-      "timestamp": 1758783600000
+      "date": "Sep 15",
+      "timestamp": 1757919600000
     },
     {
       "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
@@ -112,6 +105,13 @@
       "source": "Fierce Pharma",
       "date": "Aug 29",
       "timestamp": 1756450800000
+    },
+    {
+      "title": "FDA approves Ionis drug that prevents swelling attacks caused by a rare disease",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQck1KRXItZ3Vydzh6Y1BfS282cW5BNzNndnJWeTJRSndjUDhTdy03QTBrMVhiRjhFYTZYY01nRF9zdmJEVDRWMk01MDlScXpzR2t0Y21rNnFQUVRfN1ZrQ0o0ZnplQUVqNDk2eVBxcHZ1V1FKV2s3WklYX2J4LUJ0cmNiNERCSEhjWEpKSXJsVQ?oc=5",
+      "source": "statnews.com",
+      "date": "Aug 21",
+      "timestamp": 1755759600000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
@@ -128,11 +128,11 @@
       "timestamp": 1753858800000
     },
     {
-      "title": "Replimune drug rejected by FDA; Omega raises $647M biotech fund",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNRi1JZTc2R3ZjTWxoT2xfcGVvX2RfaDNLdHJ3RDJnYXZLbjdoZE1tOWx2a2RJQ3pMeVRGX1kxTzdvc1NoWHcwX1BrZnR0bHRVNmxldHVLUVVnNmZJUDJWZ0xFZlJpQmtveXo4Qm1PV2R4eG9XX00taF9nbHNCTTA1d29ELVFOVXdQU003MmUzWjk4ZUlyVDdJdjNKWHdCRzRyN0tNdTNB?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Jul 22",
-      "timestamp": 1753167600000
+      "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 11",
+      "timestamp": 1752217200000
     },
     {
       "title": "Biotech CEOs to FDA: Don\u2019t Let Politics Override Science on Abortion Pill",
