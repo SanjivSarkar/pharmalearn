@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharma Data Caveats — Vendor Reference Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #0F1B2D;
+  --navy-mid:   #162236;
+  --navy-soft:  #1E2F45;
+  --navy-rim:   #2A3B52;
+  --gold:       #C8984A;
+  --gold-dim:   #9B7233;
+  --gold-pale:  #E8C87A;
+  --gold-bg:    rgba(200,152,74,0.08);
+  --cream:      #F5EFDF;
+  --parchment:  #EEE5CE;
+  --cream-dim:  #C8BFA8;
+  --muted:      #8A9BB0;
+  --border:     rgba(200,152,74,0.16);
+  --border-lg:  rgba(200,152,74,0.32);
+  --green:      #4B6B4A;
+  --rust:       #A84B2A;
+  --slate:      #3A5068;
+
+  /* Severity colours */
+  --sev-high-bg:    rgba(168,75,42,0.15);
+  --sev-high-bd:    rgba(168,75,42,0.45);
+  --sev-high-txt:   #E8906A;
+  --sev-med-bg:     rgba(186,117,23,0.12);
+  --sev-med-bd:     rgba(186,117,23,0.4);
+  --sev-med-txt:    #E8C060;
+  --sev-low-bg:     rgba(75,107,74,0.15);
+  --sev-low-bd:     rgba(75,107,74,0.4);
+  --sev-low-txt:    #88B886;
+
+  /* Vendor accent colours */
+  --iqvia:     #4A8CB8;
+  --komodo:    #6B5CA5;
+  --optum:     #E86B3A;
+  --integri:   #3A8A6A;
+  --mckesson:  #C8984A;
+  --symphony:  #A84B7A;
+  --truven:    #5A7EA8;
+  --flatiron:  #B84A4A;
+  --cardinal:  #6A8A4A;
+  --cms:       #8A6A4A;
+  --veradigm:  #5A9888;
+  --labdata:   #8A5AB8;
+  --genomics:  #C85A8A;
+  --norstella: #4A7AB8;
+  --clarivate: #B87A3A;
+  --evaluate:  #5A8A5A;
+  --mmit:      #8A4A78;
+  --inovalon:  #4A6A9A;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body {
+  background: var(--navy);
+  color: var(--cream);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* noise */
+body::before {
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.5;
+}
+
+/* ── NAV ── */
+nav {
+  position:sticky;top:0;z-index:100;
+  background:rgba(15,27,45,0.97);
+  border-bottom:1px solid var(--border-lg);
+  padding:0 2rem;height:52px;
+  display:flex;align-items:center;
+  backdrop-filter:blur(8px);
+  gap:0;
+}
+.nav-brand {
+  font-family:'Playfair Display',serif;
+  font-size:13px;color:var(--gold);
+  letter-spacing:0.08em;white-space:nowrap;
+  margin-right:auto;padding-right:1.5rem;
+  border-right:1px solid var(--border);
+}
+.nav-links {
+  display:flex;gap:0;overflow-x:auto;scrollbar-width:none;
+}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a {
+  color:var(--cream-dim);text-decoration:none;
+  font-size:11.5px;letter-spacing:0.05em;
+  padding:0 13px;height:52px;display:flex;align-items:center;
+  border-right:1px solid var(--border);
+  transition:color 0.2s,background 0.2s;white-space:nowrap;
+}
+.nav-links a:hover{color:var(--gold);background:rgba(200,152,74,0.06)}
+
+/* ── HERO ── */
+.hero {
+  position:relative;z-index:1;
+  padding:4.5rem 2rem 3.5rem;
+  max-width:860px;margin:0 auto;text-align:center;
+}
+.eyebrow {
+  font-size:11px;letter-spacing:0.18em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:1.25rem;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.eyebrow::before,.eyebrow::after {
+  content:'';flex:1;max-width:80px;height:1px;
+  background:var(--gold-dim);opacity:0.5;
+}
+.hero h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.9rem,4.5vw,3.2rem);
+  font-weight:400;line-height:1.2;color:var(--cream);
+  margin-bottom:1.25rem;
+}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub {
+  font-size:16px;color:var(--cream-dim);
+  max-width:600px;margin:0 auto 2.5rem;line-height:1.75;
+}
+.hero-legend {
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin-bottom:2rem;
+}
+.leg {
+  font-size:11px;letter-spacing:0.06em;
+  padding:4px 12px;border-radius:2px;border:1px solid;
+  white-space:nowrap;
+}
+.leg-high{background:var(--sev-high-bg);border-color:var(--sev-high-bd);color:var(--sev-high-txt)}
+.leg-med {background:var(--sev-med-bg);border-color:var(--sev-med-bd);color:var(--sev-med-txt)}
+.leg-low {background:var(--sev-low-bg);border-color:var(--sev-low-bd);color:var(--sev-low-txt)}
+.leg-mit {background:rgba(58,80,104,0.25);border-color:rgba(90,126,168,0.4);color:#8AB4D8}
+
+/* ── CONTROLS ── */
+.main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:0 2rem 6rem}
+
+.controls {
+  background:var(--navy-mid);border:1px solid var(--border);
+  border-radius:3px;padding:1.25rem 1.5rem;margin-bottom:2.5rem;
+}
+.search-wrap{position:relative;margin-bottom:1rem}
+.search-wrap svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:0.4;pointer-events:none}
+#search {
+  width:100%;background:var(--navy);border:1px solid var(--border-lg);
+  border-radius:3px;padding:9px 14px 9px 40px;
+  color:var(--cream);font-family:'EB Garamond',serif;font-size:15px;
+  outline:none;transition:border-color 0.2s;
+}
+#search::placeholder{color:var(--muted)}
+#search:focus{border-color:var(--gold)}
+
+.filter-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.fl{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.pill{
+  font-family:'EB Garamond',serif;font-size:12px;
+  padding:3px 11px;border-radius:2px;border:1px solid var(--border);
+  color:var(--cream-dim);background:transparent;cursor:pointer;
+  letter-spacing:0.04em;transition:all 0.15s;white-space:nowrap;
+}
+.pill:hover{border-color:var(--gold-dim);color:var(--gold-pale)}
+.pill.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold-pale)}
+.rc{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* ── VENDOR CARD ── */
+.vendor-block{margin-bottom:3.5rem}
+.vendor-header {
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:1.5rem;padding-bottom:12px;
+  border-bottom:1px solid var(--border-lg);
+}
+.vendor-dot {
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;
+}
+.vendor-name {
+  font-family:'Playfair Display',serif;font-size:19px;
+  font-weight:600;color:var(--cream);
+}
+.vendor-tagline{font-size:13px;color:var(--muted);font-style:italic;margin-left:auto;text-align:right}
+.vendor-datasets {
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;
+}
+.ds-tag{
+  font-size:11px;padding:2px 9px;border-radius:2px;
+  border:1px solid var(--border);color:var(--cream-dim);
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* ── CAVEAT TABLE ── */
+.cav-grid{display:grid;gap:10px}
+.cav-card {
+  background:var(--navy-mid);border:1px solid var(--border);
+  border-radius:3px;overflow:hidden;
+  transition:border-color 0.2s;
+}
+.cav-card:hover{border-color:rgba(200,152,74,0.35)}
+.cav-head {
+  display:grid;
+  grid-template-columns:1fr 70px 1fr;
+  gap:0;
+}
+.cav-left{padding:13px 16px;border-right:1px solid var(--border)}
+.cav-sev{display:flex;align-items:center;justify-content:center;padding:10px 8px;border-right:1px solid var(--border)}
+.cav-right{padding:13px 16px;background:rgba(58,80,104,0.1)}
+
+.cav-dim {
+  font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.cav-title{font-size:13px;font-weight:500;font-family:'Playfair Display',serif;margin-bottom:5px}
+.cav-body{font-size:12px;color:var(--cream-dim);line-height:1.55}
+.cav-mit-label{
+  font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+  color:#8AB4D8;margin-bottom:4px;
+}
+.cav-mit-body{font-size:12px;color:#A8C8E8;line-height:1.55}
+
+.sev-badge{
+  font-size:10px;letter-spacing:0.06em;text-transform:uppercase;
+  padding:3px 7px;border-radius:2px;border:1px solid;
+  writing-mode:vertical-rl;text-orientation:mixed;
+  white-space:nowrap;
+}
+.sev-H{background:var(--sev-high-bg);border-color:var(--sev-high-bd);color:var(--sev-high-txt)}
+.sev-M{background:var(--sev-med-bg);border-color:var(--sev-med-bd);color:var(--sev-med-txt)}
+.sev-L{background:var(--sev-low-bg);border-color:var(--sev-low-bd);color:var(--sev-low-txt)}
+
+/* ── DIMENSION CHIPS ── */
+.dim-pharmacy{color:#7BAFD4}
+.dim-medical{color:#A888D4}
+.dim-manufacturer{color:#E89060}
+.dim-collection{color:#88C880}
+.dim-coverage{color:#C8A060}
+.dim-lag{color:#D47878}
+.dim-coding{color:#88B8B8}
+.dim-patient{color:#C888A8}
+.dim-ehr{color:#68C8A8}
+.dim-lab{color:#B888D8}
+.dim-genomics{color:#E878A8}
+.dim-analyst{color:#D8A850}
+
+/* ── ORNAMENT / DIVIDER ── */
+.orn{text-align:center;color:var(--gold-dim);font-size:16px;letter-spacing:0.5em;margin:2rem 0;opacity:0.45}
+
+/* ── SECTION: DATA TYPE PRIMER ── */
+.primer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:3rem}
+.primer-card{
+  background:var(--navy-mid);border:1px solid var(--border);
+  border-radius:3px;padding:16px 18px;
+}
+.primer-icon{font-size:22px;margin-bottom:8px;line-height:1}
+.primer-head{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;margin-bottom:6px}
+.primer-body{font-size:12px;color:var(--cream-dim);line-height:1.6}
+.primer-vs{
+  font-size:11px;margin-top:8px;padding-top:8px;
+  border-top:1px solid var(--border);color:var(--muted);font-style:italic;
+}
+
+/* ── EMPTY STATE ── */
+.empty{text-align:center;padding:4rem 2rem;color:var(--muted);font-style:italic}
+
+/* footer */
+footer{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);padding:2rem;
+  text-align:center;font-size:12px;color:var(--muted);letter-spacing:0.06em;
+}
+footer em{color:var(--gold-dim);font-style:normal}
+
+@media(max-width:700px){
+  .cav-head{grid-template-columns:1fr}
+  .cav-left,.cav-sev{border-right:none;border-bottom:1px solid var(--border)}
+  .cav-sev{writing-mode:horizontal-tb;flex-direction:row;gap:8px}
+  .sev-badge{writing-mode:horizontal-tb}
+  nav{padding:0 1rem}
+  .hero{padding:3rem 1.25rem 2.5rem}
+  .main{padding:0 1.25rem 4rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">Pharma Data · Caveats & Mitigations</span>
+  <div class="nav-links">
+    <a href="#primer">Data Types</a>
+    <a href="#iqvia">IQVIA</a>
+    <a href="#komodo">Komodo</a>
+    <a href="#optum">Optum</a>
+    <a href="#integrichain">IntegriChain</a>
+    <a href="#mckesson">McKesson</a>
+    <a href="#symphony">Symphony / IQVIA RWE</a>
+    <a href="#truven">Truven / IBM</a>
+    <a href="#flatiron">Flatiron</a>
+    <a href="#cardinal">Cardinal Health</a>
+    <a href="#cms">CMS / Government</a>
+    <a href="#crossvendor">Cross-Vendor</a>
+    <a href="#veradigm">Veradigm / EHR</a>
+    <a href="#labdata">Lab (Quest/LabCorp)</a>
+    <a href="#genomics">Genomics (Tempus/FMI)</a>
+    <a href="#norstella">Norstella Group</a>
+    <a href="#clarivate">Clarivate / DRG</a>
+    <a href="#evaluate">Evaluate / GlobalData</a>
+    <a href="#mmit">MMIT</a>
+    <a href="#inovalon">Inovalon / Apixio</a>
+    <a href="#trinetx">TriNetX / COTA</a>
+    <a href="#absg">AmerisourceBergen</a>
+    <a href="#datavant">Datavant / Linking</a>
+    <a href="#registry">Patient Registries</a>
+    <a href="#sdoh">SDoH Data</a>
+    <a href="#aiml">AI/ML & FHIR</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Data Vendor Reference · Caveats &amp; Mitigations</div>
+  <h1>The <em>Analyst's</em> Guide to Pharma Data Caveats</h1>
+  <p class="hero-sub">A structured reference of known limitations, biases, and blind spots across every major pharmaceutical data vendor — including EHR/EMR, lab diagnostics, genomics, and analyst intelligence sources — paired with practical mitigation strategies for each.</p>
+  <div class="hero-legend">
+    <span class="leg leg-high">High Impact Caveat</span>
+    <span class="leg leg-med">Medium Impact</span>
+    <span class="leg leg-low">Low / Manageable</span>
+    <span class="leg leg-mit">Mitigation Available</span>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="search-wrap">
+      <svg width="16" height="16" fill="none" stroke="#C8984A" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Search caveat, vendor, dataset, or topic…" oninput="render()">
+    </div>
+    <div style="margin-bottom:8px"><span class="fl">Filter by dimension</span>
+    <div class="filter-row" id="dimFilters"></div></div>
+    <div><span class="fl">Filter by severity</span>
+    <div class="filter-row" id="sevFilters"></div></div>
+    <div class="rc" id="rc"></div>
+  </div>
+
+  <!-- DATA TYPES PRIMER -->
+  <div id="primer" style="margin-bottom:2.5rem">
+    <div style="margin-bottom:1.25rem;padding-bottom:8px;border-bottom:1px solid var(--border)">
+      <span style="font-family:'Playfair Display',serif;font-size:17px;color:var(--gold)">Understanding the data landscape</span>
+    </div>
+    <div class="primer-grid">
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#7BAFD4">Rx</div>
+        <div class="primer-head" style="color:#7BAFD4">Pharmacy Claims</div>
+        <div class="primer-body">Prescription fill data captured at the pharmacy point-of-sale via switch networks (RelayHealth/McKesson, Change Healthcare). Captures retail, mail, and specialty fills. Strongest for oral and self-administered drugs.</div>
+        <div class="primer-vs">Misses: buy-and-bill, in-office infusions, hospital outpatient, uninsured patients, VA/IHS dispensing.</div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#A888D4">Mx</div>
+        <div class="primer-head" style="color:#A888D4">Medical Claims</div>
+        <div class="primer-body">ICD-10 diagnosis, CPT procedure, and J-code drug administration claims submitted by providers to payers for reimbursement. Essential for buy-and-bill infusion products (oncology, neurology, rare disease).</div>
+        <div class="primer-vs">Misses: uninsured patients, self-pay, non-covered services, clinical nuance (no lab values or biomarkers).</div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#E89060">867</div>
+        <div class="primer-head" style="color:#E89060">Channel / 867 Data</div>
+        <div class="primer-body">EDI 867 Product Transfer and Resale data flows from wholesaler to manufacturer, tracking unit movements from distributor to pharmacy or provider. Foundation of specialty pharmacy and GTN analytics.</div>
+        <div class="primer-vs">Often blinded: first 3 digits of ZIP only, weekly aggregates, direct sales excluded, 340B/GPO visibility varies.</div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#88C880">EHR</div>
+        <div class="primer-head" style="color:#88C880">Electronic Health Records</div>
+        <div class="primer-body">Structured clinical data (diagnoses, labs, vital signs, notes) from provider EHR systems (Epic, Cerner, Allscripts). Richest clinical context — but coverage is fragmented across health systems.</div>
+        <div class="primer-vs">Coverage is non-random; biased toward academic centers and specific geographies. No coverage outside network.</div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#C8A060">SP</div>
+        <div class="primer-head" style="color:#C8A060">Specialty Pharmacy Data</div>
+        <div class="primer-body">Hub, enrollment, dispense, adherence, and refill data from specialty pharmacies (Accredo, CVS Specialty, Walgreens Specialty, AllianceRx). Closest to patient-level truth for specialty biologics.</div>
+        <div class="primer-vs">Access requires manufacturer contracting. Data sharing restrictions vary. Excluded SPs create blind spots.</div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#D47878">Dist</div>
+        <div class="primer-head" style="color:#D47878">Distributor / Ex-Factory</div>
+        <div class="primer-body">Sales from manufacturer to wholesaler (McKesson, AmerisourceBergen, Cardinal Health). Upstream of patient demand; influenced by stocking behavior. Used for GTN accruals and inventory pipeline.</div>
+        <div class="primer-vs">Does not equal patient demand. Inventory build/drawdown creates demand signal distortion. Not patient-linked.</div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#68C8A8">EHR</div>
+        <div class="primer-head" style="color:#68C8A8">Electronic Health Records</div>
+        <div class="primer-body">Structured clinical data (diagnoses, vitals, labs, unstructured notes) from provider EHR systems (Epic, Cerner, Allscripts/Veradigm, Practice Fusion). Richest clinical context but fragmented across health systems.</div>
+        <div class="primer-vs">Coverage is non-random; biased by EHR vendor market share, practice type, and geography. No cross-network visibility.</div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#B888D8">Lab</div>
+        <div class="primer-head" style="color:#B888D8">Clinical Lab / Diagnostics</div>
+        <div class="primer-body">Biomarker values, diagnostic test results, and test orders from national reference labs (Quest, LabCorp) or in-house hospital lab systems. Critical for precision medicine and biomarker-driven population identification.</div>
+        <div class="primer-vs">Reference labs miss in-house hospital lab results. Test orders ≠ results. Reference ranges vary by lab and instrument across vendors.</div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#E878A8">NGS</div>
+        <div class="primer-head" style="color:#E878A8">Genomics / Multi-Omic</div>
+        <div class="primer-body">Next-generation sequencing panel data, tumor biomarker profiles, ctDNA liquid biopsy, and pharmacogenomic results from Tempus, Foundation Medicine, Caris, Guardant. Foundation of precision oncology and targeted therapy development.</div>
+        <div class="primer-vs">Academic center bias; FFPE quality failures are non-random; panel gene coverage differs; somatic vs. germline classification errors possible.</div>
+      </div>
+      <div class="primer-card">
+        <div class="primer-icon" style="color:#D8A850">Rpt</div>
+        <div class="primer-head" style="color:#D8A850">Analyst Reports / Forecasts</div>
+        <div class="primer-body">Secondary research, market forecasts, pipeline intelligence, and formulary tracking from intelligence vendors (Clarivate/DRG, Evaluate, GlobalData, Norstella/MMIT, Citeline). Used for competitive intelligence, market sizing, and BD&amp;L valuation.</div>
+        <div class="primer-vs">Consensus forecasts have documented optimism bias. Reports lag real-time events. Methodology not always transparent. Updates on 1–2 year cycles.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="output"></div>
+
+</main>
+
+<footer>
+  <em>Pharma Data Caveats Reference</em> · 24 vendors · 12 dimensions · EHR · Lab · Genomics · Registries · SDoH · AI/ML · Analyst Reports · All major US pharma data assets
+</footer>
+
+<script>
+const DIMS = {
+  pharmacy:     { label:"Pharmacy Claims",     cls:"dim-pharmacy"     },
+  medical:      { label:"Medical Claims",      cls:"dim-medical"      },
+  manufacturer: { label:"Manufacturer Restriction", cls:"dim-manufacturer" },
+  collection:   { label:"Collection Method",   cls:"dim-collection"   },
+  coverage:     { label:"Population Coverage", cls:"dim-coverage"     },
+  lag:          { label:"Data Lag / Timing",   cls:"dim-lag"          },
+  coding:       { label:"Coding / Quality",    cls:"dim-coding"       },
+  patient:      { label:"Patient Linkage",     cls:"dim-patient"      },
+  ehr:          { label:"EHR / Clinical Data",   cls:"dim-ehr"         },
+  lab:          { label:"Lab / Diagnostics",     cls:"dim-lab"         },
+  genomics:     { label:"Genomics / Biomarker",  cls:"dim-genomics"    },
+  analyst:      { label:"Analyst Report / Forecast", cls:"dim-analyst" },
+};
+
+const SEV = { H:"High", M:"Medium", L:"Low" };
+
+const VENDORS = [
+  // ── IQVIA ──────────────────────────────────────────────────────────────
+  {
+    id:"iqvia", name:"IQVIA", color:"#4A8CB8",
+    tagline:"NPA · NSP · DDD · MIDAS · Xponent · LRx · FIA · PlanTrak",
+    datasets:["NPA / Xponent","NSP","DDD","MIDAS","LRx","FIA","PlanTrak / NSP","One Key"],
+    caveats:[
+      {
+        dim:"pharmacy", sev:"H",
+        title:"NPA projection factor introduces error in low-volume segments",
+        body:"NPA is panel-based (~93% pharmacy coverage) and projected to national total via proprietary algorithms. For specialty products dispensed through limited distribution networks (<5–10 SPs) the panel may capture 0 transactions, forcing projection from zero — producing systematically underestimated or zero volumes. The projection factor is not disclosed to clients.",
+        mit:"Cross-validate NPA volume against manufacturer's own channel data (867) and SP dispense reports. For LDD products, treat NPA as floor estimate only. Use IQVIA's SP-specific panels where contracted."
+      },
+      {
+        dim:"manufacturer", sev:"H",
+        title:"Manufacturer data-sharing restrictions create blinded volumes",
+        body:"Some manufacturers restrict IQVIA from reporting product-level volumes to competitors (e.g., Biogen historically restricted MS product data). These restrictions mean IQVIA presents blinded or suppressed product lines, forcing analysts to infer volumes from class-level totals minus visible competitors.",
+        mit:"Sum visible competitor TRx and subtract from therapeutic class total to triangulate restricted product. Supplement with CMS Part D, earnings call guidance, and SP proxy data. Flag blinded products in all analyses with explicit caveat."
+      },
+      {
+        dim:"coverage", sev:"H",
+        title:"Hospital outpatient and buy-and-bill channels excluded from NPA",
+        body:"NPA captures retail, mail, and LTC pharmacy dispenses only. It does not capture drugs administered in-office or infused in hospital outpatient departments under medical benefit (J-codes). For products like SC/IV biologics (neuromuscular, neuroimmunology), this may represent 30–70% of actual utilization depending on site-of-care mix.",
+        mit:"Layer IQVIA NPA with medical claims (Komodo, Optum) for J-code utilization. Use IQVIA's hospital audit for facility-based volumes. For buy-and-bill products, build a medical claims-first model and use NPA only for oral/SC retail fills."
+      },
+      {
+        dim:"pharmacy", sev:"M",
+        title:"NPA new-to-brand (NtB) flag methodology is proprietary and inconsistent across TAs",
+        body:"IQVIA flags NtB based on 12-month lookback in its panel. Patients new to IQVIA's capture (e.g., recently moved, switched to specialty from retail) may be falsely flagged as NtB. Across therapeutic areas, lookback window consistency varies. In rare disease with very low patient volumes, NtB flags can meaningfully overcount new patient starts.",
+        mit:"Apply a consistent secondary definition using longitudinal claims (LRx or Komodo) to validate NtB counts. For rare disease, reconcile against hub enrollment data and SP new-patient start reports."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"Monthly NPA data has a 4–6 week reporting lag with late-close adjustments",
+        body:"IQVIA's monthly data closes approximately 4–6 weeks after month end. An initial release is published at ~4 weeks; a final close with restatements follows at ~6–8 weeks. Preliminary data can deviate from final close by 2–5% nationally, more so for specialty products. In-month tracking therefore requires careful distinction between preliminary and final data vintages.",
+        mit:"Always mark data vintage in dashboards (preliminary vs. final). Build a 'lag-adjusted' current-period estimate using trailing average of prior-month adjustments. Avoid using preliminary data for budget calls or board reporting."
+      },
+      {
+        dim:"collection", sev:"M",
+        title:"MIDAS DDD uses WHO-defined DDDs which may not reflect actual clinical dosing",
+        body:"IQVIA MIDAS normalizes volumes to WHO-defined Defined Daily Doses (DDDs) for cross-country comparability. WHO DDDs are set for average adult maintenance dose and are rarely updated to reflect approved label changes. For products with weight-based or indication-specific dosing (e.g., eculizumab, nusinersen), DDD-normalized volumes may bear little resemblance to actual patient exposure.",
+        mit:"Always document the DDD value used and its source (WHO ATC/DDD index version). For cross-country benchmarking of biologics, supplement DDD analysis with pack-unit analysis and label-derived dose calculations. Flag in all outputs where DDD likely underestimates or overestimates patient exposure."
+      },
+      {
+        dim:"coverage", sev:"M",
+        title:"LRx longitudinal linkage degrades for patients changing insurance or using cash pay",
+        body:"IQVIA LRx links Rx records to individual patients using a proprietary patient key. Linkage quality drops significantly when patients change payers (commercial → Medicare, job loss), pay cash, or move states. In rare disease where patients frequently change coverage during benefit fights, longitudinal continuity is systematically broken.",
+        mit:"Use LRx for aggregate-level adherence trending, not patient-level case tracking. For individual patient monitoring (rare disease), rely on hub/SP data with direct patient identifiers. Supplement LRx persistence curves with SP-reported MPR/PDC."
+      },
+      {
+        dim:"coding", sev:"L",
+        title:"FIA adjudication data covers only ~55% of pharmacy transactions",
+        body:"IQVIA's Formulary Impact Analyzer captures adjudication outcomes (paid, rejected, reversed) from ~55% of pharmacy switches and clearinghouses. The remaining 45% — including some large independent pharmacy networks and certain PBM-proprietary switches — are not covered. Rejection rates and PA denial patterns are therefore underestimated.",
+        mit:"Supplement FIA with CoverMyMeds ePA data for prior authorization patterns. Use FIA directionally for formulary tier analytics rather than absolute rejection rate counts. Cross-validate with payer-reported data where available."
+      },
+    ]
+  },
+
+  // ── KOMODO HEALTH ──────────────────────────────────────────────────────
+  {
+    id:"komodo", name:"Komodo Health", color:"#6B5CA5",
+    tagline:"Healthcare Map · Open + Closed Claims · National Drug Projections · KPI",
+    datasets:["Healthcare Map","Open Claims","Closed Claims (Medicare FFS)","National Drug Projections","KPI (Patient Insurance)"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"Open claims do not represent all payers — commercial coverage is non-random",
+        body:"Komodo's open claims derive from clearinghouse and aggregator feeds, predominantly covering commercial insurers, Medicare Advantage, and some Medicaid managed care. Fee-for-service Medicaid, uninsured populations, VA/IHS, and TRICARE patients are substantially underrepresented. For products with significant Medicaid or low-income patient populations, open claims systematically undercount utilization.",
+        mit:"Layer Komodo open claims with CMS 100% Medicare FFS data (available via Komodo's qualified entity status) for Medicare populations. For Medicaid, supplement with state MMIS data or CMS T-MSIS. Always document the payer mix of the Komodo dataset used for a given analysis."
+      },
+      {
+        dim:"manufacturer", sev:"H",
+        title:"Specialty pharmacy data blocking creates systematic gaps for LDD products",
+        body:"Manufacturers with limited distribution programs often contractually restrict SPs from sharing patient-level dispense data with third-party aggregators. Komodo (and all open-claims vendors) cannot capture these transactions. For products like gene therapies (one-time dosing), rare neurological agents, and some oncology products, the claimed 'patient journey' is truncated at the point of SP dispense.",
+        mit:"Supplement Komodo data with manufacturer-contracted SP data feeds or hub data for LDD products. Acknowledge the SP blind spot explicitly in all patient journey analyses. Use J-code medical claims as a proxy for infusion products where pharmacy claims are blocked."
+      },
+      {
+        dim:"patient", sev:"H",
+        title:"Patient de-identification and linkage errors across open claims sources",
+        body:"Komodo's patient linkage across multiple open-claim feeds relies on probabilistic matching (demographics, location, partial identifiers). Linkage error rates of 5–15% have been reported in validation studies, meaning a single patient may appear as multiple 'patients' or multiple patients may be linked into one record. This error is worse in populations with common demographics or frequent address changes.",
+        mit:"Apply minimum patient volume thresholds before drawing patient-level conclusions (e.g., n>30 per cohort). Validate Komodo-derived patient counts against payer-reported enrollment where possible. Treat patient counts as estimates ±15% rather than exact figures."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"Open claims have highly variable and often unpredictable reporting lag",
+        body:"Unlike IQVIA's structured monthly release, open claims from multiple sources arrive asynchronously. Some payers submit weekly; others have 90–120 day submission delays (common in Medicaid). The 'completeness' of a given time period improves for months after the nominal close date, making early-period estimates of new patient starts and market share unreliable.",
+        mit:"Build a claims maturation curve by monitoring how counts change for a fixed time period over successive data pulls. For near-real-time analysis, use Komodo's National Drug Projections which are adjusted for known lag patterns. Apply a 60–90 day run-out period before drawing conclusions from any specific month."
+      },
+      {
+        dim:"medical", sev:"M",
+        title:"ICD-10 diagnosis coding does not always reflect the indication being treated",
+        body:"For products used across multiple indications (e.g., rituximab used in RA, MS, and hematologic malignancies), the ICD-10 code on the claim reflects the visit diagnosis, not necessarily the drug indication. Overlapping codes, combination diagnoses, and coding shortcuts (e.g., 'unspecified autoimmune disorder') make indication-level attribution for multi-indication products unreliable.",
+        mit:"Develop an indication algorithm using combinations of ICD-10 codes, procedure codes, specialty, and temporal sequencing. Validate algorithm against known clinical trial populations or chart reviews. Document algorithm sensitivity and specificity; report indication attribution with explicit error bounds."
+      },
+      {
+        dim:"coverage", sev:"M",
+        title:"Pediatric and rare disease populations may be too small for valid statistical inference",
+        body:"For ultra-rare conditions (prevalence <1:100,000), even Komodo's 300M+ patient map may yield only 50–500 confirmed cases, producing highly unstable estimates for market share, treatment duration, or line-of-therapy analysis. Small denominators also amplify any patient linkage errors.",
+        mit:"For rare disease analyses, establish minimum cohort size thresholds before proceeding. Supplement with disease-specific patient registries and manufacturer hub data. Use Bayesian credible intervals rather than frequentist confidence intervals to better represent uncertainty with small samples."
+      },
+      {
+        dim:"coding", sev:"L",
+        title:"J-code specificity varies across medical claims for infusion products",
+        body:"Infusion drugs are billed via J-codes (HCPCS Level II). Some J-codes are product-specific; others are non-specific ('not otherwise classified' or NOC J-codes like J3490/J3590). Newly approved products often use NOC codes for 12–18 months post-launch, making early tracking of buy-and-bill demand unreliable in medical claims.",
+        mit:"Monitor FDA approval date and NDC assignment timeline. For products using NOC codes, supplement medical claims with SP or hub data. Build a J-code transition monitoring rule that flags when a product moves from NOC to specific J-code and restate historical figures accordingly."
+      },
+    ]
+  },
+
+  // ── OPTUM ──────────────────────────────────────────────────────────────
+  {
+    id:"optum", name:"Optum (UHG)", color:"#E86B3A",
+    tagline:"Clinformatics Data Mart · EHR · Market Clarity · de-ID Claims",
+    datasets:["Clinformatics Data Mart (CDM)","Optum EHR","Market Clarity","APCD"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"Clinformatics is closed-claims UnitedHealth members only — non-random selection",
+        body:"Optum CDM contains claims only for UnitedHealth Group (UHG) commercial and Medicare Advantage members — approximately 67M lives. These patients are systematically skewed toward commercially insured, employer-sponsored populations in certain geographies and industries where UHG has high market share. Medicaid beneficiaries, FFS Medicare, uninsured, and TRICARE populations are absent.",
+        mit:"Clearly document the population as 'UHG-insured' in all analyses. Supplement with Medicaid-specific sources (Milliman, CMS T-MSIS) and Medicare FFS data for complete picture. Reweight Clinformatics findings to national payer mix for population-level extrapolation."
+      },
+      {
+        dim:"coverage", sev:"H",
+        title:"Generalizability is limited — UHG geography, age, and SES skew findings",
+        body:"UHG has stronger market presence in certain states (e.g., Minnesota, Southeast, Southwest) and weaker presence in others (e.g., Northeast). Its commercial book skews toward working-age adults; seniors on FFS Medicare, rural/low-income populations, and children on CHIP are underrepresented. For TAs with concentrated demographics (elderly: Alzheimer's, Parkinson's; pediatric: SMA, Duchenne), CDM is particularly biased.",
+        mit:"Use census-based post-stratification weights to adjust CDM population distribution. For elderly-heavy TAs, supplement with Medicare FFS or Part D data. Always include a demographic representativeness table in any HEOR or RWE study using CDM."
+      },
+      {
+        dim:"coding", sev:"H",
+        title:"Claims are administrative — lack clinical variables for confounding control",
+        body:"CDM contains billing codes but not clinical measurements: no lab values (HbA1c, CD4 count, MRI findings), no disease severity scores, no genomic markers, and very limited vital signs. For comparative effectiveness studies, key confounders (e.g., disease severity, functional status, biomarker status) cannot be adjusted for, introducing unmeasured confounding bias.",
+        mit:"Link CDM to Optum EHR data where available for laboratory and clinical variable enrichment. Use validated proxy algorithms for disease severity (e.g., hospitalization frequency as proxy for severity). Conduct sensitivity analyses with available proxies; declare residual confounding explicitly in study limitations."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"Coverage gaps break longitudinal continuity — patient disenrollment common",
+        body:"CDM only contains data for periods when a patient is enrolled in a UHG plan. Coverage gaps due to job change, open-enrollment switching, or life events create discontinuities. A patient with a 60-day coverage gap is essentially invisible in CDM for that period. For adherence studies or treatment-sequence analyses, this produces inflated discontinuation rates and biased time-to-event estimates.",
+        mit:"Apply minimum continuous enrollment (MCE) requirements (e.g., 6 months pre-index, 12 months post-index). Use the Optum 'continuous enrollment' flag. Conduct sensitivity analyses with different MCE windows to assess impact. For long-term follow-up, supplement with Medicare FFS for patients aging into Medicare."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"CDM data has a 3–6 month lag from care encounter to data availability",
+        body:"Medical and pharmacy claims must be adjudicated, submitted, processed, and de-identified before inclusion in CDM. This pipeline typically takes 3–6 months, meaning CDM cannot support near-real-time commercial analytics. For launch monitoring or quarterly market share reporting, CDM lag is prohibitive.",
+        mit:"Use CDM for retrospective effectiveness, burden-of-illness, and treatment pattern studies — not near-real-time commercial tracking. For launch monitoring, use IQVIA NPA or Komodo National Drug Projections. Plan CDM-based studies with at least 6-month data lag built into the timeline."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"Pharmacy claims may not capture actual brand dispensed when DAW code is absent",
+        body:"When a physician writes for a brand but allows substitution (DAW=0), the pharmacy claim shows the generic NDC dispensed, not the brand prescribed. Brand-intent demand is therefore underestimated in pharmacy claims, particularly at LOE or in biosimilar substitution contexts.",
+        mit:"Use prescriber-level data (NPA/Xponent) for brand-intent analysis. For biosimilar switching studies, combine pharmacy claims NDC analysis with medical claims J-code tracking. Flag that CDM pharmacy claims reflect dispensed, not prescribed, product."
+      },
+    ]
+  },
+
+  // ── INTEGRICHAIN ───────────────────────────────────────────────────────
+  {
+    id:"integrichain", name:"IntegriChain", color:"#3A8A6A",
+    tagline:"867 Channel · GTN Analytics · Chargeback · 340B · ICyte Platform",
+    datasets:["EDI 867 (Product Transfer & Resale)","EDI 844 / 849 (Chargebacks)","EDI 852 (Inventory)","GTN Accrual Data","Specialty Pharmacy Scripts"],
+    caveats:[
+      {
+        dim:"manufacturer", sev:"H",
+        title:"867 data is routinely blinded by wholesalers — geography and customer obscured",
+        body:"Wholesalers (McKesson, AmerisourceBergen, Cardinal Health) frequently suppress identifying details in 867 product transfer data before providing to manufacturers. Common redactions include: first 3 digits of postal code only (e.g., '085xx'), weekly aggregation instead of transaction-level detail, and exclusion of specific pharmacy identities for large accounts. This makes pharmacy-level demand attribution impossible for a significant share of volume.",
+        mit:"Use IntegriChain's 'size unblinding' via machine learning (postal + account size inference) to probabilistically identify pharmacy. Overlay 852 inventory data to identify volume not reflected in 867. Use chargeback (844) data as a cross-reference since every chargeback links to an 867 sale."
+      },
+      {
+        dim:"manufacturer", sev:"H",
+        title:"340B transaction identification is incomplete and systematically undercounted",
+        body:"340B-eligible transactions should be flagged via HIN or 340B ID in chargeback submissions. In practice, many contract pharmacy transactions use standard HINs without 340B designation, leading to systematic underidentification of 340B volume. HRSA estimates suggest actual 340B volume is significantly higher than manufacturer-reported figures for many products.",
+        mit:"Implement OPAIS-based covered entity matching to identify probable 340B accounts. Cross-reference contract pharmacy lists with known 340B aggregators (e.g., Healthgrades, 340B Health). Apply analytical flags for high-volume contract pharmacy accounts in proximity to covered entities. Engage HRSA audit-readiness services to validate identification."
+      },
+      {
+        dim:"collection", sev:"H",
+        title:"Channel data excludes direct sales, government channels, and many independent pharmacies",
+        body:"IntegriChain's 867 universe primarily covers indirect sales via the three major wholesalers. Direct sales from manufacturer to large hospital systems, VA/DoD/IHS government accounts, and many independent pharmacy networks are typically not captured in standard 867 feeds. For products with significant hospital-direct or government channel presence, channel data substantially understates total demand.",
+        mit:"Obtain direct sales data from manufacturer's own order management system (SAP/Oracle) and include as a separate channel. Request supplemental 867-equivalent feeds from government distribution contractors. Reconcile ex-factory sales (NSP/total units shipped) against total 867 volume to identify the direct-sales gap."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"Returns and reversals are not always netted in 867 reports, overstating demand",
+        body:"867 data can include product returns (expired, recalled, or patient-returned product) as negative adjustments or as separate reversal records. Not all wholesalers submit returns in a standardized way; some batch monthly, others submit as separate EDI 180 records. Without proper netting, demand counts can be overstated by 2–8% depending on product maturity and channel.",
+        mit:"Implement a returns netting logic that matches return transactions to original dispense records within a defined time window. Monitor returns rate as a separate KPI and flag periods of abnormal return spikes (e.g., post-recall events). Validate netted demand against NSP ex-factory sales on a monthly basis."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"Specialty pharmacy 867 data has variable reporting frequency and lag across SP networks",
+        body:"Specialty pharmacies submit 867 data at different frequencies (daily, weekly, monthly) with variable lag. Large national SPs (Accredo, CVS Specialty) typically submit weekly. Smaller regional SPs may submit monthly with 30+ day lag. For in-month demand tracking or new patient start monitoring, the SP data universe is therefore systematically incomplete at any given point in time.",
+        mit:"Establish contractual reporting SLAs with SPs specifying frequency (weekly minimum) and lag (≤7 days). Track SP submission timeliness as a data quality KPI. For near-real-time launch monitoring, weight known submitters by historical market share and project forward until all SPs have reported."
+      },
+      {
+        dim:"coverage", sev:"L",
+        title:"GTN accrual estimates rely on transaction classification that may lag contract changes",
+        body:"GTN accruals are calculated by classifying channel transactions against contract eligibility rules. When contract terms change mid-quarter (new formulary tiers, new payer agreements), the classification logic must be updated manually. There is typically a 30–60 day lag between contract execution and full implementation in accrual models, leading to temporary GTN under- or over-accrual.",
+        mit:"Implement a contract change management workflow that flags effective dates and triggers immediate accrual model updates. Run sensitivity scenarios around contract change timing. Conduct quarterly accrual true-up reviews comparing estimated vs. actual payments."
+      },
+    ]
+  },
+
+  // ── MCKESSON / RELAYHEATH / COVERMYMEDS ───────────────────────────────
+  {
+    id:"mckesson", name:"McKesson / RelayHealth / CoverMyMeds", color:"#C8984A",
+    tagline:"RelayHealth Switch · CoverMyMeds ePA · Ontada Oncology · SP Data",
+    datasets:["RelayHealth Switch (adjudication feed)","CoverMyMeds ePA/eBV","Ontada Oncology EHR","Retail SP Dispense"],
+    caveats:[
+      {
+        dim:"pharmacy", sev:"H",
+        title:"RelayHealth switch data captures only ~65–70% of US pharmacy transactions",
+        body:"McKesson's RelayHealth switch processes pharmacy claims for approximately 65–70% of US pharmacy locations. Change Healthcare (now part of Optum/UHG) had ~25% share before its 2024 cyberattack. The remaining switches (Emdeon, NDCHealth, SureScripts for e-prescribing) are not included. Independent pharmacies and some regional chains may use different switches, creating coverage gaps.",
+        mit:"Combine RelayHealth data with adjudication feeds from other switch providers where available. Use IQVIA NPA (which aggregates across all switches) for national-level Rx counts and treat RelayHealth as a directional quality-check rather than a census. Document switch provider coverage in all analyses."
+      },
+      {
+        dim:"coverage", sev:"H",
+        title:"Change Healthcare 2024 cyberattack created months-long data gaps",
+        body:"The February 2024 Change Healthcare cyberattack disrupted pharmacy claims processing for 30+ days, affecting approximately 25% of US pharmacy claim volume. This created a systematic data gap in any claims-based dataset relying on Change Healthcare as a source (including IQVIA FIA, Komodo open claims, and Symphony). Analysis of Q1 2024 data requires explicit acknowledgement of this disruption.",
+        mit:"For any Q1 2024 analysis, apply an explicit data quality caveat and model the Change Healthcare gap period separately. Use manufacturer ex-factory data and SP reports to estimate true demand during the outage period. Avoid year-over-year growth comparisons that span the outage without adjustment."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"CoverMyMeds ePA data reflects submitted PAs, not the full prescribing intent universe",
+        body:"CoverMyMeds processes PAs submitted electronically through its platform (~94% payer connectivity). PAs submitted via phone, fax, or non-CoverMyMeds portals are not captured. Electronic PA submission penetration varies significantly by prescriber specialty and geography — higher in urban centers and large practices, lower in rural/solo practices.",
+        mit:"Use CoverMyMeds PA data to track approval rates and turnaround time trends directionally. For absolute PA volume, supplement with payer-reported data and hub-submitted PA reports. Weight CoverMyMeds PA data by ePrescribing penetration rate by specialty before drawing national conclusions."
+      },
+      {
+        dim:"coverage", sev:"M",
+        title:"Ontada oncology EHR data is limited to The US Oncology Network practices",
+        body:"Ontada (McKesson's oncology data arm) draws primarily from iKnowMed EHR used within The US Oncology Network (~1,400 physicians, ~475 sites). While substantial, this network covers approximately 10–15% of US oncology practices and has geographic and practice-type concentration (community oncology vs. academic medical centers). Academic center treatment patterns are largely absent.",
+        mit:"Supplement Ontada data with Flatiron Health (which has stronger academic center presence) for academic oncology insights. Acknowledge that Ontada reflects community oncology practice patterns specifically. For academic-setting TAs (e.g., CAR-T, HSCT), primary reliance on Flatiron is more appropriate."
+      },
+      {
+        dim:"coding", sev:"L",
+        title:"Copay card redemption data through RelayHealth may misclassify cash-pay transactions",
+        body:"Copay card redemptions processed through RelayHealth include both PBM-adjudicated copay reductions and some cash-pay assistance. The distinction between 'true cash pay' and 'copay card patient' can be blurred in the adjudication feed, affecting calculation of real patient OOP costs and copay card utilization metrics.",
+        mit:"Use the NCPDP claim type field and bin/PCN/group number to classify copay card vs. commercial adjudication. Validate copay card counts against manufacturer's own hub/program data. Work with RelayHealth to implement a standardized cash-vs-copay flag at claim submission."
+      },
+    ]
+  },
+
+  // ── SYMPHONY HEALTH (IQVIA RWE) ────────────────────────────────────────
+  {
+    id:"symphony", name:"Symphony Health / IQVIA Real-World Evidence", color:"#A84B7A",
+    tagline:"Integrated Dataverse · Open Claims · Rx/Mx Longitudinal · PatientSource",
+    datasets:["Integrated Dataverse (IDV)","PatientSource","Dx/Rx/Mx Claims Longitudinal","Integrated Treatment Profile (ITP)"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"Symphony open claims exclude Medicaid FFS and uninsured — significant population gaps",
+        body:"Symphony's Integrated Dataverse aggregates open claims from clearinghouses and data aggregators. Medicaid fee-for-service (the largest payer for many rare, chronic, and mental health conditions) is largely absent because Medicaid FFS claims route through state MMIS systems rather than commercial clearinghouses. Uninsured patients are completely absent. For oncology (higher Medicare mix) and neurology/rare disease (high Medicaid mix), this creates substantial undercounting.",
+        mit:"Always document Medicaid exclusion explicitly. Supplement Symphony with CMS T-MSIS Analytic Files (TAF) for Medicaid or use Medicaid-specialist vendors (Inovalon). For population-level disease burden estimates, apply a Medicaid coverage adjustment factor derived from NHIS or MEPS."
+      },
+      {
+        dim:"patient", sev:"H",
+        title:"Cross-source patient linkage in Integrated Dataverse introduces de-duplication errors",
+        body:"Symphony combines claims from multiple open-claim aggregators. A single patient receiving care across multiple networks may generate duplicate records linked to different synthetic patient keys. De-duplication relies on probabilistic matching; validation studies suggest 8–15% error rates for patients with frequent coverage changes or in dense urban areas with many providers.",
+        mit:"Apply a wash-out period and minimum activity requirement to reduce the impact of ghost patients. Validate patient counts for a condition against published epidemiological prevalence data. For high-precision patient journey analyses, prefer closed-claim sources (Optum CDM, Truven) which do not have cross-source linkage issues."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"Data completeness for recent periods is systematically lower than mature periods",
+        body:"As with all open claims, Symphony IDV data for a given month continues to receive late-arriving claims for 60–120 days after the nominal period close. Brand-new periods appear to have lower activity than 6-months-ago periods not because less happened, but because fewer claims have been submitted yet. This creates a 'recency bias' where current estimates systematically understate activity.",
+        mit:"Build and publish a claims maturation curve for key metrics. Apply maturation adjustment factors to near-term periods. Explicitly label any dashboard or report with data vintage and recommended minimum data age (e.g., 'do not use for periods less than 90 days old')."
+      },
+      {
+        dim:"medical", sev:"M",
+        title:"Treatment attribution is uncertain when multiple conditions are treated simultaneously",
+        body:"For patients with multiple active diagnoses (e.g., MS with depression, RA with cardiovascular disease), attributing a given treatment to a specific indication requires rule-based algorithms. ICD-10 codes at the time of prescription do not reliably distinguish indication-of-use for multi-indication drugs, creating misclassification in line-of-therapy and indication-penetration analyses.",
+        mit:"Develop validated indication algorithms using temporal diagnosis sequencing, procedure codes, and specialist type. For multi-indication products, maintain separate indication-specific cohort definitions and report indication uncertainty explicitly. Conduct algorithm sensitivity analysis by varying lookback window and required code frequency."
+      },
+    ]
+  },
+
+  // ── TRUVEN / IBM (now Merative) ────────────────────────────────────────
+  {
+    id:"truven", name:"Truven Health / IBM (Merative MarketScan)", color:"#5A7EA8",
+    tagline:"MarketScan Commercial · Medicare Supplemental · Medicaid Multi-State",
+    datasets:["MarketScan Commercial","Medicare Supplemental","Medicaid Multi-State (MDCD)","Health Risk Assessment (HRA)"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"MarketScan represents large employer plans — excludes small business and individual market",
+        body:"Truven/Merative MarketScan is built from large employer self-insured plan data. It overrepresents large corporations, excludes small business and individual marketplace plans (ACA exchanges), and has minimal COBRA coverage. The employed, full-benefit insured population skews toward higher income and better health status (healthy worker effect), biasing comorbidity profiles and healthcare utilization downward.",
+        mit:"Acknowledge the large-employer population limitation in all study designs. For conditions concentrated in low-SES or part-time worker populations, supplement with Medicaid data. Apply the 'healthy worker bias' caveat to any cost-of-illness or burden-of-disease analyses using MarketScan."
+      },
+      {
+        dim:"coverage", sev:"M",
+        title:"Medicare Supplemental sample is non-random and over-represents certain plan types",
+        body:"The MarketScan Medicare Supplemental file contains patients with both Medicare and employer-sponsored supplemental coverage — not the general Medicare population. This group tends to be higher income, more educated, and have better access to care than the average Medicare beneficiary. Findings from this file should not be extrapolated to general Medicare without adjustment.",
+        mit:"Use CMS 100% Medicare FFS data (via Komodo's qualified entity access or direct CMS research data) for representative Medicare analysis. Use MarketScan Medicare Supplemental only for analyses specific to the dual-coverage Medicare population, clearly labeling the population throughout."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"MarketScan data delivery is typically 12–18 months behind current date",
+        body:"Merative releases annual MarketScan files with a significant lag — the 2023 data year is typically not available until mid-to-late 2024. This makes MarketScan unsuitable for any analysis requiring recent data (launch monitoring, market share, current treatment patterns). It is most appropriate for retrospective HEOR studies with multi-year lookbacks.",
+        mit:"Use MarketScan only for studies with a ≥2-year retrospective window. For any current-year analysis, use near-real-time sources (IQVIA, Komodo). Plan MarketScan-based HEOR studies with 18-month minimum lead time from study design to data availability."
+      },
+    ]
+  },
+
+  // ── FLATIRON HEALTH ────────────────────────────────────────────────────
+  {
+    id:"flatiron", name:"Flatiron Health (Roche)", color:"#B84A4A",
+    tagline:"OncoEMR · Flatiron RWD · Oncology-Specific EHR + Claims",
+    datasets:["Flatiron Linked Dataset","OncoEMR","Flatiron Analytic Datasets","Real-World Survival (rwOS)","Real-World Endpoints (rwPFS, rwRR)"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"Flatiron network skews toward community oncology; academic centers are underrepresented",
+        body:"Flatiron's EHR network covers ~280 US oncology clinics with strong representation in community and regional oncology practices. Major academic medical centers (Memorial Sloan Kettering, MD Anderson, Mayo Clinic) are largely absent because they use proprietary EHR systems (Epic with custom builds). This creates a systematic underrepresentation of patients treated at high-volume cancer centers, who may have different tumor biology, treatment access, and outcomes.",
+        mit:"Supplement Flatiron with academic center data where available (SEER, institutional data partnerships, or direct academic center collaborations). For analyses of newer therapies disproportionately adopted at academic centers, acknowledge the community-practice selection bias explicitly. Use Flatiron for community oncology practice patterns; supplement for academic context."
+      },
+      {
+        dim:"coding", sev:"H",
+        title:"Real-world endpoints (rwPFS, rwOS) are derived from unstructured EHR notes and carry definitional uncertainty",
+        body:"Flatiron's real-world PFS and OS endpoints are abstracted from clinical notes, imaging reports, lab results, and structured EHR fields using NLP and human curation. The resulting endpoints are proxies, not trial-quality assessments. Studies show rwPFS and rwPFS can diverge from protocol-defined PFS by 10–30%, and rwOS has completeness issues for patients lost to follow-up in the network.",
+        mit:"Always specify exactly how rwPFS and rwOS are defined in the Flatiron dataset being used. Include sensitivity analyses using alternative endpoint definitions. Report concordance with trial-defined endpoints where available. Do not use Flatiron-derived endpoints for primary regulatory submissions without formal FDA qualification."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"Biomarker data is inconsistently documented and captured across practices",
+        body:"Biomarker testing (PD-L1, KRAS, EGFR, MMR/MSI) is increasingly standard but inconsistently entered into structured EHR fields across Flatiron practices. Many biomarker results are embedded in unstructured pathology reports or free-text notes. NLP extraction has known error rates and missingness, particularly for non-standard assay formats and multi-analyte panel results.",
+        mit:"Report biomarker availability rates in the study cohort before any biomarker-stratified analysis. Apply multiple imputation or sensitivity analyses for cohorts with high biomarker missingness. Validate NLP-extracted biomarker values against a sample of source records via human abstraction quality audit."
+      },
+    ]
+  },
+
+  // ── CARDINAL HEALTH / SPECIALTY SOLUTIONS ─────────────────────────────
+  {
+    id:"cardinal", name:"Cardinal Health / Sonexus / ASD Healthcare", color:"#6A8A4A",
+    tagline:"ASD Healthcare SP Data · Sonexus Hub · Patient Services Data",
+    datasets:["ASD Healthcare SP Dispense","Sonexus Hub Enrollment","Patient Assistance Program (PAP) Data","Returns / Reverse Distribution"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"Sonexus hub data only reflects patients enrolled in Cardinal-managed hub programs",
+        body:"Cardinal Health's Sonexus patient services data covers only patients who enroll in hub programs managed by Sonexus (not Lash Group, EVERSANA, AssistRx, or manufacturer-internal hubs). The hub-enrolled population is not a random sample — it skews toward commercially insured patients facing access barriers (PA required, high OOP cost). Patients who access therapy easily through in-network SPs often do not enroll in hub programs.",
+        mit:"Benchmark hub enrollment rates against brand NPS data to estimate the non-hub patient population. Use hub data for access analytics (PA rates, time-to-fill) rather than total patient volume estimates. Combine with SP dispense data for a fuller picture of total brand patients."
+      },
+      {
+        dim:"collection", sev:"M",
+        title:"ASD Healthcare SP data is a single specialty distributor — not representative of all SP channels",
+        body:"ASD Healthcare (Cardinal's specialty distributor) operates as a 3PL for certain manufacturers. Its SP data reflects the SP network for products that use ASD for distribution, which does not include products distributed through McKesson Specialty or AmerisourceBergen specialty networks. Product coverage in ASD data is entirely contingent on manufacturer distribution agreements.",
+        mit:"Map product distribution agreements to identify which SP network is relevant before selecting ASD as data source. For products using multiple specialty distributors, combine ASD data with corresponding 867 feeds from McKesson Specialty and ABSG. Always document which SP networks are and are not included in any SP-based analysis."
+      },
+    ]
+  },
+
+  // ── CMS / GOVERNMENT DATA ──────────────────────────────────────────────
+  {
+    id:"cms", name:"CMS / Government Data Sources", color:"#8A6A4A",
+    tagline:"Medicare Part D · Medicare FFS (100%) · Medicaid MMIS / T-MSIS · SEER · VA / PBM",
+    datasets:["Medicare Part D PUF","Medicare FFS Claims (100%)","Medicaid T-MSIS (TAF)","SEER Cancer Registry","VA Pharmacy Benefits","340B OPAIS"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"Medicare Part D Public Use Files only show patients with ≥11 claims — ultra-rare diseases invisible",
+        body:"CMS suppresses drug/prescriber cells with <11 patients in Part D Public Use Files (PUF) for privacy protection. For ultra-rare conditions where total Medicare patients on a product may number in the hundreds nationally, the entire product is suppressed. For rare disease analytics, Part D PUF is effectively useless at the product level.",
+        mit:"Apply for CMS Limited Data Set (LDS) through a Data Use Agreement for access to non-suppressed records. For approved research, use 100% Medicare FFS claims. Supplement with state-level Medicaid MMIS data for rare disease populations. Acknowledge Part D PUF suppression in all analyses and document the number of suppressed cells."
+      },
+      {
+        dim:"lag", sev:"H",
+        title:"CMS claims data has a 12–24 month lag from care date to research availability",
+        body:"CMS releases research data files with a 12–24 month lag. The 2023 calendar year data is typically not available for research until late 2024 or early 2025. Finalized Medicare FFS files undergo adjudication, de-identification, and release processes that introduce these delays. This makes CMS data entirely unsuitable for commercial market analytics but appropriate for HEOR and burden-of-disease research.",
+        mit:"Plan CMS-based HEOR studies with 18–24 month minimum data availability lead time. Use CMS data only for retrospective research questions, not near-real-time market tracking. For Medicare population analytics in commercial settings, use Komodo's qualified entity Medicare FFS access, which has shorter lag through the qualified entity pathway."
+      },
+      {
+        dim:"coverage", sev:"M",
+        title:"T-MSIS Medicaid data has severe quality variability across states",
+        body:"Transformed Medicaid Statistical Information System (T-MSIS) covers all 50 states' Medicaid claims but data quality is highly heterogeneous. Some states have data completeness issues, enrollment file gaps, or known systematic coding errors. States with large Medicaid managed care populations (which route through MCO systems rather than state FFS) have particularly incomplete fee-for-service T-MSIS records.",
+        mit:"Review CMS's published T-MSIS data quality metrics and state-specific data limitations documentation before using. Exclude states with known quality flags from analyses or weight by known completeness rate. For Medicaid managed care, supplement T-MSIS with individual state MCO encounter data or commercial Medicaid-specialist vendors (Inovalon, Milliman)."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"SEER cancer registry has diagnosis-stage completeness gaps and no treatment data",
+        body:"SEER (Surveillance, Epidemiology, and End Results) captures cancer diagnoses, staging, and survival from participating registries covering ~48% of the US population. SEER does not capture treatment details (chemotherapy regimens, targeted agents, immunotherapy). Treatment data must be linked via SEER-Medicare linkage, adding complexity and limiting to Medicare-age patients.",
+        mit:"Use SEER-Medicare linked data for treatment-outcome analyses in Medicare-age cancer patients. For treatment pattern analysis in all ages, use Flatiron or Komodo claims. Acknowledge SEER geographic coverage gaps (under-represents rural populations and certain minority groups)."
+      },
+    ]
+  },
+
+  // ── CROSS-VENDOR CONSIDERATIONS ────────────────────────────────────────
+  {
+    id:"crossvendor", name:"Cross-Vendor & Structural Considerations", color:"#8A9BB0",
+    tagline:"Applies across all vendor datasets — foundational analytical caveats",
+    datasets:["All vendor datasets","Claims vs. EHR integration","Open vs. closed claims","Pharmacy vs. Medical benefit"],
+    caveats:[
+      {
+        dim:"medical", sev:"H",
+        title:"Pharmacy benefit vs. medical benefit split creates systematic undercounting in all Rx datasets",
+        body:"A growing share of specialty biologics, oncology infusions, and cell/gene therapies are reimbursed under the medical benefit (J-codes) rather than the pharmacy benefit (NDC-based). Pure pharmacy claims datasets (NPA, SP data, Rx switch data) are completely blind to medical benefit drug utilization. For products like CAR-T (~100% medical benefit), IV infusions, and subcutaneous biologics administered in-office, pharmacy-only analysis drastically undercounts real-world utilization.",
+        mit:"For any specialty biologic or infusion product, always define the site-of-care mix and expected pharmacy vs. medical benefit split at the outset of analysis. Use J-code medical claims (Komodo, Optum, Symphony) alongside pharmacy claims. Build a blended 'combined demand model' summing pharmacy-benefit Rx and medical-benefit J-code volumes."
+      },
+      {
+        dim:"coverage", sev:"H",
+        title:"No single vendor provides complete US population coverage — triangulation is always required",
+        body:"IQVIA NPA covers 93% of retail pharmacy but misses hospital/outpatient and buy-and-bill. Komodo covers 300M+ patient lives but excludes Medicaid FFS and has linkage errors. Optum CDM covers 67M UHG members only. CMS data covers Medicare/Medicaid but has 12–24 month lag. No available dataset simultaneously covers all payer types, all channels, and all geographies at patient resolution with current data.",
+        mit:"Define the target population precisely (payer type, channel, geography) before selecting data sources. Use a minimum of two data sources for any key metric and triangulate findings. Document coverage assumptions and calculate a 'data completeness score' for each analysis. Be explicit about which populations are excluded and estimate their contribution where possible."
+      },
+      {
+        dim:"manufacturer", sev:"H",
+        title:"Manufacturer data restrictions are product-specific and not consistently disclosed",
+        body:"Multiple manufacturers (large pharma and emerging biotech) restrict data vendors from sharing product-level sales, prescription, or patient data with third parties including competitors. These restrictions are negotiated bilaterally and are not publicly disclosed — an analyst may not know a product is blinded until the data simply shows no volume for a known-marketed product. Restrictions vary by vendor.",
+        mit:"As a first step in any competitive analysis, cross-reference known marketed products against what appears in the data. Gaps in expected competitor products are strong indicators of manufacturer restrictions. Document confirmed restrictions in the analysis caveat log. Use earnings call disclosures, SEC filings, and specialty pharmacy network reports to triangulate restricted product volumes."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"De-identification methods vary across vendors — re-identification risk profile differs",
+        body:"Every commercial real-world dataset must be de-identified under HIPAA Safe Harbor or Expert Determination standards. Methods vary: some vendors use k-anonymity, others statistical perturbation, others tokenization. For ultra-rare conditions where patient volumes are in the dozens nationally, even nominally HIPAA-compliant datasets may pose re-identification risk. Institutional IRBs apply different standards to these edge cases.",
+        mit:"Conduct a formal privacy risk assessment for any study involving conditions with <1:10,000 prevalence. Apply minimum cell-size suppression rules (typically n≥10, ideally n≥20) to all published statistics. Work with IRBs proactively for rare disease RWE studies. Comply with vendor-specific patient re-identification prohibitions in DUAs."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"Different vendor data refreshes create temporal inconsistency in multi-source analyses",
+        body:"When combining IQVIA (monthly, 4–6 week lag), Komodo (near-real-time for open claims), Optum CDM (quarterly, 3–6 month lag), and CMS (annual, 12–24 month lag), analysts create datasets where different data elements describe different time periods. This temporal misalignment is especially dangerous when computing time-based metrics like treatment duration, line-of-therapy progression, or cohort persistence.",
+        mit:"Establish a single reference time horizon for each analysis and document which sources are available for that horizon. Build a 'data availability matrix' showing which vendors have data for each required time period. For current-period analyses, restrict to sources with adequate freshness (typically NPA or near-real-time claims). Never blend time periods without explicit documentation and adjustment."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"ICD-10 code sensitivity and specificity for defining patient cohorts varies widely",
+        body:"Defining a patient cohort using ICD-10 codes requires algorithm development and validation. A single primary ICD-10 code may be highly non-specific (e.g., G35 for MS also captures many non-MS patients coded for convenience). Published algorithms for common diseases vary in sensitivity (40–90%) and specificity (70–99%), meaning case ascertainment from claims is systematically imprecise.",
+        mit:"Always cite the published or internally validated algorithm used for cohort definition. Report the algorithm's known sensitivity and specificity if published. Apply ≥2 claims with relevant ICD-10 codes in a defined lookback window to improve specificity. For rare disease, consider specialist visit requirement as an additional filter. Conduct sensitivity analysis using alternative algorithm definitions."
+      },
+    ]
+  },
+
+  // ── VERADIGM / EHR DATA ───────────────────────────────────────────────
+  {
+    id:"veradigm", name:"Veradigm / EHR Data (formerly Allscripts)", color:"#5A9888",
+    tagline:"Ambulatory EHR Network · Practice Fusion · Structured + Unstructured Notes · Life Sciences RWD",
+    datasets:["Veradigm Network EHR","Practice Fusion Ambulatory","Veradigm Life Sciences RWD","Structured Clinical Notes (NLP)","ePrescribing Feed"],
+    caveats:[
+      {
+        dim:"ehr", sev:"H",
+        title:"EHR coverage is ambulatory-only — hospital inpatient data is largely absent",
+        body:"Veradigm's network is concentrated in ambulatory physician practices (primary care, internal medicine, specialist offices). Hospital inpatient EHR systems (Epic, Cerner) are separate ecosystems with their own data access models. Conditions requiring hospitalization, ICU stays, or inpatient procedures generate clinical data entirely outside the Veradigm network. For TAs with high inpatient burden (severe infections, acute neurological events, oncology infusions), Veradigm EHR data is structurally incomplete.",
+        mit:"Supplement Veradigm ambulatory EHR with hospital-based sources (Epic Cosmos where accessible, health system partnerships, or HCUP inpatient data). Build a care-setting map for the target TA before selecting EHR data source. For acute inpatient-dominant conditions, consider Flatiron (oncology) or COTA (oncology) rather than ambulatory EHR."
+      },
+      {
+        dim:"ehr", sev:"H",
+        title:"Unstructured clinical notes require NLP extraction — accuracy varies by field and condition",
+        body:"A large proportion of clinically relevant information in EHR records lives in free-text physician notes, discharge summaries, and problem lists. Veradigm and similar EHR data vendors use NLP to extract structured data from unstructured text. NLP extraction accuracy is field-specific: medication names extract at >90% accuracy; symptom severity scores, functional status, and physician judgements extract at 60–80%; rare clinical findings may extract at <50%. Error compounds when chaining NLP fields in cohort definitions.",
+        mit:"Request NLP algorithm performance benchmarks (F1 score, sensitivity, specificity) from the vendor for each field used in your analysis. Apply conservative thresholds: use NLP-extracted variables for hypothesis generation, not as primary endpoints. Validate NLP-extracted fields against a random chart review sample (n=50–100 records) before relying on them in regulatory-grade studies."
+      },
+      {
+        dim:"coverage", sev:"H",
+        title:"EHR network composition is non-random — geographic and practice-type selection bias",
+        body:"EHR network coverage depends entirely on which physician practices use that specific EHR system. Veradigm (Allscripts) has historically strong presence in certain states (Southeast, Midwest) and practice sizes (mid-size group practices) while being underrepresented in academic health systems and rural solo practices. The resulting patient population reflects the demographics of those practice catchment areas, not the national disease population.",
+        mit:"Request and review the geographic and specialty distribution of the EHR network before use. Compare the demographic profile of your study cohort (age, sex, race/ethnicity, geography) against published epidemiological benchmarks. Apply post-stratification weights where distributions deviate significantly from the national population."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"Patients change primary care providers — longitudinal continuity is broken across practices",
+        body:"Unlike closed insurance claims systems (Optum CDM), EHR data is provider-network-bound. When a patient switches primary care practice, their historical records at the previous practice are not transferred to the new EHR system. This creates truncated patient histories and artificially inflated 'new diagnosis' counts as patients appear as new to the network.",
+        mit:"Apply minimum activity lookback windows (e.g., 12 months in-network before index date). Define cohort inclusion to require continuous activity within the EHR network. Use claims data for longitudinal continuity assessment where cross-practice tracking is needed. Acknowledge that EHR-derived treatment history is network-bound, not whole-patient history."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"EHR data may reflect documentation date, not actual care date — 'note lag' bias",
+        body:"Physicians often document clinical encounters hours to days after the actual visit, especially in busy practices. EHR data timestamps may reflect when a note was finalized, not when the clinical event occurred. For time-sensitive analyses (time-to-diagnosis, time-to-treatment), using documentation date rather than care date introduces systematic bias, particularly for complex cases requiring specialist consultation before documentation.",
+        mit:"Use encounter date (visit date field) rather than note creation date for all time-anchored analyses. Apply a ≥7-day grace period around any time-based event to account for documentation lag. Validate key event dates against corresponding claims data (which uses service date) in a linked EHR-claims dataset."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"Medication data in EHR reflects prescriptions written, not dispensed — adherence invisible",
+        body:"EHR medication records capture what a physician prescribed and what is in the patient's medication list, not what the patient actually filled and took. There is no EHR-native visibility into prescription abandonment, refill behavior, or adherence. A medication appearing in a patient's EHR 'active medication list' may have been discontinued by the patient years ago without the physician updating the record.",
+        mit:"Use pharmacy claims data (IQVIA NPA, Komodo) for any adherence, persistence, or dispensing analysis. Treat EHR medication lists as 'intended therapy' rather than 'actual therapy'. For adherence studies, link EHR data to pharmacy claims via patient matching — the linked EHR-claims approach is the gold standard for this use case."
+      },
+    ]
+  },
+
+  // ── LAB DATA: QUEST / LABCORP / CLINICAL LAB NETWORKS ─────────────────
+  {
+    id:"labdata", name:"Lab Data — Quest Diagnostics / LabCorp / Veradigm Lab", color:"#8A5AB8",
+    tagline:"Clinical Lab Results · Biomarker Values · Diagnostic Test Orders · Reference Lab Networks",
+    datasets:["Quest Diagnostics Lab Results","LabCorp Lab Network","Veradigm Lab Feed","Hospital Lab Systems","Norstella Lab Data"],
+    caveats:[
+      {
+        dim:"lab", sev:"H",
+        title:"Lab results from reference labs capture only tests sent to national reference labs — in-house lab results are absent",
+        body:"Quest Diagnostics and LabCorp are national reference labs that process tests sent from outpatient physician offices and smaller hospital labs. Many large health systems and academic medical centers run their own in-house labs (Epic Beaker, Sunquest) and do not send tests externally. For biomarker-intensive TAs (oncology, autoimmune, rare disease), a significant portion of testing occurs at academic centers with proprietary in-house lab systems not accessible via commercial lab data vendors.",
+        mit:"Map the testing landscape for your target biomarker: identify what proportion is sent to national reference labs vs. processed in-house at health systems. Supplement reference lab data with health system lab data partnerships or EHR-lab linked datasets (Flatiron, Tempus) for academic center testing. Acknowledge reference lab coverage rate in all biomarker prevalence estimates."
+      },
+      {
+        dim:"lab", sev:"H",
+        title:"Lab test orders do not equal lab results returned — refusal, technical failure, and patient no-show create false positives",
+        body:"Lab data vendors can provide both test orders and results. Orders without results represent: patient non-compliance with the draw, insufficient sample quality, test technical failure, or reflexive cancellation (e.g., if a required prior test was negative). Treating all orders as equivalent to tests performed systematically overstates testing rates. For rare disease where diagnosis depends on a sequence of tests, order-without-result gaps are critical to identify.",
+        mit:"Always distinguish between test order counts and test result counts in any analysis. Apply a results-confirmation filter: only include patient records where a test result is documented, not just ordered. Track order-to-result completion rates as a data quality metric and flag conditions where completion rate falls below 80%."
+      },
+      {
+        dim:"coverage", sev:"H",
+        title:"Lab reference ranges vary across labs and instruments — cross-lab value comparison is unreliable",
+        body:"The same test performed by Quest, LabCorp, and a hospital lab using different reagents and analyzers can yield numerically different results for the same patient sample. Normal reference ranges differ by lab. When combining lab data from multiple sources (e.g., Quest + EHR lab + Komodo lab), comparing absolute values without harmonizing to lab-specific reference ranges produces spurious findings. This is particularly acute for biomarkers with narrow clinical thresholds (e.g., eGFR, CD4 count, troponin).",
+        mit:"Harmonize lab values using percent-of-upper-limit-of-normal (%ULN) or standard deviation from lab-specific reference ranges rather than absolute values. For multi-source lab studies, implement LOINC code standardization and lab-specific calibration factors. Document the lab source for each test result and conduct sensitivity analyses stratified by lab source."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"Patient-level lab results require linkage to clinical context — standalone lab data is diagnostically ambiguous",
+        body:"A serum biomarker result in isolation (e.g., elevated CXCL13, positive AChR antibody, elevated CK) has ambiguous clinical meaning without the patient's diagnosis, disease context, and clinical presentation. Lab vendors provide numerical results but not the clinical rationale for ordering or the physician's interpretation. For diagnostic sensitivity/specificity analyses or treatment response assessments, standalone lab data without linked claims or EHR context produces misleading conclusions.",
+        mit:"Always link lab data to clinical context (ICD-10 diagnoses from linked claims, EHR notes) before drawing diagnostic or treatment response conclusions. Use lab data as a supporting layer on top of a claims or EHR-defined patient cohort, not as a standalone cohort definition source. For biomarker studies, require that patients have both a disease diagnosis code and the relevant biomarker result."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"Lab data receipt and processing lag can range from days to months depending on source",
+        body:"National reference lab feeds (Quest, LabCorp) are typically available within days of result finalization for direct-contract customers. However, lab data aggregated via EHR vendors, health information exchanges (HIEs), or third-party aggregators can have lags of 30–90 days. For monitoring disease progression markers in real time (e.g., monthly lab tracking for oncology patients on therapy), aggregated lab feeds are often too slow for active monitoring.",
+        mit:"Clarify data provenance and refresh cadence at the outset: is the lab data direct from the reference lab or aggregated via a secondary source? For near-real-time lab monitoring use cases, establish direct feeds from reference labs. For retrospective research, aggregated lab data with 30–60 day lag is typically acceptable."
+      },
+      {
+        dim:"coding", sev:"L",
+        title:"LOINC code coverage is incomplete — many tests use proprietary lab codes, not standard LOINC",
+        body:"LOINC (Logical Observation Identifiers Names and Codes) is the international standard for laboratory test naming, but adoption is incomplete. Many hospital and regional labs still use proprietary internal codes. When combining lab data across sources (EHR + reference lab + health system), test identification via LOINC can miss 10–30% of equivalent tests coded differently. This causes systematic undercounting of test ordering rates and biomarker-positive patient populations.",
+        mit:"Implement a LOINC mapping table that cross-references proprietary lab codes to LOINC equivalents. Work with the lab data vendor to obtain a code crosswalk file. Apply fuzzy matching on test name text as a secondary identification method. Report the proportion of test results identified via LOINC vs. proprietary code as a quality metric."
+      },
+    ]
+  },
+
+  // ── GENOMICS: TEMPUS, FOUNDATION MEDICINE, CARIS, GUARDANT ───────────
+  {
+    id:"genomics", name:"Genomics & Precision Medicine Data (Tempus / Foundation Medicine / Caris / Guardant)", color:"#C85A8A",
+    tagline:"NGS Panel Data · Biomarker Profiles · Tumor/Normal Sequencing · Liquid Biopsy · Multi-Omic",
+    datasets:["Tempus xT / xR NGS Panel","Foundation Medicine F1CDx / FoundationOne Liquid","Caris Molecular Intelligence","Guardant360 ctDNA","BRCA/HRD Assays","Pharmacogenomics (PGx)"],
+    caveats:[
+      {
+        dim:"genomics", sev:"H",
+        title:"Genomic data is highly skewed toward patients at academic centers and large oncology practices — community oncology and rural patients are systematically underrepresented",
+        body:"Comprehensive genomic profiling (CGP) via large NGS panels is concentrated at academic medical centers and large community oncology networks (those with Tempus, FMI, or Caris contracts). Patients treated in rural, community, or underserved settings have substantially lower rates of genomic testing. In NSCLC, for example, ~60–70% of patients at academic centers receive CGP vs. <30% in community settings. Any genomic dataset therefore over-represents academic, urban, higher-income, and White/non-Hispanic patients relative to the true cancer population.",
+        mit:"Report the demographic composition of the genomic cohort and compare to the overall cancer population (SEER). Apply sample weights to adjust for testing propensity differences when using genomic data for population-level estimates. Avoid using genomic testing rates from reference lab datasets as proxies for true biomarker prevalence without this adjustment."
+      },
+      {
+        dim:"genomics", sev:"H",
+        title:"Tumor tissue quality and purity determines sequencing success — failed tests are non-random",
+        body:"NGS testing from FFPE (formalin-fixed paraffin-embedded) tumor tissue requires adequate tumor cellularity (typically ≥20–30%). Samples from small biopsies, needle aspirates, or highly necrotic tumors frequently fail quality thresholds and are not sequenced. These failures are non-random: later-line patients on chemotherapy, patients with aggressive disease, and metastatic sites have systematically lower tissue quality. Failed sequencing attempts are often not included in genomic datasets, creating survivorship bias toward higher-quality samples from earlier-stage, less treated patients.",
+        mit:"Request and document the sequencing success rate for the relevant tumor type and sample type in the dataset. Apply a failure-rate adjustment when estimating population-level biomarker prevalence. For late-line or heavily pre-treated populations, explicitly acknowledge that the available genomic data overrepresents higher quality earlier-line samples."
+      },
+      {
+        dim:"genomics", sev:"H",
+        title:"Genomic panels differ in gene coverage, variant calling algorithms, and reportable variant thresholds — cross-panel comparison is unreliable",
+        body:"Tempus xT (648 genes), Foundation Medicine F1CDx (324 genes), Caris MI (670 genes), and targeted panels (50–100 genes) have different gene content, sequencing depth, and variant classification algorithms. A biomarker 'negative' result on a limited panel may be 'positive' on a comprehensive panel. TMB (tumor mutational burden), MSI status, and HRD scoring are calculated differently by each platform with no universally agreed threshold. Pooling genomic data across platforms without harmonization produces spurious prevalence and co-alteration estimates.",
+        mit:"Restrict comparative genomic analyses to genes and alterations present on all platforms being compared. For pan-platform analyses, apply a minimum gene-overlap filter. When reporting TMB or HRD scores, always specify the platform and threshold used, and avoid direct numeric comparisons across platforms. Use harmonized genomic databases (AACR GENIE) where cross-platform normalization has been applied."
+      },
+      {
+        dim:"coverage", sev:"M",
+        title:"Liquid biopsy (ctDNA) has lower sensitivity than tissue biopsy — negative results do not rule out genomic alterations",
+        body:"Circulating tumor DNA assays (Guardant360, FoundationOne Liquid) have lower analytical sensitivity than matched tumor tissue sequencing, particularly for patients with low tumor burden, early-stage disease, or CNS-predominant metastases. False-negative rates for liquid biopsy range from 20–50% for lower-frequency alterations. A 'ctDNA-negative' result in a patient with low burden of disease may still harbor the alteration in tissue. Using liquid biopsy data as a proxy for tissue biomarker status inflates true-negative populations.",
+        mit:"Always specify whether genomic data is tissue-derived or ctDNA-derived and analyze separately. For prevalence estimation, use tissue-based CGP as the primary source. For monitoring applications (treatment response, MRD detection), ctDNA is appropriate. Never use a negative ctDNA result to classify a patient as biomarker-negative in a claim-based population analysis."
+      },
+      {
+        dim:"genomics", sev:"M",
+        title:"Clinical context linkage for genomic records is often incomplete — indication of testing unknown",
+        body:"Genomic test records in commercial databases contain the molecular result but limited clinical context about why the test was ordered. The same BRCA1 mutation may be identified in germline testing for hereditary risk assessment, in a tumor tissue test for treatment selection, or in a surveillance liquid biopsy. Without knowing the clinical indication, genomic records cannot be reliably attributed to specific treatment decision points or patient populations.",
+        mit:"Require clinical context linkage (claims-based or EHR-based) before using genomic data for commercial or outcomes analysis. Apply ICD-10 diagnosis codes to anchor the clinical indication. For treatment selection decisions, link the genomic result date to prescription initiation date and require that the drug use post-dates the genomic test."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"Germline vs. somatic variant classification errors can systematically misattribute hereditary findings",
+        body:"Somatic tumor sequencing panels can incidentally detect germline (hereditary) variants. Conversely, germline panels can detect variants of uncertain significance (VUS) that are incorrectly classified as pathogenic. Commercial genomic databases often do not reliably distinguish somatic from germline origin without matched normal sequencing. For pharma research using somatic biomarker prevalence data, inadvertent inclusion of germline variants inflates prevalence estimates.",
+        mit:"For somatic biomarker prevalence analyses, restrict to panels with confirmed tumor/normal matched sequencing (e.g., Tempus xT matched, FMI with germline control). Document the proportion of samples with matched normal sequencing and the resulting confidence in somatic vs. germline classification. Apply variant allele frequency thresholds to filter likely germline variants from tumor-only panels."
+      },
+      {
+        dim:"genomics", sev:"L",
+        title:"Variant pathogenicity classifications are periodically updated — historical datasets become outdated",
+        body:"The interpretation of specific genomic variants (pathogenic, likely pathogenic, VUS, benign) is continuously revised as more clinical evidence accumulates. A variant classified as VUS in 2019 may be reclassified as pathogenic by 2024. Commercial genomic databases may not retroactively apply updated classifications to historical records, meaning older records in multi-year cohort studies use outdated pathogenicity calls that would be classified differently today.",
+        mit:"Track variant classification dates and apply the most current ClinVar or ClinGen classifications when using multi-year genomic cohorts. Conduct sensitivity analyses comparing results under original vs. updated classifications for VUS reclassifications. Request from vendors whether their databases apply retrospective reclassification and on what schedule."
+      },
+    ]
+  },
+
+  // ── NORSTELLA (CITELINE / MMIT / EVALUATE / PANALGO) ──────────────────
+  {
+    id:"norstella", name:"Norstella Group (Citeline · MMIT · Evaluate · Panalgo)", color:"#4A7AB8",
+    tagline:"NorstellaLinQ · Pipeline Intelligence · Formulary Tracker · RWE Platform · HEOR Analytics",
+    datasets:["NorstellaLinQ (integrated RWD)","Citeline Pipeline","MMIT Formulary & Coverage","Evaluate Pharma Consensus","Panalgo IHD Platform"],
+    caveats:[
+      {
+        dim:"analyst", sev:"H",
+        title:"Citeline pipeline data is curated from public sources — proprietary and unpublished programs are absent",
+        body:"Citeline's drug pipeline database (formerly PharmaProjects / Pharma Intelligence) is built from public disclosures: company announcements, SEC filings, clinical trial registries, scientific publications, and conference presentations. Confidential programs in early discovery, programs paused without public announcement, and drugs in development at private companies with minimal disclosure obligations are not captured. Competitive pipeline analysis based solely on Citeline will systematically undercount early-stage activity at private biotech companies.",
+        mit:"Supplement Citeline pipeline data with patent filings (WIPO, USPTO), conference abstracts, licensing deal announcements, and investor presentations for early-stage intelligence. Use Citeline as a starting point for Phase 2+ competitive tracking but not as a census of discovery or Phase 1 programs. For private company pipeline intelligence, integrate business development network intelligence and investor tracking services."
+      },
+      {
+        dim:"analyst", sev:"H",
+        title:"MMIT formulary coverage data is based on plan document review — does not reflect real-time adjudication outcomes",
+        body:"MMIT (Managed Markets Insight & Technology) tracks formulary placement by reviewing plan benefit documents, formulary files, and P&T committee decisions. This reflects the formal policy decision, not the actual claim-level adjudication outcome. A product may be listed as 'covered' on formulary but effectively inaccessible due to aggressive PA criteria, step therapy requirements, or quantity limits not fully reflected in formulary documents. The gap between formulary policy and actual access is often significant for specialty brands.",
+        mit:"Cross-validate MMIT formulary data with claim-level adjudication data (IntegriChain, IQVIA FIA, CoverMyMeds) to identify the gap between nominal coverage and actual patient access. Supplement MMIT with payer-level PA approval rate data and appeals tracking. Present formulary coverage as an 'access ceiling' and adjudication data as 'realized access' to distinguish the two dimensions."
+      },
+      {
+        dim:"analyst", sev:"M",
+        title:"NorstellaLinQ integrated data inherits all underlying source limitations from each constituent dataset",
+        body:"NorstellaLinQ combines open claims, closed claims, lab results, and EMR data in a single platform. While the integration is valuable, it does not eliminate the underlying caveats of each source: the open claims have Medicaid gaps, the lab data has reference lab coverage issues, and the EMR data has ambulatory-only bias. Claims of '74 billion data points' should not be interpreted as comprehensive population coverage — the integration creates new analytical power but not new data completeness.",
+        mit:"When using NorstellaLinQ, explicitly trace which component data source underlies each analytical output. Document the coverage characteristics of the relevant source, not the platform as a whole. Do not use the platform's scale claims as a substitute for specific coverage documentation in study protocols or regulatory submissions."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"Panalgo IHD data refresh cycles vary by data type — not all datasets update simultaneously",
+        body:"Panalgo's Integrated Health Data (IHD) platform hosts multiple data types (claims, EHR, lab) from different sources with different refresh cadences. When analysts run cross-source analyses within IHD, the underlying datasets may represent different time periods. A claims-based cohort built in IHD may have more recent data than the linked lab or EHR records, creating temporal misalignment within a single analytical workflow.",
+        mit:"Document the data vintage for each source in every analysis run within IHD. Build a standard 'data currency' check into all IHD study protocols that records the last-updated date for each source and flags misalignments exceeding 90 days. When presenting results from multi-source IHD analyses, include a data version table in the methods section."
+      },
+    ]
+  },
+
+  // ── CLARIVATE / DRG ───────────────────────────────────────────────────
+  {
+    id:"clarivate", name:"Clarivate / Decision Resources Group (DRG)", color:"#B87A3A",
+    tagline:"Cortellis · DRG Market Analysis · Disease Landscape Reports · Commercial Analytics 360 · Patient Claims RWD",
+    datasets:["Cortellis (pipeline/regulatory)","DRG Disease Landscape & Forecast","DRG Commercial Analytics 360","Clarivate Real-World Claims","Medtrack / DRG Drug Products"],
+    caveats:[
+      {
+        dim:"analyst", sev:"H",
+        title:"DRG market forecast models are analyst-authored — methodology varies by disease area team and is not fully transparent",
+        body:"DRG Disease Landscape & Forecast reports are produced by individual therapeutic area analyst teams using proprietary models. The methodology (patient-based vs. revenue-based, market share assumptions, analogue selection, treatment algorithm modeling) is described at high level but the underlying model assumptions are not publicly auditable. Different DRG analysts in different TAs apply different modeling conventions, making cross-TA comparison of DRG forecasts unreliable. Updates to forecasts following regulatory events can lag by weeks to months.",
+        mit:"Always request the methodology note and key assumptions behind any DRG forecast before use. Cross-validate DRG market size estimates against internal patient-based models and alternative forecasting sources (Evaluate Pharma, EvaluateMedTech). For board-level or deal-valuation use cases, treat DRG as one data point in a triangulated forecast, not as ground truth. Track the report date and reconfirm relevance after major regulatory, clinical, or competitive events."
+      },
+      {
+        dim:"analyst", sev:"H",
+        title:"Cortellis clinical and regulatory data lags real-time events by days to weeks",
+        body:"Cortellis compiles clinical trial, regulatory filing, and approval data from public sources (ClinicalTrials.gov, FDA, EMA). While generally timely, there is an inherent delay between a regulatory action or trial update and its appearance in Cortellis — typically 3–14 days for major regulatory actions, and 1–4 weeks for trial protocol amendments or partial clinical results. For rapidly moving competitive landscapes (Phase 3 readouts, accelerated approvals), Cortellis is not a real-time source.",
+        mit:"For real-time competitive monitoring of regulatory actions, supplement Cortellis with direct FDA/EMA approval RSS feeds, SEC Form 8-K filings, company IR press releases, and AlphaSense for earnings-call transcripts. Use Cortellis as the structured record-keeping backbone of your competitive intelligence program, not as the first-alert layer."
+      },
+      {
+        dim:"coverage", sev:"M",
+        title:"DRG Commercial Analytics 360 provider data is claims-derived with standard claims coverage gaps",
+        body:"DRG's Commercial Analytics 360 (CA360) uses medical claims data to identify treating providers and patient volumes by ICD-10/CPT code. It therefore inherits all standard medical claims limitations: Medicaid FFS gaps, VA/IHS exclusion, claims coding imprecision, and the challenge of distinguishing treating specialist from referring generalist in attribution. For rare diseases with small patient volumes, provider-level statistics are subject to cell suppression.",
+        mit:"Apply the standard claims-data caveats to CA360 outputs. For rare disease provider targeting, supplement CA360 with specialty society member directories, clinical trial investigator lists (Citeline TrialTrove), and conference faculty rosters to identify high-volume centers not visible in claims due to low volume suppression."
+      },
+      {
+        dim:"analyst", sev:"M",
+        title:"Clarivate product portfolio is in active restructuring — data product continuity is uncertain through 2026",
+        body:"Clarivate announced in February 2026 that it is exploring a sale of its entire Life Sciences & Healthcare segment (including Cortellis, DRG). The company has previously divested non-core products (ScholarOne sold November 2024). This corporate uncertainty creates risk for long-term reliance on Clarivate data contracts — data access, product development investment, and analyst team continuity may all be affected by ownership changes.",
+        mit:"Monitor Clarivate corporate developments and diversify intelligence sources across multiple vendors rather than building deep platform dependency on any single Clarivate product. Ensure data export rights and offline archival capabilities in any current Clarivate contract. Have alternative vendor evaluations (Citeline, GlobalData, Evaluate) underway as contingency."
+      },
+    ]
+  },
+
+  // ── EVALUATE PHARMA / GLOBALDATA / ALPHASE ────────────────────────────
+  {
+    id:"evaluate", name:"Evaluate Pharma / GlobalData / AlphaSense", color:"#5A8A5A",
+    tagline:"Consensus Forecasts · Pipeline Valuation · Analyst Intelligence · Market Sizing · M&A Monitoring",
+    datasets:["Evaluate Pharma Consensus","Evaluate Omnium (predictive)","GlobalData Pharma Intelligence","AlphaSense Document Search","EvaluateMedTech"],
+    caveats:[
+      {
+        dim:"analyst", sev:"H",
+        title:"Evaluate consensus forecasts are based on sell-side analyst models — subject to systematic optimism bias",
+        body:"Evaluate Pharma's consensus sales and revenue forecasts aggregate projections from sell-side investment bank analysts. This population has well-documented optimism bias: analysts covering companies they have investment banking relationships with systematically produce more favorable forecasts. Consensus forecasts for pre-approval assets and early-launch products consistently overestimate peak sales. Historical back-testing shows Evaluate consensus forecasts exceed actual peak sales by 20–40% on average for specialty brands.",
+        mit:"Apply a systematic discount to Evaluate consensus forecasts for pre-approval and early-launch products (commonly 20–30% haircut for specialty; higher for first-in-class). Build internal patient-based bottom-up models to triangulate against consensus. For peak-sales-based deal valuations, present consensus as an upside scenario, not a base case."
+      },
+      {
+        dim:"analyst", sev:"H",
+        title:"GlobalData market reports rely on secondary research and proprietary models without primary market research validation",
+        body:"GlobalData's therapeutic area reports and market size estimates are compiled by in-house analysts using publicly available sources (clinical trial data, regulatory filings, company reports, published epidemiology). They do not incorporate primary market research (physician surveys, payer advisory boards, patient charts) unless explicitly stated. For novel TAs with limited prior art or rapidly evolving competitive landscapes, GlobalData model assumptions may lag real-world clinical practice by 12–24 months.",
+        mit:"Use GlobalData as a background intelligence and competitive positioning tool, not as a primary source for internal business cases. Validate GlobalData's epidemiology and treatment prevalence assumptions against current literature, specialist panels, and IQVIA/Komodo data. For newly approved or near-launch products, commission primary market research to supplement GlobalData's secondary research estimates."
+      },
+      {
+        dim:"analyst", sev:"M",
+        title:"AlphaSense document coverage has gaps in non-English, small-cap, and private company sources",
+        body:"AlphaSense aggregates earnings call transcripts, regulatory filings, analyst reports, and news from a broad source universe. However, its coverage of non-English language regulatory bodies (e.g., PMDA Japan, NMPA China, ANVISA Brazil), small-cap and micro-cap biotech companies, and private company disclosures is substantially thinner than its coverage of large-cap US and European pharma. For competitive intelligence on ex-US markets or emerging biotech, AlphaSense may significantly underrepresent relevant intelligence.",
+        mit:"Supplement AlphaSense with native-language regulatory body databases (PMDA, NMPA portals) for ex-US regulatory intelligence. For private biotech monitoring, combine AlphaSense with ClinicalTrials.gov alerts, PubMed citation monitoring, LinkedIn company tracking, and patent citation analysis. Use Citeline or Cortellis as the structured database backbone and AlphaSense as the unstructured document intelligence layer."
+      },
+      {
+        dim:"analyst", sev:"M",
+        title:"Analyst report forecasts do not update in real time — stale forecasts are routinely used in decisions",
+        body:"Published analyst reports (DRG disease landscape, GlobalData TA report, Evaluate Pharma forecast files) are produced on a 1–2 year update cycle. Major interim events — competitive drug approvals, Phase 3 failures, label changes, payer coverage decisions — can materially alter market dynamics between report updates. An analyst report produced before a competitor's approval will not reflect post-competition market erosion, but may still be the most recent available 'authoritative' source.",
+        mit:"Always record the publication date of any analyst report used in a decision and check whether major market-shaping events (new approvals, major trial readouts, label changes) have occurred since publication. Build a 'staleness flag' policy: reports >18 months old in a rapidly evolving TA should trigger an update request or an internal refresh before use in deal valuation or board presentations."
+      },
+    ]
+  },
+
+  // ── MMIT / MANAGED MARKETS INTELLIGENCE ──────────────────────────────
+  {
+    id:"mmit", name:"MMIT — Managed Markets Insight & Technology", color:"#8A4A78",
+    tagline:"Formulary Coverage Tracker · Access Monitoring · Payer Policy Tracking · Lives Coverage Analytics",
+    datasets:["MMIT Formulary Coverage","MMIT Payer Policy Files","MMIT Access Analytics Platform","MMIT Specialty Coverage","MMIT Medicare/Medicaid Tracker"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"MMIT coverage data has variable completeness for regional and smaller payer plans",
+        body:"MMIT's coverage database is most complete for major national PBMs (Express Scripts, CVS Caremark, OptumRx) and large national health plans (United, Anthem, Aetna, Cigna). Regional and state-specific plans, some Medicaid managed care organizations, and many smaller commercial plans may have incomplete or delayed formulary data. For products with disproportionate representation in regional markets or state-specific Medicaid plans, MMIT coverage estimates can significantly overstate uncovered lives by failing to capture smaller plan coverage.",
+        mit:"Request MMIT's live coverage by plan documentation and verify completeness for the specific payer segments most relevant to your product. For state-Medicaid-heavy products, supplement MMIT with direct state formulary portal tracking (each state Medicaid program publishes its preferred drug list). For regional product launches, build a payer coverage map that includes MMIT and direct plan verification for top 20 accounts."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"MMIT formulary file refresh cycle lags actual P&T committee decisions by 4–12 weeks",
+        body:"MMIT updates formulary data following its own collection schedule, which lags actual P&T committee decisions by weeks. Major national PBMs typically update monthly, but the date of a coverage decision and the date it appears in MMIT's system can differ by 4–12 weeks. For new product launches and the critical first-year formulary negotiation period, MMIT data may not reflect the most current coverage status at any given point.",
+        mit:"During launch and early access build period, supplement MMIT with direct payer outreach via Medical Science Liaisons (MSLs) and access team contacts to verify formulary decisions in real time. Track the lag between known coverage decisions (confirmed by access team) and MMIT's update as a quality metric. For board reporting, disclose the MMIT data vintage and known post-vintage coverage decisions."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"MMIT restriction tiers (non-formulary, step therapy, PA required) may not fully capture all access barriers",
+        body:"MMIT categorizes formulary placement into standard tiers (preferred, non-preferred, PA required, step edit, etc.). However, the specific criteria within a PA policy or step therapy requirement — what prior therapies are required, what documentation is needed, what the approval duration is — are often described at a summary level rather than at full clinical detail. Analysts using tier-only MMIT data may underestimate the practical access burden for specific patient populations.",
+        mit:"For access strategy and field execution, supplement MMIT tier data with full PA criteria from payer portals and pharmacy benefit manager coverage criteria documents. Where available, use IQVIA FIA or CoverMyMeds PA approval rate data to translate tier classifications into actual patient impact. Document that MMIT tier ≠ effective access and build a 'tier-to-access conversion factor' based on observed PA approval rates."
+      },
+    ]
+  },
+
+  // ── INOVALON / APIXIO ─────────────────────────────────────────────────
+  {
+    id:"inovalon", name:"Inovalon / Apixio", color:"#4A6A9A",
+    tagline:"Medicaid Analytics · Medicare Advantage · Risk Adjustment · Multi-Payer Claims · AI-Driven RWD",
+    datasets:["Inovalon ONE Platform","Apixio (AI Risk Adjustment)","Medicaid Claims (Multi-State)","Medicare Advantage Claims","SDoH-Linked Claims","HEDIS Analytics"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"Inovalon's Medicaid data is multi-state aggregated but not nationally representative — state mix varies by client contract",
+        body:"Inovalon aggregates Medicaid data from multiple state programs but the specific state mix available to any given client depends on individual data access agreements. Not all 50 states are uniformly represented, and some states' Medicaid data may be older or less complete than others. A client using Inovalon for 'national Medicaid' analysis may actually be working with data that significantly underrepresents certain high-Medicaid states (California, New York, Texas have complex multi-MCO structures) relative to their true share of the Medicaid population.",
+        mit:"Request a state-level data availability and completeness map from Inovalon before any analysis intended to generalize to the national Medicaid population. Weight analyses by state-specific Medicaid enrollment counts from CMS published data. For states with known gaps, supplement with state MMIS data or CMS T-MSIS where access allows."
+      },
+      {
+        dim:"coding", sev:"H",
+        title:"Risk-adjustment and HEDIS codes in Medicaid data are optimized for payment, not clinical accuracy",
+        body:"Medicaid claims coding is heavily influenced by risk-adjustment incentives (e.g., CDPS, RxHCC), quality measure performance (HEDIS), and administrative billing optimization. Diagnoses may be systematically over- or under-documented based on financial incentives of health plans and providers. Certain conditions are over-coded (to capture higher capitation rates) while others are under-coded (to avoid audit triggers). Using these codes for clinical population identification without understanding the incentive structure produces biased cohorts.",
+        mit:"Apply a minimum of two claims with the relevant diagnosis code, in conjunction with relevant procedure codes or pharmacy fills, to improve specificity against incentive-driven over-coding. For HEOR studies using Medicaid data, validate case ascertainment algorithms against published literature or chart reviews. Include payment and risk-adjustment context in the limitations section of any study."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"Medicaid enrollment churning creates frequent patient identity breaks in longitudinal analyses",
+        body:"Medicaid beneficiaries frequently gain and lose eligibility based on income fluctuations, administrative renewals, and state policy changes. Annual Medicaid disenrollment rates of 20–40% create systematic breaks in longitudinal patient tracking. A patient with a 90-day enrollment gap is invisible in Inovalon data for that period, and their records before and after the gap may appear under different patient identifiers if re-enrollment generates a new ID.",
+        mit:"Apply strict continuous enrollment requirements (minimum 6-month consecutive enrollment without gap). Use Inovalon's patient master or proprietary matching algorithms to bridge enrollment gaps where available. Conduct sensitivity analyses with and without gap bridging to assess the impact on longitudinal metrics. Report the mean enrollment duration and gap rate for the study cohort."
+      },
+      {
+        dim:"coverage", sev:"M",
+        title:"Social Determinants of Health (SDoH) linkage quality varies and may introduce selection bias",
+        body:"Inovalon and Apixio offer SDoH data linkage (geographic, socioeconomic, social risk factors derived from census, commercial databases, or predictive models). SDoH data quality is highest in urban areas with dense data provider coverage and lowest in rural areas. Predictive SDoH models (e.g., predicted food insecurity, housing instability) have AUC values of 0.65–0.80, meaning a significant proportion of high-risk patients are not flagged. Using SDoH-linked data to adjust for social factors may create a false sense of completeness.",
+        mit:"Document the source and methodology of each SDoH variable used (measured vs. modeled vs. census-imputed). Report SDoH data coverage rate by geography. For rural-heavy patient populations, acknowledge lower SDoH data density. In regression analyses controlling for SDoH, treat modeled SDoH variables as noisy proxies and conduct sensitivity analyses with and without SDoH adjustment."
+      },
+    ]
+  },
+
+  // ── TRINETX / COTA / HEALTH DATA NETWORKS ─────────────────────────────
+  {
+    id:"trinetx", name:"TriNetX / COTA / Health Data Networks", color:"#5A7AAA",
+    tagline:"Federated EHR Networks · Real-Time Cohort Discovery · Oncology RWD · Clinical Trial Feasibility",
+    datasets:["TriNetX Global Network (federated EHR)","COTA Real-World Oncology","TriNetX Research Network","Federated Query API","COTA CancerBase"],
+    caveats:[
+      {
+        dim:"ehr", sev:"H",
+        title:"Federated query results are aggregated counts only — patient-level data never leaves the source institution",
+        body:"TriNetX operates as a federated network: analysts issue queries that execute locally at each member health system and receive only aggregate counts in return. This means a TriNetX result showing '850 patients matching criteria' is a sum of local counts that cannot be independently validated, deduplicated across sites, or linked to patient-level records. A patient seen at two member institutions may be double-counted. There is no mechanism to verify data quality at individual site level or to obtain individual patient records for validation.",
+        mit:"Treat TriNetX patient counts as estimates with ±10–20% uncertainty range due to potential site-level double-counting and quality variation. Do not use TriNetX for patient-level adherence, treatment sequence, or longitudinal outcome analyses — it is appropriate for cohort feasibility sizing and site selection only. For studies requiring patient-level data, follow up TriNetX feasibility with site-specific data extraction agreements at the highest-count institutions."
+      },
+      {
+        dim:"coverage", sev:"H",
+        title:"TriNetX member network composition is health-system-self-selected — coverage is non-random geographically and by facility type",
+        body:"TriNetX membership is voluntary and fee-based. Health systems that join tend to be larger, more research-active, and more urban than the overall distribution of US healthcare facilities. Rural critical-access hospitals, small community practices, Federally Qualified Health Centers (FQHCs), and safety-net providers are significantly underrepresented. For disease areas with higher prevalence in rural or underserved populations (e.g., type 2 diabetes in Appalachia, hypertension in the Deep South), TriNetX underestimates true patient volumes in these demographics.",
+        mit:"Request and review the geographic and facility-type distribution of the specific TriNetX network tier being used (Global vs. Research Network vs. specific regional consortium). Supplement TriNetX feasibility data with SEER or HCUP statistics for rural and safety-net population estimates. Flag the network composition in all feasibility reports presented to clinical trial sponsors."
+      },
+      {
+        dim:"ehr", sev:"H",
+        title:"COTA oncology data is curated from structured + abstracted EHR — abstraction quality varies across tumor types and sites",
+        body:"COTA's oncology database combines EHR data with human abstraction of clinical notes to create structured treatment history and outcome records. Abstraction quality (accuracy of staging, treatment regimen, and response assessments) varies by cancer type, site-of-care, and the completeness of source documentation. For rare cancers, uncommon regimens, and patients with complex multi-line treatment histories, abstraction errors compound — a misclassified line of therapy propagates errors into all downstream time-to-event analyses.",
+        mit:"For COTA-based analyses, request the abstraction quality audit results for the specific cancer type and time period of interest. Apply a minimum data completeness filter (e.g., exclude records with >20% missing fields for required variables). Validate key clinical variables (e.g., stage at diagnosis, first-line regimen start date) against a random chart review sample. Treat COTA as particularly reliable for common regimens in well-characterized cancers and use with extra caution for rare tumors or investigational regimens."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"TriNetX data freshness varies by site and is not uniformly disclosed — 'real-time' claims are often overstated",
+        body:"TriNetX markets itself as providing real-time or near-real-time EHR data access. In practice, data refresh cadence varies enormously by member institution: some sites sync daily via API, others sync weekly, and some larger academic medical centers update monthly due to the complexity of their EHR systems. The platform does not uniformly disclose each site's data currency in query results, so an analyst may unknowingly receive results that are weeks or months stale for specific sites.",
+        mit:"Request data vintage documentation from TriNetX for the specific sites most heavily weighted in a query result. For time-sensitive analyses (e.g., monitoring recent treatment initiation rates), require documentation of data refresh dates from the top 10 contributing sites. Do not use TriNetX for near-real-time commercial tracking; it is best suited for design-phase feasibility with a 3–6 month data horizon tolerance."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"COTA patient follow-up is bounded by time in the treating institution's EHR — post-transfer events are lost",
+        body:"COTA's data reflects the patient's clinical record within the participating health systems. When a patient transfers care to a non-COTA institution, receives hospice care outside the network, or is lost to follow-up, their clinical record simply ends. This creates artificially right-censored survival curves and understated event rates (disease progression, death). For overall survival analyses particularly, missing out-of-network deaths can produce optimistic rwOS estimates.",
+        mit:"Link COTA records to Social Security Death Index (SSDI) or NDI (National Death Index) for mortality ascertainment outside the network. Report the proportion of patients with complete vs. censored follow-up. For rwOS analyses, apply a competing risks analysis and sensitivity analyses assuming different censoring mechanisms. Present Kaplan-Meier curves with confidence intervals explicitly acknowledging censoring assumptions."
+      },
+    ]
+  },
+
+  // ── AMERISOURCEBERGEN (CENCORA) / ABSG ────────────────────────────────
+  {
+    id:"absg", name:"AmerisourceBergen (Cencora) / ABSG Specialty Group", color:"#7A5A9A",
+    tagline:"Specialty Drug Distribution · ION Analytics Oncology · Lash Group Hub · 3PL Specialty Pharmacy",
+    datasets:["ABSG Specialty Distributor 867","ION Analytics Oncology Practice Data","Lash Group Hub & PAP Data","3PL Dispense Records","Xcenda Market Access Consulting"],
+    caveats:[
+      {
+        dim:"collection", sev:"H",
+        title:"ABSG 867 specialty data covers only the AmerisourceBergen distribution network — products distributed via McKesson or Cardinal are absent",
+        body:"AmerisourceBergen Specialty Group (ABSG) is one of three major specialty drug distributors alongside McKesson Specialty and Cardinal Health. Products contracted through ABSG appear in its 867 data, but the same product's volumes distributed via McKesson or Cardinal are invisible. Many manufacturers split distribution across distributors for business continuity, meaning ABSG data may represent 30–60% of a product's total volume depending on distribution agreement structure. Using ABSG data alone as a channel proxy will systematically understate demand.",
+        mit:"Map the manufacturer's full distribution agreement to identify what share of volume flows through ABSG vs. other distributors before using ABSG 867 as a demand proxy. Reconcile ABSG 867 volume against total ex-factory shipments (NSP) to calculate the ABSG share factor. Combine ABSG, McKesson Specialty, and Cardinal Health 867 feeds (where contracted) for a comprehensive specialty channel view."
+      },
+      {
+        dim:"ehr", sev:"H",
+        title:"ION Analytics oncology practice data is limited to community oncology practices on specific contracting platforms",
+        body:"ION Analytics (an ABSG service) aggregates clinical and utilization data from community oncology practices participating in the ION GPO and affiliated networks. Academic medical centers, hospital-based oncology programs, and practices using competing GPO arrangements are not represented. For oncology products where treatment patterns differ between academic and community settings (e.g., novel IO combinations first adopted in academic centers), ION data reflects community-practice norms only.",
+        mit:"Position ION Analytics data explicitly as community oncology intelligence. Supplement with Flatiron (community + academic mix) or COTA for academic-center practice pattern insights. When presenting ION-derived treatment pattern data to clinical or medical affairs teams, include a clear label that findings reflect community oncology practices and may not generalize to academic center protocols."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"Lash Group hub data captures only manufacturer-enrolled hub patients — significant non-hub patient population is invisible",
+        body:"Lash Group (AmerisourceBergen's patient services division) manages hub programs for specific manufacturer brands. Hub enrollment is voluntary and varies by product from <30% to >90% of new patient starts depending on the complexity of the access journey and manufacturer investment in hub services. For products where the majority of patients access therapy through straightforward retail or SP channels without hub involvement, Lash data drastically underrepresents the true patient population and is biased toward more complex, access-challenged patients.",
+        mit:"Calculate hub enrollment rate as a proportion of brand NPS before using hub data for population-level inferences. Supplement hub data with IQVIA NPA or Komodo claims data for the non-hub patient population. Use hub data for access analytics (PA rates, time-to-fill, financial assistance utilization) rather than total patient volume or treatment duration estimates."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"Xcenda market access consulting models embed proprietary assumptions that are not fully transparent to end clients",
+        body:"Xcenda (AmerisourceBergen's consulting arm) produces market access strategy frameworks, GTN models, and payer landscaping analyses. Like all consulting-delivered analytics, the underlying data sources and model assumptions are partially proprietary. Clients receive conclusions and supporting exhibits but not always the full model logic. When Xcenda outputs are used downstream in internal planning models, their provenance and assumptions may be lost, making later auditing or updating of the analysis difficult.",
+        mit:"Require documentation of data sources and key assumptions with any Xcenda deliverable. Build an internal 'assumption register' that captures all third-party model inputs used in strategic planning. For high-stakes decisions (deal valuations, launch pricing), commission independent validation of Xcenda outputs against internal models or a second consulting firm."
+      },
+    ]
+  },
+
+  // ── DATAVANT / HEALTH DATA LINKING ────────────────────────────────────
+  {
+    id:"datavant", name:"Datavant / Health Data Linking & Tokenization", color:"#7A9AAA",
+    tagline:"Privacy-Preserving Patient Linking · Cross-Dataset Tokenization · EHR-Claims-Lab Linkage · HIPAA Safe Harbor",
+    datasets:["Datavant LINK Token","EHR-Claims Linked Datasets","Cross-Vendor Patient Matching","Clinical Trial-RWD Linking","De-ID Patient Master"],
+    caveats:[
+      {
+        dim:"patient", sev:"H",
+        title:"Datavant token linkage success rate varies by data source quality — 15–35% of records may fail to link",
+        body:"Datavant's privacy-preserving record linkage uses tokenized patient identifiers (based on de-identified demographics) to match records across datasets. Linkage success depends heavily on the demographic completeness and accuracy in each source dataset. EHR records with missing middle names, variable date-of-birth formats, or PO box addresses link at significantly lower rates. Studies report linkage rates ranging from 65–85% across typical EHR-to-claims linkages. The 15–35% of unlinked records are systematically non-random — they tend to be older patients, those with less routine care engagement, and patients with more frequent address changes.",
+        mit:"Report the linkage rate and its distribution across demographic groups (age, sex, race/ethnicity) in every Datavant-linked study. Conduct a sensitivity analysis comparing characteristics of linked vs. unlinked records to assess bias direction and magnitude. Apply a minimum linkage rate threshold (e.g., >70%) before proceeding with a linked analysis; below this, the linked population is too select to support generalizable conclusions."
+      },
+      {
+        dim:"patient", sev:"H",
+        title:"Cross-vendor data linkage creates compounded privacy risk — re-identification probability increases with data richness",
+        body:"Datavant's core proposition — linking EHR + claims + lab + genomics for the same patient — creates richer records that are paradoxically more susceptible to re-identification even under HIPAA Safe Harbor. The combination of rare disease diagnosis + specific genomic variant + geographic location + age can narrow a de-identified record to a unique individual in a small community. HIPAA Expert Determination standards are designed for single datasets, not for the multi-attribute richness of cross-linked records.",
+        mit:"Commission a privacy risk assessment using Expert Determination methodology specifically for the linked (multi-source) dataset, not just each individual source. Apply cell-size suppression standards appropriate to the linked dataset's richness (n≥20 for rare disease linked records is more appropriate than the typical n≥11). Work proactively with IRBs who may require additional safeguards for multi-source linked data. Limit data linkage to the minimum fields necessary for the scientific question."
+      },
+      {
+        dim:"collection", sev:"M",
+        title:"Clinical-trial-to-RWD linkage introduces consent and protocol limitations that restrict comparator construction",
+        body:"Linking clinical trial patient records to real-world data (claims, lab, EHR) post-trial is a powerful approach for external control arm construction and long-term follow-up. However, it requires that trial participants consented to such linkage (not always the case in legacy trials), that the real-world data covers the relevant time period, and that the trial's inclusion/exclusion criteria can be approximately replicated in the real-world comparator cohort. Each of these requirements fails for a portion of patients, creating an incompletely linked and potentially non-comparable control population.",
+        mit:"Pre-specify the trial-to-RWD linkage strategy in the study protocol, including consent verification, linkage rate assumptions, and comparator construction methodology. Report the proportion of trial patients successfully linked and characterize the unlinked population. For regulatory-grade external control arm use, engage FDA early-stage dialogue on the acceptability of the linkage methodology and comparator construction approach."
+      },
+      {
+        dim:"lag", sev:"L",
+        title:"Datavant token generation requires data re-processing — pre-tokenized historical archives may not be immediately available",
+        body:"Adding Datavant linkage capability to an existing dataset requires re-processing historical records through the tokenization pipeline, which can take weeks to months for large datasets. This means a manufacturer wanting to link their hub data (never previously tokenized) to a Komodo claims dataset faces a one-time tokenization project with significant lead time before the linked analysis can begin. For time-pressured commercial or regulatory analyses, this processing lag is often underestimated.",
+        mit:"Build Datavant tokenization into data pipeline architecture prospectively rather than reactively. For hub, SP, and manufacturer-owned data assets, establish a standing tokenization pipeline so that linkage can be initiated quickly when needed. Estimate tokenization processing time realistically (typically 4–12 weeks for large datasets) in project timelines for any study requiring cross-source patient linkage."
+      },
+    ]
+  },
+
+  // ── PATIENT REGISTRIES & ADVOCACY DATA ────────────────────────────────
+  {
+    id:"registry", name:"Patient Registries, Advocacy Databases & Real-World Evidence Networks", color:"#7A9A7A",
+    tagline:"Disease Registries · Patient Advocacy Databases · NIH All of Us · PCORI Networks · Rare Disease Consortia",
+    datasets:["PCORI PCORnet","NIH All of Us Research Program","Rare Disease Advocacy Registries","Manufacturer-Sponsored Registries","SEER-Medicare","HL7 FHIR Patient Networks"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"Patient advocacy registries have severe self-selection bias — enrolled patients are unrepresentative of the disease population",
+        body:"Patient advocacy registries (e.g., Parent Project Muscular Dystrophy registry for DMD, Myasthenia Gravis Foundation of America patient database, NORD Rare Disease Registry) rely on voluntary patient enrollment. Enrolled patients systematically over-represent: those with better health literacy, those with access to advocacy resources, those with more severe disease seeking community support, those connected to academic medical center care, and those from higher socioeconomic backgrounds. For rare diseases where advocacy registries may be the only available patient database, this self-selection makes prevalence, treatment pattern, and outcomes estimates unreliable.",
+        mit:"Characterize the demographic and clinical profile of the registry population and compare against any available reference data (SEER, claims-based cohorts). Explicitly document self-selection bias in all analyses. Use registry data for qualitative hypothesis generation and for identifying patient subgroups, not for definitive prevalence or outcomes estimates. Supplement with chart audits and HCP surveys for a triangulated patient population picture."
+      },
+      {
+        dim:"coverage", sev:"H",
+        title:"NIH All of Us Research Program has significant race/ethnicity over-recruitment that is not representative of the general population",
+        body:"The NIH All of Us Research Program was intentionally designed to over-recruit historically underrepresented groups (Black/African American, Hispanic/Latino, rural, low-income populations) to correct prior research inequities. By design, All of Us does not represent the overall US population distribution and should not be used for general population prevalence estimates. Approximately 50% of participants are from racial/ethnic minority groups vs. ~40% in the general US population. Additionally, enrollment requires active participation (a healthy volunteer effect) that excludes the very sick, cognitively impaired, and those without digital access.",
+        mit:"Always use All of Us data with explicit acknowledgement of its intentional over-sampling design. Do not extrapolate All of Us findings to the general US population without reweighting to census proportions. Use All of Us for its intended purpose: generating pharmacogenomic and health disparity hypotheses, not for estimating disease burden or treatment rates in the general population."
+      },
+      {
+        dim:"collection", sev:"H",
+        title:"Manufacturer-sponsored registries carry inherent conflict of interest and may restrict adverse event capture",
+        body:"Registries funded and operated by pharmaceutical manufacturers (e.g., post-marketing safety registries required by FDA REMS programs, voluntary patient support registries) face structural conflicts: data is collected by the manufacturer, who has financial interest in the product's success. Adverse event capture may be systematically incomplete if site staff are trained by manufacturer representatives. Patient follow-up protocols may be designed to capture efficacy endpoints more rigorously than safety endpoints. Regulatory agencies and peer reviewers apply heightened skepticism to manufacturer-sponsored registry data for this reason.",
+        mit:"For manufacturer-sponsored registry outputs, ensure an independent data safety monitoring board (DSMB) oversees data integrity. Implement blinded adverse event adjudication by independent committee. For any regulatory submission using manufacturer registry data, preemptively document conflict-of-interest mitigation measures. Commission independent academic center co-principal investigators to signal rigor."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"PCORnet data queries require institutional review and can take months to execute across partner sites",
+        body:"PCORnet (the PCORI-funded national patient-centered clinical research network) is a valuable federated network of health systems, but accessing data for research requires submitting queries through the PCORI data request process and obtaining approval from each participating site's IRB. The total cycle time from query design to receiving aggregate results can range from 6–18 months depending on query complexity and site responsiveness. For commercial analytics or time-sensitive market research, this timeline is prohibitive.",
+        mit:"Use PCORnet for academic HEOR and long-term effectiveness research where 12–18 month data acquisition timelines are acceptable. For commercial applications requiring faster insights, use commercial databases (Komodo, Optum) as first-line sources. Identify PCORnet early in the research planning process if it will be the primary data source, and build its acquisition timeline into the project schedule realistically."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"Registry data dictionaries and variable definitions vary across disease-specific registries — cross-registry analysis requires harmonization",
+        body:"Each patient registry defines its own data dictionary — how 'diagnosis date,' 'disease severity,' 'line of therapy,' and 'response' are measured and coded differs across the NORD registry, the IQVIA Patient Registry, the EURODIS/RD-Connect platform, and individual disease-specific consortia. Combining data across registries without explicit variable harmonization produces datasets where the same variable label contains heterogeneous content, invalidating any cross-registry comparison.",
+        mit:"Develop an explicit cross-registry variable harmonization table before combining data from multiple registries. Map each source variable to the OMOP Common Data Model (CDM) where possible, as OMOP provides a standard vocabulary for cross-source standardization. Engage a data harmonization specialist or biostatistician with registry experience before initiating cross-registry analyses."
+      },
+    ]
+  },
+
+  // ── SDoH / SOCIAL DETERMINANTS DATA ───────────────────────────────────
+  {
+    id:"sdoh", name:"Social Determinants of Health (SDoH) Data Vendors — Arcadia, Socially Determined, Experian Health", color:"#7A8A6A",
+    tagline:"SDoH Indices · Census-Derived Risk Scores · Community-Level Attributes · SDOH Linkage to Claims/EHR",
+    datasets:["Arcadia SDoH Platform","Socially Determined SDoH Scores","Experian Health Social Risk Index","Area Deprivation Index (ADI)","Social Vulnerability Index (SVI)","SDOH-Claims Linked Datasets"],
+    caveats:[
+      {
+        dim:"coverage", sev:"H",
+        title:"Most commercial SDoH data is area-level (ZIP or census-tract), not individual-level — ecological fallacy is pervasive",
+        body:"The majority of commercial SDoH datasets assign risk scores at the ZIP code, census tract, or county level, not at the individual patient level. An 'individual' assigned a high food insecurity SDoH score based on ZIP code statistics may personally have no food insecurity — the score reflects the average for their neighborhood. This ecological fallacy — inferring individual-level characteristics from area-level data — is well-documented and systematically biases individual-level analyses. Despite vendor marketing implying individual-level SDoH insight, the underlying data is almost always area-attributed.",
+        mit:"Clearly label all SDoH variables in your dataset as 'area-level attribution' vs. 'individual-level measurement.' Treat area-level SDoH as a contextual covariate rather than a patient-specific characteristic. For studies claiming to adjust for individual social risk, require that SDoH data be measured at the individual level (via patient-reported surveys, Z-codes in EHR, or case worker assessment). Never present area-level SDoH attribution as patient-level SDoH status in published results."
+      },
+      {
+        dim:"collection", sev:"H",
+        title:"SDoH predictive models are trained on historically biased data — model predictions reinforce existing disparities",
+        body:"Commercial SDoH risk models (e.g., predicted social isolation, predicted housing instability) are trained on historical data that reflects past patterns of healthcare access and documentation, which are themselves shaped by systemic inequities. A model trained to predict 'high social risk' may learn that certain ZIP codes, ethnic groups, or insurance types correlate with adverse outcomes — not because social risk is intrinsically tied to these factors, but because past healthcare systems documented and coded them differently. Applying such models perpetuates these patterns, systematically over-flagging certain demographics while under-flagging others.",
+        mit:"Request algorithmic bias audits from SDoH vendors, including model performance stratified by race/ethnicity, geography, and insurance type. Test the model on an independent holdout set representative of the population you intend to apply it to. Apply fairness constraints (e.g., equalized odds, demographic parity) before deploying SDoH models in patient outreach or resource allocation programs. Never use SDoH model scores as the sole determinant of intervention eligibility."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"Census-derived SDoH data (ADI, SVI) updates only every 5–10 years — outdated in rapidly changing communities",
+        body:"The Area Deprivation Index (ADI) and Social Vulnerability Index (SVI) are derived from US Census data (ACS 5-year estimates), which updates on a 5-year rolling average. In rapidly gentrifying urban neighborhoods, in communities affected by major industrial changes or disasters, or in areas experiencing high demographic turnover, census-derived SDoH scores may be significantly out of date within 2–3 years of publication. A patient attributed a low-deprivation score based on 2018 census data may live in a substantially more deprived neighborhood by 2024.",
+        mit:"Check the reference year of the census vintage underlying any SDoH index and document it in study methods. For analyses in areas with known rapid demographic change, supplement census-derived SDoH with more frequently updated commercial data sources (Experian Health, Mastercard Health). Apply a data currency threshold: use ADI/SVI census-derived SDoH only if the census vintage is within 3 years of the study period."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"ICD-10 Z-codes for SDoH are severely under-documented in clinical records",
+        body:"ICD-10 Z-codes (Z55–Z65) capture social determinants directly in the clinical record: food insecurity (Z59.4), housing instability (Z59.0), lack of transportation (Z59.3), and others. Despite being available since the ICD-10 transition (2015), Z-code documentation rates in US EHRs and claims are extremely low — typically <5% of patients with known social risk have corresponding Z-codes. This means that EHR or claims-based SDoH measurement via Z-codes dramatically understates the true prevalence of social risk in most patient populations.",
+        mit:"Do not use Z-code prevalence as a proxy for true SDoH burden; it reflects documentation practice, not actual social risk prevalence. For studies requiring individual-level SDoH measurement, use patient-reported screening tools (PRAPARE, AHC-HRSN, Hunger Vital Sign) where available in EHR. Supplement Z-code data with area-level SDoH for patients without documented Z-codes, and report the two-source hybrid approach explicitly."
+      },
+    ]
+  },
+
+  // ── AI/ML MODEL GOVERNANCE & FHIR INTEROPERABILITY ────────────────────
+  {
+    id:"aiml", name:"AI/ML Model Governance, FHIR & Interoperability Caveats", color:"#6A7A9A",
+    tagline:"Applies across all AI-driven data products · FHIR-based data exchange · NLP pipelines · Predictive model outputs",
+    datasets:["AI/ML Predictive Models (all vendors)","FHIR R4 / SMART on FHIR Feeds","NLP-Structured Clinical Data","Third-Party AI Scoring (risk, churn, adherence)","LLM-Extracted RWD"],
+    caveats:[
+      {
+        dim:"collection", sev:"H",
+        title:"AI/ML models embedded in data products are black boxes — outputs cannot be audited without access to training data and architecture",
+        body:"An increasing proportion of commercial pharma data products embed AI/ML models to generate derived outputs: predicted diagnosis codes, propensity scores, next-best-action recommendations, projected market share, and adherence predictions. These models are proprietary — clients receive model outputs but not training data, feature importance rankings, or validation benchmarks. When these outputs are used in downstream analytical models (forecasts, deal valuations, clinical trial feasibility), the AI-derived inputs carry undisclosed uncertainty that cannot be quantified by the end analyst.",
+        mit:"Treat all AI-model-derived outputs as estimates requiring explicit uncertainty documentation, not as measured data. Request minimum documentation from any vendor deploying AI models: training dataset vintage, validation population, key performance metrics (AUC, calibration, sensitivity/specificity), and known failure modes. For regulatory submissions incorporating AI-derived variables, follow FDA's AI/ML action plan guidance and consult with regulatory counsel on admissibility of model-derived data."
+      },
+      {
+        dim:"collection", sev:"H",
+        title:"NLP extraction quality degrades for clinical specialties, rare conditions, and non-standard documentation practices",
+        body:"Natural language processing applied to clinical notes (for diagnosis extraction, treatment classification, outcome abstraction) is typically trained and validated on commonly occurring clinical text from large hospitals. Performance degrades substantially for: rare disease-specific clinical terminology, non-standard abbreviations used by individual physicians, notes dictated by non-native English speakers, multi-language clinical environments (Spanish-dominant practices), and highly specialized clinical documentation patterns in sub-specialties (e.g., neuromuscular disease grading scales, ophthalmology visual acuity notation). NLP F1 scores of 0.85+ in validation populations often fall to 0.60–0.75 in these edge cases.",
+        mit:"Commission a prospective NLP validation study on a random sample (n≥100) of the specific clinical notes, rare disease context, and physician documentation style relevant to your analysis before deploying NLP-extracted variables. Stratify NLP performance by specialty, care setting, and language. For rare disease or subspecialty contexts, consider human abstraction augmentation rather than relying solely on NLP."
+      },
+      {
+        dim:"lag", sev:"M",
+        title:"FHIR-based real-time data feeds have variable completeness and FHIR profile implementation differences across health systems",
+        body:"HL7 FHIR R4 is the current US regulatory standard for health data interoperability (mandated by 21st Century Cures Act). However, FHIR implementation quality varies enormously: health systems differ in which FHIR resources they expose (Observation, Condition, MedicationRequest), which terminology systems they use (SNOMED, LOINC, RxNorm, local codes), and which fields are populated vs. left empty. A FHIR query for 'all patients with NSCLC on pembrolizumab' will return dramatically different completeness levels from different health systems depending on their FHIR server implementation.",
+        mit:"Before relying on FHIR-based data from a new source, conduct a structured data quality assessment: query known reference patients and verify field completeness, terminology coding, and data freshness. Document the FHIR profile implementation version (US Core, USCDI) and known gaps for each data source. Apply FHIR normalization (mapping local codes to standard terminologies) before any cross-site FHIR data aggregation."
+      },
+      {
+        dim:"patient", sev:"M",
+        title:"LLM-extracted real-world data from clinical notes is subject to hallucination and context collapse",
+        body:"Several vendors (including Norstella, Tempus, Veradigm) are deploying large language models (LLMs) to extract structured data from unstructured clinical notes at scale. LLMs are susceptible to hallucination — generating plausible-sounding but factually incorrect extractions — particularly for numerical data (lab values, dosing), negation handling ('patient denies chest pain' misread as 'patient has chest pain'), and temporality ('history of hypertension' misclassified as current active condition). At scale, even 2–5% hallucination rates in clinical data extraction produce thousands of erroneous records.",
+        mit:"Require vendors deploying LLMs for clinical data extraction to publish hallucination rates and negation accuracy benchmarks on held-out clinical text. Apply a human-in-the-loop quality review layer for high-stakes extracted fields (primary diagnosis, treatment start date, critical lab values). For regulatory-grade studies, require that LLM-extracted variables be validated against source note by human abstractors for at least 10% of records. Clearly label LLM-extracted variables as 'AI-assisted abstraction' in study documentation."
+      },
+      {
+        dim:"coding", sev:"M",
+        title:"Model drift degrades AI/ML performance over time — models validated in 2020 may be significantly miscalibrated by 2024",
+        body:"AI/ML models embedded in pharma data products are typically validated at a single point in time. Healthcare practice patterns, coding habits, drug availability, and population demographics change continuously. A model trained to predict treatment initiation probability in 2019 will have learned from pre-COVID, pre-GLP-1-expansion, pre-biosimilar-wave healthcare patterns. By 2024, these shifts have altered the input feature distributions substantially, and the model's predictions are systematically miscalibrated without retraining — a phenomenon called 'model drift' or 'distribution shift'.",
+        mit:"Request model vintage dates and retraining schedules from any vendor embedding AI/ML models in their data products. For models older than 18 months, request recent validation benchmarks on contemporary data (post-2022 at minimum). Implement prospective performance monitoring: compare model predictions against observed outcomes on an ongoing basis and flag for model review when prediction error exceeds a pre-specified threshold."
+      },
+      {
+        dim:"collection", sev:"L",
+        title:"Data provenance is obscured when AI/ML transforms raw data into derived features — audit trails are broken",
+        body:"When vendors apply AI/ML transformations to raw clinical data (e.g., using NLP to convert free-text diagnosis mentions into structured ICD codes, or applying a classifier to determine 'line of therapy'), the connection between the raw source record and the derived analytical variable is broken. Downstream analysts cannot trace back from 'patient X was classified as second-line' to the underlying clinical documentation that drove that classification. This makes quality assurance, debugging, and regulatory auditability extremely difficult.",
+        mit:"Require vendors to maintain and provide data lineage documentation that links each AI-derived variable to its source records. Implement a 'derived variable registry' internally that tags any variable as AI-derived and documents the model, version, and validation status. For regulatory submissions, ensure that all AI-derived variables used in analyses can be traced back to underlying source records by the regulatory team."
+      },
+    ]
+  },
+];
+
+// ──────────────────────────────────────────────────────
+const ALL_DIMS = Object.keys(DIMS);
+const ALL_SEVS = ["H","M","L"];
+let activeDims = new Set();
+let activeSevs = new Set();
+
+function buildFilters(){
+  const df = document.getElementById("dimFilters");
+  df.innerHTML = ALL_DIMS.map(d =>
+    `<button class="pill" onclick="toggleF('dim','${d}')">${DIMS[d].label}</button>`
+  ).join("");
+  const sf = document.getElementById("sevFilters");
+  sf.innerHTML = ALL_SEVS.map(s =>
+    `<button class="pill" onclick="toggleF('sev','${s}')">${SEV[s]} Impact</button>`
+  ).join("");
+}
+
+function toggleF(type, val){
+  const set = type==="dim"?activeDims:activeSevs;
+  if(set.has(val)) set.delete(val); else set.add(val);
+  document.querySelectorAll(`.pill`).forEach(b=>{
+    if(b.getAttribute("onclick")?.includes(`'${type}','${val}'`))
+      b.classList.toggle("active", set.has(val));
+  });
+  render();
+}
+
+function render(){
+  const q = document.getElementById("search").value.toLowerCase();
+  let totalC = 0, totalV = 0;
+  let html = "";
+
+  VENDORS.forEach(v => {
+    const matchCaveats = v.caveats.filter(c => {
+      const dimOK = activeDims.size===0 || activeDims.has(c.dim);
+      const sevOK = activeSevs.size===0 || activeSevs.has(c.sev);
+      const qOK   = !q || [v.name, c.title, c.body, c.mit, DIMS[c.dim].label].join(" ").toLowerCase().includes(q);
+      return dimOK && sevOK && qOK;
+    });
+    if(!matchCaveats.length) return;
+    totalC += matchCaveats.length;
+    totalV++;
+
+    const accentColor = v.color;
+    html += `
+    <div class="vendor-block" id="${v.id}">
+      <div class="vendor-header">
+        <div class="vendor-dot" style="background:${accentColor}"></div>
+        <span class="vendor-name">${v.name}</span>
+        <span class="vendor-tagline">${v.tagline}</span>
+      </div>
+      <div class="vendor-datasets">
+        ${v.datasets.map(d=>`<span class="ds-tag">${d}</span>`).join("")}
+      </div>
+      <div class="cav-grid">
+        ${matchCaveats.map(c => cavCard(c, accentColor)).join("")}
+      </div>
+    </div>
+    <div class="orn">· · ·</div>`;
+  });
+
+  document.getElementById("output").innerHTML = html ||
+    `<div class="empty">No caveats match your current filters.</div>`;
+  document.getElementById("rc").textContent =
+    `Showing ${totalC} caveats across ${totalV} vendors`;
+}
+
+function cavCard(c, accent){
+  const dimInfo = DIMS[c.dim];
+  return `
+  <div class="cav-card">
+    <div class="cav-head">
+      <div class="cav-left">
+        <div class="cav-dim ${dimInfo.cls}">${dimInfo.label}</div>
+        <div class="cav-title">${c.title}</div>
+        <div class="cav-body">${c.body}</div>
+      </div>
+      <div class="cav-sev">
+        <span class="sev-badge sev-${c.sev}">${SEV[c.sev]}</span>
+      </div>
+      <div class="cav-right">
+        <div class="cav-mit-label">Suggested Mitigation</div>
+        <div class="cav-mit-body">${c.mit}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+buildFilters();
+render();
+
+// count totals for header (all caveats)
+const allC = VENDORS.reduce((a,v)=>a+v.caveats.length,0);
+</script>
+</body>
+</html>
