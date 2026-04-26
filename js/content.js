@@ -9,6 +9,14 @@ window.PL = {
 // Domain metadata
 window.PL.domains = [
   {
+    id: 0,
+    title: "Know Your TA",
+    icon: "🧬",
+    color: "#5B4A8A",
+    description: "Disease-area fundamentals across pharma's major therapeutic areas — cardiovascular, renal, metabolism, neurology, immunology, and oncology.",
+    chapters: ["0-1","0-2","0-3","0-4","0-5","0-6"]
+  },
+  {
     id: 1,
     title: "Pharma Value Chain",
     icon: "🔬",
