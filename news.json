@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-27T03:32:51Z",
+  "updated": "2026-04-27T08:33:19Z",
   "items": [
     {
       "title": "Regulatory tracker: FDA delays decision on Sanofi's subcutaneous Sarclisa",
@@ -51,13 +51,6 @@
       "timestamp": 1768377600000
     },
     {
-      "title": "US FDA approves Fortress Bio and Zydus' treatment for a rare pediatric disease",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPdmdxWS1xYk56MkRZcjNha1llS3Zfd0Rvb3FiTmQySjltNy1kWXNSeXhYUFZETnprX2kzSDJkV3JNTEZBdndaVkt1NzJfTTltMVY3MHczNUF1MHU1cndvWkZYdEl3UERpZzJ6amZIandiR0RTZWZRWjVKV3d0NF9zcWR4NGh5N3dIZHhtM3BJNFo4cXFuQnZ5Wk9sRngzc3cwOUw1RTVwLWR1VFplbTBFZ09XYlg2UTZLTVljOHFQR1RTSFBJZGVsNjRxejUwakJibEZzWjBn?oc=5",
-      "source": "Reuters",
-      "date": "Jan 13",
-      "timestamp": 1768291200000
-    },
-    {
       "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBKQjVRa3Fjay05WEdjelFUYkNVdVQ5VFFPYk42eGRvLXpTOVJYdHJaTjY4RjE3VHlmOWM0SDV1QmZKNEJXTmg0YVd2eEptbllhaklWQy1vRWdwNC1aUmptb1BfdGZLUQ?oc=5",
       "source": "Fierce Pharma",
@@ -79,18 +72,25 @@
       "timestamp": 1765958400000
     },
     {
-      "title": "RNAi biotech Arrowhead wins first FDA approval",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNG1sekVZclhCeVlfT1diN3NzaEJLOElVckN2YThoSGlhcXNfMlMtSHU2M19fX0V4aTlWQ1BlQWotREJnbGFuRl9XaHdtNUdyNDQ2LWdXVldobWFyRlY1dWIwWExTN0ZfZ0xrWFl2WU1IcDFvQUlmY0xKUDNGc29TQ1l6bmVSdFgzYzVBVTFCVjJrUTJWOEk4YUZWTUg5VUMteFNuUllpWkQtNnhVdXRYUVhKMA?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Nov 18",
-      "timestamp": 1763452800000
+      "title": "Innovative drugs: The new battleground in US-China rivalry",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOeG9vOHJjRjdxYkgtdmdIS0lMYW5DQl85ZjdXaEdCdHRleE0zR2VDem1LYlAwcmpmTWJTYjI3QVBneEhfYS04eE0tTHc3ZHJGZExsZURRVzhkanI4bG84SEc4VUZMcGh2Q1NwbEJBTHJ5cWFJdUU3WGJhdnNoRkVLZy1yZFhDRmhQcXR2Um16V0w?oc=5",
+      "source": "ThinkChina",
+      "date": "Dec 9",
+      "timestamp": 1765267200000
     },
     {
-      "title": "US FDA proposes moves to speed availability of some cheaper biotech medicines",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQOXZzeFd5a3g4MnVSa25VaDRzU0lKUjF5WWVURWJHVGNaUzJSb3N1UWVXLWtHeFpibDFOV2dLZzFtbWtQQUw4RWI3bkNjTi1Mb2VRZEJ3dldjbTl0clNvTUhZenJqeEVjVFVma3lzYlVsbHZpWmxPWE1aMnBydUlvTFZoOU5ZZEFZamk3b0V5Y25zUzQtcGYyd2lmaHFjQTRjOTJYaXQ4RUhzeG9kcXpsZmZBT3Nva2ZfNU9LMFl3?oc=5",
-      "source": "Reuters",
-      "date": "Oct 29",
-      "timestamp": 1761721200000
+      "title": "Fierce Pharma Asia\u2014US-China supply chain ties; Bayer biotech incubator; Henlius biosim nod",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOS2JEYWtNUGFwY0YxTVZPa19RMVR4ZlFCQ1VYbnNXMmZLMmdEUnI2dVgzUElLeloyV0xFTlpqR01sWGhMTVE2VTBoN3cxa2ZXTXBXbzh5WWxtMDV2TVVxTzV1M2lnLUg2Y19YUzVDaDJCVUxOcTdSNXVKdzktZHBkQURPeUVEZmJFR2VCM1huZHg2c0V2bzF0V3BFZ2hRcnNqNFJiYmp0NUxjeGk3ejJpWFNPNDJoVnBEWlpzTDlUU19qZw?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Nov 21",
+      "timestamp": 1763712000000
+    },
+    {
+      "title": "FDA declares Novo Nordisk plant, key to drug manufacturing for some biotechs, out of compliance",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaloyaGtUNW1Jb2NXUTJrbW1zcUJ1c3pjdXZYY1hYZWZCNXFQckNNQ1FQNWltcllfOHBpZUEwajhBNnFtZ1VLY3pIUGxBTThTNHZVclZ2NHBSRGZWMko0NW5tOTVmeTcxUGk3YVlNX1d5U0hvXzhZMEJncFduakFaQmtCeGV4NEpj?oc=5",
+      "source": "statnews.com",
+      "date": "Oct 13",
+      "timestamp": 1760338800000
     },
     {
       "title": "FDA official\u2019s comments spark Aurinia sell-off; Halozyme buys a biotech",
