@@ -1,13 +1,6 @@
 {
-  "updated": "2026-04-27T19:39:49Z",
+  "updated": "2026-04-28T03:37:46Z",
   "items": [
-    {
-      "title": "Regulatory tracker: FDA delays decision on Sanofi's subcutaneous Sarclisa",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Apr 22",
-      "timestamp": 1776841200000
-    },
     {
       "title": "Best Biotech Stocks of 2026 and How to Invest in Them",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
@@ -58,6 +51,13 @@
       "timestamp": 1767600000000
     },
     {
+      "title": "Regulatory tracker: AZ wins self-administration nod for lupus med Saphnelo at FDA",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 2",
+      "timestamp": 1767365493000
+    },
+    {
       "title": "2025 FDA approvals",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5VMlhtZHBzSEFBTFpaR25BbUtUUHcxZUJ5ZHVXUFhYbm5LaW1tX3pCdEl6M3VUWnhzN2l1QXdWc3h5YXpXazV4WUFUb0xMdnJsbkdMWG5vTHdoZFlxcnJZ?oc=5",
       "source": "Nature",
@@ -72,11 +72,32 @@
       "timestamp": 1765958400000
     },
     {
-      "title": "FDA official\u2019s comments spark Aurinia sell-off; Halozyme buys a biotech",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPVzhJXzJpSlVOQ0p3VUlaUXFvS3U1NWFETTNmajlHM2xVdkR6ME5XelB5a1dFck9IVEZQR3ZxMF9uQ0s1Rk8xMEZndWx6SWNGMjVhQUlJdm4yZWtKQmxZTkE5ajVoR0gxWUhfS0lpaHdqWWxycDNvb3VrSVozOF9pWDVwLVBMS2lSbGdoMkZPLTJLRWpkVVJqU0RtZ1hwY3dKZTV2Uw?oc=5",
+      "title": "RNAi biotech Arrowhead wins first FDA approval",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNG1sekVZclhCeVlfT1diN3NzaEJLOElVckN2YThoSGlhcXNfMlMtSHU2M19fX0V4aTlWQ1BlQWotREJnbGFuRl9XaHdtNUdyNDQ2LWdXVldobWFyRlY1dWIwWExTN0ZfZ0xrWFl2WU1IcDFvQUlmY0xKUDNGc29TQ1l6bmVSdFgzYzVBVTFCVjJrUTJWOEk4YUZWTUg5VUMteFNuUllpWkQtNnhVdXRYUVhKMA?oc=5",
       "source": "BioPharma Dive",
-      "date": "Oct 1",
-      "timestamp": 1759302000000
+      "date": "Nov 18",
+      "timestamp": 1763452800000
+    },
+    {
+      "title": "Three Boston biotechs await FDA decisions on new drugs by year-end",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOWnN2VkQzYVUyOTJrQk8tcWRPVFkzejBZclZ0aXZlS195LWRLOVdaZ285MlBfWFFUbTZ6V3hiRlFtQUQtZ01QbVdPeWRibXc4VmtlcThtWk9TT1pSamFFcERzZ2xoTmNHMHVOTUU4V1N3TDE2TlhORldweTJBT2lqVzNOOHhFMEdr?oc=5",
+      "source": "The Business Journals",
+      "date": "Oct 29",
+      "timestamp": 1761721200000
+    },
+    {
+      "title": "WATCH: Health Secretary RFK Jr. announces new FDA move to fast-track biosimilar drug approvals",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPa1pfM0tuczJHdDVueWhiX3RlTEU2cWFQcmlJUjFiTmd3NzRzM2VxNmZrU0RwSWxtMjFfOGk1RnEwSDVKUTdINldoMEhWSTRqSDY0elRmSXFCUTJMTWV0aDdzRkF0cjZXd0hMUGhvZU1tR3BLcEpoRW1IOVJwZGtsWUJ5eGpXLWkyZmhsMXNyYUZtNE5NNjIxaG1mQTlVUTBlM0tTd2lITUJDUmJkcGpnNllMbEkyUWhVZGVyRHpuWHN4LWdxdnZNMXRvb2JNZXlq?oc=5",
+      "source": "PBS",
+      "date": "Oct 29",
+      "timestamp": 1761721200000
+    },
+    {
+      "title": "FDA declares Novo Nordisk plant, key to drug manufacturing for some biotechs, out of compliance",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOaloyaGtUNW1Jb2NXUTJrbW1zcUJ1c3pjdXZYY1hYZWZCNXFQckNNQ1FQNWltcllfOHBpZUEwajhBNnFtZ1VLY3pIUGxBTThTNHZVclZ2NHBSRGZWMko0NW5tOTVmeTcxUGk3YVlNX1d5U0hvXzhZMEJncFduakFaQmtCeGV4NEpj?oc=5",
+      "source": "statnews.com",
+      "date": "Oct 13",
+      "timestamp": 1760338800000
     },
     {
       "title": "U.S. pressures U.K. as pharma pauses investments there",
@@ -91,13 +112,6 @@
       "source": "Fierce Pharma",
       "date": "Aug 29",
       "timestamp": 1756450800000
-    },
-    {
-      "title": "FDA approves Ionis drug that prevents swelling attacks caused by a rare disease",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQck1KRXItZ3Vydzh6Y1BfS282cW5BNzNndnJWeTJRSndjUDhTdy03QTBrMVhiRjhFYTZYY01nRF9zdmJEVDRWMk01MDlScXpzR2t0Y21rNnFQUVRfN1ZrQ0o0ZnplQUVqNDk2eVBxcHZ1V1FKV2s3WklYX2J4LUJ0cmNiNERCSEhjWEpKSXJsVQ?oc=5",
-      "source": "statnews.com",
-      "date": "Aug 21",
-      "timestamp": 1755759600000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
@@ -121,11 +135,18 @@
       "timestamp": 1753254000000
     },
     {
-      "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
+      "title": "Biotech CEOs to FDA: Don\u2019t Let Politics Override Science on Abortion Pill",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZE5lUHNkbmJXUXRWb3R1Z05WV2pqV2Z6U1hXM2JQMVY0WFk5LTRSbWNUajc4bzVOQmJBc1h4elZVN3kzcjRoUEFpaXRpeWxVYU9vM0tCam9IeTB2czAtUDEzdmJDdmpXcXlESGhVMV9qZ2Z1RzlTaEhkM2xOWS16ZVNlZ0IweGVOanZ2RzVqV29WVHI3X1Y4VVRVVkNpaWNCdlpuOHhrQXNTQ2VOWUE4cg?oc=5",
+      "source": "Ms. Magazine",
+      "date": "Jul 10",
+      "timestamp": 1752130800000
+    },
+    {
+      "title": "KalVista bounces back from FDA delay with approval for oral rare disease med Ekterly",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPd3k3MU93Y3gyQVlQcXcyUjZXMnBNZ1podk5VMG8yampqTW44LUlSZlZmeEhPeXY2Qkx1ZnhKUkVEVFpzelB1VjliTFRyZU1sQzl5cE5zMlRGdjhKbG1yaHZOeVFxT0xGZHFOVW42SWFSbTdpbzFqd01iRURocGdOb2o0WjVkY01nQVNIUEVnUl8wU2IyQ3hKMmRYY2dhZ1dRX2t3dDBkVUo1Zw?oc=5",
       "source": "Fierce Pharma",
-      "date": "Jul 11",
-      "timestamp": 1752217200000
+      "date": "Jul 7",
+      "timestamp": 1751871600000
     },
     {
       "title": "Biotech Stocks Facing FDA Decision In July 2025",
@@ -191,7 +212,7 @@
       "timestamp": 1746514800000
     },
     {
-      "title": "Cuts to FDA and NIH will hurt health tech startups, investors warn",
+      "title": "US federal job cuts to pile pressures on biotech sector",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPd1Nkdno0X2NiU1VSMUZuM1I4QVJGRmJvczNZV0lKblZCZ0J3bEJabFpqZGxrTlFXaFhNVEVrRmtJXzlIaHlrMWo5WUVNU3VQMlhqNjB0SGRrazlEUDQ3NUMxVEhzX3RDTXFaYk5VNTZ0NzFhLXBlRG5QaWdaTWdsSnRLT3cxQlN5UmJRRjFBU3JuTkMwRXRhdmRHb3FWTEk?oc=5",
       "source": "Global Venturing",
       "date": "May 2",
@@ -254,32 +275,11 @@
       "timestamp": 1734595200000
     },
     {
-      "title": "Healthy Returns: Trump\u2019s FDA pick Makary may be a relief for biotech and pharma, analysts say",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOR2dzYlZfdG1Md1hPdTB2M2dfZEdDMFVrZFF3ZXBKSUl2VG9nY0dLWjBzb0tpY2h5dkxIODV5ZFRSTG9JcmlYMWE2MGpmVHo2bElOLXpobWVjUVNSWVc4SENXbnpPRDNyclZZUS1nekwtbjlvclg4aC1acWR3M3oxYXJKQnUwWVNOamVPcEhLbVZzN1c5QnI0R29zZ3JBUEZYaWNfNTlVNnRhUTBKRlHSAbMBQVVfeXFMTjU5bmgxeEhnYTJUbnNRZjdQWGVodHBBT1FfeEpzX1JNNVFDY0FYU2NkYWlHTE5FdGV2ZE15UE5KNXlkeHBFMC1SaTVTbHBFZUU1b2tjOWxPcUtMNjg3bl9jUllDSlpNY3RteU1ndHVONkxqdDhvaThrTnpGcUtYdVMxWkd4NzBMNktjX2VBZVFPbk5qYzhtX0p0YXlNN242aF9vUVhPemFaR2lLRW5xR0FLZDg?oc=5",
-      "source": "CNBC",
-      "date": "Nov 26",
-      "timestamp": 1732608000000
-    },
-    {
       "title": "US FDA approvals bounce back in 2023, sparking hopes of a biotech recovery",
       "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNUjVId2hGTUZjTzdCbXNpUWFndVNTbU40YjRVZ2ZXYm1aMjdaeTBWaXhUMGU4OGItcURDM0F4ZHdjZ0FTSGlDX3h4NFU0NFA4OVhiN0U2WTV6b3l0Q0ZUckZEcFFzOTFUUjJRbUp2S2drRlJJbzgwWkdpZS1ZZmNrUi0zX0JzaFVRbW5wMW5UOTFyZWpRcGdCeVA5RzR0ekZqLVJOTDgweW11UlBqcDZxZDFFQkRiY2FtMWJnbndGaEhSbENZaWRLTE9HaHFiZnRma0NZ?oc=5",
       "source": "Reuters",
       "date": "Jan 2",
       "timestamp": 1704182400000
-    },
-    {
-      "title": "Krystal Biotech Receives FDA Approval for the First-Ever Redosable Gene Therapy, VYJUVEK\u2122 (beremagene geperpavec-svdt) for the Treatment of Dystrophic Epidermolysis Bullosa",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOOTFWcDVoVDdkWlN2c096eUJSQ0hoN1Q5cG5rN1dVM3VwTy0zZTAtVWo3dTBUOXY0SWdJX2JVZWRGaV90QmNmX1RoRnBBMzhLN0lYcGV5NERRRmZnWVIyY1hPZXJ3SmJPMjJTTWNvc2h1QnZhS0lKWFVaWmJqQUlIeTdPSkNwUkVuLUlyalNnSXRaOHVXOTgyaEFUeDdPWFVhSHNYMVdIUDE4SU9YTU9UaUV2dmxNUHBSc2N6VVUyUnJLQQ?oc=5",
-      "source": "Krystal Biotech, Inc",
-      "date": "May 19",
-      "timestamp": 1684479600000
-    },
-    {
-      "title": "2022 drug approvals: After Aduhelm fiasco, FDA endorsements drop to 37",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPTEVKc2c4YjF6YnJtXzB0YlBGdUxlV3NUTUQ0MU5rUjVJUXBkeG1ENTJPVmZrU0ZGdDNSVWdodnpvSnV0S0VvYmc0bkhYWGVKU2xjSWV3cXJlQkdaRUlsWVJ2eU5UZG1jQ0lxaVRheUs5UHllc1VtTFFxT2E5T192ZG5uekNOeWY1OFJROTdEWVp5QW96eWgzNjlyWXZJb0hVbzRZenFxVnVVdzBmZ3ZOWk1Jbk94RTV4OGpv?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 3",
-      "timestamp": 1672732800000
     }
   ]
 }
