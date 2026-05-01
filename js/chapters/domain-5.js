@@ -2218,250 +2218,724 @@ PL.addChapters({
   ]
 },
 
+
 "5-18": {
-  id:"5-18", title:"Key Driver Analysis", domain:"Data Science & Pharma Use Cases", domain_id:5,
-  level:"Intermediate", mins:35, available:true,
-  tags:["Key Driver Analysis","Relative Importance","Shapley Regression","MaxDiff","Brand Perception","Survey Analytics"],
-  objectives:["Explain the difference between stated importance and derived importance in KDA","Apply Shapley regression and relative weights analysis to quantify driver importance","Design and interpret MaxDiff surveys for measuring attribute preferences","Link KDA insights to commercial strategy — messaging, positioning, and resource allocation","Avoid common KDA pitfalls including multicollinearity and halo effects"],
+  id:"5-18", title:"Key Performance Driver Analysis (KDA)", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Intermediate", mins:50, available:true,
+  tags:["Key Driver Analysis","KDA","Relative Importance","Shapley Regression","MaxDiff","Conjoint","SHAP","Brand Perception","Survey Analytics"],
+  objectives:[
+    "Explain the difference between stated importance and derived importance — and why they diverge in pharma",
+    "Apply Shapley regression, relative weights, and SHAP-based methods to quantify driver importance",
+    "Design and interpret MaxDiff and conjoint surveys for measuring attribute preferences",
+    "Build an importance-performance map and translate KDA findings into brand strategy",
+    "Link survey KDA to actual claims data for perception-behaviour gap analysis",
+    "Avoid common KDA pitfalls including multicollinearity, halo effects, endogeneity, and sample bias"
+  ],
   toc:[
-    {id:"s1",title:"What Is Key Driver Analysis & When to Use It",level:"h2"},
-    {id:"s2",title:"Derived Importance Methods",level:"h2"},
-    {id:"s3",title:"Survey-Based KDA: MaxDiff & Stated Importance",level:"h2"},
-    {id:"s4",title:"Drivers of Prescribing Behavior",level:"h2"},
-    {id:"s5",title:"Interpreting & Acting on KDA Results",level:"h2"},
-    {id:"s6",title:"Key Takeaways",level:"h2"}
+    {id:"s1",title:"What Is KDA & Why It Matters in Pharma",level:"h2"},
+    {id:"s2",title:"Derived Importance Methods — Deep Dive",level:"h2"},
+    {id:"s3",title:"SHAP-Based KDA & Machine Learning Approaches",level:"h2"},
+    {id:"s4",title:"Survey Design: MaxDiff, Conjoint & Stated Preference",level:"h2"},
+    {id:"s5",title:"Drivers of Prescribing Behavior — Pharma-Specific Framework",level:"h2"},
+    {id:"s6",title:"Importance-Performance Mapping & Strategic Action",level:"h2"},
+    {id:"s7",title:"Linking KDA to Claims Data — Perception-Behaviour Gaps",level:"h2"},
+    {id:"s8",title:"KDA Across the Brand Lifecycle",level:"h2"},
+    {id:"s9",title:"KDA Pitfalls & Best Practices",level:"h2"},
+    {id:"s10",title:"Key Takeaways",level:"h2"}
   ],
   sections:[
-    {id:"s1",content:`<h2 id="s1">What Is Key Driver Analysis & When to Use It</h2>
-<p>Key Driver Analysis (KDA) answers the question: <em>which factors most strongly influence an outcome we care about?</em> The outcome might be an HCP's likelihood to prescribe a brand, a patient's satisfaction with treatment, or overall brand preference. KDA identifies which attributes to improve, message, and invest in — and which are table-stakes or irrelevant.</p>
+    {id:"s1",content:`<h2 id="s1">What Is KDA & Why It Matters in Pharma</h2>
+<p>Key Performance Driver Analysis (KDA) answers a deceptively simple question: <em>which factors most strongly influence an outcome we care about?</em> In pharma, that outcome is typically an HCP's brand preference, a patient's treatment satisfaction, or a payer's formulary decision. KDA identifies which levers to pull — and which are noise.</p>
+
 <h3>KDA in the Pharma Commercial Context</h3>
-<table><thead><tr><th>Business Question</th><th>KDA Outcome Variable</th><th>Drivers Evaluated</th></tr></thead><tbody>
-<tr><td>What drives HCP brand preference?</td><td>Intent to prescribe / overall brand rating</td><td>Efficacy, tolerability, dosing convenience, payer access, rep quality, disease education</td></tr>
-<tr><td>What drives patient adherence?</td><td>PDC score / days on therapy</td><td>Side effect burden, injection frequency, cost, nurse support, disease understanding</td></tr>
-<tr><td>What drives payer formulary preference?</td><td>Formulary tier / rebate acceptance</td><td>Clinical differentiation, ICER, HEOR evidence, patient access programs, competitive rebates</td></tr>
-<tr><td>What drives HCP satisfaction with sales rep?</td><td>Rep satisfaction score</td><td>Scientific knowledge, responsiveness, clinical insight, frequency of visits, digital tools</td></tr>
+<table><thead><tr><th>Business Question</th><th>KDA Outcome Variable</th><th>Candidate Drivers</th></tr></thead><tbody>
+<tr><td>What drives HCP brand preference?</td><td>Intent to prescribe / overall brand rating</td><td>Efficacy, tolerability, dosing convenience, payer access, rep quality, disease education, peer usage</td></tr>
+<tr><td>What drives patient adherence?</td><td>PDC score / days on therapy</td><td>Side effect burden, injection frequency, cost, nurse support, disease understanding, dosing complexity</td></tr>
+<tr><td>What drives payer formulary preference?</td><td>Formulary tier / rebate acceptance</td><td>Clinical differentiation, ICER, HEOR evidence, patient access programs, competitive rebates, budget impact</td></tr>
+<tr><td>What drives HCP satisfaction with sales rep?</td><td>Rep satisfaction score</td><td>Scientific knowledge, responsiveness, clinical insight, visit frequency, digital tools, sample availability</td></tr>
+<tr><td>What drives patient brand switching?</td><td>Switch event (binary)</td><td>AE experience, insurance change, physician recommendation, out-of-pocket cost, competitor launch, efficacy perception</td></tr>
 </tbody></table>
-<h3>Two Types of Importance</h3>
+
+<h3>Two Types of Importance — The Fundamental Distinction</h3>
 <div class="flow-box">
-  <div class="flow-step"><strong>Stated importance:</strong> Ask respondents directly — "How important is dosing convenience to your prescribing decision?" They rate each attribute. Problem: social desirability bias — respondents say efficacy is most important but actually switch brands over access/cost.</div>
-  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Stated importance:</strong> Ask respondents directly — "How important is dosing convenience to your prescribing decision?" They rate each attribute. Problem: social desirability bias — HCPs say efficacy is most important but actually switch brands over access/cost.</div>
+  <div class="flow-arrow">↕ These almost always diverge</div>
   <div class="flow-step"><strong>Derived importance:</strong> Infer importance statistically from what respondents actually choose or how they rate overall satisfaction, regressing the outcome on attribute ratings. More predictive of real behaviour.</div>
 </div>
-<div class="callout warning"><div class="callout-title">Stated ≠ Derived</div><p>In virtually every pharma KDA, stated and derived importance diverge. HCPs consistently over-state efficacy as their #1 driver and under-state access/payer coverage, rep relationship quality, and dosing convenience. Derived importance methods reveal the true levers. A brand team that acts on stated importance alone will over-invest in efficacy messaging when the real constraint is formulary access.</p></div>`},
-    {id:"s2",content:`<h2 id="s2">Derived Importance Methods</h2>
-<p>Several statistical methods exist to derive driver importance from survey or behavioural data. Each makes different assumptions and handles multicollinearity differently.</p>
-<table><thead><tr><th>Method</th><th>Approach</th><th>Handles Multicollinearity</th><th>Best For</th></tr></thead><tbody>
-<tr><td><strong>Pearson/Spearman Correlation</strong></td><td>Bivariate correlation between each driver and the outcome</td><td>No — double-counts shared variance</td><td>Quick screen only; not suitable as final KDA</td></tr>
-<tr><td><strong>OLS Regression Coefficients</strong></td><td>Standardised β coefficients from multivariate regression</td><td>Partially — but inflated/deflated by collinear drivers</td><td>When drivers are largely independent</td></tr>
-<tr><td><strong>Relative Weights Analysis (RWA)</strong></td><td>Orthogonalises predictors before regression; partitions R² among drivers</td><td>Yes — stable even with correlated drivers</td><td>Most common KDA method; balances rigour with interpretability</td></tr>
-<tr><td><strong>Shapley Regression</strong></td><td>Uses Shapley values from game theory to fairly distribute R² contribution across all subsets of predictors</td><td>Yes — theoretically optimal partition</td><td>High-collinearity scenarios; gold standard for attribution of variance</td></tr>
-<tr><td><strong>Random Forest / XGBoost Importance</strong></td><td>Feature importance from tree-based models</td><td>Partially — mean decrease impurity has known bias; SHAP values preferred</td><td>Large datasets with many potential drivers; non-linear effects</td></tr>
+
+<div class="callout warning"><div class="callout-title">Stated ≠ Derived — This Is Not a Minor Nuance</div><p>In virtually every pharma KDA, stated and derived importance rankings diverge. HCPs consistently over-state efficacy as their #1 driver and under-state access/payer coverage, rep relationship quality, and dosing convenience. Derived importance methods reveal the true levers. A brand team that acts on stated importance alone will over-invest in efficacy messaging when the real constraint is formulary access. The gap between stated and derived importance is itself a strategic insight — it tells you where HCPs' conscious beliefs diverge from their actual decision-making process.</p></div>
+
+<h3>When to Use KDA vs Other Analytical Approaches</h3>
+<table><thead><tr><th>Analytical Need</th><th>Best Approach</th><th>Why Not KDA?</th></tr></thead><tbody>
+<tr><td>Which attributes drive brand preference?</td><td><strong>KDA</strong></td><td>—</td></tr>
+<tr><td>Which channel drives the most incremental Rx?</td><td>MMM / Attribution</td><td>KDA measures perception-driven importance, not spend-driven ROI</td></tr>
+<tr><td>Which patient segments respond best?</td><td>Segmentation / Clustering</td><td>KDA ranks drivers within a segment, not segments against each other</td></tr>
+<tr><td>How will a new product feature affect share?</td><td>Conjoint / Discrete Choice</td><td>KDA explains current preferences; conjoint simulates hypothetical changes</td></tr>
+</tbody></table>`},
+
+    {id:"s2",content:`<h2 id="s2">Derived Importance Methods — Deep Dive</h2>
+<p>Several statistical methods exist to derive driver importance from survey or behavioural data. Each makes different assumptions and handles multicollinearity differently. Choosing the right method matters — in a typical pharma KDA where efficacy, safety, and tolerability ratings are correlated at r = 0.6–0.8, the method chosen can completely change which driver appears most important.</p>
+
+<h3>Method Comparison</h3>
+<table><thead><tr><th>Method</th><th>Approach</th><th>Handles Multicollinearity</th><th>Non-linear Effects</th><th>Best For</th></tr></thead><tbody>
+<tr><td><strong>Pearson / Spearman Correlation</strong></td><td>Bivariate correlation between each driver and the outcome</td><td>No — double-counts shared variance</td><td>No</td><td>Quick screen only; never as final KDA</td></tr>
+<tr><td><strong>OLS Regression (Std β)</strong></td><td>Standardised β coefficients from multivariate regression</td><td>Partially — inflated/deflated by collinearity</td><td>No</td><td>When drivers are largely independent (rare in pharma)</td></tr>
+<tr><td><strong>Relative Weights Analysis (RWA)</strong></td><td>Orthogonalises predictors via eigendecomposition, then regresses; partitions R² among drivers</td><td>Yes — stable even with correlated drivers</td><td>No</td><td>Most common KDA method; best balance of rigour and interpretability</td></tr>
+<tr><td><strong>Shapley Regression</strong></td><td>Shapley values from cooperative game theory — averages marginal R² contribution across all 2^p subsets</td><td>Yes — theoretically optimal partition</td><td>No</td><td>High-collinearity; gold standard for variance attribution</td></tr>
+<tr><td><strong>Dominance Analysis</strong></td><td>Compares R² change of each predictor across all subset models</td><td>Yes</td><td>No</td><td>Complete dominance ordering of drivers</td></tr>
+<tr><td><strong>Random Forest / XGBoost + SHAP</strong></td><td>Tree-based model with SHAP values for attribution</td><td>Partially</td><td>Yes — captures interactions and thresholds</td><td>Large datasets; non-linear driver effects</td></tr>
 </tbody></table>
-<h3>Interpreting a KDA Output</h3>
+
+<h3>Relative Weights Analysis — Step by Step</h3>
 <div class="flow-box">
-  <div class="flow-step">Rank drivers by derived importance score (% of total R² or relative weight)</div>
+  <div class="flow-step"><strong>Step 1:</strong> Compute the correlation matrix of all predictor variables (driver ratings)</div>
   <div class="flow-arrow">↓</div>
-  <div class="flow-step">Overlay performance scores: how does the brand rate on each driver?</div>
+  <div class="flow-step"><strong>Step 2:</strong> Eigendecompose the predictor correlation matrix → extract principal components that are orthogonal (uncorrelated)</div>
   <div class="flow-arrow">↓</div>
-  <div class="flow-step">Create a 2×2: High Importance / High Performance = Strengths to amplify; High Importance / Low Performance = Gaps to fix; Low Importance / Low Performance = Acceptable; Low Importance / High Performance = Over-invested</div>
+  <div class="flow-step"><strong>Step 3:</strong> Regress the outcome on the orthogonal components → get R² contribution of each component</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 4:</strong> Map component contributions back to original predictors using the loading matrix → produces "relative weight" for each original driver</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 5:</strong> Relative weights sum to total model R² — each driver's weight represents its proportional contribution to explained variance</div>
 </div>
-<div class="callout info"><div class="callout-title">Multicollinearity Is the Core Challenge</div><p>In pharma KDA, efficacy perceptions and safety perceptions are almost always correlated — HCPs who perceive a drug as more effective also tend to rate it as safer. OLS regression assigns importance unstably in this scenario: small changes in the data produce large swings in which driver appears most important. Relative Weights or Shapley regression resolve this by distributing shared variance proportionally.</p></div>`},
-    {id:"s3",content:`<h2 id="s3">Survey-Based KDA: MaxDiff & Stated Importance</h2>
-<h3>Direct Rating Scales</h3>
-<p>The simplest stated importance approach: ask respondents to rate the importance of each attribute on a 1–10 or 5-point Likert scale. Limitations: all attributes tend to score highly (positive skew), scale compression reduces discrimination between drivers, and response biases (acquiescence, social desirability) are pervasive.</p>
-<h3>MaxDiff (Best-Worst Scaling)</h3>
-<p>MaxDiff is a forced-choice experimental design that overcomes the rating scale biases. Respondents see subsets of attributes and choose the <em>most</em> and <em>least</em> important in each set. The repeated forced trade-offs produce discrimination that rating scales cannot.</p>
+
+<div class="formula-box"><div class="formula-label">Relative Weights — Key Properties</div><div class="formula-main">
+• Relative weights always sum to model R² (e.g., if R² = 0.72, weights sum to 0.72)<br>
+• Each weight is non-negative — no spurious negative contributions<br>
+• With uncorrelated predictors, relative weights equal squared standardised β (same as OLS)<br>
+• With correlated predictors, relative weights distribute shared variance proportionally — the key advantage over OLS
+</div></div>
+
+<h3>Shapley Regression — Deeper</h3>
+<p>Shapley regression applies the Shapley value from cooperative game theory. The "game" is predicting the outcome; "players" are the predictor variables. Each driver's Shapley value is its average marginal R² contribution across all possible subsets of other drivers:</p>
+
+<div class="formula-box"><div class="formula-label">Shapley Value for Driver j</div><div class="formula-main">
+φⱼ = Σ over all subsets S ⊆ {1,...,p} \ {j} of:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[ |S|! × (p − |S| − 1)! / p! ] × [ R²(S ∪ {j}) − R²(S) ]<br><br>
+In words: for every possible combination of other drivers, compute how much R² increases when you add driver j. Average these marginal contributions, weighted by the number of permutations that produce each subset.<br><br>
+Computational cost: 2^p models (exponential in number of drivers). With 12 drivers = 4,096 models. With 20 drivers → approximation needed (sampling-based Shapley).
+</div></div>
+
+<div class="callout info"><div class="callout-title">Multicollinearity Is the Core Challenge</div><p>In pharma KDA, efficacy perceptions and safety perceptions are almost always correlated (r = 0.5–0.8) — HCPs who perceive a drug as more effective also tend to rate it as safer. OLS regression assigns importance unstably: small changes in the data produce large swings in which driver appears most important. One sample might show efficacy at 45% and safety at 8%; another shows efficacy at 20% and safety at 30%. Relative Weights or Shapley regression resolve this by distributing shared variance proportionally — both methods would consistently show efficacy at ~28% and safety at ~25%.</p></div>`},
+
+    {id:"s3",content:`<h2 id="s3">SHAP-Based KDA & Machine Learning Approaches</h2>
+<p>Traditional KDA assumes linear relationships between driver ratings and the outcome. In reality, driver effects can be non-linear (e.g., a threshold effect where efficacy perception must exceed "good" before it influences prescribing) or interactive (e.g., dosing convenience only matters when efficacy is perceived as similar across brands). Machine learning methods with SHAP values capture these patterns.</p>
+
+<h3>Tree-Based KDA with SHAP Values</h3>
 <div class="flow-box">
-  <div class="flow-step">Design: Show respondents sets of 4–5 attributes from a larger list (e.g., 12 total drivers)</div>
+  <div class="flow-step"><strong>Step 1:</strong> Train a gradient-boosted model (XGBoost, LightGBM) predicting the outcome (brand preference, adherence) from driver ratings</div>
   <div class="flow-arrow">↓</div>
-  <div class="flow-step">Task: "Which of these is MOST important to your prescribing decision? Which is LEAST important?"</div>
+  <div class="flow-step"><strong>Step 2:</strong> Compute SHAP values for every observation × driver combination — these decompose each individual prediction into driver contributions</div>
   <div class="flow-arrow">↓</div>
-  <div class="flow-step">Repeat across 10–15 sets covering all attributes in a balanced design</div>
+  <div class="flow-step"><strong>Step 3:</strong> Global importance = mean |SHAP value| across observations; this ranks drivers by average impact</div>
   <div class="flow-arrow">↓</div>
-  <div class="flow-step">Estimate utilities via conditional logit or HB (Hierarchical Bayes) — produces interval-scaled importances that can be compared and aggregated</div>
+  <div class="flow-step"><strong>Step 4:</strong> SHAP dependence plots reveal non-linear effects and interactions — e.g., "efficacy perception has no impact below a rating of 3, then jumps sharply"</div>
 </div>
+
+<h3>Why SHAP Adds Value Beyond Shapley Regression</h3>
+<table><thead><tr><th>Feature</th><th>Shapley Regression</th><th>SHAP (ML-based)</th></tr></thead><tbody>
+<tr><td>Non-linear effects</td><td>Cannot detect</td><td>Captures thresholds, plateaus, U-shapes</td></tr>
+<tr><td>Interactions</td><td>Cannot detect</td><td>SHAP interaction values reveal pairwise effects</td></tr>
+<tr><td>Individual-level attribution</td><td>No — global only</td><td>Yes — SHAP value per observation enables segmented KDA</td></tr>
+<tr><td>Interpretability</td><td>High — single importance score per driver</td><td>High — but richer (summary, dependence, force plots)</td></tr>
+<tr><td>Sample size requirement</td><td>Lower (regression-based)</td><td>Higher (ML needs more data to learn non-linearity)</td></tr>
+</tbody></table>
+
+<h3>Segmented KDA Using SHAP</h3>
+<p>Individual-level SHAP values enable a powerful extension: <strong>segmented KDA</strong>. Instead of asking "what drives brand preference for all HCPs?", you can ask "what drives preference for high-decile prescribers vs. low-decile prescribers?"</p>
+
+<table><thead><tr><th>Segment</th><th>Top Derived Driver</th><th>Strategic Implication</th></tr></thead><tbody>
+<tr><td>High-volume specialists</td><td>Efficacy data depth (clinical trial detail)</td><td>Invest in MSL engagement and peer-reviewed publication strategy</td></tr>
+<tr><td>Mid-volume PCPs</td><td>Dosing simplicity and payer access</td><td>Prioritise formulary coverage messaging and simplified dosing materials</td></tr>
+<tr><td>Low / non-prescribers</td><td>Unfamiliarity with clinical evidence</td><td>Awareness campaign — disease education before brand promotion</td></tr>
+</tbody></table>
+
+<div class="callout info"><div class="callout-title">When to Use ML-Based KDA vs Traditional</div><p>Use traditional Shapley/RWA when: sample size is small (&lt; 300), the survey design is straightforward, and you need a simple importance ranking to present to brand leadership. Use SHAP-based KDA when: you have a large dataset (1,000+ observations or claims-linked data), you suspect non-linear or interactive driver effects, or you need segment-level driver insights.</p></div>`},
+
+    {id:"s4",content:`<h2 id="s4">Survey Design: MaxDiff, Conjoint & Stated Preference</h2>
+
+<h3>Direct Rating Scales — Limitations</h3>
+<p>The simplest stated importance approach: ask respondents to rate each attribute on a 1–10 or 5-point Likert scale. Limitations are well-documented: all attributes tend to score highly (positive skew), scale compression reduces discrimination, and response biases (acquiescence, social desirability) are pervasive. In pharma, the classic pattern: efficacy = 9.2, safety = 8.8, convenience = 8.5, access = 8.1, rep quality = 7.9 — virtually indistinguishable.</p>
+
+<h3>MaxDiff (Best-Worst Scaling) — The Standard for Pharma KDA</h3>
+<p>MaxDiff overcomes rating scale biases through forced-choice experimental design. Respondents see subsets of attributes and choose the most and least important in each set.</p>
+
+<div class="flow-box">
+  <div class="flow-step"><strong>Design:</strong> Show respondents sets of 4–5 attributes from a larger list (typically 10–15 total drivers)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Task:</strong> "Which of these is MOST important to your prescribing decision? Which is LEAST important?"</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Repeat:</strong> 10–15 balanced sets covering all attributes with equal frequency</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Estimate:</strong> Conditional logit or Hierarchical Bayes (HB) → produces interval-scaled utility scores per attribute per respondent</div>
+</div>
+
 <table><thead><tr><th>Feature</th><th>Direct Rating</th><th>MaxDiff</th></tr></thead><tbody>
 <tr><td>Scale discrimination</td><td>Poor (ratings cluster at top)</td><td>High (forced choice reveals true rank)</td></tr>
-<tr><td>Respondent burden</td><td>Low</td><td>Moderate (multiple choice tasks)</td></tr>
+<tr><td>Scale-use bias</td><td>Present (some respondents use top of scale, others use middle)</td><td>Absent (relative, not absolute)</td></tr>
 <tr><td>Individual-level scores</td><td>Yes</td><td>Yes (with HB estimation)</td></tr>
-<tr><td>Zero-point</td><td>Arbitrary</td><td>Meaningful (anchored)</td></tr>
-<tr><td>Recommended use</td><td>Quick pulse surveys</td><td>Strategic brand positioning research</td></tr>
-</tbody></table>`},
-    {id:"s4",content:`<h2 id="s4">Drivers of Prescribing Behavior</h2>
-<p>In pharma commercial analytics, KDA is most commonly applied to understand what drives HCPs to prescribe — or not prescribe — a specific brand. These analyses combine survey data (perception ratings) with actual prescribing behaviour (claims data) for maximum insight.</p>
-<h3>Typical Driver Framework for HCP Prescribing</h3>
-<table><thead><tr><th>Driver Category</th><th>Specific Drivers</th><th>Notes</th></tr></thead><tbody>
-<tr><td><strong>Clinical factors</strong></td><td>Efficacy in clinical trials, real-world effectiveness, onset of action, durability of response, safety profile</td><td>Typically high stated importance; actual prescribing driven more by access and habit</td></tr>
-<tr><td><strong>Access & reimbursement</strong></td><td>Formulary tier, prior authorization burden, co-pay support, specialty pharmacy friction</td><td>Often the #1 derived driver — PA denials and coverage barriers directly block prescribing</td></tr>
-<tr><td><strong>Convenience</strong></td><td>Dosing frequency, route of administration, self-injection vs. infusion, storage requirements</td><td>Key for patient-initiated therapy — also matters for HCP recommendation in self-administered drugs</td></tr>
-<tr><td><strong>Commercial support</strong></td><td>Rep quality and frequency, samples/starter packs, nurse educator support, patient assistance programs</td><td>Under-stated by HCPs but often high derived importance — especially in complex therapies</td></tr>
-<tr><td><strong>Familiarity & inertia</strong></td><td>Time since first prescription, peer usage in practice, KOL endorsement</td><td>Habit and social proof are strong behavioural drivers, especially for new entrants</td></tr>
+<tr><td>Respondent burden</td><td>Low</td><td>Moderate (10–15 choice tasks)</td></tr>
+<tr><td>Cross-country comparison</td><td>Problematic (cultural scale-use differences)</td><td>Valid (relative scores are culturally invariant)</td></tr>
+<tr><td>Recommended use</td><td>Quick pulse surveys</td><td>Strategic brand positioning, global ATU studies</td></tr>
 </tbody></table>
-<div class="callout info"><div class="callout-title">Linking Survey KDA to Claims Data</div><p>The most powerful KDA designs link survey perceptions (what HCPs say) with actual prescribing behaviour from claims (what HCPs do). An HCP who rates the brand highly on efficacy but has low actual prescribing has a perception-behaviour gap — likely caused by an access barrier. Identifying these HCPs is a high-priority target for access team intervention.</p></div>`},
-    {id:"s5",content:`<h2 id="s5">Interpreting & Acting on KDA Results</h2>
-<h3>The Importance-Performance Map</h3>
-<p>The standard KDA deliverable is an importance-performance map (also called a gap analysis or driver map). Each driver is plotted on two axes: derived importance (x or y) and brand performance/rating (the other axis). This creates four actionable quadrants:</p>
-<table><thead><tr><th>Quadrant</th><th>Importance</th><th>Performance</th><th>Strategic Implication</th></tr></thead><tbody>
-<tr><td><strong>Leverage (Strengths)</strong></td><td>High</td><td>High</td><td>Actively message and amplify — these are your differentiators; risk of losing them must be monitored</td></tr>
-<tr><td><strong>Fix (Critical Gaps)</strong></td><td>High</td><td>Low</td><td>Highest priority — address through messaging, evidence generation, access programs, or product improvement</td></tr>
-<tr><td><strong>Maintain (Table Stakes)</strong></td><td>Low</td><td>High</td><td>Low investment needed — do not over-message; HCPs expect this as baseline</td></tr>
-<tr><td><strong>Monitor (Low Priority)</strong></td><td>Low</td><td>Low</td><td>Not worth investing in; revisit if importance rises</td></tr>
+
+<h3>Choice-Based Conjoint (CBC) — Simulating Trade-Off Decisions</h3>
+<p>Conjoint analysis goes beyond importance ranking to simulate how HCPs make trade-off decisions among multi-attribute drug profiles. It answers: "If Drug A has superior efficacy but requires prior auth, and Drug B has moderate efficacy but is on formulary, which would HCPs prescribe?"</p>
+
+<div class="flow-box">
+  <div class="flow-step"><strong>Define attributes and levels:</strong> Efficacy (superior / comparable / inferior), Dosing (QD / BID / weekly injection), Access (no PA / PA required), Safety (clean label / boxed warning)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Generate choice tasks:</strong> Experimental design creates sets of 2–3 hypothetical drug profiles</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>HCPs choose:</strong> "Which drug would you prescribe for this patient?" (can include "none" option)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Estimate part-worth utilities:</strong> HB estimation produces utility for each attribute level, per respondent</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Importance = range of utilities within each attribute:</strong> If efficacy utilities range from −2 to +3 (range = 5) and dosing ranges from −1 to +1 (range = 2), efficacy is 2.5× more important than dosing in driving choice</div>
+</div>
+
+<div class="callout info"><div class="callout-title">MaxDiff vs Conjoint — When to Use Which</div><p><strong>MaxDiff</strong>: When you want to rank the importance of attributes in driving prescribing — simpler, fewer assumptions, works with any number of attributes. <strong>Conjoint</strong>: When you want to simulate how HCPs would trade off specific attribute levels in a competitive scenario — richer, enables market share simulation, but requires careful experimental design and larger samples (n ≥ 200).</p></div>`},
+
+    {id:"s5",content:`<h2 id="s5">Drivers of Prescribing Behavior — Pharma-Specific Framework</h2>
+<p>In pharma commercial analytics, KDA is most commonly applied to understand what drives HCPs to prescribe — or not prescribe — a specific brand. The driver framework must be comprehensive and mutually exclusive to avoid omitting key factors or double-counting.</p>
+
+<h3>Comprehensive Driver Framework for HCP Prescribing</h3>
+<table><thead><tr><th>Driver Category</th><th>Specific Drivers</th><th>Stated vs Derived</th></tr></thead><tbody>
+<tr><td><strong>Clinical efficacy</strong></td><td>Phase 3 data, real-world effectiveness, onset of action, durability, CR/ORR rates, symptom control</td><td>Typically over-stated (#1 in stated; often #2–3 in derived)</td></tr>
+<tr><td><strong>Safety / tolerability</strong></td><td>AE profile, black box warnings, monitoring requirements, drug-drug interactions, organ toxicity risk</td><td>Over-stated when broad; but specific AE concerns (e.g., cardiac risk) are correctly identified</td></tr>
+<tr><td><strong>Access & reimbursement</strong></td><td>Formulary tier, PA/step therapy burden, co-pay level, specialty pharmacy friction, buy-and-bill vs self-admin</td><td>Under-stated by HCPs but often #1 in derived importance — PA denials directly block prescribing</td></tr>
+<tr><td><strong>Dosing convenience</strong></td><td>Frequency (QD/BID/weekly/monthly), route (oral/SC/IV), self-admin vs office-visit, storage requirements</td><td>Under-stated; derived importance rises with increasing line of therapy (convenience matters more after efficacy is proven)</td></tr>
+<tr><td><strong>Commercial support</strong></td><td>Rep quality, scientific depth, samples/starter packs, nurse educators, patient assistance programs</td><td>Consistently under-stated but high derived importance — especially for complex therapies</td></tr>
+<tr><td><strong>Familiarity & social proof</strong></td><td>Personal prescribing experience, peer usage, KOL endorsement, time since launch, guidelines inclusion</td><td>Rarely stated explicitly but among the strongest derived drivers — habit and inertia dominate mid-lifecycle brands</td></tr>
+<tr><td><strong>Patient factors</strong></td><td>Patient demand/request, patient adherence likelihood, patient out-of-pocket cost, patient support program quality</td><td>Increasingly important in DTC-heavy TAs (obesity, dermatology, migraine)</td></tr>
 </tbody></table>
-<h3>Common KDA Pitfalls</h3>
-<table><thead><tr><th>Pitfall</th><th>Description</th><th>Fix</th></tr></thead><tbody>
-<tr><td><strong>Halo effect</strong></td><td>HCPs who like the brand rate all attributes highly, inflating correlations</td><td>Use difference scores (brand minus competitor rating) as outcome; normalise by respondent</td></tr>
-<tr><td><strong>Endogeneity</strong></td><td>High prescribers like the drug more because they prescribe it, not the other way round</td><td>Segment analysis by prescribing behaviour; look for causal mechanisms not just correlations</td></tr>
-<tr><td><strong>Sample bias</strong></td><td>Surveying only existing prescribers misses non-prescribers' barrier-driven perspectives</td><td>Include competitive prescribers and lapsed prescribers in KDA samples</td></tr>
-<tr><td><strong>Static analysis</strong></td><td>Drivers change over lifecycle — launch drivers differ from LOE defence drivers</td><td>Run KDA at regular intervals (quarterly or bi-annually); track driver importance trends over time</td></tr>
-</tbody></table>`},
-    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
-<div class="takeaway"><div class="takeaway-num">1</div><div>Stated importance (what HCPs say matters) consistently diverges from derived importance (what actually drives their behaviour). Acting on stated importance alone leads to over-investment in efficacy messaging and under-investment in access and convenience improvements.</div></div>
-<div class="takeaway"><div class="takeaway-num">2</div><div>Relative Weights Analysis and Shapley Regression are the preferred methods for derived KDA because they handle multicollinearity — the common pharma scenario where efficacy, safety, and tolerability perceptions are correlated.</div></div>
-<div class="takeaway"><div class="takeaway-num">3</div><div>MaxDiff produces better discriminating importance scores than direct rating scales by forcing trade-off choices — critical when all attributes cluster near "very important" on a rating scale.</div></div>
-<div class="takeaway"><div class="takeaway-num">4</div><div>The importance-performance map is the core KDA deliverable: high importance + low performance = fix first; high importance + high performance = message loudly; low importance = do not over-invest.</div></div>
-<div class="takeaway"><div class="takeaway-num">5</div><div>Linking survey perceptions to actual claims prescribing data reveals perception-behaviour gaps — HCPs who say the brand is excellent but don't prescribe it. These gaps almost always point to access barriers, not clinical objections.</div></div>`}],
+
+<h3>How Drivers Shift by Treatment Line</h3>
+<div class="formula-box"><div class="formula-label">Driver Importance by Treatment Line</div><div class="formula-main">
+<strong>First-line:</strong> Efficacy evidence + safety profile + guidelines dominate → HCPs follow evidence-based algorithms<br>
+<strong>Second-line:</strong> Access/coverage + differentiated efficacy data + switch-barrier considerations<br>
+<strong>Third-line+:</strong> Convenience + tolerability + patient preference + remaining treatment options → clinical equipoise, so non-clinical factors become decisive<br><br>
+<em>Implication: A brand's KDA messaging strategy should shift by line of therapy — efficacy-led for 1L, access-led for 2L, convenience-led for 3L+</em>
+</div></div>
+
+<div class="callout warning"><div class="callout-title">The Access Blind Spot</div><p>In nearly every pharma KDA across 15+ therapeutic areas, access-related drivers (formulary tier, PA burden, co-pay) show the largest stated-vs-derived gap. HCPs don't think of formulary status as a "driver" of their prescribing — they think of it as an external constraint. But statistically, access is the single strongest predictor of actual prescribing volume in most markets. Brands that invest heavily in efficacy messaging while ignoring access barriers are fighting the wrong battle.</p></div>`},
+
+    {id:"s6",content:`<h2 id="s6">Importance-Performance Mapping & Strategic Action</h2>
+<h3>The Importance-Performance Map (IPM)</h3>
+<p>The core KDA deliverable is the importance-performance map. Each driver is plotted on two axes: derived importance (x-axis) and brand performance rating (y-axis). This creates four actionable quadrants:</p>
+
+<table><thead><tr><th>Quadrant</th><th>Importance</th><th>Performance</th><th>Strategic Implication</th><th>Action Examples</th></tr></thead><tbody>
+<tr><td><strong>Leverage (Strengths)</strong></td><td>High</td><td>High</td><td>Actively message and amplify — these are your differentiators</td><td>Lead promotional materials with this attribute; build brand identity around it; ensure rep messaging reinforces it</td></tr>
+<tr><td><strong>Fix (Critical Gaps)</strong></td><td>High</td><td>Low</td><td>Highest priority — close the gap or the brand underperforms</td><td>If access: payer contracting, co-pay cards, PA support tools. If efficacy perception: RWE study, peer-to-peer programs, publication plan</td></tr>
+<tr><td><strong>Maintain (Table Stakes)</strong></td><td>Low</td><td>High</td><td>Don't over-invest; these are expected baseline attributes</td><td>Reduce messaging weight; reallocate budget to Fix quadrant; monitor for competitive parity</td></tr>
+<tr><td><strong>Monitor (Low Priority)</strong></td><td>Low</td><td>Low</td><td>Not worth investing in currently</td><td>Revisit if importance rises (competitive dynamic change); avoid wasting resources here</td></tr>
+</tbody></table>
+
+<h3>Reading an IPM — Worked Example</h3>
+<div class="formula-box"><div class="formula-label">Example: Oncology Brand IPM Findings</div><div class="formula-main">
+<strong>Leverage:</strong> Overall survival data (Importance: 32%, Performance: 8.4/10) → Lead with OS messaging in promotional materials<br>
+<strong>Fix:</strong> PA burden / access (Importance: 28%, Performance: 4.2/10) → Immediate action: expand co-pay support, simplify PA process, contract for broader formulary<br>
+<strong>Maintain:</strong> Infusion time (Importance: 8%, Performance: 8.1/10) → Short infusion is nice but not driving choice; don't over-message<br>
+<strong>Monitor:</strong> Patient portal quality (Importance: 4%, Performance: 3.5/10) → Low priority; improving the portal won't move prescribing
+</div></div>
+
+<h3>From IPM to Investment Decisions</h3>
+<div class="flow-box">
+  <div class="flow-step"><strong>Step 1:</strong> Rank "Fix" quadrant drivers by gap size (importance × performance deficit)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 2:</strong> Assess moveability — can the brand actually improve on this driver? (Efficacy data can't be changed; access can be improved through contracting)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 3:</strong> Estimate investment required vs incremental Rx lift — use MMM-style simulation or historical precedent</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 4:</strong> Redirect budget: reduce spend on "Maintain" drivers; reallocate to "Fix" drivers with highest moveability × importance</div>
+</div>
+
+<div class="callout info"><div class="callout-title">Competitive IPM Overlay</div><p>The most powerful IPM compares your brand's performance against the top competitor on each driver. Drivers where you are strong and the competitor is weak are your messaging differentiation opportunities. Drivers where the competitor is strong and you are weak reveal vulnerability — address defensively or reframe the competitive narrative.</p></div>`},
+
+    {id:"s7",content:`<h2 id="s7">Linking KDA to Claims Data — Perception-Behaviour Gaps</h2>
+<p>The most powerful KDA designs link survey perceptions (what HCPs say) with actual prescribing behaviour from claims data (what HCPs do). This reveals the crucial <strong>perception-behaviour gap</strong>.</p>
+
+<h3>The Perception-Behaviour Gap Framework</h3>
+<table><thead><tr><th>Perception</th><th>Behaviour</th><th>Diagnosis</th><th>Action</th></tr></thead><tbody>
+<tr><td>High brand perception</td><td>High prescribing</td><td>Aligned — brand is winning on merit</td><td>Maintain; defend against competitive threats</td></tr>
+<tr><td>High brand perception</td><td><strong>Low prescribing</strong></td><td><strong>Access barrier</strong> — HCP likes the brand but can't/won't prescribe due to PA, formulary, or cost</td><td>Market access intervention: payer contracting, co-pay support, PA simplification, SP onboarding</td></tr>
+<tr><td>Low brand perception</td><td>High prescribing</td><td>Habit-driven prescribing — HCP prescribes from inertia but doesn't rate the brand highly</td><td>Vulnerable to competitive switch; invest in clinical conviction-building</td></tr>
+<tr><td>Low brand perception</td><td>Low prescribing</td><td>Awareness/perception gap — HCP neither knows nor prescribes</td><td>Awareness campaign: disease education → clinical evidence → trial initiation</td></tr>
+</tbody></table>
+
+<h3>How to Link Survey and Claims</h3>
+<div class="flow-box">
+  <div class="flow-step"><strong>Step 1:</strong> Conduct ATU survey with HCP identifiers (NPI or anonymous panel ID linked to claims panel)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 2:</strong> Match survey respondents to claims data (IQVIA, Symphony Health, Komodo) to get actual TRx/NRx by brand</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 3:</strong> Create a 2×2 of perception (survey brand rating) vs behaviour (actual TRx share)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 4:</strong> Identify "High Perception / Low Rx" HCPs — these are the highest-value targets for access team intervention</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 5:</strong> Run a separate KDA within each quadrant to understand what drives behaviour in each segment</div>
+</div>
+
+<div class="callout warning"><div class="callout-title">The High-Perception / Low-Rx Segment Is Gold</div><p>HCPs who rate your brand highly on all perceptual attributes but don't prescribe it represent the highest-ROI opportunity in pharma commercial analytics. They don't need to be convinced — they're already convinced. Something external is blocking them: PA denial, formulary exclusion, cost concern, or lack of clinical trigger. Identifying and addressing the specific barrier for this group typically yields higher conversion rates than any promotional campaign.</p></div>`},
+
+    {id:"s8",content:`<h2 id="s8">KDA Across the Brand Lifecycle</h2>
+<p>Driver importance is not static — it changes as a brand progresses through its lifecycle. A KDA run at launch will produce different results from one run at peak sales or at LOE. Running KDA at regular intervals (semi-annually) and tracking driver importance trends over time is far more valuable than a single snapshot.</p>
+
+<h3>Driver Importance Shifts by Lifecycle Stage</h3>
+<table><thead><tr><th>Lifecycle Stage</th><th>Top Derived Drivers</th><th>KDA Design Considerations</th></tr></thead><tbody>
+<tr><td><strong>Pre-launch / Launch</strong></td><td>Clinical data differentiation, safety profile, KOL endorsement, first-mover vs. fast-follower positioning</td><td>Include competitor perception ratings; oversample early adopters and KOLs; focus on trial barriers</td></tr>
+<tr><td><strong>Growth</strong></td><td>Access/formulary expansion, real-world effectiveness confirmation, dosing convenience, rep reach and quality</td><td>Link to claims to identify access-blocked HCPs; segment by adoption timing (innovators vs majority)</td></tr>
+<tr><td><strong>Maturity / Peak</strong></td><td>Habit/inertia, payer coverage stability, competitive differentiation on safety/tolerability</td><td>Include competitive perception overlay; identify brand vulnerability to new entrants</td></tr>
+<tr><td><strong>LOE / Generic Entry</strong></td><td>Brand loyalty, perceived quality vs generic, patient reluctance to switch, specialty pharmacy relationship</td><td>Focus on switch triggers and retention drivers; include price sensitivity analysis</td></tr>
+<tr><td><strong>Biosimilar Competition</strong></td><td>Trust in originator vs biosimilar, pharmacy substitution policies, payer mandates, patient confidence</td><td>Include both HCP and patient KDA; payer perception analysis becomes critical</td></tr>
+</tbody></table>
+
+<div class="formula-box"><div class="formula-label">Longitudinal KDA — Tracking Driver Shifts</div><div class="formula-main">
+<strong>Best practice:</strong> Run consistent KDA every 6 months with the same attribute list and methodology<br>
+<strong>Track:</strong> Derived importance % for each driver over time → plot trend lines<br>
+<strong>Signal:</strong> If "access burden" importance rises from 15% → 25% → 35% over 18 months, the brand is losing the access battle — market access intervention is urgent<br>
+<strong>Signal:</strong> If "clinical data" importance falls from 30% → 18% over 12 months, efficacy differentiation is eroding — time for new evidence generation (RWE, new subgroup analysis)
+</div></div>`},
+
+    {id:"s9",content:`<h2 id="s9">KDA Pitfalls & Best Practices</h2>
+
+<h3>Common Pitfalls</h3>
+<table><thead><tr><th>Pitfall</th><th>Description</th><th>Diagnostic</th><th>Fix</th></tr></thead><tbody>
+<tr><td><strong>Halo effect</strong></td><td>HCPs who like the brand rate all attributes highly, inflating correlations</td><td>All driver-outcome correlations are ≥ 0.5; R² is suspiciously high (> 0.85)</td><td>Use difference scores (brand minus competitor rating) as outcome; normalise by respondent mean rating</td></tr>
+<tr><td><strong>Multicollinearity</strong></td><td>Efficacy, safety, tolerability ratings are correlated at r > 0.6; OLS becomes unstable</td><td>VIF > 5 for multiple predictors; β signs flip across subsamples</td><td>Switch from OLS to Relative Weights or Shapley regression; do not use Pearson correlations alone</td></tr>
+<tr><td><strong>Endogeneity</strong></td><td>High prescribers like the drug more because they prescribe it (reverse causality), not because perceptions drive prescribing</td><td>Effect is strongest among highest-volume prescribers who have most experience with the drug</td><td>Segment analysis by prescribing tier; include prescribing volume as a control; look for causal mechanisms</td></tr>
+<tr><td><strong>Sample bias</strong></td><td>Surveying only current prescribers misses non-prescribers' barrier-driven perspectives</td><td>Sample is 80%+ current brand prescribers; derived drivers skew toward "what satisfies users" not "what attracts new prescribers"</td><td>Include competitive prescribers and lapsed prescribers; ideally 40/40/20 split (current / competitive / lapsed)</td></tr>
+<tr><td><strong>Too many drivers</strong></td><td>20+ attributes dilute importance scores; respondent fatigue reduces data quality</td><td>Many drivers cluster at 4–5% importance; respondents take < 3 min to complete 20 rating scales</td><td>Reduce to 10–12 core drivers; group related attributes (e.g., combine "onset" and "durability" into "efficacy profile")</td></tr>
+<tr><td><strong>Static analysis</strong></td><td>One-time KDA treated as permanent truth; drivers change over lifecycle</td><td>Brand team cites 2-year-old KDA to justify current messaging strategy</td><td>Run KDA at regular intervals; track importance trends over time</td></tr>
+</tbody></table>
+
+<h3>KDA Best Practices Checklist</h3>
+<div class="flow-box">
+  <div class="flow-step">✓ Use derived importance (Shapley/RWA), not stated importance, for strategic decisions</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">✓ Include both current and competitive prescribers in the sample</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">✓ Limit to 10–12 well-defined, mutually exclusive drivers</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">✓ Link survey data to claims for perception-behaviour gap analysis</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">✓ Present as an importance-performance map, not a table of coefficients</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">✓ Run longitudinally — track driver importance trends over time</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">✓ Segment KDA by HCP tier, specialty, and treatment line</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step">✓ Always report confidence intervals / bootstrap CIs on importance scores — point estimates without uncertainty invite false precision</div>
+</div>`},
+
+    {id:"s10",content:`<h2 id="s10">Key Takeaways</h2>
+<div class="takeaway"><div class="takeaway-num">1</div><div><strong>Stated ≠ Derived.</strong> In every pharma KDA, stated importance (what HCPs say matters) diverges from derived importance (what actually drives their behaviour). Acting on stated importance alone leads to over-investment in efficacy messaging and under-investment in access and convenience improvements.</div></div>
+<div class="takeaway"><div class="takeaway-num">2</div><div><strong>Multicollinearity demands specialised methods.</strong> Relative Weights Analysis and Shapley Regression distribute shared variance proportionally across correlated drivers — essential when efficacy, safety, and tolerability perceptions are correlated at r = 0.6–0.8, which is the norm in pharma.</div></div>
+<div class="takeaway"><div class="takeaway-num">3</div><div><strong>MaxDiff > direct rating scales.</strong> MaxDiff forces trade-off choices that produce discriminating importance scores — critical when all attributes cluster near "very important" on a Likert scale. Conjoint goes further by simulating multi-attribute trade-off decisions.</div></div>
+<div class="takeaway"><div class="takeaway-num">4</div><div><strong>The importance-performance map is the core deliverable.</strong> High importance + low performance = fix first; high importance + high performance = message loudly; low importance = don't over-invest. The competitive overlay adds another dimension: where you beat the competitor on a high-importance driver is your messaging differentiation opportunity.</div></div>
+<div class="takeaway"><div class="takeaway-num">5</div><div><strong>Perception-behaviour gaps are gold.</strong> Linking survey KDA to claims reveals HCPs who rate your brand highly but don't prescribe it — the highest-ROI intervention target. The barrier is almost always access, not perception.</div></div>
+<div class="takeaway"><div class="takeaway-num">6</div><div><strong>Drivers shift over the lifecycle.</strong> Clinical data dominates at launch; access dominates at growth; habit dominates at maturity; price sensitivity dominates at LOE. A single KDA snapshot is insufficient — longitudinal tracking reveals when strategic pivots are needed.</div></div>
+<div class="takeaway"><div class="takeaway-num">7</div><div><strong>SHAP-based ML methods add non-linearity and segmentation.</strong> When you have large datasets, tree-based models with SHAP values reveal threshold effects (e.g., efficacy must exceed a minimum before it matters) and enable segment-level KDA that traditional methods cannot.</div></div>`}
+  ],
   questions:[
-    {id:"q1",text:"A pharma brand team runs a KDA and finds that HCPs rate 'efficacy in Phase 3 trials' as their #1 most important prescribing driver (stated importance). However, derived importance analysis puts 'formulary tier and prior authorization burden' as #1. What should the brand team do?",
-     options:["Discard the derived importance analysis — HCPs know what matters to them","Prioritise access-focused interventions (payer contracting, co-pay cards, PA support tools) over increasing efficacy messaging, since derived importance reflects what actually predicts prescribing behaviour","Increase clinical trial messaging to reinforce the HCP-stated driver","Survey a larger sample until stated and derived importance align"],
-     correct:1,explanation:"Derived importance reflects what actually drives prescribing behaviour — HCPs state that efficacy is most important because it is socially desirable to say so, but their actual prescribing decisions are constrained by formulary access. The brand team should prioritise market access improvements, PA burden reduction, and coverage communication over additional efficacy messaging. This doesn't mean ignoring efficacy — it means recognising that access is the binding constraint."},
-    {id:"q2",text:"In a KDA for an oncology brand, efficacy rating and safety rating have a Pearson correlation of 0.82 with each other. An OLS regression assigns 45% importance to efficacy and 8% to safety. A Shapley regression assigns 28% to efficacy and 25% to safety. Which result is more reliable?",
-     options:["OLS — it uses more standard statistical methods","Shapley regression — it distributes shared variance fairly across correlated predictors rather than arbitrarily assigning it to the first correlated variable that enters the model","OLS — Shapley is only for game theory, not regression","Neither — the correlation means KDA cannot be run"],
-     correct:1,explanation:"With a 0.82 correlation between efficacy and safety ratings, these drivers share substantial variance. OLS regression produces unstable estimates in this scenario — the coefficients are highly sensitive to which variable enters the model first and to small sample fluctuations. Shapley regression uses a combinatorial approach (averaging contribution across all subsets of predictors) to distribute shared R² fairly, producing stable and interpretable importance weights even under high multicollinearity."},
-    {id:"q3",text:"A MaxDiff survey shows that 'once-daily dosing' has the highest importance utility score. The brand currently requires twice-daily dosing. The brand team considers a label change to request a once-daily indication. What additional analysis should precede this decision?",
-     options:["Run the KDA again with a larger sample","Cross the MaxDiff finding with actual adherence data from claims — if twice-daily patients already have high PDC, dosing frequency may not be the actual barrier to prescribing or adherence in practice. Check if once-daily competitors are gaining share on the convenience story before committing to a clinical program.","Cancel the label change — MaxDiff is not statistically valid","Accept the MaxDiff result directly — it is the gold standard for preference measurement"],
-     correct:1,explanation:"MaxDiff tells you what HCPs say they value, but stated preference must be triangulated with behavioural data before making a major strategic investment. If twice-daily patients have high real-world adherence (high PDC in claims) and the brand is not losing share to once-daily competitors, dosing frequency may not be the actual commercial barrier. The MaxDiff finding is a hypothesis to investigate, not a direct investment mandate. Cross-validating with claims behaviour prevents expensive misdirected investments."}
+    {id:"q1",text:"A pharma brand team runs a KDA and finds that HCPs rate 'efficacy in Phase 3 trials' as their #1 most important driver (stated importance). Derived importance analysis puts 'formulary tier and PA burden' as #1. What should the brand team prioritise?",
+     options:["Increase clinical trial messaging to reinforce the HCP-stated driver","Discard the derived importance — HCPs know what matters to them","Prioritise access-focused interventions (payer contracting, co-pay cards, PA support tools) since derived importance reflects what actually predicts prescribing behaviour","Survey a larger sample until stated and derived importance align"],
+     correct:2,explanation:"Derived importance reflects what actually drives prescribing behaviour. HCPs state efficacy is most important due to social desirability, but their actual prescribing is constrained by formulary access. The brand team should prioritise market access improvements. This doesn't mean ignoring efficacy — it means recognising that access is the binding constraint."},
+    {id:"q2",text:"In a KDA for an oncology brand, efficacy rating and safety rating have a Pearson correlation of 0.82. OLS regression assigns 45% importance to efficacy and 8% to safety. Shapley regression assigns 28% to efficacy and 25% to safety. Which is more reliable and why?",
+     options:["OLS — it uses more standard statistical methods","Shapley regression — it distributes shared variance fairly across correlated predictors rather than arbitrarily assigning it to whichever variable enters the model first","OLS — Shapley is only valid in game theory, not regression","Neither — the high correlation means KDA cannot be run on these data"],
+     correct:1,explanation:"With r = 0.82, these drivers share substantial variance. OLS produces unstable estimates — coefficients are sensitive to which variable enters first and to small sample changes. Shapley regression averages marginal R² contribution across all subsets, distributing shared variance fairly and producing stable importance weights even under high multicollinearity."},
+    {id:"q3",text:"A brand team identifies 200 HCPs who rate their brand perception at 8+/10 on all attributes but have near-zero actual prescribing (from linked claims data). What is the most likely barrier, and what should the team do?",
+     options:["These HCPs are lying on the survey — discard them","The most likely barrier is access (PA denial, formulary exclusion, cost). These high-perception / low-Rx HCPs are the highest-ROI targets — deploy the access team to identify and remove the specific formulary or PA barrier blocking each HCP.","The brand needs more clinical data to convince these HCPs","Increase detailing frequency to these HCPs to convert them"],
+     correct:1,explanation:"HCPs who perceive the brand positively but don't prescribe it are almost always blocked by an access barrier — they don't need more conviction, they need the formulary or PA obstacle removed. Identifying the specific barrier (plan-by-plan) and deploying access solutions (co-pay support, payer contracting, PA assistance) yields higher conversion than any promotional campaign."},
+    {id:"q4",text:"A MaxDiff study for a dermatology brand shows 'once-daily dosing' has the highest importance score. The brand is twice-daily. Before investing in a once-daily label change, the team should:",
+     options:["Immediately pursue the clinical program — MaxDiff is the gold standard","Cross-validate with claims data: check if current twice-daily patients already have high adherence (PDC) and whether once-daily competitors are gaining share on the convenience story. If adherence is already high, dosing frequency may not be the actual commercial barrier.","Run the MaxDiff again with more respondents to confirm","Ignore the MaxDiff — stated preference data is unreliable"],
+     correct:1,explanation:"MaxDiff measures stated preference, which must be triangulated with behavioural data. If twice-daily patients already have high PDC and the brand isn't losing share to once-daily competitors, dosing frequency may not be the actual barrier. The MaxDiff finding is a hypothesis to investigate, not a direct investment mandate."},
+    {id:"q5",text:"Which KDA pitfall occurs when HCPs who prescribe a brand frequently rate all its attributes more highly because they prescribe it — rather than prescribing it because of those attributes?",
+     options:["Multicollinearity","Halo effect","Endogeneity (reverse causality)","Sample bias"],
+     correct:2,explanation:"Endogeneity (reverse causality) occurs when prescribing experience causes positive perceptions rather than perceptions driving prescribing. High-volume prescribers have more positive experience with the drug and rate it highly across all attributes. This inflates the apparent importance of clinical drivers. The fix: segment KDA by prescribing tier and include prescribing volume as a control variable."}
   ]
 },
 
+
 "5-19": {
-  id:"5-19", title:"Marketing Mix Models (MMM)", domain:"Data Science & Pharma Use Cases", domain_id:5,
-  level:"Advanced", mins:40, available:true,
-  tags:["Marketing Mix Modeling","MMM","Adstock","ROI","Attribution","Media Spend","Promotional Response"],
-  objectives:["Explain what MMM measures and how it differs from multi-touch attribution","Build a pharma MMM with base and incremental sales decomposition","Model adstock and saturation effects for each promotional channel","Calculate ROI and optimal budget allocation across channels","Validate an MMM and interpret its limitations for stakeholders"],
+  id:"5-19", title:"Marketing Mix Modeling (MMM)", domain:"Data Science & Pharma Use Cases", domain_id:5,
+  level:"Advanced", mins:65, available:true,
+  tags:["Marketing Mix Modeling","MMM","Adstock","ROI","Attribution","Media Spend","Promotional Response","Bayesian MMM","PyMC-Marketing","Budget Optimization"],
+  objectives:[
+    "Explain what MMM measures and how it differs from multi-touch attribution",
+    "Build a pharma MMM with base and incremental TRx decomposition",
+    "Model adstock (carryover) and saturation (diminishing returns) for each promotional channel",
+    "Understand Bayesian MMM frameworks (PyMC-Marketing, Robyn, Meridian) and when to use them",
+    "Calculate channel ROI, marginal ROI, and optimal budget allocation",
+    "Validate an MMM using holdout, decomposition plausibility, and geo-experiments",
+    "Navigate pharma-specific MMM challenges: access confounding, co-promotion, sample attribution"
+  ],
   toc:[
     {id:"s1",title:"What MMM Measures & Why It Matters",level:"h2"},
-    {id:"s2",title:"MMM Model Structure & Variables",level:"h2"},
-    {id:"s3",title:"Adstock, Carryover & Saturation Effects",level:"h2"},
-    {id:"s4",title:"Estimating ROI & Optimising Budget Allocation",level:"h2"},
-    {id:"s5",title:"Validation, Limitations & MMM vs MTA",level:"h2"},
-    {id:"s6",title:"Key Takeaways",level:"h2"}
+    {id:"s2",title:"MMM Model Structure & Variable Design",level:"h2"},
+    {id:"s3",title:"Adstock, Carryover & Saturation — Deep Dive",level:"h2"},
+    {id:"s4",title:"Base Volume Decomposition",level:"h2"},
+    {id:"s5",title:"Bayesian MMM — PyMC-Marketing, Robyn & Meridian",level:"h2"},
+    {id:"s6",title:"Channel ROI, Marginal ROI & Budget Optimisation",level:"h2"},
+    {id:"s7",title:"Validation Framework",level:"h2"},
+    {id:"s8",title:"MMM vs MTA vs Unified Measurement",level:"h2"},
+    {id:"s9",title:"Pharma-Specific MMM Challenges",level:"h2"},
+    {id:"s10",title:"Key Takeaways",level:"h2"}
   ],
   sections:[
     {id:"s1",content:`<h2 id="s1">What MMM Measures & Why It Matters</h2>
-<p>Marketing Mix Modeling (MMM) is a regression-based analytical approach that quantifies the contribution of each marketing and promotional activity to sales (or TRx) outcomes. It answers the fundamental commercial question: <em>for every dollar spent on detailing, DTC, samples, or digital promotion, how many additional prescriptions did we generate?</em></p>
+<p>Marketing Mix Modeling (MMM) is a regression-based analytical framework that decomposes total sales (TRx, NRx, or revenue) into the contributions of each marketing channel, controlling for external factors. It answers the core commercial question: <em>for every dollar spent on detailing, DTC, samples, or digital promotion, how many additional prescriptions did we generate — and how should we reallocate budget to maximise return?</em></p>
+
 <h3>Pharma Promotional Channels in an MMM</h3>
-<table><thead><tr><th>Channel</th><th>Metric Used in Model</th><th>Expected Effect Type</th></tr></thead><tbody>
-<tr><td><strong>Sales force detailing</strong></td><td>Call equivalents, detail frequency by territory, rep reach</td><td>Strong, lagged, decays quickly</td></tr>
-<tr><td><strong>Samples</strong></td><td>Sample units dispensed by rep and through dispensing programs</td><td>Fast, direct trial conversion; short carryover</td></tr>
-<tr><td><strong>Direct-to-Consumer (DTC)</strong></td><td>GRP (gross rating points) or impressions by media type (TV, digital, print)</td><td>Slower build; longer carryover; awareness-driven</td></tr>
-<tr><td><strong>Digital promotion (HCP)</strong></td><td>Email opens, banner clicks, rep-triggered digital content, eDetailer completions</td><td>Moderate; measurable at HCP level; short carryover</td></tr>
-<tr><td><strong>Speaker programs / events</strong></td><td>Program attendees, speaker fees (used as proxy for KOL reach)</td><td>Peer influence effect; slow build, long duration</td></tr>
-<tr><td><strong>Patient support programs</strong></td><td>Hub enrolments, co-pay card activations, nurse educator contacts</td><td>Retention / adherence support; reduces discontinuation</td></tr>
+<table><thead><tr><th>Channel</th><th>Metric Used in Model</th><th>Expected Effect</th><th>Typical Data Source</th></tr></thead><tbody>
+<tr><td><strong>Sales force detailing</strong></td><td>Call equivalents, detail frequency by territory</td><td>Strong, lagged 2–4 weeks, decays quickly</td><td>Veeva CRM</td></tr>
+<tr><td><strong>Samples</strong></td><td>Sample units dispensed</td><td>Fast trial conversion; short carryover</td><td>Veeva CRM / PDMA reports</td></tr>
+<tr><td><strong>DTC (TV)</strong></td><td>GRPs (gross rating points) by market/week</td><td>Slow build; long carryover; awareness-driven</td><td>Nielsen / iSpot.tv</td></tr>
+<tr><td><strong>DTC (Digital)</strong></td><td>Impressions, clicks, video completions by channel</td><td>Moderate; shorter carryover than TV</td><td>DCM, DSP platform data</td></tr>
+<tr><td><strong>HCP digital</strong></td><td>Email opens, banner impressions, eDetailer completions</td><td>Moderate; measurable at HCP level</td><td>Veeva Approved Email, Doximity, Medscape</td></tr>
+<tr><td><strong>Speaker programs</strong></td><td>Attendees, events by territory</td><td>Peer influence; slow build, long duration</td><td>Veeva Events Management</td></tr>
+<tr><td><strong>Patient support</strong></td><td>Hub enrolments, co-pay card activations</td><td>Retention / adherence; reduces discontinuation</td><td>Hub vendor reports</td></tr>
+<tr><td><strong>Medical education</strong></td><td>CME attendees, congress presentations</td><td>Long-term awareness; hard to isolate</td><td>Medical affairs tracking</td></tr>
 </tbody></table>
-<div class="callout info"><div class="callout-title">Why MMM Matters More Than Ever</div><p>As third-party cookies deprecate and multi-touch attribution becomes harder to execute (particularly in HCP digital channels where individual tracking raises compliance concerns), MMM has seen a resurgence. It does not require individual-level tracking data — it operates on aggregated spend and aggregate sales, making it inherently privacy-safe and compliant in pharma's heavily regulated promotional environment.</p></div>`},
-    {id:"s2",content:`<h2 id="s2">MMM Model Structure & Variables</h2>
-<p>An MMM decomposes total sales/TRx into <strong>base</strong> (what would have sold without any promotion) and <strong>incremental</strong> (what promotion contributed) components.</p>
-<div class="formula-box">
-  <div class="formula-label">MMM Core Equation</div>
-  <div class="formula-main">TRx(t) = Base(t) + β₁·Adstock_Detailing(t) + β₂·Adstock_Samples(t) + β₃·Adstock_DTC(t) + … + Controls(t) + ε(t)<br><br>Base(t) = underlying demand without promotion (trend + seasonality + competition effects)<br>Incremental(t) = sum of all promotional contributions</div>
-</div>
-<h3>Variable Categories</h3>
-<table><thead><tr><th>Variable Type</th><th>Examples</th><th>Purpose</th></tr></thead><tbody>
-<tr><td><strong>Promotional variables</strong></td><td>Detailing calls, samples, DTC GRPs, digital impressions (after adstock transformation)</td><td>Estimate incremental Rx attributable to each channel</td></tr>
-<tr><td><strong>Base drivers</strong></td><td>Trend, seasonal index, disease incidence, new patient starts</td><td>Capture underlying market dynamics independent of promotion</td></tr>
-<tr><td><strong>Competitive variables</strong></td><td>Competitor detailing intensity, competitor launches, competitor price changes</td><td>Control for market dynamics that suppress or boost brand sales</td></tr>
-<tr><td><strong>Distribution / access</strong></td><td>Formulary coverage %, payer mix changes, specialty pharmacy availability</td><td>Access often drives more volume than promotion — must be modelled separately</td></tr>
-<tr><td><strong>Price / GTN</strong></td><td>Net price changes, co-pay card adjustments, formulary tier shifts</td><td>Price elasticity estimation; controls for GTN changes that affect demand</td></tr>
-<tr><td><strong>External shocks</strong></td><td>COVID impact, competitor recall, safety label change, product shortage</td><td>Dummy variables absorb one-time events that would otherwise confound promotion effects</td></tr>
+
+<div class="callout info"><div class="callout-title">Why MMM Is Resurging</div><p>As third-party cookies deprecate and individual HCP tracking faces compliance scrutiny, MMM has seen a major resurgence. It operates on aggregated spend and aggregate sales — inherently privacy-safe and HIPAA-compliant. The new generation of Bayesian MMM tools (PyMC-Marketing, Google Meridian, Meta Robyn) has made MMM faster to build, more transparent, and more accessible than the legacy "black box" consulting models.</p></div>`},
+
+    {id:"s2",content:`<h2 id="s2">MMM Model Structure & Variable Design</h2>
+<p>An MMM decomposes total sales (TRx) into <strong>base</strong> (what would have sold without any promotion) and <strong>incremental</strong> (what promotion contributed).</p>
+
+<div class="formula-box"><div class="formula-label">MMM Core Equation</div><div class="formula-main">
+TRx(t) = Base(t) + Σ βⱼ · f(Xⱼ(t)) + ε(t)<br><br>
+where:<br>
+• Base(t) = trend + seasonality + distribution/access + disease incidence<br>
+• f(Xⱼ(t)) = adstock + saturation transformation of promotional channel j<br>
+• βⱼ = response coefficient for channel j<br>
+• ε(t) = residual (should be white noise)
+</div></div>
+
+<h3>Variable Categories — Comprehensive</h3>
+<table><thead><tr><th>Category</th><th>Variables</th><th>Purpose</th><th>Omission Risk</th></tr></thead><tbody>
+<tr><td><strong>Promotional</strong></td><td>Detailing calls, samples, DTC GRPs, digital impressions, speaker programs (all after adstock + saturation transforms)</td><td>Estimate incremental Rx per channel</td><td>Missing channels → their effect absorbed by other channels → biased ROI</td></tr>
+<tr><td><strong>Base / trend</strong></td><td>Linear or polynomial trend, seasonal harmonics (sin/cos), disease incidence index</td><td>Capture underlying market dynamics</td><td>Trend omission → promotional variables absorb trend → inflated ROI</td></tr>
+<tr><td><strong>Competitive</strong></td><td>Competitor detailing, competitor launches (binary), competitor DTC, share-of-voice</td><td>Control for competitive market dynamics</td><td>Competitor launch during observation window → your brand's drop falsely attributed to declining promotional effectiveness</td></tr>
+<tr><td><strong>Access / distribution</strong></td><td>Formulary coverage %, weighted payer mix, specialty pharmacy count, co-pay card penetration</td><td>Separate access-driven volume from promotion-driven volume</td><td><strong>Most common pharma MMM failure:</strong> A formulary win looks like a detailing win if unmodelled</td></tr>
+<tr><td><strong>Price / GTN</strong></td><td>Net price index, WAC changes, co-pay card utilisation rate, 340B channel mix</td><td>Price elasticity estimation</td><td>Price drop → volume increase attributed to promotion</td></tr>
+<tr><td><strong>External shocks</strong></td><td>COVID impact, competitor recall, safety label change, product shortage, guideline update</td><td>Dummy variables absorb one-time events</td><td>Unmodelled shock → distorts all coefficients in the affected period</td></tr>
 </tbody></table>
-<div class="callout warning"><div class="callout-title">Omitting Competition Variables Biases Coefficients</div><p>If a competitor launches during the observation window and you omit competitor activity from the model, the drop in your brand's TRx will be falsely attributed to a decline in your own promotional effectiveness. Always include competitive detailing and share-of-voice variables. In pharma, formulary access changes are the most common confound — a formulary win in Q3 looks like a detailing win if not modelled separately.</p></div>`},
-    {id:"s3",content:`<h2 id="s3">Adstock, Carryover & Saturation Effects</h2>
-<p>Promotional effects are not instantaneous — a detailing call made in week 1 may influence prescribing in weeks 2, 3, and 4. Similarly, promotional response does not grow linearly with spend — doubling the detailing budget does not double the incremental Rx. MMM models these dynamics explicitly.</p>
-<h3>Adstock (Carryover) Transformation</h3>
-<div class="formula-box">
-  <div class="formula-label">Geometric Adstock</div>
-  <div class="formula-main">Adstock(t) = Spend(t) + λ · Adstock(t−1)<br><br>λ = decay rate (0 to 1); higher λ = longer memory of past spend<br>λ = 0: only current period spend matters (immediate effect, no carryover)<br>λ = 0.7: past spend decays at 30% per period; ~2–3 week effective window<br>λ = 0.9: slow decay; past spend remains influential for 1–2 months</div>
-</div>
-<h3>Typical Adstock Decay Rates by Channel</h3>
-<table><thead><tr><th>Channel</th><th>Typical λ Range</th><th>Rationale</th></tr></thead><tbody>
-<tr><td>Sales force detailing</td><td>0.4 – 0.7</td><td>Message recalled for a few weeks; fades quickly without reinforcement</td></tr>
-<tr><td>Samples</td><td>0.1 – 0.3</td><td>Trial effect is immediate; patient starts right away or not at all</td></tr>
-<tr><td>TV / DTC broadcast</td><td>0.6 – 0.85</td><td>Brand awareness builds slowly and persists; patients may see an ad then wait months before asking about the drug</td></tr>
-<tr><td>Digital (HCP email)</td><td>0.2 – 0.5</td><td>Email read-rate and click effect is short-lived</td></tr>
-<tr><td>Speaker programs</td><td>0.7 – 0.9</td><td>Peer influence has long duration — a talk by a KOL influences prescribing for months</td></tr>
+
+<div class="callout warning"><div class="callout-title">The Access Confound — Pharma's #1 MMM Pitfall</div><p>In pharma, formulary access changes are the single most common confounding variable. A brand wins preferred formulary status on a major PBM in Q3 → TRx jumps → the MMM attributes the jump to the detailing campaign running simultaneously. The fix: always include a formulary coverage index (% of covered lives) as a control variable. Some teams even model access as a separate "channel" with its own response curve to quantify the access ROI independently.</p></div>`},
+
+    {id:"s3",content:`<h2 id="s3">Adstock, Carryover & Saturation — Deep Dive</h2>
+<p>Promotional effects are not instantaneous, and they don't grow linearly with spend. MMM captures these two dynamics explicitly through <strong>adstock</strong> (carryover) and <strong>saturation</strong> (diminishing returns) transformations.</p>
+
+<h3>Adstock (Carryover) Transformations</h3>
+
+<h4>1. Geometric Adstock</h4>
+<div class="formula-box"><div class="formula-label">Geometric Adstock</div><div class="formula-main">
+Adstock(t) = Spend(t) + λ · Adstock(t−1)<br><br>
+λ = decay rate (0 to 1)<br>
+λ = 0: only current-period spend matters (no memory)<br>
+λ = 0.7: past spend decays at 30%/period; ~2–3 week effective window<br>
+λ = 0.9: slow decay; influence persists 1–2 months<br><br>
+Half-life = −log(2) / log(λ)<br>
+Example: λ = 0.7 → half-life = 1.94 periods (≈ 2 weeks if weekly data)
+</div></div>
+
+<h4>2. Delayed Adstock (Weibull)</h4>
+<div class="formula-box"><div class="formula-label">Weibull Adstock (PyMC-Marketing Default)</div><div class="formula-main">
+w(t) = 1 − exp(−(t/λ)^k)<br><br>
+λ = scale (controls how quickly effect appears)<br>
+k = shape (controls whether peak is immediate or delayed)<br>
+k < 1: peak at lag 0, then decay (like geometric)<br>
+k > 1: peak is delayed — effect builds over time, then decays (common for DTC TV, speaker programs)<br><br>
+Advantage: captures delayed peak effects that geometric adstock cannot
+</div></div>
+
+<h3>Typical Adstock Parameters by Channel</h3>
+<table><thead><tr><th>Channel</th><th>Geometric λ</th><th>Half-Life (weeks)</th><th>Delayed Peak?</th><th>Rationale</th></tr></thead><tbody>
+<tr><td>Sales force detailing</td><td>0.4 – 0.7</td><td>1 – 2</td><td>No</td><td>Message recalled briefly; fades without reinforcement</td></tr>
+<tr><td>Samples</td><td>0.1 – 0.3</td><td>< 1</td><td>No</td><td>Trial effect is immediate</td></tr>
+<tr><td>TV / DTC broadcast</td><td>0.6 – 0.85</td><td>2 – 5</td><td>Yes (often)</td><td>Awareness builds then persists; patient sees ad, waits before acting</td></tr>
+<tr><td>Digital (HCP email)</td><td>0.2 – 0.5</td><td>< 1</td><td>No</td><td>Email effect is short-lived</td></tr>
+<tr><td>Speaker programs</td><td>0.7 – 0.9</td><td>4 – 8</td><td>Yes</td><td>Peer influence has long duration; KOL impact builds over time</td></tr>
+<tr><td>Patient support / hub</td><td>0.8 – 0.95</td><td>5 – 12</td><td>Yes</td><td>Retention effect; reduces discontinuation over extended periods</td></tr>
 </tbody></table>
+
 <h3>Saturation (Diminishing Returns)</h3>
-<p>After a certain spend level, additional investment yields progressively smaller incremental returns. This is modelled using a <strong>Hill function</strong> or <strong>S-curve transformation</strong> applied to the adstocked spend variable:</p>
-<div class="formula-box">
-  <div class="formula-label">Saturation (Hill Function)</div>
-  <div class="formula-main">Saturated(x) = x^α / (K^α + x^α)<br><br>K = spend at half-saturation (inflection point)<br>α = slope of the S-curve; controls how quickly saturation kicks in<br>Result: bounded between 0 and 1; input spend mapped to diminishing marginal effect</div>
-</div>`},
-    {id:"s4",content:`<h2 id="s4">Estimating ROI & Optimising Budget Allocation</h2>
-<h3>Calculating Channel ROI</h3>
-<p>Once coefficients are estimated, ROI for each promotional channel is calculated by comparing the gross margin from incremental TRx to the cost of the promotional activity:</p>
-<div class="formula-box">
-  <div class="formula-label">Channel ROI</div>
-  <div class="formula-main">Incremental TRx(channel) = β_channel × adstocked_spend(channel) over period<br>Incremental Revenue = Incremental TRx × Net Revenue Per Rx<br>ROI = (Incremental Revenue − Channel Spend) / Channel Spend<br>ROAS = Incremental Revenue / Channel Spend</div>
-</div>
-<table><thead><tr><th>Channel</th><th>Typical Pharma ROI Range</th><th>Notes</th></tr></thead><tbody>
-<tr><td>Sales force detailing</td><td>$1.50 – $4.00 per $1 spent</td><td>Highest absolute spend; ROI highly sensitive to territory design and HCP targeting quality</td></tr>
-<tr><td>Samples</td><td>$3.00 – $8.00 per $1 spent</td><td>High ROI when converting naïve patients; lower when given to existing users (no incremental lift)</td></tr>
-<tr><td>DTC (TV/digital)</td><td>$0.80 – $2.50 per $1 spent</td><td>High variance; brand awareness lifts HCP prescribing through patient demand but difficult to isolate</td></tr>
-<tr><td>Speaker programs</td><td>$2.00 – $6.00 per $1 spent</td><td>High ROI when well-targeted (right KOL, right audience); diminishing returns at high frequency</td></tr>
+<p>After a certain spend level, each additional dollar yields progressively smaller incremental returns. This is modelled using a saturation function applied to the adstocked spend.</p>
+
+<h4>Hill Function (Standard)</h4>
+<div class="formula-box"><div class="formula-label">Hill Saturation Function</div><div class="formula-main">
+Saturated(x) = x^α / (K^α + x^α)<br><br>
+K = spend at half-saturation (half-maximum effect)<br>
+α = steepness; controls how quickly saturation kicks in<br>
+Output: bounded between 0 and 1<br><br>
+At x = K: Saturated = 0.5 (half of maximum possible effect)<br>
+At x >> K: Saturated → 1.0 (fully saturated; additional spend produces near-zero lift)
+</div></div>
+
+<h4>Logistic Saturation</h4>
+<div class="formula-box"><div class="formula-label">Logistic Saturation (used in PyMC-Marketing)</div><div class="formula-main">
+Saturated(x) = 1 − exp(−λ · x)<br><br>
+λ = saturation rate (higher λ = faster saturation)<br>
+Simpler than Hill; single parameter; always concave<br>
+Used as default in PyMC-Marketing's saturation_sigma parameter
+</div></div>
+
+<div class="callout info"><div class="callout-title">Order of Transformations Matters</div><p>The standard pipeline is: Raw Spend → <strong>Adstock</strong> (carryover) → <strong>Saturation</strong> (diminishing returns) → enters the regression. Some frameworks reverse the order (saturate first, then adstock). The choice affects coefficient interpretation: Adstock-first says "accumulated exposure from past and present spend, subject to diminishing returns." Saturate-first says "each period's diminishing return, carried over." PyMC-Marketing and Meridian default to adstock-first.</p></div>`},
+
+    {id:"s4",content:`<h2 id="s4">Base Volume Decomposition</h2>
+<p>The base volume — what would have sold without any promotional activity — is often the largest component of total TRx (typically 50–80% for established brands). Understanding and modelling base correctly is critical because errors in base estimation directly bias all promotional coefficients.</p>
+
+<h3>Components of Base</h3>
+<div class="formula-box"><div class="formula-label">Base Volume Decomposition</div><div class="formula-main">
+Base(t) = α₀ + α₁·Trend(t) + α₂·Seasonality(t) + α₃·AccessIndex(t) + α₄·DiseaseIncidence(t) + α₅·PatientStock(t)<br><br>
+<strong>Trend:</strong> Long-term growth or decline (polynomial, piecewise linear, or stochastic)<br>
+<strong>Seasonality:</strong> Recurring within-year patterns (flu season, allergy season, J-curve)<br>
+<strong>Access:</strong> Formulary coverage, payer mix changes, distribution expansion<br>
+<strong>Disease incidence:</strong> New patient pool growth (e.g., diagnosed prevalence increasing)<br>
+<strong>Patient stock:</strong> Cumulative patients on therapy (chronic therapies — patients stay on drug, building base)
+</div></div>
+
+<h3>Why Base Matters for ROI</h3>
+<table><thead><tr><th>Base Estimation Error</th><th>Impact on Promotional ROI</th></tr></thead><tbody>
+<tr><td>Base too low</td><td>More TRx attributed to promotion → promotional ROI is <strong>inflated</strong></td></tr>
+<tr><td>Base too high</td><td>Less TRx attributed to promotion → promotional ROI is <strong>deflated</strong></td></tr>
+<tr><td>Trend captured by promotion</td><td>If an upward trend is unmodelled, the regression gives promotion credit for organic growth → inflated ROI</td></tr>
+<tr><td>Seasonality ignored</td><td>Seasonal peaks coinciding with promotional pushes → promotion gets credit for seasonal volume</td></tr>
 </tbody></table>
+
+<h3>Base Share Benchmarks</h3>
+<table><thead><tr><th>Brand Stage</th><th>Typical Base %</th><th>Typical Promotional %</th></tr></thead><tbody>
+<tr><td>Launch (Year 1–2)</td><td>20–40%</td><td>60–80%</td></tr>
+<tr><td>Growth (Year 3–5)</td><td>45–65%</td><td>35–55%</td></tr>
+<tr><td>Mature (Year 6+)</td><td>65–80%</td><td>20–35%</td></tr>
+<tr><td>LOE / Generic entry</td><td>80–95%</td><td>5–20%</td></tr>
+</tbody></table>
+
+<div class="callout warning"><div class="callout-title">The "J-Curve" Trap</div><p>Many pharma brands show a January volume dip (patients reset deductibles, defer refills) followed by a February rebound. If this seasonality is unmodelled, and the brand happens to run a Q1 promotional push, the MMM will attribute the February rebound to the promotion rather than to normal seasonal recovery. Always include month/week seasonal terms or Fourier harmonics.</p></div>`},
+
+    {id:"s5",content:`<h2 id="s5">Bayesian MMM — PyMC-Marketing, Robyn & Meridian</h2>
+<p>The new generation of open-source Bayesian MMM tools has transformed the discipline from a consulting "black box" into a transparent, reproducible analytical framework. These tools use Bayesian inference to estimate response curves, incorporate prior knowledge, and produce full posterior distributions (not just point estimates).</p>
+
+<h3>Framework Comparison</h3>
+<table><thead><tr><th>Feature</th><th>PyMC-Marketing</th><th>Meta Robyn</th><th>Google Meridian</th></tr></thead><tbody>
+<tr><td>Language</td><td>Python (PyMC / PyTensor)</td><td>R (nevergrad optimiser)</td><td>Python (TensorFlow Probability)</td></tr>
+<tr><td>Inference</td><td>Full Bayesian MCMC (NUTS sampler)</td><td>Frequentist; multi-objective optimisation (nevergrad)</td><td>Full Bayesian MCMC</td></tr>
+<tr><td>Adstock</td><td>Geometric, Weibull (delayed)</td><td>Geometric, Weibull</td><td>Geometric, Hill-Adstock</td></tr>
+<tr><td>Saturation</td><td>Logistic, Hill</td><td>Hill, Michaelis-Menten</td><td>Hill</td></tr>
+<tr><td>Priors</td><td>User-defined; strong prior support</td><td>Limited; hyperparameter ranges</td><td>User-defined; hierarchical priors for geo</td></tr>
+<tr><td>Geo-level</td><td>Supported (hierarchical)</td><td>Not native</td><td>Native (designed for geo-level data)</td></tr>
+<tr><td>Budget optimiser</td><td>Built-in (scipy.optimize)</td><td>Built-in (nevergrad)</td><td>Built-in</td></tr>
+<tr><td>Best for</td><td>Custom pharma models; strong prior incorporation</td><td>Quick initial models; automated exploration</td><td>Multi-geo campaigns; Google Ads integration</td></tr>
+</tbody></table>
+
+<h3>Why Bayesian MMM Matters for Pharma</h3>
+<div class="formula-box"><div class="formula-label">Bayesian MMM Advantages</div><div class="formula-main">
+<strong>1. Priors encode domain knowledge:</strong><br>
+• You know detailing should have a positive coefficient → set prior: β_detailing ~ HalfNormal(σ=0.5)<br>
+• You know DTC half-life is 2–5 weeks → set prior: λ_DTC ~ Beta(α=3, β=3) (centres around 0.5)<br>
+• Priors regularise the model and prevent unreasonable coefficient estimates<br><br>
+<strong>2. Full uncertainty quantification:</strong><br>
+• Instead of: "Detailing ROI = $2.50" (point estimate)<br>
+• You get: "Detailing ROI: median $2.50, 90% HDI [$1.80, $3.40]"<br>
+• Decision-makers see the uncertainty range — critical for budget decisions<br><br>
+<strong>3. Works with short time series:</strong><br>
+• Frequentist MMM needs 2+ years of weekly data (100+ observations)<br>
+• Bayesian MMM with informative priors can work with 1 year — essential for recently launched brands<br><br>
+<strong>4. Posterior predictive checks:</strong><br>
+• Generate simulated data from the fitted model → compare to actual data → visual validation
+</div></div>
+
+<h3>Setting Priors — Practical Guidance for Pharma</h3>
+<table><thead><tr><th>Parameter</th><th>Recommended Prior</th><th>Rationale</th></tr></thead><tbody>
+<tr><td>Channel coefficients (β)</td><td>HalfNormal(σ) — non-negative</td><td>Promotional spend should never decrease Rx; use HalfNormal to enforce positivity</td></tr>
+<tr><td>Adstock decay (λ)</td><td>Beta(α, β) — bounded [0,1]</td><td>Set α, β to centre prior on expected half-life for each channel (from table above)</td></tr>
+<tr><td>Saturation parameter (K or λ_sat)</td><td>HalfNormal or Gamma</td><td>Set scale based on typical spend levels for the brand</td></tr>
+<tr><td>Intercept</td><td>Normal(mean=observed_mean, σ=large)</td><td>Weakly informative; centres on data but allows flexibility</td></tr>
+<tr><td>Noise (σ)</td><td>HalfNormal(σ=observed_std)</td><td>Scale residual variance to data variability</td></tr>
+</tbody></table>
+
+<div class="callout info"><div class="callout-title">Robyn's "Pareto Optimal" Approach</div><p>Meta's Robyn doesn't use Bayesian MCMC — it runs thousands of model fits with different hyperparameter combinations, then selects "Pareto optimal" models that minimise multiple objectives (NRMSE, decomp distance from spend share, business constraint violations). The result is a set of candidate models for the analyst to choose from, rather than a single posterior distribution. This is faster but less principled than full Bayesian inference — it explores the solution space through brute-force optimisation rather than probabilistic reasoning.</p></div>`},
+
+    {id:"s6",content:`<h2 id="s6">Channel ROI, Marginal ROI & Budget Optimisation</h2>
+
+<h3>Three Types of ROI in MMM</h3>
+<div class="formula-box"><div class="formula-label">ROI Metrics from MMM</div><div class="formula-main">
+<strong>1. Average ROI (total period):</strong><br>
+ROI_avg = (Total Incremental Revenue from Channel − Total Channel Spend) / Total Channel Spend<br>
+Interpretation: "For every $1 spent on detailing over the past 2 years, we generated $X in incremental revenue"<br><br>
+<strong>2. Marginal ROI (at current spend level):</strong><br>
+mROI = ∂(Incremental Revenue) / ∂(Spend) evaluated at current spend level<br>
+Interpretation: "If we spend $1 MORE on detailing right now, we'd generate $X in incremental revenue"<br>
+mROI < average ROI when the channel is saturating (diminishing returns)<br><br>
+<strong>3. ROAS (Return on Ad Spend):</strong><br>
+ROAS = Incremental Revenue / Channel Spend<br>
+Same as average ROI + 1; commonly used in digital marketing contexts
+</div></div>
+
+<h3>Why Marginal ROI Matters More Than Average ROI</h3>
+<table><thead><tr><th>Scenario</th><th>Average ROI</th><th>Marginal ROI</th><th>Implication</th></tr></thead><tbody>
+<tr><td>Channel under-invested</td><td>$3.00</td><td>$4.50</td><td>Marginal > Average → channel is NOT saturated → increase spend</td></tr>
+<tr><td>Channel optimally invested</td><td>$2.50</td><td>$1.00</td><td>Marginal < Average → channel approaching saturation → maintain</td></tr>
+<tr><td>Channel over-invested</td><td>$2.00</td><td>$0.30</td><td>Marginal << Average → severely saturated → reduce spend, reallocate</td></tr>
+</tbody></table>
+
+<h3>Typical Pharma Channel ROI Benchmarks</h3>
+<table><thead><tr><th>Channel</th><th>Typical Average ROI</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Sales force detailing</td><td>$1.50 – $4.00 per $1</td><td>Highest absolute spend; ROI sensitive to territory design and HCP targeting</td></tr>
+<tr><td>Samples</td><td>$3.00 – $8.00 per $1</td><td>High ROI for naive patients; low ROI when given to existing users</td></tr>
+<tr><td>DTC (TV)</td><td>$0.80 – $2.50 per $1</td><td>High variance; lifts HCP prescribing through patient demand</td></tr>
+<tr><td>Digital (HCP)</td><td>$1.00 – $3.00 per $1</td><td>Growing channel; measurability is a strength</td></tr>
+<tr><td>Speaker programs</td><td>$2.00 – $6.00 per $1</td><td>High ROI when well-targeted; peer influence is powerful</td></tr>
+</tbody></table>
+
 <h3>Budget Optimisation</h3>
-<p>MMM enables <strong>budget simulation</strong>: given a fixed total promotional budget, find the allocation across channels that maximises incremental TRx. This is a constrained optimisation problem:</p>
 <div class="flow-box">
-  <div class="flow-step">Estimate response curves for each channel (incremental TRx as function of spend, including saturation)</div>
+  <div class="flow-step"><strong>Step 1:</strong> From the fitted MMM, extract the response curve for each channel: Incremental TRx = f(Spend), incorporating adstock and saturation</div>
   <div class="flow-arrow">↓</div>
-  <div class="flow-step">Set constraints: total budget cap, minimum and maximum spend per channel (business constraints)</div>
+  <div class="flow-step"><strong>Step 2:</strong> Compute marginal ROI at current spend level for each channel</div>
   <div class="flow-arrow">↓</div>
-  <div class="flow-step">Use gradient-based or evolutionary optimiser to find spend allocations that maximise total incremental TRx</div>
+  <div class="flow-step"><strong>Step 3:</strong> Set constraints: total budget cap, min/max per channel (business/compliance constraints), floor on sales force FTEs</div>
   <div class="flow-arrow">↓</div>
-  <div class="flow-step">Present "what-if" scenarios to brand team: e.g., shift 20% from detailing to DTC — net impact on TRx and ROI</div>
-</div>`},
-    {id:"s5",content:`<h2 id="s5">Validation, Limitations & MMM vs MTA</h2>
-<h3>Validating an MMM</h3>
-<table><thead><tr><th>Validation Check</th><th>What to Look For</th></tr></thead><tbody>
-<tr><td><strong>In-sample fit</strong></td><td>R² ≥ 0.85 for weekly/monthly data; residuals should be white noise (no autocorrelation)</td></tr>
-<tr><td><strong>Out-of-sample holdout</strong></td><td>Exclude last 3–6 months from training; model should forecast holdout TRx within ±10% MAPE</td></tr>
-<tr><td><strong>Directional validity</strong></td><td>All promotional coefficients should be positive (spending more should not decrease sales); base should be stable</td></tr>
-<tr><td><strong>Decomposition plausibility</strong></td><td>Base contribution typically 50–70% of total TRx for established brands; promotional share higher at launch</td></tr>
-<tr><td><strong>Business triangulation</strong></td><td>Channel ROI estimates should be consistent with operational knowledge — if detailing ROI appears 10× higher than samples, investigate before reporting</td></tr>
+  <div class="flow-step"><strong>Step 4:</strong> Optimise: equalise marginal ROI across channels (optimality condition: when mROI is equal across all channels, no reallocation can improve total return)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Step 5:</strong> Present "what-if" scenarios: current allocation vs optimal vs +10% budget vs −20% budget</div>
+</div>
+
+<div class="formula-box"><div class="formula-label">Optimality Condition</div><div class="formula-main">
+At the optimal budget allocation:<br>
+mROI(Detailing) = mROI(DTC) = mROI(Digital) = mROI(Samples) = ... = λ*<br><br>
+Where λ* is the shadow price of the budget constraint.<br>
+If mROI(Detailing) = $3.00 and mROI(DTC) = $1.50, you are under-investing in DTC relative to detailing — shift budget from detailing to DTC until marginal ROIs equalise.
+</div></div>`},
+
+    {id:"s7",content:`<h2 id="s7">Validation Framework</h2>
+<p>An MMM is only useful if it's trustworthy. Validation must cover statistical fit, business plausibility, and ideally experimental confirmation.</p>
+
+<h3>Multi-Layer Validation</h3>
+<table><thead><tr><th>Validation Layer</th><th>Method</th><th>Pass Criteria</th></tr></thead><tbody>
+<tr><td><strong>In-sample fit</strong></td><td>R², MAPE on training data</td><td>R² ≥ 0.85; MAPE ≤ 10% for weekly aggregated TRx data</td></tr>
+<tr><td><strong>Out-of-sample holdout</strong></td><td>Exclude last 3–6 months; predict; compare</td><td>Holdout MAPE ≤ 15%; directional accuracy on major trends</td></tr>
+<tr><td><strong>Posterior predictive checks (Bayesian)</strong></td><td>Simulate data from posterior → compare to observed data distribution</td><td>Observed data falls within 90% posterior predictive interval for ≥ 80% of time points</td></tr>
+<tr><td><strong>Coefficient sign checks</strong></td><td>All promotional coefficients should be non-negative</td><td>Any negative promotional coefficient = model problem (multicollinearity, omitted variable)</td></tr>
+<tr><td><strong>Decomposition plausibility</strong></td><td>Base % and channel contributions reviewed by brand team</td><td>Base 50–80% for established brands; no single channel > 40% of incremental; total incremental aligns with operational knowledge</td></tr>
+<tr><td><strong>ROI face validity</strong></td><td>Channel ROI estimates cross-checked with industry benchmarks</td><td>No channel ROI > 10× or < 0 (unless explained); detailing and samples should be highest-ROI channels for most pharma brands</td></tr>
+<tr><td><strong>Sensitivity analysis</strong></td><td>Perturb priors / assumptions → check if conclusions change</td><td>Key conclusions (channel ranking, optimal allocation direction) should be robust to reasonable prior changes</td></tr>
 </tbody></table>
-<h3>MMM Limitations</h3>
-<table><thead><tr><th>Limitation</th><th>Implication</th></tr></thead><tbody>
-<tr><td>Requires long time series (2+ years weekly)</td><td>New brands or recently-launched channels have insufficient history</td></tr>
-<tr><td>Cannot measure individual-level effects</td><td>Cannot distinguish which HCP types respond to which channels</td></tr>
-<tr><td>Multicollinearity across channels</td><td>When detailing and sampling are always deployed together, the model cannot separate their effects</td></tr>
-<tr><td>Does not capture cross-channel synergy</td><td>DTC may amplify detailing — sequential effects are hard to model in standard MMM</td></tr>
+
+<h3>Experimental Validation — Geo-Experiments</h3>
+<p>The gold standard for MMM validation is a <strong>geo-experiment</strong> (also called a lift test): deliberately vary promotional spend in treatment vs. control geographies and compare MMM predictions to observed lift.</p>
+
+<div class="flow-box">
+  <div class="flow-step"><strong>Design:</strong> Select matched geographic pairs (similar TRx, demographics, access). Increase DTC spend by 30% in treatment geos; hold constant in control geos.</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Run:</strong> 8–12 weeks (enough time for adstock effects to materialise)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Measure:</strong> Observed incremental TRx in treatment vs. control (difference-in-differences)</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Compare:</strong> MMM-predicted incremental TRx for the same spend change in the same geos</div>
+  <div class="flow-arrow">↓</div>
+  <div class="flow-step"><strong>Calibrate:</strong> If MMM over-predicts by 30%, adjust the DTC response curve accordingly</div>
+</div>
+
+<div class="callout info"><div class="callout-title">Calibration = Iterative, Not One-Time</div><p>The best MMM programs run geo-experiments for one channel per quarter, using results to calibrate the model continuously. PyMC-Marketing supports geo-experiment calibration directly — observed lift data is incorporated as a likelihood term in the Bayesian model, pulling the posterior toward experimentally validated response curves.</p></div>`},
+
+    {id:"s8",content:`<h2 id="s8">MMM vs MTA vs Unified Measurement</h2>
+<p>MMM and Multi-Touch Attribution (MTA) answer related but different questions. Understanding their complementarity is essential for pharma measurement strategy.</p>
+
+<h3>Side-by-Side Comparison</h3>
+<table><thead><tr><th>Dimension</th><th>MMM</th><th>Multi-Touch Attribution (MTA)</th><th>Unified Measurement</th></tr></thead><tbody>
+<tr><td>Data granularity</td><td>Aggregate (weekly/monthly by brand or geo)</td><td>Individual-level touchpoint sequences</td><td>Both — MMM calibrated by MTA and experiments</td></tr>
+<tr><td>Privacy requirement</td><td>None — aggregated data only</td><td>Requires cookies or ID matching</td><td>Depends on MTA component</td></tr>
+<tr><td>Channels covered</td><td>All channels including offline (detailing, samples, TV)</td><td>Primarily digital touchpoints</td><td>All</td></tr>
+<tr><td>Latency</td><td>Monthly to quarterly refresh</td><td>Near real-time</td><td>Mixed</td></tr>
+<tr><td>Captures long-term effects</td><td>Yes — adstock models carryover</td><td>Limited — usually short attribution windows</td><td>Yes</td></tr>
+<tr><td>Individual HCP targeting</td><td>No — aggregate only</td><td>Yes — HCP-level attribution</td><td>MTA layer provides this</td></tr>
+<tr><td>Regulatory compliance</td><td>Fully compliant; no PHI/PII</td><td>HCP tracking requires careful compliance review</td><td>Depends on implementation</td></tr>
+<tr><td>Best for</td><td>Strategic budget allocation, annual planning</td><td>Tactical digital campaign optimisation</td><td>Enterprise measurement strategy</td></tr>
 </tbody></table>
-<h3>MMM vs Multi-Touch Attribution (MTA)</h3>
-<table><thead><tr><th>Dimension</th><th>MMM</th><th>Multi-Touch Attribution</th></tr></thead><tbody>
-<tr><td>Data granularity</td><td>Aggregate (brand-level weekly/monthly)</td><td>Individual-level touchpoint data</td></tr>
-<tr><td>Privacy requirement</td><td>None — aggregated data only</td><td>Requires cookies or identifier matching</td></tr>
-<tr><td>Channels covered</td><td>All channels including offline (detailing, samples)</td><td>Primarily digital touchpoints</td></tr>
-<tr><td>Latency</td><td>Monthly to quarterly cadence</td><td>Near real-time</td></tr>
-<tr><td>Regulatory compliance</td><td>Fully compliant; no PHI/PII involved</td><td>HCP tracking requires careful compliance review</td></tr>
-<tr><td>Recommended use</td><td>Strategic budget allocation, annual planning</td><td>Tactical digital campaign optimisation</td></tr>
-</tbody></table>`},
-    {id:"s6",content:`<h2 id="s6">Key Takeaways</h2>
-<div class="takeaway"><div class="takeaway-num">1</div><div>MMM decomposes total TRx into base (organic demand) and incremental (promotion-driven) components. Understanding this split is essential — over-attributing to promotion leads to wasteful spend; under-attributing leads to under-investment in effective channels.</div></div>
-<div class="takeaway"><div class="takeaway-num">2</div><div>Adstock transformation captures the carryover effect of promotion — the fact that a detailing call or a DTC impression does not only influence prescribing this week but continues to decay over future periods. Incorrectly assuming instantaneous effects produces biased coefficients.</div></div>
-<div class="takeaway"><div class="takeaway-num">3</div><div>Omitting competitive and access variables is the most common MMM failure mode in pharma. A competitor launch or formulary win that is unmodelled will corrupt promotional coefficient estimates, leading to wrong ROI conclusions.</div></div>
-<div class="takeaway"><div class="takeaway-num">4</div><div>MMM ROI should be used directionally, not precisely. Confidence intervals on promotional coefficients are wide; the value is in ranking channels (detailing vs. DTC vs. speaker programs) and identifying saturation thresholds, not in reporting ROI to two decimal places.</div></div>
-<div class="takeaway"><div class="takeaway-num">5</div><div>MMM and Multi-Touch Attribution are complementary, not competing. MMM is better for strategic budget allocation across all channels (including offline); MTA is better for tactical digital optimisation. Pharma's privacy constraints make MMM the more viable primary method — individual HCP tracking faces significant compliance scrutiny.</div></div>`}],
+
+<h3>Unified Measurement Approach</h3>
+<div class="formula-box"><div class="formula-label">Unified Measurement Triangle</div><div class="formula-main">
+<strong>MMM</strong> (top-down, aggregate) sets the strategic budget envelope — how much to allocate to each channel<br>
+<strong>MTA</strong> (bottom-up, individual) optimises within digital channels — which HCPs to target, which content to serve<br>
+<strong>Experiments</strong> (geo-tests, A/B tests) calibrate both — ground-truth validation of causal effects<br><br>
+The three approaches triangulate: if MMM says DTC ROI = $2.00, MTA says DTC generates 15% of digital conversions, and a geo-experiment confirms a 12% TRx lift from 30% DTC increase — you have convergent evidence. If they disagree, investigate before acting.
+</div></div>
+
+<div class="callout info"><div class="callout-title">Pharma's Privacy Advantage for MMM</div><p>Pharma's stringent privacy and compliance environment (HIPAA, state privacy laws, OIG constraints on HCP tracking) actually favours MMM over MTA. Individual-level HCP touchpoint tracking faces significant compliance scrutiny, particularly for digital promotion. MMM operates entirely on aggregated spend and aggregate sales data — no PII, no PHI, no compliance risk. This makes MMM the default primary measurement framework for pharma promotional analytics.</p></div>`},
+
+    {id:"s9",content:`<h2 id="s9">Pharma-Specific MMM Challenges</h2>
+
+<h3>Challenge 1: Access / Formulary Confounding</h3>
+<p>Covered above — always include a formulary coverage index. But beyond that:</p>
+<ul>
+  <li><strong>Payer mix shifts</strong> — When a major PBM moves the brand to preferred status, the volume increase can be 20–40% — larger than any promotional effect. If unmodelled, the entire lift gets attributed to promotion.</li>
+  <li><strong>Access × Promotion interaction</strong> — Detailing is more effective in covered plans than in non-covered plans. Some advanced models include an interaction term: β_detailing × coverage_index.</li>
+</ul>
+
+<h3>Challenge 2: Co-Promotion & Multi-Brand Sales Forces</h3>
+<table><thead><tr><th>Scenario</th><th>Problem</th><th>Solution</th></tr></thead><tbody>
+<tr><td>Brand A and Brand B co-promoted by same rep</td><td>Call allocations are correlated; model can't separate effects</td><td>Use call minutes or message-level data instead of total calls; instrument variables</td></tr>
+<tr><td>Primary vs secondary detail position</td><td>Primary detail gets more time and attention</td><td>Weight calls by detail position: primary = 1.0, secondary = 0.5, tertiary = 0.25</td></tr>
+<tr><td>Contracted sales force (CSO)</td><td>CSO territories often have lower baseline and different HCP mix</td><td>Include CSO indicator as a control; or model CSO and internal SF separately</td></tr>
+</tbody></table>
+
+<h3>Challenge 3: Sample Attribution</h3>
+<p>Samples create a unique attribution problem: a sample dispensed to a patient is simultaneously a promotional activity AND a prescription event. If the sample is counted as a TRx in the dependent variable AND as a promotional input, you get circular attribution.</p>
+<div class="formula-box"><div class="formula-label">Sample Attribution Fix</div><div class="formula-main">
+<strong>Option 1:</strong> Exclude sample Rx from the dependent variable — model only paid TRx<br>
+<strong>Option 2:</strong> Include sample Rx in dependent variable but lag the sample input by 1+ periods (samples in week t influence paid Rx in week t+1, not same-week)<br>
+<strong>Option 3:</strong> Model samples as a separate "conversion" channel — sample dispensed → conversion to paid Rx (separate from the TRx regression)
+</div></div>
+
+<h3>Challenge 4: Specialty vs Primary Care Dynamics</h3>
+<table><thead><tr><th>Specialty Brands</th><th>Primary Care Brands</th></tr></thead><tbody>
+<tr><td>Smaller HCP universe (2,000–10,000 specialists)</td><td>Large HCP universe (100,000+ PCPs)</td></tr>
+<tr><td>Detailing is highly concentrated; individual HCP effects dominate</td><td>Territory-level aggregation works well</td></tr>
+<tr><td>Access / buy-and-bill dynamics; ASP pricing</td><td>Retail pharmacy; WAC/net pricing</td></tr>
+<tr><td>Speaker programs and MSL engagement are major channels</td><td>DTC and mass digital are major channels</td></tr>
+<tr><td>MMM may need HCP-level or territory-level granularity</td><td>National or regional weekly aggregation is sufficient</td></tr>
+</tbody></table>
+
+<h3>Challenge 5: Launch Brands</h3>
+<ul>
+  <li>Short time series (&lt; 1 year) limits frequentist approaches → Bayesian MMM with informative priors is essential</li>
+  <li>Base volume is near zero initially → the "base vs incremental" decomposition is less meaningful</li>
+  <li>Promotional effects are confounded with natural adoption curve → include a diffusion/growth curve in the model</li>
+  <li>Consider using analogous brands' response curves as priors (transfer learning)</li>
+</ul>
+
+<div class="callout warning"><div class="callout-title">The 60-40 Rule</div><p>In pharma MMM practice, roughly 60% of the analytical effort goes into data engineering (cleaning, aligning, transforming spend and sales data to the same granularity and time frame) and 40% goes into actual modelling. The most common reason pharma MMMs fail is not the statistical method — it's bad data: misaligned time periods, missing competitive data, formulary changes not captured, or sample Rx double-counted.</p></div>`},
+
+    {id:"s10",content:`<h2 id="s10">Key Takeaways</h2>
+<div class="takeaway"><div class="takeaway-num">1</div><div><strong>MMM decomposes TRx into base + incremental.</strong> Understanding this split is essential — over-attributing to promotion leads to wasteful spend; under-attributing leads to under-investment. For established brands, base is typically 50–80% of total TRx.</div></div>
+<div class="takeaway"><div class="takeaway-num">2</div><div><strong>Adstock captures carryover; saturation captures diminishing returns.</strong> Both are essential. Without adstock, you underestimate promotional impact (effects spill across weeks). Without saturation, you overestimate ROI at high spend levels. Weibull adstock (delayed peak) is more realistic than geometric for DTC and speaker programs.</div></div>
+<div class="takeaway"><div class="takeaway-num">3</div><div><strong>Access/formulary is pharma's #1 confound.</strong> Always include a formulary coverage index as a control. A formulary win that coincides with a detailing push will produce a spuriously high detailing coefficient if access is unmodelled. This is the single most common pharma MMM failure.</div></div>
+<div class="takeaway"><div class="takeaway-num">4</div><div><strong>Bayesian MMM (PyMC-Marketing, Meridian) is superior for pharma.</strong> Priors encode domain knowledge (promotional coefficients should be positive; detailing half-life is 1–2 weeks), full posterior distributions quantify uncertainty in ROI estimates, and the approach works with shorter time series — critical for launch brands.</div></div>
+<div class="takeaway"><div class="takeaway-num">5</div><div><strong>Marginal ROI drives allocation, not average ROI.</strong> A channel can have high average ROI but low marginal ROI if it's saturated. Budget should be reallocated until marginal ROI is equalised across channels — the optimality condition for maximum total return.</div></div>
+<div class="takeaway"><div class="takeaway-num">6</div><div><strong>Validate with experiments, not just statistics.</strong> Geo-experiments (lift tests) provide causal ground truth that no amount of regression can substitute. The best MMM programs run one geo-experiment per quarter to calibrate response curves.</div></div>
+<div class="takeaway"><div class="takeaway-num">7</div><div><strong>MMM and MTA are complementary.</strong> MMM sets the strategic budget envelope across all channels; MTA optimises within digital. Experiments calibrate both. Pharma's privacy constraints make MMM the primary framework — it requires no individual-level tracking data.</div></div>
+<div class="takeaway"><div class="takeaway-num">8</div><div><strong>60% of MMM effort is data engineering.</strong> Misaligned time periods, missing competitive data, untracked formulary changes, and double-counted sample Rx cause more MMM failures than wrong statistical methods. Get the data right first.</div></div>`}
+  ],
   questions:[
-    {id:"q1",text:"A pharma brand team increases detailing from 2 calls per rep per day to 4 calls per day for 6 months, but the MMM shows only a 15% increase in incremental TRx from detailing (not the expected 100%). What effect does this most likely illustrate?",
-     options:["The model is broken — doubling inputs should double outputs","Saturation / diminishing returns — the brand's detailing response curve has flattened at 2 calls/day; the 3rd and 4th call generate little incremental lift because the addressable HCPs have already been reached","The adstock decay rate is too high","Detailing has a negative coefficient above 2 calls/day"],
-     correct:1,explanation:"Diminishing returns (saturation) is a fundamental property of promotional response curves. After the most-receptive HCPs have been reached at an optimal call frequency, additional detailing contacts reach either already-converted HCPs (who no longer need persuading) or low-potential HCPs (who are unlikely to convert regardless of call frequency). The Hill function / S-curve transformation in the MMM captures this: beyond the saturation threshold, incremental spend generates progressively smaller incremental TRx. This finding should trigger a territory design review — redirect excess calls to untargeted high-potential HCPs."},
-    {id:"q2",text:"An MMM for a specialty brand uses two years of weekly data. The model assigns 80% of TRx to 'base' and 20% to all promotional activity combined. The brand team is concerned that promotion has little effect. What is the most likely correct interpretation?",
-     options:["80% base means promotion is ineffective — cut the budget","For a mature brand with strong formulary access, 70–80% base is typical and expected — it reflects established patient demand, formulary coverage, and physician habit. The 20% incremental is still commercially significant and worth optimising. A high base is a sign of brand health, not a failure of promotion.","The model is incorrect — base should never exceed promotional contribution","Reduce the observation window to show a lower base percentage"],
-     correct:1,explanation:"High base contributions are normal and expected for established brands. Base reflects: existing patient demand, HCPs who already prescribe habitually, formulary access secured by prior contracting, and market dynamics. For a brand that has been on the market for 5+ years with broad formulary coverage, 70–80% base is typical. The 20% promotional incremental is still worth measuring and optimising — on a $1B brand, 20% incremental = $200M driven by promotions, which justifies the entire promotional budget many times over. A low base percentage is more common at launch, when promotional seeding is essential to build initial prescribing habits."},
-    {id:"q3",text:"You are building an MMM for a brand that was heavily advertised on TV (DTC) in H1 but not in H2. Competitor activity was also high in H1. Your promotional TV coefficient is negative. What is the most likely cause?",
-     options:["DTC always has a negative effect in pharma","Multicollinearity and omitted variable bias — TV spend and competitor spend are correlated in H1; the model cannot separate their effects and may assign the competitor's negative impact to your TV variable. Adding a competitor activity variable and checking for VIF should diagnose this.","The campaign creative was ineffective","Adstock should be removed from the TV variable"],
-     correct:1,explanation:"A negative promotional coefficient is a red flag that almost always indicates a modelling problem rather than a genuine negative effect of advertising. When TV spend and a negative factor (competitor activity, formulary loss) co-occur in the same time period, and the negative factor is omitted from the model, the regression assigns the negative impact to TV — producing a spurious negative coefficient. The diagnostic is: add the omitted variable (competitor GRPs, formulary coverage index) and check if the TV coefficient becomes positive. VIF > 10 among promotional variables indicates harmful multicollinearity that requires remediation (e.g., dimension reduction, longer observation window, or orthogonalisation)."}
+    {id:"q1",text:"A pharma brand increases detailing from 2 calls/rep/day to 4 calls/day for 6 months, but the MMM shows only a 15% increase in incremental TRx (not the expected 100%). What effect does this illustrate?",
+     options:["The model is broken — doubling inputs should double outputs","Saturation / diminishing returns — the detailing response curve has flattened; the 3rd and 4th calls reach already-converted or low-potential HCPs","The adstock decay rate is too high","Detailing has a negative coefficient above 2 calls/day"],
+     correct:1,explanation:"Diminishing returns (saturation) is fundamental to promotional response curves. After the most-receptive HCPs have been reached at optimal frequency, additional contacts reach already-converted HCPs or low-potential ones. The Hill/logistic saturation function captures this: beyond the saturation threshold, incremental spend generates progressively smaller TRx lift."},
+    {id:"q2",text:"An MMM for a specialty brand shows DTC TV coefficient is negative. The brand ran heavy TV in H1, when a competitor also launched. What is the most likely cause?",
+     options:["DTC always hurts pharma brands","Multicollinearity / omitted variable bias — TV spend and competitor launch co-occurred in H1; the model assigns the competitor's negative impact to TV. Adding competitor activity should resolve this.","The creative was ineffective","Adstock should be removed from TV"],
+     correct:1,explanation:"A negative promotional coefficient almost always indicates a modelling problem. When TV spend and a negative factor (competitor launch) co-occur and the negative factor is omitted, regression assigns the negative impact to TV. Adding competitor activity variables and checking VIF should resolve the spurious negative coefficient."},
+    {id:"q3",text:"A Bayesian MMM using PyMC-Marketing produces a detailing ROI posterior with median $2.50 and 90% HDI of [$1.20, $4.10]. A frequentist OLS model produces detailing ROI of $2.45 with no confidence interval. Which is more useful for a budget decision?",
+     options:["The frequentist model — more precise point estimate","The Bayesian model — the 90% HDI tells the brand team that detailing ROI could reasonably be as low as $1.20 or as high as $4.10, which is critical for risk-adjusted budget decisions","Both are equally useful — the point estimates are nearly identical","Neither — MMM ROI estimates are too uncertain for budget decisions"],
+     correct:1,explanation:"The Bayesian posterior with its 90% HDI provides decision-relevant uncertainty information. A brand team seeing $2.50 ± $0 might invest aggressively; seeing $2.50 with range [$1.20, $4.10] would size the investment more conservatively. The uncertainty IS the information — hiding it (as frequentist point estimates do) leads to overconfident budget decisions."},
+    {id:"q4",text:"Which of the following is the optimality condition for budget allocation across promotional channels in an MMM?",
+     options:["Equalise total spend across all channels","Maximise the channel with the highest average ROI","Equalise marginal ROI across all channels — when mROI is equal everywhere, no reallocation can improve total return","Minimise total promotional spend while maintaining base volume"],
+     correct:2,explanation:"The optimality condition from constrained optimisation theory: total return is maximised when marginal ROI is equalised across all channels. If mROI(Detailing) > mROI(DTC), shifting budget from DTC to detailing increases total incremental TRx. Rebalancing continues until marginal returns are equal everywhere."},
+    {id:"q5",text:"A pharma MMM analyst omits the formulary coverage index from the model. In Q3, the brand wins preferred status on a major PBM. What happens to the detailing coefficient?",
+     options:["No effect — formulary changes don't affect detailing estimates","The detailing coefficient will be inflated — the Q3 TRx jump from formulary coverage will be falsely attributed to the detailing campaign running simultaneously","The detailing coefficient will decrease","The base volume will absorb the formulary effect automatically"],
+     correct:1,explanation:"This is pharma's #1 MMM confounding problem. When a formulary win (unmodelled) coincides with detailing activity (modelled), the regression attributes the formulary-driven TRx lift to detailing — producing a spuriously high detailing coefficient and inflated ROI. Always include a formulary coverage index as a control variable."}
   ]
 }
+
 
 }); // end PL.addChapters Domain 5
