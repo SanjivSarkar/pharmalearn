@@ -39,7 +39,10 @@ window.PL.domains = [
     icon: "📊",
     color: "#C8984A",
     description: "Patient journey analytics, HCP targeting, SFE, forecasting, MMM, launch analytics, gross-to-net, omnichannel, IC design, market research, and supply chain.",
-    chapters: ["2-1","2-2","2-3","2-4","2-5","2-6","2-7","2-8","2-9","2-10","2-11","2-12","2-13"]
+    chapters: ["2-1","2-2","2-3","2-4","2-5","2-6","2-7","2-8","2-9","2-10","2-11","2-12","2-13"],
+    resources: [
+      { title: "Commercial & Brand Strategy", subtitle: "10-Day Crash Course", tag: "Brand", href: "assets/commercial-brand.html" }
+    ]
   },
   {
     id: 3,
@@ -47,7 +50,10 @@ window.PL.domains = [
     icon: "💊",
     color: "#4B6B4A",
     description: "Payer landscape, pricing strategy, reimbursement, HTA, HEOR, value-based contracts, patient access programs, global pricing, and IRA strategy.",
-    chapters: ["3-1","3-2","3-3","3-4","3-5","3-6","3-7","3-8","3-9","3-10"]
+    chapters: ["3-1","3-2","3-3","3-4","3-5","3-6","3-7","3-8","3-9","3-10"],
+    resources: [
+      { title: "Market Access Strategy", subtitle: "10-Day Crash Course", tag: "Access", href: "assets/market-access.html" }
+    ]
   },
   {
     id: 4,
@@ -84,7 +90,8 @@ window.PL.domains = [
     resources: [
       { title: "AI-Ready Data Architecture", subtitle: "15-Day Theoretical Roadmap", tag: "Architecture", href: "assets/ai-data-architecture.html" },
       { title: "Pharma Analytics — Complete Metrics Reference", subtitle: "KPIs & Metrics Guide", tag: "Metrics", href: "assets/pharma-metrics.html" },
-      { title: "Pharma Datasets Caveat", subtitle: "Reference Guide", tag: "Datasets", href: "assets/pharma-data-caveats.html" }
+      { title: "Pharma Datasets Caveat", subtitle: "Reference Guide", tag: "Datasets", href: "assets/pharma-data-caveats.html" },
+      { title: "Pharma TA Coding Reference", subtitle: "ICD, HCPCS, CPT, NDC & More", tag: "Coding", href: "assets/pharma-ta-coding-reference.html" }
     ]
   }
 ];

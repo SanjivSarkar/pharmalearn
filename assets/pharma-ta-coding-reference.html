@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharma Coding Reference — All Therapeutic Areas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0F1B2D; --navy-mid:#162236; --navy-soft:#1E2F45; --navy-rim:#2A3B52;
+  --gold:#C8984A; --gold-dim:#9B7233; --gold-pale:#E8C87A; --gold-bg:rgba(200,152,74,0.09);
+  --cream:#F5EFDF; --parchment:#EEE5CE; --cream-dim:#C8BFA8; --muted:#8A9BB0;
+  --border:rgba(200,152,74,0.16); --border-lg:rgba(200,152,74,0.34);
+  /* Code system colours */
+  --icd:#7BAFD4;   --icd-bg:rgba(123,175,212,0.1);
+  --hcpcs:#E89060; --hcpcs-bg:rgba(232,144,96,0.1);
+  --cpt:#C8984A;   --cpt-bg:rgba(200,152,74,0.1);
+  --loinc:#A888D4; --loinc-bg:rgba(168,136,212,0.1);
+  --ndc:#88C880;   --ndc-bg:rgba(136,200,128,0.1);
+  --rxnorm:#7ABDA8;--rxnorm-bg:rgba(122,189,168,0.1);
+  --atc:#B8A860;   --atc-bg:rgba(184,168,96,0.1);
+  --drg:#D47878;   --drg-bg:rgba(212,120,120,0.1);
+  --snomed:#C888A8;--snomed-bg:rgba(200,136,168,0.1);
+  --npi:#8898C0;   --npi-bg:rgba(136,152,192,0.1);
+  /* TA colours */
+  --immuno:#A888D4; --neuro:#7BAFD4; --cardio:#D47878;
+  --renal:#7ABDA8;  --meta:#88C880;  --onco:#E89060;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--cream);font-family:'EB Garamond',Georgia,serif;font-size:16px;line-height:1.7;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");opacity:.45}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(15,27,45,0.97);border-bottom:1px solid var(--border-lg);
+  padding:0 2rem;height:52px;display:flex;align-items:center;backdrop-filter:blur(8px)}
+.nb{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);letter-spacing:.08em;
+  white-space:nowrap;margin-right:auto;padding-right:1.5rem;border-right:1px solid var(--border)}
+.nl{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.nl::-webkit-scrollbar{display:none}
+.nl a{color:var(--cream-dim);text-decoration:none;font-size:11.5px;letter-spacing:.05em;
+  padding:0 12px;height:52px;display:flex;align-items:center;border-right:1px solid var(--border);
+  transition:color .2s,background .2s;white-space:nowrap}
+.nl a:hover{color:var(--gold);background:rgba(200,152,74,0.06)}
+
+/* HERO */
+.hero{position:relative;z-index:1;padding:4rem 2rem 2.5rem;max-width:900px;margin:0 auto;text-align:center}
+.ey{font-size:11px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1.2rem;
+  display:flex;align-items:center;justify-content:center;gap:10px}
+.ey::before,.ey::after{content:'';flex:1;max-width:80px;height:1px;background:var(--gold-dim);opacity:.5}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:400;
+  line-height:1.2;color:var(--cream);margin-bottom:1rem}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero p{font-size:15px;color:var(--cream-dim);max-width:620px;margin:0 auto 1.5rem;line-height:1.75}
+
+/* TA TABS */
+.ta-tabs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:0}
+.ta-tab{font-family:'EB Garamond',serif;font-size:12px;padding:5px 14px;border-radius:2px;
+  border:1px solid;cursor:pointer;transition:all .15s;letter-spacing:.04em;white-space:nowrap}
+
+/* MAIN */
+.main{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 2rem 6rem}
+
+/* CONTROLS */
+.ctrl{background:var(--navy-mid);border:1px solid var(--border);border-radius:4px;
+  padding:1.25rem 1.5rem;margin-bottom:2.5rem}
+.sw{position:relative;margin-bottom:1rem}
+.sw svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.4;pointer-events:none}
+#srch{width:100%;background:var(--navy);border:1px solid var(--border-lg);border-radius:3px;
+  padding:10px 14px 10px 40px;color:var(--cream);font-family:'EB Garamond',serif;
+  font-size:15px;outline:none;transition:border-color .2s}
+#srch::placeholder{color:var(--muted)}
+#srch:focus{border-color:var(--gold)}
+.flr{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:.75rem}
+.fl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;display:block}
+.pill{font-family:'EB Garamond',serif;font-size:12px;padding:3px 10px;border-radius:2px;
+  border:1px solid var(--border);color:var(--cream-dim);background:transparent;cursor:pointer;
+  letter-spacing:.04em;transition:all .15s;white-space:nowrap}
+.pill:hover{border-color:var(--gold-dim);color:var(--gold-pale)}
+.pill.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold-pale)}
+.rc{font-size:12px;color:var(--muted);margin-top:.6rem}
+
+/* STATS ROW */
+.stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:2rem}
+.stat{background:var(--navy-mid);border:1px solid var(--border);border-radius:3px;
+  padding:10px 18px;text-align:center;flex:1;min-width:120px}
+.stat-n{font-family:'Playfair Display',serif;font-size:20px;display:block}
+.stat-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* TA SECTION */
+.ta-section{margin-bottom:3.5rem}
+.ta-header{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;
+  padding-bottom:10px;border-bottom:1px solid var(--border-lg);flex-wrap:wrap}
+.ta-badge{font-family:'Playfair Display',serif;font-size:18px;font-weight:600}
+.ta-count{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-left:auto}
+
+/* INDICATION GROUP */
+.ind-group{margin-bottom:2rem}
+.ind-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;
+  color:var(--cream);margin-bottom:1rem;padding:8px 14px;background:var(--navy-soft);
+  border-left:3px solid;border-radius:0 2px 2px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ind-name .ind-alias{font-size:11px;font-weight:400;color:var(--muted);font-style:italic;margin-left:4px}
+.sys-row{margin-bottom:10px}
+.sys-row-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;
+  display:flex;align-items:center;gap:6px;padding-left:2px}
+.sys-row-label::after{content:'';flex:1;height:1px;background:var(--border);opacity:.5}
+.code-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px}
+.code-card{background:var(--navy-mid);border:1px solid var(--border);border-radius:3px;
+  padding:12px 14px;border-left:3px solid;transition:border-color .15s,background .15s;position:relative}
+.code-card:hover{background:var(--navy-soft)}
+.code-top{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px}
+.code-val{font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:2px 7px;
+  border-radius:2px;border:1px solid;white-space:nowrap;flex-shrink:0;line-height:1.4}
+.code-name{font-family:'Playfair Display',serif;font-size:12.5px;font-weight:600;
+  color:var(--cream);line-height:1.35}
+.code-desc{font-size:11.5px;color:var(--cream-dim);line-height:1.6;margin-bottom:6px}
+.code-use{font-size:11px;color:var(--muted);font-style:italic;padding-top:5px;
+  border-top:1px solid var(--border);line-height:1.5}
+.code-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:5px}
+.ctag{font-size:9.5px;padding:1px 6px;border-radius:2px;background:var(--navy);
+  border:1px solid var(--border);color:var(--muted);font-family:'JetBrains Mono',monospace}
+
+/* EMPTY */
+.empty{text-align:center;padding:4rem 2rem;color:var(--muted);font-style:italic;font-size:14px}
+.orn{text-align:center;color:var(--gold-dim);font-size:15px;letter-spacing:.5em;margin:1.5rem 0;opacity:.4}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2rem;
+  text-align:center;font-size:12px;color:var(--muted);letter-spacing:.06em}
+footer em{color:var(--gold-dim);font-style:normal}
+
+/* Coding tips box */
+.tip-box{background:var(--gold-bg);border:1px solid var(--border-lg);border-radius:3px;
+  padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--cream-dim);line-height:1.6}
+.tip-box strong{color:var(--gold-pale)}
+
+@media(max-width:640px){
+  nav{padding:0 1rem} .hero,.main{padding-left:1.25rem;padding-right:1.25rem}
+  .code-grid{grid-template-columns:1fr}
+  .ta-header{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nb">Pharma Coding · Therapeutic Area Reference</span>
+  <div class="nl">
+    <a href="#immunology">🔵 Immunology</a>
+    <a href="#neuroscience">🟣 Neuroscience</a>
+    <a href="#cardiovascular">🔴 Cardiovascular</a>
+    <a href="#renal">🟢 Renal</a>
+    <a href="#metabolism">🟡 Metabolism</a>
+    <a href="#oncology">🟠 Oncology</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="ey">Complete Coding Reference · Six Therapeutic Areas</div>
+  <h1>The <em>Analyst's</em> TA Coding Compendium</h1>
+  <p>ICD-10 · HCPCS / J-Codes · CPT · LOINC · NDC · RxNorm · ATC · MS-DRG · SNOMED CT — every major code across all indications in Immunology, Neuroscience, Cardiovascular, Renal, Metabolism & Oncology.</p>
+  <div class="ta-tabs" id="taTabs"></div>
+</header>
+
+<main class="main">
+  <div class="ctrl">
+    <div class="sw">
+      <svg width="16" height="16" fill="none" stroke="#C8984A" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="srch" placeholder="Search by disease, drug, code value, or keyword (e.g. pembrolizumab, G35, eGFR, J9271…)" oninput="render()">
+    </div>
+    <span class="fl">Filter by coding system</span>
+    <div class="flr" id="sysFilter"></div>
+    <span class="fl" style="margin-top:.5rem">Filter by therapeutic area</span>
+    <div class="flr" id="taFilter"></div>
+    <div class="rc" id="rc"></div>
+  </div>
+  <div class="stats" id="statsRow"></div>
+  <div id="out"></div>
+</main>
+
+<footer>
+  <em>Pharma Coding Reference</em> · Immunology · Neuroscience · Cardiovascular · Renal · Metabolism · Oncology · 450+ codes · 10 coding systems · Updated for ICD-10-CM 2025/2026
+</footer>
+
+<script>
+const SYS = {
+  ICD:   {label:'ICD-10',   c:'#7BAFD4', bg:'rgba(123,175,212,0.1)'},
+  HCPCS: {label:'HCPCS/J',  c:'#E89060', bg:'rgba(232,144,96,0.1)'},
+  CPT:   {label:'CPT',      c:'#C8984A', bg:'rgba(200,152,74,0.1)'},
+  LOINC: {label:'LOINC',    c:'#A888D4', bg:'rgba(168,136,212,0.1)'},
+  NDC:   {label:'NDC',      c:'#88C880', bg:'rgba(136,200,128,0.1)'},
+  RXNORM:{label:'RxNorm',   c:'#7ABDA8', bg:'rgba(122,189,168,0.1)'},
+  ATC:   {label:'ATC/DDD',  c:'#B8A860', bg:'rgba(184,168,96,0.1)'},
+  DRG:   {label:'MS-DRG',   c:'#D47878', bg:'rgba(212,120,120,0.1)'},
+  SNOMED:{label:'SNOMED',   c:'#C888A8', bg:'rgba(200,136,168,0.1)'},
+  NPI:   {label:'NPI/Tax',  c:'#8898C0', bg:'rgba(136,152,192,0.1)'},
+};
+const TA_CFG = {
+  immunology:    {label:'Immunology',    c:'#A888D4', emoji:'🔵'},
+  neuroscience:  {label:'Neuroscience',  c:'#7BAFD4', emoji:'🟣'},
+  cardiovascular:{label:'Cardiovascular',c:'#D47878', emoji:'🔴'},
+  renal:         {label:'Renal',         c:'#7ABDA8', emoji:'🟢'},
+  metabolism:    {label:'Metabolism',    c:'#88C880', emoji:'🟡'},
+  oncology:      {label:'Oncology',      c:'#E89060', emoji:'🟠'},
+};
+
+/* ═══════════════════════════════════════════════════════
+   MASTER DATA
+═══════════════════════════════════════════════════════ */
+const DATA = [
+
+/* ───── IMMUNOLOGY ───── */
+{ ta:'immunology', ind:'Rheumatoid Arthritis (RA)', alias:'seropositive · seronegative · JIA', codes:[
+  {sys:'ICD',code:'M05.9',  name:'RA with rheumatoid factor, unspecified',           desc:'Seropositive RA catch-all. M05 = RF-positive; M06 = seronegative. Drives biologic eligibility criteria in payer coverage policies for TNF, IL-6, JAK, CD20.',tags:['RA','seropositive','TNF','JAK','IL-6'],use:'Core RA cohort definition; biologic market sizing'},
+  {sys:'ICD',code:'M05.79', name:'RA with RF, multiple sites, no organ involvement', desc:'Most common seropositive RA billing code in claims data (~7% of RA encounters). Used in adalimumab, etanercept, abatacept, tocilizumab, tofacitinib, baricitinib, upadacitinib analytics.',tags:['RA','seropositive','biologic'],use:'Seropositive RA RWE cohort definition'},
+  {sys:'ICD',code:'M06.9',  name:'RA unspecified (seronegative)',                    desc:'Most frequently used RA code in claims (~53% of RA encounters per published data). Seronegative or unspecified RF status. ICD-10 allows discrimination of seropositive vs. seronegative via M05/M06.',tags:['RA','seronegative'],use:'Broad RA population identification'},
+  {sys:'ICD',code:'M06.4',  name:'Inflammatory polyarthropathy',                    desc:'Second most common inflammatory arthritis code. Used when specific RA criteria are not fully met but inflammatory arthritis is present. Relevant for early RA or undifferentiated inflammatory arthritis analytics.',tags:['RA','inflammatory arthritis'],use:'Broad inflammatory arthritis population'},
+  {sys:'ICD',code:'M08.00', name:'Juvenile idiopathic arthritis (JIA), unspecified', desc:'JIA catch-all. M08.0x = systemic-onset JIA (Still disease); M08.1 = JIA with polyarthritis; M08.4 = pauciarticular JIA. Relevant for pediatric biologic (abatacept, tocilizumab, etanercept) analytics.',tags:['JIA','juvenile','pediatric','RA'],use:'Pediatric biologic market analytics'},
+  {sys:'HCPCS',code:'J0135',name:'Adalimumab (Humira) 20 mg',                        desc:'J-code for adalimumab 20 mg in medical benefit setting. Most adalimumab (and biosimilars) dispensed via specialty pharmacy NDC. Biosimilar adalimumabs (Hadlima, Cyltezo, Hyrimoz, Yusimry, etc.) have separate J-codes.',tags:['adalimumab','Humira','TNF','biosimilar','RA'],use:'Medical benefit adalimumab tracking; biosimilar conversion'},
+  {sys:'HCPCS',code:'J3262',name:'Tocilizumab (Actemra) per 0.1 mL',                desc:'IV tocilizumab (IL-6 receptor antagonist). J3262 for IV formulation. SC tocilizumab routes through pharmacy benefit. 4 or 8 mg/kg IV q4w in RA.',tags:['tocilizumab','Actemra','IL-6','RA','biologic'],use:'Tocilizumab buy-and-bill utilization in RA'},
+  {sys:'HCPCS',code:'J0223',name:'Abatacept (Orencia) per 10 mg',                   desc:'T-cell co-stimulation modulator. IV formulation. CTLA-4-Ig mechanism. Also approved for JIA. SC formulation via pharmacy benefit.',tags:['abatacept','Orencia','CTLA4','RA','biologic'],use:'Abatacept IV utilization; JIA analytics'},
+  {sys:'LOINC',code:'5264-2',name:'Rheumatoid factor (RF) [Units/vol] in Serum',    desc:'RF test LOINC. Used in EHR/lab data to confirm seropositive status for RA cohort definition without relying solely on ICD-10 M05/M06 distinction.',tags:['RA','RF','rheumatoid factor','LOINC','biomarker'],use:'Seropositive confirmation in EHR cohort definition'},
+  {sys:'LOINC',code:'20598-5',name:'Anti-CCP [Units/vol] in Serum',                 desc:'Anti-cyclic citrullinated peptide antibody. High specificity (95%) for RA. Anti-CCP-positive RA has more severe disease course and predicts biologic need. Critical biomarker for early RA diagnosis.',tags:['RA','anti-CCP','ACPA','LOINC','biomarker'],use:'Seropositive RA biomarker; biologic eligibility analytics'},
+  {sys:'ATC',code:'L04AA17', name:'Adalimumab (ATC)',                                desc:'L04AA17. Class: Selective immunosuppressant. DDD=0.04 g SC. Covers Humira + all adalimumab biosimilars globally. Used in MIDAS DDD-based market share across countries.',tags:['adalimumab','ATC','biosimilar','RA','global'],use:'Global adalimumab demand (MIDAS); biosimilar uptake'},
+]},
+{ ta:'immunology', ind:'Systemic Lupus Erythematosus (SLE)', alias:'lupus nephritis · NPSLE · skin', codes:[
+  {sys:'ICD',code:'M32.9',  name:'SLE, unspecified',                                desc:'Primary SLE ICD-10 code. M32.10 = SLE with organ involvement unspecified; M32.11 = endocarditis; M32.13 = lung; M32.14 = glomerular disease (lupus nephritis). Belimumab, voclosporin analytics.',tags:['SLE','lupus','autoimmune'],use:'SLE patient cohort; belimumab market sizing'},
+  {sys:'ICD',code:'M32.14', name:'Glomerular disease in SLE (Lupus Nephritis)',     desc:'Lupus nephritis — most severe SLE manifestation. Voclosporin (Lupkynis) + belimumab (Benlysta) analytics. WHO Class III/IV LN is the high-value segment requiring aggressive immunosuppression.',tags:['lupus nephritis','SLE','glomerular','voclosporin','belimumab'],use:'Lupus nephritis patient identification; voclosporin market sizing'},
+  {sys:'HCPCS',code:'J0490',name:'Belimumab (Benlysta) 10 mg IV',                  desc:'BLyS/BAFF inhibitor for SLE and active lupus nephritis. IV formulation J0490. SC belimumab (Benlysta SC) routed through pharmacy benefit (NDC-based).',tags:['belimumab','Benlysta','SLE','BLyS','biologic'],use:'Belimumab IV utilization; SLE payer coverage analytics'},
+  {sys:'LOINC',code:'5521-5',name:'dsDNA Ab [Units/vol] in Serum',                 desc:'Anti-double-stranded DNA antibody — primary biomarker for SLE diagnosis and disease monitoring. High titre correlates with lupus nephritis activity. ACR/EULAR 2019 classification includes dsDNA.',tags:['SLE','dsDNA','anti-dsDNA','biomarker','LOINC'],use:'SLE disease monitoring; flare prediction analytics'},
+  {sys:'LOINC',code:'24859-0',name:'Complement C3 [Mass/vol] in Serum',            desc:'C3 complement. Low C3/C4 = complement consumption in active SLE/lupus nephritis. Used to track disease activity alongside anti-dsDNA. Paired with C4 (LOINC 4498-2).',tags:['SLE','complement','C3','C4','biomarker','LOINC'],use:'SLE disease activity monitoring in EHR/lab data'},
+]},
+{ ta:'immunology', ind:'Psoriasis & Psoriatic Arthritis', alias:'plaque psoriasis · PsA · IL-17 · IL-23', codes:[
+  {sys:'ICD',code:'L40.0',  name:'Psoriasis vulgaris (Plaque Psoriasis)',            desc:'Most common psoriasis form (~90% of cases). Primary code for biologic eligibility (moderate-to-severe defined as BSA ≥10% or DLQI ≥10). IL-17A (secukinumab, ixekizumab), IL-17RA (bimekizumab), IL-23 (guselkumab, risankizumab, tildrakizumab), IL-12/23 (ustekinumab) analytics.',tags:['psoriasis','plaque psoriasis','IL-17','IL-23','dermatology'],use:'Plaque psoriasis cohort; biologic market sizing'},
+  {sys:'ICD',code:'L40.51', name:'Psoriatic arthropathy, distal interphalangeal',   desc:'PsA with DIP joint involvement — classic psoriatic arthritis pattern. M07.3x codes = psoriatic arthropathy by site. L40.51 is the combined skin+joint code used in many claims.',tags:['psoriatic arthritis','PsA','joints','IL-17'],use:'PsA patient identification in medical claims'},
+  {sys:'ICD',code:'M07.3',  name:'Psoriatic arthropathy, unspecified',               desc:'PsA coding in musculoskeletal chapter. M07.3 series by site. Ixekizumab, secukinumab, ustekinumab, guselkumab approved in PsA — analytics require combining M07.3x + L40.xx.',tags:['PsA','psoriatic arthritis','biologic'],use:'PsA biologic analytics; site-of-disease coding'},
+  {sys:'HCPCS',code:'J0222',name:'Ixekizumab (Taltz) 1 mg',                        desc:'IL-17A inhibitor for plaque psoriasis, PsA, AS. Taltz available as SC autoinjector (pharmacy benefit predominant). J0222 for medical benefit administration.',tags:['ixekizumab','Taltz','IL-17','psoriasis','PsA'],use:'Ixekizumab benefit-split analytics; PsA medical benefit'},
+  {sys:'HCPCS',code:'J2267',name:'Risankizumab (Skyrizi) 1 mg',                    desc:'IL-23 p19 inhibitor for plaque psoriasis, PsA, Crohn\'s disease. SC autoinjector for psoriasis; IV induction for Crohn\'s. Rapidly growing market share class.',tags:['risankizumab','Skyrizi','IL-23','psoriasis','Crohn'],use:'IL-23 class analytics; Skyrizi psoriasis + Crohn\'s demand'},
+  {sys:'LOINC',code:'98979-8',name:'PASI (Psoriasis Area Severity Index) total score',desc:'PASI score LOINC. Primary clinical endpoint in psoriasis trials. PASI 90 (90% improvement) is the current regulatory bar. Used in EHR outcome tracking and value-based contract performance measurement.',tags:['psoriasis','PASI','outcome','LOINC'],use:'Psoriasis treatment response tracking; VBC metrics'},
+]},
+{ ta:'immunology', ind:'Inflammatory Bowel Disease (IBD)', alias:'Crohn\'s disease · ulcerative colitis', codes:[
+  {sys:'ICD',code:'K50.90', name:'Crohn\'s disease of small intestine without complications',desc:'CD small intestine — most common Crohn\'s location. K50 = Crohn\'s; K51 = UC. Required for vedolizumab, ustekinumab, risankizumab, ozanimod analytics.',tags:['Crohn','IBD','small intestine','gastroenterology'],use:'Crohn\'s patient identification; biologic market sizing'},
+  {sys:'ICD',code:'K50.10', name:'Crohn\'s disease of large intestine without complications',desc:'CD large intestine (colonic CD). K50.10 = without complications; K50.11x = with complications (rectal bleeding, intestinal obstruction, fistula, abscess).',tags:['Crohn','colonic','IBD'],use:'Colonic Crohn\'s patient identification; complication burden'},
+  {sys:'ICD',code:'K51.90', name:'Ulcerative colitis, unspecified, without complications',desc:'UC catch-all. K51.0 = UC proctitis; K51.2 = left-sided; K51.3 = pancolitis (most severe). Ozanimod, vedolizumab, ustekinumab, guselkumab (UC) analytics.',tags:['ulcerative colitis','UC','IBD','ozanimod'],use:'UC patient pool; ozanimod/vedolizumab analytics'},
+  {sys:'HCPCS',code:'J3380',name:'Vedolizumab (Entyvio) 1 mg IV',                  desc:'Gut-selective α4β7 integrin inhibitor for CD and UC. IV induction; SC maintenance also available. IV infusion tracked via J3380. Critical for distinguishing IV vs. SC line in analytics.',tags:['vedolizumab','Entyvio','IBD','Crohn','UC','integrin'],use:'Vedolizumab IV utilization; CD vs. UC attribution'},
+  {sys:'HCPCS',code:'J2267',name:'Risankizumab (Skyrizi) 1 mg — also Crohn\'s indication',desc:'IL-23 inhibitor also approved for moderate-to-severe Crohn\'s. IV induction (600 mg) tracked via J-code; SC maintenance via pharmacy benefit. Growing rapidly in IBD.',tags:['risankizumab','Skyrizi','IL-23','Crohn','IBD'],use:'Risankizumab Crohn\'s indication demand analytics'},
+  {sys:'LOINC',code:'25830-0',name:'Calprotectin [Mass/mass] in Stool',            desc:'Fecal calprotectin — inflammatory biomarker for IBD disease activity. Elevated in active IBD vs. normal (<50 µg/g) in remission. Used in monitoring and de-escalation decisions. Increasingly ordered for biologic response tracking.',tags:['IBD','calprotectin','biomarker','LOINC','Crohn','UC'],use:'IBD disease activity monitoring in EHR lab data'},
+]},
+{ ta:'immunology', ind:'Atopic Dermatitis / Eczema', alias:'AD · dupilumab · tralokinumab · lebrikizumab', codes:[
+  {sys:'ICD',code:'L20.9',  name:'Atopic dermatitis, unspecified',                  desc:'Primary AD code. L20.0 = Besnier\'s prurigo; L20.81 = atopic neurodermatitis; L20.89 = other. Dupilumab (Dupixent), tralokinumab (Adbry), lebrikizumab (Ebglyss) analytics — all SC pharmacy benefit.',tags:['atopic dermatitis','eczema','dupilumab','IL-4','IL-13'],use:'AD patient sizing; dupilumab/IL-4/IL-13 class analytics'},
+  {sys:'HCPCS',code:'J0222',name:'Dupilumab (Dupixent) — see also HCPCS J0173',   desc:'Dupilumab is predominantly SC autoinjector via pharmacy benefit. J0173 is assigned for dupilumab. Also approved in: asthma, CRSwNP, EoE, prurigo nodularis, COPD. Multi-indication demand attribution needed.',tags:['dupilumab','Dupixent','IL-4Ra','atopic dermatitis','asthma'],use:'Dupilumab multi-indication demand split analytics'},
+  {sys:'LOINC',code:'711-2', name:'Eosinophils [#/vol] in Blood (Absolute Eosinophil Count)',desc:'AEC — also relevant in AD as an inflammation marker. High AEC correlates with AD severity and dupilumab response prediction. Also used for type 2 inflammation across asthma, CRSwNP, EoE.',tags:['eosinophil','AEC','atopic dermatitis','biomarker','LOINC'],use:'Type 2 inflammation biomarker; dupilumab patient identification'},
+  {sys:'LOINC',code:'19126-8',name:'IgE [Units/vol] in Serum',                     desc:'Total serum IgE. Elevated in atopic dermatitis, allergic asthma, food allergy. Used to characterize atopic burden and screen for high-IgE conditions (HIES). Not a selection criterion for most current AD biologics but monitored.',tags:['IgE','atopy','atopic dermatitis','LOINC','biomarker'],use:'Atopic disease characterization; biologics eligibility research'},
+]},
+{ ta:'immunology', ind:'Asthma (Severe / Biologic-eligible)', alias:'eosinophilic · type 2 · TSLP · IL-5 · IL-4', codes:[
+  {sys:'ICD',code:'J45.50', name:'Severe persistent asthma, uncomplicated',         desc:'Step 5 asthma. Biologic eligibility typically requires: J45.50 + AEC ≥150–300 cells/μL + ≥2 exacerbations/year OR OCS-dependent. Critical for mepolizumab, benralizumab, dupilumab, tezepelumab analytics.',tags:['asthma','severe','eosinophilic','IL-5','biologic'],use:'Severe asthma patient sizing; biologic eligibility analytics'},
+  {sys:'ICD',code:'J45.51', name:'Severe persistent asthma with (acute) exacerbation',desc:'Severity modifier. Exacerbation drives HCRU — ER visits, hospitalizations. Used in HCRU burden analyses and before-after biologic effectiveness studies.',tags:['asthma','exacerbation','HCRU','severe'],use:'Asthma exacerbation HCRU quantification'},
+  {sys:'ICD',code:'J45.41', name:'Moderate persistent asthma with (acute) exacerbation',desc:'Step 3/4 asthma exacerbation. Population with high unmet need and potential biologic escalation path.',tags:['asthma','moderate','exacerbation'],use:'Moderate asthma population; step-up treatment analytics'},
+  {sys:'HCPCS',code:'J2182',name:'Mepolizumab (Nucala) 1 mg',                      desc:'IL-5 inhibitor for severe eosinophilic asthma, EGPA, HES. SC via autoinjector; J2182 when administered in medical setting. AEC threshold ≥150 cells/μL for asthma.',tags:['mepolizumab','Nucala','IL-5','asthma','eosinophilic'],use:'Mepolizumab utilization tracking; IL-5 class analytics'},
+  {sys:'HCPCS',code:'J0517',name:'Benralizumab (Fasenra) 10 mg',                   desc:'IL-5Rα inhibitor. More complete eosinophil depletion vs. mepolizumab. Q8W dosing after initial Q4W. J0517 for medical benefit setting; mostly SC autoinjector via pharmacy.',tags:['benralizumab','Fasenra','IL-5Ra','asthma'],use:'Benralizumab demand; IL-5 class share analytics'},
+  {sys:'HCPCS',code:'J0222',name:'Tezepelumab (Tezspire) 210 mg — per mg',         desc:'TSLP inhibitor — effective regardless of eosinophil count. Broadest biologic mechanism. J-code for tezepelumab (verify current HCPCS update). Pharmacy benefit for SC prefilled syringe.',tags:['tezepelumab','Tezspire','TSLP','asthma','biologic'],use:'Tezepelumab demand; TSLP class analytics; broad asthma pop.'},
+  {sys:'LOINC',code:'711-2', name:'Eosinophils Absolute Count in Blood',           desc:'AEC (Absolute Eosinophil Count). Primary biomarker for biologic eligibility in asthma. AEC ≥300 = most evidence for IL-5 benefit; ≥150 approved threshold for some agents.',tags:['asthma','eosinophil','AEC','biomarker','IL-5','LOINC'],use:'Biologic-eligible asthma patient identification via lab data'},
+  {sys:'LOINC',code:'19126-8',name:'Total IgE [Units/vol] in Serum',               desc:'Elevated IgE in allergic asthma. Omalizumab (Xolair) requires IgE 30–700 IU/mL. IgE testing used for omalizumab eligibility assessment.',tags:['asthma','IgE','omalizumab','Xolair','LOINC'],use:'Omalizumab eligibility; allergic asthma patient identification'},
+  {sys:'ATC',code:'R03AC13',  name:'Formoterol (LABA) — ATC context',              desc:'R03AC=Selective beta2-adrenoreceptor agonists. Formoterol as LABA. Context: R03AK = Adrenergics+other combinations. ATC used in MIDAS for global ICS/LABA/LAMA respiratory market analysis.',tags:['asthma','LABA','formoterol','ATC','respiratory'],use:'MIDAS global respiratory market analytics; ICS/LABA share'},
+]},
+{ ta:'immunology', ind:'COPD', alias:'LAMA · LABA · ICS/LABA/LAMA · triple therapy', codes:[
+  {sys:'ICD',code:'J44.1',  name:'COPD with acute (lower respiratory) exacerbation', desc:'AECOPD — most HCRU-intensive COPD event. Driver of hospitalization cost analyses. Dupilumab approved for type 2 inflammatory COPD (eosinophilic phenotype) 2024.',tags:['COPD','exacerbation','AECOPD','respiratory'],use:'COPD exacerbation burden; dupilumab COPD analytics'},
+  {sys:'ICD',code:'J44.0',  name:'COPD with acute lower respiratory infection',     desc:'COPD + infection combination. Distinguish from J44.1. Often concurrent ICD-10 coding challenge in claims-based COPD HCRU studies.',tags:['COPD','infection','respiratory'],use:'COPD complication attribution; HCRU separation'},
+  {sys:'ICD',code:'J43.9',  name:'Emphysema, unspecified',                          desc:'Emphysema as distinct COPD pathology. Often coded alongside J44.x. Relevant for endobronchial valve procedures (Zephyr) and alpha-1 antitrypsin augmentation.',tags:['COPD','emphysema','alpha-1','respiratory'],use:'Emphysema subtype analytics; alpha-1 AT market sizing'},
+  {sys:'HCPCS',code:'A9604',name:'Alpha-1 proteinase inhibitor (Zemaira/Glassia/Prolastin) 1 mg',desc:'Alpha-1 antitrypsin augmentation therapy. IV weekly infusion. Buy-and-bill product for alpha-1 AT deficiency emphysema.',tags:['alpha-1','alpha-1 antitrypsin','COPD','emphysema','HCPCS'],use:'Alpha-1 AT infusion utilization; AATD market analytics'},
+]},
+{ ta:'immunology', ind:'Ankylosing Spondylitis / axSpA', alias:'AS · nr-axSpA · PsA · IBD arthritis', codes:[
+  {sys:'ICD',code:'M45.9',  name:'Ankylosing spondylitis of unspecified sites in spine',desc:'Primary AS ICD code. TNF (adalimumab, etanercept, certolizumab, golimumab), IL-17 (secukinumab, ixekizumab), JAK (tofacitinib) approved in AS.',tags:['ankylosing spondylitis','AS','axSpA','TNF','IL-17'],use:'AS patient cohort; TNF/IL-17 class analytics'},
+  {sys:'ICD',code:'M46.80', name:'Other specified inflammatory spondylopathies (nr-axSpA)',desc:'Non-radiographic axial spondyloarthritis. ICD-10 does not have a specific nr-axSpA code; M46.80 or M46.89 commonly used. Bimekizumab, secukinumab, adalimumab approved in nr-axSpA.',tags:['nr-axSpA','axial spondyloarthritis','non-radiographic'],use:'nr-axSpA patient identification challenge in claims'},
+]},
+{ ta:'immunology', ind:'Multiple Sclerosis (MS)', alias:'RRMS · SPMS · PPMS · neuroimmunology', codes:[
+  {sys:'ICD',code:'G35',    name:'Multiple Sclerosis (all types)',                   desc:'Primary MS code. ICD-10-CM 2026 expanded G35 into subtypes. Used in all MS analytics — neuroimmunology, market share, IQVIA NPA HCP targeting.',tags:['MS','multiple sclerosis','neuroimmunology','RRMS','SPMS','PPMS'],use:'Core MS cohort definition; CD20/S1P/fumarate market sizing'},
+  {sys:'HCPCS',code:'J2323',name:'Natalizumab (Tysabri) 1 mg',                     desc:'300 mg dose = 300 units J2323. Anti-VLA-4 integrin. IV infusion q4w. High-efficacy MS therapy with REMS (PML risk). Buy-and-bill in infusion centers.',tags:['natalizumab','Tysabri','MS','VLA-4','REMS'],use:'Natalizumab infusion utilization; PML risk population analytics'},
+  {sys:'HCPCS',code:'J1301',name:'Ocrelizumab (Ocrevus) 10 mg',                    desc:'600 mg dose = 60 units J1301. Anti-CD20 B-cell depleter. Approved RRMS and PPMS. First B-cell therapy for PPMS. High-value biologic IV infusion.',tags:['ocrelizumab','Ocrevus','CD20','MS','PPMS','RRMS'],use:'Ocrelizumab IV utilization; PPMS market analytics'},
+  {sys:'HCPCS',code:'J3245',name:'Ofatumumab (Kesimpta) — see SC for MS',          desc:'Ofatumumab SC for RMS. Pharmacy benefit as SC autoinjector (NDC-based). Note: ofatumumab was originally IV for CLL (J3245) — MS indication is SC only, different claim routing.',tags:['ofatumumab','Kesimpta','CD20','MS','SC'],use:'Ofatumumab SC routing clarification; pharmacy benefit MS'},
+  {sys:'HCPCS',code:'J2800',name:'Ublituximab (Briumvi) 150 mg',                   desc:'New anti-CD20 for RRMS. IV infusion q6 months (twice yearly) — most infrequent dosing in CD20 class. J2800 assigned. Tracks rapidly growing CD20 competition in MS.',tags:['ublituximab','Briumvi','CD20','MS','RRMS'],use:'Briumvi launch analytics; CD20 market share dynamics'},
+  {sys:'NDC',code:'59627-0529-01',name:'Ocrelizumab 30 mg/mL, 20 mL Vial (Ocrevus)',desc:'Genentech ocrelizumab NDC. Used in SP inventory data, hospital charge master, and buy-and-bill identification in specialty distribution records.',tags:['ocrelizumab','NDC','MS','specialty pharmacy'],use:'Ocrevus SP channel and hospital analytics'},
+  {sys:'LOINC',code:'14969-4',name:'Oligoclonal bands in CSF',                      desc:'OCBs in CSF — key MS diagnostic biomarker. Present in >90% of MS patients. Used in MS diagnostic journey analytics in EHR lab data.',tags:['MS','oligoclonal bands','CSF','LOINC','biomarker'],use:'MS diagnostic pathway analytics in EHR data'},
+  {sys:'ATC',code:'L04AA23',name:'Natalizumab (ATC)',                               desc:'L04AA23. DDD=0.3 mg IV. Covers Tysabri globally. Used in MIDAS DDD-based global MS market analysis and DDD cost comparison.',tags:['natalizumab','ATC','MS','MIDAS'],use:'MIDAS natalizumab global demand analytics'},
+  {sys:'ATC',code:'L04AF03',name:'Ozanimod — S1P receptor modulator (ATC)',         desc:'L04AF03. S1P modulator for RMS and UC. DDD=0.92 mg oral. ATC useful for global market comparisons where oral DMTs are tracked.',tags:['ozanimod','Zeposia','S1P','MS','ATC'],use:'S1P class global demand analytics; MS+UC indication'},
+  {sys:'DRG',code:'058',    name:'Degenerative Nervous System Disorders w/o MCC',   desc:'MS hospitalizations (relapse, exacerbations) group here. DRG 057 (w MCC), 058 (w CC), 059 (w/o CC/MCC). Used in MS HCRU hospitalization cost quantification.',tags:['MS','DRG','hospitalization','HCRU'],use:'MS hospitalization cost; HCRU budget impact modeling'},
+]},
+{ ta:'immunology', ind:'Neuromyelitis Optica Spectrum Disorder (NMOSD)', alias:'AQP4+ · MOG-AD · anti-AQP4', codes:[
+  {sys:'ICD',code:'G36.0',  name:'Neuromyelitis optica (Devic)',                    desc:'NMOSD primary ICD code. G36.0 used for NMO/NMOSD regardless of AQP4-IgG serostatus. Inebilizumab (Uplizna), eculizumab (Soliris), ravulizumab (Ultomiris), satralizumab (Enspryng) analytics.',tags:['NMOSD','neuromyelitis optica','AQP4','rare disease','neuroimmunology'],use:'NMOSD patient cohort; rare disease market sizing'},
+  {sys:'HCPCS',code:'J0896',name:'Eculizumab (Soliris) 10 mg — also NMOSD indication',desc:'C5 complement inhibitor approved in AQP4+ NMOSD (2019). Same J-code across all eculizumab indications (gMG, PNH, aHUS, NMOSD). Indication attribution requires paired ICD-10.',tags:['eculizumab','Soliris','NMOSD','C5','complement'],use:'Eculizumab NMOSD vs. other indication split analytics'},
+  {sys:'LOINC',code:'56526-1',name:'AQP4-IgG Ab [Presence] in Serum',             desc:'AQP4-IgG (anti-aquaporin-4 antibody) — primary biomarker distinguishing seropositive NMOSD from MS. Required for most NMOSD clinical trial inclusion criteria and label indications.',tags:['NMOSD','AQP4','anti-AQP4','biomarker','LOINC'],use:'NMOSD seropositive patient identification via lab data'},
+]},
+{ ta:'immunology', ind:'Myasthenia Gravis (gMG)', alias:'AChR+ · MuSK+ · FcRn · complement', codes:[
+  {sys:'ICD',code:'G70.00', name:'Myasthenia gravis without acute exacerbation',    desc:'Most frequent gMG code. G70.01 = with acute exacerbation. Used in eculizumab, ravulizumab, efgartigimod, rozanolixizumab, nipocalimab, zilucoplan analytics.',tags:['gMG','myasthenia gravis','neuromuscular','AChR','MuSK'],use:'gMG primary cohort definition; FcRn/C5 class market sizing'},
+  {sys:'ICD',code:'G70.01', name:'Myasthenia gravis with (acute) exacerbation',     desc:'Myasthenic crisis. High HCRU — ICU admission, mechanical ventilation. Complement/FcRn inhibitors reduce crisis frequency. Used in HCRU burden analyses.',tags:['gMG','myasthenic crisis','exacerbation','HCRU'],use:'gMG crisis burden; hospitalization HCRU analytics'},
+  {sys:'HCPCS',code:'J0896',name:'Eculizumab (Soliris) 10 mg',                     desc:'C5 complement inhibitor in AChR+ gMG. 900 mg q2w maintenance. J0896. Track multi-indication volume: NMOSD, PNH, aHUS, gMG require ICD-10 pairing for indication attribution.',tags:['eculizumab','Soliris','gMG','C5','complement'],use:'gMG eculizumab utilization; multi-indication attribution'},
+  {sys:'HCPCS',code:'J1300',name:'Ravulizumab (Ultomiris) 10 mg',                  desc:'Long-acting C5 inhibitor in gMG, PNH, aHUS. Q8w dosing vs. eculizumab q2w. Approved gMG 2022. AChR+ population.',tags:['ravulizumab','Ultomiris','gMG','C5','long-acting'],use:'Ravulizumab gMG market analytics; dosing interval advantage'},
+  {sys:'HCPCS',code:'J0216',name:'Efgartigimod alfa (Vyvgart) 2 mg',               desc:'FcRn inhibitor reducing IgG (including pathogenic AChR-IgG). IV formulation J0216. SC hyaluronidase formulation (Vyvgart Hytrulo) via pharmacy benefit.',tags:['efgartigimod','Vyvgart','FcRn','gMG','IgG'],use:'Efgartigimod IV utilization; FcRn class market analytics'},
+  {sys:'LOINC',code:'5248-5',name:'AChR Ab (Anti-acetylcholine receptor Ab) in Serum',desc:'Primary gMG diagnostic biomarker. AChR-positive in ~85% of generalized MG. Test LOINC used in lab data for gMG patient identification and seropositive cohort definition.',tags:['gMG','AChR','antibody','LOINC','biomarker','seropositive'],use:'gMG patient identification via lab data; AChR+ cohort'},
+  {sys:'LOINC',code:'31706-0',name:'MuSK Ab [Titre] in Serum',                     desc:'Anti-MuSK antibody test. MuSK+ gMG (~5-8% of gMG). Distinct clinical phenotype — worse bulbar symptoms, less responsive to pyridostigmine, responsive to rituximab. Different therapeutic path.',tags:['gMG','MuSK','antibody','LOINC','biomarker'],use:'MuSK+ gMG subtype identification; rituximab analytics'},
+]},
+
+/* ───── NEUROSCIENCE ───── */
+{ ta:'neuroscience', ind:'Alzheimer\'s Disease & Dementia', alias:'amyloid · tau · lecanemab · donanemab · anti-CGRP', codes:[
+  {sys:'ICD',code:'G30.0',  name:'Alzheimer\'s disease with early onset',           desc:'Early-onset AD (before age 65). Often hereditary (PSEN1/2, APP mutations). Smaller population; relevant for lecanemab Phase 3 CLARITY-AD early onset subgroup.',tags:['Alzheimer','early onset','dementia','amyloid'],use:'Early-onset AD analytics; genetic AD patient identification'},
+  {sys:'ICD',code:'G30.1',  name:'Alzheimer\'s disease with late onset',            desc:'Most common AD — onset ≥65 years. Primary code for lecanemab (Leqembi), donanemab (Kisunla) analytics. CMS coverage restricted to CED (coverage with evidence development) through early 2025.',tags:['Alzheimer','late onset','dementia','lecanemab','donanemab'],use:'Late-onset AD market sizing; anti-amyloid analytics'},
+  {sys:'ICD',code:'G30.9',  name:'Alzheimer\'s disease, unspecified',               desc:'Used when onset timing is not specified. Common in older claims data. For anti-amyloid analytics, all G30.x codes should be included, supplemented with amyloid biomarker confirmation.',tags:['Alzheimer','dementia'],use:'Broad AD cohort; anti-amyloid population sizing'},
+  {sys:'ICD',code:'G31.84', name:'Mild Cognitive Impairment (MCI) of uncertain or unknown etiology',desc:'MCI — prodromal phase of AD. Key early-treatment target population. ICD-10-CM 2023+ specific code. Lecanemab approved in MCI due to AD.',tags:['MCI','mild cognitive impairment','prodromal AD','Alzheimer'],use:'MCI patient identification; early AD intervention analytics'},
+  {sys:'ICD',code:'F01.50', name:'Vascular dementia, unspecified severity',         desc:'VaD — second most common dementia. F01 = vascular; F02 = dementia in other diseases; F03 = unspecified. Important for differential diagnosis in anti-amyloid therapy eligibility.',tags:['vascular dementia','dementia','F01'],use:'Dementia subtype analytics; AD vs. VaD differential'},
+  {sys:'HCPCS',code:'J0174',name:'Lecanemab (Leqembi) 2 mg',                       desc:'Anti-amyloid antibody targeting proto-fibrils. 10 mg/kg q2w IV. J0174. CMS Part B coverage with evidence development (CED) required — enrolled in registry. Biweekly infusion.',tags:['lecanemab','Leqembi','amyloid','Alzheimer','anti-amyloid'],use:'Lecanemab utilization; CMS CED coverage monitoring'},
+  {sys:'HCPCS',code:'J0175',name:'Donanemab (Kisunla) 1 mg',                       desc:'Anti-amyloid Ab targeting N-terminal pyroglutamate Aβ. Monthly IV. J0175. Treatment until amyloid clearance — potentially finite treatment course. Approved 2024.',tags:['donanemab','Kisunla','amyloid','Alzheimer','anti-amyloid'],use:'Donanemab utilization; amyloid clearance endpoint analytics'},
+  {sys:'LOINC',code:'48023-6',name:'Tau protein total in CSF [Mass/vol]',          desc:'CSF total tau. Elevated in AD. Combined with Aβ42 and p-tau for ATN (Amyloid-Tau-Neurodegeneration) framework biomarker classification. Required for anti-amyloid therapy eligibility documentation.',tags:['Alzheimer','tau','CSF','ATN','biomarker','LOINC'],use:'AD biomarker-confirmed diagnosis; anti-amyloid eligibility'},
+  {sys:'LOINC',code:'59551-3',name:'Amyloid beta 42 in CSF [Mass/vol]',            desc:'CSF Aβ42. Low = amyloid pathology present. Key biomarker for AD confirmation. Aβ42/40 ratio more specific. Companion to lecanemab/donanemab eligibility (plus amyloid PET).',tags:['Alzheimer','amyloid','Abeta42','CSF','LOINC','biomarker'],use:'AD amyloid biomarker; anti-amyloid therapy eligibility'},
+  {sys:'LOINC',code:'94498-0',name:'Amyloid PET scan results',                     desc:'PET amyloid scan document LOINC. Florbetapir (Amyvid), florbetaben (Neuraceq), flortaucipir (Tauvid) tau PET. Required for lecanemab/donanemab eligibility confirmation (amyloid-positive).',tags:['Alzheimer','amyloid PET','PET scan','LOINC','imaging'],use:'Amyloid-confirmed eligibility for anti-amyloid therapy'},
+  {sys:'ATC',code:'N06DA03',name:'Rivastigmine — AChE inhibitor (ATC)',             desc:'N06DA=Anti-dementia drugs, ChEIs. N06DA03=Rivastigmine. DDD=9 mg. Standard of care with donepezil (N06DA02) and galantamine (N06DA04). Global market baseline for AD.',tags:['Alzheimer','rivastigmine','ChEI','ATC','donepezil'],use:'AD SoC global demand; MIDAS cholinesterase inhibitor analytics'},
+]},
+{ ta:'neuroscience', ind:'Parkinson\'s Disease & Related Disorders', alias:'PD · DLB · PSP · MSA · dopamine', codes:[
+  {sys:'ICD',code:'G20',    name:'Parkinson\'s disease (primary PD)',               desc:'Idiopathic PD — most common parkinsonian syndrome. G21 = secondary parkinsonism; G22 = parkinsonism in disease elsewhere; G23.1 = PSP; G23.2 = striatonigral degeneration (MSA).',tags:['Parkinson','PD','dopamine','neurodegenerative'],use:'PD patient cohort; levodopa/carbidopa analytics'},
+  {sys:'ICD',code:'G20.B1', name:'Parkinson\'s disease without dyskinesia, fluctuating (ICD-10-CM 2024 expansion)',desc:'ICD-10-CM 2024 expanded G20 into G20.A1 (w/o dyskinesia, not fluctuating), G20.A2 (w/o dyskinesia, fluctuating), G20.B1 (w dyskinesia, not fluctuating), G20.B2 (w dyskinesia, fluctuating).',tags:['Parkinson','dyskinesia','motor fluctuation','ICD-10 2024'],use:'PD severity stratification; off-time analytics for MAO-B/COMT'},
+  {sys:'ICD',code:'G23.1',  name:'Progressive supranuclear palsy (PSP)',            desc:'Atypical parkinsonian syndrome. No proven disease-modifying therapy. Key for differential diagnosis analytics. PSP pipeline (tau-targeting) clinical trial patient identification.',tags:['PSP','progressive supranuclear palsy','tauopathy','neurodegenerative'],use:'PSP patient sizing; tau pipeline clinical trial feasibility'},
+  {sys:'HCPCS',code:'J1786',name:'Levodopa/Carbidopa Enteral Suspension (Duopa) 1 mL',desc:'Intestinal gel infusion for advanced PD with motor fluctuations. Jejunal tube administration. Tracks advanced PD patients on intestinal pump therapy.',tags:['Parkinson','levodopa','Duopa','enteral','advanced PD'],use:'Advanced PD pump therapy analytics; motor fluctuation population'},
+  {sys:'HCPCS',code:'A9999',name:'Apomorphine SC Infusion (Kynmobi/Apokyn) — miscellaneous code',desc:'Apomorphine SC for acute "off" episodes in PD. Apokyn (SC injection) and Kynmobi (SL film). J-code or miscellaneous coding. Tracks acute off-episode rescue therapy use.',tags:['Parkinson','apomorphine','off episodes','advanced PD'],use:'Advanced PD rescue therapy analytics; off-episode HCRU'},
+  {sys:'LOINC',code:'71657-7',name:'DaTscan SPECT imaging results document',        desc:'Dopamine transporter (DAT) SPECT scan (ioflupane, DaTscan). Differentiates PD from essential tremor. Used in diagnostic pathway analytics for PD confirmation.',tags:['Parkinson','DaTscan','SPECT','dopamine','LOINC','imaging'],use:'PD diagnostic pathway analytics; DaTscan utilization'},
+  {sys:'ATC',code:'N04BA01',name:'Levodopa — dopamine precursor (ATC)',             desc:'N04BA=Dopa and dopa derivatives. N04BA01=Levodopa; N04BA02=Levodopa+Carbidopa; N04BA03=Levodopa+Benserazide. Standard of care. DDD=0.5 g. Global baseline in MIDAS.',tags:['Parkinson','levodopa','carbidopa','ATC','dopamine'],use:'Parkinson SoC global demand; MIDAS dopaminergic analytics'},
+]},
+{ ta:'neuroscience', ind:'Epilepsy', alias:'focal seizures · generalized · Dravet · LGS', codes:[
+  {sys:'ICD',code:'G40.209',name:'Focal (partial) onset epilepsy, not intractable, unspecified',desc:'Focal epilepsy, most common type. G40.209 = not intractable, unspecified. G40.219 = intractable. AEDs: levetiracetam, lamotrigine, lacosamide, brivaracetam, cenobamate analytics.',tags:['epilepsy','focal','seizure','AED'],use:'Focal epilepsy patient pool; cenobamate/lacosamide analytics'},
+  {sys:'ICD',code:'G40.311',name:'Generalized idiopathic epilepsy, intractable, with status epilepticus',desc:'Intractable generalized epilepsy + status epilepticus — highest severity. Relevant for valproate, lamotrigine, perampanel, cannabidiol (Epidiolex) analytics.',tags:['epilepsy','generalized','intractable','status epilepticus'],use:'Drug-resistant epilepsy patient sizing; cannabidiol analytics'},
+  {sys:'ICD',code:'G40.833',name:'Dravet syndrome, intractable, with status epilepticus',desc:'Dravet syndrome (SCN1A mutation). Cannabidiol (Epidiolex), stiripentol, fenfluramine (Fintepla) approved. Rare disease with high unmet need.',tags:['Dravet syndrome','SCN1A','rare epilepsy','cannabidiol','Epidiolex'],use:'Dravet patient identification; cannabidiol/fenfluramine market sizing'},
+  {sys:'ICD',code:'G40.811',name:'Lennox-Gastaut syndrome, not intractable, with status epilepticus',desc:'LGS — severe childhood-onset epilepsy with multiple seizure types. Cannabidiol (Epidiolex), clobazam, rufinamide, fenfluramine analytics.',tags:['Lennox-Gastaut','LGS','rare epilepsy','childhood','cannabidiol'],use:'LGS patient identification; Epidiolex analytics'},
+  {sys:'LOINC',code:'69399-4',name:'Valproic acid [Mass/vol] in Serum/Plasma',     desc:'Valproate TDM LOINC. Standard AED with narrow therapeutic index. Monitoring 50–100 µg/mL. Used in TDM analytics for adherence and dose optimization.',tags:['epilepsy','valproate','TDM','therapeutic drug monitoring','LOINC'],use:'Valproate TDM analytics; AED adherence monitoring'},
+  {sys:'CPT',code:'95819',   name:'Electroencephalography (EEG), routine awake and asleep',desc:'Routine EEG CPT. 95816 = awake only; 95819 = awake + asleep. Critical diagnostic procedure for epilepsy confirmation. Used in epilepsy diagnostic journey analytics.',tags:['epilepsy','EEG','diagnostic','CPT','neurophysiology'],use:'Epilepsy diagnostic pathway analytics; EEG utilization'},
+]},
+{ ta:'neuroscience', ind:'Migraine', alias:'episodic · chronic · CGRP · anti-CGRP · gepants', codes:[
+  {sys:'ICD',code:'G43.909',name:'Migraine, unspecified, not intractable, without status migrainosus',desc:'Migraine catch-all. G43.1 = migraine with aura; G43.0 = without aura; G43.7 = chronic migraine (≥15 headache days/month). CGRP mAb (erenumab, fremanezumab, galcanezumab, eptinezumab) analytics.',tags:['migraine','CGRP','headache','episodic'],use:'Migraine patient cohort; CGRP preventive market sizing'},
+  {sys:'ICD',code:'G43.709',name:'Chronic migraine, not intractable, without status migrainosus',desc:'Chronic migraine (≥15 days/month, ≥8 migraine days). Higher-severity segment — primary biologic target. Erenumab, fremanezumab, galcanezumab all approved for episodic and chronic.',tags:['chronic migraine','CGRP','headache'],use:'Chronic migraine population; preventive biologic analytics'},
+  {sys:'HCPCS',code:'J0176',name:'Erenumab (Aimovig) 1 mg',                        desc:'CGRP receptor mAb. First approved CGRP preventive. 70 mg or 140 mg monthly SC. J0176 for medical benefit; mostly pharmacy benefit SC autoinjector.',tags:['erenumab','Aimovig','CGRP','migraine','preventive'],use:'Erenumab market share; CGRP class preventive analytics'},
+  {sys:'HCPCS',code:'J3031',name:'Eptinezumab (Vyepti) 1 mg IV',                  desc:'IV CGRP mAb — unique IV-only route (q3 months). Only buy-and-bill CGRP preventive. High compliance advantage. J3031. Infusion center administration tracking.',tags:['eptinezumab','Vyepti','CGRP','migraine','IV infusion'],use:'Eptinezumab IV utilization; infusion center migraine analytics'},
+  {sys:'CPT',code:'64615',   name:'Chemodenervation of muscle(s) innervated by facial nerve (for OnabotulinumtoxinA in migraine)',desc:'Botulinum toxin injection CPT for chronic migraine (PREEMPT protocol, onabotulinumtoxinA / Botox). ~155-195 units every 12 weeks.',tags:['migraine','Botox','botulinum toxin','CPT','chemodenervation','chronic'],use:'OnabotulinumtoxinA (Botox) chronic migraine utilization'},
+  {sys:'ATC',code:'N02CC01',name:'Sumatriptan — Triptan class (ATC)',               desc:'N02CC = Selective 5HT1-receptor agonists (triptans). Sumatriptan DDD = 0.1 g oral. Class used in MIDAS for acute migraine therapy global demand analytics.',tags:['sumatriptan','triptan','migraine','acute','ATC'],use:'Triptan class global demand; acute vs. preventive market split'},
+]},
+{ ta:'neuroscience', ind:'Spinal Muscular Atrophy (SMA)', alias:'SMN1 · nusinersen · onasemnogene · risdiplam', codes:[
+  {sys:'ICD',code:'G12.0',  name:'Infantile SMA type I (Werdnig-Hoffmann)',         desc:'Most severe SMA. Onset <6 months, never achieve sitting. Gene therapy (onasemnogene, Zolgensma) optimal in first months of life. Newborn screening critical.',tags:['SMA','type I','infantile','gene therapy','Zolgensma'],use:'SMA Type I patient identification; gene therapy analytics'},
+  {sys:'ICD',code:'G12.1',  name:'SMA type II / III / IV (other inherited SMA)',    desc:'SMA Types 2, 3, 4. All three treatable with nusinersen (Spinraza), risdiplam (Evrysdi). Type 2 also eligible for gene therapy up to 21 kg.',tags:['SMA','type II','type III','nusinersen','risdiplam'],use:'SMA broader population; nusinersen/risdiplam analytics'},
+  {sys:'HCPCS',code:'J1328',name:'Nusinersen (Spinraza) 1 mg — intrathecal',       desc:'Antisense oligonucleotide. 12 mg dose = 12 units J1328. Intrathecal injection. 4 loading doses then q4 months. One of highest-cost drugs per treatment episode. Tracks medical benefit SMA therapy.',tags:['nusinersen','Spinraza','SMA','intrathecal','ASO'],use:'Nusinersen intrathecal utilization tracking; SMA market analytics'},
+  {sys:'LOINC',code:'53034-5',name:'SMN1 gene mutation analysis in Blood by Molecular genetics',desc:'SMN1 deletion/mutation testing LOINC. Confirmatory diagnosis for SMA. Used in genetic lab data for confirmed SMA patient identification distinct from ICD-10-based claims.',tags:['SMA','SMN1','genetic testing','LOINC','confirmatory'],use:'Confirmed SMA patient identification via lab; newborn screening'},
+  {sys:'ATC',code:'M09AX07',name:'Nusinersen (ATC)',                                desc:'M09AX=Other drugs for musculoskeletal disorders. DDD=0.267 g intrathecal. ATC used in global MIDAS analytics for SMA market sizing across countries.',tags:['nusinersen','ATC','SMA','MIDAS'],use:'Nusinersen global demand analytics; MIDAS SMA market'},
+]},
+{ ta:'neuroscience', ind:'Neuromuscular Disease — DMD, ALS, CIDP', alias:'Duchenne · amyotrophic lateral sclerosis · CIDP', codes:[
+  {sys:'ICD',code:'G71.01', name:'Duchenne muscular dystrophy (DMD)',                desc:'DMD — X-linked dystrophinopathy. Exon-skipping ASOs (eteplirsen, golodirsen, viltolarsen, casimersen), gene therapy (delandistrogene moxeparvovec / Elevidys). Requires exon skip eligibility.',tags:['DMD','Duchenne','exon skipping','dystrophin','neuromuscular'],use:'DMD patient identification; exon-skip/gene therapy analytics'},
+  {sys:'ICD',code:'G71.02', name:'Becker muscular dystrophy (BMD)',                  desc:'BMD — milder dystrophinopathy. Less severe than DMD; often ambulatory into adulthood. Emerging gene therapy pipeline.',tags:['BMD','Becker','muscular dystrophy','dystrophin'],use:'BMD patient identification; pipeline analytics'},
+  {sys:'ICD',code:'G12.21', name:'Amyotrophic lateral sclerosis (ALS)',              desc:'ALS — motor neuron disease. Riluzole (SoC), edaravone (Radicava), tofersen (Qalsody, for SOD1-ALS), AMX0035 (Relyvrio — withdrawn). Rapidly evolving landscape.',tags:['ALS','motor neuron disease','riluzole','tofersen','SOD1'],use:'ALS patient cohort; SOD1-ALS tofersen market sizing'},
+  {sys:'ICD',code:'G61.9',  name:'Inflammatory polyneuropathy (incl. CIDP), unspecified',desc:'CIDP and other inflammatory neuropathies. Efgartigimod subcutaneous (Vyvgart Hytrulo) and rozanolixizumab SC approved for CIDP 2023.',tags:['CIDP','inflammatory neuropathy','FcRn','efgartigimod'],use:'CIDP patient identification; FcRn inhibitor CIDP analytics'},
+  {sys:'HCPCS',code:'J0222',name:'Efgartigimod SC hyaluronidase (Vyvgart Hytrulo) — CIDP',desc:'FcRn inhibitor SC formulation for CIDP and gMG. SC dosing Q1w. Pharmacy benefit predominantly. Verify J-code assignment for SC route.',tags:['efgartigimod','CIDP','gMG','FcRn','SC'],use:'Efgartigimod SC utilization tracking in CIDP'},
+]},
+{ ta:'neuroscience', ind:'Psychiatry: Depression, Schizophrenia, Bipolar', alias:'MDD · TRD · esketamine · LAI antipsychotics', codes:[
+  {sys:'ICD',code:'F32.9',  name:'Major depressive disorder (MDD), single episode, unspecified',desc:'MDD — primary code. F33 = recurrent. For TRD (treatment-resistant depression): esketamine (Spravato), ECT, TMS. F32.3 = severe MDD with psychotic features.',tags:['MDD','depression','antidepressant','esketamine','TRD'],use:'MDD market sizing; TRD patient identification'},
+  {sys:'ICD',code:'F31.9',  name:'Bipolar disorder, unspecified',                   desc:'Bipolar I/II. F31.0 = bipolar I, current episode manic; F31.5 = depressive; F31.81 = bipolar II. Lithium, lamotrigine, quetiapine, lurasidone analytics.',tags:['bipolar','mood disorder','lithium','atypical antipsychotic'],use:'Bipolar market sizing; mood stabilizer analytics'},
+  {sys:'ICD',code:'F20.9',  name:'Schizophrenia, unspecified',                      desc:'Schizophrenia. F20.0=paranoid, F20.1=disorganized, F20.3=undifferentiated. LAI (long-acting injectable): paliperidone palmitate, aripiprazole lauroxil, risperidone ISM analytics.',tags:['schizophrenia','LAI','antipsychotic','paliperidone'],use:'Schizophrenia market sizing; LAI vs. oral adherence analytics'},
+  {sys:'HCPCS',code:'S0013',name:'Esketamine nasal spray (Spravato) 28 mg',         desc:'NMDA receptor antagonist for TRD and MDD with suicidality. REMS-required; in-clinic administration only. J-code / S-code varies. Healthcare setting dispensing tracked.',tags:['esketamine','Spravato','TRD','MDD','NMDA','REMS'],use:'Esketamine clinical utilization; TRD specialty analytics'},
+  {sys:'HCPCS',code:'J1944',name:'Paliperidone palmitate (Invega Sustenna) 1 mg',   desc:'Monthly LAI atypical antipsychotic. J1944. Q1M dosing (Invega Sustenna); Q3M (Invega Trinza = J2358); Q6M (Invega Hafyera). Long-acting injectable analytics for adherence advantage.',tags:['paliperidone','LAI','schizophrenia','antipsychotic','monthly'],use:'LAI antipsychotic utilization; adherence advantage analytics'},
+]},
+
+/* ───── CARDIOVASCULAR ───── */
+{ ta:'cardiovascular', ind:'Heart Failure', alias:'HFrEF · HFmrEF · HFpEF · ARNI · SGLT2', codes:[
+  {sys:'ICD',code:'I50.20', name:'Systolic (congestive) heart failure, unspecified (HFrEF)',desc:'HFrEF (EF <40%). ARNI (sacubitril/valsartan), beta-blockers, ACEi/ARB, MRA, SGLT2i (dapagliflozin, empagliflozin) analytics. I50.21 = acute; I50.22 = chronic; I50.23 = acute-on-chronic.',tags:['HFrEF','heart failure','systolic','ARNI','sacubitril','SGLT2'],use:'HFrEF patient pool; ARNI/SGLT2i market analytics'},
+  {sys:'ICD',code:'I50.30', name:'Diastolic (congestive) heart failure, unspecified (HFpEF)',desc:'HFpEF (EF ≥50%). I50.31/32/33 acute/chronic/AoC variants. Finerenone, SGLT2i (empagliflozin for HFpEF — EMPEROR-Preserved), spironolactone analytics.',tags:['HFpEF','heart failure','diastolic','finerenone','SGLT2'],use:'HFpEF patient pool; empagliflozin HFpEF market analytics'},
+  {sys:'ICD',code:'I50.810',name:'Right heart failure, unspecified',                 desc:'Right HF. Pulmonary arterial hypertension is a key driver. Newer I50.810-I50.9 expanded heart failure coding. Macitentan, treprostinil analytics.',tags:['right heart failure','HF','PAH'],use:'Right HF patient sizing; PAH-related HF analytics'},
+  {sys:'ICD',code:'I50.9',  name:'Heart failure, unspecified',                       desc:'Catch-all HF code when EF not specified. Accounts for significant share of HF claims. For HFrEF vs. HFpEF analytics, require I50.20/I50.30 specificity.',tags:['heart failure','HF','unspecified'],use:'Broad HF population; unspecified HF coding baseline'},
+  {sys:'HCPCS',code:'C9399',name:'Sacubitril/valsartan (Entresto) — may use drug-specific J-code when assigned',desc:'ARNI. Predominantly oral pharmacy benefit (NDC). Some plan designs use J-codes for specific settings. Monitor annually for HCPCS updates. Tracks HFrEF ARNI analytics.',tags:['sacubitril','valsartan','Entresto','ARNI','HFrEF'],use:'Entresto HFrEF analytics; pharmacy benefit tracking'},
+  {sys:'LOINC',code:'33763-4',name:'NT-proBNP [Mass/vol] in Serum or Plasma',       desc:'NT-proBNP — primary HF biomarker. Elevated in HF exacerbation; used for diagnosis, prognosis, and treatment response monitoring. Threshold: >125 pg/mL (ambulatory); >300 (acute) per ESC guidelines.',tags:['heart failure','NT-proBNP','BNP','biomarker','LOINC'],use:'HF severity stratification; ARNI treatment response'},
+  {sys:'LOINC',code:'42637-9',name:'BNP [Mass/vol] in Serum or Plasma',             desc:'BNP (B-type natriuretic peptide). Complementary to NT-proBNP. <100 pg/mL helps exclude HF. Trending used in outpatient HF management.',tags:['heart failure','BNP','biomarker','LOINC'],use:'HF diagnosis and monitoring in EHR lab data'},
+  {sys:'DRG',code:'291',     name:'Heart failure & shock w MCC',                     desc:'MS-DRG 291 = HFrEF/HFpEF hospitalization with major complication. DRG 292 = w CC; 293 = without CC/MCC. Mean Medicare payment ~$11,000–14,000. Key HCRU metric.',tags:['heart failure','DRG','hospitalization','HCRU','CMS'],use:'HF hospitalization cost; budget impact for ARNI/SGLT2i'},
+  {sys:'CPT',code:'93306',   name:'Echocardiography, transthoracic, complete with color flow',desc:'Complete echocardiogram CPT. EF measurement for HFrEF/HFpEF classification. Required documentation for biologic and ARNI initiation.',tags:['echocardiogram','echo','EF','CPT','cardiac imaging'],use:'Echo utilization analytics; EF classification for HF market sizing'},
+  {sys:'ATC',code:'C09DA03', name:'Valsartan — ARB class (ATC)',                    desc:'C09 = Agents acting on renin-angiotensin system. C09DA=ARBs+diuretics; C09DA03=Valsartan. Sacubitril/valsartan combination: C09DX04. MIDAS global ARB/ARNI market analytics.',tags:['valsartan','ARB','ARNI','heart failure','ATC'],use:'ARNI global demand analytics via MIDAS DDD'},
+]},
+{ ta:'cardiovascular', ind:'Atrial Fibrillation', alias:'paroxysmal · persistent · chronic · DOAC', codes:[
+  {sys:'ICD',code:'I48.0',  name:'Paroxysmal atrial fibrillation',                  desc:'AF episodes <7 days, self-terminating. Rhythm control vs. rate control decision-making. DOAC (apixaban, rivaroxaban, edoxaban, dabigatran) analytics.',tags:['AFib','paroxysmal','atrial fibrillation','DOAC'],use:'Paroxysmal AF patient identification; DOAC market sizing'},
+  {sys:'ICD',code:'I48.11', name:'Longstanding persistent atrial fibrillation (>12 months)',desc:'Persistent AF >1 year. Higher ablation failure rate. Rhythm control more difficult. Added in ICD-10-CM 2023 for greater specificity.',tags:['AFib','persistent','long-standing','ablation'],use:'Persistent AF stratification; ablation analytics'},
+  {sys:'ICD',code:'I48.20', name:'Chronic atrial fibrillation, unspecified (permanent AF)',desc:'Permanent AF — rate control accepted, no rhythm restoration planned. I48.2x series. Chronic AF is common in older Medicare population.',tags:['AFib','chronic','permanent','atrial fibrillation'],use:'Permanent AF population; rate control therapy analytics'},
+  {sys:'HCPCS',code:'J0179',name:'Apixaban (Eliquis) — oral DOAC, pharmacy benefit',desc:'Apixaban predominantly pharmacy benefit (NDC). No standard HCPCS/J-code for oral DOACs. Tracked via NDC in pharmacy claims. Leading DOAC by TRx share.',tags:['apixaban','Eliquis','DOAC','AFib','stroke prevention'],use:'Apixaban TRx analytics; DOAC market share via NPA'},
+  {sys:'CPT',code:'93656',  name:'Pulmonary vein isolation (AFib catheter ablation)',desc:'Catheter ablation CPT for AFib — pulmonary vein isolation. 93657 = additional linear or focal ablation. Growing utilization as ablation evidence supports early rhythm control.',tags:['AFib','ablation','PVI','catheter ablation','CPT'],use:'AFib ablation utilization analytics; early rhythm control trends'},
+  {sys:'LOINC',code:'3467-8',name:'INR in Platelet poor plasma by Coagulation assay',desc:'PT/INR — warfarin monitoring biomarker. Therapeutic range 2.0-3.0 for AFib stroke prevention. DOAC adoption driven by INR monitoring burden avoidance.',tags:['INR','warfarin','anticoagulation','AFib','LOINC'],use:'Warfarin monitoring analytics; DOAC conversion driver'},
+  {sys:'ATC',code:'B01AF01',name:'Apixaban (ATC) — factor Xa inhibitor',            desc:'B01=Antithrombotic. B01AF=Direct factor Xa inhibitors. B01AF01=Apixaban. DDD=10 mg. MIDAS global DOAC market analytics.',tags:['apixaban','DOAC','factor Xa','ATC','anticoagulant'],use:'Global DOAC market via MIDAS DDD; Xa inhibitor analytics'},
+]},
+{ ta:'cardiovascular', ind:'Coronary Artery Disease & Acute Coronary Syndrome', alias:'STEMI · NSTEMI · angina · CAD · PCSK9', codes:[
+  {sys:'ICD',code:'I25.10', name:'Atherosclerotic heart disease of native coronary artery',desc:'Stable CAD. I25.110 = with unstable angina; I25.119 = with unspecified angina. Primary code for PCSK9 inhibitor (evolocumab, alirocumab) indication analytics.',tags:['CAD','coronary artery disease','atherosclerosis','PCSK9'],use:'CAD patient population; PCSK9i established ASCVD analytics'},
+  {sys:'ICD',code:'I21.09', name:'STEMI involving other coronary artery of anterior wall',desc:'ST-elevation MI. I21.0x = anterior wall STEMI; I21.1x = inferior wall; I21.2x = other sites. Requires primary PCI and antiplatelet (ticagrelor, prasugrel) therapy.',tags:['STEMI','myocardial infarction','MI','acute','coronary'],use:'STEMI patient HCRU; P2Y12 antiplatelet analytics'},
+  {sys:'ICD',code:'I21.4',  name:'Non-ST elevation myocardial infarction (NSTEMI)',   desc:'NSTEMI — troponin positive, no ST elevation. Managed with anticoagulants + P2Y12 + statin. High-volume ACS code in claims databases.',tags:['NSTEMI','myocardial infarction','ACS','troponin'],use:'NSTEMI patient identification; ACS treatment analytics'},
+  {sys:'ICD',code:'I20.0',  name:'Unstable angina',                                  desc:'ACS without troponin elevation. Often coded with CAD codes. Triggers high-acuity management and catheterization.',tags:['unstable angina','ACS','CAD','angina'],use:'Unstable angina HCRU; cathing and PCI utilization analytics'},
+  {sys:'HCPCS',code:'J0223',name:'Evolocumab (Repatha) 140 mg SC',                  desc:'PCSK9 inhibitor SC Q2w or 420 mg Q month. J0223 when administered in medical setting. Predominantly pharmacy benefit SC autoinjector. Also J0217 for alirocumab (Praluent).',tags:['evolocumab','Repatha','PCSK9','LDL','cardiovascular'],use:'PCSK9i utilization; pharmacy vs. medical benefit split'},
+  {sys:'LOINC',code:'42757-5',name:'Troponin I.cardiac [Mass/vol] in Serum or Plasma',desc:'High-sensitivity cardiac troponin I — cornerstone ACS biomarker. STEMI/NSTEMI diagnosis requires troponin elevation. Serial measurements required. LOINC critical for ACS EHR cohort definition.',tags:['troponin','ACS','STEMI','NSTEMI','biomarker','LOINC'],use:'ACS patient identification via EHR lab; STEMI/NSTEMI analytics'},
+  {sys:'LOINC',code:'13457-7',name:'LDL Cholesterol [Mass/vol] in Serum or Plasma',  desc:'LDL-C — primary lipid monitoring biomarker. Target <70 mg/dL for ASCVD; <55 mg/dL very high risk (per ESC/ACC). PCSK9i eligibility criteria (LDL ≥70 on maximally tolerated statin).',tags:['LDL','cholesterol','lipid','PCSK9','ASCVD','LOINC'],use:'LDL goal attainment analytics; PCSK9i eligibility assessment'},
+  {sys:'CPT',code:'92920',  name:'Percutaneous transluminal coronary balloon angioplasty (PTCA/PCI)',desc:'PCI CPT. 92928 = stent placement. 92933 = atherectomy + angioplasty. Tracks revascularization procedures in CAD HCRU analyses.',tags:['PCI','angioplasty','stent','CAD','coronary','CPT'],use:'PCI utilization analytics; CAD revascularization HCRU'},
+]},
+{ ta:'cardiovascular', ind:'Hypertension & Hypertensive Disease', alias:'HTN · hypertensive CKD · resistant HTN · finerenone', codes:[
+  {sys:'ICD',code:'I10',    name:'Essential (primary) hypertension',                desc:'Most common cardiovascular ICD-10. Used in ~60% of cardiology encounters. Single code replaces all ICD-9 hypertension table entries. Basis for RAAS therapy analytics.',tags:['hypertension','HTN','primary','I10','blood pressure'],use:'HTN patient population; RAAS/diuretic analytics'},
+  {sys:'ICD',code:'I11.9',  name:'Hypertensive heart disease without heart failure', desc:'HTN + cardiac involvement without HF. Combination coding required if HTN + HF: use I11.0 + I50.x. Tracks hypertensive cardiomyopathy without overt HF.',tags:['hypertension','hypertensive heart disease','cardiac'],use:'Hypertensive heart disease analytics; combination coding'},
+  {sys:'ICD',code:'I12.9',  name:'Hypertensive chronic kidney disease w stage 1–4 CKD',desc:'HTN-CKD combination. I12.9 (without HF, CKD 1-4); I12.1 (CKD 5 or ESRD). Finerenone (Kerendia) analytics for diabetic CKD + hypertension.',tags:['hypertensive CKD','HTN','CKD','finerenone','combination coding'],use:'Hypertensive CKD population; finerenone analytics'},
+  {sys:'ICD',code:'R03.0',  name:'Elevated blood-pressure reading, without diagnosis of hypertension',desc:'Pre-hypertension / elevated BP without confirmed HTN diagnosis. Used in screening analytics and prevention program tracking.',tags:['elevated BP','prehypertension','screening'],use:'Pre-hypertension population analytics; prevention program sizing'},
+  {sys:'LOINC',code:'8480-6',name:'Systolic blood pressure',                        desc:'SBP LOINC for EHR vital signs. Critical for HTN control monitoring analytics in EHR populations. Paired with DBP (LOINC 8462-4) for full BP measurement.',tags:['blood pressure','systolic','SBP','HTN','LOINC','vital sign'],use:'HTN blood pressure control analytics in EHR data'},
+]},
+{ ta:'cardiovascular', ind:'Pulmonary Arterial Hypertension (PAH)', alias:'PAH · ERA · PDE5i · prostacyclin · soluble GC', codes:[
+  {sys:'ICD',code:'I27.0',  name:'Primary pulmonary hypertension (PAH)',             desc:'Group 1 PAH. ERA (macitentan, ambrisentan, bosentan), PDE5i (sildenafil, tadalafil), prostacyclin (epoprostenol, treprostinil, iloprost), soluble GC (riociguat), selexipag analytics.',tags:['PAH','pulmonary hypertension','ERA','prostacyclin','riociguat'],use:'PAH patient identification; combination therapy analytics'},
+  {sys:'ICD',code:'I27.20', name:'Pulmonary arterial hypertension, unspecified',     desc:'Expanded PAH coding 2022. I27.21 = PAH heritable; I27.22 = drug/toxin-induced; I27.23 = associated with connective tissue disease; I27.24 = associated with HIV.',tags:['PAH','pulmonary hypertension','WHO group 1'],use:'PAH subtypes analytics; connective tissue disease-associated PAH'},
+  {sys:'HCPCS',code:'J3472',name:'Treprostinil (Remodulin) 1 mg — IV/SC infusion', desc:'Prostacyclin analog for PAH. Continuous IV or SC infusion. High-cost rare disease therapy. J3472. Inhaled treprostinil (Tyvaso) via pharmacy benefit.',tags:['treprostinil','Remodulin','prostacyclin','PAH','infusion'],use:'Treprostinil IV/SC buy-and-bill utilization; PAH rare disease analytics'},
+  {sys:'HCPCS',code:'J3285',name:'Riociguat (Adempas) — soluble guanylate cyclase',desc:'sGC stimulator. Approved PAH and CTEPH. Oral — pharmacy benefit. Riociguat analytics track an emerging class with growing adoption post-CHEST-2 data.',tags:['riociguat','Adempas','sGC','PAH','CTEPH'],use:'sGC stimulator class analytics; CTEPH and PAH market'},
+  {sys:'LOINC',code:'59788-1',name:'Right ventricular systolic pressure estimated by echo [mmHg]',desc:'RVSP by echocardiography — PAH screening and monitoring marker. RVSP >40 mmHg warrants right heart catheterization (RHC) for PAH confirmation.',tags:['PAH','RVSP','echocardiogram','pulmonary hypertension','LOINC'],use:'PAH screening analytics; echo-based RVSP monitoring'},
+]},
+{ ta:'cardiovascular', ind:'Hyperlipidemia & ASCVD Prevention', alias:'LDL · PCSK9 · statin · inclisiran · bempedoic acid', codes:[
+  {sys:'ICD',code:'E78.00', name:'Pure hypercholesterolemia, unspecified',           desc:'High LDL-C without triglycerides elevation. Primary indication for statins, PCSK9i, inclisiran, ezetimibe, bempedoic acid. ASCVD secondary prevention eligibility requires this + CAD/event history.',tags:['hypercholesterolemia','LDL','PCSK9','statin','lipid'],use:'Hypercholesterolemia patient pool; PCSK9i analytics'},
+  {sys:'ICD',code:'E78.01', name:'Familial hypercholesterolemia (FH)',               desc:'FH — severe inherited LDL elevation. Heterozygous FH: LDL 190–400 mg/dL. HoFH (E78.01) associated LDL >500 mg/dL. PCSK9i, lomitapide, evinacumab (HoFH) analytics.',tags:['familial hypercholesterolemia','FH','HoFH','evinacumab','PCSK9'],use:'FH patient identification; HoFH market sizing for evinacumab'},
+  {sys:'HCPCS',code:'J3490',name:'Inclisiran (Leqvio) — siRNA PCSK9 inhibitor',     desc:'siRNA targeting PCSK9 synthesis. Q6M SC dosing (twice yearly). J-code for inclisiran. Fundamentally different mechanism from PCSK9 mAbs. Compliance advantage with twice-yearly dosing.',tags:['inclisiran','Leqvio','siRNA','PCSK9','LDL','cholesterol'],use:'Inclisiran utilization; siRNA class analytics; adherence advantage'},
+  {sys:'LOINC',code:'2571-8',name:'Triglycerides [Mass/vol] in Serum or Plasma',   desc:'Triglyceride test LOINC. High TG (>500 mg/dL) triggers fibrate/omega-3 (icosapent ethyl/Vascepa) analytics. Paired with LDL, HDL for full lipid panel.',tags:['triglycerides','lipid panel','LOINC','dyslipidemia'],use:'Lipid panel analytics; icosapent ethyl patient identification'},
+]},
+
+/* ───── RENAL ───── */
+{ ta:'renal', ind:'Chronic Kidney Disease (CKD)', alias:'CKD stages · eGFR · diabetic CKD · finerenone', codes:[
+  {sys:'ICD',code:'N18.1',  name:'CKD Stage 1 (eGFR ≥90 with markers of damage)',  desc:'CKD Stage 1 — normal/high eGFR but kidney damage markers present (albuminuria, structural abnormality). Often under-coded. Relevant for early intervention analytics.',tags:['CKD','stage 1','eGFR','kidney disease','N18'],use:'CKD early-stage analytics; albuminuria screening programs'},
+  {sys:'ICD',code:'N18.2',  name:'CKD Stage 2 (eGFR 60–89)',                       desc:'CKD Stage 2 — mildly decreased eGFR with kidney damage markers. Large population; early RAAS/SGLT2i intervention opportunity.',tags:['CKD','stage 2','eGFR','kidney disease'],use:'CKD Stage 2 population; early intervention analytics'},
+  {sys:'ICD',code:'N18.3',  name:'CKD Stage 3 (eGFR 30–59)',                       desc:'CKD Stage 3 — moderately decreased kidney function. Split: N18.31 = eGFR 45–59 (3a); N18.32 = eGFR 30–44 (3b). Finerenone, dapagliflozin, empagliflozin analytics at this stage.',tags:['CKD','stage 3','eGFR','kidney disease','SGLT2','finerenone'],use:'CKD 3a/3b population; cardiorenal analytics'},
+  {sys:'ICD',code:'N18.4',  name:'CKD Stage 4 (eGFR 15–29)',                       desc:'CKD Stage 4 — severely decreased function. Pre-dialysis. High burden of cardiovascular disease. AV fistula creation, transplant listing planning.',tags:['CKD','stage 4','eGFR','pre-dialysis','kidney'],use:'Pre-ESRD population; transition-to-dialysis analytics'},
+  {sys:'ICD',code:'N18.6',  name:'End-Stage Renal Disease (ESRD)',                  desc:'ESRD — dialysis-dependent. Assigned when patient on chronic dialysis, regardless of stage. High CMS Medicare spend: ESRD patients <1% of beneficiaries but ~7% of Medicare spending.',tags:['ESRD','end-stage renal disease','dialysis','kidney failure'],use:'ESRD patient population; dialysis center analytics; transplant'},
+  {sys:'ICD',code:'E11.22', name:'Type 2 diabetes with diabetic CKD',               desc:'Combination code: T2DM + CKD. ICD-10 assumes causal relationship when both documented. Finerenone (Kerendia) approved specifically in diabetic CKD with albuminuria.',tags:['diabetic CKD','T2DM','diabetes','finerenone','Kerendia'],use:'Diabetic CKD population; finerenone market analytics'},
+  {sys:'ICD',code:'I12.9',  name:'Hypertensive CKD with Stage 1–4 or unspecified CKD',desc:'HTN-CKD combination code. Apply N18.x as additional code for CKD stage. Important for combination coding compliance and accurate patient population sizing.',tags:['hypertensive CKD','HTN','CKD','combination coding'],use:'HTN-CKD analytics; RAAS+SGLT2i combination therapy'},
+  {sys:'HCPCS',code:'J0880',name:'Darbepoetin alfa (Aranesp) 1 mcg — ESA in CKD',  desc:'Erythropoiesis-stimulating agent (ESA) for CKD-related anemia. Q1-4 weeks dosing. J0880. ESA use dramatically declined with SGLT2i and HIF-PHI (daprodustat, roxadustat) emergence in dialysis anemia.',tags:['darbepoetin','Aranesp','ESA','CKD','anemia','ESRD'],use:'ESA utilization in CKD/ESRD; anemia management analytics'},
+  {sys:'HCPCS',code:'A4657',name:'IV tubing for dialysis (representative dialysis supply code)',desc:'Dialysis supply coding. HCPCS E1500-E1699 series covers dialysis equipment. Q-codes for dialysis supplies. Tracks ESRD service economics in Medicare ESRD capitated bundle.',tags:['dialysis','ESRD','hemodialysis','HCPCS','supply'],use:'Dialysis supply cost analytics; ESRD bundle reimbursement'},
+  {sys:'LOINC',code:'48642-3',name:'eGFR (MDRD) using creatinine [Volume rate/Area]',desc:'eGFR (estimated Glomerular Filtration Rate) — primary CKD staging biomarker. MDRD formula. CKD-EPI 2021 (race-free) increasingly preferred. Critical for CKD stage assignment and SGLT2i dosing thresholds.',tags:['eGFR','CKD','kidney function','creatinine','LOINC','biomarker'],use:'CKD staging via lab data; eGFR threshold analytics for SGLT2i/finerenone'},
+  {sys:'LOINC',code:'14959-5',name:'Microalbumin/Creatinine [Ratio] in Urine',      desc:'UACR (urine albumin-to-creatinine ratio) — primary marker of CKD progression and cardiovascular risk. >30 mg/g = albuminuria; >300 = macroalbuminuria. Finerenone FIDELIO/FIGARO trials enrolled by UACR.',tags:['albuminuria','UACR','CKD','proteinuria','LOINC','biomarker'],use:'UACR-based CKD progression analytics; finerenone eligibility'},
+  {sys:'LOINC',code:'2160-0',name:'Creatinine [Mass/vol] in Serum or Plasma',       desc:'Serum creatinine — fundamental kidney function test. Basis for eGFR calculation. Used across all CKD stages for monitoring and SGLT2i dose adjustment decisions.',tags:['creatinine','CKD','kidney function','LOINC','biomarker'],use:'Creatinine monitoring analytics; CKD staging cross-validation'},
+  {sys:'DRG',code:'682',     name:'Renal failure with MCC',                         desc:'MS-DRG for AKI/CKD hospitalization with major complication. DRG 683 = w CC; 684 = without. AKI hospitalization is a key HCRU endpoint in CKD progression studies.',tags:['CKD','AKI','renal failure','DRG','hospitalization','HCRU'],use:'CKD hospitalization HCRU; AKI economic burden analytics'},
+  {sys:'ATC',code:'C09AA05',name:'Ramipril — ACE inhibitor (ATC)',                  desc:'C09AA=ACE inhibitors. Ramipril=C09AA05. DDD=2.5 mg. Standard of care for CKD/proteinuria with or without diabetes. MIDAS global ACEi/ARB analytics in CKD.',tags:['ramipril','ACEi','CKD','RAAS','ATC'],use:'Global ACEi demand analytics; RAAS SoC in CKD'},
+]},
+{ ta:'renal', ind:'IgA Nephropathy (IgAN)', alias:'IgAN · sparsentan · budesonide · atrasentan', codes:[
+  {sys:'ICD',code:'N02.8',  name:'Recurrent and persistent hematuria with other morphological changes (IgAN)',desc:'IgAN coding — often N02.8 or N02.9. IgAN accounts for ~25% of primary glomerulonephritis. Sparsentan (Filspari), budesonide (Tarpeyo/Kinpeygo), iptacopan analytics.',tags:['IgAN','IgA nephropathy','glomerulonephritis','sparsentan','budesonide'],use:'IgAN patient identification; sparsentan/budesonide market sizing'},
+  {sys:'HCPCS',code:'J0178',name:'Sparsentan (Filspari) 200 mg',                    desc:'Dual RAAS+ET(A) antagonist for IgAN. First FDA-approved targeted therapy for IgAN. Rare disease oral therapy — pharmacy benefit. Verify J-code assignment.',tags:['sparsentan','Filspari','IgAN','RAAS','endothelin'],use:'Sparsentan utilization; IgAN rare disease market analytics'},
+  {sys:'LOINC',code:'14959-5',name:'Urine Albumin/Creatinine Ratio (UACR)',         desc:'UACR primary endpoint in IgAN trials. Proteinuria reduction (UACR, 24h urine protein) is key efficacy marker for all IgAN therapies.',tags:['IgAN','UACR','proteinuria','biomarker','LOINC'],use:'IgAN treatment response monitoring; UACR endpoint analytics'},
+]},
+{ ta:'renal', ind:'Lupus Nephritis', alias:'LN · voclosporin · belimumab · MMF', codes:[
+  {sys:'ICD',code:'M32.14', name:'Systemic lupus erythematosus with glomerular disease',desc:'Lupus nephritis ICD-10. Voclosporin (Lupkynis) + MMF induction; belimumab IV/SC add-on approved. Class III/IV LN = highest severity and therapeutic priority.',tags:['lupus nephritis','LN','SLE','voclosporin','belimumab'],use:'Lupus nephritis patient identification; voclosporin market analytics'},
+  {sys:'LOINC',code:'56526-1',name:'AQP4-IgG Ab — also note anti-dsDNA for LN activity',desc:'See anti-dsDNA (LOINC 5521-5) and C3/C4 complement for LN activity monitoring. Paired biomarkers track disease activity and treatment response.',tags:['lupus nephritis','anti-dsDNA','complement','biomarker'],use:'LN disease activity monitoring; treatment response analytics'},
+]},
+{ ta:'renal', ind:'Acute Kidney Injury (AKI)', alias:'AKI · prerenal · intrinsic · CRRT', codes:[
+  {sys:'ICD',code:'N17.9',  name:'Acute kidney failure, unspecified',               desc:'AKI catch-all. N17.0 = AKI with tubular necrosis; N17.1 = with acute cortical necrosis; N17.2 = with medullary necrosis. AKI is a critical HCRU driver and progression risk to CKD.',tags:['AKI','acute kidney injury','renal failure','hospitalization'],use:'AKI patient identification; HCRU analytics; CKD progression'},
+  {sys:'ICD',code:'N17.0',  name:'Acute kidney failure with tubular necrosis (ATN)',  desc:'ATN — most common intrinsic AKI cause. Drug-induced (aminoglycosides, contrast, NSAIDs) or ischemic. High hospitalization HCRU.',tags:['AKI','ATN','acute tubular necrosis','drug-induced'],use:'ATN analytics; drug-induced AKI pharmacovigilance'},
+  {sys:'LOINC',code:'33914-3',name:'eGFR CKD-EPI [Volume rate/Area] in Serum or Plasma',desc:'CKD-EPI 2021 formula eGFR — preferred over MDRD. Race-free since 2021. Rapid decline = AKI biomarker in serial measurements.',tags:['eGFR','CKD-EPI','AKI','CKD','LOINC'],use:'AKI detection via eGFR decline analytics; CKD-EPI 2021 adoption'},
+]},
+
+/* ───── METABOLISM ───── */
+{ ta:'metabolism', ind:'Type 2 Diabetes Mellitus (T2DM)', alias:'GLP-1 · SGLT2 · DPP-4 · insulin · HbA1c', codes:[
+  {sys:'ICD',code:'E11.9',  name:'Type 2 diabetes mellitus without complications',  desc:'T2DM catch-all — most common DM code. GLP-1 RA (semaglutide, dulaglutide, liraglutide, tirzepatide), SGLT2i (dapagliflozin, empagliflozin, canagliflozin), DPP-4 (sitagliptin), insulin analytics.',tags:['T2DM','diabetes','GLP-1','SGLT2','insulin'],use:'T2DM patient pool; GLP-1/SGLT2/DPP-4 market sizing'},
+  {sys:'ICD',code:'E11.65', name:'T2DM with hyperglycemia (poor control)',          desc:'E11.65 signals uncontrolled T2DM. Triggers intensification consideration — insulin, GLP-1 add-on. Used in treatment escalation analytics.',tags:['T2DM','hyperglycemia','uncontrolled diabetes','treatment escalation'],use:'Uncontrolled T2DM analytics; escalation to GLP-1/insulin'},
+  {sys:'ICD',code:'E11.22', name:'T2DM with diabetic CKD',                          desc:'Combination code: T2DM + CKD. Assumed causal relationship. SGLT2i (dapagliflozin DAPA-CKD, empagliflozin EMPA-KIDNEY) approved for CKD regardless of diabetes status.',tags:['T2DM','CKD','diabetic CKD','SGLT2','finerenone'],use:'Cardiorenal diabetes analytics; SGLT2i/finerenone overlap'},
+  {sys:'ICD',code:'E10.9',  name:'Type 1 diabetes mellitus without complications',  desc:'T1DM catch-all. Insulin-dependent. E10 = Type 1; E11 = Type 2; E13 = other. SGLT2i (dapagliflozin — T1DM with high risk in EU), teplizumab (Tzield) for T1DM delay analytics.',tags:['T1DM','type 1 diabetes','insulin','teplizumab'],use:'T1DM patient identification; teplizumab at-risk analytics'},
+  {sys:'LOINC',code:'4548-4',name:'Hemoglobin A1c/Hemoglobin.total in Blood',      desc:'HbA1c — primary T2DM glycemic control marker. ADA target <7.0%; individualized 7–8% for elderly. Cornerstone of T2DM treatment response analytics.',tags:['HbA1c','A1c','diabetes','glycemic','LOINC','biomarker'],use:'T2DM glycemic control analytics; treatment response tracking'},
+  {sys:'LOINC',code:'2344-0',name:'Glucose [Mass/vol] in Serum or Plasma (fasting)',desc:'Fasting plasma glucose (FPG) LOINC. Diagnosis threshold ≥126 mg/dL. Monitoring alongside HbA1c. Used in T2DM new diagnosis identification in EHR lab data.',tags:['glucose','FPG','fasting','diabetes','LOINC','diagnosis'],use:'T2DM diagnosis via EHR lab data; glucose monitoring analytics'},
+  {sys:'ATC',code:'A10BH01',name:'Sitagliptin — DPP-4 inhibitor (ATC)',            desc:'A10BH=DPP-4 inhibitors. Sitagliptin=A10BH01. DDD=0.1 g oral. MIDAS global DPP-4 demand analytics. Class declining as GLP-1/SGLT2 grow.',tags:['sitagliptin','DPP-4','diabetes','ATC','MIDAS'],use:'DPP-4 global demand via MIDAS; class share decline analytics'},
+  {sys:'ATC',code:'A10BK01',name:'Dapagliflozin — SGLT2 inhibitor (ATC)',          desc:'A10BK=SGLT2 inhibitors. Dapagliflozin=A10BK01; Empagliflozin=A10BK03; Canagliflozin=A10BK02. DDD=10 mg oral. Fastest growing class in diabetes.',tags:['dapagliflozin','SGLT2','diabetes','ATC','MIDAS'],use:'SGLT2i global demand; cardiorenal protection analytics'},
+  {sys:'ATC',code:'A10BJ01',name:'Exenatide — GLP-1 receptor agonist (ATC)',       desc:'A10BJ=GLP-1 receptor agonists. Exenatide=A10BJ01; Liraglutide=A10BJ02; Semaglutide=A10BJ06; Tirzepatide=A10BJ07 (GIP/GLP-1). DDD varies by formulation. Fastest-growing class globally.',tags:['GLP-1','exenatide','semaglutide','tirzepatide','ATC'],use:'GLP-1 class global demand via MIDAS; dual agonist (GIP/GLP-1) analytics'},
+  {sys:'DRG',code:'638',     name:'Diabetes w MCC',                                 desc:'MS-DRG for diabetes-related hospitalizations. DRG 639 = w CC; 640 = without. Diabetic ketoacidosis (DKA), hyperosmolar state, severe hypoglycemia drive hospitalizations.',tags:['diabetes','DRG','DKA','hospitalization','HCRU'],use:'Diabetes hospitalization HCRU; DKA analytics'},
+]},
+{ ta:'metabolism', ind:'Obesity & Weight Management', alias:'GLP-1 · GIP/GLP-1 · semaglutide · tirzepatide · BMI', codes:[
+  {sys:'ICD',code:'E66.01', name:'Morbid (severe) obesity due to excess calories',  desc:'Morbid obesity (BMI ≥40, or ≥35 + obesity-related comorbidity). Primary indication for GLP-1 RA (semaglutide 2.4 mg/Wegovy), GIP/GLP-1 (tirzepatide/Zepbound), bariatric surgery analytics.',tags:['obesity','morbid obesity','semaglutide','Wegovy','tirzepatide','Zepbound'],use:'Morbid obesity population; anti-obesity medication analytics'},
+  {sys:'ICD',code:'E66.9',  name:'Obesity, unspecified',                            desc:'Obesity (BMI ≥30, unspecified). Broad obesity coding — may require BMI documentation for specificity. E66.01 for severe; E66.09 for other. Critical for GLP-1 anti-obesity market.',tags:['obesity','BMI','weight management','GLP-1'],use:'Obesity market sizing; GLP-1 weight management analytics'},
+  {sys:'ICD',code:'Z68.41', name:'BMI 40.0–44.9, adult',                            desc:'BMI Z-codes (Z68.xx) as additional codes to document obesity severity class. Z68.41–44.9 = Class III obesity. Required for bariatric surgery coverage criteria.',tags:['BMI','obesity','class III','bariatric'],use:'BMI documentation analytics; bariatric surgery eligibility'},
+  {sys:'LOINC',code:'39156-5',name:'BMI [Ratio]',                                  desc:'Body mass index LOINC. BMI = weight(kg)/height(m)². ≥30 = obese; ≥35 = Class II; ≥40 = Class III. Tracked in EHR vital signs. Critical for obesity population analytics.',tags:['BMI','obesity','weight','LOINC','vital sign'],use:'BMI-based obesity cohort in EHR data; GLP-1 eligibility analytics'},
+  {sys:'NDC',code:'0169-4700-12',name:'Semaglutide 2.4 mg SC autoinjector (Wegovy)',desc:'Representative Wegovy NDC. Pharmacy benefit injectable for chronic weight management. Blockbuster: ~$1,300/month WAC. SC autoinjector weekly. Tracking via specialty pharmacy NPA.',tags:['semaglutide','Wegovy','GLP-1','obesity','NDC','specialty pharmacy'],use:'Wegovy demand analytics; pharmacy benefit weight management tracking'},
+  {sys:'ATC',code:'A10BJ06',name:'Semaglutide — GLP-1 RA (ATC)',                  desc:'A10BJ06=Semaglutide. DDD varies: 0.5 mg SC (diabetes) vs. 2.4 mg SC (obesity) vs. 14 mg oral (Rybelsus). ATC covers Ozempic + Wegovy + Rybelsus combined. MIDAS may split by formulation.',tags:['semaglutide','GLP-1','ATC','Wegovy','Ozempic','MIDAS'],use:'Semaglutide global demand via MIDAS; indication attribution challenge'},
+]},
+{ ta:'metabolism', ind:'Type 1 Diabetes / MODY / Rare Metabolic', alias:'T1DM · teplizumab · insulin · MODY', codes:[
+  {sys:'ICD',code:'E10.65', name:'T1DM with hyperglycemia',                         desc:'Uncontrolled T1DM. May trigger insulin intensification, CGM upgrade, islet transplant consideration. Teplizumab (Tzield) delay of T1DM in at-risk relatives.',tags:['T1DM','hyperglycemia','insulin','type 1 diabetes'],use:'T1DM glycemic control analytics; intensification triggers'},
+  {sys:'ICD',code:'E13.9',  name:'Other specified diabetes mellitus (MODY, latent)',desc:'MODY (maturity-onset diabetes of the young), secondary diabetes, latent autoimmune (LADA). Distinct from T1/T2. MODY genetic testing analytics and precision medicine.',tags:['MODY','LADA','other diabetes','rare metabolic'],use:'MODY patient identification; precision medicine analytics'},
+  {sys:'LOINC',code:'56778-8',name:'Insulin antibody [Units/vol] in Serum',        desc:'Insulin antibody test — used in T1DM diagnosis and monitoring. Also relevant for detecting insulin-induced hypoglycemia (insulin antibody syndrome) in treatment analytics.',tags:['T1DM','insulin antibody','LOINC','autoimmune diabetes'],use:'T1DM autoimmune marker analytics; insulin Ab monitoring'},
+]},
+{ ta:'metabolism', ind:'Dyslipidemia & Rare Lipid Disorders', alias:'familial hypercholesterolemia · lomitapide · evinacumab · ANGPTL3', codes:[
+  {sys:'ICD',code:'E78.01', name:'Familial hypercholesterolemia (HeFH / HoFH)',     desc:'Monogenic LDL elevation. HoFH (homozygous FH) — LDL >400 mg/dL, extremely high ASCVD risk. Evinacumab (Evkeeza, ANGPTL3 inhibitor), lomitapide (Juxtapid, MTP inhibitor), LDL apheresis.',tags:['FH','familial hypercholesterolemia','HoFH','evinacumab','lomitapide'],use:'FH/HoFH patient identification; ultra-rare lipid market sizing'},
+  {sys:'ICD',code:'E78.3',  name:'Hyperchylomicronemia (familial hypertriglyceridemia)',desc:'Severe hypertriglyceridemia — pancreatitis risk. Relevant for omega-3 FA (icosapent ethyl/Vascepa), fibrates, and volanesorsen (for FCS/LPL deficiency).',tags:['hypertriglyceridemia','FCS','LPL deficiency','omega-3','volanesorsen'],use:'Severe hypertriglyceridemia analytics; FCS rare disease sizing'},
+  {sys:'HCPCS',code:'J0218',name:'Evinacumab-dgnb (Evkeeza) 1 mg',                 desc:'ANGPTL3 inhibitor for HoFH. IV monthly infusion. J0218. Rare disease — estimated <1,000 HoFH patients in US eligible.',tags:['evinacumab','Evkeeza','HoFH','ANGPTL3','rare disease'],use:'Evinacumab utilization; HoFH ultra-rare market analytics'},
+]},
+{ ta:'metabolism', ind:'Non-Alcoholic Steatohepatitis (MASH/NASH)', alias:'MASH · fibrosis · resmetirom · lanifibranor', codes:[
+  {sys:'ICD',code:'K75.81', name:'Nonalcoholic steatohepatitis (NASH / MASH)',      desc:'MASH/NASH ICD-10 code. Resmetirom (Rezdiffra) first FDA-approved therapy (2024) for MASH with moderate-to-advanced liver fibrosis (F2-F3). Rapidly evolving class.',tags:['MASH','NASH','liver fibrosis','resmetirom','Rezdiffra'],use:'MASH patient identification; resmetirom market analytics'},
+  {sys:'ICD',code:'K76.0',  name:'Fatty liver, not elsewhere classified (NAFLD)',   desc:'NAFLD — spectrum from steatosis to NASH. K76.0 often used before NASH confirmation. Disease renamed MASLD/MASH in 2023. Large at-risk population (40M+ US adults).',tags:['NAFLD','MASLD','fatty liver','metabolic','steatohepatitis'],use:'NAFLD population sizing; MASH pipeline market opportunity'},
+  {sys:'LOINC',code:'1742-6',name:'Alanine aminotransferase [Enzymatic activity/volume] in Serum',desc:'ALT — primary liver function marker. Elevated ALT required for MASH suspicion. ALT monitoring used in MASH treatment response analytics.',tags:['ALT','liver','transaminase','MASH','NASH','LOINC'],use:'MASH diagnosis analytics via EHR lab data; treatment response'},
+]},
+{ ta:'metabolism', ind:'Metabolic-Cardiovascular: Heart Disease + DM + CKD', alias:'CaReNa · cardiorenal metabolic · GLP-1 · SGLT2', codes:[
+  {sys:'ICD',code:'I50.9',  name:'Heart failure + E11.22 (DM+CKD) — cardiorenal metabolic syndrome', desc:'Cardiorenal metabolic (CaReNa) syndome — HF + T2DM + CKD trinity. SGLT2i (dapagliflozin, empagliflozin) and GLP-1 (semaglutide, liraglutide) showed CV benefit across all three. Requires combination coding.',tags:['cardiorenal','heart failure','T2DM','CKD','SGLT2','GLP-1'],use:'CaReNa population analytics; SGLT2i/GLP-1 shared indication'},
+  {sys:'ATC',code:'A10BK03',name:'Empagliflozin — SGLT2i (ATC)',                   desc:'A10BK03. DDD=10 mg oral. Approved T2DM, HFrEF (EMPEROR-Reduced), HFpEF (EMPEROR-Preserved), CKD (EMPA-KIDNEY). Single drug with 4+ major indications. Multi-indication ATC analytics challenge.',tags:['empagliflozin','SGLT2','diabetes','heart failure','CKD','ATC'],use:'Empagliflozin global demand via MIDAS; multi-indication attribution'},
+]},
+
+/* ───── ONCOLOGY ───── */
+{ ta:'oncology', ind:'Non-Small Cell Lung Cancer (NSCLC)', alias:'EGFR · ALK · PD-L1 · IO · KRAS', codes:[
+  {sys:'ICD',code:'C34.90', name:'Malignant neoplasm of bronchus and lung, unspecified',desc:'NSCLC catch-all — most frequently used lung cancer code (~60% of lung cancer claims). Required for all NSCLC analytics: IO (pembrolizumab, nivolumab, atezolizumab), EGFR TKI, ALK inhibitor.',tags:['NSCLC','lung cancer','oncology'],use:'NSCLC primary cohort; IO market sizing'},
+  {sys:'ICD',code:'C34.10', name:'Malignant neoplasm of upper lobe bronchus/lung, unspecified',desc:'NSCLC upper lobe, laterality unspecified. Upper lobe is most common NSCLC site (~40% of NSCLC). EGFR mutations more common in upper lobe adenocarcinoma.',tags:['NSCLC','lung cancer','upper lobe'],use:'Lobe-specific NSCLC analytics; EGFR prevalence estimation'},
+  {sys:'ICD',code:'C78.00', name:'Secondary malignant neoplasm of unspecified lung',  desc:'Metastatic disease in lung — from any primary site. Distinguish from primary NSCLC using primary site code + C78.00 for mets.',tags:['metastatic','lung metastasis','secondary malignancy'],use:'Metastatic NSCLC staging analytics; secondary vs. primary coding'},
+  {sys:'HCPCS',code:'J9271',name:'Pembrolizumab (Keytruda) 1 mg',                   desc:'PD-1 inhibitor. 200 mg dose = 200 units J9271. Q3w or Q6w dosing. Most widely used oncology drug globally. Approved across 18+ indications. Indication attribution via ICD-10 pairing critical.',tags:['pembrolizumab','Keytruda','PD-1','IO','NSCLC','immunotherapy'],use:'Pembrolizumab cross-indication analytics; NSCLC vs. other tumors'},
+  {sys:'HCPCS',code:'J9035',name:'Bevacizumab (Avastin/biosimilars) 10 mg',          desc:'VEGF inhibitor for NSCLC, CRC, GBM, mCRC, cervical, ovarian. J9035. Biosimilars: Mvasi (J9035 shared), Zirabev. Bevacizumab biosimilar penetration analytics.',tags:['bevacizumab','Avastin','VEGF','NSCLC','biosimilar'],use:'Bevacizumab biosimilar vs. originator analytics'},
+  {sys:'HCPCS',code:'J9180',name:'Erlotinib (Tarceva) per treatment',               desc:'EGFR TKI (1st gen). Predominantly pharmacy benefit oral. Medical benefit when clinic-dispensed. Superseded by osimertinib (Tagrisso) as 1L EGFR+ standard. Tracks historical EGFR TKI demand.',tags:['erlotinib','EGFR TKI','NSCLC','targeted therapy'],use:'EGFR TKI class analytics; historical to osimertinib shift'},
+  {sys:'LOINC',code:'85319-2',name:'EGFR gene mutation analysis in Tissue by NGS',  desc:'EGFR mutation testing by NGS — companion diagnostic for osimertinib eligibility. Activating mutations: exon 19 del, L858R. T790M = acquired resistance. LOINC links to molecular lab analytics.',tags:['NSCLC','EGFR','NGS','biomarker','CDx','LOINC'],use:'EGFR+ patient identification via lab; CDx analytics'},
+  {sys:'LOINC',code:'81704-9',name:'PD-L1 [Presence] in Tissue by IHC',            desc:'PD-L1 IHC test. TPS (Tumor Proportion Score) for pembrolizumab 1L monotherapy: TPS ≥50%. CPS for other combinations. Multiple companion diagnostics (22C3, SP142, 28-8 assays).',tags:['PD-L1','IO','pembrolizumab','CDx','NSCLC','LOINC'],use:'PD-L1 testing rate analytics; IO eligibility population sizing'},
+  {sys:'ATC',code:'L01ED01',name:'Osimertinib — 3rd gen EGFR TKI (ATC)',           desc:'L01ED=EGFR inhibitors. Osimertinib=L01ED01. DDD=80 mg oral. Standard 1L EGFR+ NSCLC and adjuvant LAURA trial setting. Fastest-growing NSCLC targeted therapy globally.',tags:['osimertinib','Tagrisso','EGFR','ATC','NSCLC'],use:'Osimertinib global demand via MIDAS; EGFR+ market analytics'},
+]},
+{ ta:'oncology', ind:'Breast Cancer', alias:'HR+ · HER2+ · TNBC · CDK4/6 · ADC', codes:[
+  {sys:'ICD',code:'C50.912',name:'Malignant neoplasm of unspecified site of right female breast',desc:'Common breast cancer code when quadrant not specified. C50.411 = upper outer quadrant left (most common specific code). Use most specific code available including laterality and quadrant.',tags:['breast cancer','female breast','oncology'],use:'Breast cancer patient cohort; biologic market sizing'},
+  {sys:'ICD',code:'C50.919',name:'Malignant neoplasm of unspecified site of unspecified female breast',desc:'Breast cancer laterality unspecified. Common in older data. 2025 ICD-10-CM added new codes for inflammatory breast cancer (IBC) subtype.',tags:['breast cancer','oncology'],use:'Broad breast cancer population analytics'},
+  {sys:'ICD',code:'Z17.10', name:'HER2-negative status (new 2025 code)',              desc:'HER2 receptor status coding — Z17 series. Z17.10 = HER2-neg; Z17.11 = HER2-pos. Z17.421 = triple-negative breast cancer (TNBC). New 2025 ICD-10-CM codes for hormone receptor status.',tags:['breast cancer','HER2','receptor status','TNBC','ICD-10 2025'],use:'Breast cancer receptor status coding; HER2/TNBC analytics'},
+  {sys:'HCPCS',code:'J9354',name:'Trastuzumab (Herceptin/biosimilars) 10 mg',       desc:'HER2-targeted mAb. J9354. Multiple biosimilars approved (Ogivri, Herzuma, Ontruzant, Trazimera, Kanjinti). Biosimilar substitution analytics critical for market share.',tags:['trastuzumab','Herceptin','HER2','breast cancer','biosimilar'],use:'Trastuzumab biosimilar conversion analytics; HER2+ market'},
+  {sys:'HCPCS',code:'J9152',name:'Pertuzumab (Perjeta) 1 mg',                       desc:'HER2-dimerization inhibitor; used with trastuzumab (PHESGO or dual). J9152. First-line mBC and adjuvant (APHINITY). Pertuzumab + trastuzumab + docetaxel (PHD) standard.',tags:['pertuzumab','Perjeta','HER2','breast cancer','dual blockade'],use:'PHD regimen analytics; HER2+ 1L breast cancer market'},
+  {sys:'HCPCS',code:'J9262',name:'Sacituzumab govitecan (Trodelvy) 1 mg',           desc:'TROP-2 ADC for TNBC and HR+/HER2-low mBC. J9262. Growing rapidly in TNBC where immunotherapy has limited role. Expanding indications.',tags:['sacituzumab govitecan','Trodelvy','TROP-2','ADC','TNBC','breast cancer'],use:'Sacituzumab utilization; TNBC ADC market analytics'},
+  {sys:'LOINC',code:'85318-4',name:'ERBB2 (HER2) gene amplification [Presence] in Tissue by FISH',desc:'HER2 FISH amplification test LOINC. Confirms HER2 positivity alongside IHC. Required for trastuzumab/pertuzumab eligibility. CDx analytics for HER2-directed therapies.',tags:['HER2','FISH','breast cancer','CDx','LOINC','biomarker'],use:'HER2 amplification testing analytics; CDx utilization'},
+  {sys:'ATC',code:'L01EC01',name:'Palbociclib — CDK4/6 inhibitor (ATC)',            desc:'L01EC=CDK4/6 inhibitors. Palbociclib=L01EC01; Ribociclib=L01EC02; Abemaciclib=L01EC03. DDD=125 mg oral. All approved HR+/HER2- mBC. CDK4/6i class analytics.',tags:['palbociclib','CDK4/6','breast cancer','HR+','ATC'],use:'CDK4/6i class global demand; MIDAS HR+ breast cancer analytics'},
+]},
+{ ta:'oncology', ind:'Colorectal Cancer (CRC)', alias:'mCRC · RAS · BRAF · MSI-H · cetuximab · bevacizumab', codes:[
+  {sys:'ICD',code:'C18.9',  name:'Malignant neoplasm of colon, unspecified',         desc:'CRC colon unspecified. C18.0-8 specify site. C19 = rectosigmoid junction; C20 = rectum. Bevacizumab, cetuximab, panitumumab, pembrolizumab (MSI-H/dMMR) analytics.',tags:['colorectal cancer','CRC','colon','oncology'],use:'CRC patient cohort; anti-VEGF/anti-EGFR market sizing'},
+  {sys:'ICD',code:'C78.5',  name:'Secondary malignant neoplasm of large intestine and rectum',desc:'Colorectal metastases. Important for metastatic CRC coding. Hepatic metastases (C78.7) from CRC extremely common — code with primary C18.x.',tags:['mCRC','metastatic','colorectal','secondary malignancy'],use:'Metastatic CRC staging; HCRU analytics'},
+  {sys:'HCPCS',code:'J9060',name:'Cetuximab (Erbitux) 10 mg',                       desc:'Anti-EGFR mAb for RAS wild-type mCRC and head/neck cancer. J9060. RAS testing required — KRAS/NRAS WT only eligible. Panitumumab (J9303) is fully human alternative.',tags:['cetuximab','Erbitux','EGFR','mCRC','RAS WT','oncology'],use:'Cetuximab mCRC utilization; RAS WT population analytics'},
+  {sys:'LOINC',code:'51963-7',name:'KRAS gene mutation analysis in Tissue',         desc:'KRAS mutation testing — predictive biomarker for anti-EGFR therapy resistance. KRAS/NRAS wild-type required for cetuximab/panitumumab eligibility in mCRC.',tags:['KRAS','CRC','biomarker','anti-EGFR','CDx','LOINC'],use:'KRAS testing analytics; anti-EGFR eligible population sizing'},
+  {sys:'LOINC',code:'81695-9',name:'MMR (mismatch repair) protein deficiency by IHC in Tissue',desc:'dMMR (deficient mismatch repair) / MSI-H (microsatellite instability-high) testing. Pembrolizumab approved for MSI-H/dMMR tumors pan-tumor. Biomarker for IO eligibility.',tags:['MSI-H','dMMR','mismatch repair','pembrolizumab','CRC','LOINC'],use:'MSI-H/dMMR population across tumor types; pan-tumor IO analytics'},
+]},
+{ ta:'oncology', ind:'Hematologic Malignancies', alias:'CLL · NHL · AML · myeloma · CAR-T · bispecific', codes:[
+  {sys:'ICD',code:'C91.10', name:'Chronic lymphocytic leukemia (CLL), not in remission',desc:'CLL primary code. BTK inhibitors (ibrutinib, acalabrutinib, zanubrutinib), venetoclax, obinutuzumab analytics. BCL-2 + BTK combinations emerging standard.',tags:['CLL','leukemia','B-cell','BTK','venetoclax','oncology'],use:'CLL patient cohort; BTK inhibitor market analytics'},
+  {sys:'ICD',code:'C83.30', name:'Diffuse large B-cell lymphoma (DLBCL), unspecified',desc:'DLBCL — most common aggressive lymphoma. Rituximab-CHOP SoC. CAR-T (axicabtagene ciloleucel, lisocabtagene maraleucel, tisagenlecleucel) in 3L+. Bispecific Abs (epcoritamab, glofitamab) emerging 2L/3L.',tags:['DLBCL','NHL','lymphoma','CAR-T','CD20','oncology'],use:'DLBCL patient sizing; CAR-T/bispecific market analytics'},
+  {sys:'ICD',code:'C90.00', name:'Multiple myeloma, not in remission',               desc:'MM primary code. Daratumumab (dara) combinations: DRd, DVd, D-VMP. Newer: elotuzumab, isatuximab, teclistamab (bispecific), ciltacabtagene autoleucel (CAR-T). Complex multi-line treatment landscape.',tags:['myeloma','multiple myeloma','MM','daratumumab','CAR-T','oncology'],use:'MM patient pool; dara/bispecific/CAR-T market analytics'},
+  {sys:'ICD',code:'C95.90', name:'Acute leukemia, unspecified, not in remission',    desc:'AML/ALL unspecified acute leukemia. C91.0 = ALL; C92.0 = AML. Gilteritinib, enasidenib, ivosidenib (FLT3/IDH-targeted), venetoclax + HMA (AML frontline), CAR-T (B-ALL) analytics.',tags:['leukemia','AML','ALL','acute leukemia','FLT3','IDH'],use:'Acute leukemia analytics; molecularly targeted therapy market'},
+  {sys:'HCPCS',code:'J9312',name:'Rituximab (Rituxan/biosimilars) 100 mg',          desc:'Anti-CD20 mAb. J9312. First biologic oncology blockbuster. Biosimilars: Ruxience (J9312 shared), Truxima, Riabni. Biosimilar substitution tracking critical. Used in NHL, CLL, RA, ANCA vasculitis.',tags:['rituximab','CD20','NHL','biosimilar','hematology','oncology'],use:'Rituximab biosimilar conversion analytics; cross-indication split'},
+  {sys:'HCPCS',code:'J9042',name:'Bortezomib (Velcade) 0.1 mg',                    desc:'Proteasome inhibitor for MM and MCL. J9042. Predominantly SC dosing (2.5 mg/m²). Cornerstone of VRd (bortezomib + lenalidomide + dexamethasone) — frontline MM SoC.',tags:['bortezomib','Velcade','proteasome','myeloma','VRd','oncology'],use:'Bortezomib analytics; VRd regimen tracking in MM'},
+  {sys:'HCPCS',code:'Q2042',name:'Axicabtagene ciloleucel (Yescarta) per treatment',desc:'CAR-T cell therapy for DLBCL (2L+) and FL (2L+). Q2042. Treatment is a one-time infusion but manufacture tracking is complex. Very high cost (~$425,000/treatment).',tags:['CAR-T','axicabtagene','Yescarta','DLBCL','NHL','cell therapy'],use:'CAR-T utilization analytics; high-cost cell therapy market'},
+  {sys:'HCPCS',code:'J9228',name:'Daratumumab (Darzalex) 1 mg',                    desc:'Anti-CD38 mAb for MM. J9228. Multiple combinations approved: DRd, DVd, D-VMP, DKd. Also approved Daratumumab SC (Darzalex Faspro) via pharmacy benefit.',tags:['daratumumab','Darzalex','CD38','myeloma','oncology'],use:'Daratumumab combination analytics; IV vs. SC split'},
+  {sys:'LOINC',code:'59181-8',name:'BCR/ABL1 gene fusion [Presence] in Blood by FISH',desc:'BCR-ABL fusion testing — Philadelphia chromosome. Required for CML and Ph+ ALL diagnosis and tyrosine kinase inhibitor (imatinib, dasatinib, ponatinib) eligibility.',tags:['BCR-ABL','CML','leukemia','TKI','FISH','LOINC','biomarker'],use:'Ph+ leukemia patient identification; TKI analytics'},
+  {sys:'ATC',code:'L01XC22',name:'Daratumumab — anti-CD38 mAb (ATC)',             desc:'L01XC=Monoclonal Abs for neoplasms. L01XC22=Daratumumab. DDD=16 mg/kg IV. Global demand analytics via MIDAS — one of highest-value hematology products.',tags:['daratumumab','CD38','myeloma','ATC','MIDAS'],use:'Daratumumab global demand; MIDAS MM market analytics'},
+]},
+{ ta:'oncology', ind:'Prostate Cancer', alias:'mCRPC · ARPI · PARP inhibitor · PSMA · docetaxel', codes:[
+  {sys:'ICD',code:'C61',    name:'Malignant neoplasm of prostate',                  desc:'Primary prostate cancer code. All stages from early (PSA-detected) to metastatic CRPC. ARPI (enzalutamide, apalutamide, darolutamide), PARP inhibitors (olaparib, rucaparib), Lutetium PSMA-617 analytics.',tags:['prostate cancer','PCa','mCRPC','ARPI','PARP','PSMA'],use:'Prostate cancer patient cohort; ARPI/PARP market analytics'},
+  {sys:'ICD',code:'C61.1',  name:'Metastatic prostate cancer (use C61 + Z19.2 for hormone-sensitive)',desc:'Hormone-sensitive mPCa vs. CRPC distinction requires additional documentation. ARPI (abiraterone, enzalutamide) analytics in mHSPC.',tags:['mPCa','metastatic prostate','mHSPC','abiraterone','enzalutamide'],use:'mHSPC patient sizing; ARPI market analytics'},
+  {sys:'HCPCS',code:'J9177',name:'Enzalutamide (Xtandi) per treatment',            desc:'Androgen receptor inhibitor. Predominantly pharmacy benefit oral capsule. J9177 for medical benefit. Approved mCRPC and nmCRPC and mHSPC.',tags:['enzalutamide','Xtandi','ARPI','prostate cancer','androgen receptor'],use:'Enzalutamide pharmacy benefit tracking; mCRPC/nmCRPC analytics'},
+  {sys:'HCPCS',code:'A9590',name:'Lutetium Lu 177 vipivotide tetraxetan (Pluvicto) — PSMA-targeted RLT',desc:'PSMA-targeted radioligand therapy. A9590. Q6w IV infusion. ~$42,000/dose. Approved mCRPC post-ARPI + taxane. Complex administration requiring qualified healthcare facility.',tags:['Pluvicto','lutetium 177','PSMA','radioligand','mCRPC'],use:'Pluvicto utilization analytics; PSMA-RLT market sizing'},
+  {sys:'LOINC',code:'2857-1',name:'PSA (Prostate specific antigen) [Mass/vol] in Serum or Plasma',desc:'PSA — primary prostate cancer screening and monitoring biomarker. Threshold: >4 ng/mL triggers biopsy; PSA doubling time used for biochemical recurrence monitoring.',tags:['PSA','prostate cancer','biomarker','LOINC','screening'],use:'PSA-based prostate cancer analytics; biochemical recurrence monitoring'},
+]},
+{ ta:'oncology', ind:'Ovarian & Gynecologic Cancers', alias:'ovarian · endometrial · BRCA · PARP · HER2', codes:[
+  {sys:'ICD',code:'C56.9',  name:'Malignant neoplasm of ovary, unspecified',        desc:'Ovarian cancer — high mortality gynecologic malignancy. PARP inhibitors (olaparib, niraparib, rucaparib) for BRCA-mutated/HRD-positive ovarian. Bevacizumab maintenance.',tags:['ovarian cancer','BRCA','PARP','gynecologic oncology'],use:'Ovarian cancer patient cohort; PARP inhibitor analytics'},
+  {sys:'ICD',code:'C54.1',  name:'Malignant neoplasm of endometrium',               desc:'Endometrial cancer. Pembrolizumab + lenvatinib (pMMR) and dostarlimab (dMMR/MSI-H) standard. Growing HER2+ endometrial (trastuzumab + chemotherapy).',tags:['endometrial cancer','uterine','pembrolizumab','dostarlimab','gynecologic'],use:'Endometrial cancer sizing; IO + targeted analytics'},
+  {sys:'LOINC',code:'53755-5',name:'BRCA1 and BRCA2 gene mutation analysis',        desc:'BRCA1/2 germline testing LOINC. Required for PARP inhibitor eligibility in ovarian cancer. Also for breast cancer risk assessment. Both somatic and germline variants relevant.',tags:['BRCA','ovarian','breast','PARP','biomarker','LOINC','genetic testing'],use:'BRCA testing analytics; PARP inhibitor eligible population sizing'},
+  {sys:'HCPCS',code:'J9265',name:'Olaparib (Lynparza) per capsule or tablet',       desc:'PARP inhibitor for BRCA1/2-mutated ovarian, breast, prostate, pancreatic cancer. Predominantly pharmacy benefit oral. One of broadest PARP approvals across multiple tumor types.',tags:['olaparib','Lynparza','PARP','BRCA','ovarian','breast cancer'],use:'Olaparib pharmacy benefit analytics; multi-tumor PARP demand'},
+]},
+{ ta:'oncology', ind:'Melanoma & Skin Cancers', alias:'melanoma · BRAF · MEK · PD-1 · uveal', codes:[
+  {sys:'ICD',code:'C43.9',  name:'Malignant melanoma, unspecified site',            desc:'Melanoma — highly immunogenic. PD-1 (nivolumab, pembrolizumab), CTLA-4 (ipilimumab), BRAF+MEK (dabrafenib + trametinib, vemurafenib + cobimetinib) analytics.',tags:['melanoma','skin cancer','PD-1','BRAF','MEK','oncology'],use:'Melanoma patient cohort; IO/BRAF-MEK market analytics'},
+  {sys:'HCPCS',code:'J9299',name:'Nivolumab (Opdivo) 1 mg',                        desc:'PD-1 inhibitor. J9299. Multiple tumor types: melanoma, NSCLC, RCC, HCC, GC, CRC (MSI-H), esophageal, HNSCC, MPM, cervical, urothelial. Multi-indication demand attribution critical.',tags:['nivolumab','Opdivo','PD-1','IO','melanoma','oncology'],use:'Nivolumab cross-tumor analytics; IO class share'},
+  {sys:'LOINC',code:'55459-2',name:'BRAF gene mutation V600 analysis in Tissue',   desc:'BRAF V600E/V600K mutation testing — required for BRAF-targeted therapy (dabrafenib + trametinib) eligibility in melanoma and other BRAF-positive tumors.',tags:['BRAF','V600E','melanoma','CDx','LOINC','biomarker'],use:'BRAF+ melanoma patient identification; BRAF-targeted therapy analytics'},
+]},
+{ ta:'oncology', ind:'Renal Cell Carcinoma (RCC) & Urothelial', alias:'RCC · mRCC · IO+TKI · urothelial · enfortumab', codes:[
+  {sys:'ICD',code:'C64.9',  name:'Malignant neoplasm of kidney except renal pelvis, unspecified',desc:'RCC primary code. Clear cell RCC most common (75%). IO+TKI combos: nivolumab+cabozantinib, pembrolizumab+axitinib/lenvatinib, avelumab+axitinib. Belzutifan (HIF-2α inhibitor) analytics.',tags:['RCC','renal cell carcinoma','kidney cancer','IO+TKI','oncology'],use:'mRCC patient cohort; IO+TKI combination market sizing'},
+  {sys:'ICD',code:'C67.9',  name:'Malignant neoplasm of bladder, unspecified',      desc:'Urothelial/bladder cancer. Enfortumab vedotin (EV) + pembrolizumab 1L standard (EV-302). Sacituzumab, atezolizumab analytics. Perioperative pembrolizumab (KEYNOTE-866/905).',tags:['bladder cancer','urothelial','enfortumab','EV','pembrolizumab'],use:'Urothelial cancer analytics; EV+pembro 1L standard of care'},
+  {sys:'HCPCS',code:'J9173',name:'Enfortumab vedotin (Padcev) 0.25 mg',            desc:'Nectin-4 directed ADC. J9173. 1L urothelial in combo with pembrolizumab (EV-302). Also 2L+ monotherapy. Rapidly growing ADC class in urothelial.',tags:['enfortumab vedotin','Padcev','ADC','Nectin-4','urothelial','bladder'],use:'Enfortumab utilization; ADC class urothelial analytics'},
+]},
+{ ta:'oncology', ind:'Procedure Codes for Oncology', alias:'chemotherapy administration · G-CSF · antiemetics · supportive', codes:[
+  {sys:'CPT',code:'96413',  name:'Chemotherapy IV infusion, first hour',             desc:'Standard IV chemo initiation CPT. 96415 = each additional hour. Tracks chemo administration in clinic and infusion center. Required to establish chemo encounter for HCRU analytics.',tags:['chemotherapy','infusion','oncology','CPT','IV'],use:'Chemo administration event identification; HCRU analytics'},
+  {sys:'CPT',code:'96401',  name:'Chemotherapy injection, subcutaneous or intramuscular',desc:'SC/IM chemo administration CPT. Used for bortezomib SC, daratumumab SC, and other SC oncology biologics.',tags:['chemotherapy','SC','IM','injection','oncology','CPT'],use:'SC chemo administration tracking; site-of-care analytics'},
+  {sys:'ICD',code:'Z51.11', name:'Encounter for antineoplastic chemotherapy',        desc:'Administrative ICD code for chemotherapy visit. Used as principal diagnosis when the sole reason for encounter is to receive chemo. Critical for identifying chemo visits in claims.',tags:['chemotherapy','oncology visit','encounter','Z51.11'],use:'Chemotherapy encounter identification; treatment visit analytics'},
+  {sys:'HCPCS',code:'J2505',name:'Pegfilgrastim (Neulasta) 6 mg',                  desc:'PEG-G-CSF for neutropenia prophylaxis after chemotherapy. J2505. Multiple biosimilars (Neulasta Onpro on-body injector via J2506). Critical supportive care analytics.',tags:['pegfilgrastim','Neulasta','G-CSF','neutropenia','supportive care'],use:'G-CSF utilization analytics; biosimilar pegfilgrastim conversion'},
+  {sys:'DRG',code:'853',    name:'Infectious & Parasitic Diseases w OR Procedure w MCC',desc:'DRG for febrile neutropenia + procedure hospitalizations — major oncology HCRU driver. DRG 854 (w CC); 855 (w/o). Febrile neutropenia hospitalization analytics.',tags:['febrile neutropenia','DRG','oncology','hospitalization','HCRU'],use:'Febrile neutropenia hospitalization cost; G-CSF value analytics'},
+  {sys:'NPI',code:'207RH0003X',name:'Hematology-Oncology Physician Taxonomy Code',   desc:'NUCC taxonomy for hematology-oncology. Used to filter oncologists in NPI registry for prescriber targeting and KOL identification. Paired with NPI number in NPA/Xponent.',tags:['oncology','hematology','NPI','taxonomy','HCP targeting'],use:'Hematology-oncology prescriber segmentation; KOL identification'},
+]},
+];
+
+/* ═══════════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════════ */
+let activeSys = new Set();
+let activeTAs = new Set();
+
+/* ═══════════════════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════════════════ */
+function init(){
+  // TA tab strip in hero
+  const strip = document.getElementById('taTabs');
+  strip.innerHTML = Object.entries(TA_CFG).map(([k,v])=>
+    `<span class="ta-tab" style="color:${v.c};border-color:${v.c};background:rgba(${hexToRgb(v.c)},0.08)"
+      onclick="quickTA('${k}')">${v.emoji} ${v.label}</span>`).join('');
+
+  // System filter
+  const sf = document.getElementById('sysFilter');
+  sf.innerHTML = Object.entries(SYS).map(([k,v])=>
+    `<button class="pill" data-sys="${k}" onclick="toggleSys('${k}')">${v.label}</button>`).join('');
+
+  // TA filter
+  const tf = document.getElementById('taFilter');
+  tf.innerHTML = Object.entries(TA_CFG).map(([k,v])=>
+    `<button class="pill" data-ta="${k}" onclick="toggleTA('${k}')">${v.emoji} ${v.label}</button>`).join('');
+
+  buildStats();
+  render();
+}
+
+function hexToRgb(hex){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+function quickTA(ta){
+  activeTAs = new Set([ta]);
+  document.querySelectorAll('[data-ta]').forEach(b=>{
+    const on=b.dataset.ta===ta;
+    b.classList.toggle('active',on);
+    if(on){const c=TA_CFG[ta].c;b.style.background=`rgba(${hexToRgb(c)},0.1)`;b.style.borderColor=c;b.style.color=c;}
+    else{b.style.background='';b.style.borderColor='';b.style.color='';}
+  });
+  window.scrollTo({top:document.getElementById('out').offsetTop-70,behavior:'smooth'});
+  render();
+}
+
+function toggleSys(k){
+  if(activeSys.has(k))activeSys.delete(k); else activeSys.add(k);
+  document.querySelectorAll('[data-sys]').forEach(b=>{
+    if(b.dataset.sys!==k)return;
+    const on=activeSys.has(k);
+    b.classList.toggle('active',on);
+    const s=SYS[k];
+    b.style.background=on?s.bg:'';b.style.borderColor=on?s.c:'';b.style.color=on?s.c:'';
+  });
+  render();
+}
+
+function toggleTA(k){
+  if(activeTAs.has(k))activeTAs.delete(k); else activeTAs.add(k);
+  document.querySelectorAll('[data-ta]').forEach(b=>{
+    if(b.dataset.ta!==k)return;
+    const on=activeTAs.has(k);
+    b.classList.toggle('active',on);
+    const c=TA_CFG[k].c;
+    b.style.background=on?`rgba(${hexToRgb(c)},0.1)`:'';b.style.borderColor=on?c:'';b.style.color=on?c:'';
+  });
+  render();
+}
+
+function buildStats(){
+  const sr=document.getElementById('statsRow');
+  const total=DATA.reduce((a,g)=>a+g.codes.length,0);
+  const indications=DATA.length;
+  const taCount=Object.keys(TA_CFG).length;
+  const sysCount=Object.keys(SYS).length;
+  sr.innerHTML=`
+    <div class="stat"><span class="stat-n" style="color:var(--gold)">${total}</span><span class="stat-l">Total Codes</span></div>
+    <div class="stat"><span class="stat-n" style="color:var(--gold)">${indications}</span><span class="stat-l">Indications</span></div>
+    <div class="stat"><span class="stat-n" style="color:var(--gold)">${taCount}</span><span class="stat-l">Therapeutic Areas</span></div>
+    <div class="stat"><span class="stat-n" style="color:var(--gold)">${sysCount}</span><span class="stat-l">Coding Systems</span></div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════════════════ */
+function render(){
+  const q=document.getElementById('srch').value.toLowerCase().trim();
+  let html='';
+  let totalCodes=0,totalInds=0;
+  const taOrder=Object.keys(TA_CFG);
+
+  // Group matching data by TA
+  const byTA={};
+  DATA.forEach(grp=>{
+    if(activeTAs.size>0 && !activeTAs.has(grp.ta)) return;
+    const matchCodes=grp.codes.filter(c=>{
+      if(activeSys.size>0 && !activeSys.has(c.sys)) return false;
+      if(!q) return true;
+      return (c.code+c.name+c.desc+(c.tags||[]).join(' ')+c.use+grp.ind+grp.alias).toLowerCase().includes(q);
+    });
+    if(!matchCodes.length) return;
+    if(!byTA[grp.ta]) byTA[grp.ta]=[];
+    byTA[grp.ta].push({...grp, codes:matchCodes});
+  });
+
+  taOrder.forEach(ta=>{
+    if(!byTA[ta]?.length) return;
+    const taCfg=TA_CFG[ta];
+    const taCodes=byTA[ta].reduce((a,g)=>a+g.codes.length,0);
+    totalCodes+=taCodes;
+    totalInds+=byTA[ta].length;
+
+    html+=`<div class="ta-section" id="${ta}">
+      <div class="ta-header">
+        <span class="ta-badge" style="color:${taCfg.c}">${taCfg.emoji} ${taCfg.label}</span>
+        <span style="font-size:12px;color:var(--muted)">${byTA[ta].length} indication${byTA[ta].length!==1?'s':''}</span>
+        <span class="ta-count">${taCodes} codes</span>
+      </div>`;
+
+    byTA[ta].forEach(grp=>{
+      // Group codes by system
+      const bySys={};
+      grp.codes.forEach(c=>{
+        if(!bySys[c.sys])bySys[c.sys]=[];
+        bySys[c.sys].push(c);
+      });
+
+      html+=`<div class="ind-group">
+        <div class="ind-name" style="border-left-color:${taCfg.c}">
+          ${grp.ind}
+          ${grp.alias?`<span class="ind-alias">${grp.alias}</span>`:''}
+          <span style="margin-left:auto;font-size:11px;font-weight:400;color:var(--muted);font-family:'JetBrains Mono',monospace">${grp.codes.length} codes</span>
+        </div>`;
+
+      const sysOrder=['ICD','HCPCS','CPT','LOINC','NDC','RXNORM','ATC','DRG','SNOMED','NPI'];
+      sysOrder.forEach(sys=>{
+        if(!bySys[sys]?.length) return;
+        const s=SYS[sys];
+        html+=`<div class="sys-row">
+          <div class="sys-row-label" style="color:${s.c}">${s.label}</div>
+          <div class="code-grid">
+            ${bySys[sys].map(c=>codeCard(c,s,taCfg.c)).join('')}
+          </div>
+        </div>`;
+      });
+      html+=`</div>`;
+    });
+    html+=`</div><div class="orn">· · ·</div>`;
+  });
+
+  if(!totalCodes){
+    html=`<div class="empty">No codes match your search or filters.<br>Try clearing filters or searching a different term.</div>`;
+  }
+
+  document.getElementById('out').innerHTML=html;
+  document.getElementById('rc').textContent = totalCodes
+    ? `Showing ${totalCodes} codes across ${totalInds} indications`
+    : '';
+}
+
+function codeCard(c, s, taColor){
+  const tags=(c.tags||[]).slice(0,4).map(t=>`<span class="ctag">${t}</span>`).join('');
+  return `
+  <div class="code-card" style="border-color:var(--border);border-left-color:${s.c}">
+    <div class="code-top">
+      <span class="code-val" style="color:${s.c};border-color:${s.c};background:${s.bg}">${c.code}</span>
+      <div class="code-name">${c.name}</div>
+    </div>
+    <div class="code-desc">${c.desc}</div>
+    ${tags?`<div class="code-tags">${tags}</div>`:''}
+    <div class="code-use">↳ ${c.use}</div>
+  </div>`;
+}
+
+init();
+</script>
+</body>
+</html>
