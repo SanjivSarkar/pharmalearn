@@ -41,7 +41,8 @@ window.PL.domains = [
     description: "Patient journey analytics, HCP targeting, SFE, forecasting, MMM, launch analytics, gross-to-net, omnichannel, IC design, market research, and supply chain.",
     chapters: ["2-1","2-2","2-3","2-4","2-5","2-6","2-7","2-8","2-9","2-10","2-11","2-12","2-13"],
     resources: [
-      { title: "Commercial & Brand Strategy", subtitle: "10-Day Crash Course", tag: "Brand", href: "assets/commercial-brand.html" }
+      { title: "Commercial & Brand Strategy", subtitle: "10-Day Crash Course", tag: "Brand", href: "assets/commercial-brand.html" },
+      { title: "MMM MasterClass", subtitle: "Marketing Mix Modeling Deep Dive", tag: "MMM", href: "assets/mmm_learning_app.html" }
     ]
   },
   {

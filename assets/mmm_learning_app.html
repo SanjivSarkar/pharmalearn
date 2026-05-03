@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMM MasterClass — Pharma Analytics Learning System</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5EFDF;
+    --surface: #EEE5CE;
+    --surface2: #E4D8B8;
+    --surface3: #D9CCAA;
+    --border: rgba(15,27,45,0.10);
+    --border2: rgba(15,27,45,0.18);
+    --text: #0F1B2D;
+    --text2: #2A3B52;
+    --text3: #5C6A7A;
+    --accent: #9B7233;
+    --accent2: #B87333;
+    --accent3: rgba(155,114,51,0.12);
+    --teal: #2D5F47;
+    --teal2: rgba(45,95,71,0.10);
+    --rose: #A84B2A;
+    --rose2: rgba(168,75,42,0.10);
+    --purple: #5B4A8A;
+    --purple2: rgba(91,74,138,0.10);
+    --green: #4B6B4A;
+    --green2: rgba(75,107,74,0.10);
+    --shadow: 0 2px 12px rgba(15,27,45,0.08);
+    --shadow2: 0 8px 32px rgba(15,27,45,0.14);
+    --radius: 12px;
+    --radius2: 18px;
+    --transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── SIDEBAR NAV ─── */
+  #sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    width: 240px;
+    height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow-y: auto;
+    transition: var(--transition);
+  }
+
+  #sidebar-brand {
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  #sidebar-brand .logo-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  #sidebar-brand .logo-sub {
+    font-size: 11px;
+    color: var(--text3);
+    margin-top: 2px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text3);
+    padding: 18px 24px 6px;
+    font-weight: 600;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text2);
+    cursor: pointer;
+    transition: var(--transition);
+    border-left: 2px solid transparent;
+    user-select: none;
+  }
+
+  .nav-item:hover { color: var(--text); background: rgba(15,27,45,0.04); }
+
+  .nav-item.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: var(--accent3);
+  }
+
+  .nav-item .nav-icon { font-size: 15px; width: 20px; text-align: center; }
+
+  .progress-bar-wrap {
+    padding: 20px 24px;
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+  }
+
+  .progress-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+
+  .progress-track {
+    height: 3px;
+    background: var(--surface3);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--teal));
+    border-radius: 10px;
+    transition: width 0.5s ease;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  #main {
+    margin-left: 240px;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ─── TOP BAR ─── */
+  #topbar {
+    position: sticky;
+    top: 0;
+    background: rgba(245,239,223,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+  }
+
+  #topbar-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text); }
+  #topbar-badge { font-size: 11px; background: var(--accent3); color: var(--accent); padding: 3px 10px; border-radius: 20px; border: 1px solid rgba(155,114,51,0.3); font-weight: 600; letter-spacing: 0.06em; }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    display: none;
+    padding: 40px 40px 60px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section-header {
+    margin-bottom: 36px;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .section-desc { font-size: 15px; color: var(--text2); max-width: 680px; line-height: 1.7; }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius2);
+    padding: 28px;
+    transition: var(--transition);
+  }
+
+  .card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+  .card-icon { font-size: 28px; margin-bottom: 14px; }
+  .card-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .card-body { font-size: 14px; color: var(--text2); line-height: 1.65; }
+
+  .card.accent-teal { border-color: rgba(78,205,196,0.25); background: linear-gradient(135deg, var(--surface) 0%, rgba(78,205,196,0.05) 100%); }
+  .card.accent-gold { border-color: rgba(155,114,51,0.25); background: linear-gradient(135deg, var(--surface) 0%, rgba(155,114,51,0.05) 100%); }
+  .card.accent-purple { border-color: rgba(155,142,196,0.25); background: linear-gradient(135deg, var(--surface) 0%, rgba(155,142,196,0.05) 100%); }
+  .card.accent-rose { border-color: rgba(224,112,112,0.25); background: linear-gradient(135deg, var(--surface) 0%, rgba(224,112,112,0.05) 100%); }
+
+  /* ─── HERO CARD ─── */
+  .hero-card {
+    background: linear-gradient(135deg, var(--surface2) 0%, rgba(155,114,51,0.08) 100%);
+    border: 1px solid rgba(155,114,51,0.2);
+    border-radius: var(--radius2);
+    padding: 40px;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-family: 'Playfair Display', serif; font-size: 40px; font-weight: 700; color: var(--accent); }
+  .hero-stat .lbl { font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+  .hero-stats { display: flex; gap: 32px; }
+  .hero-divider { width: 1px; background: var(--border); }
+
+  /* ─── FLOW STEPS ─── */
+  .flow-wrap { display: flex; flex-direction: column; gap: 0; }
+
+  .flow-step {
+    display: flex;
+    gap: 0;
+    cursor: pointer;
+  }
+
+  .flow-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+  .flow-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 2px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+    transition: var(--transition);
+    flex-shrink: 0;
+  }
+
+  .flow-step.open .flow-num, .flow-step:hover .flow-num {
+    background: var(--accent3);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .flow-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+    margin: 4px 0;
+    min-height: 20px;
+  }
+
+  .flow-step:last-child .flow-line { display: none; }
+
+  .flow-content { flex: 1; padding: 0 0 28px 20px; }
+
+  .flow-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0 0;
+    margin-bottom: 6px;
+  }
+
+  .flow-title { font-size: 16px; font-weight: 600; color: var(--text); }
+  .flow-subtitle { font-size: 13px; color: var(--text3); margin-bottom: 0; }
+
+  .flow-chevron { color: var(--text3); font-size: 14px; transition: var(--transition); }
+  .flow-step.open .flow-chevron { transform: rotate(180deg); color: var(--accent); }
+
+  .flow-body {
+    display: none;
+    padding: 18px 0 0;
+  }
+
+  .flow-step.open .flow-body { display: block; }
+
+  .flow-detail {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+  }
+
+  .flow-detail h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+  .flow-detail p { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 14px; }
+  .flow-detail p:last-child { margin-bottom: 0; }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+  .tag {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .tag.blue { background: var(--teal2); color: var(--teal); border: 1px solid rgba(78,205,196,0.2); }
+  .tag.gold { background: var(--accent3); color: var(--accent); border: 1px solid rgba(155,114,51,0.2); }
+  .tag.rose { background: var(--rose2); color: var(--rose); border: 1px solid rgba(224,112,112,0.2); }
+  .tag.purple { background: var(--purple2); color: var(--purple); border: 1px solid rgba(155,142,196,0.2); }
+  .tag.green { background: var(--green2); color: var(--green); border: 1px solid rgba(106,191,106,0.2); }
+
+  .pitfall-box {
+    background: var(--rose2);
+    border: 1px solid rgba(224,112,112,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--rose);
+  }
+
+  .pitfall-box strong { display: block; margin-bottom: 4px; font-weight: 600; }
+
+  /* ─── SIMULATOR ─── */
+  .sim-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .sim-controls { display: flex; flex-direction: column; gap: 20px; }
+
+  .sim-slider-wrap { }
+  .sim-slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .sim-slider-label { font-size: 14px; font-weight: 500; color: var(--text); }
+  .sim-slider-val { font-family: 'DM Mono', monospace; font-size: 14px; color: var(--accent); font-weight: 500; }
+
+  input[type=range] {
+    width: 100%;
+    height: 4px;
+    -webkit-appearance: none;
+    background: var(--surface3);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 0 0 3px rgba(155,114,51,0.2);
+  }
+
+  input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 5px rgba(155,114,51,0.3);
+  }
+
+  .sim-chart-area {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .kpi-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  .kpi-box .kpi-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--accent); }
+  .kpi-box .kpi-lbl { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
+  .kpi-box .kpi-delta { font-size: 12px; margin-top: 4px; font-weight: 500; }
+  .kpi-box .kpi-delta.pos { color: var(--green); }
+  .kpi-box .kpi-delta.neg { color: var(--rose); }
+
+  .chart-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    position: relative;
+  }
+
+  .chart-box-title { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.07em; }
+
+  /* ─── CASE STUDY ─── */
+  .case-brand-header {
+    background: linear-gradient(135deg, var(--surface), var(--surface2));
+    border: 1px solid var(--border);
+    border-radius: var(--radius2);
+    padding: 28px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .case-brand-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--text); }
+  .case-brand-desc { font-size: 14px; color: var(--text2); margin-top: 4px; }
+  .case-badge { font-size: 12px; background: var(--teal2); color: var(--teal); padding: 5px 14px; border-radius: 20px; border: 1px solid rgba(78,205,196,0.25); font-weight: 600; }
+
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .channel-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .channel-row:last-child { border-bottom: none; }
+  .channel-icon { font-size: 20px; width: 32px; text-align: center; }
+  .channel-name { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+  .channel-spend { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); min-width: 70px; text-align: right; }
+
+  input.channel-slider {
+    width: 100px;
+  }
+
+  .outcome-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .outcome-metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .outcome-metric:last-child { border-bottom: none; }
+  .outcome-metric .om-label { font-size: 14px; color: var(--text2); }
+  .outcome-metric .om-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; }
+
+  /* ─── ADVANCED ─── */
+  .accordion-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 12px;
+    transition: var(--transition);
+  }
+
+  .accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    cursor: pointer;
+    background: var(--surface);
+    transition: var(--transition);
+  }
+
+  .accordion-header:hover { background: var(--surface2); }
+
+  .accordion-header-left { display: flex; align-items: center; gap: 14px; }
+  .accordion-icon { font-size: 22px; }
+  .accordion-title { font-size: 16px; font-weight: 600; color: var(--text); }
+  .accordion-subtitle { font-size: 13px; color: var(--text3); margin-top: 2px; }
+  .accordion-chevron { color: var(--text3); font-size: 14px; transition: var(--transition); }
+  .accordion-item.open .accordion-chevron { transform: rotate(180deg); color: var(--accent); }
+
+  .accordion-body {
+    display: none;
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .accordion-item.open .accordion-body { display: block; }
+
+  /* ─── KPI DASHBOARD ─── */
+  .dashboard-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+
+  .dash-tab {
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text3);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: var(--transition);
+  }
+
+  .dash-tab:hover { color: var(--text2); }
+  .dash-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .dashboard-panel { display: none; }
+  .dashboard-panel.active { display: block; }
+
+  .roi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .roi-table th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--text3);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .roi-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--text2); }
+  .roi-table tr:hover td { background: var(--surface2); }
+  .roi-table .val { font-family: 'DM Mono', monospace; color: var(--text); }
+  .roi-table .pos { color: var(--green); font-weight: 600; }
+  .roi-table .neg { color: var(--rose); font-weight: 600; }
+  .roi-table .neutral { color: var(--accent); font-weight: 600; }
+
+  .roi-bar { height: 6px; border-radius: 4px; background: var(--accent); display: inline-block; min-width: 4px; }
+
+  /* ─── INTERVIEW PREP ─── */
+  .qa-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .qa-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .qa-q:hover { background: var(--surface2); }
+
+  .qa-qtext { font-size: 15px; font-weight: 500; color: var(--text); line-height: 1.5; }
+  .qa-badge { font-size: 10px; background: var(--accent3); color: var(--accent); padding: 3px 9px; border-radius: 12px; white-space: nowrap; font-weight: 600; letter-spacing: 0.06em; flex-shrink: 0; margin-top: 3px; }
+
+  .qa-a {
+    display: none;
+    padding: 0 22px 18px;
+    border-top: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .qa-item.open .qa-a { display: block; }
+  .qa-a-text { font-size: 14px; color: var(--text2); line-height: 1.75; padding-top: 16px; }
+  .qa-a-text strong { color: var(--accent); font-weight: 600; }
+
+  .chevron-small { color: var(--text3); font-size: 12px; flex-shrink: 0; margin-top: 4px; transition: var(--transition); }
+  .qa-item.open .chevron-small { transform: rotate(180deg); color: var(--accent); }
+
+  /* ─── UTILITY ─── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+  .info-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: var(--text2);
+    font-weight: 500;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary { background: var(--accent); color: #0e0f13; }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  .btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--border2); color: var(--text); }
+
+  /* mobile hamburger */
+  #menu-btn { display: none; }
+
+  @media (max-width: 900px) {
+    #sidebar { transform: translateX(-100%); }
+    #sidebar.open { transform: translateX(0); }
+    #main { margin-left: 0; }
+    .section { padding: 24px 20px 48px; }
+    .two-col, .case-grid, .sim-wrap { grid-template-columns: 1fr; }
+    .three-col { grid-template-columns: 1fr 1fr; }
+    .hero-card { grid-template-columns: 1fr; }
+    .hero-stats { justify-content: center; }
+    #menu-btn { display: block; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════ SIDEBAR ══════════════════════════════════════ -->
+<nav id="sidebar">
+  <div id="sidebar-brand">
+    <div class="logo-label">MMM MasterClass</div>
+    <div class="logo-sub">Pharma Analytics Series</div>
+  </div>
+
+  <div class="nav-section-label">Modules</div>
+
+  <div class="nav-item active" onclick="showSection('overview')">
+    <span class="nav-icon">📊</span> MMM Overview
+  </div>
+  <div class="nav-item" onclick="showSection('flow')">
+    <span class="nav-icon">🔄</span> End-to-End Flow
+  </div>
+  <div class="nav-item" onclick="showSection('simulator')">
+    <span class="nav-icon">📈</span> Model Simulator
+  </div>
+  <div class="nav-item" onclick="showSection('casestudy')">
+    <span class="nav-icon">🧪</span> Case Study
+  </div>
+  <div class="nav-item" onclick="showSection('advanced')">
+    <span class="nav-icon">⚙️</span> Advanced Concepts
+  </div>
+  <div class="nav-item" onclick="showSection('dashboard')">
+    <span class="nav-icon">🗂</span> KPI Dashboard
+  </div>
+  <div class="nav-item" onclick="showSection('interview')">
+    <span class="nav-icon">🧠</span> Interview Prep
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-label">Course Progress — <span id="progress-pct">14%</span></div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:14%"></div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════ MAIN ══════════════════════════════════════ -->
+<div id="main">
+  <div id="topbar">
+    <div id="topbar-title">Market Mix Modeling — Pharma</div>
+    <span id="topbar-badge">ADVANCED</span>
+  </div>
+
+  <!-- ─────────────────────── 1. OVERVIEW ─────────────────────── -->
+  <section id="sec-overview" class="section active">
+    <div class="section-header">
+      <div class="section-tag">Module 01 · Foundation</div>
+      <h1 class="section-title">What is Market Mix Modeling?</h1>
+      <p class="section-desc">MMM is an econometric technique that quantifies how marketing and promotional activities drive brand performance — helping pharma leaders allocate spend more precisely and defend ROI with data.</p>
+    </div>
+
+    <div class="hero-card">
+      <div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:22px; margin-bottom:12px; color:var(--text);">Why MMM is Uniquely Complex in Pharma</h3>
+        <p style="font-size:15px; color:var(--text2); line-height:1.75; max-width:560px;">Unlike consumer goods, pharma MMM must model <strong style="color:var(--accent)">multi-stakeholder dynamics</strong> — HCP prescribing behavior, patient adherence, payer coverage, and DTC awareness — often with incomplete data due to sampling, privacy restrictions, and channel fragmentation.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;">
+          <span class="tag blue">HCP Promotional Mix</span>
+          <span class="tag gold">Rx Outcome Modeling</span>
+          <span class="tag purple">Attribution at Scale</span>
+          <span class="tag green">Budget Optimization</span>
+        </div>
+      </div>
+      <div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="num">4×</div>
+            <div class="lbl">Avg ROI Lift<br>from optimization</div>
+          </div>
+          <div class="hero-divider"></div>
+          <div class="hero-stat">
+            <div class="num">68%</div>
+            <div class="lbl">Pharma cos using<br>MMM by 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card accent-gold" onclick="toggleCard(this)" style="cursor:pointer;">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">Business Purpose</div>
+        <div class="card-body">MMM answers the core strategic question: <em>Which promotional activities are actually driving incremental prescriptions?</em> It separates base sales (brand equity, disease prevalence) from promoted sales (field force, digital, journals).
+          <div class="tag-list" style="margin-top:12px;">
+            <span class="tag gold">Budget Allocation</span>
+            <span class="tag gold">Promo ROI</span>
+          </div>
+        </div>
+      </div>
+      <div class="card accent-teal" onclick="toggleCard(this)" style="cursor:pointer;">
+        <div class="card-icon">📡</div>
+        <div class="card-title">Data Inputs in Pharma</div>
+        <div class="card-body">TRx/NRx from IQVIA or Symphony; field force call activity from CRM (Veeva); digital spend from ad platforms; speaker programs; journal ads; payer mix; competitive activity. Each has lag, noise, and attribution challenges.
+          <div class="tag-list" style="margin-top:12px;">
+            <span class="tag blue">IQVIA Data</span>
+            <span class="tag blue">Veeva CRM</span>
+          </div>
+        </div>
+      </div>
+      <div class="card accent-purple" onclick="toggleCard(this)" style="cursor:pointer;">
+        <div class="card-icon">🔢</div>
+        <div class="card-title">The Core Equation</div>
+        <div class="card-body">At its heart, MMM fits a regression:
+          <code style="display:block; margin:10px 0; background:var(--bg); padding:10px; border-radius:6px; font-family:'DM Mono',monospace; font-size:12px; color:var(--teal);">
+            TRx = α + β₁·Rep_Calls + β₂·Digital +<br>
+            β₃·Adstock(TV) + β₄·Season + ε
+          </code>
+          where coefficients reveal each channel's marginal contribution per unit of spend.
+        </div>
+      </div>
+      <div class="card accent-rose" onclick="toggleCard(this)" style="cursor:pointer;">
+        <div class="card-icon">⚠️</div>
+        <div class="card-title">Unique Pharma Challenges</div>
+        <div class="card-body">Pharma MMM faces data restrictions (IMS, Symphony sampling), long lag effects (HCP behavior change), detailing frequency caps, off-label constraints, and the complexity of modeling both HCP and patient channels simultaneously.</div>
+      </div>
+      <div class="card accent-teal" onclick="toggleCard(this)" style="cursor:pointer;">
+        <div class="card-icon">🧭</div>
+        <div class="card-title">Bayesian vs. Frequentist MMM</div>
+        <div class="card-body">Traditional OLS regression requires large datasets. <strong style="color:var(--teal)">Bayesian MMM</strong> (used by Meta's Robyn, Google's Meridian) incorporates prior beliefs — ideal for pharma where data is sparse, launches are recent, or channels are correlated.</div>
+      </div>
+      <div class="card accent-gold" onclick="toggleCard(this)" style="cursor:pointer;">
+        <div class="card-icon">💰</div>
+        <div class="card-title">Strategic Outputs</div>
+        <div class="card-body">MMM delivers: channel ROI rankings, optimal budget frontiers, response curves for each channel, decomposition of base vs. incremental TRx, and scenario simulations for quarterly planning cycles.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <h3 style="font-family:'Playfair Display',serif; font-size:20px; margin-bottom:20px;">MMM vs. Attribution: What's the Difference?</h3>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Market Mix Modeling (MMM)</div>
+        <div class="card-body">
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+            <li>✓ Aggregated data (weekly/monthly)</li>
+            <li>✓ Captures long-term effects via adstock</li>
+            <li>✓ No cookies/tracking needed</li>
+            <li>✓ Cross-channel holistic view</li>
+            <li>✗ Cannot do individual-level analysis</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔗</div>
+        <div class="card-title">Multi-Touch Attribution (MTA)</div>
+        <div class="card-body">
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+            <li>✓ Individual-level touchpoint analysis</li>
+            <li>✓ Granular digital channel credit</li>
+            <li>✗ Requires identity resolution</li>
+            <li>✗ Misses offline channels</li>
+            <li>✗ Privacy constraints limit pharma use</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 2. FLOW ─────────────────────── -->
+  <section id="sec-flow" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 02 · Process</div>
+      <h1 class="section-title">End-to-End MMM Workflow</h1>
+      <p class="section-desc">Click each step to explore the methodology, pharma-specific nuances, and common pitfalls professionals encounter at each stage.</p>
+    </div>
+
+    <div class="flow-wrap">
+
+      <div class="flow-step" onclick="toggleFlow(this)">
+        <div class="flow-left">
+          <div class="flow-num">01</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <div class="flow-header">
+            <div>
+              <div class="flow-title">Business Problem Definition</div>
+              <div class="flow-subtitle">Aligning analytics to commercial strategy</div>
+            </div>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-body">
+            <div class="flow-detail">
+              <h4>What Happens Here</h4>
+              <p>Before any data is pulled, the team aligns on the core business question. Are we optimizing field force call frequency? Deciding between DTC and HCP-only spending? Justifying the ROI of a speaker program to leadership?</p>
+              <p>Pharma-specific: Brand lifecycle matters enormously. Launch brands need MMM to set baseline spend ratios. Mature brands use it to rebalance toward digital. LOE brands need it to rationalize fleet size.</p>
+              <div class="tag-list">
+                <span class="tag gold">Launch Brands</span>
+                <span class="tag gold">Mature Brands</span>
+                <span class="tag gold">LOE Strategy</span>
+              </div>
+              <div class="pitfall-box">
+                <strong>⚠ Common Pitfall</strong>
+                Scoping too broad ("optimize everything") leads to unfocused models. Define 2–3 specific business questions the MMM must answer before touching data.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step" onclick="toggleFlow(this)">
+        <div class="flow-left">
+          <div class="flow-num">02</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <div class="flow-header">
+            <div>
+              <div class="flow-title">Data Collection & Harmonization</div>
+              <div class="flow-subtitle">Building the analytical dataset</div>
+            </div>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-body">
+            <div class="flow-detail">
+              <h4>Core Data Streams</h4>
+              <p><strong style="color:var(--teal)">Outcome variables:</strong> Weekly TRx, NRx from IQVIA/Symphony Health; market-level or geography-segmented. Consider denominator metrics (patient share vs. prescriber share).</p>
+              <p><strong style="color:var(--teal)">Promotional inputs:</strong> Veeva CRM for field force (calls, samples); Salesforce for speaker programs; DSP/DV360 for digital; PLD for payer pull-through programs; journal ad spend from publishers.</p>
+              <p><strong style="color:var(--teal)">Context variables:</strong> Seasonality (ICD codes, disease seasonality), competitive launches, payer formulary changes, label updates, COVID disruptions.</p>
+              <div class="tag-list">
+                <span class="tag blue">IQVIA/Symphony</span>
+                <span class="tag blue">Veeva CRM</span>
+                <span class="tag blue">Claims Data</span>
+                <span class="tag rose">Competitive Intel</span>
+              </div>
+              <div class="pitfall-box">
+                <strong>⚠ Common Pitfall</strong>
+                Aggregation mismatch: mixing weekly Rx data with monthly field force reports destroys temporal validity. Align all data to the same time grain before modeling.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step" onclick="toggleFlow(this)">
+        <div class="flow-left">
+          <div class="flow-num">03</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <div class="flow-header">
+            <div>
+              <div class="flow-title">Data Transformation</div>
+              <div class="flow-subtitle">Adstock, lag, and saturation functions</div>
+            </div>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-body">
+            <div class="flow-detail">
+              <h4>The Three Core Transformations</h4>
+              <p><strong style="color:var(--teal)">Adstock (Carryover):</strong> Marketing effects persist beyond the moment of exposure. A sales rep call in Week 1 may influence an Rx decision in Week 3. Adstock decays the lagged effect: <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;font-size:12px;color:var(--teal)">A_t = x_t + λ·A_(t-1)</code> where λ (0–1) is the decay rate.</p>
+              <p><strong style="color:var(--teal)">Saturation (Hill/S-curve):</strong> Each additional call yields diminishing returns. At high call frequencies, HCPs become desensitized. Modeled as a Hill function: <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;font-size:12px;color:var(--teal)">f(x) = x^α / (x^α + K^α)</code></p>
+              <p><strong style="color:var(--teal)">Lag Transformation:</strong> Different channels have different response lags. TV/DTC may take 4–6 weeks; HCP samples may show Rx lift within 1–2 weeks. Testing multiple lags and selecting via information criteria (AIC/BIC) is standard practice.</p>
+              <div class="tag-list">
+                <span class="tag purple">Adstock Decay (λ)</span>
+                <span class="tag purple">Hill Saturation</span>
+                <span class="tag purple">Optimal Lag</span>
+              </div>
+              <div class="pitfall-box">
+                <strong>⚠ Common Pitfall</strong>
+                Using the same adstock parameter for all channels. Rep calls for oncology vs. primary care have fundamentally different decay rates. Parameterize per channel type.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step" onclick="toggleFlow(this)">
+        <div class="flow-left">
+          <div class="flow-num">04</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <div class="flow-header">
+            <div>
+              <div class="flow-title">Model Building</div>
+              <div class="flow-subtitle">Regression, Bayesian, and ensemble approaches</div>
+            </div>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-body">
+            <div class="flow-detail">
+              <h4>Modeling Choices</h4>
+              <p><strong style="color:var(--teal)">Classical OLS:</strong> Interpretable, fast. Requires sufficient data (2+ years weekly). Risk of multicollinearity with correlated channels (reps + digital often move together in launch waves).</p>
+              <p><strong style="color:var(--teal)">Ridge / LASSO Regression:</strong> Adds regularization to handle correlated predictors. LASSO creates sparse models (zeroes out weak channels). Ridge shrinks coefficients smoothly. Elastic Net combines both.</p>
+              <p><strong style="color:var(--teal)">Bayesian MMM (Robyn / Meridian / LightweightMMM):</strong> Incorporates prior domain knowledge. Can handle fewer data points. Returns probability distributions over ROI estimates, not point estimates. Increasingly standard for pharma launch brands with limited history.</p>
+              <div class="tag-list">
+                <span class="tag green">OLS Regression</span>
+                <span class="tag green">Ridge / LASSO</span>
+                <span class="tag green">Bayesian MMM</span>
+                <span class="tag green">Robyn / Meridian</span>
+              </div>
+              <div class="pitfall-box">
+                <strong>⚠ Common Pitfall</strong>
+                Overfitting to historical data with too many predictors. Use cross-validation (walk-forward) and hold-out periods — not just in-sample R². A 0.98 R² with no out-of-sample validity is worthless.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step" onclick="toggleFlow(this)">
+        <div class="flow-left">
+          <div class="flow-num">05</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <div class="flow-header">
+            <div>
+              <div class="flow-title">Validation & Diagnostics</div>
+              <div class="flow-subtitle">Building credibility with business stakeholders</div>
+            </div>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-body">
+            <div class="flow-detail">
+              <h4>Validation Framework</h4>
+              <p><strong style="color:var(--teal)">Statistical diagnostics:</strong> R², MAPE, Durbin-Watson (autocorrelation), VIF (multicollinearity &lt;5), residual normality. MAPE &lt;10% is a common pharma MMM threshold.</p>
+              <p><strong style="color:var(--teal)">Business sense checks:</strong> Does the sign direction make sense? (More rep calls → more Rx, not less.) Is the magnitude plausible? (1 additional call generating 10,000 TRx is implausible.) Sales team sanity checks are essential.</p>
+              <p><strong style="color:var(--teal)">Out-of-sample testing:</strong> Hold out last 3–6 months. Refit model on earlier data; compare predictions to actuals. This is the true test of model generalizability.</p>
+              <div class="pitfall-box">
+                <strong>⚠ Common Pitfall</strong>
+                Validating only on statistics, not business context. A statistically perfect model that suggests eliminating your flagship rep channel will never get leadership buy-in.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step" onclick="toggleFlow(this)">
+        <div class="flow-left">
+          <div class="flow-num">06</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <div class="flow-header">
+            <div>
+              <div class="flow-title">Insights Generation</div>
+              <div class="flow-subtitle">From coefficients to commercial decisions</div>
+            </div>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-body">
+            <div class="flow-detail">
+              <h4>Translating Model to Strategy</h4>
+              <p><strong style="color:var(--teal)">Decomposition:</strong> Break total TRx into base (what you'd sell with no promotion) and incremental (driven by each channel). Base is typically 50–80% of pharma brands.</p>
+              <p><strong style="color:var(--teal)">ROI by channel:</strong> Incremental TRx per $1 spent, converted to $ revenue using brand WAC and gross-to-net. Rank channels by ROI and marginal ROI to identify rebalancing opportunities.</p>
+              <p><strong style="color:var(--teal)">Response curves:</strong> Plot TRx vs. spend for each channel. Identify the point of diminishing returns — the natural ceiling before additional spend yields near-zero incremental lift.</p>
+              <div class="tag-list">
+                <span class="tag gold">Base vs. Incremental</span>
+                <span class="tag gold">ROI Ranking</span>
+                <span class="tag gold">Response Curves</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-step" onclick="toggleFlow(this)">
+        <div class="flow-left">
+          <div class="flow-num">07</div>
+          <div class="flow-line"></div>
+        </div>
+        <div class="flow-content">
+          <div class="flow-header">
+            <div>
+              <div class="flow-title">Budget Optimization</div>
+              <div class="flow-subtitle">Maximizing TRx under a budget constraint</div>
+            </div>
+            <span class="flow-chevron">▼</span>
+          </div>
+          <div class="flow-body">
+            <div class="flow-detail">
+              <h4>Optimization Mechanics</h4>
+              <p><strong style="color:var(--teal)">Constrained optimization:</strong> Given total budget B, allocate across channels x₁, x₂ … xₙ to maximize Σ f(xᵢ) subject to Σ xᵢ ≤ B. Each fᵢ is the channel response curve estimated from the model.</p>
+              <p><strong style="color:var(--teal)">Scenario modeling:</strong> What happens if DTC spend is cut 20% to fund a new digital channel? What's the Rx impact of a +15% field force expansion? These are answered via the optimizer.</p>
+              <p><strong style="color:var(--teal)">Budget frontier:</strong> Plot optimal TRx vs. total budget to show the "efficient frontier" of spend — below it is waste, above it is saturation. Leadership use this to argue budget requests.</p>
+              <div class="tag-list">
+                <span class="tag blue">Budget Frontier</span>
+                <span class="tag blue">Scenario Planning</span>
+                <span class="tag blue">Constrained Opt.</span>
+              </div>
+              <div class="pitfall-box">
+                <strong>⚠ Common Pitfall</strong>
+                Optimizing purely on ROI without operational constraints (e.g., can't cut rep fleet by 40% in Q1 due to contracts). Optimization must have business guardrails — min/max bounds per channel.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 3. SIMULATOR ─────────────────────── -->
+  <section id="sec-simulator" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 03 · Interactive</div>
+      <h1 class="section-title">MMM Simulation Engine</h1>
+      <p class="section-desc">Adjust promotional spend across channels and observe the simulated impact on TRx, ROI, and channel contribution. Uses a realistic underlying model with adstock and saturation effects.</p>
+    </div>
+
+    <div class="sim-wrap">
+      <div class="card sim-controls">
+        <div style="margin-bottom:4px;">
+          <div class="card-title" style="margin-bottom:4px;">🎛️ Channel Spend Inputs</div>
+          <p style="font-size:13px; color:var(--text3);">Drag sliders to adjust weekly spend allocation</p>
+        </div>
+        <hr class="divider" style="margin:16px 0;">
+
+        <div class="sim-slider-wrap">
+          <div class="sim-slider-header">
+            <span class="sim-slider-label">👤 Sales Rep Calls</span>
+            <span class="sim-slider-val" id="val-rep">650</span>
+          </div>
+          <input type="range" id="sl-rep" min="0" max="1200" value="650" oninput="updateSim()">
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;">HCP detailing (weekly calls)</div>
+        </div>
+
+        <div class="sim-slider-wrap">
+          <div class="sim-slider-header">
+            <span class="sim-slider-label">💻 Digital / HCP Programmatic</span>
+            <span class="sim-slider-val" id="val-digital">$180K</span>
+          </div>
+          <input type="range" id="sl-digital" min="0" max="500" value="180" oninput="updateSim()">
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;">Spend in $K/week (banner, email, portal)</div>
+        </div>
+
+        <div class="sim-slider-wrap">
+          <div class="sim-slider-header">
+            <span class="sim-slider-label">📺 DTC Television</span>
+            <span class="sim-slider-val" id="val-tv">$320K</span>
+          </div>
+          <input type="range" id="sl-tv" min="0" max="800" value="320" oninput="updateSim()">
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;">Spend in $K/week (broadcast + streaming)</div>
+        </div>
+
+        <div class="sim-slider-wrap">
+          <div class="sim-slider-header">
+            <span class="sim-slider-label">🎤 Speaker Programs</span>
+            <span class="sim-slider-val" id="val-speaker">$90K</span>
+          </div>
+          <input type="range" id="sl-speaker" min="0" max="300" value="90" oninput="updateSim()">
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;">Spend in $K/week (P2P education events)</div>
+        </div>
+
+        <div class="sim-slider-wrap">
+          <div class="sim-slider-header">
+            <span class="sim-slider-label">📬 Email / eCME</span>
+            <span class="sim-slider-val" id="val-email">$45K</span>
+          </div>
+          <input type="range" id="sl-email" min="0" max="200" value="45" oninput="updateSim()">
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;">Spend in $K/week (targeted HCP email)</div>
+        </div>
+
+        <div style="margin-top:8px; padding:14px; background:var(--surface2); border-radius:8px; border:1px solid var(--border);">
+          <div style="font-size:12px; color:var(--text3); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.07em;">Total Weekly Budget</div>
+          <div style="font-family:'Playfair Display',serif; font-size:26px; color:var(--accent);" id="total-budget">$635K</div>
+          <div style="font-size:12px; color:var(--text3); margin-top:4px;">+ Rep cost allocation</div>
+        </div>
+
+      </div>
+
+      <div class="sim-chart-area">
+        <div class="kpi-strip">
+          <div class="kpi-box">
+            <div class="kpi-val" id="kpi-trx">12,840</div>
+            <div class="kpi-lbl">Weekly TRx</div>
+            <div class="kpi-delta pos" id="kpi-trx-d">+4.2%</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-val" id="kpi-roi">2.4×</div>
+            <div class="kpi-lbl">Blended ROI</div>
+            <div class="kpi-delta pos" id="kpi-roi-d">Efficient</div>
+          </div>
+          <div class="kpi-box">
+            <div class="kpi-val" id="kpi-incr">31%</div>
+            <div class="kpi-lbl">Incremental TRx</div>
+            <div class="kpi-delta pos" id="kpi-incr-d">vs 28% base</div>
+          </div>
+        </div>
+
+        <div class="chart-box" style="height:220px;">
+          <div class="chart-box-title">Channel TRx Contribution</div>
+          <canvas id="sim-bar-chart" height="160"></canvas>
+        </div>
+
+        <div class="chart-box" style="height:200px;">
+          <div class="chart-box-title">Response Curve — Rep Calls (Saturation Effect)</div>
+          <canvas id="sim-curve-chart" height="150"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 4. CASE STUDY ─────────────────────── -->
+  <section id="sec-casestudy" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 04 · Applied Learning</div>
+      <h1 class="section-title">Pharma Case Study</h1>
+      <p class="section-desc">You are the analytics lead for REVONEX — a newly approved treatment for generalized Myasthenia Gravis (gMG). 18 months post-launch. Make channel decisions and see outcomes.</p>
+    </div>
+
+    <div class="case-brand-header">
+      <div>
+        <div class="case-brand-name">REVONEX® (ravoxumab)</div>
+        <div class="case-brand-desc">Anti-FcRn monoclonal antibody · gMG · Year 2 Post-Launch · 340 mg SC monthly</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="case-badge">YEAR 2 POST-LAUNCH</div>
+        <div style="font-size:12px; color:var(--text3); margin-top:8px;">US Market · Specialty Neurology</div>
+      </div>
+    </div>
+
+    <div class="case-grid">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:16px;">📊 Adjust Channel Investments</div>
+        <p style="font-size:13px; color:var(--text3); margin-bottom:16px;">Current annual spend. Drag to reallocate. Total budget is fixed at $48M.</p>
+
+        <div class="channel-row">
+          <span class="channel-icon">👤</span>
+          <span class="channel-name">Neuro Specialty Reps</span>
+          <input type="range" class="channel-slider" id="cs-rep" min="5" max="28" value="18" oninput="updateCase()">
+          <span class="channel-spend" id="cs-rep-val">$18M</span>
+        </div>
+        <div class="channel-row">
+          <span class="channel-icon">💻</span>
+          <span class="channel-name">HCP Digital / Programmatic</span>
+          <input type="range" class="channel-slider" id="cs-dig" min="2" max="15" value="8" oninput="updateCase()">
+          <span class="channel-spend" id="cs-dig-val">$8M</span>
+        </div>
+        <div class="channel-row">
+          <span class="channel-icon">🎤</span>
+          <span class="channel-name">Speaker Programs (P2P)</span>
+          <input type="range" class="channel-slider" id="cs-spk" min="1" max="12" value="7" oninput="updateCase()">
+          <span class="channel-spend" id="cs-spk-val">$7M</span>
+        </div>
+        <div class="channel-row">
+          <span class="channel-icon">📺</span>
+          <span class="channel-name">Patient DTC (TV+Digital)</span>
+          <input type="range" class="channel-slider" id="cs-dtc" min="0" max="20" value="10" oninput="updateCase()">
+          <span class="channel-spend" id="cs-dtc-val">$10M</span>
+        </div>
+        <div class="channel-row">
+          <span class="channel-icon">📋</span>
+          <span class="channel-name">Medical / Journal Ads</span>
+          <input type="range" class="channel-slider" id="cs-med" min="0" max="8" value="5" oninput="updateCase()">
+          <span class="channel-spend" id="cs-med-val">$5M</span>
+        </div>
+
+        <div style="margin-top:16px; padding:12px; background:var(--surface2); border-radius:8px; border:1px solid var(--border);">
+          <div style="display:flex; justify-content:space-between; font-size:13px;">
+            <span style="color:var(--text3);">Total Allocated</span>
+            <span id="cs-total" style="font-family:'DM Mono',monospace; color:var(--accent); font-weight:600;">$48M</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:13px; margin-top:6px;">
+            <span style="color:var(--text3);">Budget Remaining</span>
+            <span id="cs-remaining" style="font-family:'DM Mono',monospace; color:var(--green); font-weight:600;">$0M</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title" style="margin-bottom:20px;">📈 Projected Outcomes</div>
+        <div class="outcome-box">
+          <div class="outcome-metric">
+            <div class="om-label">Annual Incremental TRx</div>
+            <div class="om-val" id="cs-trx" style="color:var(--teal);">142,800</div>
+          </div>
+          <div class="outcome-metric">
+            <div class="om-label">Blended Marketing ROI</div>
+            <div class="om-val" id="cs-roi" style="color:var(--accent);">3.1×</div>
+          </div>
+          <div class="outcome-metric">
+            <div class="om-label">HCP Reach (% target)</div>
+            <div class="om-val" id="cs-reach" style="color:var(--green);">72%</div>
+          </div>
+          <div class="outcome-metric">
+            <div class="om-label">Patient Demand Index</div>
+            <div class="om-val" id="cs-patient" style="color:var(--purple);">68</div>
+          </div>
+        </div>
+
+        <div style="height:180px; margin-top:16px;">
+          <canvas id="case-donut-chart"></canvas>
+        </div>
+
+        <div id="cs-insight" style="margin-top:16px; padding:14px 16px; background:var(--accent3); border:1px solid rgba(155,114,51,0.2); border-radius:8px; font-size:13px; color:var(--accent); line-height:1.65;">
+          💡 <strong>Analyst Insight:</strong> Current allocation is near-optimal. Rep spend is approaching diminishing returns at $18M — marginal ROI drops 40% beyond this level. Shifting $2M to HCP digital could generate +4,200 incremental TRx.
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <div class="chart-box" style="height:240px;">
+        <div class="chart-box-title">Quarterly TRx Trajectory — Base vs. Promoted</div>
+        <canvas id="case-trend-chart" height="200"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 5. ADVANCED ─────────────────────── -->
+  <section id="sec-advanced" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 05 · Deep Dive</div>
+      <h1 class="section-title">Advanced Concepts</h1>
+      <p class="section-desc">Master the technical depth that separates good analysts from great ones. Each concept below is critical for building credible, boardroom-ready MMM models.</p>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">🌊</span>
+          <div>
+            <div class="accordion-title">Adstock Transformation</div>
+            <div class="accordion-subtitle">Modeling carryover effects of promotional exposure</div>
+          </div>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="two-col">
+          <div>
+            <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;">Adstock captures the <strong style="color:var(--teal)">memory effect</strong> of promotional exposure. When a neurologist receives a sales rep detail, the impact doesn't disappear the next week — it decays gradually. Adstock transforms raw promotional input into an effective exposure metric.</p>
+            <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;"><strong style="color:var(--accent)">Formula:</strong> A_t = x_t + λ·A_(t-1) where λ is the decay rate (0 = no carryover, 1 = infinite memory).</p>
+            <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;"><strong style="color:var(--accent)">Pharma Context:</strong> Rep calls in oncology specialty may have λ ≈ 0.7 (slow decay — relationship-based selling). Direct mail may have λ ≈ 0.2 (quick decay). Setting the right λ requires grid search or Bayesian priors from historical data.</p>
+            <div class="tag-list">
+              <span class="tag blue">λ = 0.7 (Oncology Reps)</span>
+              <span class="tag rose">λ = 0.2 (Direct Mail)</span>
+              <span class="tag purple">λ = 0.5 (Speaker Programs)</span>
+            </div>
+          </div>
+          <div>
+            <div class="chart-box" style="height:220px;">
+              <div class="chart-box-title">Adstock Decay Comparison</div>
+              <canvas id="adstock-chart" height="180"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">📉</span>
+          <div>
+            <div class="accordion-title">Diminishing Returns & Saturation Curves</div>
+            <div class="accordion-subtitle">The Hill function and finding optimal spend points</div>
+          </div>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <div class="two-col">
+          <div>
+            <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;">No channel has infinite returns. Beyond a saturation point, additional spend yields near-zero incremental TRx. The <strong style="color:var(--teal)">Hill (S-curve) function</strong> models this: <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;font-size:12px;color:var(--teal)">f(x) = x^α / (x^α + K^α)</code></p>
+            <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;">K = half-saturation point (spend where 50% of maximum effect is reached). α = shape parameter (steepness). Higher α = faster saturation.</p>
+            <p style="font-size:14px;color:var(--text2);line-height:1.75;"><strong style="color:var(--accent)">Strategic insight:</strong> If your spend is to the right of the saturation knee, you're overspending on that channel. Shift budget to channels still on the linear part of the curve — where marginal ROI is highest.</p>
+          </div>
+          <div>
+            <div class="chart-box" style="height:220px;">
+              <div class="chart-box-title">Saturation Curve — HCP Digital</div>
+              <canvas id="saturation-chart" height="180"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">🔀</span>
+          <div>
+            <div class="accordion-title">Multicollinearity in Pharma MMM</div>
+            <div class="accordion-subtitle">When channels move together — and what to do about it</div>
+          </div>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;">Multicollinearity occurs when promotional channels are highly correlated — making it mathematically impossible to isolate each channel's individual effect. In pharma, this is endemic: field force calls and speaker program spend typically ramp up simultaneously at launch.</p>
+        <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;"><strong style="color:var(--teal)">Detection:</strong> Variance Inflation Factor (VIF). VIF &gt;5 is cause for concern; VIF &gt;10 is severe. Condition number of design matrix &gt;30 indicates problematic collinearity.</p>
+        <div class="three-col" style="margin-top:16px;">
+          <div class="card" style="padding:18px;">
+            <div style="font-size:13px;font-weight:600;color:var(--accent);margin-bottom:8px;">Ridge Regression</div>
+            <div style="font-size:13px;color:var(--text2);">Adds L2 penalty: shrinks all coefficients but keeps all channels in model. Good when you believe all channels contribute.</div>
+          </div>
+          <div class="card" style="padding:18px;">
+            <div style="font-size:13px;font-weight:600;color:var(--teal);margin-bottom:8px;">Bayesian Priors</div>
+            <div style="font-size:13px;color:var(--text2);">Inject domain knowledge: "rep ROI should be between 1× and 4×." Prior distributions constrain the solution space and break collinearity degeneracy.</div>
+          </div>
+          <div class="card" style="padding:18px;">
+            <div style="font-size:13px;font-weight:600;color:var(--purple);margin-bottom:8px;">Channel Aggregation</div>
+            <div style="font-size:13px;color:var(--text2);">Combine highly correlated channels (e.g., "Total HCP Push") rather than over-segmenting. Sacrifice granularity for stability.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">🎯</span>
+          <div>
+            <div class="accordion-title">Attribution Challenges in Pharma</div>
+            <div class="accordion-subtitle">Why pharma attribution is harder than consumer goods</div>
+          </div>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:18px;">Pharma attribution faces structural challenges that don't exist in CPG or e-commerce: the decision-maker (HCP) and the consumer (patient) are different people; the purchase (prescription) is mediated by a third party (pharmacist/payer); and most conversion happens offline without trackable identifiers.</p>
+        <div class="two-col">
+          <div class="card" style="border-color:rgba(224,112,112,0.2); background:var(--rose2); padding:18px;">
+            <div style="font-size:13px;font-weight:700;color:var(--rose);margin-bottom:10px;">🚫 What Doesn't Work</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--text2);">
+              <li>× Last-click attribution (ignores HCP journey)</li>
+              <li>× Cross-device tracking (HIPAA constraints)</li>
+              <li>× Cookie-based MTA (privacy regulations)</li>
+              <li>× Individual-level HCP identity matching</li>
+            </ul>
+          </div>
+          <div class="card" style="border-color:rgba(106,191,106,0.2); background:var(--green2); padding:18px;">
+            <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px;">✅ What Works</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;font-size:13px;color:var(--text2);">
+              <li>✓ Aggregate MMM with strong channel granularity</li>
+              <li>✓ Geo-experiments (holdout markets)</li>
+              <li>✓ HCP-level cohort analysis (de-identified NPI)</li>
+              <li>✓ Bayesian priors from analogous brand launches</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item" onclick="toggleAccordion(this)">
+      <div class="accordion-header">
+        <div class="accordion-header-left">
+          <span class="accordion-icon">🔬</span>
+          <div>
+            <div class="accordion-title">Geo-Experiments & Causal Inference</div>
+            <div class="accordion-subtitle">The gold standard for pharma MMM validation</div>
+          </div>
+        </div>
+        <span class="accordion-chevron">▼</span>
+      </div>
+      <div class="accordion-body">
+        <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;">While MMM provides observational estimates, <strong style="color:var(--teal)">geo-holdout experiments</strong> provide causal ground truth. In pharma, this means running a promotional channel in selected geographies (DMA or state level) while holding others constant, then measuring the TRx lift vs. control geographies.</p>
+        <p style="font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:14px;"><strong style="color:var(--accent)">Design considerations:</strong> Select geographies matched on disease prevalence, payer mix, HCP density, and competitive share. Use synthetic control or difference-in-differences for analysis. Run for minimum 8–12 weeks to capture lagged effects.</p>
+        <p style="font-size:14px;color:var(--text2);line-height:1.75;"><strong style="color:var(--accent)">Use case:</strong> Validate whether your MMM-estimated DTC ROI of 1.8× is real, before committing $40M+ based on model estimates alone. Geo-experiments reduce model risk significantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 6. DASHBOARD ─────────────────────── -->
+  <section id="sec-dashboard" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 06 · Reporting</div>
+      <h1 class="section-title">KPI Dashboard</h1>
+      <p class="section-desc">Interactive MMM output dashboard showing channel ROI, contribution decomposition, and incremental performance metrics for REVONEX gMG — Year 2 results.</p>
+    </div>
+
+    <div class="kpi-strip" style="margin-bottom:28px;">
+      <div class="kpi-box">
+        <div class="kpi-val">$148M</div>
+        <div class="kpi-lbl">Net Revenue</div>
+        <div class="kpi-delta pos">+22% YoY</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">2.9×</div>
+        <div class="kpi-lbl">Blended ROI</div>
+        <div class="kpi-delta pos">+0.4× vs Y1</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">38%</div>
+        <div class="kpi-lbl">Incremental TRx</div>
+        <div class="kpi-delta pos">+6pp vs Y1</div>
+      </div>
+    </div>
+
+    <div class="dashboard-tabs">
+      <div class="dash-tab active" onclick="switchDashTab(this,'roi')">ROI by Channel</div>
+      <div class="dash-tab" onclick="switchDashTab(this,'contribution')">TRx Contribution</div>
+      <div class="dash-tab" onclick="switchDashTab(this,'trend')">Performance Trend</div>
+    </div>
+
+    <div class="dashboard-panel active" id="dash-roi">
+      <div class="card" style="margin-bottom:24px; padding:0; overflow:hidden;">
+        <table class="roi-table">
+          <thead>
+            <tr>
+              <th>Channel</th>
+              <th>Annual Spend</th>
+              <th>Incremental TRx</th>
+              <th>ROI</th>
+              <th>Marginal ROI</th>
+              <th>Contribution</th>
+              <th>Signal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>👤 Specialty Reps</strong></td>
+              <td class="val">$18.0M</td>
+              <td class="val">62,400</td>
+              <td class="neutral">3.5×</td>
+              <td class="pos">2.1× ↑</td>
+              <td>
+                <span class="roi-bar" style="width:80px;"></span>
+              </td>
+              <td><span class="tag blue" style="font-size:10px;">MAINTAIN</span></td>
+            </tr>
+            <tr>
+              <td><strong>📺 DTC Television</strong></td>
+              <td class="val">$10.0M</td>
+              <td class="val">28,800</td>
+              <td class="neutral">2.9×</td>
+              <td class="neg">1.2× ↓</td>
+              <td>
+                <span class="roi-bar" style="width:50px; background:var(--teal);"></span>
+              </td>
+              <td><span class="tag rose" style="font-size:10px;">REDUCE</span></td>
+            </tr>
+            <tr>
+              <td><strong>🎤 Speaker Programs</strong></td>
+              <td class="val">$7.0M</td>
+              <td class="val">24,500</td>
+              <td class="neutral">3.5×</td>
+              <td class="pos">3.1× ↑</td>
+              <td>
+                <span class="roi-bar" style="width:44px; background:var(--purple);"></span>
+              </td>
+              <td><span class="tag green" style="font-size:10px;">INCREASE</span></td>
+            </tr>
+            <tr>
+              <td><strong>💻 HCP Digital</strong></td>
+              <td class="val">$8.0M</td>
+              <td class="val">22,400</td>
+              <td class="neutral">2.8×</td>
+              <td class="pos">3.5× ↑</td>
+              <td>
+                <span class="roi-bar" style="width:40px; background:var(--teal);"></span>
+              </td>
+              <td><span class="tag green" style="font-size:10px;">INCREASE</span></td>
+            </tr>
+            <tr>
+              <td><strong>📋 Medical / Journals</strong></td>
+              <td class="val">$5.0M</td>
+              <td class="val">8,700</td>
+              <td class="neutral">1.7×</td>
+              <td class="neg">0.8× ↓</td>
+              <td>
+                <span class="roi-bar" style="width:18px; background:var(--rose);"></span>
+              </td>
+              <td><span class="tag rose" style="font-size:10px;">REDUCE</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="padding:14px 18px; background:var(--surface2); border:1px solid rgba(155,114,51,0.2); border-radius:10px; font-size:14px; color:var(--text2); line-height:1.7;">
+        <strong style="color:var(--accent);">📌 Strategic Read:</strong> Speaker Programs and HCP Digital have the highest <em>marginal</em> ROI, indicating they are underfunded relative to their response curve potential. TV/DTC is past saturation — marginal ROI of 1.2× suggests rebalancing toward digital channels.
+      </div>
+    </div>
+
+    <div class="dashboard-panel" id="dash-contribution">
+      <div class="two-col">
+        <div class="chart-box" style="height:300px;">
+          <div class="chart-box-title">TRx Contribution by Channel (Annual)</div>
+          <canvas id="dash-donut" height="260"></canvas>
+        </div>
+        <div class="chart-box" style="height:300px;">
+          <div class="chart-box-title">Base vs. Incremental TRx Split</div>
+          <canvas id="dash-base-chart" height="260"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-panel" id="dash-trend">
+      <div class="chart-box" style="height:320px;">
+        <div class="chart-box-title">Weekly TRx vs. Promotional Spend — Rolling 52 Weeks</div>
+        <canvas id="dash-trend-chart" height="280"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 7. INTERVIEW ─────────────────────── -->
+  <section id="sec-interview" class="section">
+    <div class="section-header">
+      <div class="section-tag">Module 07 · Career Prep</div>
+      <h1 class="section-title">Interview Prep Mode</h1>
+      <p class="section-desc">High-frequency MMM questions asked in pharma analytics interviews at ZS, IQVIA, Novartis, AZ, and Pfizer. Click to reveal structured, pharma-specific answers.</p>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;">
+      <span class="info-pill">🎯 20 Questions</span>
+      <span class="info-pill">📊 Technical + Strategic</span>
+      <span class="info-pill">🏥 Pharma-Framed</span>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:14px;">Foundational</h3>
+
+    <div class="qa-item" onclick="toggleQA(this)">
+      <div class="qa-q">
+        <span class="qa-qtext">Walk me through how you would set up an MMM for a newly launched specialty pharma brand.</span>
+        <span class="qa-badge">SENIOR</span>
+        <span class="chevron-small">▼</span>
+      </div>
+      <div class="qa-a">
+        <div class="qa-a-text">
+          Start with <strong>scoping</strong>: define the KPI (TRx, NRx, or patient share?), geographic granularity (national or MSA-level?), and time horizon (do we have 18+ months of weekly data?). For a new launch, data sparsity is the core challenge — you likely have &lt;24 months of weekly TRx. This pushes you toward <strong>Bayesian MMM</strong> (Robyn / LightweightMMM) where prior beliefs on channel ROI from analogous brands can stabilize estimates.<br><br>
+          Data assembly: pull weekly TRx from IQVIA/Symphony; rep call activity from Veeva CRM; digital spend from your DSP; speaker program spend from the vendor management system. Align all to weekly grain — convert monthly field force data via calendar day proration.<br><br>
+          Transformation: apply adstock to all promotional variables (test λ via grid search 0.2–0.8 in 0.1 steps; select via AIC). Apply Hill saturation for channels where you suspect nonlinearity. Include seasonality (ICD-10 claim seasonality for the indication), payer formulary change events, and competitive launch flags as dummy variables.<br><br>
+          Model: start with a ridge regression baseline. Evaluate VIF — if correlated channels (reps + speakers) show VIF &gt;7, either apply Bayesian priors or aggregate. Validate with walk-forward cross-validation (retrain on first 12 months, test on months 13–18). MAPE &lt;10% is acceptable for pharma specialty.
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-item" onclick="toggleQA(this)">
+      <div class="qa-q">
+        <span class="qa-qtext">What is adstock, and how do you determine the right decay parameter for a pharma channel?</span>
+        <span class="qa-badge">TECHNICAL</span>
+        <span class="chevron-small">▼</span>
+      </div>
+      <div class="qa-a">
+        <div class="qa-a-text">
+          <strong>Adstock</strong> models the carryover or memory effect of promotional exposure. The formula is: A_t = x_t + λ·A_(t-1), where λ ∈ [0,1] is the decay rate. λ=0 means zero carryover; λ=1 means infinite memory.<br><br>
+          In pharma, the "right" λ depends on channel and therapeutic area. <strong>Relationship-based channels</strong> (specialty reps in oncology/neurology) have higher λ (~0.6–0.8) because HCP prescribing behavior changes slowly and relationship credibility persists. <strong>Tactical channels</strong> (email, banner ads, samples) have lower λ (~0.1–0.3) — effects are transient.<br><br>
+          To determine λ empirically: run a grid search across λ values (0.1 to 0.9 in 0.1 increments), fit the model at each level, and select the λ that minimizes AIC/BIC. In Bayesian MMM, you set a prior distribution on λ and the model learns the posterior. A Beta(3,3) prior centered at 0.5 is common when you have no strong prior belief.
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-item" onclick="toggleQA(this)">
+      <div class="qa-q">
+        <span class="qa-qtext">How would you handle multicollinearity between field force and speaker program spend in your MMM?</span>
+        <span class="qa-badge">TECHNICAL</span>
+        <span class="chevron-small">▼</span>
+      </div>
+      <div class="qa-a">
+        <div class="qa-a-text">
+          This is extremely common in pharma: field force ramp-up and speaker program activation typically co-occur, especially at launch. First, <strong>diagnose the severity</strong> using VIF. If VIF &gt;10 for both channels, you cannot reliably estimate individual coefficients.<br><br>
+          <strong>Options:</strong> (1) Ridge regression — L2 regularization shrinks collinear coefficients toward zero but keeps both in the model; interpretability is reduced but estimates are stable. (2) Aggregate the channels into "HCP Personal Promotion" if the business can accept a combined view. (3) Bayesian priors — if you have historical data from an analogous brand where these channels were varied independently, use those as priors to anchor each channel's ROI range. (4) Geo-holdout experiment — run speakers in selective markets without rep activity to create independent variation; use that data to estimate speaker ROI directly, then fix that coefficient in the national model.
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-item" onclick="toggleQA(this)">
+      <div class="qa-q">
+        <span class="qa-qtext">What's the difference between ROI and marginal ROI in MMM, and why does it matter for budget decisions?</span>
+        <span class="qa-badge">STRATEGIC</span>
+        <span class="chevron-small">▼</span>
+      </div>
+      <div class="qa-a">
+        <div class="qa-a-text">
+          <strong>ROI</strong> (or average ROI) = total incremental revenue attributable to a channel / total spend on that channel. It tells you historical efficiency. A channel with 3.5× ROI generated $3.50 in net revenue per $1 spent.<br><br>
+          <strong>Marginal ROI</strong> = the ROI of the last additional dollar spent on a channel. Due to saturation, marginal ROI declines as spend increases. A channel might have average ROI of 3.5× but marginal ROI of only 0.9× — meaning the last dollars spent barely broke even.<br><br>
+          <strong>Why it matters:</strong> Optimal budget allocation requires equalizing marginal ROI across channels, not maximizing average ROI. If your rep channel has marginal ROI 1.2× and your HCP digital has marginal ROI 3.5×, you should shift budget from reps to digital until marginal ROIs converge. Presenting only average ROI to leadership can lead to systematically wrong budget decisions.
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <h3 style="font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--text3);margin-bottom:14px;">Applied / Scenario</h3>
+
+    <div class="qa-item" onclick="toggleQA(this)">
+      <div class="qa-q">
+        <span class="qa-qtext">Your MMM shows DTC TV ROI is negative. The brand team doesn't believe it. How do you handle this?</span>
+        <span class="qa-badge">LEADERSHIP</span>
+        <span class="chevron-small">▼</span>
+      </div>
+      <div class="qa-a">
+        <div class="qa-a-text">
+          Never present a negative ROI result in isolation. First, <strong>diagnose the model</strong>: is this an artifact of multicollinearity (DTC and digital often correlate)? Did TV spend stay constant, giving the model no variation to identify the effect? Check confidence intervals — if the coefficient's CI includes zero, the estimate is statistically unreliable, not necessarily truly negative.<br><br>
+          Then <strong>investigate alternatives</strong>: Does TV have a long lag (brand awareness takes months to translate to Rx)? Try a 6–8 week lag specification. Is TV driving patient demand that then shows up through HCP channels — a mediation effect your single-equation model misses?<br><br>
+          Finally, <strong>present constructively</strong>: "Our model, given current data variation, cannot reliably estimate TV's standalone effect. We recommend a geo-holdout experiment: pause TV in 2–3 matched DMAs for 12 weeks and measure TRx differential. This gives us causal evidence either way, before making a $15M budget decision." This protects your credibility and advances the analytics agenda without creating brand team adversarial dynamics.
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-item" onclick="toggleQA(this)">
+      <div class="qa-q">
+        <span class="qa-qtext">How do you model a competitive product launch within an existing MMM framework?</span>
+        <span class="qa-badge">ADVANCED</span>
+        <span class="chevron-small">▼</span>
+      </div>
+      <div class="qa-a">
+        <div class="qa-a-text">
+          Competitive launches create a <strong>structural break</strong> in your time series — the pre-launch and post-launch periods are fundamentally different. Failing to account for this inflates your error term and biases all channel coefficients.<br><br>
+          <strong>Modeling approaches:</strong> (1) Include competitive spend/activity as a covariate (use competitive sales data from IQVIA or IRI as a proxy if spend data is unavailable). (2) Add a binary step-function dummy variable at the exact launch date. (3) If the competitive product targets a different patient segment, model market share rather than absolute TRx — this naturally normalizes for competitor entry. (4) For Bayesian models, update your prior distribution on base TRx post-launch to reflect the new competitive reality.<br><br>
+          <strong>In practice:</strong> Run the model with and without the competitive variable. If including it materially improves fit and changes channel coefficients, the competitor effect is real and significant. Report both versions to leadership with the caveat that all post-launch insights should be interpreted in the competitive context.
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-item" onclick="toggleQA(this)">
+      <div class="qa-q">
+        <span class="qa-qtext">What would you tell a CFO asking why MMM recommended cutting the field force by 30%?</span>
+        <span class="qa-badge">EXECUTIVE</span>
+        <span class="chevron-small">▼</span>
+      </div>
+      <div class="qa-a">
+        <div class="qa-a-text">
+          Lead with context before conclusions. <strong>"Our model shows that field force spend has reached a saturation threshold — the last $5M in rep activity is generating only $4M in attributed revenue at current call patterns. This is not saying reps aren't valuable; it's saying we're overcalling the saturated decile of HCPs."</strong><br><br>
+          Then introduce nuance: field force ROI in the model doesn't capture relationship equity, competitive blocking, patient support navigation, or the next-brand pipeline value. MMM is a demand model, not a total commercial value model.<br><br>
+          The recommendation isn't "cut 30% of reps" — it's <strong>"realign territory coverage to underpenetrated high-potential HCPs and shift the incremental budget to HCP digital and speaker programs where marginal ROI is 3× higher."</strong> Frame it as redeployment, not reduction, and tie every recommendation to specific business outcomes. CFOs respond to revenue impact projections, not statistical output.
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-item" onclick="toggleQA(this)">
+      <div class="qa-q">
+        <span class="qa-qtext">How do you validate an MMM model in pharma when you can't run true A/B tests?</span>
+        <span class="qa-badge">TECHNICAL</span>
+        <span class="chevron-small">▼</span>
+      </div>
+      <div class="qa-a">
+        <div class="qa-a-text">
+          Use a multi-layer validation framework: <strong>(1) In-sample fit</strong> — R², MAPE, DW statistic, residual autocorrelation plots. Target MAPE &lt;10% for specialty pharma. <strong>(2) Out-of-sample validation</strong> — hold out the last 3–6 months of data; refit on earlier data; compare predictions to actual TRx. This tests generalizability. <strong>(3) Business face validity</strong> — do coefficient signs make sense? Are magnitude estimates within plausible ranges (cross-check with field team intuitions and competitive benchmarks)? <strong>(4) Sensitivity analysis</strong> — perturb key parameters (adstock decay, lag) ±20% and check if insights are robust or fragile. <strong>(5) Benchmarking against analogous brands</strong> — if your rep ROI of 4.2× aligns with what a similar specialty brand in the same TA showed historically, that's supporting evidence.<br><br>
+          The gold standard is a subsequent geo-holdout experiment that validates at least one key channel ROI estimate post-model. Use the experiment to calibrate model output, not to replace it.
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-item" onclick="toggleQA(this)">
+      <div class="qa-q">
+        <span class="qa-qtext">Explain base vs. incremental decomposition and how you'd present it to a brand team.</span>
+        <span class="qa-badge">COMMUNICATION</span>
+        <span class="chevron-small">▼</span>
+      </div>
+      <div class="qa-a">
+        <div class="qa-a-text">
+          <strong>Base TRx</strong> = what the brand would sell with zero marketing activity — driven by brand equity, disease prevalence, patient adherence, and formulary positioning. For mature brands, base is typically 60–80% of total TRx. For launch brands year 1, base is lower (&lt;50%). <strong>Incremental TRx</strong> = the additional prescriptions attributable to your promotional investment across all channels.<br><br>
+          <strong>Why it matters to brand teams:</strong> Understanding what's "owned" vs. what you're "renting" with spend is critical for planning. If base is eroding, that's a formulary/competitive/adherence problem that more promotion can't fix. If incremental is declining, you have a spend efficiency problem.<br><br>
+          <strong>How to present:</strong> Waterfall chart showing base → each channel's incremental TRx → total. Then show year-over-year base trend as a separate line (are we building or eroding brand equity?). Finally, show channel contribution as % of incremental — not absolute numbers, which tend to dominate with the field force because it's the largest spend item.
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+const sections = ['overview','flow','simulator','casestudy','advanced','dashboard','interview'];
+let currentSection = 'overview';
+let visitedSections = new Set(['overview']);
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  const idx = sections.indexOf(id);
+  document.querySelectorAll('.nav-item')[idx].classList.add('active');
+  currentSection = id;
+  visitedSections.add(id);
+  updateProgress();
+
+  // Update topbar title
+  const titles = {
+    overview: 'MMM Overview — Foundation',
+    flow: 'End-to-End Workflow',
+    simulator: 'Interactive Model Simulator',
+    casestudy: 'REVONEX gMG Case Study',
+    advanced: 'Advanced Concepts',
+    dashboard: 'KPI Dashboard',
+    interview: 'Interview Prep Mode'
+  };
+  document.getElementById('topbar-title').textContent = titles[id] || 'MMM MasterClass';
+
+  // Init charts on demand
+  if (id === 'simulator') { initSimCharts(); updateSim(); }
+  if (id === 'casestudy') { initCaseCharts(); updateCase(); }
+  if (id === 'dashboard') { initDashCharts(); }
+  if (id === 'advanced') { initAdvancedCharts(); }
+}
+
+function updateProgress() {
+  const pct = Math.round((visitedSections.size / sections.length) * 100);
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+// ─── TOGGLE HELPERS ───────────────────────────────────────────────────────────
+function toggleFlow(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.flow-step.open').forEach(s => s.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+function toggleAccordion(el) {
+  el.classList.toggle('open');
+  if (el.classList.contains('open')) {
+    setTimeout(() => initAdvancedCharts(), 50);
+  }
+}
+
+function toggleQA(el) { el.classList.toggle('open'); }
+
+function toggleCard(el) { el.classList.toggle('open'); }
+
+// ─── DASHBOARD TABS ──────────────────────────────────────────────────────────
+function switchDashTab(el, panelId) {
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.dashboard-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('dash-' + panelId).classList.add('active');
+  setTimeout(() => initDashCharts(), 100);
+}
+
+// ─── CHART REGISTRY ──────────────────────────────────────────────────────────
+const charts = {};
+
+function destroyChart(id) {
+  if (charts[id]) { charts[id].destroy(); delete charts[id]; }
+}
+
+const CHART_DEFAULTS = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
+  scales: {}
+};
+
+const COLORS = {
+  gold: 'rgba(155,114,51,0.85)',
+  teal: 'rgba(78,205,196,0.85)',
+  purple: 'rgba(155,142,196,0.85)',
+  rose: 'rgba(224,112,112,0.85)',
+  green: 'rgba(106,191,106,0.85)',
+  goldBorder: '#9B7233',
+  tealBorder: '#2D5F47',
+  purpleBorder: '#5B4A8A',
+  roseBorder: '#A84B2A',
+  greenBorder: '#4B6B4A'
+};
+
+const gridColor = 'rgba(15,27,45,0.08)';
+const tickColor = 'rgba(15,27,45,0.55)';
+
+const scaleDefaults = {
+  grid: { color: gridColor },
+  ticks: { color: tickColor, font: { family: 'DM Mono', size: 10 } }
+};
+
+// ─── SIMULATOR CHARTS ────────────────────────────────────────────────────────
+let simBarChart, simCurveChart;
+
+function initSimCharts() {
+  const ctx1 = document.getElementById('sim-bar-chart');
+  if (!ctx1 || charts['sim-bar']) return;
+
+  charts['sim-bar'] = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: ['Rep Calls','Digital','DTC TV','Speaker','Email'],
+      datasets: [{
+        data: [0,0,0,0,0],
+        backgroundColor: [COLORS.gold, COLORS.teal, COLORS.purple, COLORS.rose, COLORS.green],
+        borderColor: [COLORS.goldBorder, COLORS.tealBorder, COLORS.purpleBorder, COLORS.roseBorder, COLORS.greenBorder],
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      ...CHART_DEFAULTS,
+      indexAxis: 'y',
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: { label: ctx => ' ' + ctx.parsed.x.toLocaleString() + ' TRx' }
+      }},
+      scales: { x: { ...scaleDefaults, beginAtZero: true }, y: { ...scaleDefaults } }
+    }
+  });
+
+  const ctx2 = document.getElementById('sim-curve-chart');
+  if (!ctx2 || charts['sim-curve']) return;
+
+  const curveX = Array.from({length: 25}, (_,i) => i * 50);
+  const curveY = curveX.map(x => hillFn(x, 0.7, 450) * 8000);
+
+  charts['sim-curve'] = new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: curveX,
+      datasets: [{
+        data: curveY,
+        borderColor: COLORS.goldBorder,
+        backgroundColor: 'rgba(155,114,51,0.08)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 0
+      },{
+        data: [],
+        pointRadius: 8,
+        pointBackgroundColor: '#fff',
+        pointBorderColor: COLORS.goldBorder,
+        pointBorderWidth: 2,
+        showLine: false,
+        label: 'current'
+      }]
+    },
+    options: {
+      ...CHART_DEFAULTS,
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: {
+          label: ctx => ctx.datasetIndex === 0 ? ' ' + Math.round(ctx.parsed.y).toLocaleString() + ' TRx' : ' Current: ' + ctx.parsed.x + ' calls'
+        }
+      }},
+      scales: {
+        x: { ...scaleDefaults, title: { display: true, text: 'Weekly Rep Calls', color: tickColor, font: { family: 'DM Sans', size: 11 } }},
+        y: { ...scaleDefaults, title: { display: true, text: 'Incremental TRx', color: tickColor, font: { family: 'DM Sans', size: 11 } }}
+      }
+    }
+  });
+}
+
+function hillFn(x, alpha, K) {
+  return Math.pow(x, alpha) / (Math.pow(x, alpha) + Math.pow(K, alpha));
+}
+
+function adstockFn(x, lambda) {
+  return x / (1 - lambda);
+}
+
+function updateSim() {
+  const rep = +document.getElementById('sl-rep').value;
+  const dig = +document.getElementById('sl-digital').value;
+  const tv = +document.getElementById('sl-tv').value;
+  const spk = +document.getElementById('sl-speaker').value;
+  const em = +document.getElementById('sl-email').value;
+
+  document.getElementById('val-rep').textContent = rep;
+  document.getElementById('val-digital').textContent = '$' + dig + 'K';
+  document.getElementById('val-tv').textContent = '$' + tv + 'K';
+  document.getElementById('val-speaker').textContent = '$' + spk + 'K';
+  document.getElementById('val-email').textContent = '$' + em + 'K';
+
+  const totalBudget = dig + tv + spk + em;
+  document.getElementById('total-budget').textContent = '$' + totalBudget + 'K';
+
+  // Model contributions (with saturation)
+  const repTRx  = Math.round(hillFn(rep, 0.7, 450) * 5200);
+  const digTRx  = Math.round(hillFn(dig, 0.9, 200) * 2400);
+  const tvTRx   = Math.round(hillFn(tv, 0.8, 350) * 3100);
+  const spkTRx  = Math.round(hillFn(spk, 0.9, 120) * 1600);
+  const emTRx   = Math.round(hillFn(em, 0.9, 80) * 700);
+  const baseTRx = 8800;
+
+  const totalTRx = baseTRx + repTRx + digTRx + tvTRx + spkTRx + emTRx;
+  const incrPct = Math.round(((totalTRx - baseTRx) / totalTRx) * 100);
+  const roiVal = totalBudget > 0 ? ((totalTRx - baseTRx) * 0.045 / totalBudget).toFixed(1) : 'N/A';
+
+  document.getElementById('kpi-trx').textContent = totalTRx.toLocaleString();
+  document.getElementById('kpi-roi').textContent = roiVal + '×';
+  document.getElementById('kpi-incr').textContent = incrPct + '%';
+
+  if (charts['sim-bar']) {
+    charts['sim-bar'].data.datasets[0].data = [repTRx, digTRx, tvTRx, spkTRx, emTRx];
+    charts['sim-bar'].update('none');
+  }
+
+  if (charts['sim-curve'] && charts['sim-curve'].data.datasets[1]) {
+    const curveY = hillFn(rep, 0.7, 450) * 8000;
+    charts['sim-curve'].data.datasets[1].data = [{x: rep, y: curveY}];
+    charts['sim-curve'].update('none');
+  }
+}
+
+// ─── CASE STUDY CHARTS ───────────────────────────────────────────────────────
+function initCaseCharts() {
+  if (charts['case-donut']) return;
+
+  const ctx = document.getElementById('case-donut-chart');
+  if (!ctx) return;
+
+  charts['case-donut'] = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Reps','Digital','Speaker','DTC','Medical'],
+      datasets: [{
+        data: [38, 17, 15, 21, 9],
+        backgroundColor: [COLORS.gold, COLORS.teal, COLORS.purple, COLORS.rose, COLORS.green],
+        borderColor: '#E4D8B8',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '68%',
+      plugins: {
+        legend: { display: true, position: 'right', labels: { color: tickColor, font: { family: 'DM Sans', size: 11 }, padding: 12 } }
+      }
+    }
+  });
+
+  const ctx2 = document.getElementById('case-trend-chart');
+  if (!ctx2) return;
+
+  const quarters = ['Q1 Y1','Q2 Y1','Q3 Y1','Q4 Y1','Q1 Y2','Q2 Y2','Q3 Y2','Q4 Y2'];
+  const baseTrx = [8200,8350,8500,8650,8800,8900,9000,9100];
+  const totalTrx = [10200,12400,13800,15200,16400,17600,18900,20100];
+
+  charts['case-trend'] = new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: quarters,
+      datasets: [
+        {
+          label: 'Total TRx',
+          data: totalTrx,
+          borderColor: COLORS.goldBorder,
+          backgroundColor: 'rgba(155,114,51,0.08)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 4,
+          pointBackgroundColor: COLORS.goldBorder
+        },
+        {
+          label: 'Base TRx',
+          data: baseTrx,
+          borderColor: COLORS.tealBorder,
+          backgroundColor: 'transparent',
+          borderDash: [5,5],
+          tension: 0.4,
+          pointRadius: 3,
+          pointBackgroundColor: COLORS.tealBorder
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: true, labels: { color: tickColor, font: { family: 'DM Sans', size: 11 }, boxWidth: 12 } }
+      },
+      scales: { x: { ...scaleDefaults }, y: { ...scaleDefaults, beginAtZero: false } }
+    }
+  });
+}
+
+function updateCase() {
+  const rep = +document.getElementById('cs-rep').value;
+  const dig = +document.getElementById('cs-dig').value;
+  const spk = +document.getElementById('cs-spk').value;
+  const dtc = +document.getElementById('cs-dtc').value;
+  const med = +document.getElementById('cs-med').value;
+
+  document.getElementById('cs-rep-val').textContent = '$' + rep + 'M';
+  document.getElementById('cs-dig-val').textContent = '$' + dig + 'M';
+  document.getElementById('cs-spk-val').textContent = '$' + spk + 'M';
+  document.getElementById('cs-dtc-val').textContent = '$' + dtc + 'M';
+  document.getElementById('cs-med-val').textContent = '$' + med + 'M';
+
+  const total = rep + dig + spk + dtc + med;
+  document.getElementById('cs-total').textContent = '$' + total + 'M';
+  const remaining = 48 - total;
+  const remEl = document.getElementById('cs-remaining');
+  remEl.textContent = (remaining >= 0 ? '' : '-') + '$' + Math.abs(remaining) + 'M';
+  remEl.style.color = remaining >= 0 ? 'var(--green)' : 'var(--rose)';
+
+  // Outcome model
+  const repTRx = hillFn(rep, 0.8, 15) * 72000;
+  const digTRx = hillFn(dig, 0.9, 8) * 28000;
+  const spkTRx = hillFn(spk, 0.9, 6) * 24000;
+  const dtcTRx = hillFn(dtc, 0.7, 10) * 22000;
+  const medTRx = hillFn(med, 0.9, 4) * 10000;
+  const totalTRx = Math.round(repTRx + digTRx + spkTRx + dtcTRx + medTRx);
+
+  const revenue = totalTRx * 180; // avg WAC per Rx
+  const spend = total * 1e6;
+  const roi = spend > 0 ? (revenue / spend).toFixed(1) : 0;
+
+  document.getElementById('cs-trx').textContent = totalTRx.toLocaleString();
+  document.getElementById('cs-roi').textContent = roi + '×';
+  document.getElementById('cs-reach').textContent = Math.min(95, Math.round(50 + rep * 1.2)) + '%';
+  document.getElementById('cs-patient').textContent = Math.min(95, Math.round(40 + dtc * 1.8));
+
+  // Insight logic
+  const insightEl = document.getElementById('cs-insight');
+  if (rep > 22) {
+    insightEl.innerHTML = '⚠️ <strong>Analyst Alert:</strong> Rep spend at $' + rep + 'M is entering diminishing returns. Marginal ROI drops significantly above $20M. Consider reallocating $' + (rep-20) + 'M to Speaker Programs or HCP Digital.';
+  } else if (dig > 12) {
+    insightEl.innerHTML = '✅ <strong>Analyst Insight:</strong> Strong HCP digital investment at $' + dig + 'M. You\'re capturing high-value targeted HCPs efficiently. Monitor frequency caps to avoid saturation.';
+  } else if (dtc > 15) {
+    insightEl.innerHTML = '⚠️ <strong>Analyst Alert:</strong> DTC spend at $' + dtc + 'M may be exceeding optimal. Patient demand channel performs well up to ~$12M. Marginal ROI likely declining.';
+  } else {
+    insightEl.innerHTML = '💡 <strong>Analyst Insight:</strong> Current allocation is near-optimal. Rep spend at $' + rep + 'M is approaching saturation — shifting $2M to HCP digital could generate +4,200 incremental TRx at higher marginal ROI.';
+  }
+}
+
+// ─── DASHBOARD CHARTS ────────────────────────────────────────────────────────
+function initDashCharts() {
+  // Donut
+  if (!charts['dash-donut']) {
+    const ctx = document.getElementById('dash-donut');
+    if (ctx) {
+      charts['dash-donut'] = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Base','Reps','DTC','Speaker','Digital','Medical'],
+          datasets: [{
+            data: [62, 14.5, 6.7, 5.7, 5.2, 2.0],
+            backgroundColor: ['rgba(107,114,128,0.8)', COLORS.gold, COLORS.purple, COLORS.rose, COLORS.teal, COLORS.green],
+            borderColor: '#E4D8B8',
+            borderWidth: 3
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '65%',
+          plugins: {
+            legend: { display: true, position: 'right', labels: { color: tickColor, font: { family: 'DM Sans', size: 11 }, padding: 10 } },
+            tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%' } }
+          }
+        }
+      });
+    }
+  }
+
+  // Base chart
+  if (!charts['dash-base']) {
+    const ctx = document.getElementById('dash-base-chart');
+    if (ctx) {
+      const qLabels = ['Q1 Y1','Q2 Y1','Q3 Y1','Q4 Y1','Q1 Y2','Q2 Y2','Q3 Y2','Q4 Y2'];
+      charts['dash-base'] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: qLabels,
+          datasets: [
+            { label: 'Base TRx', data: [64,65,66,67,68,68,69,70], backgroundColor: 'rgba(107,114,128,0.6)', stack: 'a', borderRadius: 2 },
+            { label: 'Incremental TRx', data: [20,26,32,36,38,40,43,46], backgroundColor: COLORS.gold, stack: 'a', borderRadius: 2 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: { x: { ...scaleDefaults, stacked: true }, y: { ...scaleDefaults, stacked: true, ticks: { ...scaleDefaults.ticks, callback: v => v + '%' } } },
+          plugins: { legend: { display: true, labels: { color: tickColor, font: { family: 'DM Sans', size: 11 }, boxWidth: 12 } } }
+        }
+      });
+    }
+  }
+
+  // Trend chart
+  if (!charts['dash-trend']) {
+    const ctx = document.getElementById('dash-trend-chart');
+    if (ctx) {
+      const weeks = Array.from({length: 52}, (_,i) => 'W' + (i+1));
+      const trx = weeks.map((_, i) => 11000 + i * 160 + Math.sin(i/6)*800 + Math.random()*300);
+      const spend = weeks.map((_, i) => 600 + Math.sin(i/10)*150 + Math.random()*50);
+      charts['dash-trend'] = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: weeks,
+          datasets: [
+            { label: 'Weekly TRx', data: trx, borderColor: COLORS.goldBorder, backgroundColor: 'rgba(155,114,51,0.07)', fill: true, tension: 0.4, pointRadius: 0, yAxisID: 'y' },
+            { label: 'Weekly Spend ($K)', data: spend, borderColor: COLORS.tealBorder, backgroundColor: 'transparent', borderDash: [4,4], tension: 0.4, pointRadius: 0, yAxisID: 'y2' }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          scales: {
+            x: { ...scaleDefaults, ticks: { ...scaleDefaults.ticks, maxTicksLimit: 12 } },
+            y: { ...scaleDefaults, position: 'left', title: { display: true, text: 'TRx', color: tickColor, font: { size: 10 } } },
+            y2: { ...scaleDefaults, position: 'right', grid: { display: false }, title: { display: true, text: 'Spend $K', color: tickColor, font: { size: 10 } } }
+          },
+          plugins: { legend: { display: true, labels: { color: tickColor, font: { family: 'DM Sans', size: 11 }, boxWidth: 12 } } }
+        }
+      });
+    }
+  }
+}
+
+// ─── ADVANCED CHARTS ─────────────────────────────────────────────────────────
+let advChartsInited = false;
+
+function initAdvancedCharts() {
+  if (advChartsInited) return;
+
+  const ctx1 = document.getElementById('adstock-chart');
+  if (!ctx1) return;
+
+  const weeks = Array.from({length: 12}, (_,i) => 'W' + (i+1));
+  const raw = [100,0,0,0,0,0,0,0,0,0,0,0];
+
+  function calcAdstock(lambda) {
+    let a = 0;
+    return raw.map((x,i) => { a = x + lambda * a; return Math.round(a); });
+  }
+
+  charts['adstock'] = new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels: weeks,
+      datasets: [
+        { label: 'Raw Input', data: raw, borderColor: 'rgba(107,114,128,0.7)', borderDash: [4,4], pointRadius: 3, tension: 0, pointBackgroundColor: 'rgba(107,114,128,0.7)' },
+        { label: 'λ=0.3 (Email)', data: calcAdstock(0.3), borderColor: COLORS.tealBorder, tension: 0.4, pointRadius: 2 },
+        { label: 'λ=0.6 (Digital)', data: calcAdstock(0.6), borderColor: COLORS.purpleBorder, tension: 0.4, pointRadius: 2 },
+        { label: 'λ=0.8 (Reps)', data: calcAdstock(0.8), borderColor: COLORS.goldBorder, tension: 0.4, pointRadius: 2 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: true, labels: { color: tickColor, font: { family: 'DM Sans', size: 10 }, boxWidth: 12 } } },
+      scales: { x: { ...scaleDefaults }, y: { ...scaleDefaults } }
+    }
+  });
+
+  const ctx2 = document.getElementById('saturation-chart');
+  if (!ctx2) return;
+
+  const spendX = Array.from({length: 20}, (_,i) => (i+1) * 25);
+  const satY_steep = spendX.map(x => hillFn(x, 2.0, 200) * 5000);
+  const satY_normal = spendX.map(x => hillFn(x, 0.8, 200) * 5000);
+
+  charts['saturation'] = new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: spendX.map(x => '$' + x + 'K'),
+      datasets: [
+        { label: 'α=2.0 (Steep)', data: satY_steep, borderColor: COLORS.roseBorder, tension: 0.4, pointRadius: 0, fill: false },
+        { label: 'α=0.8 (Gradual)', data: satY_normal, borderColor: COLORS.goldBorder, tension: 0.4, pointRadius: 0, fill: 'origin', backgroundColor: 'rgba(155,114,51,0.06)' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: true, labels: { color: tickColor, font: { family: 'DM Sans', size: 10 }, boxWidth: 12 } } },
+      scales: {
+        x: { ...scaleDefaults, ticks: { ...scaleDefaults.ticks, maxTicksLimit: 8 } },
+        y: { ...scaleDefaults, title: { display: true, text: 'Incremental TRx', color: tickColor, font: { size: 10 } } }
+      }
+    }
+  });
+
+  advChartsInited = true;
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  // Nothing auto-init; charts init on section visit
+});
+</script>
+</body>
+</html>
