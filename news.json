@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-10T13:38:27Z",
+  "updated": "2026-05-10T19:11:37Z",
   "items": [
     {
       "title": "Best Biotech Stocks of 2026 and How to Invest in Them",
@@ -9,25 +9,18 @@
       "timestamp": 1775890800000
     },
     {
-      "title": "FDA lays out policy wish list, including new trial pathway and new enforcement powers",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWTEycDFZVDVWY0lJZEtXWjBiSHMwblphd3hHZncxbWxWN0NyUlVucGFURGNkSWZZMUQtVE1xN0Z2eEEwQ0NRTDVIT2liOUQ4eldMN3VEcUFBckNWN18zOEktMjdLOUNTWTF4UWxpVjRZR3NYRW05WlJlQk9aMlloSnZfUkpPYnpQeEc1OTFBVFYyVUxvT3Q2ZXUzdFNGOEJnSFFjWXNsbE5JY0c4NnRwbEFHa1hnX0pQbGM0?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Apr 7",
-      "timestamp": 1775545200000
-    },
-    {
-      "title": "New FDA Policies for Faster Drug Reviews Met with Mixed Reactions",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQWm5WYUpCZ2hhbXI3bGk1bHdZZFl6ZXk2RVlWdXlqdzM0bVZ6WFpPTDlKTmNzUDhIYWRmOFhVblM4SE5XZXZIYmw5LUd6RFpIekU2aE5iT2FkLTZ2RDhlaC00aGRoR3ZqN3BuWGFhRGpzeVhRTTBrajFYWVRRdlViaWZYa1plWUxvajVkai1BYV9teFlHRlQ3ZHN3OFZlc0RwRThN?oc=5",
-      "source": "the-scientist.com",
-      "date": "Mar 17",
-      "timestamp": 1773730800000
-    },
-    {
       "title": "What 3 recent FDA rejections reveal about shifts inside the agency",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPbXF1d3RidzFSRGFkRDA3UDRYbXdLVlpycWIxQkpobGhCaDFoVWlzMjMyeGpmeFNpVllnd25lVW1laDNkeUEzYzdmM2xqVTJMYzZsSmVOZ0hnalNlUmxtNGdIVjZ4Y2Qya3A1M3hhandjMHlobzBRTUhLekwteFJlRHhvZTRQRnhzWFN2eVZB?oc=5",
       "source": "Pharma Voice",
       "date": "Mar 4",
       "timestamp": 1772611200000
+    },
+    {
+      "title": "Earnings roundup: Amgen vs. FDA, Pfizer\u2019s defense and Merck\u2019s $70B-in-sales plan",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNOXJjVlRweEFDdlFaZUtScWl2UFJkWWVHNzgzWXhkT3BPX2hjWjJqRGhpZVJuOW4tbUdoWlZWQURCcjY2ZndZakh5M2Y4eDhEVWRvb0NnaWkwV1lWbzNaNmxYNElnQXpVLW5fY0xtdXREbWhNa0JZd19JZnVBblNITzdzWnlEbUpLRTU0RkxWV0g3c0NP?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Feb 4",
+      "timestamp": 1770192000000
     },
     {
       "title": "Top 10 most anticipated drug launches of 2026",
@@ -65,6 +58,13 @@
       "timestamp": 1768291200000
     },
     {
+      "title": "The top 10 biopharma M&A deals of 2025",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBrbFY5MjJEV015dFlNOUhfUlVocG9WVmdZOThJTE5oLU0wX3lFUjdhckFMelItb05jV3JGeTBhUmlsYWE2LWZCWk5kbmF0T29BemEwZ3M3UjRxU0NWVmRsaDdvWnFOeWtKMHhoUTRWbWw1NnpT?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 12",
+      "timestamp": 1768204800000
+    },
+    {
       "title": "5 FDA decisions to watch in the second quarter of 2026",
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeS1xNDBkWi1BUlhmbnd1WTJpMV81VXBkRS1fOUlmNk9pcnVMZ3RIOG5vUGdxN0JQaE9GVUlIWkt0WTN6N1I0dGJlcmp6QnVzR1BxOVFqcTlpY0RscjBtajYxWjBxdlNFeWpoQV9tODBJU25VR2E4UkFIdThsaGphLU1R?oc=5",
       "source": "BioPharma Dive",
@@ -79,18 +79,25 @@
       "timestamp": 1767600000000
     },
     {
-      "title": "Regulatory tracker: Biogen, Eisai confront FDA delay for subQ Leqembi starting dose",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 2",
-      "timestamp": 1767365493000
-    },
-    {
       "title": "2025 FDA approvals",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5VMlhtZHBzSEFBTFpaR25BbUtUUHcxZUJ5ZHVXUFhYbm5LaW1tX3pCdEl6M3VUWnhzN2l1QXdWc3h5YXpXazV4WUFUb0xMdnJsbkdMWG5vTHdoZFlxcnJZ?oc=5",
       "source": "Nature",
       "date": "Jan 2",
       "timestamp": 1767340800000
+    },
+    {
+      "title": "Turmoil at the FDA Threatens Biotech Recovery",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOZFdCR1VhbWhCeEppOUt4VlJESDd1aG5WNTdPSkRaem8tbWZMdHhSQmR2eGY5OXpIWnNwOXBYZWRQYTFmSFBJWTJfZXA2TVRndk9jbFhyS2JkZkstYWlmSDlkX1dvMW90cGlLcEk0UldOVkxMQi00SmFuM2pieGlQb3FuZkhxc0JnWjVOUVJiTWt1dw?oc=5",
+      "source": "WSJ",
+      "date": "Dec 4",
+      "timestamp": 1764835200000
+    },
+    {
+      "title": "RNAi biotech Arrowhead wins first FDA approval",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNG1sekVZclhCeVlfT1diN3NzaEJLOElVckN2YThoSGlhcXNfMlMtSHU2M19fX0V4aTlWQ1BlQWotREJnbGFuRl9XaHdtNUdyNDQ2LWdXVldobWFyRlY1dWIwWExTN0ZfZ0xrWFl2WU1IcDFvQUlmY0xKUDNGc29TQ1l6bmVSdFgzYzVBVTFCVjJrUTJWOEk4YUZWTUg5VUMteFNuUllpWkQtNnhVdXRYUVhKMA?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Nov 18",
+      "timestamp": 1763452800000
     },
     {
       "title": "U.S. pressures U.K. as pharma pauses investments there",
@@ -100,18 +107,18 @@
       "timestamp": 1757919600000
     },
     {
-      "title": "U.S. Drugmakers Warn White House of Chaos as Trump Weighs Curbs on China",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNLUZBMW1ycFFMUExyYkNjQVlqNXVWeWRMbUhSOGdEdFF3azZWN0xrQ0ZteHpzYWVTQ2lyYkVEOUwxUVRnVVF5Wlkybm5jSVFCWWU5NENRVGJkekdNcDZLNGNVeG9mQnlJS0JvM3drQ3QtUHJlMzMwczVzX0M1TTJKVVEwNVY?oc=5",
-      "source": "The New York Times",
-      "date": "Sep 12",
-      "timestamp": 1757660400000
-    },
-    {
       "title": "'Several concerning observations': FDA sheds more light on reasons it rejected drugs",
       "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNSnluVHU4Znp2MXRyZ2dXUDFUcXh4VTB2aXNsdzZsVHYwN2poQXZmVHc2TjNtT2xVYWRRQnZJTDlXMXFqV0FuR1NCbUVHUzE3NFFXenBVOS1abklsTDFfLWpITUhFT1FsUnoxN0toazNBYjZ3ano3V2ZJbFU3Z1JXS3VQNmtidkNZWjRBM3dLeGtKcTZEYWdzdDEyQmk5SURBR0pOcDB1bDc?oc=5",
       "source": "Fierce Biotech",
       "date": "Sep 5",
       "timestamp": 1757055600000
+    },
+    {
+      "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWkFSZXVGSzlqZmw2MFNaR2JQaHVQdVp3cjNrMm1CMFh5SXM2QlRNSVg4NXBKbF9aVk5TSEgzdWlqVEtLMkMxTUZORTQxTS1nSXpmOFNTS3BpZE1ZOWxyb3M0dDRLbnNTb1Ywd1J3b1lNYTNqYUxSRm85bmJJbDY1Qi1vVHFxeEY1amIzd3ZrbWp0Q0VHTFJrbXYyRWZ6Zw?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Aug 29",
+      "timestamp": 1756450800000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
@@ -126,6 +133,20 @@
       "source": "Fierce Pharma",
       "date": "Jul 11",
       "timestamp": 1752217200000
+    },
+    {
+      "title": "Biotech CEOs to FDA: Don\u2019t Let Politics Override Science on Abortion Pill",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZE5lUHNkbmJXUXRWb3R1Z05WV2pqV2Z6U1hXM2JQMVY0WFk5LTRSbWNUajc4bzVOQmJBc1h4elZVN3kzcjRoUEFpaXRpeWxVYU9vM0tCam9IeTB2czAtUDEzdmJDdmpXcXlESGhVMV9qZ2Z1RzlTaEhkM2xOWS16ZVNlZ0IweGVOanZ2RzVqV29WVHI3X1Y4VVRVVkNpaWNCdlpuOHhrQXNTQ2VOWUE4cg?oc=5",
+      "source": "Ms. Magazine",
+      "date": "Jul 10",
+      "timestamp": 1752130800000
+    },
+    {
+      "title": "KalVista bounces back from FDA delay with approval for oral rare disease med Ekterly",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPd3k3MU93Y3gyQVlQcXcyUjZXMnBNZ1podk5VMG8yampqTW44LUlSZlZmeEhPeXY2Qkx1ZnhKUkVEVFpzelB1VjliTFRyZU1sQzl5cE5zMlRGdjhKbG1yaHZOeVFxT0xGZHFOVW42SWFSbTdpbzFqd01iRURocGdOb2o0WjVkY01nQVNIUEVnUl8wU2IyQ3hKMmRYY2dhZ1dRX2t3dDBkVUo1Zw?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 7",
+      "timestamp": 1751871600000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
@@ -212,13 +233,6 @@
       "timestamp": 1743404400000
     },
     {
-      "title": "Rare Disease Day: seven drugs awaiting approval in 2025",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPV2ppUVFPeXUzcVcwUTdnU3pVRW1qcThUOUxMcjkybU1SVUh5UmJqUVF5NmpjR3JxRTdkM2YyS1lwN2pPQl9nN0dJR01OeGZMNjZoNnZMRjVMWk1VRzRTSGhkeXNwVDcxTmJhcGFsVHNyTUtUM3MyaE13eklNM1ZMTUhKRzFpbllTVExpVg?oc=5",
-      "source": "Labiotech.eu",
-      "date": "Mar 3",
-      "timestamp": 1740988800000
-    },
-    {
       "title": "Top 10 most anticipated drug launches of 2025",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdXR2cHZPdWp0djFfWnlOSnhpSkJpd2ZJTmZVWnJaVElmNzFnZHREZ1Vza1NuRVhIREdRejV6NUhGMjdsSnktSGlzaEFvdUpJSDR6VHFBVXBtWGhrTFFuZHYtYVlEcVFZMWtGelVlQzY3QkhvcXNfRHJ4UF9UZ3QxVDdEUjk2WWM1?oc=5",
       "source": "Fierce Pharma",
@@ -240,25 +254,11 @@
       "timestamp": 1735804800000
     },
     {
-      "title": "The benefits and challenges of FDA Fast-Track and Accelerated Approval in drug development",
-      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOSUhpUVBKU2ZBSnNwcmprVEVrVm9ZeU1Mb3NIR05mOXFmRWhjdHlHOHVHemtkUmRFb1p6SEctQWUyY01UeDU3dmpaTXd4NXVVNXNpN2dsY0pxVFlEVnF1SjRCTkVnYV95dUx5d0JGM2wtVzAzbExSTzBhelY5U1Z1RkE1LXVUaER1VmZHb1pEaUo2RmQ4WHZSUTN6RUFVbUdrWmRDc1pvSVZ1NnVLOHFwRmtCSWdhQUNrLWFjTG9NM0JOemhfdi1famhWOEhibHo2MGRybjI2QXhraHN2?oc=5",
-      "source": "News-Medical",
-      "date": "Nov 13",
-      "timestamp": 1731484800000
-    },
-    {
       "title": "How One Biotech Is Using FDA 505(b)(2) To Get Drugs To Patients Quicker And Cheaper",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQeXZ1d2E5bU5IVTR4VmlzNks1VmliRFprTWkyZkVZd0Y2QzVjVVZETFJUWGpBWE54Mm5zaHpYQ04zRnNFODltVFlBbTV1VHR0V2h4bWdjMExGQmpUbndxNnE4dmtqMV9PUWpGNzlXcjBBQTN0dlZlTThrYjhrVVNvNkR3TzBzRllXd1hFQ3dQR2N1cFZmdkpVX3ZfcU1KU05rVUd6Sll0WmZSbjZ3RzlLdkRBRjd5UQ?oc=5",
       "source": "Clinical Leader",
       "date": "Oct 9",
       "timestamp": 1728457200000
-    },
-    {
-      "title": "Analysis of US Food and Drug Administration new drug and biologic approvals, regulatory pathways, and review times, 1980\u20132022",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5KZFpOMENFcndMZFl0SkNiRmVyY2VEa01kazdSRHd6cDk5M0hEaGw4TWpRODh5QUc5cUI5QUEyZVJjd2J3SmZ3RjRaSV9LM0RVaEJGU0NHMHJ4M1ZST2J3?oc=5",
-      "source": "Nature",
-      "date": "Feb 9",
-      "timestamp": 1707465600000
     },
     {
       "title": "US FDA approvals bounce back in 2023, sparking hopes of a biotech recovery",
