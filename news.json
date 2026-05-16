@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-16T13:41:29Z",
+  "updated": "2026-05-16T19:11:29Z",
   "items": [
     {
       "title": "FDA Leadership Changes Crisis: 3 Exits in 2026?",
@@ -14,6 +14,13 @@
       "source": "The Motley Fool",
       "date": "Apr 11",
       "timestamp": 1775890800000
+    },
+    {
+      "title": "FDA floats new clinical trial reforms; Takeda punts Denali brain drug",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNUGJySG5YcjI5YUIxa1BNYWl4Z3FtQmZ3UE9yemRXcW5FMjJxdFhudFU3cHVoajl4UUc1ZHJCTE95TUlZYjBDSkh6QjFBc29felgtTHNOVkhWbk5jRjN6V2dHdldzcnVPNzktT1pZNlMzei15NHFFYVhCajBxVmxZbXRvY0s4ZmV2R3ZHSWV5S0dRR3E2N01MMVl3?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Apr 6",
+      "timestamp": 1775458800000
     },
     {
       "title": "What 3 recent FDA rejections reveal about shifts inside the agency",
@@ -42,13 +49,6 @@
       "source": "ING THINK economic and financial analysis | ING THINK",
       "date": "Jan 20",
       "timestamp": 1768896000000
-    },
-    {
-      "title": "The China Dependence Big Pharma Doesn\u2019t Want Washington to See",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNRnRmY0JZb2pWRkxOTmRWT1liR0p4Smh0TzVhNDVFaHd0SGNoS0VVWVM2dW1fVkV3UzFJZUVNR3lUUDU0Q01fbW40XzlIQldVbkNmcVFLeWxDX1Rkb1dST1ljdTFZdDJOa3hOQnVPdDJqVlZaMFFmUnlTQ0RRVjFXcFhBVFRxQWMzWWxoam5YWjVSazg0SVZn?oc=5",
-      "source": "Coalition For A Prosperous America",
-      "date": "Jan 14",
-      "timestamp": 1768377600000
     },
     {
       "title": "The top 10 biopharma M&A deals of 2025",
@@ -91,6 +91,13 @@
       "source": "Fierce Pharma",
       "date": "Dec 17",
       "timestamp": 1765958400000
+    },
+    {
+      "title": "RNAi biotech Arrowhead wins first FDA approval",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNG1sekVZclhCeVlfT1diN3NzaEJLOElVckN2YThoSGlhcXNfMlMtSHU2M19fX0V4aTlWQ1BlQWotREJnbGFuRl9XaHdtNUdyNDQ2LWdXVldobWFyRlY1dWIwWExTN0ZfZ0xrWFl2WU1IcDFvQUlmY0xKUDNGc29TQ1l6bmVSdFgzYzVBVTFCVjJrUTJWOEk4YUZWTUg5VUMteFNuUllpWkQtNnhVdXRYUVhKMA?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Nov 18",
+      "timestamp": 1763452800000
     },
     {
       "title": "FDA review of drugs is slowing while application delays are growing, analysis finds",
@@ -170,6 +177,13 @@
       "timestamp": 1752130800000
     },
     {
+      "title": "FDA publishes rejection letters sent to drugmakers, with a big caveat",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNRFNjenM2QzNhR1pxM1BGS0lNdHpzRkxRUmJJQU5KR0MwcG8wNXBSaThoXzQ4ZElQR2VlTzRPbGlOZmp0MC1SRzJaSUZMblVQbHV2U2FhdkNuTHYxTHAyMlJYeVdXeFhFU1A5RGYyTkp4cTNyZ3BzZW9ncGtRdkN6elV0bTNHYzA2OVltdEZkVU5FNTRaY3l5UjBZQ0NINWR4OWh5Y0V2Tlk0Zw?oc=5",
+      "source": "statnews.com",
+      "date": "Jul 10",
+      "timestamp": 1752130800000
+    },
+    {
       "title": "KalVista bounces back from FDA delay with approval for oral rare disease med Ekterly",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPd3k3MU93Y3gyQVlQcXcyUjZXMnBNZ1podk5VMG8yampqTW44LUlSZlZmeEhPeXY2Qkx1ZnhKUkVEVFpzelB1VjliTFRyZU1sQzl5cE5zMlRGdjhKbG1yaHZOeVFxT0xGZHFOVW42SWFSbTdpbzFqd01iRURocGdOb2o0WjVkY01nQVNIUEVnUl8wU2IyQ3hKMmRYY2dhZ1dRX2t3dDBkVUo1Zw?oc=5",
       "source": "Fierce Pharma",
@@ -184,15 +198,15 @@
       "timestamp": 1751180400000
     },
     {
-      "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
-      "source": "Fierce Biotech",
-      "date": "Jun 16",
-      "timestamp": 1750057200000
+      "title": "Does the FDA commissioner\u2019s new voucher program open a Pandora\u2019s box?",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNZjlpRGVDWGtFRW9jelI3LXU5dkt3YVRGRVJDcjBjNGF4Q2owMzhtd3g2RHlBQnItbVVKVUQ0bEd1YUs4MzZJVkllQkc0MjVfZ0MyX1ExV0RlcTZZVHhaQ1J2RGRaTWdYcGx3LVdUSmpuYTkxUHMwX2p5Vjc1NlFoQ2kyZ09PMEdUaWFzbC1pU0NlaHB3dm5LNFZ0Nk1kdTN0U1BtLUdidw?oc=5",
+      "source": "statnews.com",
+      "date": "Jun 18",
+      "timestamp": 1750230000000
     },
     {
-      "title": "FDA's 'heavy workload' blamed for delays to KalVista's angioedema drug approval decision",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNZ3hYWUlUOG5BeWNBU1RDRVZZbEFHNzBQV1drQ3R3MFNRWWpzWUVRS3p0eDFxUU12RTBCT3U0bmh3bWZ1WHZLcXppS1dEVXZuc1Axb0NVUmVyakFmOEVhTnRNMVlya1N5M05xM1c5SjI1ZFFSYXljaEFsV2lIaHhpSkYxX1h4anhMcGdPRlBFZS14c2hoQU9vcEhGWFdHSXVPSUpqaXItYy1JVFFnVWRWNThPLTNsQQ?oc=5",
+      "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
       "source": "Fierce Biotech",
       "date": "Jun 16",
       "timestamp": 1750057200000
@@ -210,13 +224,6 @@
       "source": "Reuters",
       "date": "May 14",
       "timestamp": 1747206000000
-    },
-    {
-      "title": "FDA misses another approval decision target date, this time for GSK's Nucala in COPD",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQSDlKQ2M4akVPZk5UQUxab0hVTTQ4NTRzaXJmSmdOZThCNmloZThMa0FtVU5saDdaSE5pRWRFY2RzbUtIdjAtUXRsNFR5STdTY2ZndFRPR1h4eF8xQnRFRjFyZVd2dmtYeWxiS0NSQWFIamJKV2V5TDk0cnphVnRIVktHbUJ1amZCY2lWWjFkLXk5RjN5ZHc1Q3V5bkpMaHoyVmNCMU13?oc=5",
-      "source": "Fierce Pharma",
-      "date": "May 8",
-      "timestamp": 1746687600000
     },
     {
       "title": "How to stop the shift of drug discovery from the U.S. to China",
@@ -245,13 +252,6 @@
       "source": "WSJ",
       "date": "Apr 17",
       "timestamp": 1744873200000
-    },
-    {
-      "title": "Top 10 most anticipated drug launches of 2025",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdXR2cHZPdWp0djFfWnlOSnhpSkJpd2ZJTmZVWnJaVElmNzFnZHREZ1Vza1NuRVhIREdRejV6NUhGMjdsSnktSGlzaEFvdUpJSDR6VHFBVXBtWGhrTFFuZHYtYVlEcVFZMWtGelVlQzY3QkhvcXNfRHJ4UF9UZ3QxVDdEUjk2WWM1?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 27",
-      "timestamp": 1737964800000
     },
     {
       "title": "Ten first-in-class drugs on track for FDA approval in 2025",
