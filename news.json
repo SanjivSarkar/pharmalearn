@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-27T15:55:30Z",
+  "updated": "2026-05-27T20:23:54Z",
   "items": [
     {
       "title": "Best Biotech Stocks of 2026 and How to Invest in Them",
@@ -21,6 +21,13 @@
       "source": "Pharma Voice",
       "date": "Mar 4",
       "timestamp": 1772611200000
+    },
+    {
+      "title": "U.S.-China Biotech Rivalry Over Faster Drug Approvals",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOU084OGtSRVpuWkRLNjJGVU5iTkRfZGU5bDRFcHdoZGUxb1BSV1BKcEl0NXVDQkZPOUVUZDQ3T1JoMkh1S2syWm1GeENzVmhkeFNLbmhhcVBDSHFsbmRJdE1VbU1JcDRHcE5EOWstdm9jaWlhVU1sdTRkUm9IRVlEbV9OTGJQTFhs?oc=5",
+      "source": "\uc870\uc120\uc77c\ubcf4",
+      "date": "Feb 26",
+      "timestamp": 1772092800000
     },
     {
       "title": "Pharma and biotech innovation and competition in 2026: Five areas to watch",
@@ -65,6 +72,13 @@
       "timestamp": 1768204800000
     },
     {
+      "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSUt6TjhqalJoV0RyTGFjdVoyaUdFQ3VFbHlVNXBpQ2lPMXdmU2pXbGxSTWtmY0otM0dTZktkS3pXVXk2Y2RYTnAtOUJJTDlzRkFwOXlkaDNMTS1lYm4wMXNZbGpuYWhTUFZHUlF2clJHU2tLaVQ3WXFDQ1E5WFJBR2hiY3dPNUFQbURaZjNJOGlUU3lSTGZHUkxJOGtBaUJnTW9SZ3JtMXN2bUdMY3psLU15dzBMX2ZR?oc=5",
+      "source": "McKinsey & Company",
+      "date": "Jan 7",
+      "timestamp": 1767772800000
+    },
+    {
       "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBKQjVRa3Fjay05WEdjelFUYkNVdVQ5VFFPYk42eGRvLXpTOVJYdHJaTjY4RjE3VHlmOWM0SDV1QmZKNEJXTmg0YVd2eEptbllhaklWQy1vRWdwNC1aUmptb1BfdGZLUQ?oc=5",
       "source": "Fierce Pharma",
@@ -93,11 +107,11 @@
       "timestamp": 1765958400000
     },
     {
-      "title": "Senate Witnesses Discuss Reshoring and Making China\u2019s Massive Biotech Ecosystem Less Attractive for Big Pharma",
-      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNdVZ0YTlnSnhKN2lReWRTS1Ewdm5pQTY4MzNjZmtTQWhhdjVxZ0JGTzFLN2dla0tRZ2NhaUVKdW5HTEdKX2tCN1BlSy1tWWFVUGx0VVZwQ0dnZTA4dlRWRnZuTWJMZFBXVko5X2xsZ3FrUHYyRG16TkRTUEpPY0otNEduMHpXNEEzLXNHVFA3WWl1UjF4UDJoeFJoQ0ZuX0llbGRYNTN4Y1dXYTRLOTRxcnFmMVI4WC0zZGJIenFzTlN2YWRLSzZDRHRoVER3Ml9zb05DRG5BVQ?oc=5",
-      "source": "Coalition For A Prosperous America",
-      "date": "Nov 3",
-      "timestamp": 1762156800000
+      "title": "Fierce Pharma Asia\u2014US-China supply chain ties; Bayer biotech incubator; Henlius biosim nod",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOS2JEYWtNUGFwY0YxTVZPa19RMVR4ZlFCQ1VYbnNXMmZLMmdEUnI2dVgzUElLeloyV0xFTlpqR01sWGhMTVE2VTBoN3cxa2ZXTXBXbzh5WWxtMDV2TVVxTzV1M2lnLUg2Y19YUzVDaDJCVUxOcTdSNXVKdzktZHBkQURPeUVEZmJFR2VCM1huZHg2c0V2bzF0V3BFZ2hRcnNqNFJiYmp0NUxjeGk3ejJpWFNPNDJoVnBEWlpzTDlUU19qZw?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Nov 21",
+      "timestamp": 1763712000000
     },
     {
       "title": "First FDA IND Milestone Achieved Using Human Vascularized Organoid Efficacy Data",
@@ -107,18 +121,18 @@
       "timestamp": 1761548400000
     },
     {
-      "title": "Drug and medical device regulation under the Trump administration",
-      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQbFBuM0dSXzNUYjhPTjRsWTdWTTlONEU4SWowUnIzU1U2Y25OZ3dKem9XaDFab1ZKZVg5ZDdKbFZMS21WM1FrMDVhN1k3RWNBMENMOUtQY3VZVThqS1BwdmZQR09wbVVVVzJaT2R0WGJZaGJ4SUJCcm1BeHl4MF9xMHpEamZFTklOVEt5cG1td2dUODdvdFp6NnNPV3NQMzVnZlVNLUxpaw?oc=5",
-      "source": "A&O Shearman",
-      "date": "Sep 16",
-      "timestamp": 1758006000000
+      "title": "Trump administration mulls curbs on Chinese biotech drug approvals",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPVjhxX3BPTnp6bDRnMnk5M2liT3ExbVB4VHF1clBXUEpWMHZFUGhIVDU1Q2pVV0tUOWN5T195TTFhTi1fc1lVaGNnR3RuV1ZyVUw3N3QtaDdVQnhRWC1QdHNYTUNEdlA4LTEyLVJaUFhjUFowWjE3MjNEQkFubFhJNEdFcVRpTjBk?oc=5",
+      "source": "\uc870\uc120\uc77c\ubcf4",
+      "date": "Sep 15",
+      "timestamp": 1757919600000
     },
     {
-      "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWkFSZXVGSzlqZmw2MFNaR2JQaHVQdVp3cjNrMm1CMFh5SXM2QlRNSVg4NXBKbF9aVk5TSEgzdWlqVEtLMkMxTUZORTQxTS1nSXpmOFNTS3BpZE1ZOWxyb3M0dDRLbnNTb1Ywd1J3b1lNYTNqYUxSRm85bmJJbDY1Qi1vVHFxeEY1amIzd3ZrbWp0Q0VHTFJrbXYyRWZ6Zw?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 29",
-      "timestamp": 1756450800000
+      "title": "Trump admin mulls 'severe restrictions' on US pharmas licensing Chinese meds: NYT",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQS1ZFc2hqWDNJcjcybE5nbnJaSEk0ZENyNVFfS2NQOUV6WS1oNmJfYk4yV0RJQjJ0TnczMU9lSkIzUE1tNlA3eXdTVzZCeXdqRVNPRm1Zb2lCdWZ6Ny1ldGRDenBfaW1EM3dmeFl0SmdUNExrZ25xM3ZEc3dHc2VPVkwwRE9wblJ2LVhIQWNVNWxFcTdxS3M2YnJ6ZlJvWlJGem1MTXZHUFhTckhwajl5bWJ3?oc=5",
+      "source": "Fierce Biotech",
+      "date": "Sep 10",
+      "timestamp": 1757487600000
     },
     {
       "title": "CEO Forums: An FDA Listening Tour to Engage Pharmaceutical and Biotech CEOs",
@@ -140,13 +154,6 @@
       "source": "RTTNews",
       "date": "Jul 30",
       "timestamp": 1753858800000
-    },
-    {
-      "title": "FDA appoints George Tidmarsh as top drug regulator",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxONm5iTGVuNVNxUm5BRDhTLUowV1N3MjRDbXNOc0s1THVRRGRRbWhObVVvanpRUjd1dnpjTGNzUVFNRV9MSEZ5U21JY2dVQ3lVaVp1S0Nzc0pnMVA3LVZfR3VMTTBkRDd1d2k0d0ZlVUVNZkh3cXZzanA5NFdtME5VMFk2RWFxSndvY01oQnJVQTRTQU9meEtxTzZaYzRsLVZKd3VzbzNZQWtTei1WdUFsZmlRRE55Q3VzNUJF?oc=5",
-      "source": "Reuters",
-      "date": "Jul 21",
-      "timestamp": 1753081200000
     },
     {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
@@ -266,13 +273,6 @@
       "source": "Reuters",
       "date": "Jan 2",
       "timestamp": 1704182400000
-    },
-    {
-      "title": "Krystal Biotech Receives FDA Approval for the First-Ever Redosable Gene Therapy, VYJUVEK\u2122 (beremagene geperpavec-svdt) for the Treatment of Dystrophic Epidermolysis Bullosa",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOOTFWcDVoVDdkWlN2c096eUJSQ0hoN1Q5cG5rN1dVM3VwTy0zZTAtVWo3dTBUOXY0SWdJX2JVZWRGaV90QmNmX1RoRnBBMzhLN0lYcGV5NERRRmZnWVIyY1hPZXJ3SmJPMjJTTWNvc2h1QnZhS0lKWFVaWmJqQUlIeTdPSkNwUkVuLUlyalNnSXRaOHVXOTgyaEFUeDdPWFVhSHNYMVdIUDE4SU9YTU9UaUV2dmxNUHBSc2N6VVUyUnJLQQ?oc=5",
-      "source": "Krystal Biotech, Inc",
-      "date": "May 19",
-      "timestamp": 1684479600000
     },
     {
       "title": "2022 drug approvals: After Aduhelm fiasco, FDA endorsements drop to 37",
