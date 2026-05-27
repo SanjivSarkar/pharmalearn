@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-26T20:13:19Z",
+  "updated": "2026-05-27T04:13:20Z",
   "items": [
     {
       "title": "Best Biotech Stocks of 2026 and How to Invest in Them",
@@ -9,11 +9,11 @@
       "timestamp": 1775890800000
     },
     {
-      "title": "Proposed FDA budget aligns Makary, Trump behind rivaling China biotech",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQZmhwSE9CRGktbkNCVFBDekktcWNwREY5bWMyNTBTXzBMM2hsS1EyVUg0c09nTFoxczlLV1cxSEpvZHlGanl4Ymg1d3FlWGZQWTFmby00ek1SQXVFeTBaSVJvaHVPUVUzd2RqNFZmd0lsenlNV0hmSGZianlpcmd1dEdCN3M?oc=5",
-      "source": "Endpoints News",
-      "date": "Apr 6",
-      "timestamp": 1775458800000
+      "title": "FDA lays out policy wish list, including new trial pathway and new enforcement powers",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWTEycDFZVDVWY0lJZEtXWjBiSHMwblphd3hHZncxbWxWN0NyUlVucGFURGNkSWZZMUQtVE1xN0Z2eEEwQ0NRTDVIT2liOUQ4eldMN3VEcUFBckNWN18zOEktMjdLOUNTWTF4UWxpVjRZR3NYRW05WlJlQk9aMlloSnZfUkpPYnpQeEc1OTFBVFYyVUxvT3Q2ZXUzdFNGOEJnSFFjWXNsbE5JY0c4NnRwbEFHa1hnX0pQbGM0?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Apr 7",
+      "timestamp": 1775545200000
     },
     {
       "title": "FDA approves leucovorin for ultrarare cerebral folate deficiency subset without clinical trial",
@@ -65,6 +65,13 @@
       "timestamp": 1768291200000
     },
     {
+      "title": "The top 10 biopharma M&A deals of 2025",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBrbFY5MjJEV015dFlNOUhfUlVocG9WVmdZOThJTE5oLU0wX3lFUjdhckFMelItb05jV3JGeTBhUmlsYWE2LWZCWk5kbmF0T29BemEwZ3M3UjRxU0NWVmRsaDdvWnFOeWtKMHhoUTRWbWw1NnpT?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 12",
+      "timestamp": 1768204800000
+    },
+    {
       "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBKQjVRa3Fjay05WEdjelFUYkNVdVQ5VFFPYk42eGRvLXpTOVJYdHJaTjY4RjE3VHlmOWM0SDV1QmZKNEJXTmg0YVd2eEptbllhaklWQy1vRWdwNC1aUmptb1BfdGZLUQ?oc=5",
       "source": "Fierce Pharma",
@@ -93,11 +100,18 @@
       "timestamp": 1765958400000
     },
     {
-      "title": "US FDA proposes moves to speed availability of some cheaper biotech medicines",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQOXZzeFd5a3g4MnVSa25VaDRzU0lKUjF5WWVURWJHVGNaUzJSb3N1UWVXLWtHeFpibDFOV2dLZzFtbWtQQUw4RWI3bkNjTi1Mb2VRZEJ3dldjbTl0clNvTUhZenJqeEVjVFVma3lzYlVsbHZpWmxPWE1aMnBydUlvTFZoOU5ZZEFZamk3b0V5Y25zUzQtcGYyd2lmaHFjQTRjOTJYaXQ4RUhzeG9kcXpsZmZBT3Nva2ZfNU9LMFl3?oc=5",
-      "source": "Reuters",
-      "date": "Oct 29",
-      "timestamp": 1761721200000
+      "title": "First FDA IND Milestone Achieved Using Human Vascularized Organoid Efficacy Data",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNYU5keXB5YnJROWcxUlNMLXN2b1JIcTRyZzgwM0xyRThaNEFWN3M0UHIzOTQwZGVnWTNWLXFHSHR2NHRLOU51aWJxX1VDelBvb3IySzRMR0hMcFZmV01IUUREZ2tvS0I5SUxyQ0dPcU9jNWNGWURyX2xRUy1Pd0tiaC12bEtSRDBWQkZ2bFQ0cUo2ck9ISklZUGRMNzREb3BhYVlPWWVod21hRDF0QkVmcHNKY0M0Mkx0QWlBOQ?oc=5",
+      "source": "Fierce Biotech",
+      "date": "Oct 27",
+      "timestamp": 1761548400000
+    },
+    {
+      "title": "Drug and medical device regulation under the Trump administration",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQbFBuM0dSXzNUYjhPTjRsWTdWTTlONEU4SWowUnIzU1U2Y25OZ3dKem9XaDFab1ZKZVg5ZDdKbFZMS21WM1FrMDVhN1k3RWNBMENMOUtQY3VZVThqS1BwdmZQR09wbVVVVzJaT2R0WGJZaGJ4SUJCcm1BeHl4MF9xMHpEamZFTklOVEt5cG1td2dUODdvdFp6NnNPV3NQMzVnZlVNLUxpaw?oc=5",
+      "source": "A&O Shearman",
+      "date": "Sep 16",
+      "timestamp": 1758006000000
     },
     {
       "title": "'Several concerning observations': FDA sheds more light on reasons it rejected drugs",
@@ -140,13 +154,6 @@
       "source": "Fierce Pharma",
       "date": "Jul 11",
       "timestamp": 1752217200000
-    },
-    {
-      "title": "Biotech CEOs to FDA: Don\u2019t Let Politics Override Science on Abortion Pill",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZE5lUHNkbmJXUXRWb3R1Z05WV2pqV2Z6U1hXM2JQMVY0WFk5LTRSbWNUajc4bzVOQmJBc1h4elZVN3kzcjRoUEFpaXRpeWxVYU9vM0tCam9IeTB2czAtUDEzdmJDdmpXcXlESGhVMV9qZ2Z1RzlTaEhkM2xOWS16ZVNlZ0IweGVOanZ2RzVqV29WVHI3X1Y4VVRVVkNpaWNCdlpuOHhrQXNTQ2VOWUE4cg?oc=5",
-      "source": "Ms. Magazine",
-      "date": "Jul 10",
-      "timestamp": 1752130800000
     },
     {
       "title": "KalVista bounces back from FDA delay with approval for oral rare disease med Ekterly",
@@ -231,13 +238,6 @@
       "source": "WSJ",
       "date": "Apr 17",
       "timestamp": 1744873200000
-    },
-    {
-      "title": "Make the FDA Great Again!",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBiWnJpSUhpaWo0d1o3LWo4NXFKNXB3bGxoNDYweVNpSlEyd1d1VWFMRlJ5RjJkOHktbjlUNklFOG9RcURZT2N4VGRKTVA5ck1jazVLcUZIT1hob1pMc0lzWmZJSEwtQQ?oc=5",
-      "source": "blog.joelonsdale.com",
-      "date": "Apr 5",
-      "timestamp": 1743836400000
     },
     {
       "title": "Top 10 most anticipated drug launches of 2025",
