@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-06T13:52:41Z",
+  "updated": "2026-06-06T19:38:21Z",
   "items": [
     {
       "title": "The Pharma Choke Point",
@@ -84,13 +84,6 @@
       "source": "Fierce Pharma",
       "date": "Jan 5",
       "timestamp": 1767600000000
-    },
-    {
-      "title": "Regulatory tracker: AbbVie's Elahere cleared for use on NHS England",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 2",
-      "timestamp": 1767365493000
     },
     {
       "title": "2025 FDA approvals",
@@ -182,6 +175,13 @@
       "source": "BioPharma Dive",
       "date": "Jul 22",
       "timestamp": 1753167600000
+    },
+    {
+      "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 11",
+      "timestamp": 1752217200000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
