@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-06T03:54:09Z",
+  "updated": "2026-06-06T08:38:50Z",
   "items": [
     {
       "title": "The Pharma Choke Point",
@@ -149,6 +149,13 @@
       "timestamp": 1758438000000
     },
     {
+      "title": "Trump administration mulls curbs on Chinese biotech drug approvals",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPVjhxX3BPTnp6bDRnMnk5M2liT3ExbVB4VHF1clBXUEpWMHZFUGhIVDU1Q2pVV0tUOWN5T195TTFhTi1fc1lVaGNnR3RuV1ZyVUw3N3QtaDdVQnhRWC1QdHNYTUNEdlA4LTEyLVJaUFhjUFowWjE3MjNEQkFubFhJNEdFcVRpTjBk?oc=5",
+      "source": "\uc870\uc120\uc77c\ubcf4",
+      "date": "Sep 15",
+      "timestamp": 1757919600000
+    },
+    {
       "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWkFSZXVGSzlqZmw2MFNaR2JQaHVQdVp3cjNrMm1CMFh5SXM2QlRNSVg4NXBKbF9aVk5TSEgzdWlqVEtLMkMxTUZORTQxTS1nSXpmOFNTS3BpZE1ZOWxyb3M0dDRLbnNTb1Ywd1J3b1lNYTNqYUxSRm85bmJJbDY1Qi1vVHFxeEY1amIzd3ZrbWp0Q0VHTFJrbXYyRWZ6Zw?oc=5",
       "source": "Fierce Pharma",
@@ -163,13 +170,6 @@
       "timestamp": 1754550000000
     },
     {
-      "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYkJzbE1HalpDVHJoMmIzbkNVMG9ISWstT3QwanZYbGV3WG5sVnZ3YVlybVAxTmtCTUw5aWViWkNLRTcwZFVuS0w2dVBXUWZUSzdGN1Z4a3VNbTR1T2tnVWZfREttVG1lQXRqLURlQ1ZXQXBZMHJJaDk1RUtTZDE2ak9BOERZblFpX0k1TVJld25pWTExSmo5YWlBUTdHdkdjajJIN19RM2Vac3NmakRF?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 6",
-      "timestamp": 1754463600000
-    },
-    {
       "title": "Biotech Stocks Facing FDA Decision In August 2025",
       "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQUFNCWnduWVU1ekM1dlVwWk95aTlmVGtYYUZIMzNxeUJLUHZTeXB3QWNXMHBZT19za3V0dG5Nd2l6bE5ybFlkVW5NbDREdFIzWXJfcmhUV3ItbkNjem0tZ2kxV2FnN0ZVZVh1aXlqOVVsWHVTSnhOSUZyY2tsWlc3YnFVS1B2WEdUbjZXcTltWQ?oc=5",
       "source": "RTTNews",
@@ -182,13 +182,6 @@
       "source": "BioPharma Dive",
       "date": "Jul 22",
       "timestamp": 1753167600000
-    },
-    {
-      "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jul 11",
-      "timestamp": 1752217200000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
@@ -280,6 +273,13 @@
       "source": "Reuters",
       "date": "Jan 2",
       "timestamp": 1704182400000
+    },
+    {
+      "title": "2022 drug approvals: After Aduhelm fiasco, FDA endorsements drop to 37",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPTEVKc2c4YjF6YnJtXzB0YlBGdUxlV3NUTUQ0MU5rUjVJUXBkeG1ENTJPVmZrU0ZGdDNSVWdodnpvSnV0S0VvYmc0bkhYWGVKU2xjSWV3cXJlQkdaRUlsWVJ2eU5UZG1jQ0lxaVRheUs5UHllc1VtTFFxT2E5T192ZG5uekNOeWY1OFJROTdEWVp5QW96eWgzNjlyWXZJb0hVbzRZenFxVnVVdzBmZ3ZOWk1Jbk94RTV4OGpv?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 3",
+      "timestamp": 1672732800000
     }
   ]
 }
