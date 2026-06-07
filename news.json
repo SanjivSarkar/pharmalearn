@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-07T04:20:06Z",
+  "updated": "2026-06-07T09:21:01Z",
   "items": [
     {
       "title": "The Pharma Choke Point",
@@ -70,13 +70,6 @@
       "source": "ING THINK economic and financial analysis | ING THINK",
       "date": "Jan 20",
       "timestamp": 1768896000000
-    },
-    {
-      "title": "US FDA approves Fortress Bio and Zydus' treatment for a rare pediatric disease",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPdmdxWS1xYk56MkRZcjNha1llS3Zfd0Rvb3FiTmQySjltNy1kWXNSeXhYUFZETnprX2kzSDJkV3JNTEZBdndaVkt1NzJfTTltMVY3MHczNUF1MHU1cndvWkZYdEl3UERpZzJ6amZIandiR0RTZWZRWjVKV3d0NF9zcWR4NGh5N3dIZHhtM3BJNFo4cXFuQnZ5Wk9sRngzc3cwOUw1RTVwLWR1VFplbTBFZ09XYlg2UTZLTVljOHFQR1RTSFBJZGVsNjRxejUwakJibEZzWjBn?oc=5",
-      "source": "Reuters",
-      "date": "Jan 13",
-      "timestamp": 1768291200000
     },
     {
       "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
@@ -184,6 +177,13 @@
       "timestamp": 1752217200000
     },
     {
+      "title": "Biotech CEOs to FDA: Don\u2019t Let Politics Override Science on Abortion Pill",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZE5lUHNkbmJXUXRWb3R1Z05WV2pqV2Z6U1hXM2JQMVY0WFk5LTRSbWNUajc4bzVOQmJBc1h4elZVN3kzcjRoUEFpaXRpeWxVYU9vM0tCam9IeTB2czAtUDEzdmJDdmpXcXlESGhVMV9qZ2Z1RzlTaEhkM2xOWS16ZVNlZ0IweGVOanZ2RzVqV29WVHI3X1Y4VVRVVkNpaWNCdlpuOHhrQXNTQ2VOWUE4cg?oc=5",
+      "source": "Ms. Magazine",
+      "date": "Jul 10",
+      "timestamp": 1752130800000
+    },
+    {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
       "source": "Fierce Biotech",
@@ -193,7 +193,7 @@
     {
       "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
-      "source": "FirstWord Pharma",
+      "source": "FirstWord PHARMA",
       "date": "Jun 6",
       "timestamp": 1749193200000
     },
