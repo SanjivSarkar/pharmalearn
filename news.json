@@ -1,12 +1,12 @@
 {
-  "updated": "2026-06-11T10:44:06Z",
+  "updated": "2026-06-11T16:09:58Z",
   "items": [
     {
       "title": "The Pharma Choke Point",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
       "source": "Council on Foreign Relations",
       "date": "Jun 3",
-      "timestamp": 1780518028000
+      "timestamp": 1780470000000
     },
     {
       "title": "Concord Biotech shares jump over 8% after US FDA approves latest Mycophenolate Mofetil drug",
@@ -19,6 +19,13 @@
       "title": "FDA Leadership Changes Crisis: 3 Exits in 2026?",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFAzOXFuTnEwY042aTZIZnZUQTA3LW4tVXgtV3JKVEJ3VWlhVG5ybklvM1JyT3ZMRFlkZTZ2cWdvemxHQlQ4YU5aY3k0Q0xDR3lsT3R2T0NyVlVKWklqaHJjSE9WTXVXdHVoTkJyWjdHTVhWRzh4bnBRQ2RlUE1pUQ?oc=5",
       "source": "Brussels Morning Newspaper",
+      "date": "May 15",
+      "timestamp": 1778828400000
+    },
+    {
+      "title": "Pharmalittle: U.S. pressuring Germany on drug prices | STAT",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOS0hJamFMYng2S3FsWXRjQ3Y4VDFrT25JNE0yTVA3U19CZ2FvUWxFbW5NMjMzakRVUDZyaFQzU2oxbjlCMVdNSjF6dFdFN2ZoTDZDYTJ0a3hUekhiajU0aTBwTXF2U0tKTDUtdXE1SGJPRzRBR29QNUFlX2prWHFtUVlyMlFyMTNBRDROUVRzdmlXd3ZqVVZ3VFNFTkxwVjJqbV93WDEzNTY2eHItZXVSOTl2X0s?oc=5",
+      "source": "statnews.com",
       "date": "May 15",
       "timestamp": 1778828400000
     },
@@ -212,23 +219,9 @@
       "timestamp": 1747206000000
     },
     {
-      "title": "FDA misses another approval decision target date, this time for GSK's Nucala in COPD",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQSDlKQ2M4akVPZk5UQUxab0hVTTQ4NTRzaXJmSmdOZThCNmloZThMa0FtVU5saDdaSE5pRWRFY2RzbUtIdjAtUXRsNFR5STdTY2ZndFRPR1h4eF8xQnRFRjFyZVd2dmtYeWxiS0NSQWFIamJKV2V5TDk0cnphVnRIVktHbUJ1amZCY2lWWjFkLXk5RjN5ZHc1Q3V5bkpMaHoyVmNCMU13?oc=5",
-      "source": "Fierce Pharma",
-      "date": "May 8",
-      "timestamp": 1746687600000
-    },
-    {
       "title": "How to stop the shift of drug discovery from the U.S. to China",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQLW4wcjk0X2EyMGZSZ2NzcmoyamxHVGhQS0VCeGVDMmVQTlhrRllsajRrSTV3ek1hczluTnk5Vmk0OVBaZzlVM3pDdi1WM2RsdTc2alo2NG1yeEFtaWNMbEVYZXFya05VakRSc1BEWlYwUFk5a0otMlZCcWNLd05BbHRqdWlJYzRsenlFajdLQ1hUWkZNRXZNUl9VUHNWNUk?oc=5",
       "source": "statnews.com",
-      "date": "May 6",
-      "timestamp": 1746514800000
-    },
-    {
-      "title": "Trump signs executive order to boost US drug manufacturing amid threat of tariffs",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNUzUtbGZUUXdBODRPek1Bbi0wLTE1TDYwelVPcS1lX2JTT1pBeEMyWW9wbE9SVDk5S3BfSlloWF9mMzF1M05JQjM1QW1PTFhKa3pjOGVSMnEwemRLZlhtV0lrZTR5cE5kSXdxMmo1TWxxNEFBelQ1NEJvZS1JNXpfYWw4NTladmZaOGFINVpndHZfVDNJZmxLbU12UTJhZUJnUUl2SjVDWjZkM2w1Qklfcg?oc=5",
-      "source": "Fierce Pharma",
       "date": "May 6",
       "timestamp": 1746514800000
     },
@@ -238,6 +231,13 @@
       "source": "WSJ",
       "date": "Apr 22",
       "timestamp": 1745305200000
+    },
+    {
+      "title": "Exclusive | Drug Development Is Slowing Down After Cuts at the FDA",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWi1iZFExRC0yeS1LaHRDRlRDUHdCRXpid2lDWU5iOGhINzFRb04yZkNOd25sSFZBUnhwTTJGRklFX3N5c0o5VkRZeE1kMVpUcG9qdmhpS0lOVDdVaDlmY2M0YTZhN3JVWm94RVVyMUVOSWctZTlKSkJRUnRkWVlnWkFpMThFREpXWjlUamJlWkw1bFoyU3piUFNldUQ4dElmZlM0?oc=5",
+      "source": "WSJ",
+      "date": "Apr 17",
+      "timestamp": 1744873200000
     },
     {
       "title": "Top 10 most anticipated drug launches of 2025",
