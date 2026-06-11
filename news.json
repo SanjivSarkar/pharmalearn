@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-11T16:09:58Z",
+  "updated": "2026-06-11T20:26:52Z",
   "items": [
     {
       "title": "The Pharma Choke Point",
@@ -156,13 +156,6 @@
       "timestamp": 1753858800000
     },
     {
-      "title": "Replimune drug rejected by FDA; Omega raises $647M biotech fund",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNRi1JZTc2R3ZjTWxoT2xfcGVvX2RfaDNLdHJ3RDJnYXZLbjdoZE1tOWx2a2RJQ3pMeVRGX1kxTzdvc1NoWHcwX1BrZnR0bHRVNmxldHVLUVVnNmZJUDJWZ0xFZlJpQmtveXo4Qm1PV2R4eG9XX00taF9nbHNCTTA1d29ELVFOVXdQU003MmUzWjk4ZUlyVDdJdjNKWHdCRzRyN0tNdTNB?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Jul 22",
-      "timestamp": 1753167600000
-    },
-    {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
       "source": "Fierce Pharma",
@@ -217,6 +210,13 @@
       "source": "Reuters",
       "date": "May 14",
       "timestamp": 1747206000000
+    },
+    {
+      "title": "FDA misses another approval decision target date, this time for GSK's Nucala in COPD",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQSDlKQ2M4akVPZk5UQUxab0hVTTQ4NTRzaXJmSmdOZThCNmloZThMa0FtVU5saDdaSE5pRWRFY2RzbUtIdjAtUXRsNFR5STdTY2ZndFRPR1h4eF8xQnRFRjFyZVd2dmtYeWxiS0NSQWFIamJKV2V5TDk0cnphVnRIVktHbUJ1amZCY2lWWjFkLXk5RjN5ZHc1Q3V5bkpMaHoyVmNCMU13?oc=5",
+      "source": "Fierce Pharma",
+      "date": "May 8",
+      "timestamp": 1746687600000
     },
     {
       "title": "How to stop the shift of drug discovery from the U.S. to China",
