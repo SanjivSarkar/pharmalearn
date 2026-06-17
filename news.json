@@ -1,6 +1,13 @@
 {
-  "updated": "2026-06-17T15:44:21Z",
+  "updated": "2026-06-17T20:19:22Z",
   "items": [
+    {
+      "title": "Regulatory tracker: After FDA scrutiny, AZ's Truqap clears hurdle in prostate cancer",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jun 15",
+      "timestamp": 1781506800000
+    },
     {
       "title": "The Pharma Choke Point",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
@@ -86,20 +93,6 @@
       "timestamp": 1768291200000
     },
     {
-      "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
-      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBKQjVRa3Fjay05WEdjelFUYkNVdVQ5VFFPYk42eGRvLXpTOVJYdHJaTjY4RjE3VHlmOWM0SDV1QmZKNEJXTmg0YVd2eEptbllhaklWQy1vRWdwNC1aUmptb1BfdGZLUQ?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 5",
-      "timestamp": 1767600000000
-    },
-    {
-      "title": "Regulatory tracker: After FDA scrutiny, AZ's Truqap clears hurdle in prostate cancer",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 2",
-      "timestamp": 1767365493000
-    },
-    {
       "title": "2025 FDA approvals",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5VMlhtZHBzSEFBTFpaR25BbUtUUHcxZUJ5ZHVXUFhYbm5LaW1tX3pCdEl6M3VUWnhzN2l1QXdWc3h5YXpXazV4WUFUb0xMdnJsbkdMWG5vTHdoZFlxcnJZ?oc=5",
       "source": "Nature",
@@ -121,25 +114,11 @@
       "timestamp": 1765958400000
     },
     {
-      "title": "Alkermes escalates bidding war; US biotech risks \u2018falling behind\u2019 China",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPSWRLZlNDeXphc0h5Y082a2tVV2diUmZacWl2ajVqWl9kdUJwSFd1a1RhaDBadjhtODhTbGh2WXdRMGdNZk5GSjdORDVFVzhKUGlWakxxRkR6Qnpwemg4M0VXQ3hSV3BNZ19sV3JJVFdoUXNGNnkxOUVyc253V0FVallzdTlBQm1MVVhZQ1NWcDBmNFBUYnlQUHBB?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Nov 19",
-      "timestamp": 1763539200000
-    },
-    {
       "title": "RNAi biotech Arrowhead wins first FDA approval",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNG1sekVZclhCeVlfT1diN3NzaEJLOElVckN2YThoSGlhcXNfMlMtSHU2M19fX0V4aTlWQ1BlQWotREJnbGFuRl9XaHdtNUdyNDQ2LWdXVldobWFyRlY1dWIwWExTN0ZfZ0xrWFl2WU1IcDFvQUlmY0xKUDNGc29TQ1l6bmVSdFgzYzVBVTFCVjJrUTJWOEk4YUZWTUg5VUMteFNuUllpWkQtNnhVdXRYUVhKMA?oc=5",
       "source": "BioPharma Dive",
       "date": "Nov 18",
       "timestamp": 1763452800000
-    },
-    {
-      "title": "Three Boston biotechs await FDA decisions on new drugs by year-end",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOWnN2VkQzYVUyOTJrQk8tcWRPVFkzejBZclZ0aXZlS195LWRLOVdaZ285MlBfWFFUbTZ6V3hiRlFtQUQtZ01QbVdPeWRibXc4VmtlcThtWk9TT1pSamFFcERzZ2xoTmNHMHVOTUU4V1N3TDE2TlhORldweTJBT2lqVzNOOHhFMEdr?oc=5",
-      "source": "The Business Journals",
-      "date": "Oct 29",
-      "timestamp": 1761721200000
     },
     {
       "title": "US FDA proposes moves to speed availability of some cheaper biotech medicines",
@@ -149,11 +128,11 @@
       "timestamp": 1761721200000
     },
     {
-      "title": "FDA official\u2019s comments spark Aurinia sell-off; Halozyme buys a biotech",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPVzhJXzJpSlVOQ0p3VUlaUXFvS3U1NWFETTNmajlHM2xVdkR6ME5XelB5a1dFck9IVEZQR3ZxMF9uQ0s1Rk8xMEZndWx6SWNGMjVhQUlJdm4yZWtKQmxZTkE5ajVoR0gxWUhfS0lpaHdqWWxycDNvb3VrSVozOF9pWDVwLVBMS2lSbGdoMkZPLTJLRWpkVVJqU0RtZ1hwY3dKZTV2Uw?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Oct 1",
-      "timestamp": 1759302000000
+      "title": "Crinetics wins FDA approval for acromegaly drug, faces competition with Novartis and Ipsen",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYlZPaTVLYmx4LTBGUDhVbm80RTVqMS05Q3RQTXhxckhuWEEyNDluZzRUaHpiR0gyWUUwTTFMbXpJWEtvN2hjcV9hSkpFY3EtOVc2R0V0aGhQVGpMU1VkZWF3TVJpd05hWjdablVnaXMzb0o5bXZKdGRDQmFDbUFsZVJLbjhkVGVldmI4Vm5WcDhreENtNzBPUmJYLWk2RDJPMHFGR3YtQmo?oc=5",
+      "source": "statnews.com",
+      "date": "Sep 25",
+      "timestamp": 1758783600000
     },
     {
       "title": "Lupin biotech facility gets 4 observations from FDA",
@@ -168,6 +147,13 @@
       "source": "Fierce Pharma",
       "date": "Aug 29",
       "timestamp": 1756450800000
+    },
+    {
+      "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYkJzbE1HalpDVHJoMmIzbkNVMG9ISWstT3QwanZYbGV3WG5sVnZ3YVlybVAxTmtCTUw5aWViWkNLRTcwZFVuS0w2dVBXUWZUSzdGN1Z4a3VNbTR1T2tnVWZfREttVG1lQXRqLURlQ1ZXQXBZMHJJaDk1RUtTZDE2ak9BOERZblFpX0k1TVJld25pWTExSmo5YWlBUTdHdkdjajJIN19RM2Vac3NmakRF?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Aug 6",
+      "timestamp": 1754463600000
     },
     {
       "title": "Biotech Stocks Facing FDA Decision In August 2025",
@@ -233,11 +219,25 @@
       "timestamp": 1746514800000
     },
     {
+      "title": "FDA misses approval deadline for biotech\u2019s rare disease drug",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQMlJmUy1YWVlOU3h0QW0tN2JFMzVnRG90TWsyN0s5TTZRUzZpS04yTDB0akZKclJzYzl5QjNwcXBEcUQ0WGlQM0lFZDhpM0NEMzVOZ084Nm9vckNwMlJMeVlWV044VGlRaG9ZYjA3NkR2TFZMVE1CN3dxUHlJU0ppcVRxcVVmMi1fMUtsS2lFT09QakRaQnVuelhpejkyUEtXNzhfUFZwNGRBSVM4QlJqQXJ2VQ?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Apr 29",
+      "timestamp": 1745910000000
+    },
+    {
       "title": "Trump\u2019s FDA Sends a Bullish Signal to Biotech",
       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOdGJSVnBCaWgtOUpJNG93QkZVQlhwblEtb212M1hwYWFNNFJSRWtJNXlzQklLdS1FZjhDald3aXJQRVpUczJGQVpibWRtaHBReVJkT0hlTXQtSFh4Q0RaYzNkN0J1WlN3a1Jnb1I5U25nMzNxaUEtVFJRWV92VDhCdWVIZUVWQUs1OU96TDVLT3o?oc=5",
       "source": "WSJ",
       "date": "Apr 22",
       "timestamp": 1745305200000
+    },
+    {
+      "title": "Top 10 most anticipated drug launches of 2025",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOdXR2cHZPdWp0djFfWnlOSnhpSkJpd2ZJTmZVWnJaVElmNzFnZHREZ1Vza1NuRVhIREdRejV6NUhGMjdsSnktSGlzaEFvdUpJSDR6VHFBVXBtWGhrTFFuZHYtYVlEcVFZMWtGelVlQzY3QkhvcXNfRHJ4UF9UZ3QxVDdEUjk2WWM1?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 27",
+      "timestamp": 1737964800000
     },
     {
       "title": "Ten first-in-class drugs on track for FDA approval in 2025",
