@@ -1,6 +1,13 @@
 {
-  "updated": "2026-06-20T09:23:57Z",
+  "updated": "2026-06-20T14:12:02Z",
   "items": [
+    {
+      "title": "Regulatory tracker: FDA accepts Roche's application for Lunsumio-Polivy combo",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jun 18",
+      "timestamp": 1781766000000
+    },
     {
       "title": "The Pharma Choke Point",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
@@ -107,13 +114,6 @@
       "timestamp": 1767600000000
     },
     {
-      "title": "Regulatory tracker: FDA accepts Roche's application for Lunsumio-Polivy combo",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 2",
-      "timestamp": 1767365493000
-    },
-    {
       "title": "2025 FDA approvals",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5VMlhtZHBzSEFBTFpaR25BbUtUUHcxZUJ5ZHVXUFhYbm5LaW1tX3pCdEl6M3VUWnhzN2l1QXdWc3h5YXpXazV4WUFUb0xMdnJsbkdMWG5vTHdoZFlxcnJZ?oc=5",
       "source": "Nature",
@@ -175,6 +175,13 @@
       "source": "Fierce Pharma",
       "date": "Aug 29",
       "timestamp": 1756450800000
+    },
+    {
+      "title": "Biotech\u2019s Lost Archive",
+      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5fQ1dQaW1YbU0tbTM5Ykk5eHVPcDR5V2tLMmlZdGFJOFcwWE5faXpHV3YwZUpjUTA3SVRIUjBGU1BtT1FqWVNRM2FpM0tUNVU?oc=5",
+      "source": "Institute for Progress (IFP)",
+      "date": "Aug 11",
+      "timestamp": 1754895600000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
@@ -273,13 +280,6 @@
       "source": "Reuters",
       "date": "Jan 2",
       "timestamp": 1704182400000
-    },
-    {
-      "title": "2022 drug approvals: After Aduhelm fiasco, FDA endorsements drop to 37",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPTEVKc2c4YjF6YnJtXzB0YlBGdUxlV3NUTUQ0MU5rUjVJUXBkeG1ENTJPVmZrU0ZGdDNSVWdodnpvSnV0S0VvYmc0bkhYWGVKU2xjSWV3cXJlQkdaRUlsWVJ2eU5UZG1jQ0lxaVRheUs5UHllc1VtTFFxT2E5T192ZG5uekNOeWY1OFJROTdEWVp5QW96eWgzNjlyWXZJb0hVbzRZenFxVnVVdzBmZ3ZOWk1Jbk94RTV4OGpv?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 3",
-      "timestamp": 1672732800000
     }
   ]
 }
