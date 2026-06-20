@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T19:53:35Z",
+  "updated": "2026-06-20T04:05:23Z",
   "items": [
     {
       "title": "The Pharma Choke Point",
@@ -77,13 +77,6 @@
       "source": "Axios",
       "date": "Jan 30",
       "timestamp": 1769760000000
-    },
-    {
-      "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ING Think",
-      "date": "Jan 20",
-      "timestamp": 1768896000000
     },
     {
       "title": "US FDA approves Fortress Bio and Zydus' treatment for a rare pediatric disease",
@@ -191,13 +184,6 @@
       "timestamp": 1753254000000
     },
     {
-      "title": "Biotech CEOs to FDA: Don\u2019t Let Politics Override Science on Abortion Pill",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOZE5lUHNkbmJXUXRWb3R1Z05WV2pqV2Z6U1hXM2JQMVY0WFk5LTRSbWNUajc4bzVOQmJBc1h4elZVN3kzcjRoUEFpaXRpeWxVYU9vM0tCam9IeTB2czAtUDEzdmJDdmpXcXlESGhVMV9qZ2Z1RzlTaEhkM2xOWS16ZVNlZ0IweGVOanZ2RzVqV29WVHI3X1Y4VVRVVkNpaWNCdlpuOHhrQXNTQ2VOWUE4cg?oc=5",
-      "source": "Ms. Magazine",
-      "date": "Jul 10",
-      "timestamp": 1752130800000
-    },
-    {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
       "source": "Fierce Biotech",
@@ -219,6 +205,13 @@
       "timestamp": 1747206000000
     },
     {
+      "title": "FDA misses another approval decision target date, this time for GSK's Nucala in COPD",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQSDlKQ2M4akVPZk5UQUxab0hVTTQ4NTRzaXJmSmdOZThCNmloZThMa0FtVU5saDdaSE5pRWRFY2RzbUtIdjAtUXRsNFR5STdTY2ZndFRPR1h4eF8xQnRFRjFyZVd2dmtYeWxiS0NSQWFIamJKV2V5TDk0cnphVnRIVktHbUJ1amZCY2lWWjFkLXk5RjN5ZHc1Q3V5bkpMaHoyVmNCMU13?oc=5",
+      "source": "Fierce Pharma",
+      "date": "May 8",
+      "timestamp": 1746687600000
+    },
+    {
       "title": "How to stop the shift of drug discovery from the U.S. to China",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQLW4wcjk0X2EyMGZSZ2NzcmoyamxHVGhQS0VCeGVDMmVQTlhrRllsajRrSTV3ek1hczluTnk5Vmk0OVBaZzlVM3pDdi1WM2RsdTc2alo2NG1yeEFtaWNMbEVYZXFya05VakRSc1BEWlYwUFk5a0otMlZCcWNLd05BbHRqdWlJYzRsenlFajdLQ1hUWkZNRXZNUl9VUHNWNUk?oc=5",
       "source": "statnews.com",
@@ -231,6 +224,13 @@
       "source": "BioPharma Dive",
       "date": "Apr 29",
       "timestamp": 1745910000000
+    },
+    {
+      "title": "Strategically De-Risking U.S. Drug Supply Chains",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
+      "source": "RAND",
+      "date": "Apr 23",
+      "timestamp": 1745391600000
     },
     {
       "title": "Trump\u2019s FDA Sends a Bullish Signal to Biotech",
