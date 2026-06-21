@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T04:46:55Z",
+  "updated": "2026-06-21T09:55:55Z",
   "items": [
     {
       "title": "Regulatory tracker: FDA accepts Roche's application for Lunsumio-Polivy combo",
@@ -21,13 +21,6 @@
       "source": "Upstox",
       "date": "Jun 2",
       "timestamp": 1780383600000
-    },
-    {
-      "title": "FDA Leadership Changes Crisis: 3 Exits in 2026?",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFAzOXFuTnEwY042aTZIZnZUQTA3LW4tVXgtV3JKVEJ3VWlhVG5ybklvM1JyT3ZMRFlkZTZ2cWdvemxHQlQ4YU5aY3k0Q0xDR3lsT3R2T0NyVlVKWklqaHJjSE9WTXVXdHVoTkJyWjdHTVhWRzh4bnBRQ2RlUE1pUQ?oc=5",
-      "source": "Brussels Morning Newspaper",
-      "date": "May 15",
-      "timestamp": 1778828400000
     },
     {
       "title": "Pharmalittle: U.S. pressuring Germany on drug prices | STAT",
@@ -86,11 +79,11 @@
       "timestamp": 1769760000000
     },
     {
-      "title": "The China Dependence Big Pharma Doesn\u2019t Want Washington to See",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNRnRmY0JZb2pWRkxOTmRWT1liR0p4Smh0TzVhNDVFaHd0SGNoS0VVWVM2dW1fVkV3UzFJZUVNR3lUUDU0Q01fbW40XzlIQldVbkNmcVFLeWxDX1Rkb1dST1ljdTFZdDJOa3hOQnVPdDJqVlZaMFFmUnlTQ0RRVjFXcFhBVFRxQWMzWWxoam5YWjVSazg0SVZn?oc=5",
-      "source": "Coalition For A Prosperous America",
-      "date": "Jan 14",
-      "timestamp": 1768377600000
+      "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
+      "source": "ING Think",
+      "date": "Jan 20",
+      "timestamp": 1768896000000
     },
     {
       "title": "US FDA approves Fortress Bio and Zydus' treatment for a rare pediatric disease",
@@ -102,7 +95,7 @@
     {
       "title": "Senate committee targets biotech bottlenecks to maintain US edge",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9NejFtbUxpWEdFWV9ZNWN5UEhPTXhTMFZCYkZidzdQVjBTR05FTjZROG83M3c5Tkdwam9ubUc5eThRaHpNdEg1Y0xGMmNpeE1FcWl3?oc=5",
-      "source": "FirstWord Pharma",
+      "source": "FirstWord PHARMA",
       "date": "Jan 13",
       "timestamp": 1768291200000
     },
@@ -198,11 +191,11 @@
       "timestamp": 1753254000000
     },
     {
-      "title": "KalVista bounces back from FDA delay with approval for oral rare disease med Ekterly",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPd3k3MU93Y3gyQVlQcXcyUjZXMnBNZ1podk5VMG8yampqTW44LUlSZlZmeEhPeXY2Qkx1ZnhKUkVEVFpzelB1VjliTFRyZU1sQzl5cE5zMlRGdjhKbG1yaHZOeVFxT0xGZHFOVW42SWFSbTdpbzFqd01iRURocGdOb2o0WjVkY01nQVNIUEVnUl8wU2IyQ3hKMmRYY2dhZ1dRX2t3dDBkVUo1Zw?oc=5",
+      "title": "China approves 4 new drugs, including a global first-in-class medicine",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNWTNrOFoyN2NBalpJVWFhcG44MnBsWVA5VU9wVVpMM0x5eG5xcGdSSHEwLWIxM2lTNmMwbWtpOEcyZ1lFbWNKNXdpZTlRXy0wZ1FwOWE2X3dKT0NYU2w0NVJmUHZRamh0MHp1QWsyY3RDUFhTYmtWZEVTa0lkQldYYUpBaDJoOWE0ekEweEpaNkxBNGpXZXc?oc=5",
       "source": "Fierce Pharma",
-      "date": "Jul 7",
-      "timestamp": 1751871600000
+      "date": "Jul 2",
+      "timestamp": 1751439600000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
@@ -273,6 +266,13 @@
       "source": "Fierce Pharma",
       "date": "Jan 2",
       "timestamp": 1735804800000
+    },
+    {
+      "title": "Pharma Looks To America First: US FDA Holds Overwhelming Lead Over EMA In Novel Approvals",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOeUVLLUQ4Mm5mR0l3cS1pbHZxVS10bHV2UUhjdEtEM0FNaUZhaDhHWjdaTDR6ZE11eEtpT0FrUmE1ZVFRSXlzN2xXQlVRMjN1TzNEZllXOWc3djljTTVZMmdTSmcwV3lCWFZRX1hmRkdMQ2FNb0dieE8tNlNZeUR5MzVsV1RNdFRReXNRUHA5dTV6Rm1EbjlyZ2ppUEFvb0NrbWlROEdaVTdOT3lZWHNReXc3NWc3WTRKMTY1eWtqd0FPcDdOTDlV?oc=5",
+      "source": "Citeline News & Insights",
+      "date": "Jul 5",
+      "timestamp": 1720162800000
     },
     {
       "title": "US FDA approvals bounce back in 2023, sparking hopes of a biotech recovery",
