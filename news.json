@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24T19:51:25Z",
+  "updated": "2026-06-25T03:58:44Z",
   "items": [
     {
       "title": "The Pharma Choke Point",
@@ -88,7 +88,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ING Think",
+      "source": "ING THINK economic and financial analysis | ING THINK",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -140,13 +140,6 @@
       "source": "Fierce Pharma",
       "date": "Dec 17",
       "timestamp": 1765958400000
-    },
-    {
-      "title": "RNAi biotech Arrowhead wins first FDA approval",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNG1sekVZclhCeVlfT1diN3NzaEJLOElVckN2YThoSGlhcXNfMlMtSHU2M19fX0V4aTlWQ1BlQWotREJnbGFuRl9XaHdtNUdyNDQ2LWdXVldobWFyRlY1dWIwWExTN0ZfZ0xrWFl2WU1IcDFvQUlmY0xKUDNGc29TQ1l6bmVSdFgzYzVBVTFCVjJrUTJWOEk4YUZWTUg5VUMteFNuUllpWkQtNnhVdXRYUVhKMA?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Nov 18",
-      "timestamp": 1763452800000
     },
     {
       "title": "Three Boston biotechs await FDA decisions on new drugs by year-end",
@@ -203,6 +196,13 @@
       "source": "Fierce Pharma",
       "date": "Jul 11",
       "timestamp": 1752217200000
+    },
+    {
+      "title": "China approves 4 new drugs, including a global first-in-class medicine",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNWTNrOFoyN2NBalpJVWFhcG44MnBsWVA5VU9wVVpMM0x5eG5xcGdSSHEwLWIxM2lTNmMwbWtpOEcyZ1lFbWNKNXdpZTlRXy0wZ1FwOWE2X3dKT0NYU2w0NVJmUHZRamh0MHp1QWsyY3RDUFhTYmtWZEVTa0lkQldYYUpBaDJoOWE0ekEweEpaNkxBNGpXZXc?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 2",
+      "timestamp": 1751439600000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
