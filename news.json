@@ -1,68 +1,306 @@
 {
-  "updated": "2026-06-26T19:55:53Z",
+  "updated": "2026-06-27T03:51:55Z",
   "items": [
     {
-      "title": "Regulatory tracker: Pierre Fabre expands Braftovi\u2019s European label to first-line colorectal cancer",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jun 23",
-      "timestamp": 1782198000000
+      "title": "EMA: Amgen, Vifor Inflammatory Drug\u2019s Benefits No Longer Outweigh Risks",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOUDlFUW1GSHBUU05OdFZSTlFDdUdWSEpwbmxEVjhZamdNSnZaTVFTMFlNV1VzR01QVmZWbHZDTS1LUllWa3NrNHF6a1M4Y3RfaXg4UVNhNTZXSlUxS01jY2FFZUNTQk9LZkp1YllTS211eVNqLXJvT1dIQklUYTZpNkdRS0pxU25jMFQwR2k5TW9XazZlWUFVYnNXZGZJbDEzSnc?oc=5",
+      "source": "MedCity News",
+      "date": "Jun 26",
+      "timestamp": 1782517402000
     },
     {
-      "title": "The Pharma Choke Point",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
-      "source": "Council on Foreign Relations",
+      "title": "This Week at FDA: HHS proposes drug acceleration initiatives, FDA warns companies about falsifying test data, and more",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOYjAwVjFSaGZTb2YtbDZnME1sY01nQlltNm1SM2hfakU5YkgyNzZSd1FKWkJSX2t4X1pGdHd1NWtRMHhXcWgxMHIyRjVnY3BpUDAtM1N2dlVQUkx4b0Y1Sko2R3phcU4zM1dUb2JxdjVPVW5WZ2RXZnJodF9ZLW9HNUVqTXRKbEFYTXBFQVp2ZFJwckxyZ2tObGt5SmhoQVpXamFzNGd6TVFjQ1ZGckhuaVI2TnQtQVgzWko5el9kTDViQm1hbmUyNVlHZUEyRUdHN201UzZ0ZWVqMlk1V2NHWE8yTDM?oc=5",
+      "source": "RAPS.org",
+      "date": "Jun 26",
+      "timestamp": 1782501480000
+    },
+    {
+      "title": "Lupin Gets Tentative US FDA Nod for Enzalutamide Tablets",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQQTBRN1hxZHJuWVpxaHU5YW93NVB3UWZweXUwWkNFS0lBZHc2ajE5amYzNzhjRmxoWi03aEsxcG1zUDlYY3NhRFV3clN0cFMxWjdTUGRRNUE3bGM0c1p0WGhZOUJnTmRmaUNGczQwT3lrTkRtSE1pTTdxMVF4cnpwdEVBc1hoRVBPNG43by1BTS1nbWktRFJ5UmZJVWFYWVV5aGhOZml3VjA1ZjdIWXJmR2FXNzFlOWhRQWFxVHgzZjBZX0tGSlllUUt4ald2aVlIQXFYaGV3?oc=5",
+      "source": "Whalesbook",
+      "date": "Jun 26",
+      "timestamp": 1782452047000
+    },
+    {
+      "title": "FDA moves to accelerate US clinical development as OIG weighs new protection for trial participant remuneration",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNRDQza2tEOW50ZEZYelhjcm1fNFVERnExZXY4QnVJVlgwRkx1YXhtcmRFdW1hOWhqbDM2LU4zdUpNdW1jLWNqWTJaZWdKSHBVRi1XY3htRWp5YlBlbUNKOWIyb0dfb1dadW9XMWpxTDY1WFhNMk1IOEdlR1lCNE5tSXVoY3o1eEJUMWxwajdpY0FvQkpRSnF0R19XR0N2Z2F1dWNvQkpXR1BvbEYwVjhZYWxyNGlLVUNRdkh5bTdBY1NNS1ZzeUJFNHhCM1NJLXI3ckNFMXZDajhldXM?oc=5",
+      "source": "www.hoganlovells.com",
+      "date": "Jun 26",
+      "timestamp": 1782432197000
+    },
+    {
+      "title": "Ionis\u2019 Tryngolza approved by the FDA",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOWWFVclpIci04TWFJUm1pcnRpeDRnSTI1ek9taWlrU3N3TFRLS1pKdVFUQjhUVnpVQWd4X2dJTWNNdmxQNWkwR3JCMXpxUTlfc2Nfb09zZTdEZEpVODJQSkVZOUhOUHAtZTZrWl9iSk52TFdISnBFMFZraEc0UEYzZk5faEpPVlU?oc=5",
+      "source": "The Pharma Letter",
+      "date": "Jun 25",
+      "timestamp": 1782385800000
+    },
+    {
+      "title": "UniXell Secures US FDA Clearance for Off-the-Shelf Parkinson\u2019s Cell Therapy, Advancing Dual-China-US Clinical Development",
+      "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxOeWpsUkdKNW1DTDhXcE1JOXdLTEc2UzFTYU9RM1hYcWFNeUZiTEwyZ3lvWGhVNDhoS09yWE9SZXlnWEcxbVlKRUZveFpVZ1BvdkxoWXE2WnZwX2xvODAweVJZMHZmOFJmVlY2NlZ5Z19MZ3BvUkdyU0RuaGM5LTNkaEI4alBhVjJ4QjYzanVlWHFBNTdtSDg0QXVNX2w3d3hzYl9aaHBJWGZ2aHdrTGU1UEVCNFU1d0VnQUtRMURIOHJhMDk0QmYxZzVyVFlxaE4tTnBwZy1EcUdLd3VDTXRkOEl2QVFycGVqX25ydmpnT29BS1Nqb3c?oc=5",
+      "source": "BioPharma APAC",
+      "date": "Jun 24",
+      "timestamp": 1782331537000
+    },
+    {
+      "title": "HHS Proposes Clinical Trial Reform To Catch Chinese Biotech Sector",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQTkRTbEhZZUJLRVYzZmJxZnc4Skg5LW9POUNxcmozOXZsWDlBTnVLT2szd3pyanpJZmtWX1o3WWtPSDVxVFRFcWJfeEU1eEpPenFXTGRaMFdZdlN6WDhVZDBoYzJldXVHQW5nRGdDWTBNNk02MVh2ZEcxRHoxRkNXWWo3eEhyNGR6MnM1Y2RzSHYwSjJRbmRxeFAxWEhDSy15OTVjX1dlR2pJQTg?oc=5",
+      "source": "Foundation for Defense of Democracies",
+      "date": "Jun 24",
+      "timestamp": 1782330959000
+    },
+    {
+      "title": "Ionis Pharmaceuticals (IONS) Gains FDA Approval for New Triglyce",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQaFBTdlR1MGZLeHpFUGE0Rk8wOENfbW1RZGt6VE5aNEE2X2Ntclg0MkJRT2d6aWtJbHJ0cFhib1ljQ3JFR01wampGRjlyR0NWSjFSZmNuUV9FWlk5U1BPMFNmUTh3Xy1QWVJZTUN0b0Z5SWk1cENyUnlsd2FJVEF6U1hlNWxkR2JSRHdFUDY2d3pNaHFDNEhHRndvRGdGc0hEa0Rvcl9QMVFGdnZwZVI2SnhfY2JvUQ?oc=5",
+      "source": "GuruFocus",
+      "date": "Jun 24",
+      "timestamp": 1782319457000
+    },
+    {
+      "title": "HHS and FDA propose clinical trial reforms to expedite drug development",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOdHIyVzROT1VmRTlSVE43STFiQ1hsekl1Z29leFVxVkF3SG1IaHRIRzk5Z1NMM0l5QVlYMjk3VXkzclhBS2tVY2tmeG9mcC1xdXNxXzl4NkVXNmtOa19rck1GOFRPNm90YkhTbl9FTWJ1T0ZBS09QYUxsTl9VZ2FHSnpSaUtCQUpxLTh6ZFkzU0pvTTl4ZE9uYkhwdHZxRzVBV25WdmgyS3ppdw?oc=5",
+      "source": "RAPS.org",
+      "date": "Jun 23",
+      "timestamp": 1782245460000
+    },
+    {
+      "title": "FDA Pilot Targets Faster Early-Stage Drug Trial Starts",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOVW55a0sxaFJSZ2Y0ZE54YUZOVVdhVGxhRjNMZDFKZWJSVUlQZncxVGNONWdfc19SaEJ2a2Y1Nk5FNy1KS1FPcFhaZW9TX3hjR0tTb1pHYWNVNlU2YkQwOHREWnZ1cHBHajBBZXFXY3RCa2Jpd3BZQ2JkckNTWjctdW5velp2R1hBWE1hNkVR?oc=5",
+      "source": "Pharmaceutical Executive",
+      "date": "Jun 23",
+      "timestamp": 1782222470000
+    },
+    {
+      "title": "Eli Lilly gave extraordinary obesity drug access to a 79-year-old patient. Who was it?",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOaW95MjB3ZHFsVEgyRlFhQzFnTUluQjFnT2YybzdyM2hucGxEVFAzcXBZbGdRODJ1dUN5OFZJd3FPNHk2ajRCaHhYejVydUNfaUJERU1kUkRFRENRcThkV01EQU5WZlFzM09lVGQwQk9fblIxS211bWt4eG9qdlNqOU00MEtQUTAzMXNEb3BGNUNGYUpHX05aVkNIUHRNN0RqOThnLUR0YnNRdTdZQmU0ZWduRQ?oc=5",
+      "source": "statnews.com",
+      "date": "Jun 23",
+      "timestamp": 1782204105000
+    },
+    {
+      "title": "HHS debuts \u2018unprecedented\u2019 initiative to \u2018restore American leadership\u2019 in clinical trials",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOcjZYRzJxdGlRd0RQUFBXc1ljOE44WWZUMHNZWGJ2NjQwd01EWXpjdVgtTlM2M0JXSWluRXBBQVl4OUpfWmNrN2Q3YU02RTRWRXhzQ2tnbEdDTC0yVzdMZ1lfeXBBZzNNSmh3RFF2SW1uV0hzM0NtZUtoVXNXRzMwRnFaQjdDMWhMMjFBbktnV1hLcnlOeFVxdUd2VU12UnlRejhyc2ZFLWlySlQ3NjNJbmgxeEc?oc=5",
+      "source": "BioSpace",
+      "date": "Jun 22",
+      "timestamp": 1782158999000
+    },
+    {
+      "title": "Accelerating and Modernizing Early and Late-Stage Clinical Development",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQUTVWQ2ZBOVFlRnBfeUwxRG5CRUU3ZU1vYk44NXE2TVUweHYyY2FsTkJuck5vdXJHa21RemQweEVibDJ3N2NSZkkxOVNuVVN0TUU5TTR0RjZyQkYwbnZSd3B4VTdmZHB5T0MtbEN5LWxhUlN4cVc2aVRKdHEtOVB6dVFxYTBPZHFCTGZxWUI4Z3ptSTdoYi12TkRRdzJ5SEd3RlpjV1J6SEJ2cGM?oc=5",
+      "source": "fda.gov",
+      "date": "Jun 22",
+      "timestamp": 1782086400000
+    },
+    {
+      "title": "Uncertain FDA leadership raises stakes in clinical trials",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPV0tCbDUya1RCR05fTkNzQ0E5UnFSbVFNZzlQc0FsNWNNeFg0Xzg5OEgzV3ozUVNTQzZSNnlqR0h0eHlSYnk4NDYwNXM3bURYRlE0STVhX204cDZsUDRwQTFHVkVJVW1GMHlPWERYbTRySVlQM21nNGNYNTdOZ2dJNGtfaUhSVzlDb3ljbXdn?oc=5",
+      "source": "PharmaLive",
       "date": "Jun 3",
       "timestamp": 1780470000000
     },
     {
-      "title": "Concord Biotech shares jump over 8% after US FDA approves latest Mycophenolate Mofetil drug",
-      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNZGkwU1ZZUjJPaW5Lai01cllOZ1lScmR2aV9sem9WaGNOQjNQTDdlYkZwVy1SeWh1UzRNbjZDRG5YS0JKQW10VHhFNlg5clE4R2FyMG8yTGMyeWkyckkzcWVSLXhCX1JaN2h3R2xFekNKeloyR3Y1TXdQek84QlFUcTQxOWctWVBmQ3daeGxPamc3eTFIaW81RElfZXhBOUdJeUE2aWNLeDJhR3RkN3FZV1VWcTFUMU5XTkRJaGRRNkhXdE9mcjFmSlF0Qnd6RkVuMmFzN0QwdnYxQjVCTGtVa2xZQ3puUQ?oc=5",
-      "source": "Upstox",
+      "title": "Study: FDA approves more orphan drugs with specific cancer, pediatric indications over EMA",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPV0owLTlWbmY2UlhKYm9YMEJ6X2tMRG5Bc1dVR1p5STRVMExZalRHdlRPdlY1eTlVbXZYeFdQM3JMaTBLcUVNRE1LbDRQZS1NQWJRNmpsTG5zWF9lMU04ZnlON2VrMC1oUkFoczlxMEJqWElUZEt3M1VSLWJHVVVhODM5UEV5SmZOTlRwRE53OVo2NFRPNnhOdXJKQXFHWE1xa0RfZE55RWVweWpGNTI0LWNKNGQ0MjNDWVYteXFJY2k?oc=5",
+      "source": "RAPS.org",
       "date": "Jun 2",
       "timestamp": 1780383600000
     },
     {
-      "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOek1rM1FHU3hZUkZmOG9BWjJVT3VNWWhBUWcwcWR6d1BTYmxqWUVyeG1WTmNyeGlQZnJyVm5RX3JxaFhlZ3FSZnBWRjFRM0NqLURGN1RlV2hPcGRSeG03TVNLc1Myc1Jmc3hnMmw5NHJYWVlpM05HdUo0N0duZmprejZRTQ?oc=5",
-      "source": "statnews.com",
-      "date": "May 7",
-      "timestamp": 1778137200000
+      "title": "The FDA Is Rudderless And Clinical Trials Are Left Adrift",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPUHBsTkpYSUdfZEtHb2hiaUx0bl9tNVAtRlJFWnZRT0NWZmVpd3B3RE00WkNfa0x0WVZxNW1TRk5NTWxlTGwwSHlfa3c0RExURm16TnByN1laQkNvTkI4c3VPNEZ2c0dDeVpYUmVWRzhaY0VJNjItalh2Tm50d3JIR0FTMTlXemdaZndBdThUWEpRWWZ1em1WeUo4a2huZw?oc=5",
+      "source": "Clinical Leader",
+      "date": "Jun 2",
+      "timestamp": 1780383600000
     },
     {
-      "title": "Best Biotech Stocks of 2026 and How to Invest in Them",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
-      "source": "The Motley Fool",
-      "date": "Apr 11",
-      "timestamp": 1775890800000
-    },
-    {
-      "title": "FDA approves leucovorin for ultrarare cerebral folate deficiency subset without clinical trial",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPZmNucDd2OV9TUzhDM3UyZnMwRFlQcmpsX2M0bEthRUVfeUU2Q3k0NHR3cUpjX1Vyd1A0T2cwdkl5OVE1M2xBQ0d0OV90Mjh2U0trQWNyRXNobW1JeF9NOWNpck5LdTEzQUQwU19nTzNSV2l0NEJ4UGgwSF92bjhBU0JOb0x0TFZWcnU1NzBPdkxzY19Pa3k5WGZNZVNNbENQZF81YU1oSDlrUXhVTTdxbjZkcHZnQlRoT3ZIWDZBU3RENGE4clE?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Mar 10",
-      "timestamp": 1773126000000
-    },
-    {
-      "title": "What 3 recent FDA rejections reveal about shifts inside the agency",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPbXF1d3RidzFSRGFkRDA3UDRYbXdLVlpycWIxQkpobGhCaDFoVWlzMjMyeGpmeFNpVllnd25lVW1laDNkeUEzYzdmM2xqVTJMYzZsSmVOZ0hnalNlUmxtNGdIVjZ4Y2Qya3A1M3hhandjMHlobzBRTUhLekwteFJlRHhvZTRQRnhzWFN2eVZB?oc=5",
-      "source": "Pharma Voice",
-      "date": "Mar 4",
-      "timestamp": 1772611200000
-    },
-    {
-      "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5QVlc1aXhVQV9RdmFtRUQ5bzRLN1RMbGRGamRoLXdTUlRTdl85U2F0UlpTbXJIN3lIUURnMTEzVWs3U2ItR1RWZXQxbDdyYks1VlZiRlh6akhFTUJNZk11QzBpeGlxVHdjY3MzMmpxQTVhWkE2?oc=5",
-      "source": "statnews.com",
-      "date": "Feb 25",
-      "timestamp": 1772006400000
-    },
-    {
-      "title": "Pharma and biotech innovation and competition in 2026: Five areas to watch",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNaHIxNGppcFI3Z29GNV85RDBYZVdVdXNvazc1TklJUllXZUNFVE9mZG1MWGZ4WTkxWTNfTVFrR2hGMDJEbTRYNVE3SHRxQWM4aGJOLVZBYmpKRi1FUl9ZNS1qZUlVMWROd19DSTQtVElzZkZ1UVBEdUhualBzWjdKT3JYX2JhNV83Sm1lVWhPNjFQcTlPODB1WlVCM1VpY2FwT1ZQbFF2UUtSY01ZYVNHSlJGejdjQ1E4TWc?oc=5",
+      "title": "FDA extends comment period for real-time clinical trials pilot, AI use in studies (updated)",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPVERkc1lwdXhFanJNWHJiTnNLM2lQb0VscVRvUG8yeXh5Z3RPV1h1dUcxazJINjFQRkgtTUw0QlBiZk5KdmsxOVZGWmxrUUlpYmhuZHoxMmEwTWZpOFNLaTFoRENVZm82SS1iV0U1ODBTVjhVU0syZ2s0cUpJRzBWeld0SGwtN0d0d185Ug?oc=5",
       "source": "www.hoganlovells.com",
-      "date": "Feb 17",
-      "timestamp": 1771315200000
+      "date": "Jun 1",
+      "timestamp": 1780297200000
+    },
+    {
+      "title": "FDA, industry discuss need for flexibility in early phase clinical development of cell therapy products",
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQVmVhV2FQb2QyUThHRUhWSngxUUxNbXlfRGNua2xlT09scDNvRWdjTE1xdjFPN3p6dHJlNGFVTmNITllOeTBjS29VOFpKZEQtZDNsc3FTVnh0ZS1iZXZYZnptUUJrbWcxUlJQaWJwNlVJaTNaSFJJZGYydEFKdERlUkRPdF9IVDIxTUdTMEpnX2V6UktrRW9XX3ZrLVJvVl9oLUZ5b2FWM2RYc25qNS1lWTJqQVpfd0NKQ0FkS2Vnb19UcDFMdmdKbV9Oa1JpRlpMMW1V?oc=5",
+      "source": "RAPS.org",
+      "date": "Jun 1",
+      "timestamp": 1780297200000
+    },
+    {
+      "title": "Can a chaotic FDA still deliver on faster drug development?",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNktTZVlfbmVrVkVzejV6S1U1SWtnVG0zODVOVWN6OEZWSDZqdVlDQThHWVgtc0ZUSWpiSDhadHdBREtDWVdlNkVWZDRWd2xOS1VWZUhCRWlsYm5YZy1kWFEwOHBwT3Nkamo0aEdwLU9SU3VNZVJsbXk2bkVieE50WHRadTdsRExw?oc=5",
+      "source": "BioPharma Dive",
+      "date": "May 29",
+      "timestamp": 1780038000000
+    },
+    {
+      "title": "FDA official offers examples of RWE being used to secure drug approval",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPWjBOVGJXTTNnSjdHTnp5R2JOOGNCY3JPbUQ0d1hnay1zY1lsbWY5UXJaVGtKQ2FPQVRfLTFoazZPcHJmcGJfb0E2YXg2UlppdWtkNWJScTNrS2JnRTNuTHhsVjhJSmdmRTVMTDNac2lmYzZBRFpFelRsdl9HS1E0RVNzWVI4dVVxeGdUSHZweDlpUnhnV2l1V0wyd2dBLTZYQU1XeHE2ak8?oc=5",
+      "source": "RAPS.org",
+      "date": "May 19",
+      "timestamp": 1779174000000
+    },
+    {
+      "title": "FDA Blocked Melanoma Drug as Confusion Reigned Under Makary",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYUpQY19jQnJKWU5PU0V1UE9PWW5zMkJhS0thdWNQUy1ZYXRYQ1AtczlkYlVZOWNob1JmLTB3NHNqZEtpTW9mbGNGNUdTdkxfdV9VN2RLRmtaeDJmeFI5RWZnbHdNN0ZDRm5iR2ZFamJ5VnJIaFRLMGJmeHQ4dnZHY290elVnLVNWemFNVm9qdHd3VVNrcGRMc0FkMEMtNm5n?oc=5",
+      "source": "KFF Health News",
+      "date": "May 15",
+      "timestamp": 1778828400000
+    },
+    {
+      "title": "FDA chief\u2019s exit clouds already murky drug approvals",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOZzBEWTN5V2dZZkdINHhXMndSNURUNXlBSzlRQkdkNjB4dXN6ZFBGMm44WmtjYk94Qk1takltMFhjQ1VZN0xrRm5rU2VMRkZiRkR1U2k3WGZsRm1YOGw3X0VjcXpoM05tNWlQUXRYVmdCZHRwTDd4SFBqdUE2LXptSk5hWWhmTmxVSFBxbDNrY0w?oc=5",
+      "source": "Pharma Voice",
+      "date": "May 14",
+      "timestamp": 1778742000000
+    },
+    {
+      "title": "FDA Fast Track Designation for Oncology Drugs in April 2026",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNNTZ0Z3d6WFlrRjVNVF9VdndVQ19Eam0wM1JDNEVRcnBxUTJTWURCRk9MLVVCY1ZsZGgxSC1jZnRDQ09IdUtJcTZSVjRDVzAzaUFnOWhTaXJicHFVSTh2UTRlN3ItRWR1NVBHaFEtSTZUejJ0Q2Q5anhDNnBHS1JvLXE1QjZEOW8zYkNSYTRKMUNKQnFHNGV2YlRHSUtETHZY?oc=5",
+      "source": "Oncology News Central",
+      "date": "May 4",
+      "timestamp": 1777878000000
+    },
+    {
+      "title": "House panel calls for banning China data from FDA drug trial applications",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNc0gwMzlGVFRsQV9FNVRlTjl5M3lYX3E2NHhrY01Ta29kelp6TnNzSFI0Q3NJNnhwR3RuMVBpX1lBdFAyR1RJV1lzR19xM2V0eFVfVjQyejFlTGJ5LXpnenllX2VlRVljdHlHeVFsNjNSYzZka1JTN0N5czgxaHJfWWN6NXpYTV95TTZMRUZQZ1lvVFZrUU9qc0RXdlRGNkk?oc=5",
+      "source": "Endpoints News",
+      "date": "Apr 30",
+      "timestamp": 1777532400000
+    },
+    {
+      "title": "WTAS: FDA Announces Major Steps to Implement Real-Time Clinical Trials",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOLUJ3SnVLd3FzNlBuV1FKLVVXbzBLTGQ2UHNTOHR6M3RqdFpSZ2h6Sy1OU2w3UlNFaUM5Y21QT0gyY3FaYzhZODY3UkJTTVJFQU4tZG85dW83RFUxN2ZuWnpkMEVTb25OVk1ndnhGNzlCZl9fWVB4Wk05Q3JwSHFKX0NFd0VNRXVieF82ZXM4U3lEYlpvYXBkN2VmVnJnOEQ2YkFVSw?oc=5",
+      "source": "HHS.gov",
+      "date": "Apr 30",
+      "timestamp": 1777532400000
+    },
+    {
+      "title": "FDA Moves to Real-Time Clinical Trial Patient Monitoring, Faster Drug Review",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPREdYUW1fZXNpdWtucGxYWG5CZGtmSHl5ZTdzbGVVZ293V3JqTFB0amVEejYwM2t0cWdJdDEweExoSXJwOVgzQnY2czFITnNuVE9QR0lpRFRuYUU2eV9PeGNOZk5ndzIxbVhweWNuc1ZLXzVxUXc2S1czbVpSSDNhdTB2WXNiS3hGd09tZTE0ZjVHMXFFZllHeF9PZW1VWXRXcG9wdHU2YVZHRTFtTXM0Mmpn?oc=5",
+      "source": "Vaccine Advisor",
+      "date": "Apr 29",
+      "timestamp": 1777446000000
+    },
+    {
+      "title": "Drug Trials Snapshots: DUVYZAT",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNUlk5NEJGdUZqSFVlZ2pKR01EczhfUzk2bGJZNkZzWFd2UHVsRE51ZnFjcVVNU0tmeFgyd0RqdXBDaG55STg0TkJLdEh6X19KS1B4S0ZwMEpsaDhITk9vVEllZFNvcUhkVWdqdkRuWW5QbVBQVlM2alltUWJPb0xmb3RaYw?oc=5",
+      "source": "fda.gov",
+      "date": "Apr 29",
+      "timestamp": 1777446000000
+    },
+    {
+      "title": "FDA to pilot real-time clinical drug trials through cloud and AI",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOVUx5cm9aSkhfSzlLakhhaXZYVXpaVjROaHZwbmxvbjItRlhmRENQYVU4b01qVlVVSTBrcjZVQTB0Tzh2bjJKZ0RrQzg3VWNOVmZsQ2FlQ0lpR2dBRkd0eFB2TEpoUG1JZDF0SHRvSEE5dVBySmM2d3RHaTd4clBnRjhvUE83YkxoUXcyZlduZ1FSSnRvZHg2NWgyRTdsTDdOWEE?oc=5",
+      "source": "GovExec.com",
+      "date": "Apr 29",
+      "timestamp": 1777446000000
+    },
+    {
+      "title": "FDA announces efforts to advance real-time clinical trials",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNMDQ0Qnc4VW9rTHdZNmY3TWlvODhoLS1WZ3EybUVoMW5zUTRvZnJsZzh0TjdjY2dWaF9rQ2ctbEc2ejVIUmNMR2pmMkUwUW1JbUdzcTVyaHpoTWVSNEtwNWJtNHZqblI2TW1ITl9rYWdPdEtIV3B2WmlNemNlcXB1UDFHV1pNbXVHczREeGJ1V3NkeFVyV1BQTQ?oc=5",
+      "source": "RAPS.org",
+      "date": "Apr 29",
+      "timestamp": 1777446000000
+    },
+    {
+      "title": "Paradigm Health Announces Collaboration with the FDA to Transform Regulatory Review of Clinical Trial Data",
+      "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOQm53WDNtVG85Wk5UVUEydm9FU1FwSFROMkoyMjZNeUpqQnF1bGZTWlhtbE9mX2pJa1BMSHpxOTZSODJUTFhrdENBZzVpNmRmSExXQ1dDaE5pQ3BPME94Mk1MbVdjNHAwZk5wM2hyS2FaTWtic2F4SndMNkp0d2hveFhiNm53OVJTWHY1Z2N3TTROWnNfRElrdmRlUUpkZjRWTGpXQlNlbWN0LWYtYkZ6aXNEVzllaWhzaHVKR1dFbnJWazFtMjJkV3MtejRYbVl5NGdpVF9IX3BhS1ozQkk1WjZkeV9wb3pDdUdNdldEZzRzV1h3?oc=5",
+      "source": "PR Newswire",
+      "date": "Apr 28",
+      "timestamp": 1777359600000
+    },
+    {
+      "title": "US FDA to Monitor Clinical Trial Data in Real Time in Pilot Program Aimed at Speeding Approvals",
+      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOZVNwR3VEUzNXNDYxd0RqcEdvMFRGVFIxYjdRcUdwVm81V1RzTlZxeTBzUm84Qm8wZXlZeTcxV1VMZ2lyNUM5WG1IWEZseDRVVXRwaUVGTGk0eWU5enlWSHhYakY5WDFOUDdTQ3ppSDdFemFMVjJwdFdkY0w4OFhsS2M2bExrR0ZkMVg5dzBYYzJlWkpZNGUwMmdUNTdyd0pZU3FOdzltTFd1d0hRY3liYUcySjhscnpjQTRtVGw0akFmalpyZUZ5Y1RWU1VJUmI5a21QdndKbXpvenFJZEpr?oc=5",
+      "source": "U.S. News & World Report",
+      "date": "Apr 28",
+      "timestamp": 1777359600000
+    },
+    {
+      "title": "FDA Reminds More Than 2,200 Sponsors and Researchers to Report Clinical Trial Results",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNTFpNdUVGVW94eUZ2RVpRb0RtWGxDUXdveEJ2OElQOUdBQXRQQ3k1WGVsUWFzNkpLcjJ5N2pIajhhOEZWbWVmNHdMX3pLT190OFJ2aUZZeHlyak1QSDZESmJqWklfd3RqdExILUVUanNNYnFKb3RHcHFSb2oydFhjYXA3ZEV4ZzNic0ZGODNYTzZtSVdkblAyZkZQb2tZM3gwcWVMcHRQdW93dllLSWhGcw?oc=5",
+      "source": "Applied Clinical Trials Online",
+      "date": "Apr 15",
+      "timestamp": 1776236400000
+    },
+    {
+      "title": "FDA budget proposal: New clinical trial pathway; permanent authorization of rare pediatric disease voucher program",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQSVdCcmFyOVZsNzZGWXFyU1N3Qk9JODVvODgwaUFfdVctRzFoWmNFOWJJY1djcFYyb3RlVUhFa0JNaktnX0xKbm1EbnhiSHVJaDFaYWp3QXIzWnN0b3c4NjU2WVI5N2xEbHN6Z3c4SlhyT0lmZnNsSVR2b1dxRmdhV0IxNlFkaDQyVEVvVVBYVjBvdmwtZkE2LXR4ZWhwb1lsOHc2MEF1V0VHalVHaWVuMUpBbmdpdm5RdUZodU16VUplWUNxNVU1X09INzVpdzNacE1hRVVWWDlSUGg2aFM2Ug?oc=5",
+      "source": "RAPS.org",
+      "date": "Apr 7",
+      "timestamp": 1775545200000
+    },
+    {
+      "title": "Regulating Payment of Participant Data in Clinical Trials",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPZ0xJNnV2RWdySEZUZDdBRHllS2NPZGw1aklaQmJVb1hxeTczR2UxdTU3czBQekdxWkhPMlVMVzJuZW16Q1dhbmk3WlFBbmVRZGZGTTZRbDUyRmVLQmxsYjByVzIydVV5dDd0T21aa0UxYl9FM042RFVqZFlMczFCYUM5SzVKWlNXeWxtOExoOEFxRjVteTBXWHBLUW90WG5QUW1qMlU4TQ?oc=5",
+      "source": "The Regulatory Review",
+      "date": "Apr 1",
+      "timestamp": 1775026800000
+    },
+    {
+      "title": "New FDA Policies for Faster Drug Reviews Met with Mixed Reactions",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQWm5WYUpCZ2hhbXI3bGk1bHdZZFl6ZXk2RVlWdXlqdzM0bVZ6WFpPTDlKTmNzUDhIYWRmOFhVblM4SE5XZXZIYmw5LUd6RFpIekU2aE5iT2FkLTZ2RDhlaC00aGRoR3ZqN3BuWGFhRGpzeVhRTTBrajFYWVRRdlViaWZYa1plWUxvajVkai1BYV9teFlHRlQ3ZHN3OFZlc0RwRThN?oc=5",
+      "source": "the-scientist.com",
+      "date": "Mar 18",
+      "timestamp": 1773807502000
+    },
+    {
+      "title": "FDA Moves Toward Faster Drug Approvals",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPMUtyeE9pZkZXMFFsVUs0cC1ZM3NENkVGVGVPSm9tSzl0OEpoZ2JiOG5jT1o2Zzd0UDc5aWRnUWo0eWlVX0EwNHN4cks1TERVczd3YzczekhCbkY1R3pmdEMzc0dOMVFlNndrRkFWUTNVeVdLVVN2bnVBdVFRM1BVX1FoTzU?oc=5",
+      "source": "Hematology Advisor",
+      "date": "Mar 11",
+      "timestamp": 1773212400000
+    },
+    {
+      "title": "North American Enrollment in Clinical Trials: An Emerging Issue for Regulatory Approval",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQX0hfczdvT1R5QmVDNlhtbkY2a3JZQm8wdk1RX1J0aGdURHE1SzNDcXFsN0ZuLWJmcl9zMTJ0dENITWJBb2pWbVNUT2RRNW9wcWJyWDZocUhHNl9yLWxYR193anhuN3EydlhQTmdDYWxZdVRGTFNlLUlxTDRkcUczNWttaTZnTEhHUkthekFmbXdIenBUandhX3hCdG5lVHcxUXBiMTNmeHN3MmpNT0t4c3lTeVlaTGdDaXo4QjJkd3A0WnctempZTURiZw?oc=5",
+      "source": "Journal of Hematology Oncology Pharmacy",
+      "date": "Mar 6",
+      "timestamp": 1772784000000
+    },
+    {
+      "title": "FDA Launches Framework for Accelerating Development of Individualized Therapies for Ultra-Rare Diseases",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPR1llLWRCQXAzTTcwWFVhbnhkQTBpSURXMXRaaGVaS2Nfdkt6QjhaMFhhTHhKaU5iNUdDYmY4c1NQTzc1dF9lSUFnWWFrR3hpZktxWk5kQXNmOTkwRFFsTXp5UVRtRWRPNU1rYmZRMXVSVlQwNHh0ZURmNVVYcUtxSmxwOURVZ01jY3B1bER4ZFc0NXlRbXJETVRUOHd0QkNIcDVDdWdSeXdRQ0NDMjEzdkdISWdnN0pNN2dHU1BOZ1M1czN4a3lv?oc=5",
+      "source": "HHS.gov",
+      "date": "Feb 23",
+      "timestamp": 1771833600000
+    },
+    {
+      "title": "FDA policy sets new clinical trial requirements for drug approvals",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQTlJTSXFrUDdTVmI3Y19vWlQ5b3JOYVY3OHE1MmZ4LTF4OG8xZ0RiVndSc2tmTWlCa0RYbnJ1WUQtWWtJUzJxc0trdXIzQmNxaHg5NGNDbXdzOTBWalBPbFdDU3kzYk1SdUdCa1Z1RHloQ2FaSW5TTG1wUjVPaFdxLXVST1NkZzZHaEh6Uk85M092Yk5UOUwyOHhvbGVlUWVleWtOSFpPdUpLUlA2cHpkRzlmckxTVDBfLW9naHg1MWZadFVkcmVseVJYelk?oc=5",
+      "source": "European Pharmaceutical Review",
+      "date": "Feb 19",
+      "timestamp": 1771488000000
+    },
+    {
+      "title": "FDA Will Require Only 1 Study to Approve New Drugs, Speeding Up Process",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOV2pxZEVDdGFQM19xMzFQbEhtYlF6R2ZFMGprbEpzY096ZTRRSjk4bDgzcHU3ZW5WQUFIS1JQMzFEMUZkQUcweGN0bURCWVBVSjVrbEpMbGxmbXFwZExrbmhqYkpMbFBZU2lMSkZfcG9pZllHLTk3bEFBT3BwVTdvTjZ0TEJpcE1VTWNaSHMzVWJtTnMtdERsUXUybGE?oc=5",
+      "source": "The American Journal of Managed Care\u00ae (AJMC\u00ae)",
+      "date": "Feb 19",
+      "timestamp": 1771488000000
+    },
+    {
+      "title": "FDA Removes Two Study Requirement for New Drug Approval Process: Report",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPdkdvU3hVNTFKUmxIRnlwN1lVcElONnhLWHJUblJqdk5jdzB2dl9mWDQ1MHpLLU5QLWhYSDdQSF95THpPVHBPSzc4NDhYc1dNcTJQazhsdWVnWjdKOUJzbDhYeVRhZGR2Z2JjM3JVRkFtVWplSzNCazBRSVZ4eVVXcTlQY3RmVWJxRHI0ekE5M3NMZXoybUpIN0dBMmxvUQ?oc=5",
+      "source": "Pharmaceutical Executive",
+      "date": "Feb 19",
+      "timestamp": 1771488000000
+    },
+    {
+      "title": "FDA chief warns U.S. is losing ground to China in early drug development, calls for faster trial approvals",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPaVR6SGg4Z3cyd3BSN0puc0Ztai1meTd6aUdHU1o2bndkcGRxSEtKNi1ycldUU0VYbGVZYTR1S2RLVGpmNDJTZmlwdEotNXpNZmJPWUh4T2VqZmdsS3ZSLURpamtNZlVlSWVuUDZkOExSRWVnWGxnUzJ5WWRrN3Bxdmh2RFdRY1lCWThmOXF0ejJxaEdCUXgwNURManlhN2VKbjl6MtIBqgFBVV95cUxOc0V6SGdGd0ZieXZLa2Z5d09WcW5mZnJXU2pVUUMyeFVrMTlNNmhJUEllWEV0T1h2cnJqYW03bTZDc21TbXprXzlqeGZOSm9HaEEyTlhCWHQ0OVl0ZS1MVFdKVWhIOUdack5wbUpmWS1iS0RuMk5nUDJ1YU10QlZLTG9vcXpNS2hEV0xnbEU3Qk41TmFLcmJwY2VUaTJaWVJ4c1lJTkpPdUhJZw?oc=5",
+      "source": "CNBC",
+      "date": "Feb 18",
+      "timestamp": 1771401600000
+    },
+    {
+      "title": "Drug Trials Snapshots: REDEMPLO",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNcGRLXzFhdDVvOE5fV29od2NpWXgzTmNKNl9wdkdOTWp6MjNTTGtISUFCcF9ManhPcnJiZUJQMno0Ti1KVmw4OWdpY2xKdUNyeTNTdWV6T256cHFmbGlFTWg3VndKeHRFRllnWG9fZnhrNDlSZEFFTTV3QkJiOVM1RW9GSmNKZ1B0NjNRdjJwb1Y?oc=5",
+      "source": "fda.gov",
+      "date": "Feb 4",
+      "timestamp": 1770192000000
     },
     {
       "title": "Top 10 most anticipated drug launches of 2026",
@@ -72,39 +310,11 @@
       "timestamp": 1770019200000
     },
     {
-      "title": "China threatens U.S.' drug-making crown amid Trump admin's research overhaul",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5TNEdRRnJOeXNNd1dVZVBNa0NuQWxocTlLb2FFT1FVWHpnakYzWDdtOUZzeDU4RTNMRlZ3RWhtZzJEM0t3UXN6MnhvWTBqVGIwZHJhdk9wR0pZVTY2S2hRQ1NWQUtYMU1NaXc?oc=5",
-      "source": "Axios",
-      "date": "Jan 30",
-      "timestamp": 1769760000000
-    },
-    {
-      "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ING THINK economic and financial analysis | ING THINK",
-      "date": "Jan 20",
-      "timestamp": 1768896000000
-    },
-    {
-      "title": "The China Dependence Big Pharma Doesn\u2019t Want Washington to See",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNRnRmY0JZb2pWRkxOTmRWT1liR0p4Smh0TzVhNDVFaHd0SGNoS0VVWVM2dW1fVkV3UzFJZUVNR3lUUDU0Q01fbW40XzlIQldVbkNmcVFLeWxDX1Rkb1dST1ljdTFZdDJOa3hOQnVPdDJqVlZaMFFmUnlTQ0RRVjFXcFhBVFRxQWMzWWxoam5YWjVSazg0SVZn?oc=5",
-      "source": "Coalition For A Prosperous America",
-      "date": "Jan 14",
-      "timestamp": 1768377600000
-    },
-    {
-      "title": "US FDA approves Fortress Bio and Zydus' treatment for a rare pediatric disease",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPdmdxWS1xYk56MkRZcjNha1llS3Zfd0Rvb3FiTmQySjltNy1kWXNSeXhYUFZETnprX2kzSDJkV3JNTEZBdndaVkt1NzJfTTltMVY3MHczNUF1MHU1cndvWkZYdEl3UERpZzJ6amZIandiR0RTZWZRWjVKV3d0NF9zcWR4NGh5N3dIZHhtM3BJNFo4cXFuQnZ5Wk9sRngzc3cwOUw1RTVwLWR1VFplbTBFZ09XYlg2UTZLTVljOHFQR1RTSFBJZGVsNjRxejUwakJibEZzWjBn?oc=5",
-      "source": "Reuters",
-      "date": "Jan 13",
-      "timestamp": 1768291200000
-    },
-    {
-      "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSUt6TjhqalJoV0RyTGFjdVoyaUdFQ3VFbHlVNXBpQ2lPMXdmU2pXbGxSTWtmY0otM0dTZktkS3pXVXk2Y2RYTnAtOUJJTDlzRkFwOXlkaDNMTS1lYm4wMXNZbGpuYWhTUFZHUlF2clJHU2tLaVQ3WXFDQ1E5WFJBR2hiY3dPNUFQbURaZjNJOGlUU3lSTGZHUkxJOGtBaUJnTW9SZ3JtMXN2bUdMY3psLU15dzBMX2ZR?oc=5",
-      "source": "McKinsey & Company",
-      "date": "Jan 7",
-      "timestamp": 1767772800000
+      "title": "Impact of drug repurposing between 1985 and 2024 on pharmaceutical innovation",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE13ZnR2bzdYbzIzN3FIVmp3cXYyTlpEM19wRHBCVE5rdy12Qk9xM3JJb2l6VWI2TnRTb0lJX2FFeTRQYkp0ZDFmWG1RMjV2ZENhRkRvRGI2NEZMc2VlcDhr?oc=5",
+      "source": "Nature",
+      "date": "Jan 8",
+      "timestamp": 1767859200000
     },
     {
       "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
@@ -114,6 +324,13 @@
       "timestamp": 1767600000000
     },
     {
+      "title": "Regulatory tracker: Keytruda-Padcev combo wins EU expansion in bladder cancer",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 2",
+      "timestamp": 1767365493000
+    },
+    {
       "title": "2025 FDA approvals",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5VMlhtZHBzSEFBTFpaR25BbUtUUHcxZUJ5ZHVXUFhYbm5LaW1tX3pCdEl6M3VUWnhzN2l1QXdWc3h5YXpXazV4WUFUb0xMdnJsbkdMWG5vTHdoZFlxcnJZ?oc=5",
       "source": "Nature",
@@ -121,74 +338,46 @@
       "timestamp": 1767340800000
     },
     {
-      "title": "Cytokinetics heart drug wins FDA approval, the biotech\u2019s first",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQS3JCYk1PcUE4QnFWS0JmdW9id3V0dW9BVk5YWW8wYmtxU1RtN0ZUOEozX05jclR6VFdSSWhaOExMLVhmSktrZ2hBOGxva3NJbWtJeEotcXluVnAtbnE3cFJGVWpkOElUUldGbDBEeDExRDhGazhZMXU5a2UtSnpiZUJNbkhCOW53?oc=5",
+      "title": "MSK-Led Research Resulted in New FDA Approvals for Cancer Drugs in 2025",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOa1FYRG5kZXprUTF4YjJWR0dBak42VWRMMkJ2SHNGMlJKN044REpxZk9MWWFRV1duM0Mwb0VWZXNIZlNxNU5aSlRLTDFMdkg3d1FtaHdObW1fa3BzX0FwLTh4R0g2ZllXVE1ycExvdFJaX19pNkl2UlpUbkFQYkxKVVpzdlhHNXF5WWJhTWtWRjFuYWtXLTF5QWs1a1EwTF91X3hB?oc=5",
+      "source": "Memorial Sloan Kettering Cancer Center",
+      "date": "Dec 15",
+      "timestamp": 1765785600000
+    },
+    {
+      "title": "Longitudinal clinical trial enrollment trends across 341 US FDA-approved drugs and their guiding role in precision medicine strategies | Communications Medicine",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9qWERJcGJyb0VfWGFYUTJrMk93clg3bERpU1lNTkdGVks3R2lmMHNjZ2VLT0lEaURPd1lPMENnMzFQSFppOG1MOWh3dWItRFlxSnhXNkdDMHQwUHJKNW13?oc=5",
+      "source": "Nature",
+      "date": "Dec 5",
+      "timestamp": 1764921600000
+    },
+    {
+      "title": "FDA to lower number of trials required for approval of drugs, other medical products",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQQUZZVHdRenJ0U2ZraFluTk5VVmZmT1A0a19tQlM3TW90ZkRnMHZiVWM1QjVZN054ZVNWamFzb1BVcVc5TWpQQnZjOHB3WlYxYmF3MkdYZHBzeWI5eGN3ekN1c1BMdW9UWTd3bW5CLWE0V3NEbjlseFQ3ZEdWOVh3eWxjMjRESGFUTmpGcjhWTDBudU1fQjlxblpab2NzblU?oc=5",
       "source": "statnews.com",
-      "date": "Dec 19",
-      "timestamp": 1766131200000
+      "date": "Dec 4",
+      "timestamp": 1764835200000
     },
     {
-      "title": "GSK rounds out year of approvals with FDA asthma nod for long-acting biologic Exdensur",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxONTU4cVYzbC1sdkpocHpPNndfalc3eUptbThmR1hyeFY1eW0tQkhTYnVwVXhITkhfXzRIYTViUi0tZEZYWDlUa3RFZDlaeWQ5bUhqdVo2LTNHRV9lNmJjMkhCYVNEYmVUUFBEQ3M1YzBrR0hCU085ZGtqMzF3U0ZuTFIxTEw0OS12VEdHaDB5MmY0M2Myd01ZWExrTWtmQ0RySFhlUDg1bUcxeDlEQlJN?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Dec 17",
-      "timestamp": 1765958400000
+      "title": "Top FDA drug regulator resigns after officials probe 'serious concerns' about his conduct",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxObHNXckpJdlVwdGpKN29tWHBOeDZma0V3U1JnZ2Y4emtwWDZJRG1ocjQwYmRLcUM4b1huaThhd0k2ZE1oSDlIU25Ra2FKOEUtRXRUMVlCMWpud0dfU2hpOEI4NEpHVjBVTVZ3QVFiWUw2VDlRRFBoTjVIWHNKTGlrUjNmV1lqZ2NaVi1xUjNJWWJ4a0d5S0dIUTdFTFc1Qng4RkdNcDVQdklBZmxWaEUxU0o1MTZCS0t5TjRRdTZqR24?oc=5",
+      "source": "PBS",
+      "date": "Nov 3",
+      "timestamp": 1762156800000
     },
     {
-      "title": "Arrowhead strikes true with 1st FDA approval, but Ionis competition looms",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNd05UdnRDMU9hQVBDdWhWSUJRcDVEMmtjdU5YS1hKRGNhM3h6WlhlaU1qaGFYWUtnMkV3cTlpSmk4MloyU2I1WlV3a3dCUWxBcEpaWk1rdXhXZ3pSN3lrZy0wV2pUOEwtM0NSdXM2MTVkMG1nM29nVXo5a1NwdktQREtaQ0N5SW5JODhiX2VjYmg1QURSWmhYQlpxNnBTc1lwWGg2RXZJRVlQcFJYczM2cDhhMEZZNTlheWF5V1hB?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Nov 18",
-      "timestamp": 1763452800000
+      "title": "'Several concerning observations': FDA sheds more light on reasons it rejected drugs",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNSnluVHU4Znp2MXRyZ2dXUDFUcXh4VTB2aXNsdzZsVHYwN2poQXZmVHc2TjNtT2xVYWRRQnZJTDlXMXFqV0FuR1NCbUVHUzE3NFFXenBVOS1abklsTDFfLWpITUhFT1FsUnoxN0toazNBYjZ3ano3V2ZJbFU3Z1JXS3VQNmtidkNZWjRBM3dLeGtKcTZEYWdzdDEyQmk5SURBR0pOcDB1bDc?oc=5",
+      "source": "Fierce Biotech",
+      "date": "Sep 5",
+      "timestamp": 1757055600000
     },
     {
-      "title": "US FDA proposes moves to speed availability of some cheaper biotech medicines",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQOXZzeFd5a3g4MnVSa25VaDRzU0lKUjF5WWVURWJHVGNaUzJSb3N1UWVXLWtHeFpibDFOV2dLZzFtbWtQQUw4RWI3bkNjTi1Mb2VRZEJ3dldjbTl0clNvTUhZenJqeEVjVFVma3lzYlVsbHZpWmxPWE1aMnBydUlvTFZoOU5ZZEFZamk3b0V5Y25zUzQtcGYyd2lmaHFjQTRjOTJYaXQ4RUhzeG9kcXpsZmZBT3Nva2ZfNU9LMFl3?oc=5",
-      "source": "Reuters",
-      "date": "Oct 29",
-      "timestamp": 1761721200000
-    },
-    {
-      "title": "U.S. pressures U.K. as pharma pauses investments there",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOTldWRm0wdXBPajZ0Tjd1c2sxcGxVak42Q1RkM2lfbjJueW1reFRMMUEwY2Y3VU1NWUhyUi0za0JnVzl5cUc4YlVCc3hkRTNBR3Eta09HS0ZlMS1Ra3ZncFdoYVN3akhLUTJzN1ZyNEt6WGE5XzJjS0Fxd2RWaUs5MWZWQ2JJUQ?oc=5",
-      "source": "statnews.com",
-      "date": "Sep 15",
-      "timestamp": 1757919600000
-    },
-    {
-      "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWkFSZXVGSzlqZmw2MFNaR2JQaHVQdVp3cjNrMm1CMFh5SXM2QlRNSVg4NXBKbF9aVk5TSEgzdWlqVEtLMkMxTUZORTQxTS1nSXpmOFNTS3BpZE1ZOWxyb3M0dDRLbnNTb1Ywd1J3b1lNYTNqYUxSRm85bmJJbDY1Qi1vVHFxeEY1amIzd3ZrbWp0Q0VHTFJrbXYyRWZ6Zw?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 29",
-      "timestamp": 1756450800000
-    },
-    {
-      "title": "Biotech\u2019s Lost Archive",
-      "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5fQ1dQaW1YbU0tbTM5Ykk5eHVPcDR5V2tLMmlZdGFJOFcwWE5faXpHV3YwZUpjUTA3SVRIUjBGU1BtT1FqWVNRM2FpM0tUNVU?oc=5",
-      "source": "Institute for Progress (IFP)",
+      "title": "CEO Forums: An FDA Listening Tour to Engage Pharmaceutical and Biotech CEOs",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNQmJrMHczOWNXLWhRUEtBMjlkRllDeC1uQzBJcFUxaWkzekRjaHR2bHI3QXpqTkRfUTZ4VzFEanEzNjlDOW5Gd2JBRHFIbjlwblotZmIzbjR1c2Iydk5SZUNmejJRRlRsN2xsMnFjQlhwd3hEMFVLUE9Wb2JTakwyWi10aGR4MnVITFNfRTJXY0thU2I2R0xreU41U2lfdw?oc=5",
+      "source": "fda.gov",
       "date": "Aug 11",
       "timestamp": 1754895600000
-    },
-    {
-      "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYkJzbE1HalpDVHJoMmIzbkNVMG9ISWstT3QwanZYbGV3WG5sVnZ3YVlybVAxTmtCTUw5aWViWkNLRTcwZFVuS0w2dVBXUWZUSzdGN1Z4a3VNbTR1T2tnVWZfREttVG1lQXRqLURlQ1ZXQXBZMHJJaDk1RUtTZDE2ak9BOERZblFpX0k1TVJld25pWTExSmo5YWlBUTdHdkdjajJIN19RM2Vac3NmakRF?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 6",
-      "timestamp": 1754463600000
-    },
-    {
-      "title": "FDA opens national priority fast track, offering 2-month reviews to onshoring and affordability projects",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPTkRyWVVSNnhkLThucFBGZExiY0dBVnF1aFM1c19WZEM1bjk0UDBWOFMwcl96Ukx3Q2k2Z2tjcXdSeXQxQk5mM1dxT0hOYlBQVWNFZG5XaVRUX3A1eFllMlJIaXVSSHJZSlNBbG1tX1NGaU40T0VTVWI2aEtoUTFOSkxTNE1QWi04VXdvcFpXYXR6Zm1JMDNWQ1lqRFNJNXh6SGUzSVRqXzQxZXJ4ZE5hY1ppc1hkODlIdkVTMURGV0VPYTh2M1paaA?oc=5",
-      "source": "Fierce Biotech",
-      "date": "Jul 23",
-      "timestamp": 1753254000000
-    },
-    {
-      "title": "FDA appoints George Tidmarsh as top drug regulator",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxONm5iTGVuNVNxUm5BRDhTLUowV1N3MjRDbXNOc0s1THVRRGRRbWhObVVvanpRUjd1dnpjTGNzUVFNRV9MSEZ5U21JY2dVQ3lVaVp1S0Nzc0pnMVA3LVZfR3VMTTBkRDd1d2k0d0ZlVUVNZkh3cXZzanA5NFdtME5VMFk2RWFxSndvY01oQnJVQTRTQU9meEtxTzZaYzRsLVZKd3VzbzNZQWtTei1WdUFsZmlRRE55Q3VzNUJF?oc=5",
-      "source": "Reuters",
-      "date": "Jul 21",
-      "timestamp": 1753081200000
     },
     {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
@@ -198,30 +387,9 @@
       "timestamp": 1752217200000
     },
     {
-      "title": "KalVista bounces back from FDA delay with approval for oral rare disease med Ekterly",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPd3k3MU93Y3gyQVlQcXcyUjZXMnBNZ1podk5VMG8yampqTW44LUlSZlZmeEhPeXY2Qkx1ZnhKUkVEVFpzelB1VjliTFRyZU1sQzl5cE5zMlRGdjhKbG1yaHZOeVFxT0xGZHFOVW42SWFSbTdpbzFqd01iRURocGdOb2o0WjVkY01nQVNIUEVnUl8wU2IyQ3hKMmRYY2dhZ1dRX2t3dDBkVUo1Zw?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jul 7",
-      "timestamp": 1751871600000
-    },
-    {
-      "title": "China approves 4 new drugs, including a global first-in-class medicine",
-      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNWTNrOFoyN2NBalpJVWFhcG44MnBsWVA5VU9wVVpMM0x5eG5xcGdSSHEwLWIxM2lTNmMwbWtpOEcyZ1lFbWNKNXdpZTlRXy0wZ1FwOWE2X3dKT0NYU2w0NVJmUHZRamh0MHp1QWsyY3RDUFhTYmtWZEVTa0lkQldYYUpBaDJoOWE0ekEweEpaNkxBNGpXZXc?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jul 2",
-      "timestamp": 1751439600000
-    },
-    {
-      "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
-      "source": "Fierce Biotech",
-      "date": "Jun 16",
-      "timestamp": 1750057200000
-    },
-    {
-      "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNSkYzYkhXNjZXWnUtZ3hDcDdYc1B2QUxTNHZzUGtZQlhsSWVyYTFHVDRGU2l4RldlQVVVU01DVFktSFRybXVEczJldU5ZWjN1QnJ5NjM0bXNHZk1UVXZjajVlX19XQzdUM1BILWZpVXozdV96eGdhVktvNTFtaXl6ZWYyU1ZXelAtV3JVeS1jX3F5M291V0x4b2RLazlMU1RJeFplS1RCSC1iTE01SVpad0pNZ1JXYWI1MG5jaVpXNmxEc2JycWt2U0VlTU1neWNiMGxiZzhB?oc=5",
-      "source": "Reuters",
+      "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
+      "source": "C&EN",
       "date": "May 14",
       "timestamp": 1747206000000
     },
@@ -233,18 +401,18 @@
       "timestamp": 1746514800000
     },
     {
-      "title": "Strategically De-Risking U.S. Drug Supply Chains",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
-      "source": "RAND",
-      "date": "Apr 23",
-      "timestamp": 1745391600000
+      "title": "FDA misses approval deadline for biotech\u2019s rare disease drug",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQMlJmUy1YWVlOU3h0QW0tN2JFMzVnRG90TWsyN0s5TTZRUzZpS04yTDB0akZKclJzYzl5QjNwcXBEcUQ0WGlQM0lFZDhpM0NEMzVOZ084Nm9vckNwMlJMeVlWV044VGlRaG9ZYjA3NkR2TFZMVE1CN3dxUHlJU0ppcVRxcVVmMi1fMUtsS2lFT09QakRaQnVuelhpejkyUEtXNzhfUFZwNGRBSVM4QlJqQXJ2VQ?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Apr 29",
+      "timestamp": 1745910000000
     },
     {
-      "title": "Trump\u2019s FDA Sends a Bullish Signal to Biotech",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOdGJSVnBCaWgtOUpJNG93QkZVQlhwblEtb212M1hwYWFNNFJSRWtJNXlzQklLdS1FZjhDald3aXJQRVpUczJGQVpibWRtaHBReVJkT0hlTXQtSFh4Q0RaYzNkN0J1WlN3a1Jnb1I5U25nMzNxaUEtVFJRWV92VDhCdWVIZUVWQUs1OU96TDVLT3o?oc=5",
+      "title": "Exclusive | Drug Development Is Slowing Down After Cuts at the FDA",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWi1iZFExRC0yeS1LaHRDRlRDUHdCRXpid2lDWU5iOGhINzFRb04yZkNOd25sSFZBUnhwTTJGRklFX3N5c0o5VkRZeE1kMVpUcG9qdmhpS0lOVDdVaDlmY2M0YTZhN3JVWm94RVVyMUVOSWctZTlKSkJRUnRkWVlnWkFpMThFREpXWjlUamJlWkw1bFoyU3piUFNldUQ4dElmZlM0?oc=5",
       "source": "WSJ",
-      "date": "Apr 22",
-      "timestamp": 1745305200000
+      "date": "Apr 17",
+      "timestamp": 1744873200000
     },
     {
       "title": "Top 10 most anticipated drug launches of 2025",
@@ -268,9 +436,37 @@
       "timestamp": 1735804800000
     },
     {
+      "title": "The benefits and challenges of FDA Fast-Track and Accelerated Approval in drug development",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOSUhpUVBKU2ZBSnNwcmprVEVrVm9ZeU1Mb3NIR05mOXFmRWhjdHlHOHVHemtkUmRFb1p6SEctQWUyY01UeDU3dmpaTXd4NXVVNXNpN2dsY0pxVFlEVnF1SjRCTkVnYV95dUx5d0JGM2wtVzAzbExSTzBhelY5U1Z1RkE1LXVUaER1VmZHb1pEaUo2RmQ4WHZSUTN6RUFVbUdrWmRDc1pvSVZ1NnVLOHFwRmtCSWdhQUNrLWFjTG9NM0JOemhfdi1famhWOEhibHo2MGRybjI2QXhraHN2?oc=5",
+      "source": "News-Medical",
+      "date": "Nov 13",
+      "timestamp": 1731484800000
+    },
+    {
+      "title": "FDA approves first MASH drug: Madrigal's Rezdiffra breaks ground in notorious biopharma graveyard",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOMVMwa0Fhc2x2SDRBaWduRW05aF93TGMzaUNRaVpsc3Nrd3hCZUhUVzZaclVzb0R0NENObGlfMG9QVWlPREZhRXBvM2tFZm53TXB2LTAyNEZVLUZ3b2dzMDhZVV81X2ZiYmtYWmdIWFNDMEdwMEt6dkRtclF3MlcyWGc5SDlWWk5Rc1Q1c0ZkUE5SRFBWSzlldzd2ZVpLQQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Mar 14",
+      "timestamp": 1710399600000
+    },
+    {
+      "title": "Analysis of US Food and Drug Administration new drug and biologic approvals, regulatory pathways, and review times, 1980\u20132022",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5KZFpOMENFcndMZFl0SkNiRmVyY2VEa01kazdSRHd6cDk5M0hEaGw4TWpRODh5QUc5cUI5QUEyZVJjd2J3SmZ3RjRaSV9LM0RVaEJGU0NHMHJ4M1ZST2J3?oc=5",
+      "source": "Nature",
+      "date": "Feb 9",
+      "timestamp": 1707465600000
+    },
+    {
       "title": "US FDA approvals bounce back in 2023, sparking hopes of a biotech recovery",
       "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNUjVId2hGTUZjTzdCbXNpUWFndVNTbU40YjRVZ2ZXYm1aMjdaeTBWaXhUMGU4OGItcURDM0F4ZHdjZ0FTSGlDX3h4NFU0NFA4OVhiN0U2WTV6b3l0Q0ZUckZEcFFzOTFUUjJRbUp2S2drRlJJbzgwWkdpZS1ZZmNrUi0zX0JzaFVRbW5wMW5UOTFyZWpRcGdCeVA5RzR0ekZqLVJOTDgweW11UlBqcDZxZDFFQkRiY2FtMWJnbndGaEhSbENZaWRLTE9HaHFiZnRma0NZ?oc=5",
       "source": "Reuters",
+      "date": "Jan 2",
+      "timestamp": 1704182400000
+    },
+    {
+      "title": "2023 drug approvals: After a down year, FDA signs off on a bounty of new meds, including 7 from Pfizer",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOQjhHMmxpbzhPQ2ZvMHRtRzlyZHdCTVVselhiOTdHQk1BVWxPVzBCSHFBYmNNN2F5QUZDaFRHS1hqM1I2MnJwYWtyanhBSzRhNkJ3TDZYelZSazNSRWYxSnZlU1FZczVNci1TYVVqNG1ubGJzRUl4eDNsaG0ya2dzbXRoUDNPc1k2Z1hUMjRPSFl1Umhia1NYdGQ4ZmMwb1lDaFduUVg1VWF5QUhXVGpMcA?oc=5",
+      "source": "Fierce Pharma",
       "date": "Jan 2",
       "timestamp": 1704182400000
     },
@@ -280,6 +476,27 @@
       "source": "Fierce Pharma",
       "date": "Jan 3",
       "timestamp": 1672732800000
+    },
+    {
+      "title": "A biotech wins the first FDA drug approval in a rare type of eye cancer",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNQ3p2X0NSWGpwOVBPWDhoV2psb2FzWlZaTmxuM0dIaTJiSDM5cnlRRFVQSV9TWDdVZjRtei1WMFVJVWk2cmFoYlJ0NnIwTDZHNi1hME9fc20tYUM3VXFvMDZaTkNoZHhGbG40eGc1MzdjcW05Mm94N2Q2NFhWU0hPbHNWMXprbzhLa2FpVXFpb0U3Zw?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Jan 26",
+      "timestamp": 1643184000000
+    },
+    {
+      "title": "Key Stock Catalysts in the FDA Drug Application Process",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQOVZUOV9VV0cyMHIySUdjQmxOVThURllJNFJtQUlkSGpxX0JXbjhJTDNxSHZiVkxOZl9SZTBBWnZKQW05cjRncDVfc3MwTDRYb1M3QlVweWJIVUdjZTdvUGEyNkgyQkp3czBaaThvOEhkSF9xZDZQaGdTbXpaTzB0X2xGcW9uQkF6VkctLXU2WU02TGJjQ2tSOHdpUktZYnNmQldlbXRVMEMtMTRvLUJrUFBsV3M5dEFVdmlQa0lSdW02T1FFMy1JSE1GVVExcV91?oc=5",
+      "source": "Investing News Network",
+      "date": "Apr 30",
+      "timestamp": 1525071600000
+    },
+    {
+      "title": "What Are Barriers to Entry for Pharma Companies?",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPNm5DMnZKMHJNVXI3TUtUb1RsMkZwa3BuUzhGWUlSeTVuLXBNSUt5LUhldkRDVkI3SGJvcnVXUzE3ZjdvcndST2ZLT0l4YUNaa0lXU3E4Yzg1bkRzNVR1UGJnVVJpcl9tMHlnNW13SExGeTBxYXF1VWhYQjd3aFVGeVVPM054dEtiZXJaMzZUUnpWdGo0QnFyS3JVczVRUndCTFF4ZWVaUmw0YmNl?oc=5",
+      "source": "Investopedia",
+      "date": "Mar 25",
+      "timestamp": 1490467743000
     }
   ]
 }
