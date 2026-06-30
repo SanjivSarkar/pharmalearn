@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30T09:46:30Z",
+  "updated": "2026-06-30T14:27:32Z",
   "items": [
     {
       "title": "The Pharma Choke Point",
@@ -74,7 +74,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ING Think",
+      "source": "ING THINK economic and financial analysis | ING THINK",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -107,13 +107,6 @@
       "timestamp": 1767600000000
     },
     {
-      "title": "Regulatory tracker: FDA starts review of Sandoz's generic tirzepatide",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 2",
-      "timestamp": 1767365493000
-    },
-    {
       "title": "2025 FDA approvals",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5VMlhtZHBzSEFBTFpaR25BbUtUUHcxZUJ5ZHVXUFhYbm5LaW1tX3pCdEl6M3VUWnhzN2l1QXdWc3h5YXpXazV4WUFUb0xMdnJsbkdMWG5vTHdoZFlxcnJZ?oc=5",
       "source": "Nature",
@@ -138,13 +131,6 @@
       "title": "Three Boston biotechs await FDA decisions on new drugs by year-end",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOWnN2VkQzYVUyOTJrQk8tcWRPVFkzejBZclZ0aXZlS195LWRLOVdaZ285MlBfWFFUbTZ6V3hiRlFtQUQtZ01QbVdPeWRibXc4VmtlcThtWk9TT1pSamFFcERzZ2xoTmNHMHVOTUU4V1N3TDE2TlhORldweTJBT2lqVzNOOHhFMEdr?oc=5",
       "source": "The Business Journals",
-      "date": "Oct 29",
-      "timestamp": 1761721200000
-    },
-    {
-      "title": "US FDA proposes moves to speed availability of some cheaper biotech medicines",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQOXZzeFd5a3g4MnVSa25VaDRzU0lKUjF5WWVURWJHVGNaUzJSb3N1UWVXLWtHeFpibDFOV2dLZzFtbWtQQUw4RWI3bkNjTi1Mb2VRZEJ3dldjbTl0clNvTUhZenJqeEVjVFVma3lzYlVsbHZpWmxPWE1aMnBydUlvTFZoOU5ZZEFZamk3b0V5Y25zUzQtcGYyd2lmaHFjQTRjOTJYaXQ4RUhzeG9kcXpsZmZBT3Nva2ZfNU9LMFl3?oc=5",
-      "source": "Reuters",
       "date": "Oct 29",
       "timestamp": 1761721200000
     },
@@ -177,6 +163,13 @@
       "timestamp": 1754463600000
     },
     {
+      "title": "FDA opens national priority fast track, offering 2-month reviews to onshoring and affordability projects",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPTkRyWVVSNnhkLThucFBGZExiY0dBVnF1aFM1c19WZEM1bjk0UDBWOFMwcl96Ukx3Q2k2Z2tjcXdSeXQxQk5mM1dxT0hOYlBQVWNFZG5XaVRUX3A1eFllMlJIaXVSSHJZSlNBbG1tX1NGaU40T0VTVWI2aEtoUTFOSkxTNE1QWi04VXdvcFpXYXR6Zm1JMDNWQ1lqRFNJNXh6SGUzSVRqXzQxZXJ4ZE5hY1ppc1hkODlIdkVTMURGV0VPYTh2M1paaA?oc=5",
+      "source": "Fierce Biotech",
+      "date": "Jul 23",
+      "timestamp": 1753254000000
+    },
+    {
       "title": "FDA appoints George Tidmarsh as top drug regulator",
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxONm5iTGVuNVNxUm5BRDhTLUowV1N3MjRDbXNOc0s1THVRRGRRbWhObVVvanpRUjd1dnpjTGNzUVFNRV9MSEZ5U21JY2dVQ3lVaVp1S0Nzc0pnMVA3LVZfR3VMTTBkRDd1d2k0d0ZlVUVNZkh3cXZzanA5NFdtME5VMFk2RWFxSndvY01oQnJVQTRTQU9meEtxTzZaYzRsLVZKd3VzbzNZQWtTei1WdUFsZmlRRE55Q3VzNUJF?oc=5",
       "source": "Reuters",
@@ -189,6 +182,13 @@
       "source": "Fierce Pharma",
       "date": "Jul 11",
       "timestamp": 1752217200000
+    },
+    {
+      "title": "KalVista bounces back from FDA delay with approval for oral rare disease med Ekterly",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPd3k3MU93Y3gyQVlQcXcyUjZXMnBNZ1podk5VMG8yampqTW44LUlSZlZmeEhPeXY2Qkx1ZnhKUkVEVFpzelB1VjliTFRyZU1sQzl5cE5zMlRGdjhKbG1yaHZOeVFxT0xGZHFOVW42SWFSbTdpbzFqd01iRURocGdOb2o0WjVkY01nQVNIUEVnUl8wU2IyQ3hKMmRYY2dhZ1dRX2t3dDBkVUo1Zw?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 7",
+      "timestamp": 1751871600000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
