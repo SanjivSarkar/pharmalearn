@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-30T04:01:04Z",
+  "updated": "2026-06-30T09:46:30Z",
   "items": [
     {
       "title": "The Pharma Choke Point",
@@ -28,13 +28,6 @@
       "source": "The Motley Fool",
       "date": "Apr 11",
       "timestamp": 1775890800000
-    },
-    {
-      "title": "FDA lays out policy wish list, including new trial pathway and new enforcement powers",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWTEycDFZVDVWY0lJZEtXWjBiSHMwblphd3hHZncxbWxWN0NyUlVucGFURGNkSWZZMUQtVE1xN0Z2eEEwQ0NRTDVIT2liOUQ4eldMN3VEcUFBckNWN18zOEktMjdLOUNTWTF4UWxpVjRZR3NYRW05WlJlQk9aMlloSnZfUkpPYnpQeEc1OTFBVFYyVUxvT3Q2ZXUzdFNGOEJnSFFjWXNsbE5JY0c4NnRwbEFHa1hnX0pQbGM0?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Apr 7",
-      "timestamp": 1775545200000
     },
     {
       "title": "FDA approves leucovorin for ultrarare cerebral folate deficiency subset without clinical trial",
@@ -81,21 +74,28 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ING THINK economic and financial analysis | ING THINK",
+      "source": "ING Think",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
     {
-      "title": "Makary cites higher FDA user fees as one key to counter China biotech",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPUmQzOHAxdS1vQURRSnN4aUxBNmNFTGdCT1NaMzZfb3ppbU5hRmJaM1pxLWVSUk55ZUJLbnRXQTNDQi1aM2ZpMldMTHdUZDJwM3ZYUXc3RWhfZTBieUdaSXEzUGFzUUlCMTVUS3JTQnVqZjdUOHM2Zmw0LTRYcWgxci1fTjJLUQ?oc=5",
-      "source": "Endpoints News",
-      "date": "Jan 20",
-      "timestamp": 1768896000000
+      "title": "The China Dependence Big Pharma Doesn\u2019t Want Washington to See",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNRnRmY0JZb2pWRkxOTmRWT1liR0p4Smh0TzVhNDVFaHd0SGNoS0VVWVM2dW1fVkV3UzFJZUVNR3lUUDU0Q01fbW40XzlIQldVbkNmcVFLeWxDX1Rkb1dST1ljdTFZdDJOa3hOQnVPdDJqVlZaMFFmUnlTQ0RRVjFXcFhBVFRxQWMzWWxoam5YWjVSazg0SVZn?oc=5",
+      "source": "Coalition For A Prosperous America",
+      "date": "Jan 14",
+      "timestamp": 1768377600000
     },
     {
-      "title": "5 FDA decisions to watch in the second quarter of 2026",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeS1xNDBkWi1BUlhmbnd1WTJpMV81VXBkRS1fOUlmNk9pcnVMZ3RIOG5vUGdxN0JQaE9GVUlIWkt0WTN6N1I0dGJlcmp6QnVzR1BxOVFqcTlpY0RscjBtajYxWjBxdlNFeWpoQV9tODBJU25VR2E4UkFIdThsaGphLU1R?oc=5",
-      "source": "BioPharma Dive",
+      "title": "US FDA approves Fortress Bio and Zydus' treatment for a rare pediatric disease",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPdmdxWS1xYk56MkRZcjNha1llS3Zfd0Rvb3FiTmQySjltNy1kWXNSeXhYUFZETnprX2kzSDJkV3JNTEZBdndaVkt1NzJfTTltMVY3MHczNUF1MHU1cndvWkZYdEl3UERpZzJ6amZIandiR0RTZWZRWjVKV3d0NF9zcWR4NGh5N3dIZHhtM3BJNFo4cXFuQnZ5Wk9sRngzc3cwOUw1RTVwLWR1VFplbTBFZ09XYlg2UTZLTVljOHFQR1RTSFBJZGVsNjRxejUwakJibEZzWjBn?oc=5",
+      "source": "Reuters",
+      "date": "Jan 13",
+      "timestamp": 1768291200000
+    },
+    {
+      "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSUt6TjhqalJoV0RyTGFjdVoyaUdFQ3VFbHlVNXBpQ2lPMXdmU2pXbGxSTWtmY0otM0dTZktkS3pXVXk2Y2RYTnAtOUJJTDlzRkFwOXlkaDNMTS1lYm4wMXNZbGpuYWhTUFZHUlF2clJHU2tLaVQ3WXFDQ1E5WFJBR2hiY3dPNUFQbURaZjNJOGlUU3lSTGZHUkxJOGtBaUJnTW9SZ3JtMXN2bUdMY3psLU15dzBMX2ZR?oc=5",
+      "source": "McKinsey & Company",
       "date": "Jan 7",
       "timestamp": 1767772800000
     },
@@ -135,6 +135,13 @@
       "timestamp": 1765958400000
     },
     {
+      "title": "Three Boston biotechs await FDA decisions on new drugs by year-end",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOWnN2VkQzYVUyOTJrQk8tcWRPVFkzejBZclZ0aXZlS195LWRLOVdaZ285MlBfWFFUbTZ6V3hiRlFtQUQtZ01QbVdPeWRibXc4VmtlcThtWk9TT1pSamFFcERzZ2xoTmNHMHVOTUU4V1N3TDE2TlhORldweTJBT2lqVzNOOHhFMEdr?oc=5",
+      "source": "The Business Journals",
+      "date": "Oct 29",
+      "timestamp": 1761721200000
+    },
+    {
       "title": "US FDA proposes moves to speed availability of some cheaper biotech medicines",
       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQOXZzeFd5a3g4MnVSa25VaDRzU0lKUjF5WWVURWJHVGNaUzJSb3N1UWVXLWtHeFpibDFOV2dLZzFtbWtQQUw4RWI3bkNjTi1Mb2VRZEJ3dldjbTl0clNvTUhZenJqeEVjVFVma3lzYlVsbHZpWmxPWE1aMnBydUlvTFZoOU5ZZEFZamk3b0V5Y25zUzQtcGYyd2lmaHFjQTRjOTJYaXQ4RUhzeG9kcXpsZmZBT3Nva2ZfNU9LMFl3?oc=5",
       "source": "Reuters",
@@ -149,18 +156,18 @@
       "timestamp": 1761721200000
     },
     {
+      "title": "Lupin biotech facility gets 4 observations from FDA",
+      "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNVy0tOGpXOVVVakpjaFZlRVRWeEZmZG5ZYmZ0UTJ5d3ZxdkJIenk0aDh5SW1NbzlKTXNpTk5RbkQwc2FqTVJ1eG4zUmp6Sml5amtHUTNTOG5MRVpCZ3BJQVZRNlhYMkR1ODJZeU1tcFZMdXFsckR4UWdxazJwQXcweS1jY1had1JpN0lHSkJGdExIMk1JT3gxSnlxS0VudkZBZ3N2STRONGViTHRwT0hWMjdpV0p5S25BdTBqOS10Wl9lSlVBTkU5bDJTU0l3c3VKRHlXSEh5c2Z0c1lJeU5Hd0RKcFBoTXVZNjMxS3QwcDFCazQ4OE1fZG5R0gH_AUFVX3lxTE1vU29UOUZMb2Y3Uk1zVnNaTTNTWFJUdzhqNEZNWDdFd3J6NVZndFJxbk9iazZ1MEtVeUlkVnJmZUxMMm1aU1dURkhzMVcwcXBFV1hBbXExSVdjWHNsSjc5N005QnBsbXhsZGlMTEN6elFnSUlBdm9SWDJaV29PMDRaZ0lFM216UE5sZmZ5b0pmQ2Z0Z1BJWmhpWFpvZDNfRGFOM2doc1c0THhwanQtYkZPQ1VtUU94a2dHcmtuak9HcGxWVEx6MUR6Zjl2M0xUX0czVTZwN2E5eFdmN1lGSkhhMDVwaXFfTVBRV3dwSURmd183S29UcElIbjk0Q1NpOA?oc=5",
+      "source": "ETPharma.com",
+      "date": "Sep 21",
+      "timestamp": 1758438000000
+    },
+    {
       "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWkFSZXVGSzlqZmw2MFNaR2JQaHVQdVp3cjNrMm1CMFh5SXM2QlRNSVg4NXBKbF9aVk5TSEgzdWlqVEtLMkMxTUZORTQxTS1nSXpmOFNTS3BpZE1ZOWxyb3M0dDRLbnNTb1Ywd1J3b1lNYTNqYUxSRm85bmJJbDY1Qi1vVHFxeEY1amIzd3ZrbWp0Q0VHTFJrbXYyRWZ6Zw?oc=5",
       "source": "Fierce Pharma",
       "date": "Aug 29",
       "timestamp": 1756450800000
-    },
-    {
-      "title": "CEO Forums: An FDA Listening Tour to Engage Pharmaceutical and Biotech CEOs",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNQmJrMHczOWNXLWhRUEtBMjlkRllDeC1uQzBJcFUxaWkzekRjaHR2bHI3QXpqTkRfUTZ4VzFEanEzNjlDOW5Gd2JBRHFIbjlwblotZmIzbjR1c2Iydk5SZUNmejJRRlRsN2xsMnFjQlhwd3hEMFVLUE9Wb2JTakwyWi10aGR4MnVITFNfRTJXY0thU2I2R0xreU41U2lfdw?oc=5",
-      "source": "fda.gov",
-      "date": "Aug 11",
-      "timestamp": 1754895600000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
@@ -170,11 +177,11 @@
       "timestamp": 1754463600000
     },
     {
-      "title": "FDA opens national priority fast track, offering 2-month reviews to onshoring and affordability projects",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPTkRyWVVSNnhkLThucFBGZExiY0dBVnF1aFM1c19WZEM1bjk0UDBWOFMwcl96Ukx3Q2k2Z2tjcXdSeXQxQk5mM1dxT0hOYlBQVWNFZG5XaVRUX3A1eFllMlJIaXVSSHJZSlNBbG1tX1NGaU40T0VTVWI2aEtoUTFOSkxTNE1QWi04VXdvcFpXYXR6Zm1JMDNWQ1lqRFNJNXh6SGUzSVRqXzQxZXJ4ZE5hY1ppc1hkODlIdkVTMURGV0VPYTh2M1paaA?oc=5",
-      "source": "Fierce Biotech",
-      "date": "Jul 23",
-      "timestamp": 1753254000000
+      "title": "FDA appoints George Tidmarsh as top drug regulator",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxONm5iTGVuNVNxUm5BRDhTLUowV1N3MjRDbXNOc0s1THVRRGRRbWhObVVvanpRUjd1dnpjTGNzUVFNRV9MSEZ5U21JY2dVQ3lVaVp1S0Nzc0pnMVA3LVZfR3VMTTBkRDd1d2k0d0ZlVUVNZkh3cXZzanA5NFdtME5VMFk2RWFxSndvY01oQnJVQTRTQU9meEtxTzZaYzRsLVZKd3VzbzNZQWtTei1WdUFsZmlRRE55Q3VzNUJF?oc=5",
+      "source": "Reuters",
+      "date": "Jul 21",
+      "timestamp": 1753081200000
     },
     {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
@@ -182,13 +189,6 @@
       "source": "Fierce Pharma",
       "date": "Jul 11",
       "timestamp": 1752217200000
-    },
-    {
-      "title": "KalVista bounces back from FDA delay with approval for oral rare disease med Ekterly",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPd3k3MU93Y3gyQVlQcXcyUjZXMnBNZ1podk5VMG8yampqTW44LUlSZlZmeEhPeXY2Qkx1ZnhKUkVEVFpzelB1VjliTFRyZU1sQzl5cE5zMlRGdjhKbG1yaHZOeVFxT0xGZHFOVW42SWFSbTdpbzFqd01iRURocGdOb2o0WjVkY01nQVNIUEVnUl8wU2IyQ3hKMmRYY2dhZ1dRX2t3dDBkVUo1Zw?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jul 7",
-      "timestamp": 1751871600000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
@@ -217,13 +217,6 @@
       "source": "statnews.com",
       "date": "May 6",
       "timestamp": 1746514800000
-    },
-    {
-      "title": "FDA misses approval deadline for biotech\u2019s rare disease drug",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQMlJmUy1YWVlOU3h0QW0tN2JFMzVnRG90TWsyN0s5TTZRUzZpS04yTDB0akZKclJzYzl5QjNwcXBEcUQ0WGlQM0lFZDhpM0NEMzVOZ084Nm9vckNwMlJMeVlWV044VGlRaG9ZYjA3NkR2TFZMVE1CN3dxUHlJU0ppcVRxcVVmMi1fMUtsS2lFT09QakRaQnVuelhpejkyUEtXNzhfUFZwNGRBSVM4QlJqQXJ2VQ?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Apr 29",
-      "timestamp": 1745910000000
     },
     {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
@@ -266,6 +259,13 @@
       "source": "Reuters",
       "date": "Dec 19",
       "timestamp": 1734595200000
+    },
+    {
+      "title": "How One Biotech Is Using FDA 505(b)(2) To Get Drugs To Patients Quicker And Cheaper",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQeXZ1d2E5bU5IVTR4VmlzNks1VmliRFprTWkyZkVZd0Y2QzVjVVZETFJUWGpBWE54Mm5zaHpYQ04zRnNFODltVFlBbTV1VHR0V2h4bWdjMExGQmpUbndxNnE4dmtqMV9PUWpGNzlXcjBBQTN0dlZlTThrYjhrVVNvNkR3TzBzRllXd1hFQ3dQR2N1cFZmdkpVX3ZfcU1KU05rVUd6Sll0WmZSbjZ3RzlLdkRBRjd5UQ?oc=5",
+      "source": "Clinical Leader",
+      "date": "Oct 9",
+      "timestamp": 1728457200000
     },
     {
       "title": "US FDA approvals bounce back in 2023, sparking hopes of a biotech recovery",
