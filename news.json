@@ -1,19 +1,19 @@
 {
-  "updated": "2026-07-14T08:14:25Z",
+  "updated": "2026-07-14T13:52:49Z",
   "items": [
-    {
-      "title": "US FDA approves Sanofi's wearable injector form of blood cancer drug",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOZnF5Sl9QS0o0Y0ZZS2dyWXRqR29fdlRMQldNV0p5TVBSc2VZaU95R0xZSVF0d1NLanRCRjdvNjFvbzkwS09sSDFQOFJ5NDIwQWd3ekZINTJMY1hBTEd2OVlZMnNSSEdFZkpfTHFUODk4Umlaazk3Q2M4bnptbHZpR2VJeTRvNV9ESmJkcUYzRE9tMWlfMVZRREs1MHUzNG1lNFU2a05sazN6RGRvS1BicG11bWVSVjhlVmo2Um5HaE1hTTB2Sk1oMG1CcUk5RVJObmc?oc=5",
-      "source": "Reuters",
-      "date": "Jul 10",
-      "timestamp": 1783705762000
-    },
     {
       "title": "5 FDA decisions to watch in the third quarter of 2026",
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeS1xNDBkWi1BUlhmbnd1WTJpMV81VXBkRS1fOUlmNk9pcnVMZ3RIOG5vUGdxN0JQaE9GVUlIWkt0WTN6N1I0dGJlcmp6QnVzR1BxOVFqcTlpY0RscjBtajYxWjBxdlNFeWpoQV9tODBJU25VR2E4UkFIdThsaGphLU1R?oc=5",
       "source": "BioPharma Dive",
       "date": "Jul 1",
       "timestamp": 1782889200000
+    },
+    {
+      "title": "Concord Biotech shares jump 6% on receiving US FDA approval for its latest arthritis drug",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNclEzVkcwTndiLUNzOGJQYnlMeWRWRlFtUV9aODBBRW9tVHMwYkQxSzFxRTRhU3VpMDlUNHZxbWNfUU1yMjJHWExsYmF4TTBUQW41cFBYeHMtZzFSR1M5TGU2bDR2LVRnLTdURmoyQ0x3VXJCM3RHYzBzMlpnLXBpeGxkdlpXWVBPYXhna2p0LVZrT1RPbDhQYVprdDhqdFhHVDNvbVlMTU5zM2dsNEJYcmRWSjdEelI4NzR4U3dVOFA4V25uSno0RHh4Z0FDSGM2Yk5KRU1HR2tnUUFEd3JhdA?oc=5",
+      "source": "Upstox",
+      "date": "Jun 10",
+      "timestamp": 1781074800000
     },
     {
       "title": "The Pharma Choke Point",
@@ -58,11 +58,11 @@
       "timestamp": 1776236400000
     },
     {
-      "title": "FDA backs proposals to entice pharma companies to test, make drugs domestically",
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOcUhFZ0NKaGF4bFJjODR4VEZPN0JJS3Q4a0pYVmc0M29sUlgtbTFWckNySG5McXRCSUZMZ2dPcHhmOEFZai12S2ZhLVFLUEEtMFNMRC1OckRTb3NxbTlpaEFnVWdGQXUyazZnWm1pT3BlODRRM0plY1RyeWFQdmtaRmRpRzRzelZ0eUhhT1F4a0dicDRyUVJwVzZSUQ?oc=5",
-      "source": "STAT",
-      "date": "Apr 7",
-      "timestamp": 1775545200000
+      "title": "FDA approves leucovorin for ultrarare cerebral folate deficiency subset without clinical trial",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPZmNucDd2OV9TUzhDM3UyZnMwRFlQcmpsX2M0bEthRUVfeUU2Q3k0NHR3cUpjX1Vyd1A0T2cwdkl5OVE1M2xBQ0d0OV90Mjh2U0trQWNyRXNobW1JeF9NOWNpck5LdTEzQUQwU19nTzNSV2l0NEJ4UGgwSF92bjhBU0JOb0x0TFZWcnU1NzBPdkxzY19Pa3k5WGZNZVNNbENQZF81YU1oSDlrUXhVTTdxbjZkcHZnQlRoT3ZIWDZBU3RENGE4clE?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Mar 10",
+      "timestamp": 1773126000000
     },
     {
       "title": "What 3 recent FDA rejections reveal about shifts inside the agency",
@@ -95,7 +95,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ING THINK economic and financial analysis | ING THINK",
+      "source": "ING Think",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -170,18 +170,11 @@
       "timestamp": 1758438000000
     },
     {
-      "title": "FDA approves Ionis drug that prevents swelling attacks caused by a rare disease",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQck1KRXItZ3Vydzh6Y1BfS282cW5BNzNndnJWeTJRSndjUDhTdy03QTBrMVhiRjhFYTZYY01nRF9zdmJEVDRWMk01MDlScXpzR2t0Y21rNnFQUVRfN1ZrQ0o0ZnplQUVqNDk2eVBxcHZ1V1FKV2s3WklYX2J4LUJ0cmNiNERCSEhjWEpKSXJsVQ?oc=5",
-      "source": "STAT",
-      "date": "Aug 21",
-      "timestamp": 1755759600000
-    },
-    {
-      "title": "As Chinese-developed drugs draw U.S. interest, a regulatory chill threatens to dampen new investment",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQUHgzb0hmZHlTMDQtWnZjbDlrYk1pTVZkdE1KcXY1V1pHdDRKYWtKOWV4MWV1UkE5a0lzZFkxSzlUSU41cU5sSGJGVlZrUGdjX0Q5d2l1NUdFWlBybzdELVpyN2JYTnZWQTVOWENsS0VTNUFDOE5yOUsyeGs4S1FtVmtB?oc=5",
-      "source": "STAT",
-      "date": "Jul 7",
-      "timestamp": 1751871600000
+      "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWkFSZXVGSzlqZmw2MFNaR2JQaHVQdVp3cjNrMm1CMFh5SXM2QlRNSVg4NXBKbF9aVk5TSEgzdWlqVEtLMkMxTUZORTQxTS1nSXpmOFNTS3BpZE1ZOWxyb3M0dDRLbnNTb1Ywd1J3b1lNYTNqYUxSRm85bmJJbDY1Qi1vVHFxeEY1amIzd3ZrbWp0Q0VHTFJrbXYyRWZ6Zw?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Aug 29",
+      "timestamp": 1756450800000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
@@ -266,6 +259,13 @@
       "source": "Fierce Pharma",
       "date": "Jan 2",
       "timestamp": 1735804800000
+    },
+    {
+      "title": "Pharma Looks To America First: US FDA Holds Overwhelming Lead Over EMA In Novel Approvals",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOeUVLLUQ4Mm5mR0l3cS1pbHZxVS10bHV2UUhjdEtEM0FNaUZhaDhHWjdaTDR6ZE11eEtpT0FrUmE1ZVFRSXlzN2xXQlVRMjN1TzNEZllXOWc3djljTTVZMmdTSmcwV3lCWFZRX1hmRkdMQ2FNb0dieE8tNlNZeUR5MzVsV1RNdFRReXNRUHA5dTV6Rm1EbjlyZ2ppUEFvb0NrbWlROEdaVTdOT3lZWHNReXc3NWc3WTRKMTY1eWtqd0FPcDdOTDlV?oc=5",
+      "source": "insights.citeline.com",
+      "date": "Jul 5",
+      "timestamp": 1720162800000
     },
     {
       "title": "US FDA approvals bounce back in 2023, sparking hopes of a biotech recovery",
