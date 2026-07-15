@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-15T08:20:30Z",
+  "updated": "2026-07-15T13:50:31Z",
   "items": [
     {
       "title": "5 FDA decisions to watch in the third quarter of 2026",
@@ -177,18 +177,25 @@
       "timestamp": 1756450800000
     },
     {
+      "title": "FDA approves Ionis drug that prevents swelling attacks caused by a rare disease",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQck1KRXItZ3Vydzh6Y1BfS282cW5BNzNndnJWeTJRSndjUDhTdy03QTBrMVhiRjhFYTZYY01nRF9zdmJEVDRWMk01MDlScXpzR2t0Y21rNnFQUVRfN1ZrQ0o0ZnplQUVqNDk2eVBxcHZ1V1FKV2s3WklYX2J4LUJ0cmNiNERCSEhjWEpKSXJsVQ?oc=5",
+      "source": "STAT",
+      "date": "Aug 21",
+      "timestamp": 1755759600000
+    },
+    {
+      "title": "FDA appoints George Tidmarsh as top drug regulator",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxONm5iTGVuNVNxUm5BRDhTLUowV1N3MjRDbXNOc0s1THVRRGRRbWhObVVvanpRUjd1dnpjTGNzUVFNRV9MSEZ5U21JY2dVQ3lVaVp1S0Nzc0pnMVA3LVZfR3VMTTBkRDd1d2k0d0ZlVUVNZkh3cXZzanA5NFdtME5VMFk2RWFxSndvY01oQnJVQTRTQU9meEtxTzZaYzRsLVZKd3VzbzNZQWtTei1WdUFsZmlRRE55Q3VzNUJF?oc=5",
+      "source": "Reuters",
+      "date": "Jul 21",
+      "timestamp": 1753081200000
+    },
+    {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
       "source": "Fierce Biotech",
       "date": "Jun 16",
       "timestamp": 1750057200000
-    },
-    {
-      "title": "4 ideas to kick-start U.S. drug research \u2014 and beat China in biotech",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxORXBFUEpySnlDOWdDbXRZRkZjUENodGtGaDlmNmpMUlEwbnUwS3M3MUFESzQ0aXRRWW9UWHZIaWw3U29SckN1SGxyWks5Ync2Zk1wY0JTUTV3TnJkajczbjdoaDJrZWNVVHh3b2tYNnNfU3JmNXNyZjZpVDV0djh2LVN6QVZBdDBYcUhSeFZxSll4c3pTX1ZucUdKMG4ydUY3Z29UUzJn?oc=5",
-      "source": "STAT",
-      "date": "Jun 3",
-      "timestamp": 1748934000000
     },
     {
       "title": "A rare disease drug is rejected, even as the FDA talks about new approval pathway",
@@ -273,13 +280,6 @@
       "source": "Reuters",
       "date": "Jan 2",
       "timestamp": 1704182400000
-    },
-    {
-      "title": "2022 drug approvals: After Aduhelm fiasco, FDA endorsements drop to 37",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPTEVKc2c4YjF6YnJtXzB0YlBGdUxlV3NUTUQ0MU5rUjVJUXBkeG1ENTJPVmZrU0ZGdDNSVWdodnpvSnV0S0VvYmc0bkhYWGVKU2xjSWV3cXJlQkdaRUlsWVJ2eU5UZG1jQ0lxaVRheUs5UHllc1VtTFFxT2E5T192ZG5uekNOeWY1OFJROTdEWVp5QW96eWgzNjlyWXZJb0hVbzRZenFxVnVVdzBmZ3ZOWk1Jbk94RTV4OGpv?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 3",
-      "timestamp": 1672732800000
     }
   ]
 }
