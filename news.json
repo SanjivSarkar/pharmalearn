@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-18T19:10:07Z",
+  "updated": "2026-07-19T03:18:08Z",
   "items": [
     {
       "title": "5 FDA decisions to watch in the third quarter of 2026",
@@ -63,13 +63,6 @@
       "source": "STAT",
       "date": "May 7",
       "timestamp": 1778137200000
-    },
-    {
-      "title": "Orbicular secures tentative approval for semaglutide generic in US",
-      "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQTF9SU3VzRGpYb1pGVFdyaGV1OVNzbnB5YmlMVkFYb0NMWXZaR1dPRGU1NW1NSUtjWnBOY01taG5kVTczZWJTZ3hmbjhyYXRwd3J6ZnFuOEJzVXFGNHdXM25kZ1VJSWJxd0xUaUpPQ1pVTEJ5czhpaWJRdlVnUEN4dVNZWGpVbkN4WTQ2VlpCUGt3UDc2Z1BfQmJVclRmN3EtXzh3M3JHWmVaMFVOaWxyVjNiNmhBRkt1Z3NMdkpiYjBabnZjX2E3SFBUdWxlNGdBV0k4cXBwR3FCeUNRQU9GWVBQaFdoemRO0gHuAUFVX3lxTE1jOG1VbEFZM29sT1BrcGREVUp0amhBamV4YXJNVnJqZjlsZFhfY0U3WWMzbnp3N0x6REtndk5GT2JHNFRVMVJlOS13UENKSDFXU0owS2VweTlhNF80NGxzd3dWS2d6TUVMMjNmUW9MejF2a2JFZG5JSFBuNnJIa0JkVWgzTUpXOGlyMXVRNFVreDhDYTNIamFOOXpDT201X2EtaTljRGpkYU54ZFZydWFkWlZjTUhZVlBhcEhaOUtoS1dWemlrRHZaUnZOX0Z2TFB0WWY0TVIwNm1ZTXA2ekNXT3B1V1d5aUV4WHF4aFE?oc=5",
-      "source": "ETPharma.com",
-      "date": "Apr 15",
-      "timestamp": 1776236400000
     },
     {
       "title": "Top 10 most anticipated drug launches of 2026",
@@ -231,6 +224,13 @@
       "source": "medwatch.com",
       "date": "Apr 24",
       "timestamp": 1745478000000
+    },
+    {
+      "title": "Strategically De-Risking U.S. Drug Supply Chains",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
+      "source": "RAND",
+      "date": "Apr 23",
+      "timestamp": 1745391600000
     },
     {
       "title": "Trump\u2019s FDA Sends a Bullish Signal to Biotech",
