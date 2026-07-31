@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-31T14:17:18Z",
+  "updated": "2026-07-31T19:39:30Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -70,13 +70,6 @@
       "source": "STAT",
       "date": "May 7",
       "timestamp": 1778137200000
-    },
-    {
-      "title": "FDA floats new clinical trial reforms; Takeda punts Denali brain drug",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNUGJySG5YcjI5YUIxa1BNYWl4Z3FtQmZ3UE9yemRXcW5FMjJxdFhudFU3cHVoajl4UUc1ZHJCTE95TUlZYjBDSkh6QjFBc29felgtTHNOVkhWbk5jRjN6V2dHdldzcnVPNzktT1pZNlMzei15NHFFYVhCajBxVmxZbXRvY0s4ZmV2R3ZHSWV5S0dRR3E2N01MMVl3?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Apr 6",
-      "timestamp": 1775458800000
     },
     {
       "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
@@ -172,14 +165,21 @@
     {
       "title": "US FDA approves another generic version of abortion pill",
       "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPMW5DWmdPVFJYVWREMkpHWUVNeUdtaXJvTU03NnJEQUc2LXAydEJpQVctdkQ3dndyRnNLejdFRjJnd1Z4WE9tYmNRZ2xnamtHaUpYczhKUldMamRmQTkyTGhUX2xRb1RLQVpOYktiYTJ3Z0dHemtCVW0xOENMTDBZNVE3MUE2TTBRUWU5NUduek1TMTV6c00tRVh1eUtySm85U2JIMG9nWDAyWGxKZkp5STVRT3NUZ05xdmIwZUl4Ql8waW5EYWhDdkVNUWRpMEQ0R2RNeDZTUENRWE0?oc=5",
-      "source": "pharma.economictimes.indiatimes.com",
+      "source": "ET Pharma",
       "date": "Oct 3",
       "timestamp": 1759474800000
     },
     {
+      "title": "Crinetics wins FDA approval for acromegaly drug, faces competition with Novartis and Ipsen",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYlZPaTVLYmx4LTBGUDhVbm80RTVqMS05Q3RQTXhxckhuWEEyNDluZzRUaHpiR0gyWUUwTTFMbXpJWEtvN2hjcV9hSkpFY3EtOVc2R0V0aGhQVGpMU1VkZWF3TVJpd05hWjdablVnaXMzb0o5bXZKdGRDQmFDbUFsZVJLbjhkVGVldmI4Vm5WcDhreENtNzBPUmJYLWk2RDJPMHFGR3YtQmo?oc=5",
+      "source": "STAT",
+      "date": "Sep 25",
+      "timestamp": 1758783600000
+    },
+    {
       "title": "Lupin biotech facility gets 4 observations from FDA",
       "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNVy0tOGpXOVVVakpjaFZlRVRWeEZmZG5ZYmZ0UTJ5d3ZxdkJIenk0aDh5SW1NbzlKTXNpTk5RbkQwc2FqTVJ1eG4zUmp6Sml5amtHUTNTOG5MRVpCZ3BJQVZRNlhYMkR1ODJZeU1tcFZMdXFsckR4UWdxazJwQXcweS1jY1had1JpN0lHSkJGdExIMk1JT3gxSnlxS0VudkZBZ3N2STRONGViTHRwT0hWMjdpV0p5S25BdTBqOS10Wl9lSlVBTkU5bDJTU0l3c3VKRHlXSEh5c2Z0c1lJeU5Hd0RKcFBoTXVZNjMxS3QwcDFCazQ4OE1fZG5R0gH_AUFVX3lxTE1vU29UOUZMb2Y3Uk1zVnNaTTNTWFJUdzhqNEZNWDdFd3J6NVZndFJxbk9iazZ1MEtVeUlkVnJmZUxMMm1aU1dURkhzMVcwcXBFV1hBbXExSVdjWHNsSjc5N005QnBsbXhsZGlMTEN6elFnSUlBdm9SWDJaV29PMDRaZ0lFM216UE5sZmZ5b0pmQ2Z0Z1BJWmhpWFpvZDNfRGFOM2doc1c0THhwanQtYkZPQ1VtUU94a2dHcmtuak9HcGxWVEx6MUR6Zjl2M0xUX0czVTZwN2E5eFdmN1lGSkhhMDVwaXFfTVBRV3dwSURmd183S29UcElIbjk0Q1NpOA?oc=5",
-      "source": "pharma.economictimes.indiatimes.com",
+      "source": "ET Pharma",
       "date": "Sep 21",
       "timestamp": 1758438000000
     },
@@ -228,7 +228,7 @@
     {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
-      "source": "RAND Corporation",
+      "source": "rand.org",
       "date": "Apr 23",
       "timestamp": 1745391600000
     },
