@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-02T13:36:11Z",
+  "updated": "2026-08-02T19:16:06Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -70,6 +70,13 @@
       "source": "STAT",
       "date": "May 7",
       "timestamp": 1778137200000
+    },
+    {
+      "title": "FDA floats new clinical trial reforms; Takeda punts Denali brain drug",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNUGJySG5YcjI5YUIxa1BNYWl4Z3FtQmZ3UE9yemRXcW5FMjJxdFhudFU3cHVoajl4UUc1ZHJCTE95TUlZYjBDSkh6QjFBc29felgtTHNOVkhWbk5jRjN6V2dHdldzcnVPNzktT1pZNlMzei15NHFFYVhCajBxVmxZbXRvY0s4ZmV2R3ZHSWV5S0dRR3E2N01MMVl3?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Apr 6",
+      "timestamp": 1775458800000
     },
     {
       "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
@@ -198,18 +205,18 @@
       "timestamp": 1754463600000
     },
     {
-      "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jul 11",
-      "timestamp": 1752217200000
-    },
-    {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
       "source": "Fierce Biotech",
       "date": "Jun 16",
       "timestamp": 1750057200000
+    },
+    {
+      "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
+      "source": "FirstWord Pharma",
+      "date": "Jun 5",
+      "timestamp": 1749106800000
     },
     {
       "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
@@ -228,7 +235,7 @@
     {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
-      "source": "RAND Corporation",
+      "source": "rand.org",
       "date": "Apr 23",
       "timestamp": 1745391600000
     },
@@ -273,13 +280,6 @@
       "source": "Reuters",
       "date": "Jan 2",
       "timestamp": 1704182400000
-    },
-    {
-      "title": "2022 drug approvals: After Aduhelm fiasco, FDA endorsements drop to 37",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPTEVKc2c4YjF6YnJtXzB0YlBGdUxlV3NUTUQ0MU5rUjVJUXBkeG1ENTJPVmZrU0ZGdDNSVWdodnpvSnV0S0VvYmc0bkhYWGVKU2xjSWV3cXJlQkdaRUlsWVJ2eU5UZG1jQ0lxaVRheUs5UHllc1VtTFFxT2E5T192ZG5uekNOeWY1OFJROTdEWVp5QW96eWgzNjlyWXZJb0hVbzRZenFxVnVVdzBmZ3ZOWk1Jbk94RTV4OGpv?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 3",
-      "timestamp": 1672732800000
     }
   ]
 }
