@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-02T03:21:21Z",
+  "updated": "2026-08-02T08:28:48Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -121,13 +121,6 @@
       "timestamp": 1767365493000
     },
     {
-      "title": "2025 FDA approvals",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5VMlhtZHBzSEFBTFpaR25BbUtUUHcxZUJ5ZHVXUFhYbm5LaW1tX3pCdEl6M3VUWnhzN2l1QXdWc3h5YXpXazV4WUFUb0xMdnJsbkdMWG5vTHdoZFlxcnJZ?oc=5",
-      "source": "nature.com",
-      "date": "Jan 2",
-      "timestamp": 1767340800000
-    },
-    {
       "title": "Cytokinetics heart drug wins FDA approval, the biotech\u2019s first",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQS3JCYk1PcUE4QnFWS0JmdW9id3V0dW9BVk5YWW8wYmtxU1RtN0ZUOEozX05jclR6VFdSSWhaOExMLVhmSktrZ2hBOGxva3NJbWtJeEotcXluVnAtbnE3cFJGVWpkOElUUldGbDBEeDExRDhGazhZMXU5a2UtSnpiZUJNbkhCOW53?oc=5",
       "source": "STAT",
@@ -165,7 +158,7 @@
     {
       "title": "WATCH: Health Secretary RFK Jr. announces new FDA move to fast-track biosimilar drug approvals",
       "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPa1pfM0tuczJHdDVueWhiX3RlTEU2cWFQcmlJUjFiTmd3NzRzM2VxNmZrU0RwSWxtMjFfOGk1RnEwSDVKUTdINldoMEhWSTRqSDY0elRmSXFCUTJMTWV0aDdzRkF0cjZXd0hMUGhvZU1tR3BLcEpoRW1IOVJwZGtsWUJ5eGpXLWkyZmhsMXNyYUZtNE5NNjIxaG1mQTlVUTBlM0tTd2lITUJDUmJkcGpnNllMbEkyUWhVZGVyRHpuWHN4LWdxdnZNMXRvb2JNZXlq?oc=5",
-      "source": "pbs.org",
+      "source": "PBS",
       "date": "Oct 29",
       "timestamp": 1761721200000
     },
@@ -203,6 +196,13 @@
       "source": "Fierce Pharma",
       "date": "Aug 6",
       "timestamp": 1754463600000
+    },
+    {
+      "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 11",
+      "timestamp": 1752217200000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
@@ -249,7 +249,7 @@
     {
       "title": "Ten first-in-class drugs on track for FDA approval in 2025",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9peG1RV2VXZmNLU0lYX3lBTERPdUc3Z0tFRnNkTmE1SXFsdkxxLUl2b080Sm5mV1ZHQnM4ZlNPTGRqVV9nWXhoOGpGdnlMZk50NllNeG9fV1RmSG9SbUpuMlQxUTdhZG9HUzhXTXRiRExMbGlWZ05ZQWRhNkVidw?oc=5",
-      "source": "Labiotech.eu",
+      "source": "labiotech.eu",
       "date": "Jan 18",
       "timestamp": 1737187200000
     },
