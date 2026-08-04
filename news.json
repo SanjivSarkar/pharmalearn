@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-04T02:52:11Z",
+  "updated": "2026-08-04T08:43:25Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -21,6 +21,13 @@
       "source": "Reuters",
       "date": "Jul 10",
       "timestamp": 1783666800000
+    },
+    {
+      "title": "FDA approves Vera\u2019s dual-target Trutakna, setting up IgAN market battle with Novartis, Otsuka",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQYnpPM2o4V3FNeEhiclRhZVNUTnY4U0NPZHNYOHVUc2t3b0U0YkJQVEUyLUZsSzc4Q3FyOWN3RjNjWE1sa3F0U2tpQi01TUo0S3FpT3Z1elVrOW1XNi1HRGFyOVlYLVBiUUZYZzNPQ2NqcHlSOVFGemtkd2lvckpDclJ5a29jS1dhdVJKeU1SWE96Unh1a01sSnQ2Mjl1NF9yd1NXeS1OMjF1T1NaMWtWS1NuRXNIM3lnVVZ3?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 7",
+      "timestamp": 1783407600000
     },
     {
       "title": "5 FDA decisions to watch in the third quarter of 2026",
@@ -63,13 +70,6 @@
       "source": "BioPharma Dive",
       "date": "Apr 6",
       "timestamp": 1775458800000
-    },
-    {
-      "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5QVlc1aXhVQV9RdmFtRUQ5bzRLN1RMbGRGamRoLXdTUlRTdl85U2F0UlpTbXJIN3lIUURnMTEzVWs3U2ItR1RWZXQxbDdyYks1VlZiRlh6akhFTUJNZk11QzBpeGlxVHdjY3MzMmpxQTVhWkE2?oc=5",
-      "source": "STAT",
-      "date": "Feb 25",
-      "timestamp": 1772006400000
     },
     {
       "title": "Inside Biotech: FDA says \u2018one and done\u2019 \u2014 what it means for biotech globally",
@@ -144,7 +144,7 @@
     {
       "title": "Three Boston biotechs await FDA decisions on new drugs by year-end",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOWnN2VkQzYVUyOTJrQk8tcWRPVFkzejBZclZ0aXZlS195LWRLOVdaZ285MlBfWFFUbTZ6V3hiRlFtQUQtZ01QbVdPeWRibXc4VmtlcThtWk9TT1pSamFFcERzZ2xoTmNHMHVOTUU4V1N3TDE2TlhORldweTJBT2lqVzNOOHhFMEdr?oc=5",
-      "source": "bizjournals.com",
+      "source": "The Business Journals",
       "date": "Oct 29",
       "timestamp": 1761721200000
     },
@@ -228,14 +228,14 @@
     {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
-      "source": "RAND Corporation",
+      "source": "rand.org",
       "date": "Apr 23",
       "timestamp": 1745391600000
     },
     {
       "title": "Trump\u2019s FDA Sends a Bullish Signal to Biotech",
       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOdGJSVnBCaWgtOUpJNG93QkZVQlhwblEtb212M1hwYWFNNFJSRWtJNXlzQklLdS1FZjhDald3aXJQRVpUczJGQVpibWRtaHBReVJkT0hlTXQtSFh4Q0RaYzNkN0J1WlN3a1Jnb1I5U25nMzNxaUEtVFJRWV92VDhCdWVIZUVWQUs1OU96TDVLT3o?oc=5",
-      "source": "WSJ",
+      "source": "wsj.com",
       "date": "Apr 22",
       "timestamp": 1745305200000
     },
