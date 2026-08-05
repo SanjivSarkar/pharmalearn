@@ -1,10 +1,17 @@
 {
-  "updated": "2026-08-05T08:41:22Z",
+  "updated": "2026-08-05T14:18:01Z",
   "items": [
+    {
+      "title": "Biotech experts want FDA drug reviews based on science, not politics",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNRDNBOVdaVWpfaEg5eml6RUhCZW42WE1DTGlKbHEtdTBSUkJ4MlJjLUQ5WDdyY3lVcUJXNmU0Wmlyb29DdVdWZXQ3UV9KMTEyX3JYUlJlRFBGcUxfeFN4RUF5ZWliV3ItQUp3QnBvYk9UVkxuRDdyMXBEWm1wWWhxUUwtejVETVZWcERCMF9SX3NEbzhJclhSNEcxOGRjbmVmQ0tWRWZMT2VMSGtZTzNHQ2pubC1DQW5V?oc=5",
+      "source": "Reuters",
+      "date": "Jul 22",
+      "timestamp": 1784703600000
+    },
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
-      "source": "The Motley Fool",
+      "source": "fool.com",
       "date": "Jul 17",
       "timestamp": 1784271600000
     },
@@ -18,7 +25,7 @@
     {
       "title": "FDA accepts resubmitted BLA from Outlook Therapeutics",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNZDJFaEJJUzFzMjNXOGFHSi1oQ1I1cHdfNmE5Um9yWG9JRnhZNUlmZ0xnN3hZdlZXRjRVUVFzOENBQmRqVEFDa2xQSWpsNmo4THdxY1V2VkhoTU9YakVMVndVeGlNNFJpQ0ZNaW9WNFRxSFRRWUFtZkw4TGxuRWJxbEFDdkpqRjlwVGhYWGIxSlZZbDlxa3YtZExrb1RWejA?oc=5",
-      "source": "thepharmaletter.com",
+      "source": "The Pharma Letter",
       "date": "Jun 17",
       "timestamp": 1781679600000
     },
@@ -32,7 +39,7 @@
     {
       "title": "Concord Biotech shares jump over 8% after US FDA approves latest Mycophenolate Mofetil drug",
       "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNZGkwU1ZZUjJPaW5Lai01cllOZ1lScmR2aV9sem9WaGNOQjNQTDdlYkZwVy1SeWh1UzRNbjZDRG5YS0JKQW10VHhFNlg5clE4R2FyMG8yTGMyeWkyckkzcWVSLXhCX1JaN2h3R2xFekNKeloyR3Y1TXdQek84QlFUcTQxOWctWVBmQ3daeGxPamc3eTFIaW81RElfZXhBOUdJeUE2aWNLeDJhR3RkN3FZV1VWcTFUMU5XTkRJaGRRNkhXdE9mcjFmSlF0Qnd6RkVuMmFzN0QwdnYxQjVCTGtVa2xZQ3puUQ?oc=5",
-      "source": "upstox.com",
+      "source": "Upstox",
       "date": "Jun 2",
       "timestamp": 1780383600000
     },
@@ -89,13 +96,6 @@
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
       "source": "ING THINK economic and financial analysis | ING THINK",
-      "date": "Jan 20",
-      "timestamp": 1768896000000
-    },
-    {
-      "title": "Makary cites higher FDA user fees as one key to counter China biotech",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPUmQzOHAxdS1vQURRSnN4aUxBNmNFTGdCT1NaMzZfb3ppbU5hRmJaM1pxLWVSUk55ZUJLbnRXQTNDQi1aM2ZpMldMTHdUZDJwM3ZYUXc3RWhfZTBieUdaSXEzUGFzUUlCMTVUS3JTQnVqZjdUOHM2Zmw0LTRYcWgxci1fTjJLUQ?oc=5",
-      "source": "Endpoints News",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -158,7 +158,7 @@
     {
       "title": "Lupin biotech facility gets 4 observations from FDA",
       "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNVy0tOGpXOVVVakpjaFZlRVRWeEZmZG5ZYmZ0UTJ5d3ZxdkJIenk0aDh5SW1NbzlKTXNpTk5RbkQwc2FqTVJ1eG4zUmp6Sml5amtHUTNTOG5MRVpCZ3BJQVZRNlhYMkR1ODJZeU1tcFZMdXFsckR4UWdxazJwQXcweS1jY1had1JpN0lHSkJGdExIMk1JT3gxSnlxS0VudkZBZ3N2STRONGViTHRwT0hWMjdpV0p5S25BdTBqOS10Wl9lSlVBTkU5bDJTU0l3c3VKRHlXSEh5c2Z0c1lJeU5Hd0RKcFBoTXVZNjMxS3QwcDFCazQ4OE1fZG5R0gH_AUFVX3lxTE1vU29UOUZMb2Y3Uk1zVnNaTTNTWFJUdzhqNEZNWDdFd3J6NVZndFJxbk9iazZ1MEtVeUlkVnJmZUxMMm1aU1dURkhzMVcwcXBFV1hBbXExSVdjWHNsSjc5N005QnBsbXhsZGlMTEN6elFnSUlBdm9SWDJaV29PMDRaZ0lFM216UE5sZmZ5b0pmQ2Z0Z1BJWmhpWFpvZDNfRGFOM2doc1c0THhwanQtYkZPQ1VtUU94a2dHcmtuak9HcGxWVEx6MUR6Zjl2M0xUX0czVTZwN2E5eFdmN1lGSkhhMDVwaXFfTVBRV3dwSURmd183S29UcElIbjk0Q1NpOA?oc=5",
-      "source": "ET Pharma",
+      "source": "pharma.economictimes.indiatimes.com",
       "date": "Sep 21",
       "timestamp": 1758438000000
     },
@@ -207,7 +207,7 @@
     {
       "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
-      "source": "FirstWord PHARMA",
+      "source": "FirstWord Pharma",
       "date": "Jun 5",
       "timestamp": 1749106800000
     },
@@ -235,7 +235,7 @@
     {
       "title": "Trump\u2019s FDA Sends a Bullish Signal to Biotech",
       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOdGJSVnBCaWgtOUpJNG93QkZVQlhwblEtb212M1hwYWFNNFJSRWtJNXlzQklLdS1FZjhDald3aXJQRVpUczJGQVpibWRtaHBReVJkT0hlTXQtSFh4Q0RaYzNkN0J1WlN3a1Jnb1I5U25nMzNxaUEtVFJRWV92VDhCdWVIZUVWQUs1OU96TDVLT3o?oc=5",
-      "source": "WSJ",
+      "source": "wsj.com",
       "date": "Apr 22",
       "timestamp": 1745305200000
     },
