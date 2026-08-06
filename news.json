@@ -1,17 +1,10 @@
 {
-  "updated": "2026-08-06T02:52:10Z",
+  "updated": "2026-08-06T08:42:48Z",
   "items": [
-    {
-      "title": "Biotech experts want FDA drug reviews based on science, not politics",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNRDNBOVdaVWpfaEg5eml6RUhCZW42WE1DTGlKbHEtdTBSUkJ4MlJjLUQ5WDdyY3lVcUJXNmU0Wmlyb29DdVdWZXQ3UV9KMTEyX3JYUlJlRFBGcUxfeFN4RUF5ZWliV3ItQUp3QnBvYk9UVkxuRDdyMXBEWm1wWWhxUUwtejVETVZWcERCMF9SX3NEbzhJclhSNEcxOGRjbmVmQ0tWRWZMT2VMSGtZTzNHQ2pubC1DQW5V?oc=5",
-      "source": "Reuters",
-      "date": "Jul 22",
-      "timestamp": 1784703600000
-    },
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
-      "source": "The Motley Fool",
+      "source": "fool.com",
       "date": "Jul 17",
       "timestamp": 1784271600000
     },
@@ -28,6 +21,13 @@
       "source": "The Pharma Letter",
       "date": "Jun 17",
       "timestamp": 1781679600000
+    },
+    {
+      "title": "Concord Biotech shares jump 6% on receiving US FDA approval for its latest arthritis drug",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNclEzVkcwTndiLUNzOGJQYnlMeWRWRlFtUV9aODBBRW9tVHMwYkQxSzFxRTRhU3VpMDlUNHZxbWNfUU1yMjJHWExsYmF4TTBUQW41cFBYeHMtZzFSR1M5TGU2bDR2LVRnLTdURmoyQ0x3VXJCM3RHYzBzMlpnLXBpeGxkdlpXWVBPYXhna2p0LVZrT1RPbDhQYVprdDhqdFhHVDNvbVlMTU5zM2dsNEJYcmRWSjdEelI4NzR4U3dVOFA4V25uSno0RHh4Z0FDSGM2Yk5KRU1HR2tnUUFEd3JhdA?oc=5",
+      "source": "Upstox",
+      "date": "Jun 10",
+      "timestamp": 1781074800000
     },
     {
       "title": "The Pharma Choke Point",
@@ -88,7 +88,7 @@
     {
       "title": "China threatens U.S.' drug-making crown amid Trump admin's research overhaul",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5TNEdRRnJOeXNNd1dVZVBNa0NuQWxocTlLb2FFT1FVWHpnakYzWDdtOUZzeDU4RTNMRlZ3RWhtZzJEM0t3UXN6MnhvWTBqVGIwZHJhdk9wR0pZVTY2S2hRQ1NWQUtYMU1NaXc?oc=5",
-      "source": "Axios",
+      "source": "axios.com",
       "date": "Jan 30",
       "timestamp": 1769760000000
     },
@@ -149,6 +149,13 @@
       "timestamp": 1763452800000
     },
     {
+      "title": "Senate Witnesses Discuss Reshoring and Making China\u2019s Massive Biotech Ecosystem Less Attractive for Big Pharma",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNdVZ0YTlnSnhKN2lReWRTS1Ewdm5pQTY4MzNjZmtTQWhhdjVxZ0JGTzFLN2dla0tRZ2NhaUVKdW5HTEdKX2tCN1BlSy1tWWFVUGx0VVZwQ0dnZTA4dlRWRnZuTWJMZFBXVko5X2xsZ3FrUHYyRG16TkRTUEpPY0otNEduMHpXNEEzLXNHVFA3WWl1UjF4UDJoeFJoQ0ZuX0llbGRYNTN4Y1dXYTRLOTRxcnFmMVI4WC0zZGJIenFzTlN2YWRLSzZDRHRoVER3Ml9zb05DRG5BVQ?oc=5",
+      "source": "Coalition For A Prosperous America",
+      "date": "Nov 3",
+      "timestamp": 1762156800000
+    },
+    {
       "title": "Three Boston biotechs await FDA decisions on new drugs by year-end",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOWnN2VkQzYVUyOTJrQk8tcWRPVFkzejBZclZ0aXZlS195LWRLOVdaZ285MlBfWFFUbTZ6V3hiRlFtQUQtZ01QbVdPeWRibXc4VmtlcThtWk9TT1pSamFFcERzZ2xoTmNHMHVOTUU4V1N3TDE2TlhORldweTJBT2lqVzNOOHhFMEdr?oc=5",
       "source": "The Business Journals",
@@ -184,13 +191,6 @@
       "timestamp": 1754895600000
     },
     {
-      "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYkJzbE1HalpDVHJoMmIzbkNVMG9ISWstT3QwanZYbGV3WG5sVnZ3YVlybVAxTmtCTUw5aWViWkNLRTcwZFVuS0w2dVBXUWZUSzdGN1Z4a3VNbTR1T2tnVWZfREttVG1lQXRqLURlQ1ZXQXBZMHJJaDk1RUtTZDE2ak9BOERZblFpX0k1TVJld25pWTExSmo5YWlBUTdHdkdjajJIN19RM2Vac3NmakRF?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 6",
-      "timestamp": 1754463600000
-    },
-    {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
       "source": "Fierce Pharma",
@@ -200,7 +200,7 @@
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
-      "source": "fiercebiotech.com",
+      "source": "Fierce Biotech",
       "date": "Jun 16",
       "timestamp": 1750057200000
     },
@@ -228,7 +228,7 @@
     {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
-      "source": "RAND Corporation",
+      "source": "rand.org",
       "date": "Apr 23",
       "timestamp": 1745391600000
     },
@@ -249,7 +249,7 @@
     {
       "title": "Ten first-in-class drugs on track for FDA approval in 2025",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9peG1RV2VXZmNLU0lYX3lBTERPdUc3Z0tFRnNkTmE1SXFsdkxxLUl2b080Sm5mV1ZHQnM4ZlNPTGRqVV9nWXhoOGpGdnlMZk50NllNeG9fV1RmSG9SbUpuMlQxUTdhZG9HUzhXTXRiRExMbGlWZ05ZQWRhNkVidw?oc=5",
-      "source": "Labiotech.eu",
+      "source": "labiotech.eu",
       "date": "Jan 18",
       "timestamp": 1737187200000
     },
