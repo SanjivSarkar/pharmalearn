@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08T18:42:17Z",
+  "updated": "2026-08-09T02:00:48Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -49,6 +49,13 @@
       "source": "Upstox",
       "date": "Jun 2",
       "timestamp": 1780383600000
+    },
+    {
+      "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
+      "source": "The New York Times",
+      "date": "May 31",
+      "timestamp": 1780210800000
     },
     {
       "title": "FDA Leadership Changes Crisis: 3 Exits in 2026?",
@@ -109,7 +116,7 @@
     {
       "title": "China threatens U.S.' drug-making crown amid Trump admin's research overhaul",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5TNEdRRnJOeXNNd1dVZVBNa0NuQWxocTlLb2FFT1FVWHpnakYzWDdtOUZzeDU4RTNMRlZ3RWhtZzJEM0t3UXN6MnhvWTBqVGIwZHJhdk9wR0pZVTY2S2hRQ1NWQUtYMU1NaXc?oc=5",
-      "source": "axios.com",
+      "source": "Axios",
       "date": "Jan 30",
       "timestamp": 1769760000000
     },
@@ -140,6 +147,13 @@
       "source": "Fierce Pharma",
       "date": "Jan 2",
       "timestamp": 1767365493000
+    },
+    {
+      "title": "Omeros scores its 1st FDA nod as stem cell transplant drug Yartemlea approved",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNQTVFdGQtUGRNQnZfN21sWHJrR2xYZ19GaEZNa2xXRUhseC0yTEVxcDJEa0ZtdnJ3SzZXeWN1TldabkQ5QnlpcU5ROEhTNDZieXhhOVdwcmlNYW43ZmlTQW1aRXdnSUdORm5Da0tsSzVPcVhsNFFldFBhcE9hcVgtV09HTmNSZTBtcnBKTW1lb2hVbjRoODZBNDZ0eXRfa1oxRE1lZl9fdnZtOXdUYTdjRm9sRQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Dec 26",
+      "timestamp": 1766736000000
     },
     {
       "title": "Cytokinetics heart drug wins FDA approval, the biotech\u2019s first",
@@ -205,16 +219,9 @@
       "timestamp": 1756450800000
     },
     {
-      "title": "FDA approves Ionis drug that prevents swelling attacks caused by a rare disease",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQck1KRXItZ3Vydzh6Y1BfS282cW5BNzNndnJWeTJRSndjUDhTdy03QTBrMVhiRjhFYTZYY01nRF9zdmJEVDRWMk01MDlScXpzR2t0Y21rNnFQUVRfN1ZrQ0o0ZnplQUVqNDk2eVBxcHZ1V1FKV2s3WklYX2J4LUJ0cmNiNERCSEhjWEpKSXJsVQ?oc=5",
-      "source": "STAT",
-      "date": "Aug 21",
-      "timestamp": 1755759600000
-    },
-    {
       "title": "Biotech\u2019s Lost Archive",
       "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5fQ1dQaW1YbU0tbTM5Ykk5eHVPcDR5V2tLMmlZdGFJOFcwWE5faXpHV3YwZUpjUTA3SVRIUjBGU1BtT1FqWVNRM2FpM0tUNVU?oc=5",
-      "source": "ifp.org",
+      "source": "Institute for Progress (IFP)",
       "date": "Aug 11",
       "timestamp": 1754895600000
     },
@@ -228,7 +235,7 @@
     {
       "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
-      "source": "FirstWord Pharma",
+      "source": "FirstWord PHARMA",
       "date": "Jun 5",
       "timestamp": 1749106800000
     },
@@ -245,13 +252,6 @@
       "source": "STAT",
       "date": "May 6",
       "timestamp": 1746514800000
-    },
-    {
-      "title": "Strategically De-Risking U.S. Drug Supply Chains",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
-      "source": "RAND Corporation",
-      "date": "Apr 23",
-      "timestamp": 1745391600000
     },
     {
       "title": "Trump\u2019s FDA Sends a Bullish Signal to Biotech",
