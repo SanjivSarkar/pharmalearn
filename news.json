@@ -1,13 +1,6 @@
 {
-  "updated": "2026-08-12T19:05:21Z",
+  "updated": "2026-08-13T02:18:48Z",
   "items": [
-    {
-      "title": "Biotech experts want FDA drug reviews based on science, not politics",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNRDNBOVdaVWpfaEg5eml6RUhCZW42WE1DTGlKbHEtdTBSUkJ4MlJjLUQ5WDdyY3lVcUJXNmU0Wmlyb29DdVdWZXQ3UV9KMTEyX3JYUlJlRFBGcUxfeFN4RUF5ZWliV3ItQUp3QnBvYk9UVkxuRDdyMXBEWm1wWWhxUUwtejVETVZWcERCMF9SX3NEbzhJclhSNEcxOGRjbmVmQ0tWRWZMT2VMSGtZTzNHQ2pubC1DQW5V?oc=5",
-      "source": "Reuters",
-      "date": "Jul 22",
-      "timestamp": 1784703600000
-    },
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
@@ -28,6 +21,13 @@
       "source": "Fierce Pharma",
       "date": "Jul 7",
       "timestamp": 1783407600000
+    },
+    {
+      "title": "Opinion: The FDA must put biotech at its center or continue to cede early research to China",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQN3dHUDJiSjNQMDJmanI3dzFZV3lJUDd5emNYTy1vTGh1SDVkQlpDekJSanZlS0ZkTHUzSUdObUYwdGk1dzZucFdWNGVkeGVDZmxYNVV2azBfNFFmQ2xFMG5TdlU3VDdhN1B1ZWZuNnpCNEZOem9FVWFmTzBheG5pRGdnWW0tZXkzUmt2cEpHbzE4M0VqVzVjNmkzU19pOW1CRXBKWnQwbzNJMGFhWk5DUUJBZUpLbUpyeWRB?oc=5",
+      "source": "BioSpace",
+      "date": "Jul 6",
+      "timestamp": 1783321200000
     },
     {
       "title": "Pharma and biotech innovation and competition in 2026: Five areas to watch",
@@ -67,7 +67,7 @@
     {
       "title": "FDA Leadership Changes Crisis: 3 Exits in 2026?",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFAzOXFuTnEwY042aTZIZnZUQTA3LW4tVXgtV3JKVEJ3VWlhVG5ybklvM1JyT3ZMRFlkZTZ2cWdvemxHQlQ4YU5aY3k0Q0xDR3lsT3R2T0NyVlVKWklqaHJjSE9WTXVXdHVoTkJyWjdHTVhWRzh4bnBRQ2RlUE1pUQ?oc=5",
-      "source": "brusselsmorning.com",
+      "source": "Brussels Morning Newspaper",
       "date": "May 15",
       "timestamp": 1778828400000
     },
@@ -95,7 +95,7 @@
     {
       "title": "China threatens U.S.' drug-making crown amid Trump admin's research overhaul",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5TNEdRRnJOeXNNd1dVZVBNa0NuQWxocTlLb2FFT1FVWHpnakYzWDdtOUZzeDU4RTNMRlZ3RWhtZzJEM0t3UXN6MnhvWTBqVGIwZHJhdk9wR0pZVTY2S2hRQ1NWQUtYMU1NaXc?oc=5",
-      "source": "axios.com",
+      "source": "Axios",
       "date": "Jan 30",
       "timestamp": 1769760000000
     },
@@ -105,13 +105,6 @@
       "source": "\uc870\uc120\uc77c\ubcf4",
       "date": "Jan 28",
       "timestamp": 1769587200000
-    },
-    {
-      "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ING Think",
-      "date": "Jan 20",
-      "timestamp": 1768896000000
     },
     {
       "title": "US FDA approves Fortress Bio and Zydus' treatment for a rare pediatric disease",
@@ -191,11 +184,11 @@
       "timestamp": 1760425200000
     },
     {
-      "title": "FDA official\u2019s comments spark Aurinia sell-off; Halozyme buys a biotech",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPVzhJXzJpSlVOQ0p3VUlaUXFvS3U1NWFETTNmajlHM2xVdkR6ME5XelB5a1dFck9IVEZQR3ZxMF9uQ0s1Rk8xMEZndWx6SWNGMjVhQUlJdm4yZWtKQmxZTkE5ajVoR0gxWUhfS0lpaHdqWWxycDNvb3VrSVozOF9pWDVwLVBMS2lSbGdoMkZPLTJLRWpkVVJqU0RtZ1hwY3dKZTV2Uw?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Oct 1",
-      "timestamp": 1759302000000
+      "title": "US FDA approves another generic version of abortion pill",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPMW5DWmdPVFJYVWREMkpHWUVNeUdtaXJvTU03NnJEQUc2LXAydEJpQVctdkQ3dndyRnNLejdFRjJnd1Z4WE9tYmNRZ2xnamtHaUpYczhKUldMamRmQTkyTGhUX2xRb1RLQVpOYktiYTJ3Z0dHemtCVW0xOENMTDBZNVE3MUE2TTBRUWU5NUduek1TMTV6c00tRVh1eUtySm85U2JIMG9nWDAyWGxKZkp5STVRT3NUZ05xdmIwZUl4Ql8waW5EYWhDdkVNUWRpMEQ0R2RNeDZTUENRWE0?oc=5",
+      "source": "pharma.economictimes.indiatimes.com",
+      "date": "Oct 3",
+      "timestamp": 1759474800000
     },
     {
       "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
@@ -207,7 +200,7 @@
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
-      "source": "Fierce Biotech",
+      "source": "fiercebiotech.com",
       "date": "Jun 16",
       "timestamp": 1750057200000
     },
@@ -219,9 +212,16 @@
       "timestamp": 1749106800000
     },
     {
+      "title": "A rare disease drug is rejected, even as the FDA talks about new approval pathway",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYWtsQzlvTTloOFB5S2RCY2dJVU00Q000V1NPLUlkNzUzZkpUbWpwTFNZbmxURzNnejlibFRySllZVjJJbURIcERXdXZWNW9qWHBwVUlib2Nid2lmb3JNdm5tam0wTjliZnpaWXBJaEdfcjdTQXd0SHZCX3FtUDgxSDlPX0VMZnRtaTFYcEZqcGdXNXRaVngzUnA1U3A1cWhCYl92bGpSSkJtTzRqaGtKNmxkZUFrQjhOMU91QjVJMk8?oc=5",
+      "source": "STAT",
+      "date": "May 29",
+      "timestamp": 1748502000000
+    },
+    {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
-      "source": "Chemical & Engineering News",
+      "source": "cen.acs.org",
       "date": "May 14",
       "timestamp": 1747206000000
     },
