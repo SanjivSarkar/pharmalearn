@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-14T18:58:46Z",
+  "updated": "2026-08-15T01:25:00Z",
   "items": [
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
@@ -18,14 +18,14 @@
     {
       "title": "Opinion: The FDA must put biotech at its center or continue to cede early research to China",
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQN3dHUDJiSjNQMDJmanI3dzFZV3lJUDd5emNYTy1vTGh1SDVkQlpDekJSanZlS0ZkTHUzSUdObUYwdGk1dzZucFdWNGVkeGVDZmxYNVV2azBfNFFmQ2xFMG5TdlU3VDdhN1B1ZWZuNnpCNEZOem9FVWFmTzBheG5pRGdnWW0tZXkzUmt2cEpHbzE4M0VqVzVjNmkzU19pOW1CRXBKWnQwbzNJMGFhWk5DUUJBZUpLbUpyeWRB?oc=5",
-      "source": "biospace.com",
+      "source": "BioSpace",
       "date": "Jul 6",
       "timestamp": 1783321200000
     },
     {
       "title": "Pharma and biotech innovation and competition in 2026: Five areas to watch",
       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOWENkWHVpUkFoWUVuN0ZHbFNfNmJXdkt2bHZyRC1DTzVVNE5GUDZZV19DcVBxenU4UXZhU0VFNnlWb2ZtQ3dtZmFtWmRkSEJLU3JfcjN6RGxUczdVbTBCSUY2ME9tYnlCY2RMV3Fhd0QwYWtkZ214SmNYaTZBZmF2ZEVDMkE2OW1HTmliZXJSSGR0cEo4bWh6M0QzYWpTZ1kteWNwSG8yWW96VDNmLVE?oc=5",
-      "source": "www.hlc.com",
+      "source": "hlc.com",
       "date": "Jul 3",
       "timestamp": 1783084104000
     },
@@ -46,7 +46,7 @@
     {
       "title": "The Pharma Choke Point",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
-      "source": "Council on Foreign Relations",
+      "source": "cfr.org",
       "date": "Jun 3",
       "timestamp": 1780470000000
     },
@@ -58,16 +58,23 @@
       "timestamp": 1780383600000
     },
     {
+      "title": "Trump plans to fire US FDA chief",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBKVDJTbDg4Ykgtenh3N2NMTWI2N0VUeE1KbzNTbG9fdzBMbnA1a3UxVG5JV2NCdUI4S1d3dGJQUjRnLTB2SVZoNkxHRWtENmpNMkN3bjN3MWJtVzhGb1k1dkhxMFYxWnZhUFU4NUVITQ?oc=5",
+      "source": "medwatch.com",
+      "date": "May 11",
+      "timestamp": 1778482800000
+    },
+    {
       "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOek1rM1FHU3hZUkZmOG9BWjJVT3VNWWhBUWcwcWR6d1BTYmxqWUVyeG1WTmNyeGlQZnJyVm5RX3JxaFhlZ3FSZnBWRjFRM0NqLURGN1RlV2hPcGRSeG03TVNLc1Myc1Jmc3hnMmw5NHJYWVlpM05HdUo0N0duZmprejZRTQ?oc=5",
-      "source": "statnews.com",
+      "source": "STAT",
       "date": "May 7",
       "timestamp": 1778137200000
     },
     {
       "title": "Inside Biotech: FDA says \u2018one and done\u2019 \u2014 what it means for biotech globally",
       "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNeXloN00yQlVhZVlWR2pKQS1YSzBzazUySlJ4aG00TmkzY0RzY09QdkhVSXBveGs2akpKQWlYWVhuZnlpVjFVUUZlenNWWjVLRjJmTHo0SWtNSnZmUjFtbk9uMldFZXVjb1doMGdMYURERDdrbHlKMElNUE1icGtjUGZQOXd5Sk9KcFpLM0hJT190WnFmbGJwVnRMNGthalZWcElwWllyeWlCbGQxZnYzVDdGNXJ0VWVtQjdMQnc1TEV2NTdiRjBDb19QNHpYMTZGN0tNbVBua2gxek5yWGc?oc=5",
-      "source": "proactiveinvestors.com.au",
+      "source": "Proactive financial news",
       "date": "Feb 23",
       "timestamp": 1771833600000
     },
@@ -81,7 +88,7 @@
     {
       "title": "China threatens U.S.' drug-making crown amid Trump admin's research overhaul",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5TNEdRRnJOeXNNd1dVZVBNa0NuQWxocTlLb2FFT1FVWHpnakYzWDdtOUZzeDU4RTNMRlZ3RWhtZzJEM0t3UXN6MnhvWTBqVGIwZHJhdk9wR0pZVTY2S2hRQ1NWQUtYMU1NaXc?oc=5",
-      "source": "Axios",
+      "source": "axios.com",
       "date": "Jan 30",
       "timestamp": 1769760000000
     },
@@ -184,13 +191,6 @@
       "timestamp": 1754895600000
     },
     {
-      "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYkJzbE1HalpDVHJoMmIzbkNVMG9ISWstT3QwanZYbGV3WG5sVnZ3YVlybVAxTmtCTUw5aWViWkNLRTcwZFVuS0w2dVBXUWZUSzdGN1Z4a3VNbTR1T2tnVWZfREttVG1lQXRqLURlQ1ZXQXBZMHJJaDk1RUtTZDE2ak9BOERZblFpX0k1TVJld25pWTExSmo5YWlBUTdHdkdjajJIN19RM2Vac3NmakRF?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 6",
-      "timestamp": 1754463600000
-    },
-    {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
       "source": "Fierce Pharma",
@@ -205,11 +205,11 @@
       "timestamp": 1750057200000
     },
     {
-      "title": "A rare disease drug is rejected, even as the FDA talks about new approval pathway",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYWtsQzlvTTloOFB5S2RCY2dJVU00Q000V1NPLUlkNzUzZkpUbWpwTFNZbmxURzNnejlibFRySllZVjJJbURIcERXdXZWNW9qWHBwVUlib2Nid2lmb3JNdm5tam0wTjliZnpaWXBJaEdfcjdTQXd0SHZCX3FtUDgxSDlPX0VMZnRtaTFYcEZqcGdXNXRaVngzUnA1U3A1cWhCYl92bGpSSkJtTzRqaGtKNmxkZUFrQjhOMU91QjVJMk8?oc=5",
-      "source": "statnews.com",
-      "date": "May 29",
-      "timestamp": 1748502000000
+      "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
+      "source": "FirstWord Pharma",
+      "date": "Jun 5",
+      "timestamp": 1749106800000
     },
     {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
@@ -228,7 +228,7 @@
     {
       "title": "How to stop the shift of drug discovery from the U.S. to China",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQLW4wcjk0X2EyMGZSZ2NzcmoyamxHVGhQS0VCeGVDMmVQTlhrRllsajRrSTV3ek1hczluTnk5Vmk0OVBaZzlVM3pDdi1WM2RsdTc2alo2NG1yeEFtaWNMbEVYZXFya05VakRSc1BEWlYwUFk5a0otMlZCcWNLd05BbHRqdWlJYzRsenlFajdLQ1hUWkZNRXZNUl9VUHNWNUk?oc=5",
-      "source": "statnews.com",
+      "source": "STAT",
       "date": "May 6",
       "timestamp": 1746514800000
     },
