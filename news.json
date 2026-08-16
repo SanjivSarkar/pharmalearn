@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-15T18:34:28Z",
+  "updated": "2026-08-16T01:36:57Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -11,7 +11,7 @@
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
-      "source": "fool.com",
+      "source": "The Motley Fool",
       "date": "Jul 17",
       "timestamp": 1784271600000
     },
@@ -81,7 +81,7 @@
     {
       "title": "Inside Biotech: FDA says \u2018one and done\u2019 \u2014 what it means for biotech globally",
       "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNeXloN00yQlVhZVlWR2pKQS1YSzBzazUySlJ4aG00TmkzY0RzY09QdkhVSXBveGs2akpKQWlYWVhuZnlpVjFVUUZlenNWWjVLRjJmTHo0SWtNSnZmUjFtbk9uMldFZXVjb1doMGdMYURERDdrbHlKMElNUE1icGtjUGZQOXd5Sk9KcFpLM0hJT190WnFmbGJwVnRMNGthalZWcElwWllyeWlCbGQxZnYzVDdGNXJ0VWVtQjdMQnc1TEV2NTdiRjBDb19QNHpYMTZGN0tNbVBua2gxek5yWGc?oc=5",
-      "source": "Proactive financial news",
+      "source": "proactiveinvestors.com.au",
       "date": "Feb 23",
       "timestamp": 1771833600000
     },
@@ -102,7 +102,7 @@
     {
       "title": "China's New Drug Approvals, Exports Reach Record",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTVk1dUd1Tm5VUEVRSklweHBtWTMwMmN3dTJRRHA5akRSRVBaaEQ3NHg4M19jSjZpbkVlX28xTkJVYl9VWnd0SUhYc2UtZ3daZVFvTURtMWJ3cEdybENoWDZxWDhTZzA3UmpnMEdDMGhGcU0tREZNYVJuN2owdV82MmRuX0tUTjZy?oc=5",
-      "source": "chosun.com",
+      "source": "\uc870\uc120\uc77c\ubcf4",
       "date": "Jan 28",
       "timestamp": 1769587200000
     },
@@ -147,13 +147,6 @@
       "source": "Fierce Pharma",
       "date": "Dec 17",
       "timestamp": 1765958400000
-    },
-    {
-      "title": "Alkermes escalates bidding war; US biotech risks \u2018falling behind\u2019 China",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPSWRLZlNDeXphc0h5Y082a2tVV2diUmZacWl2ajVqWl9kdUJwSFd1a1RhaDBadjhtODhTbGh2WXdRMGdNZk5GSjdORDVFVzhKUGlWakxxRkR6Qnpwemg4M0VXQ3hSV3BNZ19sV3JJVFdoUXNGNnkxOUVyc253V0FVallzdTlBQm1MVVhZQ1NWcDBmNFBUYnlQUHBB?oc=5",
-      "source": "BioPharma Dive",
-      "date": "Nov 19",
-      "timestamp": 1763539200000
     },
     {
       "title": "RNAi biotech Arrowhead wins first FDA approval",
@@ -214,9 +207,16 @@
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
-      "source": "Fierce Biotech",
+      "source": "fiercebiotech.com",
       "date": "Jun 16",
       "timestamp": 1750057200000
+    },
+    {
+      "title": "A rare disease drug is rejected, even as the FDA talks about new approval pathway",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYWtsQzlvTTloOFB5S2RCY2dJVU00Q000V1NPLUlkNzUzZkpUbWpwTFNZbmxURzNnejlibFRySllZVjJJbURIcERXdXZWNW9qWHBwVUlib2Nid2lmb3JNdm5tam0wTjliZnpaWXBJaEdfcjdTQXd0SHZCX3FtUDgxSDlPX0VMZnRtaTFYcEZqcGdXNXRaVngzUnA1U3A1cWhCYl92bGpSSkJtTzRqaGtKNmxkZUFrQjhOMU91QjVJMk8?oc=5",
+      "source": "STAT",
+      "date": "May 29",
+      "timestamp": 1748502000000
     },
     {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
@@ -242,7 +242,7 @@
     {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
-      "source": "rand.org",
+      "source": "RAND Corporation",
       "date": "Apr 23",
       "timestamp": 1745391600000
     },
