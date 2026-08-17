@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-17T07:02:14Z",
+  "updated": "2026-08-17T12:50:43Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -11,14 +11,21 @@
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
-      "source": "The Motley Fool",
+      "source": "fool.com",
       "date": "Jul 17",
       "timestamp": 1784271600000
     },
     {
+      "title": "US FDA approves Sanofi's wearable injector form of blood cancer drug",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOZnF5Sl9QS0o0Y0ZZS2dyWXRqR29fdlRMQldNV0p5TVBSc2VZaU95R0xZSVF0d1NLanRCRjdvNjFvbzkwS09sSDFQOFJ5NDIwQWd3ekZINTJMY1hBTEd2OVlZMnNSSEdFZkpfTHFUODk4Umlaazk3Q2M4bnptbHZpR2VJeTRvNV9ESmJkcUYzRE9tMWlfMVZRREs1MHUzNG1lNFU2a05sazN6RGRvS1BicG11bWVSVjhlVmo2Um5HaE1hTTB2Sk1oMG1CcUk5RVJObmc?oc=5",
+      "source": "Reuters",
+      "date": "Jul 10",
+      "timestamp": 1783666800000
+    },
+    {
       "title": "Opinion: The FDA must put biotech at its center or continue to cede early research to China",
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQN3dHUDJiSjNQMDJmanI3dzFZV3lJUDd5emNYTy1vTGh1SDVkQlpDekJSanZlS0ZkTHUzSUdObUYwdGk1dzZucFdWNGVkeGVDZmxYNVV2azBfNFFmQ2xFMG5TdlU3VDdhN1B1ZWZuNnpCNEZOem9FVWFmTzBheG5pRGdnWW0tZXkzUmt2cEpHbzE4M0VqVzVjNmkzU19pOW1CRXBKWnQwbzNJMGFhWk5DUUJBZUpLbUpyeWRB?oc=5",
-      "source": "BioSpace",
+      "source": "biospace.com",
       "date": "Jul 6",
       "timestamp": 1783321200000
     },
@@ -46,7 +53,7 @@
     {
       "title": "FDA accepts resubmitted BLA from Outlook Therapeutics",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNZDJFaEJJUzFzMjNXOGFHSi1oQ1I1cHdfNmE5Um9yWG9JRnhZNUlmZ0xnN3hZdlZXRjRVUVFzOENBQmRqVEFDa2xQSWpsNmo4THdxY1V2VkhoTU9YakVMVndVeGlNNFJpQ0ZNaW9WNFRxSFRRWUFtZkw4TGxuRWJxbEFDdkpqRjlwVGhYWGIxSlZZbDlxa3YtZExrb1RWejA?oc=5",
-      "source": "The Pharma Letter",
+      "source": "thepharmaletter.com",
       "date": "Jun 17",
       "timestamp": 1781679600000
     },
@@ -72,6 +79,13 @@
       "timestamp": 1778828400000
     },
     {
+      "title": "Trump plans to fire US FDA chief",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBKVDJTbDg4Ykgtenh3N2NMTWI2N0VUeE1KbzNTbG9fdzBMbnA1a3UxVG5JV2NCdUI4S1d3dGJQUjRnLTB2SVZoNkxHRWtENmpNMkN3bjN3MWJtVzhGb1k1dkhxMFYxWnZhUFU4NUVITQ?oc=5",
+      "source": "medwatch.com",
+      "date": "May 11",
+      "timestamp": 1778482800000
+    },
+    {
       "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOek1rM1FHU3hZUkZmOG9BWjJVT3VNWWhBUWcwcWR6d1BTYmxqWUVyeG1WTmNyeGlQZnJyVm5RX3JxaFhlZ3FSZnBWRjFRM0NqLURGN1RlV2hPcGRSeG03TVNLc1Myc1Jmc3hnMmw5NHJYWVlpM05HdUo0N0duZmprejZRTQ?oc=5",
       "source": "STAT",
@@ -93,13 +107,6 @@
       "timestamp": 1772006400000
     },
     {
-      "title": "Inside Biotech: FDA says \u2018one and done\u2019 \u2014 what it means for biotech globally",
-      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNeXloN00yQlVhZVlWR2pKQS1YSzBzazUySlJ4aG00TmkzY0RzY09QdkhVSXBveGs2akpKQWlYWVhuZnlpVjFVUUZlenNWWjVLRjJmTHo0SWtNSnZmUjFtbk9uMldFZXVjb1doMGdMYURERDdrbHlKMElNUE1icGtjUGZQOXd5Sk9KcFpLM0hJT190WnFmbGJwVnRMNGthalZWcElwWllyeWlCbGQxZnYzVDdGNXJ0VWVtQjdMQnc1TEV2NTdiRjBDb19QNHpYMTZGN0tNbVBua2gxek5yWGc?oc=5",
-      "source": "Proactive financial news",
-      "date": "Feb 23",
-      "timestamp": 1771833600000
-    },
-    {
       "title": "Top 10 most anticipated drug launches of 2026",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbjRqeVFJazA4RlI4cC1QaXhwZHdoNjFIcThCckNlZ2xfc2NrLXp0SnhodmdkUFFZN05EWVJSbll2VDl5RUNEVjduWmVNOXlqV1hBM3R3OHBSZWp5M09pdjlFM2lYRV92aHlmNmNoMVBKYzhaNW5GTzhNRzNTSHdFaC1kb1FWMl92?oc=5",
       "source": "Fierce Pharma",
@@ -116,7 +123,7 @@
     {
       "title": "China's New Drug Approvals, Exports Reach Record",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQTVk1dUd1Tm5VUEVRSklweHBtWTMwMmN3dTJRRHA5akRSRVBaaEQ3NHg4M19jSjZpbkVlX28xTkJVYl9VWnd0SUhYc2UtZ3daZVFvTURtMWJ3cEdybENoWDZxWDhTZzA3UmpnMEdDMGhGcU0tREZNYVJuN2owdV82MmRuX0tUTjZy?oc=5",
-      "source": "\uc870\uc120\uc77c\ubcf4",
+      "source": "chosun.com",
       "date": "Jan 28",
       "timestamp": 1769587200000
     },
@@ -186,7 +193,7 @@
     {
       "title": "WATCH: Health Secretary RFK Jr. announces new FDA move to fast-track biosimilar drug approvals",
       "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPa1pfM0tuczJHdDVueWhiX3RlTEU2cWFQcmlJUjFiTmd3NzRzM2VxNmZrU0RwSWxtMjFfOGk1RnEwSDVKUTdINldoMEhWSTRqSDY0elRmSXFCUTJMTWV0aDdzRkF0cjZXd0hMUGhvZU1tR3BLcEpoRW1IOVJwZGtsWUJ5eGpXLWkyZmhsMXNyYUZtNE5NNjIxaG1mQTlVUTBlM0tTd2lITUJDUmJkcGpnNllMbEkyUWhVZGVyRHpuWHN4LWdxdnZNMXRvb2JNZXlq?oc=5",
-      "source": "pbs.org",
+      "source": "PBS",
       "date": "Oct 29",
       "timestamp": 1761721200000
     },
@@ -238,13 +245,6 @@
       "source": "Reuters",
       "date": "May 14",
       "timestamp": 1747206000000
-    },
-    {
-      "title": "How to stop the shift of drug discovery from the U.S. to China",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQLW4wcjk0X2EyMGZSZ2NzcmoyamxHVGhQS0VCeGVDMmVQTlhrRllsajRrSTV3ek1hczluTnk5Vmk0OVBaZzlVM3pDdi1WM2RsdTc2alo2NG1yeEFtaWNMbEVYZXFya05VakRSc1BEWlYwUFk5a0otMlZCcWNLd05BbHRqdWlJYzRsenlFajdLQ1hUWkZNRXZNUl9VUHNWNUk?oc=5",
-      "source": "STAT",
-      "date": "May 6",
-      "timestamp": 1746514800000
     },
     {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
