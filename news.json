@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-18T06:49:25Z",
+  "updated": "2026-08-18T12:53:07Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -86,13 +86,6 @@
       "timestamp": 1778828400000
     },
     {
-      "title": "Trump plans to fire US FDA chief",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBKVDJTbDg4Ykgtenh3N2NMTWI2N0VUeE1KbzNTbG9fdzBMbnA1a3UxVG5JV2NCdUI4S1d3dGJQUjRnLTB2SVZoNkxHRWtENmpNMkN3bjN3MWJtVzhGb1k1dkhxMFYxWnZhUFU4NUVITQ?oc=5",
-      "source": "medwatch.com",
-      "date": "May 11",
-      "timestamp": 1778482800000
-    },
-    {
       "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOek1rM1FHU3hZUkZmOG9BWjJVT3VNWWhBUWcwcWR6d1BTYmxqWUVyeG1WTmNyeGlQZnJyVm5RX3JxaFhlZ3FSZnBWRjFRM0NqLURGN1RlV2hPcGRSeG03TVNLc1Myc1Jmc3hnMmw5NHJYWVlpM05HdUo0N0duZmprejZRTQ?oc=5",
       "source": "STAT",
@@ -100,11 +93,11 @@
       "timestamp": 1778137200000
     },
     {
-      "title": "What 3 recent FDA rejections reveal about shifts inside the agency",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPbXF1d3RidzFSRGFkRDA3UDRYbXdLVlpycWIxQkpobGhCaDFoVWlzMjMyeGpmeFNpVllnd25lVW1laDNkeUEzYzdmM2xqVTJMYzZsSmVOZ0hnalNlUmxtNGdIVjZ4Y2Qya3A1M3hhandjMHlobzBRTUhLekwteFJlRHhvZTRQRnhzWFN2eVZB?oc=5",
-      "source": "Pharma Voice",
-      "date": "Mar 4",
-      "timestamp": 1772611200000
+      "title": "FDA lays out policy wish list, including new trial pathway and new enforcement powers",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWTEycDFZVDVWY0lJZEtXWjBiSHMwblphd3hHZncxbWxWN0NyUlVucGFURGNkSWZZMUQtVE1xN0Z2eEEwQ0NRTDVIT2liOUQ4eldMN3VEcUFBckNWN18zOEktMjdLOUNTWTF4UWxpVjRZR3NYRW05WlJlQk9aMlloSnZfUkpPYnpQeEc1OTFBVFYyVUxvT3Q2ZXUzdFNGOEJnSFFjWXNsbE5JY0c4NnRwbEFHa1hnX0pQbGM0?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Apr 7",
+      "timestamp": 1775545200000
     },
     {
       "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
@@ -249,14 +242,14 @@
     {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
-      "source": "RAND",
+      "source": "rand.org",
       "date": "Apr 23",
       "timestamp": 1745391600000
     },
     {
       "title": "Ten first-in-class drugs on track for FDA approval in 2025",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9peG1RV2VXZmNLU0lYX3lBTERPdUc3Z0tFRnNkTmE1SXFsdkxxLUl2b080Sm5mV1ZHQnM4ZlNPTGRqVV9nWXhoOGpGdnlMZk50NllNeG9fV1RmSG9SbUpuMlQxUTdhZG9HUzhXTXRiRExMbGlWZ05ZQWRhNkVidw?oc=5",
-      "source": "Labiotech.eu",
+      "source": "labiotech.eu",
       "date": "Jan 18",
       "timestamp": 1737187200000
     },
@@ -266,6 +259,13 @@
       "source": "Fierce Pharma",
       "date": "Jan 2",
       "timestamp": 1735804800000
+    },
+    {
+      "title": "Pharma Looks To America First: US FDA Holds Overwhelming Lead Over EMA In Novel Approvals",
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOeUVLLUQ4Mm5mR0l3cS1pbHZxVS10bHV2UUhjdEtEM0FNaUZhaDhHWjdaTDR6ZE11eEtpT0FrUmE1ZVFRSXlzN2xXQlVRMjN1TzNEZllXOWc3djljTTVZMmdTSmcwV3lCWFZRX1hmRkdMQ2FNb0dieE8tNlNZeUR5MzVsV1RNdFRReXNRUHA5dTV6Rm1EbjlyZ2ppUEFvb0NrbWlROEdaVTdOT3lZWHNReXc3NWc3WTRKMTY1eWtqd0FPcDdOTDlV?oc=5",
+      "source": "insights.citeline.com",
+      "date": "Jul 5",
+      "timestamp": 1720162800000
     },
     {
       "title": "US FDA approvals bounce back in 2023, sparking hopes of a biotech recovery",
