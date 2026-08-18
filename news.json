@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-18T01:24:27Z",
+  "updated": "2026-08-18T06:49:25Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -23,16 +23,9 @@
       "timestamp": 1784271600000
     },
     {
-      "title": "US FDA approves Sanofi's wearable injector form of blood cancer drug",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOZnF5Sl9QS0o0Y0ZZS2dyWXRqR29fdlRMQldNV0p5TVBSc2VZaU95R0xZSVF0d1NLanRCRjdvNjFvbzkwS09sSDFQOFJ5NDIwQWd3ekZINTJMY1hBTEd2OVlZMnNSSEdFZkpfTHFUODk4Umlaazk3Q2M4bnptbHZpR2VJeTRvNV9ESmJkcUYzRE9tMWlfMVZRREs1MHUzNG1lNFU2a05sazN6RGRvS1BicG11bWVSVjhlVmo2Um5HaE1hTTB2Sk1oMG1CcUk5RVJObmc?oc=5",
-      "source": "Reuters",
-      "date": "Jul 10",
-      "timestamp": 1783666800000
-    },
-    {
       "title": "Opinion: The FDA must put biotech at its center or continue to cede early research to China",
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQN3dHUDJiSjNQMDJmanI3dzFZV3lJUDd5emNYTy1vTGh1SDVkQlpDekJSanZlS0ZkTHUzSUdObUYwdGk1dzZucFdWNGVkeGVDZmxYNVV2azBfNFFmQ2xFMG5TdlU3VDdhN1B1ZWZuNnpCNEZOem9FVWFmTzBheG5pRGdnWW0tZXkzUmt2cEpHbzE4M0VqVzVjNmkzU19pOW1CRXBKWnQwbzNJMGFhWk5DUUJBZUpLbUpyeWRB?oc=5",
-      "source": "biospace.com",
+      "source": "BioSpace",
       "date": "Jul 6",
       "timestamp": 1783321200000
     },
@@ -46,7 +39,7 @@
     {
       "title": "5 FDA decisions to watch in the third quarter of 2026",
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeS1xNDBkWi1BUlhmbnd1WTJpMV81VXBkRS1fOUlmNk9pcnVMZ3RIOG5vUGdxN0JQaE9GVUlIWkt0WTN6N1I0dGJlcmp6QnVzR1BxOVFqcTlpY0RscjBtajYxWjBxdlNFeWpoQV9tODBJU25VR2E4UkFIdThsaGphLU1R?oc=5",
-      "source": "biopharmadive.com",
+      "source": "BioPharma Dive",
       "date": "Jul 1",
       "timestamp": 1782889200000
     },
@@ -91,6 +84,13 @@
       "source": "STAT",
       "date": "May 15",
       "timestamp": 1778828400000
+    },
+    {
+      "title": "Trump plans to fire US FDA chief",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBKVDJTbDg4Ykgtenh3N2NMTWI2N0VUeE1KbzNTbG9fdzBMbnA1a3UxVG5JV2NCdUI4S1d3dGJQUjRnLTB2SVZoNkxHRWtENmpNMkN3bjN3MWJtVzhGb1k1dkhxMFYxWnZhUFU4NUVITQ?oc=5",
+      "source": "medwatch.com",
+      "date": "May 11",
+      "timestamp": 1778482800000
     },
     {
       "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
@@ -149,6 +149,13 @@
       "timestamp": 1767600000000
     },
     {
+      "title": "Regulatory tracker: FDA starts review of Sandoz's generic tirzepatide",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 2",
+      "timestamp": 1767365493000
+    },
+    {
       "title": "Omeros scores its 1st FDA nod as stem cell transplant drug Yartemlea approved",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNQTVFdGQtUGRNQnZfN21sWHJrR2xYZ19GaEZNa2xXRUhseC0yTEVxcDJEa0ZtdnJ3SzZXeWN1TldabkQ5QnlpcU5ROEhTNDZieXhhOVdwcmlNYW43ZmlTQW1aRXdnSUdORm5Da0tsSzVPcVhsNFFldFBhcE9hcVgtV09HTmNSZTBtcnBKTW1lb2hVbjRoODZBNDZ0eXRfa1oxRE1lZl9fdnZtOXdUYTdjRm9sRQ?oc=5",
       "source": "Fierce Pharma",
@@ -172,7 +179,7 @@
     {
       "title": "RNAi biotech Arrowhead wins first FDA approval",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNG1sekVZclhCeVlfT1diN3NzaEJLOElVckN2YThoSGlhcXNfMlMtSHU2M19fX0V4aTlWQ1BlQWotREJnbGFuRl9XaHdtNUdyNDQ2LWdXVldobWFyRlY1dWIwWExTN0ZfZ0xrWFl2WU1IcDFvQUlmY0xKUDNGc29TQ1l6bmVSdFgzYzVBVTFCVjJrUTJWOEk4YUZWTUg5VUMteFNuUllpWkQtNnhVdXRYUVhKMA?oc=5",
-      "source": "biopharmadive.com",
+      "source": "BioPharma Dive",
       "date": "Nov 18",
       "timestamp": 1763452800000
     },
@@ -198,13 +205,6 @@
       "timestamp": 1759474800000
     },
     {
-      "title": "With FDA nod, Sanofi's Wayrilz becomes 1st US BTK drug approved for immune thrombocytopenia",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOWkFSZXVGSzlqZmw2MFNaR2JQaHVQdVp3cjNrMm1CMFh5SXM2QlRNSVg4NXBKbF9aVk5TSEgzdWlqVEtLMkMxTUZORTQxTS1nSXpmOFNTS3BpZE1ZOWxyb3M0dDRLbnNTb1Ywd1J3b1lNYTNqYUxSRm85bmJJbDY1Qi1vVHFxeEY1amIzd3ZrbWp0Q0VHTFJrbXYyRWZ6Zw?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 29",
-      "timestamp": 1756450800000
-    },
-    {
       "title": "Biotech\u2019s Lost Archive",
       "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5fQ1dQaW1YbU0tbTM5Ykk5eHVPcDR5V2tLMmlZdGFJOFcwWE5faXpHV3YwZUpjUTA3SVRIUjBGU1BtT1FqWVNRM2FpM0tUNVU?oc=5",
       "source": "Institute for Progress (IFP)",
@@ -221,14 +221,14 @@
     {
       "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
-      "source": "firstwordpharma.com",
+      "source": "FirstWord Pharma",
       "date": "Jun 5",
       "timestamp": 1749106800000
     },
     {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
-      "source": "Chemical & Engineering News",
+      "source": "C&EN",
       "date": "May 14",
       "timestamp": 1747206000000
     },
