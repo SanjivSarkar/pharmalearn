@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-19T12:53:37Z",
+  "updated": "2026-08-19T18:39:33Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -74,7 +74,7 @@
     {
       "title": "The Pharma Choke Point",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
-      "source": "Council on Foreign Relations",
+      "source": "cfr.org",
       "date": "Jun 3",
       "timestamp": 1780470000000
     },
@@ -91,6 +91,13 @@
       "source": "STAT",
       "date": "May 15",
       "timestamp": 1778828400000
+    },
+    {
+      "title": "Trump plans to fire US FDA chief",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBKVDJTbDg4Ykgtenh3N2NMTWI2N0VUeE1KbzNTbG9fdzBMbnA1a3UxVG5JV2NCdUI4S1d3dGJQUjRnLTB2SVZoNkxHRWtENmpNMkN3bjN3MWJtVzhGb1k1dkhxMFYxWnZhUFU4NUVITQ?oc=5",
+      "source": "medwatch.com",
+      "date": "May 11",
+      "timestamp": 1778482800000
     },
     {
       "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
@@ -112,6 +119,13 @@
       "source": "Pharma Voice",
       "date": "Mar 4",
       "timestamp": 1772611200000
+    },
+    {
+      "title": "U.S.-China Biotech Rivalry Over Faster Drug Approvals",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOU084OGtSRVpuWkRLNjJGVU5iTkRfZGU5bDRFcHdoZGUxb1BSV1BKcEl0NXVDQkZPOUVUZDQ3T1JoMkh1S2syWm1GeENzVmhkeFNLbmhhcVBDSHFsbmRJdE1VbU1JcDRHcE5EOWstdm9jaWlhVU1sdTRkUm9IRVlEbV9OTGJQTFhs?oc=5",
+      "source": "chosun.com",
+      "date": "Feb 26",
+      "timestamp": 1772092800000
     },
     {
       "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
@@ -137,7 +151,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ING THINK economic and financial analysis | ING THINK",
+      "source": "ING Think",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -198,18 +212,18 @@
       "timestamp": 1761721200000
     },
     {
-      "title": "US FDA approves another generic version of abortion pill",
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPMW5DWmdPVFJYVWREMkpHWUVNeUdtaXJvTU03NnJEQUc2LXAydEJpQVctdkQ3dndyRnNLejdFRjJnd1Z4WE9tYmNRZ2xnamtHaUpYczhKUldMamRmQTkyTGhUX2xRb1RLQVpOYktiYTJ3Z0dHemtCVW0xOENMTDBZNVE3MUE2TTBRUWU5NUduek1TMTV6c00tRVh1eUtySm85U2JIMG9nWDAyWGxKZkp5STVRT3NUZ05xdmIwZUl4Ql8waW5EYWhDdkVNUWRpMEQ0R2RNeDZTUENRWE0?oc=5",
-      "source": "pharma.economictimes.indiatimes.com",
-      "date": "Oct 3",
-      "timestamp": 1759474800000
+      "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
+      "source": "STAT",
+      "date": "Sep 23",
+      "timestamp": 1758610800000
     },
     {
-      "title": "FDA approves Ionis drug that prevents swelling attacks caused by a rare disease",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQck1KRXItZ3Vydzh6Y1BfS282cW5BNzNndnJWeTJRSndjUDhTdy03QTBrMVhiRjhFYTZYY01nRF9zdmJEVDRWMk01MDlScXpzR2t0Y21rNnFQUVRfN1ZrQ0o0ZnplQUVqNDk2eVBxcHZ1V1FKV2s3WklYX2J4LUJ0cmNiNERCSEhjWEpKSXJsVQ?oc=5",
-      "source": "STAT",
-      "date": "Aug 21",
-      "timestamp": 1755759600000
+      "title": "America\u2019s drug regulator is in turmoil",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQZHZUenpMWFByZWlZdW1qZHZmR0tnWGR5bG1mSlZfOG5rNFNaUVNFbnpVZ1RXSWxfRXIxX1MzUDlnb2x5aEhEUm5hQ01CU2RFWFk1cjZsNnVEZzZ1WUYxNHNLVTF4TVdlZDRaWWhMWWtHVHMwSjF0UnNOWFZBRjJ1RTFLcHcxOGxYMWlBb2g0ZU1VUQ?oc=5",
+      "source": "The Economist",
+      "date": "Aug 10",
+      "timestamp": 1754809200000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
@@ -217,13 +231,6 @@
       "source": "Fierce Biotech",
       "date": "Jun 16",
       "timestamp": 1750057200000
-    },
-    {
-      "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
-      "source": "firstwordpharma.com",
-      "date": "Jun 5",
-      "timestamp": 1749106800000
     },
     {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
@@ -240,13 +247,6 @@
       "timestamp": 1747206000000
     },
     {
-      "title": "How to stop the shift of drug discovery from the U.S. to China",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQLW4wcjk0X2EyMGZSZ2NzcmoyamxHVGhQS0VCeGVDMmVQTlhrRllsajRrSTV3ek1hczluTnk5Vmk0OVBaZzlVM3pDdi1WM2RsdTc2alo2NG1yeEFtaWNMbEVYZXFya05VakRSc1BEWlYwUFk5a0otMlZCcWNLd05BbHRqdWlJYzRsenlFajdLQ1hUWkZNRXZNUl9VUHNWNUk?oc=5",
-      "source": "STAT",
-      "date": "May 6",
-      "timestamp": 1746514800000
-    },
-    {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
       "source": "RAND",
@@ -256,7 +256,7 @@
     {
       "title": "Ten first-in-class drugs on track for FDA approval in 2025",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9peG1RV2VXZmNLU0lYX3lBTERPdUc3Z0tFRnNkTmE1SXFsdkxxLUl2b080Sm5mV1ZHQnM4ZlNPTGRqVV9nWXhoOGpGdnlMZk50NllNeG9fV1RmSG9SbUpuMlQxUTdhZG9HUzhXTXRiRExMbGlWZ05ZQWRhNkVidw?oc=5",
-      "source": "Labiotech.eu",
+      "source": "labiotech.eu",
       "date": "Jan 18",
       "timestamp": 1737187200000
     },
