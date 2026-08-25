@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T18:45:30Z",
+  "updated": "2026-08-25T01:26:18Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -84,13 +84,6 @@
       "source": "STAT",
       "date": "May 15",
       "timestamp": 1778828400000
-    },
-    {
-      "title": "Trump plans to fire US FDA chief",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBKVDJTbDg4Ykgtenh3N2NMTWI2N0VUeE1KbzNTbG9fdzBMbnA1a3UxVG5JV2NCdUI4S1d3dGJQUjRnLTB2SVZoNkxHRWtENmpNMkN3bjN3MWJtVzhGb1k1dkhxMFYxWnZhUFU4NUVITQ?oc=5",
-      "source": "medwatch.com",
-      "date": "May 11",
-      "timestamp": 1778482800000
     },
     {
       "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
@@ -210,6 +203,13 @@
       "source": "Reuters",
       "date": "Oct 29",
       "timestamp": 1761721200000
+    },
+    {
+      "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
+      "source": "STAT",
+      "date": "Sep 23",
+      "timestamp": 1758610800000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
