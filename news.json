@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29T16:28:12Z",
+  "updated": "2026-08-29T20:41:42Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -86,13 +86,6 @@
       "timestamp": 1780383600000
     },
     {
-      "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
-      "source": "The New York Times",
-      "date": "May 31",
-      "timestamp": 1780210800000
-    },
-    {
       "title": "Pharmalittle: U.S. pressuring Germany on drug prices | STAT",
       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOS0hJamFMYng2S3FsWXRjQ3Y4VDFrT25JNE0yTVA3U19CZ2FvUWxFbW5NMjMzakRVUDZyaFQzU2oxbjlCMVdNSjF6dFdFN2ZoTDZDYTJ0a3hUekhiajU0aTBwTXF2U0tKTDUtdXE1SGJPRzRBR29QNUFlX2prWHFtUVlyMlFyMTNBRDROUVRzdmlXd3ZqVVZ3VFNFTkxwVjJqbV93WDEzNTY2eHItZXVSOTl2X0s?oc=5",
       "source": "STAT",
@@ -142,6 +135,13 @@
       "timestamp": 1768291200000
     },
     {
+      "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSUt6TjhqalJoV0RyTGFjdVoyaUdFQ3VFbHlVNXBpQ2lPMXdmU2pXbGxSTWtmY0otM0dTZktkS3pXVXk2Y2RYTnAtOUJJTDlzRkFwOXlkaDNMTS1lYm4wMXNZbGpuYWhTUFZHUlF2clJHU2tLaVQ3WXFDQ1E5WFJBR2hiY3dPNUFQbURaZjNJOGlUU3lSTGZHUkxJOGtBaUJnTW9SZ3JtMXN2bUdMY3psLU15dzBMX2ZR?oc=5",
+      "source": "McKinsey & Company",
+      "date": "Jan 7",
+      "timestamp": 1767772800000
+    },
+    {
       "title": "Regulatory tracker: FDA starts review of Sandoz's generic tirzepatide",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
       "source": "Fierce Pharma",
@@ -170,16 +170,23 @@
       "timestamp": 1763452800000
     },
     {
-      "title": "WATCH: Health Secretary RFK Jr. announces new FDA move to fast-track biosimilar drug approvals",
-      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPa1pfM0tuczJHdDVueWhiX3RlTEU2cWFQcmlJUjFiTmd3NzRzM2VxNmZrU0RwSWxtMjFfOGk1RnEwSDVKUTdINldoMEhWSTRqSDY0elRmSXFCUTJMTWV0aDdzRkF0cjZXd0hMUGhvZU1tR3BLcEpoRW1IOVJwZGtsWUJ5eGpXLWkyZmhsMXNyYUZtNE5NNjIxaG1mQTlVUTBlM0tTd2lITUJDUmJkcGpnNllMbEkyUWhVZGVyRHpuWHN4LWdxdnZNMXRvb2JNZXlq?oc=5",
-      "source": "PBS",
-      "date": "Oct 29",
-      "timestamp": 1761721200000
+      "title": "Senate Witnesses Discuss Reshoring and Making China\u2019s Massive Biotech Ecosystem Less Attractive for Big Pharma",
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNdVZ0YTlnSnhKN2lReWRTS1Ewdm5pQTY4MzNjZmtTQWhhdjVxZ0JGTzFLN2dla0tRZ2NhaUVKdW5HTEdKX2tCN1BlSy1tWWFVUGx0VVZwQ0dnZTA4dlRWRnZuTWJMZFBXVko5X2xsZ3FrUHYyRG16TkRTUEpPY0otNEduMHpXNEEzLXNHVFA3WWl1UjF4UDJoeFJoQ0ZuX0llbGRYNTN4Y1dXYTRLOTRxcnFmMVI4WC0zZGJIenFzTlN2YWRLSzZDRHRoVER3Ml9zb05DRG5BVQ?oc=5",
+      "source": "Coalition For A Prosperous America",
+      "date": "Nov 3",
+      "timestamp": 1762156800000
     },
     {
       "title": "US FDA proposes moves to speed availability of some cheaper biotech medicines",
       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQOXZzeFd5a3g4MnVSa25VaDRzU0lKUjF5WWVURWJHVGNaUzJSb3N1UWVXLWtHeFpibDFOV2dLZzFtbWtQQUw4RWI3bkNjTi1Mb2VRZEJ3dldjbTl0clNvTUhZenJqeEVjVFVma3lzYlVsbHZpWmxPWE1aMnBydUlvTFZoOU5ZZEFZamk3b0V5Y25zUzQtcGYyd2lmaHFjQTRjOTJYaXQ4RUhzeG9kcXpsZmZBT3Nva2ZfNU9LMFl3?oc=5",
       "source": "Reuters",
+      "date": "Oct 29",
+      "timestamp": 1761721200000
+    },
+    {
+      "title": "WATCH: Health Secretary RFK Jr. announces new FDA move to fast-track biosimilar drug approvals",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPa1pfM0tuczJHdDVueWhiX3RlTEU2cWFQcmlJUjFiTmd3NzRzM2VxNmZrU0RwSWxtMjFfOGk1RnEwSDVKUTdINldoMEhWSTRqSDY0elRmSXFCUTJMTWV0aDdzRkF0cjZXd0hMUGhvZU1tR3BLcEpoRW1IOVJwZGtsWUJ5eGpXLWkyZmhsMXNyYUZtNE5NNjIxaG1mQTlVUTBlM0tTd2lITUJDUmJkcGpnNllMbEkyUWhVZGVyRHpuWHN4LWdxdnZNMXRvb2JNZXlq?oc=5",
+      "source": "PBS",
       "date": "Oct 29",
       "timestamp": 1761721200000
     },
@@ -196,13 +203,6 @@
       "source": "STAT",
       "date": "Sep 23",
       "timestamp": 1758610800000
-    },
-    {
-      "title": "Biotech Stocks Facing FDA Decision In August 2025",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQUFNCWnduWVU1ekM1dlVwWk95aTlmVGtYYUZIMzNxeUJLUHZTeXB3QWNXMHBZT19za3V0dG5Nd2l6bE5ybFlkVW5NbDREdFIzWXJfcmhUV3ItbkNjem0tZ2kxV2FnN0ZVZVh1aXlqOVVsWHVTSnhOSUZyY2tsWlc3YnFVS1B2WEdUbjZXcTltWQ?oc=5",
-      "source": "RTTNews",
-      "date": "Jul 30",
-      "timestamp": 1753858800000
     },
     {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
