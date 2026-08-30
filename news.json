@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-30T11:34:29Z",
+  "updated": "2026-08-30T16:21:23Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -77,6 +77,13 @@
       "source": "Upstox",
       "date": "Jun 2",
       "timestamp": 1780383600000
+    },
+    {
+      "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
+      "source": "The New York Times",
+      "date": "May 31",
+      "timestamp": 1780210800000
     },
     {
       "title": "Pharmalittle: U.S. pressuring Germany on drug prices | STAT",
@@ -184,13 +191,6 @@
       "timestamp": 1761721200000
     },
     {
-      "title": "WATCH: Health Secretary RFK Jr. announces new FDA move to fast-track biosimilar drug approvals",
-      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPa1pfM0tuczJHdDVueWhiX3RlTEU2cWFQcmlJUjFiTmd3NzRzM2VxNmZrU0RwSWxtMjFfOGk1RnEwSDVKUTdINldoMEhWSTRqSDY0elRmSXFCUTJMTWV0aDdzRkF0cjZXd0hMUGhvZU1tR3BLcEpoRW1IOVJwZGtsWUJ5eGpXLWkyZmhsMXNyYUZtNE5NNjIxaG1mQTlVUTBlM0tTd2lITUJDUmJkcGpnNllMbEkyUWhVZGVyRHpuWHN4LWdxdnZNMXRvb2JNZXlq?oc=5",
-      "source": "PBS",
-      "date": "Oct 29",
-      "timestamp": 1761721200000
-    },
-    {
       "title": "US FDA approves another generic version of abortion pill",
       "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPMW5DWmdPVFJYVWREMkpHWUVNeUdtaXJvTU03NnJEQUc2LXAydEJpQVctdkQ3dndyRnNLejdFRjJnd1Z4WE9tYmNRZ2xnamtHaUpYczhKUldMamRmQTkyTGhUX2xRb1RLQVpOYktiYTJ3Z0dHemtCVW0xOENMTDBZNVE3MUE2TTBRUWU5NUduek1TMTV6c00tRVh1eUtySm85U2JIMG9nWDAyWGxKZkp5STVRT3NUZ05xdmIwZUl4Ql8waW5EYWhDdkVNUWRpMEQ0R2RNeDZTUENRWE0?oc=5",
       "source": "pharma.economictimes.indiatimes.com",
@@ -198,11 +198,11 @@
       "timestamp": 1759474800000
     },
     {
-      "title": "FDA opens national priority fast track, offering 2-month reviews to onshoring and affordability projects",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPTkRyWVVSNnhkLThucFBGZExiY0dBVnF1aFM1c19WZEM1bjk0UDBWOFMwcl96Ukx3Q2k2Z2tjcXdSeXQxQk5mM1dxT0hOYlBQVWNFZG5XaVRUX3A1eFllMlJIaXVSSHJZSlNBbG1tX1NGaU40T0VTVWI2aEtoUTFOSkxTNE1QWi04VXdvcFpXYXR6Zm1JMDNWQ1lqRFNJNXh6SGUzSVRqXzQxZXJ4ZE5hY1ppc1hkODlIdkVTMURGV0VPYTh2M1paaA?oc=5",
-      "source": "Fierce Biotech",
-      "date": "Jul 23",
-      "timestamp": 1753254000000
+      "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
+      "source": "STAT",
+      "date": "Sep 23",
+      "timestamp": 1758610800000
     },
     {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
@@ -221,7 +221,7 @@
     {
       "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
-      "source": "FirstWord Pharma",
+      "source": "FirstWord PHARMA",
       "date": "Jun 5",
       "timestamp": 1749106800000
     },
