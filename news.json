@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-06T10:35:31Z",
+  "updated": "2026-09-06T15:11:56Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -42,13 +42,6 @@
       "source": "BioSpace",
       "date": "Jul 6",
       "timestamp": 1783321200000
-    },
-    {
-      "title": "Pharma and biotech innovation and competition in 2026: Five areas to watch",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOWENkWHVpUkFoWUVuN0ZHbFNfNmJXdkt2bHZyRC1DTzVVNE5GUDZZV19DcVBxenU4UXZhU0VFNnlWb2ZtQ3dtZmFtWmRkSEJLU3JfcjN6RGxUczdVbTBCSUY2ME9tYnlCY2RMV3Fhd0QwYWtkZ214SmNYaTZBZmF2ZEVDMkE2OW1HTmliZXJSSGR0cEo4bWh6M0QzYWpTZ1kteWNwSG8yWW96VDNmLVE?oc=5",
-      "source": "Hogan Lovells Cadwalader",
-      "date": "Jul 3",
-      "timestamp": 1783084104000
     },
     {
       "title": "5 FDA decisions to watch in the third quarter of 2026",
@@ -100,6 +93,13 @@
       "timestamp": 1778828400000
     },
     {
+      "title": "FDA approves Ascendis drug for dwarfism",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9LN2NkVGtuUGFxSWp0SDNfTk5ad1hvNGE1Rm9LbUsxMXZzQ1l4U0ZEUGF5X0xzcjJ2UkkxTmtqc1VkUXJWNGpFT0VmMDM1RmVZYkVLcEtIbWFnYUNMOEZMTlFRVU1ZU3RVLTZXMERnRQ?oc=5",
+      "source": "medwatch.com",
+      "date": "Mar 2",
+      "timestamp": 1772438400000
+    },
+    {
       "title": "U.S.-China Biotech Rivalry Over Faster Drug Approvals",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOU084OGtSRVpuWkRLNjJGVU5iTkRfZGU5bDRFcHdoZGUxb1BSV1BKcEl0NXVDQkZPOUVUZDQ3T1JoMkh1S2syWm1GeENzVmhkeFNLbmhhcVBDSHFsbmRJdE1VbU1JcDRHcE5EOWstdm9jaWlhVU1sdTRkUm9IRVlEbV9OTGJQTFhs?oc=5",
       "source": "\uc870\uc120\uc77c\ubcf4",
@@ -112,13 +112,6 @@
       "source": "STAT",
       "date": "Feb 25",
       "timestamp": 1772006400000
-    },
-    {
-      "title": "Inside Biotech: FDA says \u2018one and done\u2019 \u2014 what it means for biotech globally",
-      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNeXloN00yQlVhZVlWR2pKQS1YSzBzazUySlJ4aG00TmkzY0RzY09QdkhVSXBveGs2akpKQWlYWVhuZnlpVjFVUUZlenNWWjVLRjJmTHo0SWtNSnZmUjFtbk9uMldFZXVjb1doMGdMYURERDdrbHlKMElNUE1icGtjUGZQOXd5Sk9KcFpLM0hJT190WnFmbGJwVnRMNGthalZWcElwWllyeWlCbGQxZnYzVDdGNXJ0VWVtQjdMQnc1TEV2NTdiRjBDb19QNHpYMTZGN0tNbVBua2gxek5yWGc?oc=5",
-      "source": "Proactive financial news",
-      "date": "Feb 23",
-      "timestamp": 1771833600000
     },
     {
       "title": "Top 10 most anticipated drug launches of 2026",
@@ -151,7 +144,7 @@
     {
       "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSUt6TjhqalJoV0RyTGFjdVoyaUdFQ3VFbHlVNXBpQ2lPMXdmU2pXbGxSTWtmY0otM0dTZktkS3pXVXk2Y2RYTnAtOUJJTDlzRkFwOXlkaDNMTS1lYm4wMXNZbGpuYWhTUFZHUlF2clJHU2tLaVQ3WXFDQ1E5WFJBR2hiY3dPNUFQbURaZjNJOGlUU3lSTGZHUkxJOGtBaUJnTW9SZ3JtMXN2bUdMY3psLU15dzBMX2ZR?oc=5",
-      "source": "McKinsey & Company",
+      "source": "mckinsey.com",
       "date": "Jan 7",
       "timestamp": 1767772800000
     },
@@ -214,7 +207,7 @@
     {
       "title": "FDA opens national priority fast track, offering 2-month reviews to onshoring and affordability projects",
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPTkRyWVVSNnhkLThucFBGZExiY0dBVnF1aFM1c19WZEM1bjk0UDBWOFMwcl96Ukx3Q2k2Z2tjcXdSeXQxQk5mM1dxT0hOYlBQVWNFZG5XaVRUX3A1eFllMlJIaXVSSHJZSlNBbG1tX1NGaU40T0VTVWI2aEtoUTFOSkxTNE1QWi04VXdvcFpXYXR6Zm1JMDNWQ1lqRFNJNXh6SGUzSVRqXzQxZXJ4ZE5hY1ppc1hkODlIdkVTMURGV0VPYTh2M1paaA?oc=5",
-      "source": "Fierce Biotech",
+      "source": "fiercebiotech.com",
       "date": "Jul 23",
       "timestamp": 1753254000000
     },
@@ -228,9 +221,16 @@
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
-      "source": "Fierce Biotech",
+      "source": "fiercebiotech.com",
       "date": "Jun 16",
       "timestamp": 1750057200000
+    },
+    {
+      "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
+      "source": "FirstWord Pharma",
+      "date": "Jun 5",
+      "timestamp": 1749106800000
     },
     {
       "title": "A rare disease drug is rejected, even as the FDA talks about new approval pathway",
