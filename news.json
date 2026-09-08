@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-07T21:19:49Z",
+  "updated": "2026-09-08T03:50:51Z",
   "items": [
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -32,7 +32,7 @@
     {
       "title": "FDA approves Vera\u2019s dual-target Trutakna, setting up IgAN market battle with Novartis, Otsuka",
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQYnpPM2o4V3FNeEhiclRhZVNUTnY4U0NPZHNYOHVUc2t3b0U0YkJQVEUyLUZsSzc4Q3FyOWN3RjNjWE1sa3F0U2tpQi01TUo0S3FpT3Z1elVrOW1XNi1HRGFyOVlYLVBiUUZYZzNPQ2NqcHlSOVFGemtkd2lvckpDclJ5a29jS1dhdVJKeU1SWE96Unh1a01sSnQ2Mjl1NF9yd1NXeS1OMjF1T1NaMWtWS1NuRXNIM3lnVVZ3?oc=5",
-      "source": "Fierce Pharma",
+      "source": "fiercepharma.com",
       "date": "Jul 7",
       "timestamp": 1783407600000
     },
@@ -67,7 +67,7 @@
     {
       "title": "FDA accepts resubmitted BLA from Outlook Therapeutics",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNZDJFaEJJUzFzMjNXOGFHSi1oQ1I1cHdfNmE5Um9yWG9JRnhZNUlmZ0xnN3hZdlZXRjRVUVFzOENBQmRqVEFDa2xQSWpsNmo4THdxY1V2VkhoTU9YakVMVndVeGlNNFJpQ0ZNaW9WNFRxSFRRWUFtZkw4TGxuRWJxbEFDdkpqRjlwVGhYWGIxSlZZbDlxa3YtZExrb1RWejA?oc=5",
-      "source": "thepharmaletter.com",
+      "source": "The Pharma Letter",
       "date": "Jun 17",
       "timestamp": 1781679600000
     },
@@ -91,6 +91,13 @@
       "source": "Upstox",
       "date": "Jun 2",
       "timestamp": 1780383600000
+    },
+    {
+      "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
+      "source": "The New York Times",
+      "date": "May 31",
+      "timestamp": 1780210800000
     },
     {
       "title": "Pharmalittle: U.S. pressuring Germany on drug prices | STAT",
@@ -123,14 +130,14 @@
     {
       "title": "Top 10 most anticipated drug launches of 2026",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbjRqeVFJazA4RlI4cC1QaXhwZHdoNjFIcThCckNlZ2xfc2NrLXp0SnhodmdkUFFZN05EWVJSbll2VDl5RUNEVjduWmVNOXlqV1hBM3R3OHBSZWp5M09pdjlFM2lYRV92aHlmNmNoMVBKYzhaNW5GTzhNRzNTSHdFaC1kb1FWMl92?oc=5",
-      "source": "Fierce Pharma",
+      "source": "fiercepharma.com",
       "date": "Feb 2",
       "timestamp": 1770019200000
     },
     {
       "title": "China threatens U.S.' drug-making crown amid Trump admin's research overhaul",
       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5TNEdRRnJOeXNNd1dVZVBNa0NuQWxocTlLb2FFT1FVWHpnakYzWDdtOUZzeDU4RTNMRlZ3RWhtZzJEM0t3UXN6MnhvWTBqVGIwZHJhdk9wR0pZVTY2S2hRQ1NWQUtYMU1NaXc?oc=5",
-      "source": "axios.com",
+      "source": "Axios",
       "date": "Jan 30",
       "timestamp": 1769760000000
     },
@@ -144,7 +151,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "think.ing.com",
+      "source": "ING Think",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -158,14 +165,14 @@
     {
       "title": "Regulatory tracker: FDA starts review of Sandoz's generic tirzepatide",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
-      "source": "Fierce Pharma",
+      "source": "fiercepharma.com",
       "date": "Jan 2",
       "timestamp": 1767365493000
     },
     {
       "title": "Omeros scores its 1st FDA nod as stem cell transplant drug Yartemlea approved",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNQTVFdGQtUGRNQnZfN21sWHJrR2xYZ19GaEZNa2xXRUhseC0yTEVxcDJEa0ZtdnJ3SzZXeWN1TldabkQ5QnlpcU5ROEhTNDZieXhhOVdwcmlNYW43ZmlTQW1aRXdnSUdORm5Da0tsSzVPcVhsNFFldFBhcE9hcVgtV09HTmNSZTBtcnBKTW1lb2hVbjRoODZBNDZ0eXRfa1oxRE1lZl9fdnZtOXdUYTdjRm9sRQ?oc=5",
-      "source": "Fierce Pharma",
+      "source": "fiercepharma.com",
       "date": "Dec 26",
       "timestamp": 1766736000000
     },
@@ -179,7 +186,7 @@
     {
       "title": "GSK rounds out year of approvals with FDA asthma nod for long-acting biologic Exdensur",
       "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxONTU4cVYzbC1sdkpocHpPNndfalc3eUptbThmR1hyeFY1eW0tQkhTYnVwVXhITkhfXzRIYTViUi0tZEZYWDlUa3RFZDlaeWQ5bUhqdVo2LTNHRV9lNmJjMkhCYVNEYmVUUFBEQ3M1YzBrR0hCU085ZGtqMzF3U0ZuTFIxTEw0OS12VEdHaDB5MmY0M2Myd01ZWExrTWtmQ0RySFhlUDg1bUcxeDlEQlJN?oc=5",
-      "source": "Fierce Pharma",
+      "source": "fiercepharma.com",
       "date": "Dec 17",
       "timestamp": 1765958400000
     },
@@ -221,7 +228,7 @@
     {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
-      "source": "Fierce Pharma",
+      "source": "fiercepharma.com",
       "date": "Jul 11",
       "timestamp": 1752217200000
     },
@@ -231,13 +238,6 @@
       "source": "Fierce Biotech",
       "date": "Jun 16",
       "timestamp": 1750057200000
-    },
-    {
-      "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
-      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
-      "source": "FirstWord Pharma",
-      "date": "Jun 5",
-      "timestamp": 1749106800000
     },
     {
       "title": "A rare disease drug is rejected, even as the FDA talks about new approval pathway",
@@ -270,7 +270,7 @@
     {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
-      "source": "RAND",
+      "source": "rand.org",
       "date": "Apr 23",
       "timestamp": 1745391600000
     },
