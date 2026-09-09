@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-09T10:59:46Z",
+  "updated": "2026-09-09T16:14:43Z",
   "items": [
     {
       "title": "US FDA approves Replimune's skin cancer drug after prior rejections",
@@ -35,6 +35,13 @@
       "source": "Reuters",
       "date": "Jul 10",
       "timestamp": 1783666800000
+    },
+    {
+      "title": "FDA approves Vera\u2019s dual-target Trutakna, setting up IgAN market battle with Novartis, Otsuka",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQYnpPM2o4V3FNeEhiclRhZVNUTnY4U0NPZHNYOHVUc2t3b0U0YkJQVEUyLUZsSzc4Q3FyOWN3RjNjWE1sa3F0U2tpQi01TUo0S3FpT3Z1elVrOW1XNi1HRGFyOVlYLVBiUUZYZzNPQ2NqcHlSOVFGemtkd2lvckpDclJ5a29jS1dhdVJKeU1SWE96Unh1a01sSnQ2Mjl1NF9yd1NXeS1OMjF1T1NaMWtWS1NuRXNIM3lnVVZ3?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 7",
+      "timestamp": 1783407600000
     },
     {
       "title": "Opinion: The FDA must put biotech at its center or continue to cede early research to China",
@@ -86,25 +93,18 @@
       "timestamp": 1780383600000
     },
     {
+      "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
+      "source": "The New York Times",
+      "date": "May 31",
+      "timestamp": 1780210800000
+    },
+    {
       "title": "Pharmalittle: U.S. pressuring Germany on drug prices | STAT",
       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOS0hJamFMYng2S3FsWXRjQ3Y4VDFrT25JNE0yTVA3U19CZ2FvUWxFbW5NMjMzakRVUDZyaFQzU2oxbjlCMVdNSjF6dFdFN2ZoTDZDYTJ0a3hUekhiajU0aTBwTXF2U0tKTDUtdXE1SGJPRzRBR29QNUFlX2prWHFtUVlyMlFyMTNBRDROUVRzdmlXd3ZqVVZ3VFNFTkxwVjJqbV93WDEzNTY2eHItZXVSOTl2X0s?oc=5",
       "source": "STAT",
       "date": "May 15",
       "timestamp": 1778828400000
-    },
-    {
-      "title": "FDA approves Ascendis drug for dwarfism",
-      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9LN2NkVGtuUGFxSWp0SDNfTk5ad1hvNGE1Rm9LbUsxMXZzQ1l4U0ZEUGF5X0xzcjJ2UkkxTmtqc1VkUXJWNGpFT0VmMDM1RmVZYkVLcEtIbWFnYUNMOEZMTlFRVU1ZU3RVLTZXMERnRQ?oc=5",
-      "source": "medwatch.com",
-      "date": "Mar 2",
-      "timestamp": 1772438400000
-    },
-    {
-      "title": "U.S.-China Biotech Rivalry Over Faster Drug Approvals",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOU084OGtSRVpuWkRLNjJGVU5iTkRfZGU5bDRFcHdoZGUxb1BSV1BKcEl0NXVDQkZPOUVUZDQ3T1JoMkh1S2syWm1GeENzVmhkeFNLbmhhcVBDSHFsbmRJdE1VbU1JcDRHcE5EOWstdm9jaWlhVU1sdTRkUm9IRVlEbV9OTGJQTFhs?oc=5",
-      "source": "\uc870\uc120\uc77c\ubcf4",
-      "date": "Feb 26",
-      "timestamp": 1772092800000
     },
     {
       "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
@@ -137,7 +137,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "think.ing.com",
+      "source": "ING Think",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -212,13 +212,6 @@
       "timestamp": 1758610800000
     },
     {
-      "title": "3 FDA approval firsts that could be around the corner",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOQUtZaVQ4bzJZekUyT3ZteFZsbGEzOHI2Z1BBUWtDcEo3djVMUmNrWnQzeHBSdlM3cGdISVJjOGtad0VmaUM5LXRrNUFVd09CQXlubE5aR1VyOHpvTGh1ZGd4UWpqaS1MWUppajRCYko3LXRYRl9pWlZZVEo5WFJIMlRwVllvMzNmV21pN3ZSR19QOXdZZ0hWRA?oc=5",
-      "source": "Pharma Voice",
-      "date": "Sep 19",
-      "timestamp": 1758265200000
-    },
-    {
       "title": "FDA opens national priority fast track, offering 2-month reviews to onshoring and affordability projects",
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPTkRyWVVSNnhkLThucFBGZExiY0dBVnF1aFM1c19WZEM1bjk0UDBWOFMwcl96Ukx3Q2k2Z2tjcXdSeXQxQk5mM1dxT0hOYlBQVWNFZG5XaVRUX3A1eFllMlJIaXVSSHJZSlNBbG1tX1NGaU40T0VTVWI2aEtoUTFOSkxTNE1QWi04VXdvcFpXYXR6Zm1JMDNWQ1lqRFNJNXh6SGUzSVRqXzQxZXJ4ZE5hY1ppc1hkODlIdkVTMURGV0VPYTh2M1paaA?oc=5",
       "source": "Fierce Biotech",
@@ -240,6 +233,13 @@
       "timestamp": 1750057200000
     },
     {
+      "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
+      "source": "firstwordpharma.com",
+      "date": "Jun 5",
+      "timestamp": 1749106800000
+    },
+    {
       "title": "A rare disease drug is rejected, even as the FDA talks about new approval pathway",
       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYWtsQzlvTTloOFB5S2RCY2dJVU00Q000V1NPLUlkNzUzZkpUbWpwTFNZbmxURzNnejlibFRySllZVjJJbURIcERXdXZWNW9qWHBwVUlib2Nid2lmb3JNdm5tam0wTjliZnpaWXBJaEdfcjdTQXd0SHZCX3FtUDgxSDlPX0VMZnRtaTFYcEZqcGdXNXRaVngzUnA1U3A1cWhCYl92bGpSSkJtTzRqaGtKNmxkZUFrQjhOMU91QjVJMk8?oc=5",
       "source": "STAT",
@@ -247,16 +247,16 @@
       "timestamp": 1748502000000
     },
     {
-      "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNSkYzYkhXNjZXWnUtZ3hDcDdYc1B2QUxTNHZzUGtZQlhsSWVyYTFHVDRGU2l4RldlQVVVU01DVFktSFRybXVEczJldU5ZWjN1QnJ5NjM0bXNHZk1UVXZjajVlX19XQzdUM1BILWZpVXozdV96eGdhVktvNTFtaXl6ZWYyU1ZXelAtV3JVeS1jX3F5M291V0x4b2RLazlMU1RJeFplS1RCSC1iTE01SVpad0pNZ1JXYWI1MG5jaVpXNmxEc2JycWt2U0VlTU1neWNiMGxiZzhB?oc=5",
-      "source": "Reuters",
+      "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
+      "source": "C&EN",
       "date": "May 14",
       "timestamp": 1747206000000
     },
     {
-      "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
-      "source": "C&EN",
+      "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNSkYzYkhXNjZXWnUtZ3hDcDdYc1B2QUxTNHZzUGtZQlhsSWVyYTFHVDRGU2l4RldlQVVVU01DVFktSFRybXVEczJldU5ZWjN1QnJ5NjM0bXNHZk1UVXZjajVlX19XQzdUM1BILWZpVXozdV96eGdhVktvNTFtaXl6ZWYyU1ZXelAtV3JVeS1jX3F5M291V0x4b2RLazlMU1RJeFplS1RCSC1iTE01SVpad0pNZ1JXYWI1MG5jaVpXNmxEc2JycWt2U0VlTU1neWNiMGxiZzhB?oc=5",
+      "source": "Reuters",
       "date": "May 14",
       "timestamp": 1747206000000
     },
