@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-11T03:50:56Z",
+  "updated": "2026-09-11T10:54:48Z",
   "items": [
     {
       "title": "US FDA approves Replimune's skin cancer drug after prior rejections",
@@ -67,7 +67,7 @@
     {
       "title": "Concord Biotech shares jump over 8% after US FDA approves latest Mycophenolate Mofetil drug",
       "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNZGkwU1ZZUjJPaW5Lai01cllOZ1lScmR2aV9sem9WaGNOQjNQTDdlYkZwVy1SeWh1UzRNbjZDRG5YS0JKQW10VHhFNlg5clE4R2FyMG8yTGMyeWkyckkzcWVSLXhCX1JaN2h3R2xFekNKeloyR3Y1TXdQek84QlFUcTQxOWctWVBmQ3daeGxPamc3eTFIaW81RElfZXhBOUdJeUE2aWNLeDJhR3RkN3FZV1VWcTFUMU5XTkRJaGRRNkhXdE9mcjFmSlF0Qnd6RkVuMmFzN0QwdnYxQjVCTGtVa2xZQ3puUQ?oc=5",
-      "source": "Upstox",
+      "source": "upstox.com",
       "date": "Jun 3",
       "timestamp": 1780470000000
     },
@@ -77,13 +77,6 @@
       "source": "Council on Foreign Relations",
       "date": "Jun 3",
       "timestamp": 1780470000000
-    },
-    {
-      "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
-      "source": "The New York Times",
-      "date": "May 31",
-      "timestamp": 1780210800000
     },
     {
       "title": "Pharmalittle: U.S. pressuring Germany on drug prices | STAT",
@@ -128,11 +121,25 @@
       "timestamp": 1769760000000
     },
     {
+      "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
+      "source": "ing think",
+      "date": "Jan 20",
+      "timestamp": 1768896000000
+    },
+    {
       "title": "US FDA approves Fortress Bio and Zydus' treatment for a rare pediatric disease",
       "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPdmdxWS1xYk56MkRZcjNha1llS3Zfd0Rvb3FiTmQySjltNy1kWXNSeXhYUFZETnprX2kzSDJkV3JNTEZBdndaVkt1NzJfTTltMVY3MHczNUF1MHU1cndvWkZYdEl3UERpZzJ6amZIandiR0RTZWZRWjVKV3d0NF9zcWR4NGh5N3dIZHhtM3BJNFo4cXFuQnZ5Wk9sRngzc3cwOUw1RTVwLWR1VFplbTBFZ09XYlg2UTZLTVljOHFQR1RTSFBJZGVsNjRxejUwakJibEZzWjBn?oc=5",
       "source": "Reuters",
       "date": "Jan 13",
       "timestamp": 1768291200000
+    },
+    {
+      "title": "The top 10 biopharma M&A deals of 2025",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBrbFY5MjJEV015dFlNOUhfUlVocG9WVmdZOThJTE5oLU0wX3lFUjdhckFMelItb05jV3JGeTBhUmlsYWE2LWZCWk5kbmF0T29BemEwZ3M3UjRxU0NWVmRsaDdvWnFOeWtKMHhoUTRWbWw1NnpT?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 12",
+      "timestamp": 1768204800000
     },
     {
       "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
@@ -154,13 +161,6 @@
       "source": "Fierce Pharma",
       "date": "Dec 26",
       "timestamp": 1766736000000
-    },
-    {
-      "title": "Cytokinetics heart drug wins FDA approval, the biotech\u2019s first",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQS3JCYk1PcUE4QnFWS0JmdW9id3V0dW9BVk5YWW8wYmtxU1RtN0ZUOEozX05jclR6VFdSSWhaOExMLVhmSktrZ2hBOGxva3NJbWtJeEotcXluVnAtbnE3cFJGVWpkOElUUldGbDBEeDExRDhGazhZMXU5a2UtSnpiZUJNbkhCOW53?oc=5",
-      "source": "STAT",
-      "date": "Dec 19",
-      "timestamp": 1766131200000
     },
     {
       "title": "GSK rounds out year of approvals with FDA asthma nod for long-acting biologic Exdensur",
@@ -191,13 +191,6 @@
       "timestamp": 1761721200000
     },
     {
-      "title": "WATCH: Health Secretary RFK Jr. announces new FDA move to fast-track biosimilar drug approvals",
-      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPa1pfM0tuczJHdDVueWhiX3RlTEU2cWFQcmlJUjFiTmd3NzRzM2VxNmZrU0RwSWxtMjFfOGk1RnEwSDVKUTdINldoMEhWSTRqSDY0elRmSXFCUTJMTWV0aDdzRkF0cjZXd0hMUGhvZU1tR3BLcEpoRW1IOVJwZGtsWUJ5eGpXLWkyZmhsMXNyYUZtNE5NNjIxaG1mQTlVUTBlM0tTd2lITUJDUmJkcGpnNllMbEkyUWhVZGVyRHpuWHN4LWdxdnZNMXRvb2JNZXlq?oc=5",
-      "source": "PBS",
-      "date": "Oct 29",
-      "timestamp": 1761721200000
-    },
-    {
       "title": "Crinetics wins FDA approval for acromegaly drug, faces competition with Novartis and Ipsen",
       "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYlZPaTVLYmx4LTBGUDhVbm80RTVqMS05Q3RQTXhxckhuWEEyNDluZzRUaHpiR0gyWUUwTTFMbXpJWEtvN2hjcV9hSkpFY3EtOVc2R0V0aGhQVGpMU1VkZWF3TVJpd05hWjdablVnaXMzb0o5bXZKdGRDQmFDbUFsZVJLbjhkVGVldmI4Vm5WcDhreENtNzBPUmJYLWk2RDJPMHFGR3YtQmo?oc=5",
       "source": "STAT",
@@ -210,6 +203,13 @@
       "source": "STAT",
       "date": "Sep 23",
       "timestamp": 1758610800000
+    },
+    {
+      "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYkJzbE1HalpDVHJoMmIzbkNVMG9ISWstT3QwanZYbGV3WG5sVnZ3YVlybVAxTmtCTUw5aWViWkNLRTcwZFVuS0w2dVBXUWZUSzdGN1Z4a3VNbTR1T2tnVWZfREttVG1lQXRqLURlQ1ZXQXBZMHJJaDk1RUtTZDE2ak9BOERZblFpX0k1TVJld25pWTExSmo5YWlBUTdHdkdjajJIN19RM2Vac3NmakRF?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Aug 6",
+      "timestamp": 1754463600000
     },
     {
       "title": "FDA opens national priority fast track, offering 2-month reviews to onshoring and affordability projects",
@@ -235,7 +235,7 @@
     {
       "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
-      "source": "FirstWord PHARMA",
+      "source": "firstwordpharma.com",
       "date": "Jun 5",
       "timestamp": 1749106800000
     },
@@ -249,7 +249,7 @@
     {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
-      "source": "cen.acs.org",
+      "source": "C&EN",
       "date": "May 14",
       "timestamp": 1747206000000
     },
