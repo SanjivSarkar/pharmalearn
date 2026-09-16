@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-16T16:29:15Z",
+  "updated": "2026-09-16T21:04:24Z",
   "items": [
     {
       "title": "FDA takes applications for new program to shorten drug approval times",
@@ -14,6 +14,13 @@
       "source": "The Motley Fool",
       "date": "Sep 15",
       "timestamp": 1789436160000
+    },
+    {
+      "title": "FDA greenlights Revolution Medicines' pancreatic cancer gamechanger",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPLU1rdTRrckF0MHJVdm1QWElTOHNMRnNzLXdfWEtWRl9QZjZDUzE0OUdJQ0tJUy1qdnY3WDQtUml6enZfbG9rS21US3R6anlwY1N1dzdENXVsd3pBQzN2ZG4wclNsS0VEUVRwSmRUaHROUWdUMWpQX0s0eTJxMG9VN1g4Rlhubld0TFRMSnRXYVBsLUltLW9na2ZlaHFLUkFrb2xIRw?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Aug 26",
+      "timestamp": 1787727600000
     },
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -93,11 +100,25 @@
       "timestamp": 1775545200000
     },
     {
+      "title": "Ascendis gains more altitude with FDA approval for dwarfism drug Yuviwel",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNN2M0X0FXZGVVYjVpYmlpWEJKMlNfVGg2UHBxQ1FpWEx0VmFMSnpjWndWREFvbkxCcl92a2N4dE1lLXNvZzdoTU95S1ROWUJHcDdZZGg3NkNQdlViN1hJTWVFTGZaS3J1LTFSeHh2Sm9QTkRpbTNQWDBJUHlNSXMxTkxhdENqdG84RXhjREdNQk1tZ1djVzl2Q0l0UkdYQkgt?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Mar 2",
+      "timestamp": 1772438400000
+    },
+    {
       "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5QVlc1aXhVQV9RdmFtRUQ5bzRLN1RMbGRGamRoLXdTUlRTdl85U2F0UlpTbXJIN3lIUURnMTEzVWs3U2ItR1RWZXQxbDdyYks1VlZiRlh6akhFTUJNZk11QzBpeGlxVHdjY3MzMmpxQTVhWkE2?oc=5",
       "source": "STAT",
       "date": "Feb 25",
       "timestamp": 1772006400000
+    },
+    {
+      "title": "Top 10 most anticipated drug launches of 2026",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPbjRqeVFJazA4RlI4cC1QaXhwZHdoNjFIcThCckNlZ2xfc2NrLXp0SnhodmdkUFFZN05EWVJSbll2VDl5RUNEVjduWmVNOXlqV1hBM3R3OHBSZWp5M09pdjlFM2lYRV92aHlmNmNoMVBKYzhaNW5GTzhNRzNTSHdFaC1kb1FWMl92?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Feb 2",
+      "timestamp": 1770019200000
     },
     {
       "title": "China threatens U.S.' drug-making crown amid Trump admin's research overhaul",
@@ -142,13 +163,6 @@
       "timestamp": 1766736000000
     },
     {
-      "title": "FDA comes bearing gifts early for Cytokinetics and blockbuster-to-be Myqorzo",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQWE9fM3BoZmdsbDRTSzBTZFB4RXFmTzRHSUY5R0JoaW5GMmtHd3FJTXRaLWNVMTlFdXRQTDJLcG4zbF9EWUNNdmp0dnNVTk1BR2Z5OWhNNVlkeUNFN09ROUVoclZpc2NxTDdtQXltMEthZEFrQkZvS1Bsanl6MjM5SUJ1M1BhZFMtWGlvSDdNZHFuSG5mV1prakdiVXJYV3Rya2dNNVJYcnUwcnZW?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Dec 22",
-      "timestamp": 1766390400000
-    },
-    {
       "title": "Cytokinetics heart drug wins FDA approval, the biotech\u2019s first",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQS3JCYk1PcUE4QnFWS0JmdW9id3V0dW9BVk5YWW8wYmtxU1RtN0ZUOEozX05jclR6VFdSSWhaOExMLVhmSktrZ2hBOGxva3NJbWtJeEotcXluVnAtbnE3cFJGVWpkOElUUldGbDBEeDExRDhGazhZMXU5a2UtSnpiZUJNbkhCOW53?oc=5",
       "source": "STAT",
@@ -170,11 +184,11 @@
       "timestamp": 1762156800000
     },
     {
-      "title": "First FDA IND Milestone Achieved Using Human Vascularized Organoid Efficacy Data",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNYU5keXB5YnJROWcxUlNMLXN2b1JIcTRyZzgwM0xyRThaNEFWN3M0UHIzOTQwZGVnWTNWLXFHSHR2NHRLOU51aWJxX1VDelBvb3IySzRMR0hMcFZmV01IUUREZ2tvS0I5SUxyQ0dPcU9jNWNGWURyX2xRUy1Pd0tiaC12bEtSRDBWQkZ2bFQ0cUo2ck9ISklZUGRMNzREb3BhYVlPWWVod21hRDF0QkVmcHNKY0M0Mkx0QWlBOQ?oc=5",
-      "source": "Fierce Biotech",
-      "date": "Oct 27",
-      "timestamp": 1761548400000
+      "title": "US FDA proposes moves to speed availability of some cheaper biotech medicines",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQOXZzeFd5a3g4MnVSa25VaDRzU0lKUjF5WWVURWJHVGNaUzJSb3N1UWVXLWtHeFpibDFOV2dLZzFtbWtQQUw4RWI3bkNjTi1Mb2VRZEJ3dldjbTl0clNvTUhZenJqeEVjVFVma3lzYlVsbHZpWmxPWE1aMnBydUlvTFZoOU5ZZEFZamk3b0V5Y25zUzQtcGYyd2lmaHFjQTRjOTJYaXQ4RUhzeG9kcXpsZmZBT3Nva2ZfNU9LMFl3?oc=5",
+      "source": "Reuters",
+      "date": "Oct 29",
+      "timestamp": 1761721200000
     },
     {
       "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
@@ -219,13 +233,6 @@
       "timestamp": 1749106800000
     },
     {
-      "title": "A rare disease drug is rejected, even as the FDA talks about new approval pathway",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYWtsQzlvTTloOFB5S2RCY2dJVU00Q000V1NPLUlkNzUzZkpUbWpwTFNZbmxURzNnejlibFRySllZVjJJbURIcERXdXZWNW9qWHBwVUlib2Nid2lmb3JNdm5tam0wTjliZnpaWXBJaEdfcjdTQXd0SHZCX3FtUDgxSDlPX0VMZnRtaTFYcEZqcGdXNXRaVngzUnA1U3A1cWhCYl92bGpSSkJtTzRqaGtKNmxkZUFrQjhOMU91QjVJMk8?oc=5",
-      "source": "STAT",
-      "date": "May 29",
-      "timestamp": 1748502000000
-    },
-    {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
       "source": "C&EN",
@@ -249,7 +256,7 @@
     {
       "title": "Ten first-in-class drugs on track for FDA approval in 2025",
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9peG1RV2VXZmNLU0lYX3lBTERPdUc3Z0tFRnNkTmE1SXFsdkxxLUl2b080Sm5mV1ZHQnM4ZlNPTGRqVV9nWXhoOGpGdnlMZk50NllNeG9fV1RmSG9SbUpuMlQxUTdhZG9HUzhXTXRiRExMbGlWZ05ZQWRhNkVidw?oc=5",
-      "source": "labiotech.eu",
+      "source": "Labiotech.eu",
       "date": "Jan 18",
       "timestamp": 1737187200000
     },
@@ -266,13 +273,6 @@
       "source": "insights.citeline.com",
       "date": "Jul 5",
       "timestamp": 1720162800000
-    },
-    {
-      "title": "Biotech Stock Soars on FDA Drug Approval",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOTWZiekx5SldKcHlSZEM2ZTBwZ3VpU1NMUlZaSTBJRmJienlvdWo3Um9YM015ZTRzNl93NXRrVWNtS2JzUlNyY21aa3ZhVXVjOE9ySTE4alNlbzVSWFROVjVNbEtLVmNOanRCRDdUdDlNMndEM1BSQ05IdXplSHJsei1XcF9XMVhOWm04MXdIZDJFbWZlMHVJcW5pUnZFRnlS?oc=5",
-      "source": "Schaeffer's Investment Research",
-      "date": "Mar 15",
-      "timestamp": 1710486000000
     },
     {
       "title": "2022 drug approvals: After Aduhelm fiasco, FDA endorsements drop to 37",
