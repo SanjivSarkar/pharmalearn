@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-18T03:57:44Z",
+  "updated": "2026-09-18T10:51:45Z",
   "items": [
     {
       "title": "FDA takes applications for new program to shorten drug approval times",
@@ -21,6 +21,13 @@
       "source": "Fierce Pharma",
       "date": "Aug 26",
       "timestamp": 1787727600000
+    },
+    {
+      "title": "US FDA approves Replimune's skin cancer drug after prior rejections",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQSzRDTVZPLXhNYTNDWDYyVXZTemQwOXJNQVlVblBvZHVpbUxPX0dQQzVRVTJIT2h5ZmFjVGlOZjNScjRPT1FveDliRmtNdEh5WEtNWUF4Sk5xVi1qdV9aQ3A3eEZvWHNGUDFCWGNhT0ZEb2gwdWw1amRPWkJ2d1M4em1VVVZCdUM3YW9JLXhMamVWOUFseVZnNTd3OWFwaFdWdy1VNVlITVVqUWR6dFYzZ0xFRzlGZw?oc=5",
+      "source": "Reuters",
+      "date": "Aug 6",
+      "timestamp": 1785999600000
     },
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -149,13 +156,6 @@
       "timestamp": 1766736000000
     },
     {
-      "title": "Cytokinetics heart drug wins FDA approval, the biotech\u2019s first",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQS3JCYk1PcUE4QnFWS0JmdW9id3V0dW9BVk5YWW8wYmtxU1RtN0ZUOEozX05jclR6VFdSSWhaOExMLVhmSktrZ2hBOGxva3NJbWtJeEotcXluVnAtbnE3cFJGVWpkOElUUldGbDBEeDExRDhGazhZMXU5a2UtSnpiZUJNbkhCOW53?oc=5",
-      "source": "STAT",
-      "date": "Dec 19",
-      "timestamp": 1766131200000
-    },
-    {
       "title": "GSK rounds out year of approvals with FDA asthma nod for long-acting biologic Exdensur",
       "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxONTU4cVYzbC1sdkpocHpPNndfalc3eUptbThmR1hyeFY1eW0tQkhTYnVwVXhITkhfXzRIYTViUi0tZEZYWDlUa3RFZDlaeWQ5bUhqdVo2LTNHRV9lNmJjMkhCYVNEYmVUUFBEQ3M1YzBrR0hCU085ZGtqMzF3U0ZuTFIxTEw0OS12VEdHaDB5MmY0M2Myd01ZWExrTWtmQ0RySFhlUDg1bUcxeDlEQlJN?oc=5",
       "source": "Fierce Pharma",
@@ -184,18 +184,18 @@
       "timestamp": 1761721200000
     },
     {
+      "title": "First FDA IND Milestone Achieved Using Human Vascularized Organoid Efficacy Data",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNYU5keXB5YnJROWcxUlNMLXN2b1JIcTRyZzgwM0xyRThaNEFWN3M0UHIzOTQwZGVnWTNWLXFHSHR2NHRLOU51aWJxX1VDelBvb3IySzRMR0hMcFZmV01IUUREZ2tvS0I5SUxyQ0dPcU9jNWNGWURyX2xRUy1Pd0tiaC12bEtSRDBWQkZ2bFQ0cUo2ck9ISklZUGRMNzREb3BhYVlPWWVod21hRDF0QkVmcHNKY0M0Mkx0QWlBOQ?oc=5",
+      "source": "Fierce Biotech",
+      "date": "Oct 27",
+      "timestamp": 1761548400000
+    },
+    {
       "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
       "source": "STAT",
       "date": "Sep 23",
       "timestamp": 1758610800000
-    },
-    {
-      "title": "FDA approves Ionis drug that prevents swelling attacks caused by a rare disease",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQck1KRXItZ3Vydzh6Y1BfS282cW5BNzNndnJWeTJRSndjUDhTdy03QTBrMVhiRjhFYTZYY01nRF9zdmJEVDRWMk01MDlScXpzR2t0Y21rNnFQUVRfN1ZrQ0o0ZnplQUVqNDk2eVBxcHZ1V1FKV2s3WklYX2J4LUJ0cmNiNERCSEhjWEpKSXJsVQ?oc=5",
-      "source": "STAT",
-      "date": "Aug 21",
-      "timestamp": 1755759600000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
@@ -221,7 +221,7 @@
     {
       "title": "At FDA roundtable, biotech leaders call for 'modernising' regulation to compete with China",
       "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wYVd6VFh6b2lIN3VIWDVhNFBGeU9teXhfV3FrWHU5TTQwRXY2YWNfTmR5Zlp2UDliR1VmZV85ZmdqWjdGdVVJMGMtMHhQYWY3VU1F?oc=5",
-      "source": "FirstWord Pharma",
+      "source": "firstwordpharma.com",
       "date": "Jun 5",
       "timestamp": 1749106800000
     },
