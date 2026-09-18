@@ -1,17 +1,17 @@
 {
-  "updated": "2026-09-18T16:06:31Z",
+  "updated": "2026-09-18T20:39:26Z",
   "items": [
     {
       "title": "FDA takes applications for new program to shorten drug approval times",
       "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNdTF1UHNaSGI2QzhrazBucXk2cGVyQV9DX1R3NzNpM2REZl9zY1FuR0ZzdkhTVmxMYjFzdmFsV19GNDVmb2k0SURhQmdQS0pLOTJ5YTlHTHQzMWpwNmttODlFT09PVXdlT0dDS1AwYVQyR05wTEtkZ2x1QklkX2RETy1RVmtFSHU4eXRjMEdpa1JDdw?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "Sep 15",
       "timestamp": 1789481031000
     },
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
-      "source": "The Motley Fool",
+      "source": "fool.com",
       "date": "Sep 15",
       "timestamp": 1789436160000
     },
@@ -53,7 +53,7 @@
     {
       "title": "5 FDA decisions to watch in the third quarter of 2026",
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeS1xNDBkWi1BUlhmbnd1WTJpMV81VXBkRS1fOUlmNk9pcnVMZ3RIOG5vUGdxN0JQaE9GVUlIWkt0WTN6N1I0dGJlcmp6QnVzR1BxOVFqcTlpY0RscjBtajYxWjBxdlNFeWpoQV9tODBJU25VR2E4UkFIdThsaGphLU1R?oc=5",
-      "source": "BioPharma Dive",
+      "source": "biopharmadive.com",
       "date": "Jul 1",
       "timestamp": 1782889200000
     },
@@ -88,14 +88,14 @@
     {
       "title": "Pharmalittle: U.S. pressuring Germany on drug prices | STAT",
       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOS0hJamFMYng2S3FsWXRjQ3Y4VDFrT25JNE0yTVA3U19CZ2FvUWxFbW5NMjMzakRVUDZyaFQzU2oxbjlCMVdNSjF6dFdFN2ZoTDZDYTJ0a3hUekhiajU0aTBwTXF2U0tKTDUtdXE1SGJPRzRBR29QNUFlX2prWHFtUVlyMlFyMTNBRDROUVRzdmlXd3ZqVVZ3VFNFTkxwVjJqbV93WDEzNTY2eHItZXVSOTl2X0s?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "May 15",
       "timestamp": 1778828400000
     },
     {
       "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5QVlc1aXhVQV9RdmFtRUQ5bzRLN1RMbGRGamRoLXdTUlRTdl85U2F0UlpTbXJIN3lIUURnMTEzVWs3U2ItR1RWZXQxbDdyYks1VlZiRlh6akhFTUJNZk11QzBpeGlxVHdjY3MzMmpxQTVhWkE2?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "Feb 25",
       "timestamp": 1772006400000
     },
@@ -156,13 +156,6 @@
       "timestamp": 1766736000000
     },
     {
-      "title": "FDA comes bearing gifts early for Cytokinetics and blockbuster-to-be Myqorzo",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQWE9fM3BoZmdsbDRTSzBTZFB4RXFmTzRHSUY5R0JoaW5GMmtHd3FJTXRaLWNVMTlFdXRQTDJLcG4zbF9EWUNNdmp0dnNVTk1BR2Z5OWhNNVlkeUNFN09ROUVoclZpc2NxTDdtQXltMEthZEFrQkZvS1Bsanl6MjM5SUJ1M1BhZFMtWGlvSDdNZHFuSG5mV1prakdiVXJYV3Rya2dNNVJYcnUwcnZW?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Dec 22",
-      "timestamp": 1766390400000
-    },
-    {
       "title": "GSK rounds out year of approvals with FDA asthma nod for long-acting biologic Exdensur",
       "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxONTU4cVYzbC1sdkpocHpPNndfalc3eUptbThmR1hyeFY1eW0tQkhTYnVwVXhITkhfXzRIYTViUi0tZEZYWDlUa3RFZDlaeWQ5bUhqdVo2LTNHRV9lNmJjMkhCYVNEYmVUUFBEQ3M1YzBrR0hCU085ZGtqMzF3U0ZuTFIxTEw0OS12VEdHaDB5MmY0M2Myd01ZWExrTWtmQ0RySFhlUDg1bUcxeDlEQlJN?oc=5",
       "source": "Fierce Pharma",
@@ -172,7 +165,7 @@
     {
       "title": "RNAi biotech Arrowhead wins first FDA approval",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNG1sekVZclhCeVlfT1diN3NzaEJLOElVckN2YThoSGlhcXNfMlMtSHU2M19fX0V4aTlWQ1BlQWotREJnbGFuRl9XaHdtNUdyNDQ2LWdXVldobWFyRlY1dWIwWExTN0ZfZ0xrWFl2WU1IcDFvQUlmY0xKUDNGc29TQ1l6bmVSdFgzYzVBVTFCVjJrUTJWOEk4YUZWTUg5VUMteFNuUllpWkQtNnhVdXRYUVhKMA?oc=5",
-      "source": "BioPharma Dive",
+      "source": "biopharmadive.com",
       "date": "Nov 18",
       "timestamp": 1763452800000
     },
@@ -196,6 +189,13 @@
       "source": "Fierce Biotech",
       "date": "Oct 27",
       "timestamp": 1761548400000
+    },
+    {
+      "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
+      "source": "statnews.com",
+      "date": "Sep 23",
+      "timestamp": 1758610800000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
@@ -228,7 +228,7 @@
     {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
-      "source": "C&EN",
+      "source": "cen.acs.org",
       "date": "May 14",
       "timestamp": 1747206000000
     },
@@ -242,7 +242,7 @@
     {
       "title": "How to stop the shift of drug discovery from the U.S. to China",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQLW4wcjk0X2EyMGZSZ2NzcmoyamxHVGhQS0VCeGVDMmVQTlhrRllsajRrSTV3ek1hczluTnk5Vmk0OVBaZzlVM3pDdi1WM2RsdTc2alo2NG1yeEFtaWNMbEVYZXFya05VakRSc1BEWlYwUFk5a0otMlZCcWNLd05BbHRqdWlJYzRsenlFajdLQ1hUWkZNRXZNUl9VUHNWNUk?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "May 6",
       "timestamp": 1746514800000
     },
@@ -270,7 +270,7 @@
     {
       "title": "Biotech Stock Soars on FDA Drug Approval",
       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOTWZiekx5SldKcHlSZEM2ZTBwZ3VpU1NMUlZaSTBJRmJienlvdWo3Um9YM015ZTRzNl93NXRrVWNtS2JzUlNyY21aa3ZhVXVjOE9ySTE4alNlbzVSWFROVjVNbEtLVmNOanRCRDdUdDlNMndEM1BSQ05IdXplSHJsei1XcF9XMVhOWm04MXdIZDJFbWZlMHVJcW5pUnZFRnlS?oc=5",
-      "source": "schaeffersresearch.com",
+      "source": "Schaeffer's Investment Research",
       "date": "Mar 15",
       "timestamp": 1710486000000
     },
