@@ -1,19 +1,19 @@
 {
-  "updated": "2026-09-21T12:23:55Z",
+  "updated": "2026-09-21T21:49:58Z",
   "items": [
-    {
-      "title": "FDA takes applications for new program to shorten drug approval times",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNdTF1UHNaSGI2QzhrazBucXk2cGVyQV9DX1R3NzNpM2REZl9zY1FuR0ZzdkhTVmxMYjFzdmFsV19GNDVmb2k0SURhQmdQS0pLOTJ5YTlHTHQzMWpwNmttODlFT09PVXdlT0dDS1AwYVQyR05wTEtkZ2x1QklkX2RETy1RVmtFSHU4eXRjMEdpa1JDdw?oc=5",
-      "source": "STAT",
-      "date": "Sep 15",
-      "timestamp": 1789481031000
-    },
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
       "source": "The Motley Fool",
       "date": "Sep 15",
       "timestamp": 1789436160000
+    },
+    {
+      "title": "FDA greenlights Revolution Medicines' pancreatic cancer gamechanger",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPLU1rdTRrckF0MHJVdm1QWElTOHNMRnNzLXdfWEtWRl9QZjZDUzE0OUdJQ0tJUy1qdnY3WDQtUml6enZfbG9rS21US3R6anlwY1N1dzdENXVsd3pBQzN2ZG4wclNsS0VEUVRwSmRUaHROUWdUMWpQX0s0eTJxMG9VN1g4Rlhubld0TFRMSnRXYVBsLUltLW9na2ZlaHFLUkFrb2xIRw?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Aug 26",
+      "timestamp": 1787727600000
     },
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -25,7 +25,7 @@
     {
       "title": "FDA Faces Staffing Crisis Threatening U.S. Drug Innovation",
       "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAxUkotMERtUlBNU3ltOXNxb05LVWhfVzdrS0hWRHdjVDlrZThpampraTI4cUcyREt1ajF3dXlzdGlCUnNKNXdobHpxcGd5cTNWN3ktMGRWSk1iTFFNSTlGM0pNVGVCaDZLd1VVSHk2OXc2aUFreWFKcA?oc=5",
-      "source": "legis1.com",
+      "source": "Legis1",
       "date": "Jul 21",
       "timestamp": 1784617200000
     },
@@ -39,7 +39,7 @@
     {
       "title": "Opinion: The FDA must put biotech at its center or continue to cede early research to China",
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQN3dHUDJiSjNQMDJmanI3dzFZV3lJUDd5emNYTy1vTGh1SDVkQlpDekJSanZlS0ZkTHUzSUdObUYwdGk1dzZucFdWNGVkeGVDZmxYNVV2azBfNFFmQ2xFMG5TdlU3VDdhN1B1ZWZuNnpCNEZOem9FVWFmTzBheG5pRGdnWW0tZXkzUmt2cEpHbzE4M0VqVzVjNmkzU19pOW1CRXBKWnQwbzNJMGFhWk5DUUJBZUpLbUpyeWRB?oc=5",
-      "source": "BioSpace",
+      "source": "biospace.com",
       "date": "Jul 6",
       "timestamp": 1783321200000
     },
@@ -93,6 +93,27 @@
       "timestamp": 1778828400000
     },
     {
+      "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOek1rM1FHU3hZUkZmOG9BWjJVT3VNWWhBUWcwcWR6d1BTYmxqWUVyeG1WTmNyeGlQZnJyVm5RX3JxaFhlZ3FSZnBWRjFRM0NqLURGN1RlV2hPcGRSeG03TVNLc1Myc1Jmc3hnMmw5NHJYWVlpM05HdUo0N0duZmprejZRTQ?oc=5",
+      "source": "STAT",
+      "date": "May 7",
+      "timestamp": 1778137200000
+    },
+    {
+      "title": "FDA lays out policy wish list, including new trial pathway and new enforcement powers",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWTEycDFZVDVWY0lJZEtXWjBiSHMwblphd3hHZncxbWxWN0NyUlVucGFURGNkSWZZMUQtVE1xN0Z2eEEwQ0NRTDVIT2liOUQ4eldMN3VEcUFBckNWN18zOEktMjdLOUNTWTF4UWxpVjRZR3NYRW05WlJlQk9aMlloSnZfUkpPYnpQeEc1OTFBVFYyVUxvT3Q2ZXUzdFNGOEJnSFFjWXNsbE5JY0c4NnRwbEFHa1hnX0pQbGM0?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Apr 7",
+      "timestamp": 1775545200000
+    },
+    {
+      "title": "What 3 recent FDA rejections reveal about shifts inside the agency",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPbXF1d3RidzFSRGFkRDA3UDRYbXdLVlpycWIxQkpobGhCaDFoVWlzMjMyeGpmeFNpVllnd25lVW1laDNkeUEzYzdmM2xqVTJMYzZsSmVOZ0hnalNlUmxtNGdIVjZ4Y2Qya3A1M3hhandjMHlobzBRTUhLekwteFJlRHhvZTRQRnhzWFN2eVZB?oc=5",
+      "source": "Pharma Voice",
+      "date": "Mar 4",
+      "timestamp": 1772611200000
+    },
+    {
       "title": "A rare disease drug was approvable, then it wasn\u2019t. Inside a surprise rejection by the FDA",
       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5QVlc1aXhVQV9RdmFtRUQ5bzRLN1RMbGRGamRoLXdTUlRTdl85U2F0UlpTbXJIN3lIUURnMTEzVWs3U2ItR1RWZXQxbDdyYks1VlZiRlh6akhFTUJNZk11QzBpeGlxVHdjY3MzMmpxQTVhWkE2?oc=5",
       "source": "STAT",
@@ -116,7 +137,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ING Think",
+      "source": "ing think",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -126,13 +147,6 @@
       "source": "Reuters",
       "date": "Jan 13",
       "timestamp": 1768291200000
-    },
-    {
-      "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSUt6TjhqalJoV0RyTGFjdVoyaUdFQ3VFbHlVNXBpQ2lPMXdmU2pXbGxSTWtmY0otM0dTZktkS3pXVXk2Y2RYTnAtOUJJTDlzRkFwOXlkaDNMTS1lYm4wMXNZbGpuYWhTUFZHUlF2clJHU2tLaVQ3WXFDQ1E5WFJBR2hiY3dPNUFQbURaZjNJOGlUU3lSTGZHUkxJOGtBaUJnTW9SZ3JtMXN2bUdMY3psLU15dzBMX2ZR?oc=5",
-      "source": "McKinsey & Company",
-      "date": "Jan 7",
-      "timestamp": 1767772800000
     },
     {
       "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
@@ -189,20 +203,6 @@
       "source": "STAT",
       "date": "Sep 25",
       "timestamp": 1758783600000
-    },
-    {
-      "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
-      "source": "STAT",
-      "date": "Sep 23",
-      "timestamp": 1758610800000
-    },
-    {
-      "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYkJzbE1HalpDVHJoMmIzbkNVMG9ISWstT3QwanZYbGV3WG5sVnZ3YVlybVAxTmtCTUw5aWViWkNLRTcwZFVuS0w2dVBXUWZUSzdGN1Z4a3VNbTR1T2tnVWZfREttVG1lQXRqLURlQ1ZXQXBZMHJJaDk1RUtTZDE2ak9BOERZblFpX0k1TVJld25pWTExSmo5YWlBUTdHdkdjajJIN19RM2Vac3NmakRF?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 6",
-      "timestamp": 1754463600000
     },
     {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
