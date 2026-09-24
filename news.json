@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-24T11:23:32Z",
+  "updated": "2026-09-24T16:48:36Z",
   "items": [
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
@@ -11,7 +11,7 @@
     {
       "title": "Pharmalittle: We're reading about a pancreatic cancer drug approval, a Trump deal with biotechs, and more",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOVWJXLTZtUHVKc3Fka0ZFVktNekNqaUpjNkNOUmxWY0RLOUUtY0twYTRhU2ttOURIMDVGcURqdWp1V09EYUZyOUZMUEZpS05TUUtLZlJCNFlNR1BqWHBYYndVSi01bWJDazZUSHZjeEhkQ29uZnFNeldHRzZXNW11Y3pmMEtYTUpxQTdFc1pQblRtT19XOUpJQWtoMldzWVVLRHJ3WUh3?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "Aug 27",
       "timestamp": 1787814000000
     },
@@ -60,7 +60,7 @@
     {
       "title": "The Pharma Choke Point",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
-      "source": "cfr.org",
+      "source": "Council on Foreign Relations",
       "date": "Jun 3",
       "timestamp": 1780470000000
     },
@@ -74,14 +74,14 @@
     {
       "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
-      "source": "nytimes.com",
+      "source": "The New York Times",
       "date": "May 31",
       "timestamp": 1780210800000
     },
     {
       "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOek1rM1FHU3hZUkZmOG9BWjJVT3VNWWhBUWcwcWR6d1BTYmxqWUVyeG1WTmNyeGlQZnJyVm5RX3JxaFhlZ3FSZnBWRjFRM0NqLURGN1RlV2hPcGRSeG03TVNLc1Myc1Jmc3hnMmw5NHJYWVlpM05HdUo0N0duZmprejZRTQ?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "May 7",
       "timestamp": 1778137200000
     },
@@ -91,6 +91,13 @@
       "source": "Pharma Voice",
       "date": "Mar 4",
       "timestamp": 1772611200000
+    },
+    {
+      "title": "U.S.-China Biotech Rivalry Over Faster Drug Approvals",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOU084OGtSRVpuWkRLNjJGVU5iTkRfZGU5bDRFcHdoZGUxb1BSV1BKcEl0NXVDQkZPOUVUZDQ3T1JoMkh1S2syWm1GeENzVmhkeFNLbmhhcVBDSHFsbmRJdE1VbU1JcDRHcE5EOWstdm9jaWlhVU1sdTRkUm9IRVlEbV9OTGJQTFhs?oc=5",
+      "source": "\uc870\uc120\uc77c\ubcf4",
+      "date": "Feb 26",
+      "timestamp": 1772092800000
     },
     {
       "title": "Inside Biotech: FDA says \u2018one and done\u2019 \u2014 what it means for biotech globally",
@@ -144,7 +151,7 @@
     {
       "title": "Cytokinetics heart drug wins FDA approval, the biotech\u2019s first",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQS3JCYk1PcUE4QnFWS0JmdW9id3V0dW9BVk5YWW8wYmtxU1RtN0ZUOEozX05jclR6VFdSSWhaOExMLVhmSktrZ2hBOGxva3NJbWtJeEotcXluVnAtbnE3cFJGVWpkOElUUldGbDBEeDExRDhGazhZMXU5a2UtSnpiZUJNbkhCOW53?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "Dec 19",
       "timestamp": 1766131200000
     },
@@ -179,16 +186,9 @@
     {
       "title": "Crinetics wins FDA approval for acromegaly drug, faces competition with Novartis and Ipsen",
       "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYlZPaTVLYmx4LTBGUDhVbm80RTVqMS05Q3RQTXhxckhuWEEyNDluZzRUaHpiR0gyWUUwTTFMbXpJWEtvN2hjcV9hSkpFY3EtOVc2R0V0aGhQVGpMU1VkZWF3TVJpd05hWjdablVnaXMzb0o5bXZKdGRDQmFDbUFsZVJLbjhkVGVldmI4Vm5WcDhreENtNzBPUmJYLWk2RDJPMHFGR3YtQmo?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "Sep 25",
       "timestamp": 1758783600000
-    },
-    {
-      "title": "FDA approves Ionis drug that prevents swelling attacks caused by a rare disease",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQck1KRXItZ3Vydzh6Y1BfS282cW5BNzNndnJWeTJRSndjUDhTdy03QTBrMVhiRjhFYTZYY01nRF9zdmJEVDRWMk01MDlScXpzR2t0Y21rNnFQUVRfN1ZrQ0o0ZnplQUVqNDk2eVBxcHZ1V1FKV2s3WklYX2J4LUJ0cmNiNERCSEhjWEpKSXJsVQ?oc=5",
-      "source": "STAT",
-      "date": "Aug 21",
-      "timestamp": 1755759600000
     },
     {
       "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
@@ -221,7 +221,7 @@
     {
       "title": "A rare disease drug is rejected, even as the FDA talks about new approval pathway",
       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYWtsQzlvTTloOFB5S2RCY2dJVU00Q000V1NPLUlkNzUzZkpUbWpwTFNZbmxURzNnejlibFRySllZVjJJbURIcERXdXZWNW9qWHBwVUlib2Nid2lmb3JNdm5tam0wTjliZnpaWXBJaEdfcjdTQXd0SHZCX3FtUDgxSDlPX0VMZnRtaTFYcEZqcGdXNXRaVngzUnA1U3A1cWhCYl92bGpSSkJtTzRqaGtKNmxkZUFrQjhOMU91QjVJMk8?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "May 29",
       "timestamp": 1748502000000
     },
@@ -242,7 +242,7 @@
     {
       "title": "How to stop the shift of drug discovery from the U.S. to China",
       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQLW4wcjk0X2EyMGZSZ2NzcmoyamxHVGhQS0VCeGVDMmVQTlhrRllsajRrSTV3ek1hczluTnk5Vmk0OVBaZzlVM3pDdi1WM2RsdTc2alo2NG1yeEFtaWNMbEVYZXFya05VakRSc1BEWlYwUFk5a0otMlZCcWNLd05BbHRqdWlJYzRsenlFajdLQ1hUWkZNRXZNUl9VUHNWNUk?oc=5",
-      "source": "STAT",
+      "source": "statnews.com",
       "date": "May 6",
       "timestamp": 1746514800000
     },
