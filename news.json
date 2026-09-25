@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25T04:13:00Z",
+  "updated": "2026-09-25T11:29:14Z",
   "items": [
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
@@ -21,13 +21,6 @@
       "source": "finance.biggo.com",
       "date": "Aug 24",
       "timestamp": 1787535046000
-    },
-    {
-      "title": "US FDA approves Replimune's skin cancer drug after prior rejections",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQSzRDTVZPLXhNYTNDWDYyVXZTemQwOXJNQVlVblBvZHVpbUxPX0dQQzVRVTJIT2h5ZmFjVGlOZjNScjRPT1FveDliRmtNdEh5WEtNWUF4Sk5xVi1qdV9aQ3A3eEZvWHNGUDFCWGNhT0ZEb2gwdWw1amRPWkJ2d1M4em1VVVZCdUM3YW9JLXhMamVWOUFseVZnNTd3OWFwaFdWdy1VNVlITVVqUWR6dFYzZ0xFRzlGZw?oc=5",
-      "source": "Reuters",
-      "date": "Aug 6",
-      "timestamp": 1785999600000
     },
     {
       "title": "FDA approves Otsuka\u2019s ADHD drug Simtriyo, teeing up its \u2018next major CNS launch\u2019",
@@ -60,7 +53,7 @@
     {
       "title": "Pharma and biotech innovation and competition in 2026: Five areas to watch",
       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOWENkWHVpUkFoWUVuN0ZHbFNfNmJXdkt2bHZyRC1DTzVVNE5GUDZZV19DcVBxenU4UXZhU0VFNnlWb2ZtQ3dtZmFtWmRkSEJLU3JfcjN6RGxUczdVbTBCSUY2ME9tYnlCY2RMV3Fhd0QwYWtkZ214SmNYaTZBZmF2ZEVDMkE2OW1HTmliZXJSSGR0cEo4bWh6M0QzYWpTZ1kteWNwSG8yWW96VDNmLVE?oc=5",
-      "source": "Hogan Lovells Cadwalader",
+      "source": "hlc.com",
       "date": "Jul 3",
       "timestamp": 1783084104000
     },
@@ -123,7 +116,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ing think",
+      "source": "think.ing.com",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -133,6 +126,13 @@
       "source": "Reuters",
       "date": "Jan 13",
       "timestamp": 1768291200000
+    },
+    {
+      "title": "The top 10 biopharma M&A deals of 2025",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBrbFY5MjJEV015dFlNOUhfUlVocG9WVmdZOThJTE5oLU0wX3lFUjdhckFMelItb05jV3JGeTBhUmlsYWE2LWZCWk5kbmF0T29BemEwZ3M3UjRxU0NWVmRsaDdvWnFOeWtKMHhoUTRWbWw1NnpT?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 12",
+      "timestamp": 1768204800000
     },
     {
       "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
@@ -177,6 +177,13 @@
       "timestamp": 1761721200000
     },
     {
+      "title": "WATCH: Health Secretary RFK Jr. announces new FDA move to fast-track biosimilar drug approvals",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPa1pfM0tuczJHdDVueWhiX3RlTEU2cWFQcmlJUjFiTmd3NzRzM2VxNmZrU0RwSWxtMjFfOGk1RnEwSDVKUTdINldoMEhWSTRqSDY0elRmSXFCUTJMTWV0aDdzRkF0cjZXd0hMUGhvZU1tR3BLcEpoRW1IOVJwZGtsWUJ5eGpXLWkyZmhsMXNyYUZtNE5NNjIxaG1mQTlVUTBlM0tTd2lITUJDUmJkcGpnNllMbEkyUWhVZGVyRHpuWHN4LWdxdnZNMXRvb2JNZXlq?oc=5",
+      "source": "PBS",
+      "date": "Oct 29",
+      "timestamp": 1761721200000
+    },
+    {
       "title": "Crinetics wins FDA approval for acromegaly drug, faces competition with Novartis and Ipsen",
       "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYlZPaTVLYmx4LTBGUDhVbm80RTVqMS05Q3RQTXhxckhuWEEyNDluZzRUaHpiR0gyWUUwTTFMbXpJWEtvN2hjcV9hSkpFY3EtOVc2R0V0aGhQVGpMU1VkZWF3TVJpd05hWjdablVnaXMzb0o5bXZKdGRDQmFDbUFsZVJLbjhkVGVldmI4Vm5WcDhreENtNzBPUmJYLWk2RDJPMHFGR3YtQmo?oc=5",
       "source": "STAT",
@@ -189,13 +196,6 @@
       "source": "STAT",
       "date": "Sep 23",
       "timestamp": 1758610800000
-    },
-    {
-      "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYkJzbE1HalpDVHJoMmIzbkNVMG9ISWstT3QwanZYbGV3WG5sVnZ3YVlybVAxTmtCTUw5aWViWkNLRTcwZFVuS0w2dVBXUWZUSzdGN1Z4a3VNbTR1T2tnVWZfREttVG1lQXRqLURlQ1ZXQXBZMHJJaDk1RUtTZDE2ak9BOERZblFpX0k1TVJld25pWTExSmo5YWlBUTdHdkdjajJIN19RM2Vac3NmakRF?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 6",
-      "timestamp": 1754463600000
     },
     {
       "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
