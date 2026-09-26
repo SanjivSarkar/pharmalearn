@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-26T16:04:27Z",
+  "updated": "2026-09-26T20:50:15Z",
   "items": [
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
@@ -35,13 +35,6 @@
       "source": "Reuters",
       "date": "Aug 6",
       "timestamp": 1785999600000
-    },
-    {
-      "title": "FDA approves Otsuka\u2019s ADHD drug Simtriyo, teeing up its \u2018next major CNS launch\u2019",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZGVESENwUnNpRjRFOGZ1czkybW9IR0d2RzFZLWF0OFdBMDRKMU01Z2hXTlRKclZ1UHZhR2lBc2RtUTF5NEdweFltdGtPT0RMZEF3Yi1yM3JfZ3RsX1VhaEkxTEdYdW9wVUJ2WFlVUEd4eXN4UTQ4akJUaGNMUEM4WWxRblVfNnJqLXJndlhQbkJmNk42U3ZiNDUtMUFvMEd2SUJ0akFfc1pNc00?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jul 27",
-      "timestamp": 1785135600000
     },
     {
       "title": "Biotech experts want FDA drug reviews based on science, not politics",
@@ -81,7 +74,7 @@
     {
       "title": "5 FDA decisions to watch in the third quarter of 2026",
       "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQeS1xNDBkWi1BUlhmbnd1WTJpMV81VXBkRS1fOUlmNk9pcnVMZ3RIOG5vUGdxN0JQaE9GVUlIWkt0WTN6N1I0dGJlcmp6QnVzR1BxOVFqcTlpY0RscjBtajYxWjBxdlNFeWpoQV9tODBJU25VR2E4UkFIdThsaGphLU1R?oc=5",
-      "source": "BioPharma Dive",
+      "source": "biopharmadive.com",
       "date": "Jul 1",
       "timestamp": 1782889200000
     },
@@ -95,7 +88,7 @@
     {
       "title": "The Pharma Choke Point",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
-      "source": "Council on Foreign Relations",
+      "source": "cfr.org",
       "date": "Jun 3",
       "timestamp": 1780470000000
     },
@@ -109,7 +102,7 @@
     {
       "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
-      "source": "nytimes.com",
+      "source": "The New York Times",
       "date": "May 31",
       "timestamp": 1780210800000
     },
@@ -207,7 +200,7 @@
     {
       "title": "RNAi biotech Arrowhead wins first FDA approval",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNG1sekVZclhCeVlfT1diN3NzaEJLOElVckN2YThoSGlhcXNfMlMtSHU2M19fX0V4aTlWQ1BlQWotREJnbGFuRl9XaHdtNUdyNDQ2LWdXVldobWFyRlY1dWIwWExTN0ZfZ0xrWFl2WU1IcDFvQUlmY0xKUDNGc29TQ1l6bmVSdFgzYzVBVTFCVjJrUTJWOEk4YUZWTUg5VUMteFNuUllpWkQtNnhVdXRYUVhKMA?oc=5",
-      "source": "BioPharma Dive",
+      "source": "biopharmadive.com",
       "date": "Nov 18",
       "timestamp": 1763452800000
     },
@@ -221,7 +214,7 @@
     {
       "title": "WATCH: Health Secretary RFK Jr. announces new FDA move to fast-track biosimilar drug approvals",
       "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPa1pfM0tuczJHdDVueWhiX3RlTEU2cWFQcmlJUjFiTmd3NzRzM2VxNmZrU0RwSWxtMjFfOGk1RnEwSDVKUTdINldoMEhWSTRqSDY0elRmSXFCUTJMTWV0aDdzRkF0cjZXd0hMUGhvZU1tR3BLcEpoRW1IOVJwZGtsWUJ5eGpXLWkyZmhsMXNyYUZtNE5NNjIxaG1mQTlVUTBlM0tTd2lITUJDUmJkcGpnNllMbEkyUWhVZGVyRHpuWHN4LWdxdnZNMXRvb2JNZXlq?oc=5",
-      "source": "pbs.org",
+      "source": "PBS",
       "date": "Oct 29",
       "timestamp": 1761721200000
     },
@@ -266,6 +259,13 @@
       "source": "Chemical & Engineering News",
       "date": "May 14",
       "timestamp": 1747206000000
+    },
+    {
+      "title": "Strategically De-Risking U.S. Drug Supply Chains",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
+      "source": "RAND",
+      "date": "Apr 23",
+      "timestamp": 1745391600000
     },
     {
       "title": "2024 drug approvals: Small companies loom large with several key FDA nods",
