@@ -1,10 +1,10 @@
 {
-  "updated": "2026-09-29T12:26:26Z",
+  "updated": "2026-09-29T22:02:36Z",
   "items": [
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQUzJDQTRnQ2pOU0JoUUJRT2YxYm9Qc3hIaFY4WktwR09HeDFLaVRCQ0dRRzF4RHJ1RnN3cTFVUFUyVzVjVFJjZmpuS3VCbTlpQ1RTQi1OcnhPWFZ1ZUJWTHpDN1hwbW51UGlBdUlFU3NrYzdXSWRob1Y0Q3F1QUs3c3dNcl9sNU16amtjT2lB?oc=5",
-      "source": "The Motley Fool",
+      "source": "fool.com",
       "date": "Sep 14",
       "timestamp": 1789369200000
     },
@@ -32,14 +32,21 @@
     {
       "title": "FDA Faces Staffing Crisis Threatening U.S. Drug Innovation",
       "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAxUkotMERtUlBNU3ltOXNxb05LVWhfVzdrS0hWRHdjVDlrZThpampraTI4cUcyREt1ajF3dXlzdGlCUnNKNXdobHpxcGd5cTNWN3ktMGRWSk1iTFFNSTlGM0pNVGVCaDZLd1VVSHk2OXc2aUFreWFKcA?oc=5",
-      "source": "legis1.com",
+      "source": "Legis1",
       "date": "Jul 21",
       "timestamp": 1784617200000
     },
     {
+      "title": "US FDA approves Sanofi's wearable injector form of blood cancer drug",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOZnF5Sl9QS0o0Y0ZZS2dyWXRqR29fdlRMQldNV0p5TVBSc2VZaU95R0xZSVF0d1NLanRCRjdvNjFvbzkwS09sSDFQOFJ5NDIwQWd3ekZINTJMY1hBTEd2OVlZMnNSSEdFZkpfTHFUODk4Umlaazk3Q2M4bnptbHZpR2VJeTRvNV9ESmJkcUYzRE9tMWlfMVZRREs1MHUzNG1lNFU2a05sazN6RGRvS1BicG11bWVSVjhlVmo2Um5HaE1hTTB2Sk1oMG1CcUk5RVJObmc?oc=5",
+      "source": "Reuters",
+      "date": "Jul 10",
+      "timestamp": 1783666800000
+    },
+    {
       "title": "FDA halts release of new drug rejection letters while working to formalize policy",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPNG9CRmF2VU1SVXFsU3c2T3E0S0swc0thMW1DWVhPSUJhYmxlWWhlcDZQOWt2aTIzN3lpR1pmcVNya0RCQlJuWHhKRGhHcXZMOVBDeWxDMUV5WGxCbEI1OGpyT3NGZTR6LWJKMjlDVmNqT1pFbWI2YnhRU1lPVUpuSGg2WjBYRzJjejFaNlV1d080cHBrOERKT3BaVVBCanRSOHBWNlBSQkZ1VFp6SU9ubnNfRQ?oc=5",
-      "source": "Fierce Biotech",
+      "source": "fiercebiotech.com",
       "date": "Jul 8",
       "timestamp": 1783494000000
     },
@@ -53,7 +60,7 @@
     {
       "title": "Opinion: The FDA must put biotech at its center or continue to cede early research to China",
       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQN3dHUDJiSjNQMDJmanI3dzFZV3lJUDd5emNYTy1vTGh1SDVkQlpDekJSanZlS0ZkTHUzSUdObUYwdGk1dzZucFdWNGVkeGVDZmxYNVV2azBfNFFmQ2xFMG5TdlU3VDdhN1B1ZWZuNnpCNEZOem9FVWFmTzBheG5pRGdnWW0tZXkzUmt2cEpHbzE4M0VqVzVjNmkzU19pOW1CRXBKWnQwbzNJMGFhWk5DUUJBZUpLbUpyeWRB?oc=5",
-      "source": "biospace.com",
+      "source": "BioSpace",
       "date": "Jul 6",
       "timestamp": 1783321200000
     },
@@ -91,13 +98,6 @@
       "source": "Upstox",
       "date": "Jun 2",
       "timestamp": 1780383600000
-    },
-    {
-      "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
-      "source": "The New York Times",
-      "date": "May 31",
-      "timestamp": 1780210800000
     },
     {
       "title": "Pharmalittle: U.S. pressuring Germany on drug prices | STAT",
@@ -158,7 +158,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "think.ing.com",
+      "source": "ING Think",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -242,7 +242,7 @@
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
-      "source": "Fierce Biotech",
+      "source": "fiercebiotech.com",
       "date": "Jun 16",
       "timestamp": 1750057200000
     },
@@ -254,16 +254,16 @@
       "timestamp": 1748502000000
     },
     {
-      "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNSkYzYkhXNjZXWnUtZ3hDcDdYc1B2QUxTNHZzUGtZQlhsSWVyYTFHVDRGU2l4RldlQVVVU01DVFktSFRybXVEczJldU5ZWjN1QnJ5NjM0bXNHZk1UVXZjajVlX19XQzdUM1BILWZpVXozdV96eGdhVktvNTFtaXl6ZWYyU1ZXelAtV3JVeS1jX3F5M291V0x4b2RLazlMU1RJeFplS1RCSC1iTE01SVpad0pNZ1JXYWI1MG5jaVpXNmxEc2JycWt2U0VlTU1neWNiMGxiZzhB?oc=5",
-      "source": "Reuters",
+      "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
+      "source": "Chemical & Engineering News",
       "date": "May 14",
       "timestamp": 1747206000000
     },
     {
-      "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
-      "source": "Chemical & Engineering News",
+      "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNSkYzYkhXNjZXWnUtZ3hDcDdYc1B2QUxTNHZzUGtZQlhsSWVyYTFHVDRGU2l4RldlQVVVU01DVFktSFRybXVEczJldU5ZWjN1QnJ5NjM0bXNHZk1UVXZjajVlX19XQzdUM1BILWZpVXozdV96eGdhVktvNTFtaXl6ZWYyU1ZXelAtV3JVeS1jX3F5M291V0x4b2RLazlMU1RJeFplS1RCSC1iTE01SVpad0pNZ1JXYWI1MG5jaVpXNmxEc2JycWt2U0VlTU1neWNiMGxiZzhB?oc=5",
+      "source": "Reuters",
       "date": "May 14",
       "timestamp": 1747206000000
     },
