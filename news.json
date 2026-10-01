@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T05:02:44Z",
+  "updated": "2026-10-01T12:45:56Z",
   "items": [
     {
       "title": "Orexo resubmits US approval application for opioid overdose drug",
@@ -44,6 +44,13 @@
       "timestamp": 1784703600000
     },
     {
+      "title": "FDA Faces Staffing Crisis Threatening U.S. Drug Innovation",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAxUkotMERtUlBNU3ltOXNxb05LVWhfVzdrS0hWRHdjVDlrZThpampraTI4cUcyREt1ajF3dXlzdGlCUnNKNXdobHpxcGd5cTNWN3ktMGRWSk1iTFFNSTlGM0pNVGVCaDZLd1VVSHk2OXc2aUFreWFKcA?oc=5",
+      "source": "Legis1",
+      "date": "Jul 21",
+      "timestamp": 1784617200000
+    },
+    {
       "title": "US FDA approves Sanofi's wearable injector form of blood cancer drug",
       "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOZnF5Sl9QS0o0Y0ZZS2dyWXRqR29fdlRMQldNV0p5TVBSc2VZaU95R0xZSVF0d1NLanRCRjdvNjFvbzkwS09sSDFQOFJ5NDIwQWd3ekZINTJMY1hBTEd2OVlZMnNSSEdFZkpfTHFUODk4Umlaazk3Q2M4bnptbHZpR2VJeTRvNV9ESmJkcUYzRE9tMWlfMVZRREs1MHUzNG1lNFU2a05sazN6RGRvS1BicG11bWVSVjhlVmo2Um5HaE1hTTB2Sk1oMG1CcUk5RVJObmc?oc=5",
       "source": "Reuters",
@@ -63,13 +70,6 @@
       "source": "Fierce Pharma",
       "date": "Jul 7",
       "timestamp": 1783407600000
-    },
-    {
-      "title": "Opinion: The FDA must put biotech at its center or continue to cede early research to China",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQN3dHUDJiSjNQMDJmanI3dzFZV3lJUDd5emNYTy1vTGh1SDVkQlpDekJSanZlS0ZkTHUzSUdObUYwdGk1dzZucFdWNGVkeGVDZmxYNVV2azBfNFFmQ2xFMG5TdlU3VDdhN1B1ZWZuNnpCNEZOem9FVWFmTzBheG5pRGdnWW0tZXkzUmt2cEpHbzE4M0VqVzVjNmkzU19pOW1CRXBKWnQwbzNJMGFhWk5DUUJBZUpLbUpyeWRB?oc=5",
-      "source": "BioSpace",
-      "date": "Jul 6",
-      "timestamp": 1783321200000
     },
     {
       "title": "Pharma and biotech innovation and competition in 2026: Five areas to watch",
@@ -130,7 +130,7 @@
     {
       "title": "StockWatch: Price War Dampens Lilly Surge After Oral GLP-1 Wins FDA Nod",
       "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQSjdObDI5U05Edkp6OHFBVW9UaXRqUkZ2aG1kS1VlZnpwLVBnWVdqYnlxVDdNQTVualVkOUpJNm1oUUpxNHRUYVZaQ3FzRWpNNVNWNDFnTEpxOE9fMzA3UlQyVVBuVmExUUVwTnJZRzc5b1hLWHhac2h0TnBqNmp0NXpSbzNKZ1dxOHpXeXg3ZXRjM1FJUEx5REVDbWtZai0tdnlxeThPaXI3S2hGdk1md2JuZi1uSW5TUnVONGFYZU4tek84YTlJ?oc=5",
-      "source": "genengnews.com",
+      "source": "Genetic Engineering and Biotechnology News",
       "date": "Apr 5",
       "timestamp": 1775372400000
     },
@@ -186,7 +186,7 @@
     {
       "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSUt6TjhqalJoV0RyTGFjdVoyaUdFQ3VFbHlVNXBpQ2lPMXdmU2pXbGxSTWtmY0otM0dTZktkS3pXVXk2Y2RYTnAtOUJJTDlzRkFwOXlkaDNMTS1lYm4wMXNZbGpuYWhTUFZHUlF2clJHU2tLaVQ3WXFDQ1E5WFJBR2hiY3dPNUFQbURaZjNJOGlUU3lSTGZHUkxJOGtBaUJnTW9SZ3JtMXN2bUdMY3psLU15dzBMX2ZR?oc=5",
-      "source": "mckinsey.com",
+      "source": "McKinsey & Company",
       "date": "Jan 7",
       "timestamp": 1767772800000
     },
@@ -240,23 +240,23 @@
       "timestamp": 1758783600000
     },
     {
-      "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
-      "source": "STAT",
-      "date": "Sep 23",
-      "timestamp": 1758610800000
-    },
-    {
-      "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNSkYzYkhXNjZXWnUtZ3hDcDdYc1B2QUxTNHZzUGtZQlhsSWVyYTFHVDRGU2l4RldlQVVVU01DVFktSFRybXVEczJldU5ZWjN1QnJ5NjM0bXNHZk1UVXZjajVlX19XQzdUM1BILWZpVXozdV96eGdhVktvNTFtaXl6ZWYyU1ZXelAtV3JVeS1jX3F5M291V0x4b2RLazlMU1RJeFplS1RCSC1iTE01SVpad0pNZ1JXYWI1MG5jaVpXNmxEc2JycWt2U0VlTU1neWNiMGxiZzhB?oc=5",
-      "source": "Reuters",
-      "date": "May 14",
-      "timestamp": 1747206000000
+      "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
+      "source": "Fierce Biotech",
+      "date": "Jun 16",
+      "timestamp": 1750057200000
     },
     {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
       "source": "Chemical & Engineering News",
+      "date": "May 14",
+      "timestamp": 1747206000000
+    },
+    {
+      "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNSkYzYkhXNjZXWnUtZ3hDcDdYc1B2QUxTNHZzUGtZQlhsSWVyYTFHVDRGU2l4RldlQVVVU01DVFktSFRybXVEczJldU5ZWjN1QnJ5NjM0bXNHZk1UVXZjajVlX19XQzdUM1BILWZpVXozdV96eGdhVktvNTFtaXl6ZWYyU1ZXelAtV3JVeS1jX3F5M291V0x4b2RLazlMU1RJeFplS1RCSC1iTE01SVpad0pNZ1JXYWI1MG5jaVpXNmxEc2JycWt2U0VlTU1neWNiMGxiZzhB?oc=5",
+      "source": "Reuters",
       "date": "May 14",
       "timestamp": 1747206000000
     },
