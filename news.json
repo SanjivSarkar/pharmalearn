@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30T22:01:41Z",
+  "updated": "2026-10-01T05:02:44Z",
   "items": [
     {
       "title": "Orexo resubmits US approval application for opioid overdose drug",
@@ -42,13 +42,6 @@
       "source": "Reuters",
       "date": "Jul 22",
       "timestamp": 1784703600000
-    },
-    {
-      "title": "FDA Faces Staffing Crisis Threatening U.S. Drug Innovation",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAxUkotMERtUlBNU3ltOXNxb05LVWhfVzdrS0hWRHdjVDlrZThpampraTI4cUcyREt1ajF3dXlzdGlCUnNKNXdobHpxcGd5cTNWN3ktMGRWSk1iTFFNSTlGM0pNVGVCaDZLd1VVSHk2OXc2aUFreWFKcA?oc=5",
-      "source": "Legis1",
-      "date": "Jul 21",
-      "timestamp": 1784617200000
     },
     {
       "title": "US FDA approves Sanofi's wearable injector form of blood cancer drug",
@@ -102,7 +95,7 @@
     {
       "title": "The Pharma Choke Point",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
-      "source": "cfr.org",
+      "source": "Council on Foreign Relations (CFR)",
       "date": "Jun 3",
       "timestamp": 1780470000000
     },
@@ -137,7 +130,7 @@
     {
       "title": "StockWatch: Price War Dampens Lilly Surge After Oral GLP-1 Wins FDA Nod",
       "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQSjdObDI5U05Edkp6OHFBVW9UaXRqUkZ2aG1kS1VlZnpwLVBnWVdqYnlxVDdNQTVualVkOUpJNm1oUUpxNHRUYVZaQ3FzRWpNNVNWNDFnTEpxOE9fMzA3UlQyVVBuVmExUUVwTnJZRzc5b1hLWHhac2h0TnBqNmp0NXpSbzNKZ1dxOHpXeXg3ZXRjM1FJUEx5REVDbWtZai0tdnlxeThPaXI3S2hGdk1md2JuZi1uSW5TUnVONGFYZU4tek84YTlJ?oc=5",
-      "source": "Genetic Engineering and Biotechnology News",
+      "source": "genengnews.com",
       "date": "Apr 5",
       "timestamp": 1775372400000
     },
@@ -193,7 +186,7 @@
     {
       "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSUt6TjhqalJoV0RyTGFjdVoyaUdFQ3VFbHlVNXBpQ2lPMXdmU2pXbGxSTWtmY0otM0dTZktkS3pXVXk2Y2RYTnAtOUJJTDlzRkFwOXlkaDNMTS1lYm4wMXNZbGpuYWhTUFZHUlF2clJHU2tLaVQ3WXFDQ1E5WFJBR2hiY3dPNUFQbURaZjNJOGlUU3lSTGZHUkxJOGtBaUJnTW9SZ3JtMXN2bUdMY3psLU15dzBMX2ZR?oc=5",
-      "source": "McKinsey & Company",
+      "source": "mckinsey.com",
       "date": "Jan 7",
       "timestamp": 1767772800000
     },
@@ -266,6 +259,13 @@
       "source": "Chemical & Engineering News",
       "date": "May 14",
       "timestamp": 1747206000000
+    },
+    {
+      "title": "Trump health policy uncertainty sends biotech sector into deeper slump",
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPdkZscVRwM2VnS242MHI5SGJ2aEt2UldTTlRiOW8xdkMtd3F6eXcwbExlVTlueVdkVUZ0OVc1dUtycW8wMkwxaW5ZeDhoS3JjNlRWZlNmUnlTYTRuR1ZCR05hZHZ5cGtqWUdueExnaFFQS2lUX1FYZXc3cHQ5MXgyOUd0TWJDT0ZYbGhwRlgyS0RBbkVvbmZwdnJHdW94Q25fcDJGNWh0c2dvbEpwWjNpYklyZVpqT056dHpFNldmMWhDSzdpQUJURktUN2l1YVpHR2pxUV9vOEVlUQ?oc=5",
+      "source": "Reuters",
+      "date": "Apr 14",
+      "timestamp": 1744614000000
     },
     {
       "title": "2024 drug approvals: Small companies loom large with several key FDA nods",
