@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02T21:59:03Z",
+  "updated": "2026-10-03T04:35:10Z",
   "items": [
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
@@ -77,6 +77,13 @@
       "source": "Pharmaceutical Commerce",
       "date": "Jun 30",
       "timestamp": 1782802800000
+    },
+    {
+      "title": "Concord Biotech shares jump 6% on receiving US FDA approval for its latest arthritis drug",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNclEzVkcwTndiLUNzOGJQYnlMeWRWRlFtUV9aODBBRW9tVHMwYkQxSzFxRTRhU3VpMDlUNHZxbWNfUU1yMjJHWExsYmF4TTBUQW41cFBYeHMtZzFSR1M5TGU2bDR2LVRnLTdURmoyQ0x3VXJCM3RHYzBzMlpnLXBpeGxkdlpXWVBPYXhna2p0LVZrT1RPbDhQYVprdDhqdFhHVDNvbVlMTU5zM2dsNEJYcmRWSjdEelI4NzR4U3dVOFA4V25uSno0RHh4Z0FDSGM2Yk5KRU1HR2tnUUFEd3JhdA?oc=5",
+      "source": "Upstox",
+      "date": "Jun 10",
+      "timestamp": 1781074800000
     },
     {
       "title": "The Pharma Choke Point",
@@ -158,7 +165,7 @@
     {
       "title": "Hello, Goodbye: Europe loses ground as China becomes powerhouse of innovation",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPbUREeHJtMVotT0dwaFpPX0ViZk1mamxTWUVYZ2NsWGd3N3Fhb1YzcGx6N1VLZ3FBeV9RTmMtVkxKQTVDZWhBTlpHMm52YnBvempjcmNHWUw4ejhjYmtyY0tXLWR6VXA3dDlFV1hvaXdFQkFnUzYzLTctbXRIUUxoV1YxSy1fLW1oTVE4ZUh1RHR3Sm1I?oc=5",
-      "source": "ing think",
+      "source": "think.ing.com",
       "date": "Jan 20",
       "timestamp": 1768896000000
     },
@@ -168,13 +175,6 @@
       "source": "Reuters",
       "date": "Jan 13",
       "timestamp": 1768291200000
-    },
-    {
-      "title": "The top 10 biopharma M&A deals of 2025",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBrbFY5MjJEV015dFlNOUhfUlVocG9WVmdZOThJTE5oLU0wX3lFUjdhckFMelItb05jV3JGeTBhUmlsYWE2LWZCWk5kbmF0T29BemEwZ3M3UjRxU0NWVmRsaDdvWnFOeWtKMHhoUTRWbWw1NnpT?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 12",
-      "timestamp": 1768204800000
     },
     {
       "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
@@ -233,13 +233,6 @@
       "timestamp": 1758783600000
     },
     {
-      "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
-      "source": "STAT",
-      "date": "Sep 23",
-      "timestamp": 1758610800000
-    },
-    {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZHBPeGhwU3hHeXJ6dHpHTDF5YW9OeDV6U2ZBME94c1JhRVh2VzF6QUxvRUlUSDhEekNTUkVCaVVoQ2tKUlF6dlNkZ1ZuVXBGN3ZkN211ZTJnNkxBUVMxa1g2RTZnYk5xeVRLR1g5RkVLQ25PLVlqUDhNR05DUml0RE1USHU5ZzQxUnA4NnZVNzZ2dWZKWnBZMlV4REpicEdjeXliaTFnOFFZcjBqQ3IyeHdza1paUQ?oc=5",
       "source": "Fierce Biotech",
@@ -247,16 +240,16 @@
       "timestamp": 1750057200000
     },
     {
-      "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNSkYzYkhXNjZXWnUtZ3hDcDdYc1B2QUxTNHZzUGtZQlhsSWVyYTFHVDRGU2l4RldlQVVVU01DVFktSFRybXVEczJldU5ZWjN1QnJ5NjM0bXNHZk1UVXZjajVlX19XQzdUM1BILWZpVXozdV96eGdhVktvNTFtaXl6ZWYyU1ZXelAtV3JVeS1jX3F5M291V0x4b2RLazlMU1RJeFplS1RCSC1iTE01SVpad0pNZ1JXYWI1MG5jaVpXNmxEc2JycWt2U0VlTU1neWNiMGxiZzhB?oc=5",
-      "source": "Reuters",
+      "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
+      "source": "Chemical & Engineering News",
       "date": "May 14",
       "timestamp": 1747206000000
     },
     {
-      "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
-      "source": "Chemical & Engineering News",
+      "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNSkYzYkhXNjZXWnUtZ3hDcDdYc1B2QUxTNHZzUGtZQlhsSWVyYTFHVDRGU2l4RldlQVVVU01DVFktSFRybXVEczJldU5ZWjN1QnJ5NjM0bXNHZk1UVXZjajVlX19XQzdUM1BILWZpVXozdV96eGdhVktvNTFtaXl6ZWYyU1ZXelAtV3JVeS1jX3F5M291V0x4b2RLazlMU1RJeFplS1RCSC1iTE01SVpad0pNZ1JXYWI1MG5jaVpXNmxEc2JycWt2U0VlTU1neWNiMGxiZzhB?oc=5",
+      "source": "Reuters",
       "date": "May 14",
       "timestamp": 1747206000000
     },
@@ -280,6 +273,13 @@
       "source": "Reuters",
       "date": "Jan 2",
       "timestamp": 1704182400000
+    },
+    {
+      "title": "2022 drug approvals: After Aduhelm fiasco, FDA endorsements drop to 37",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPTEVKc2c4YjF6YnJtXzB0YlBGdUxlV3NUTUQ0MU5rUjVJUXBkeG1ENTJPVmZrU0ZGdDNSVWdodnpvSnV0S0VvYmc0bkhYWGVKU2xjSWV3cXJlQkdaRUlsWVJ2eU5UZG1jQ0lxaVRheUs5UHllc1VtTFFxT2E5T192ZG5uekNOeWY1OFJROTdEWVp5QW96eWgzNjlyWXZJb0hVbzRZenFxVnVVdzBmZ3ZOWk1Jbk94RTV4OGpv?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 3",
+      "timestamp": 1672732800000
     }
   ]
 }
