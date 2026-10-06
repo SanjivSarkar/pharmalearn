@@ -1,13 +1,6 @@
 {
-  "updated": "2026-10-05T23:53:21Z",
+  "updated": "2026-10-06T05:39:07Z",
   "items": [
-    {
-      "title": "Elevar wins FDA nod for bile duct cancer drug Lyrfigtu, a first for a Korean firm",
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNNG9ZNWFUakhnNTJTQmhsMkM5Y1lDWkJLNTdvNXhpVXpLOTMtVWwteWdSbzhLWTlzcGZyOGU5OXlaM3ZUMEJBRkoyWWduZF9tMlBIS3JLeFV0cHFXajlIY1RrU2p5cHRsdHRJcU9fZEh2bFZFYTczY2lGeFVzR1RRN2JXVEY4S3JqSzV0SEFVOWJraGJxTTgwLXBCODQ2OU5IWTd3SGZRWEptMW8?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Sep 24",
-      "timestamp": 1790233200000
-    },
     {
       "title": "FDA takes applications for new program to shorten drug approval times",
       "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNdTF1UHNaSGI2QzhrazBucXk2cGVyQV9DX1R3NzNpM2REZl9zY1FuR0ZzdkhTVmxMYjFzdmFsV19GNDVmb2k0SURhQmdQS0pLOTJ5YTlHTHQzMWpwNmttODlFT09PVXdlT0dDS1AwYVQyR05wTEtkZ2x1QklkX2RETy1RVmtFSHU4eXRjMEdpa1JDdw?oc=5",
@@ -88,7 +81,7 @@
     {
       "title": "Seven Companies Selected for FDA Pilot to Strengthen US Drug Supply Chain",
       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQSGJxaEFHZmYyZDY4QWNOMlV4Si15Zm5CRXMtNkNzV2JfVmlhdXdCVW00RVBHNTRlRHRoSjZuRnRUMVFpUWZuekN2NzlmYjJMOFViMmM1WEF4N3QwUEwwd1RrcG9XLUl1cXZ2TTRrWGR6S0Y1ZlRoekU0bUNHcVQtdFNlVy1tOXVicXFDcThpUWhYSTF6cGxKQnFjVUdBa1pIdmc3XzNaUGhwdFA5ck5pSV9PeURpcU5G?oc=5",
-      "source": "pharmaceuticalcommerce.com",
+      "source": "Pharmaceutical Commerce",
       "date": "Jun 30",
       "timestamp": 1782802800000
     },
@@ -212,18 +205,25 @@
       "timestamp": 1761721200000
     },
     {
-      "title": "Crinetics wins FDA approval for acromegaly drug, faces competition with Novartis and Ipsen",
-      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYlZPaTVLYmx4LTBGUDhVbm80RTVqMS05Q3RQTXhxckhuWEEyNDluZzRUaHpiR0gyWUUwTTFMbXpJWEtvN2hjcV9hSkpFY3EtOVc2R0V0aGhQVGpMU1VkZWF3TVJpd05hWjdablVnaXMzb0o5bXZKdGRDQmFDbUFsZVJLbjhkVGVldmI4Vm5WcDhreENtNzBPUmJYLWk2RDJPMHFGR3YtQmo?oc=5",
-      "source": "STAT",
-      "date": "Sep 25",
-      "timestamp": 1758783600000
-    },
-    {
       "title": "Scholar Rock SMA drug rejected due to problems at contract manufacturing site",
       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNFNJcDA0VEtfcmU0SGdMblhCUDNyQzhnWF9HVGtIQzJqdGVSbkJvYVVJeVVYblE4Rjhoc0I3cXdrZkgwU18zQ1VxTk1YS0R3NW5pa0sxSFRYVlVsT2VDR21zSElPRmVscktyWFh3MUhYZjNRNkxDVkE4UzBpUU0wVmF0b3p3QzZRYkR4dGtZZ3VFQUJXVmRuWUJuLXZVX2xZSmlTVUFJR2otQQ?oc=5",
       "source": "STAT",
       "date": "Sep 23",
       "timestamp": 1758610800000
+    },
+    {
+      "title": "Jazz's Modeyso becomes first FDA-approved drug for type of aggressive brain cancer",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQYkJzbE1HalpDVHJoMmIzbkNVMG9ISWstT3QwanZYbGV3WG5sVnZ3YVlybVAxTmtCTUw5aWViWkNLRTcwZFVuS0w2dVBXUWZUSzdGN1Z4a3VNbTR1T2tnVWZfREttVG1lQXRqLURlQ1ZXQXBZMHJJaDk1RUtTZDE2ak9BOERZblFpX0k1TVJld25pWTExSmo5YWlBUTdHdkdjajJIN19RM2Vac3NmakRF?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Aug 6",
+      "timestamp": 1754463600000
+    },
+    {
+      "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 11",
+      "timestamp": 1752217200000
     },
     {
       "title": "China proposes shorter clinical trial reviews in efforts to accelerate drug development",
@@ -242,7 +242,7 @@
     {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
-      "source": "Chemical & Engineering News",
+      "source": "cen.acs.org",
       "date": "May 14",
       "timestamp": 1747206000000
     },
