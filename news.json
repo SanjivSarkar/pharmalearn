@@ -1,19 +1,19 @@
 {
-  "updated": "2026-10-22T16:53:11Z",
+  "updated": "2026-10-22T21:20:20Z",
   "items": [
-    {
-      "title": "As Politicians Argue About China, US Patients Find Cutting-Edge Treatment There",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPVWxxQVVxN3R0RjlRTXEzemRWOTktYmQ1Rm13X05WVzk2a2FCSzgxTEFTLTN4VjZIX201b19LYnhtQ0RpX04yVC03dEx5V0VyNnJiT0RYRGJsSzFyN2Y4UElwU3J1Q29hRVpZdTF6bjdRd3BpcGNJekdBSmZuS3hLekwyTVVrYTZDcFc5Q2toaWxsek11VFdLT0twbFdHTTRCYTh3M3doNmdBa2JvS1drSjVMYW9wTWJ3QVZWZG4zNA?oc=5",
-      "source": "KFF Health News",
-      "date": "Oct 20",
-      "timestamp": 1792486897000
-    },
     {
       "title": "Elevar wins FDA nod for bile duct cancer drug Lyrfigtu, a first for a Korean firm",
       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNNG9ZNWFUakhnNTJTQmhsMkM5Y1lDWkJLNTdvNXhpVXpLOTMtVWwteWdSbzhLWTlzcGZyOGU5OXlaM3ZUMEJBRkoyWWduZF9tMlBIS3JLeFV0cHFXajlIY1RrU2p5cHRsdHRJcU9fZEh2bFZFYTczY2lGeFVzR1RRN2JXVEY4S3JqSzV0SEFVOWJraGJxTTgwLXBCODQ2OU5IWTd3SGZRWEptMW8?oc=5",
       "source": "Fierce Pharma",
       "date": "Sep 24",
       "timestamp": 1790233200000
+    },
+    {
+      "title": "FDA takes applications for new program to shorten drug approval times",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNdTF1UHNaSGI2QzhrazBucXk2cGVyQV9DX1R3NzNpM2REZl9zY1FuR0ZzdkhTVmxMYjFzdmFsV19GNDVmb2k0SURhQmdQS0pLOTJ5YTlHTHQzMWpwNmttODlFT09PVXdlT0dDS1AwYVQyR05wTEtkZ2x1QklkX2RETy1RVmtFSHU4eXRjMEdpa1JDdw?oc=5",
+      "source": "STAT",
+      "date": "Sep 15",
+      "timestamp": 1789455600000
     },
     {
       "title": "5 Best Biotech Stocks for 2026 and How to Invest",
@@ -240,13 +240,6 @@
       "timestamp": 1747206000000
     },
     {
-      "title": "How to stop the shift of drug discovery from the U.S. to China",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQLW4wcjk0X2EyMGZSZ2NzcmoyamxHVGhQS0VCeGVDMmVQTlhrRllsajRrSTV3ek1hczluTnk5Vmk0OVBaZzlVM3pDdi1WM2RsdTc2alo2NG1yeEFtaWNMbEVYZXFya05VakRSc1BEWlYwUFk5a0otMlZCcWNLd05BbHRqdWlJYzRsenlFajdLQ1hUWkZNRXZNUl9VUHNWNUk?oc=5",
-      "source": "STAT",
-      "date": "May 6",
-      "timestamp": 1746514800000
-    },
-    {
       "title": "Strategically De-Risking U.S. Drug Supply Chains",
       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPTmZwT3loZjBNOHZBWmZRMkl0TTdkSFN3bjd6NzA2T052OWpXU1NOTGlJb1RkMlBHWlhUaHVYbG52R1dxUWJaSkcxVlFfODhDb0hyMDVIZ3hnRGFVOWJWQmpraDlWWkxvQkdydmlvQkdFYTMyczduSG1WRXFYRXk4Wk5xcTM0ZHcyb1Fsc3V4LVBMWUVkZkRFQ3N1bWo?oc=5",
       "source": "RAND",
@@ -259,6 +252,13 @@
       "source": "Reuters",
       "date": "Apr 14",
       "timestamp": 1744614000000
+    },
+    {
+      "title": "50 new drugs received FDA approval in 2024",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1iWm54LWx2SHZhSFphZmgwV1FXSlBJMmI0elg3ZUZGdXFSMU93NVpvbkRXNXFOU3NMNURmWE5hWGlBbzhrWHExbjZlOVBQOUhmeGpyeFRnbVdPUUNwZ0pqQnVFcUx2SnhEVFBWNWJhd3psbU8wbXFn?oc=5",
+      "source": "Chemical & Engineering News",
+      "date": "Jan 23",
+      "timestamp": 1737619200000
     },
     {
       "title": "2024 drug approvals: Small companies loom large with several key FDA nods",
