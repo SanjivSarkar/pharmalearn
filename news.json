@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T16:44:56Z",
+  "updated": "2026-10-23T21:11:10Z",
   "items": [
     {
       "title": "As Politicians Argue About China, US Patients Find Cutting-Edge Treatment There",
@@ -56,6 +56,13 @@
       "source": "Fierce Pharma",
       "date": "Aug 26",
       "timestamp": 1787727600000
+    },
+    {
+      "title": "Novo Nordisk FDA Setback Creates Opportunity for Korean CDMOs",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9sMzdGMmJrd21pcURKbzZQV2V1SzhWa2NVMEE4d2JONGFZT3ZVS0xrdXh0bHZCMDczRkhSMzl4Z0F0ek0zaVROa0M3YWN3Wm0waWhUQjNMLXVINGZ6N0RYa2NVR3BPbk0wWWZrSWVRQlpLbzFw?oc=5",
+      "source": "Businesskorea",
+      "date": "Aug 13",
+      "timestamp": 1786604400000
     },
     {
       "title": "US FDA approves Replimune's skin cancer drug after prior rejections",
@@ -226,18 +233,18 @@
       "timestamp": 1761721200000
     },
     {
+      "title": "Crinetics wins FDA approval for acromegaly drug, faces competition with Novartis and Ipsen",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPYlZPaTVLYmx4LTBGUDhVbm80RTVqMS05Q3RQTXhxckhuWEEyNDluZzRUaHpiR0gyWUUwTTFMbXpJWEtvN2hjcV9hSkpFY3EtOVc2R0V0aGhQVGpMU1VkZWF3TVJpd05hWjdablVnaXMzb0o5bXZKdGRDQmFDbUFsZVJLbjhkVGVldmI4Vm5WcDhreENtNzBPUmJYLWk2RDJPMHFGR3YtQmo?oc=5",
+      "source": "STAT",
+      "date": "Sep 25",
+      "timestamp": 1758783600000
+    },
+    {
       "title": "U.S. pressures U.K. as pharma pauses investments there",
       "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOTldWRm0wdXBPajZ0Tjd1c2sxcGxVak42Q1RkM2lfbjJueW1reFRMMUEwY2Y3VU1NWUhyUi0za0JnVzl5cUc4YlVCc3hkRTNBR3Eta09HS0ZlMS1Ra3ZncFdoYVN3akhLUTJzN1ZyNEt6WGE5XzJjS0Fxd2RWaUs5MWZWQ2JJUQ?oc=5",
       "source": "STAT",
       "date": "Sep 15",
       "timestamp": 1757919600000
-    },
-    {
-      "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
-      "source": "Chemical & Engineering News",
-      "date": "May 14",
-      "timestamp": 1747206000000
     },
     {
       "title": "Upheaval at FDA pushes some biotech firms to move early trials out of US",
@@ -247,11 +254,11 @@
       "timestamp": 1747206000000
     },
     {
-      "title": "How to stop the shift of drug discovery from the U.S. to China",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQLW4wcjk0X2EyMGZSZ2NzcmoyamxHVGhQS0VCeGVDMmVQTlhrRllsajRrSTV3ek1hczluTnk5Vmk0OVBaZzlVM3pDdi1WM2RsdTc2alo2NG1yeEFtaWNMbEVYZXFya05VakRSc1BEWlYwUFk5a0otMlZCcWNLd05BbHRqdWlJYzRsenlFajdLQ1hUWkZNRXZNUl9VUHNWNUk?oc=5",
-      "source": "STAT",
-      "date": "May 6",
-      "timestamp": 1746514800000
+      "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPQk10dzR5WWMwNFBSel9YcTZaRklGLV8tOHRaWmExSjUydXBxLUM4MXNHVDA5NjlDaGR4WWNqU3g0LU1qLTdha0VmWE5NZWlSbWMzOHNIQi02XzRsUmg2ZFlqMnVvY1NZWUNqZ2NycklNMEQzYXlYa3Q0dXRDXzZOMHVRYkZjMVlWZmZDa0ZBM0Z3a21lTG1sRXZ4WGVDa0VVNGRVOQ?oc=5",
+      "source": "Chemical & Engineering News",
+      "date": "May 14",
+      "timestamp": 1747206000000
     },
     {
       "title": "Trump health policy uncertainty sends biotech sector into deeper slump",
@@ -259,13 +266,6 @@
       "source": "Reuters",
       "date": "Apr 14",
       "timestamp": 1744614000000
-    },
-    {
-      "title": "Ten first-in-class drugs on track for FDA approval in 2025",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9peG1RV2VXZmNLU0lYX3lBTERPdUc3Z0tFRnNkTmE1SXFsdkxxLUl2b080Sm5mV1ZHQnM4ZlNPTGRqVV9nWXhoOGpGdnlMZk50NllNeG9fV1RmSG9SbUpuMlQxUTdhZG9HUzhXTXRiRExMbGlWZ05ZQWRhNkVidw?oc=5",
-      "source": "Labiotech.eu",
-      "date": "Jan 18",
-      "timestamp": 1737187200000
     },
     {
       "title": "2024 drug approvals: Small companies loom large with several key FDA nods",
