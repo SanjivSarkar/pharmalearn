@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T22:34:53Z",
+  "updated": "2026-10-30T05:01:21Z",
   "items": [
     {
       "title": "China expands role in manufacturing new FDA-approved drugs",
@@ -100,18 +100,18 @@
       "timestamp": 1782802800000
     },
     {
+      "title": "The Pharma Choke Point",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBURUNMRkhJUERtaDV2MzBBWnJsUUNPVFpsZ0VPZnVwemdKNXBmdnQtWmhmUXZ6aUw2aGc0bkdhMzQ4TVNvWmlwdEFKaXJZdEF6am95MS1LdkpjMWMyWFdV?oc=5",
+      "source": "Council on Foreign Relations",
+      "date": "Jun 3",
+      "timestamp": 1780470000000
+    },
+    {
       "title": "Concord Biotech shares jump over 8% after US FDA approves latest Mycophenolate Mofetil drug",
       "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNZGkwU1ZZUjJPaW5Lai01cllOZ1lScmR2aV9sem9WaGNOQjNQTDdlYkZwVy1SeWh1UzRNbjZDRG5YS0JKQW10VHhFNlg5clE4R2FyMG8yTGMyeWkyckkzcWVSLXhCX1JaN2h3R2xFekNKeloyR3Y1TXdQek84QlFUcTQxOWctWVBmQ3daeGxPamc3eTFIaW81RElfZXhBOUdJeUE2aWNLeDJhR3RkN3FZV1VWcTFUMU5XTkRJaGRRNkhXdE9mcjFmSlF0Qnd6RkVuMmFzN0QwdnYxQjVCTGtVa2xZQ3puUQ?oc=5",
       "source": "Upstox",
       "date": "Jun 3",
       "timestamp": 1780458466000
-    },
-    {
-      "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
-      "source": "The New York Times",
-      "date": "May 31",
-      "timestamp": 1780210800000
     },
     {
       "title": "FDA to reconsider treatment for rare cancer after its surprise rejection",
@@ -156,13 +156,6 @@
       "timestamp": 1768291200000
     },
     {
-      "title": "The emerging epicenter: Asia\u2019s role in biopharma\u2019s future",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSUt6TjhqalJoV0RyTGFjdVoyaUdFQ3VFbHlVNXBpQ2lPMXdmU2pXbGxSTWtmY0otM0dTZktkS3pXVXk2Y2RYTnAtOUJJTDlzRkFwOXlkaDNMTS1lYm4wMXNZbGpuYWhTUFZHUlF2clJHU2tLaVQ3WXFDQ1E5WFJBR2hiY3dPNUFQbURaZjNJOGlUU3lSTGZHUkxJOGtBaUJnTW9SZ3JtMXN2bUdMY3psLU15dzBMX2ZR?oc=5",
-      "source": "McKinsey & Company",
-      "date": "Jan 7",
-      "timestamp": 1767772800000
-    },
-    {
       "title": "2025 drug approvals: Despite FDA tumult and macro uncertainty, biopharma scored with 55 new products",
       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBKQjVRa3Fjay05WEdjelFUYkNVdVQ5VFFPYk42eGRvLXpTOVJYdHJaTjY4RjE3VHlmOWM0SDV1QmZKNEJXTmg0YVd2eEptbllhaklWQy1vRWdwNC1aUmptb1BfdGZLUQ?oc=5",
       "source": "Fierce Pharma",
@@ -175,6 +168,13 @@
       "source": "Chosunbiz",
       "date": "Jan 4",
       "timestamp": 1767513600000
+    },
+    {
+      "title": "Regulatory tracker: FDA starts review of Sandoz's generic tirzepatide",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1HR2pJQXJsR0JMdGpBX2JINnZaLTk0S3JUd1dsWDVWTVp1WlpDSUs5ZFlzNC03ZTQySzJ4cTZOelRQM2JqUHJiUkxac3llMUE0Tlo0Mlk2ZmZqeXRVSEJ4aUg0TVlYRUFmT2pNVUhsVFQ3MURPelB0amtNNnZBUQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 2",
+      "timestamp": 1767365493000
     },
     {
       "title": "Cytokinetics heart drug wins FDA approval, the biotech\u2019s first",
@@ -277,7 +277,7 @@
     {
       "title": "C&EN\u2019s Year in Pharma 2022",
       "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBINTRVaFJBZjNLSzJVRTJSbF9zUXJGQXI3R0o3ZGxReDVMcGk2SEk1bFNiUnloN1VNZExaUWhzenBJQXFDTnZxWndQSnZacm5tYVE2elg5ZzhsWng3Q3RZMUQ2cUo1alptN2YzS2pEdFcyeEE?oc=5",
-      "source": "Chemical & Engineering News",
+      "source": "C&EN",
       "date": "Dec 2",
       "timestamp": 1669968000000
     }
