@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01T12:54:53Z",
+  "updated": "2026-11-01T21:50:54Z",
   "items": [
     {
       "title": "As Politicians Argue About China, US Patients Find Cutting-Edge Treatment There",
@@ -44,6 +44,13 @@
       "timestamp": 1789023600000
     },
     {
+      "title": "FDA approves AstraZeneca\u2019s Etcamah, opening ctDNA-guided treatment paradigm in breast cancer",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNbmw5TEpNWVZlU2ZrVlA2akR1ck50RHlnNzllRElpUGxQaC1NaTE5SUVjdjlnRlYxb2R1Y281MGRPNVJMZ2NIeVA0YXYtbVVaWDEwaXVFb2NnVGVnenVzX0hVV3FFVm5VS2M3aEVRUFhacnFBLXdhejZqTUFLbW9CRXE4c3lJNFZoNjVNQ3JQOExCSFI2RWJPelBLREU3WHJ3REJ2WFFtMy1hRjVQanFfUFJOMjRFVDJQOGNj?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Sep 8",
+      "timestamp": 1788850800000
+    },
+    {
       "title": "Takeda bolsters blood cancer portfolio with FDA nod for Mimrylo in polycythemia vera",
       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQamtWcVZqdlpmWHRQeThTUVVQUUdJTXVmOFE1OWUwc3BRME5xc2lIcGM5Y0M3a2E2SG40TS12WnZkV3ZpcVdUUG5JdjNSQzZISjlaNzRHcFYzRnVPRWtpVlV4dnI1SVE0N3NWUXpGSEZTZnh6TGY5M3VBTGRVbERBZlkzdWYyNWstOTRjQnk3cTBRNzJDdW10d1BhbFpSNWhvMEdEcmYzUkZ6aUZmc2p4NDRpQQ?oc=5",
       "source": "Fierce Pharma",
@@ -56,13 +63,6 @@
       "source": "STAT",
       "date": "Aug 27",
       "timestamp": 1787814000000
-    },
-    {
-      "title": "FDA greenlights Revolution Medicines' pancreatic cancer gamechanger",
-      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPLU1rdTRrckF0MHJVdm1QWElTOHNMRnNzLXdfWEtWRl9QZjZDUzE0OUdJQ0tJUy1qdnY3WDQtUml6enZfbG9rS21US3R6anlwY1N1dzdENXVsd3pBQzN2ZG4wclNsS0VEUVRwSmRUaHROUWdUMWpQX0s0eTJxMG9VN1g4Rlhubld0TFRMSnRXYVBsLUltLW9na2ZlaHFLUkFrb2xIRw?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Aug 26",
-      "timestamp": 1787727600000
     },
     {
       "title": "US FDA approves Replimune's skin cancer drug after prior rejections",
@@ -121,13 +121,6 @@
       "timestamp": 1780470000000
     },
     {
-      "title": "Concord Biotech shares jump over 8% after US FDA approves latest Mycophenolate Mofetil drug",
-      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNZGkwU1ZZUjJPaW5Lai01cllOZ1lScmR2aV9sem9WaGNOQjNQTDdlYkZwVy1SeWh1UzRNbjZDRG5YS0JKQW10VHhFNlg5clE4R2FyMG8yTGMyeWkyckkzcWVSLXhCX1JaN2h3R2xFekNKeloyR3Y1TXdQek84QlFUcTQxOWctWVBmQ3daeGxPamc3eTFIaW81RElfZXhBOUdJeUE2aWNLeDJhR3RkN3FZV1VWcTFUMU5XTkRJaGRRNkhXdE9mcjFmSlF0Qnd6RkVuMmFzN0QwdnYxQjVCTGtVa2xZQ3puUQ?oc=5",
-      "source": "Upstox",
-      "date": "Jun 3",
-      "timestamp": 1780458466000
-    },
-    {
       "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
       "source": "The New York Times",
@@ -140,6 +133,13 @@
       "source": "STAT",
       "date": "May 7",
       "timestamp": 1778137200000
+    },
+    {
+      "title": "FDA lays out policy wish list, including new trial pathway and new enforcement powers",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNWTEycDFZVDVWY0lJZEtXWjBiSHMwblphd3hHZncxbWxWN0NyUlVucGFURGNkSWZZMUQtVE1xN0Z2eEEwQ0NRTDVIT2liOUQ4eldMN3VEcUFBckNWN18zOEktMjdLOUNTWTF4UWxpVjRZR3NYRW05WlJlQk9aMlloSnZfUkpPYnpQeEc1OTFBVFYyVUxvT3Q2ZXUzdFNGOEJnSFFjWXNsbE5JY0c4NnRwbEFHa1hnX0pQbGM0?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Apr 7",
+      "timestamp": 1775545200000
     },
     {
       "title": "What 3 recent FDA rejections reveal about shifts inside the agency",
