@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T12:41:58Z",
+  "updated": "2026-11-07T21:37:02Z",
   "items": [
     {
       "title": "IMGT Enrolls First U.S. Patient in Confirmatory Pancreatic Cancer Trial of Focused Ultrasound Therapy, Taking Aim at FDA Approval",
@@ -23,20 +23,6 @@
       "timestamp": 1793981809000
     },
     {
-      "title": "FDA Approves Amivantamab for Recurrent or Metastatic HNSCC",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNNi01T01WUml3MmdYMjVVYV9WRHhCWVZnc3ZuSGJmR280RDVQaV9pNjJtNzY0ODl6WldfVThhYVhrSWstT3lUZHdCUHRQM09KN1pnYUp3b01qSklwMk1iWUNRYnoxMC1Wek9QbWVrWS0zOE5nMWY1LTdqTmhRQ3lUcWpWMkhwYnFTMHYydzV6NUEzbDVyWWhxVnV3?oc=5",
-      "source": "Oncology Nursing News",
-      "date": "Nov 6",
-      "timestamp": 1793979980000
-    },
-    {
-      "title": "How industry fees became central to FDA drug reviews",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPYjZ6aS1QUFRPNTUxRlFYTlk2b0ZmM1k2TEZnNHhsbS1uZ1lfWFBkMzUxbTBBaDBBa0tLdENnYzg4ak1MNFY1ZUw1T0RQaDRyQW0xVlhuR01TZW1DcHlydEd5OEZic05rNWNCV3RwaVFxU1A1SlBuOUpSNHZfSnpRMjVWTUlEcFJtQ25fR0dJS0RFYVhHaGVEeQ?oc=5",
-      "source": "The Pharma Letter",
-      "date": "Nov 6",
-      "timestamp": 1793961298000
-    },
-    {
       "title": "Why being first matters in the US generic drug market",
       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPak96cGpxcFlsZXFHUVBxVFhBaHJsd3lQTmZwbHdMTlRud3lLMVh5THpodUxaLVE1aDVUdUhDNUdLMFJsRDNOWGN6cl9OUnllQk44WVVMUW9fZHZtS0VSd0tRaXI0Rk1JeE9EVndPeU1EM1V5MHRhZzZMaGVscGdPcFNEWGJ1MVJMOWtnbHpUcVBJVWh2TGh5UlNn?oc=5",
       "source": "The Pharma Letter",
@@ -56,6 +42,20 @@
       "source": "PRLog",
       "date": "Nov 4",
       "timestamp": 1793801122000
+    },
+    {
+      "title": "Accelerating Rare disease Cures (ARC) Program",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxORGpFTUctajRlZVM0OUE0T1BQakxXYVh2Q2N3ZHZhLUt4Z2F5Q3lPc1lvUi1RU3VoNGd4YTN0bVhMRG5TdXowSWh1dUxBUXE5aEhOdW5oVld2TU1ZN29ndW1VWnBuV2Z5bDZBVE8tRFNaMDduVUtGcnRfWThYQ2duX2Y0X3JQeG91VGFxaUZ1NFR0NmtNZnJ3b2loRFN3UUUtdC13XzBmQzBNS0lRUHNteVhtTl8?oc=5",
+      "source": "U.S. Food and Drug Administration (.gov)",
+      "date": "Oct 22",
+      "timestamp": 1792652400000
+    },
+    {
+      "title": "A German biotech has big ambitions in cancer. Now it needs to get a medicine approved",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOeXRwQndBUTlraEVSZk9CWHkzOXRadG84Vl9waHRQbEFJMlA1MlZhWXlLS1QwYkxuaUZRVGVreXRMaUFkWVp2NURNckZBT2hXSDUtQ1ctcG55dmVUanp4N2YwQnNQc3E4QmF4SzZjNW1aMFZMRE0xVmFOTlJqaUFpXzU0THpzekRJZGs3TlpiVlE?oc=5",
+      "source": "STAT",
+      "date": "Oct 21",
+      "timestamp": 1792566000000
     },
     {
       "title": "Accelerating and Modernizing Early and Late-Stage Clinical Development",
@@ -79,13 +79,6 @@
       "timestamp": 1788937200000
     },
     {
-      "title": "Opinion | This Is the Biggest Obstacle to New Cancer Cures",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQUDd3a2NFak1nS0piTC1TaFlSUnJiMHZBNVQ1QS01TmN5Y3NILVE1VDJXc2N0bTBNVTFKLXBLY0dHVFBfakJYWDB5Ui1WR2swTFlPUjVfZTRfdURRazNUZTFQR3lTUUFteHprV21NQ0ZCLUhSSnU2WjNtaU5ZejlZcHY2OA?oc=5",
-      "source": "The New York Times",
-      "date": "Sep 4",
-      "timestamp": 1788505200000
-    },
-    {
       "title": "Good Clinical Practices Are Not Optional",
       "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQTGctRVhzM1FnVmQ3emF6aGNqeUdLclpJNTBZSGpPajJYYWItZWhnSmktM3JsVUVMamxBVm5MQkstbmtXYUVITEZlVmNtb0dHYkNJYjdLYVZ5bUZCZ3JxMzRRcGo5aHFFU1luRE5Dekg5dzk3NDRhcmdGLTZId1lmY2NlUlBIZzZTUUhGTWI2OW1UeVBuV0ZDYnVXLWJiak1USUk2MFp0SGN0bHRxQms1enZpZnI3bVFDbzdZNXlUSEtvNlJETmFtdG1LZ1ZvRDZQWkVhVHlCbUs3RFU?oc=5",
       "source": "U.S. Food and Drug Administration (.gov)",
@@ -105,13 +98,6 @@
       "source": "STAT",
       "date": "Jul 2",
       "timestamp": 1782975600000
-    },
-    {
-      "title": "Regulatory tracker: J&J pushes Rybrevant beyond lung cancer with new subQ FDA nod",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPMUdpOFVId25Lek4tOXVDTnJnTW56cTNMUEdscXcyemZua1VIZ216alV5aUtRUllqUmFHcXFJRFZ3VHczcmU0dU4tM3lBTXlaSm5jQWloLU80V01ua1MxSkJuSGpfVndPUzVCUGNLTVV2OTYxMHNwbkNYODByVzBtaGNB?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jul 1",
-      "timestamp": 1782929731000
     },
     {
       "title": "10 clinical trials to watch in the second half of 2026",
@@ -324,6 +310,13 @@
       "timestamp": 1744182000000
     },
     {
+      "title": "Understanding the FDA Approval Process and PDUFA Dates",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPNUpDdTNtWFliVVNlcEhHcU9VVzd5NE8yblhiR1J1TVV6em5ZNFZhZkQteTA1T2txb0pKOGlGd1ZseTBydkhodDZ1dU5wN3FwWHlWMFd1QW1xSy05N1FaUXZGSGlBby1PSUZtUHB1bTBWRHFQdzZjSnVQQkgtNElyWGZJWTMwVGxtM2Ricktlbm1rMlk?oc=5",
+      "source": "Pharmacy Times",
+      "date": "Mar 20",
+      "timestamp": 1742454000000
+    },
+    {
       "title": "'I don't feel we lost momentum': Takeda\u2019s oncology execs sharpen focus after restructuring",
       "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxONzlqVDYxcnF0YXhjdkdnZHVVVGxna25EcTZsalpUbXJuMl9scXdwdVVJSlByMFRTM2lNekx4LXRWSTYyU0RzajFVdjloMmFSVGtXVXRxWWFkc0FsNU1zNG15OFZRN3gyakxpY0Y3bDJGYmd1NVl3UUhMbVBHbTk5eEFQZnVGcnhvRzNVMUhsbEM0MGZuSFRrZVFXM21DM3g0MXUzeFp1ZExRSFFaSG5qNlQtYV9GQlJKZDVmdFNHYnd3b0lr?oc=5",
       "source": "Fierce Biotech",
@@ -366,18 +359,18 @@
       "timestamp": 1727679600000
     },
     {
-      "title": "Chutes & Ladders\u2014Takeda taps internal leader as head of US oncology business",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOcWprM3RMOFl1N1QwQWxrVFh3bHA3QWl2eHIxRnpkUzFPbkQ1dW1vcWNTMHdURXpkRGd5dFNfaU1oVHpXOENuMWE1bjZvZGtHdC12TWF2TU9sRm4yUFd2c0ROdjR4Ync2OHhkS09rRzJzYnRpZnM1eHk5ZEFpS3MtV3BIUXdPN3JOU0hvSTdGbllrZnRVejA5bUdSV2xOY2ZFSmtZZFdkRGtiQQ?oc=5",
-      "source": "Fierce Biotech",
-      "date": "Aug 2",
-      "timestamp": 1722582000000
-    },
-    {
       "title": "Biotech faces a reckoning: 'We've lost our luster in cell therapies'",
       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNT0tmY2hBekZ5UGZaNGw2WVcxZmUyeGJudEdGN0hqQ20tcDlPUHFKQzdFVy1VdXJnWFZORE5Gci12WnlrNmxKZXdUYWZWQm1sUjZGRmk4WFI3SVltaFNRN1FnZ1JsVVBmM1dXVEYybFRfeWFHT3E1RlppSXkxTlRhazdhdUZVLThXdGt6NDg3WU1WTGwxNDFBeDg4OGhkZw?oc=5",
       "source": "Fierce Biotech",
       "date": "May 29",
       "timestamp": 1716966000000
+    },
+    {
+      "title": "13 Biotech Companies In Dallas To Know",
+      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE01WFhab1Q1UlJISXd3akJKU2hqczJQSTVsNHBQMmtQWVpNSkQ3M3hybXFKa0UzSDBlbVJ5Vl84T0k3dVZISkloM2l2T09Da18zNW9xSHY5ZVlaZUktNE5vRV9kdWU2Mmc?oc=5",
+      "source": "Built In",
+      "date": "Apr 8",
+      "timestamp": 1712604352000
     },
     {
       "title": "Drug Trials Snapshots: BRENZAVVY",
@@ -415,6 +408,13 @@
       "timestamp": 1700812800000
     },
     {
+      "title": "A cancer biotech\u2019s collapse gives Neurogene a path to Wall Street",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQMndFTGJwWVJjSWlDZ3NHakhKTWplc21rbVNlQkJEUk1wQjJjVEdOdEVSSU8yTm1ucUVOa3NyQjY4R18zVEpnSWlPSVdSVUFXNFZvZnRKYXItNHRhZnFiZlB5TFhIdHNWNlNXZTA3bS1OVzhrSGdYMHB2YUlUMlhhLWxfbkN3YTR2bWtya2ZocDJxVU1pYlJIMjVoVQ?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Jul 18",
+      "timestamp": 1689663600000
+    },
+    {
       "title": "Siren emerges from stealth with plans to marry gene therapy to cancer immunotherapy",
       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPMzNfOWlYMkQwYzNxTFl3R1EzMkpZVzFGQXFUYkpkTjdjWEFPNzdzMjY2YjUzXzRlRTl3YVBZWk1tWmZiaDNnNUxJbk1xVldQbEJ4U2dSZXB6elM4bGo4VE54dWZCVmRISllJOW9pd1JMZ2NIR0JiWmQzSGFZSFpZUFJMZzhaT0lodDRZVkpqZzl4N1Fr?oc=5",
       "source": "BioPharma Dive",
@@ -441,6 +441,13 @@
       "source": "UVA Today",
       "date": "Jan 20",
       "timestamp": 1674201600000
+    },
+    {
+      "title": "A biotech wins the first FDA drug approval in a rare type of eye cancer",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNQ3p2X0NSWGpwOVBPWDhoV2psb2FzWlZaTmxuM0dIaTJiSDM5cnlRRFVQSV9TWDdVZjRtei1WMFVJVWk2cmFoYlJ0NnIwTDZHNi1hME9fc20tYUM3VXFvMDZaTkNoZHhGbG40eGc1MzdjcW05Mm94N2Q2NFhWU0hPbHNWMXprbzhLa2FpVXFpb0U3Zw?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Jan 26",
+      "timestamp": 1643184000000
     },
     {
       "title": "Research and Development in the Pharmaceutical Industry",
