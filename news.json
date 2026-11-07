@@ -1,6 +1,13 @@
 {
-  "updated": "2026-11-06T22:52:59Z",
+  "updated": "2026-11-07T05:20:28Z",
   "items": [
+    {
+      "title": "New tumor cases show common gene therapy tool can come with risk",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQemtzMXZqNjVobTJidFVnT0k0aXBydHlpLWpiZnJKUnFYYWNtcm1kRDdqU19YNHdZZGdiMWV0SndxN2d1RHJQNVlMaUxCeU9NUVRPMUpMdlR6cWI3bDk0NVRSajZmbFNSdXF6OXdKdUJ1N0JqUC1CWEJreUVRbk1FM3EyRHpEQQ?oc=5",
+      "source": "STAT",
+      "date": "Nov 6",
+      "timestamp": 1793981809000
+    },
     {
       "title": "FDA Approves Amivantamab for Recurrent or Metastatic HNSCC",
       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNNi01T01WUml3MmdYMjVVYV9WRHhCWVZnc3ZuSGJmR280RDVQaV9pNjJtNzY0ODl6WldfVThhYVhrSWstT3lUZHdCUHRQM09KN1pnYUp3b01qSklwMk1iWUNRYnoxMC1Wek9QbWVrWS0zOE5nMWY1LTdqTmhRQ3lUcWpWMkhwYnFTMHYydzV6NUEzbDVyWWhxVnV3?oc=5",
@@ -184,13 +191,6 @@
       "timestamp": 1768291200000
     },
     {
-      "title": "Orca rides $250M funding wave toward cancer cell therapy launch",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPSzhIMDVxbHRlaWNEdDZYanBOZi1FRDZDblZDRW1FSE44cW82MXJlNFhmR2RyQ1NwN1RmMnROd0p1ZGFpckd5a0Z1a0pkWTExT2lJNUFNSlp6VU5PazZ6dkwtQ2JiNFJYMm1VclMzYVcwSC1JQldSNGIta1R3SDlGRWVuOUZfTnFDU0lOYlNibW9NcjlJMmhLcHYzRlMwbEJKQVh3?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 9",
-      "timestamp": 1767945600000
-    },
-    {
       "title": "Impact of drug repurposing between 1985 and 2024 on pharmaceutical innovation",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE13ZnR2bzdYbzIzN3FIVmp3cXYyTlpEM19wRHBCVE5rdy12Qk9xM3JJb2l6VWI2TnRTb0lJX2FFeTRQYkp0ZDFmWG1RMjV2ZENhRkRvRGI2NEZMc2VlcDhr?oc=5",
       "source": "Nature",
@@ -324,6 +324,13 @@
       "timestamp": 1737619200000
     },
     {
+      "title": "2024 drug approvals: Small companies loom large with several key FDA nods",
+      "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBfRFdqbHZRZHo0Tmd5UWQ2TG1tWGFzczRseExfQW95YWUwVk1JcXFNUzJ6LUVnZGxhcjNqbHRYUUI5ckNhSWxZYWZtcVRfZENmN2FiN09UYnRTNXdwWnFVSXhUWllUQQ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jan 2",
+      "timestamp": 1735805263000
+    },
+    {
       "title": "MD Anderson Cancer Center unveils cell therapy research institute that will work with biotech, pharma",
       "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxORVdmMDJBdlo4ZUxObEdKcHpYU2NCaHFJOThOZVRsaWUyb08wRUxLMGVnX2FyWlJDWW5TZUkzLXVuVENuYmtSWF93X2pKcE5BaWNUbURLYXdvU0ZVQ2JNWmxwUmMxNDN2SnFiY013U0RHbHBYdk5HYTdYdzk1M1dyQ0NPZGEwYm5KRXI4RUhTbTFDdDdFTUpTaVZnRmdMTVZzclVGUG9pRDc3Y0pKdUhxN3NPXzBvWlJvNGl5ZG9aQklQXzRBRWlv?oc=5",
       "source": "Fierce Biotech",
@@ -336,6 +343,13 @@
       "source": "Fierce Biotech",
       "date": "Sep 30",
       "timestamp": 1727679600000
+    },
+    {
+      "title": "Chutes & Ladders\u2014Takeda taps internal leader as head of US oncology business",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOcWprM3RMOFl1N1QwQWxrVFh3bHA3QWl2eHIxRnpkUzFPbkQ1dW1vcWNTMHdURXpkRGd5dFNfaU1oVHpXOENuMWE1bjZvZGtHdC12TWF2TU9sRm4yUFd2c0ROdjR4Ync2OHhkS09rRzJzYnRpZnM1eHk5ZEFpS3MtV3BIUXdPN3JOU0hvSTdGbllrZnRVejA5bUdSV2xOY2ZFSmtZZFdkRGtiQQ?oc=5",
+      "source": "Fierce Biotech",
+      "date": "Aug 2",
+      "timestamp": 1722582000000
     },
     {
       "title": "Biotech faces a reckoning: 'We've lost our luster in cell therapies'",
@@ -420,13 +434,6 @@
       "source": "UVA Today",
       "date": "Jan 20",
       "timestamp": 1674201600000
-    },
-    {
-      "title": "2022 drug approvals: After Aduhelm fiasco, FDA endorsements drop to 37",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPTEVKc2c4YjF6YnJtXzB0YlBGdUxlV3NUTUQ0MU5rUjVJUXBkeG1ENTJPVmZrU0ZGdDNSVWdodnpvSnV0S0VvYmc0bkhYWGVKU2xjSWV3cXJlQkdaRUlsWVJ2eU5UZG1jQ0lxaVRheUs5UHllc1VtTFFxT2E5T192ZG5uekNOeWY1OFJROTdEWVp5QW96eWgzNjlyWXZJb0hVbzRZenFxVnVVdzBmZ3ZOWk1Jbk94RTV4OGpv?oc=5",
-      "source": "Fierce Pharma",
-      "date": "Jan 3",
-      "timestamp": 1672732800000
     },
     {
       "title": "A biotech wins the first FDA drug approval in a rare type of eye cancer",
