@@ -1,12 +1,54 @@
 {
-  "updated": "2026-11-10T14:35:16Z",
+  "updated": "2026-11-10T22:59:29Z",
   "items": [
+    {
+      "title": "Recon: Bayer wins FDA approval for stroke prevention drug; Third Rock enters $2B partnership with AI-focused Chinese biotech",
+      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPTGlwTWVEN1ZHY2l3ZGdYTTJqT2tGQWFOSmVsWkZXMzZBMkxrZTgtNFJfVFJaek92TlFZMW90S0Z5N1JFWVRXLXBUSk1uaGJpaEVKLVBfSUNqdHpsZGVLZ0t0ZTFFT3pzNFZHVld0XzVrVS1udXVCdC1hbTdDaGN4aHJBRUtLeVlMZ05HalNicVRJOEFaSXZwQmJmVFkxQmM2WVhFZjNfNEtUalc1NFRXU3kzMWVHNGhBdG1zZ1hKbE9LWmtJcm1QcV93VENxNFl3Snp2WGlpQkpjWEZDU1ZUbGwyWEVFajBFU3JsbA?oc=5",
+      "source": "RAPS",
+      "date": "Nov 10",
+      "timestamp": 1794346860000
+    },
+    {
+      "title": "INOVIO Reports Third Quarter 2026 Financial Results and Recent Business Highlights",
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNcXMxY0w1SEhEVmNxU1FkeG1CcGRBUUZxYWp0Mlk4WmNUc1lwZVN2eGY0NmJxZEJaVzlTVTE2OUxaTF8wdHpXWU5CZjdVMmFuTnBZdXN2UkstR2gtdUxqalAxeGRoVmp3NGlUMmU2TU1mbjFNRFVJWmFiVUt5ZGRpeDN4ZFAwSExGQTlBX0lPc1hTaWV0bnJhYm1fUlBqVTVLVEZwXy03OVE5S2xZZnRHbVgtaFNuYVUtcnNpcURrUzlMbkhvd0NYZmE2Q2FhR0QtVWdpVnhkU1VpcEk?oc=5",
+      "source": "TradingView",
+      "date": "Nov 10",
+      "timestamp": 1794344700000
+    },
+    {
+      "title": "C2N Diagnostics and LSI Medience Partner to Bring PrecivityAD2\u00ae Alzheimer\u2019s Disease Blood Test to Japan",
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOZDM5V0NjYXN1YUJidl9GdHYyTHBmT01WV2VuR1RNRk5RSDlyT3ZiWDUwc01jckIyeFhPYURmMWtrMU5lLWlBcW56emZpNVFCWXBIcDd3TDVnSjI4dHVOcGRBYXhnV0VIcmFmU0U0bFdOWFQ2MXpzazdyODZpU0M5S1Fjb1VqaVIyMXVFNDRFSTVnV1V5VVpWSjlWc3gwWExiSENwT29wd3Vsc1gxcjhpdkstMFVMNm4tRjB1bEdrbmpuTl9yaXVETS04bWtZMVhMaXJwenUxLXo?oc=5",
+      "source": "BioSpace",
+      "date": "Nov 10",
+      "timestamp": 1794338993000
+    },
+    {
+      "title": "FDA Approves First DNA Medicine to Reduce Repeat Airway Surgeries",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOdHRWbmtQWERrNnpOT2JIdDcwdjFFZDFKMmtPb0I2eDBSU2RXeW0tc2ZGNDZjUGlHR2xoV3E3OHJoaF94MFpsbkUzRjFhaTN2SW9sZmhxWnQ4a0VSS3dia09UWmtJTDNkMlFVdFlvZlQ5UXlUZTZTcVVGZHExVXN6VG5fb1VPZlJmNFdlT0dxX01SWndBc29EdFRHZV8yM28?oc=5",
+      "source": "2 Minute Medicine",
+      "date": "Nov 10",
+      "timestamp": 1794336300000
+    },
+    {
+      "title": "FDA Approves PIMJETMI\u00ae (pimicotinib) for Patients with Tenosynovial Giant Cell Tumor",
+      "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNYzNRX1NTd2Y0TzVtY09sRVRmRHdrOXJsVHBtTW5aUzc1WVZYQWhhNDNrUHVqLVk3bkdxcmw2VWFtOHA5ODdEVUZ3TkViR0Z4enBDU2FTYXRaQXAwNlJkQVdCMFVBWEduZ1lWbmhxRjRCNDIzaVRNbENtTnNEU0lWNV84R0pKbC0yWDMwUzJKTkZJMGhTdzR1QmxlbDB2QjN0NlRKa0wyYUl1M2UxWWFFZGRnU2c2dnI1c0ZIay1MN2pBUnZ5dF9iNFFoNV9RSGYxVFE3cg?oc=5",
+      "source": "Business Wire",
+      "date": "Nov 10",
+      "timestamp": 1794334440000
+    },
     {
       "title": "FDA nod for first factor Xla inhibitor to help prevent stroke",
       "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNWWlodHltdlN6ckJwUWc1SlB1WXctQW1rNUZod0Q3V0tCVnNuZ2NxUTJEbmRYM0U1V1JLeldjbWdERDZCZ0hIMWE0SFhKUUc4Z0J1S3pISzhCcVBRQnZacjJHaXJjdy1KazdBRGtKNzloT0pmeHR4WVYwSjZvZXRKRkR2RjhpQm9CSWdRMlB3eWxQUEZPNEJ6OGdreDJjZjM1ME56a0NNVjE?oc=5",
       "source": "The Pharma Letter",
       "date": "Nov 10",
       "timestamp": 1794315008000
+    },
+    {
+      "title": "MSI Dx Analysis System as Companion Diagnostic for KEYTRUDA",
+      "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxPc05lbFhRUnU5S3RjY3duX0Rab29la05GbXd2aC1vaDlYbFBmeVozTE5ydHpnM0lyazNqV0ZoNUpiUlFKVncxS2F3MDZQQmtvUGJpZjA1OWI2SGR0VXdKYllleUxwTnBEa0lHN1g5ZVpuV3ZURThTTnF0eGVlMmRzOVNweHN4UW5IX3VWcmU1MTFTMFNEbVo0Mm1WMVZ6QURmZ1ZoUEFnMklFTmk1YUwyNE5hRHBFZG1YVnRzdXFMb1J0UzA3c0Jjc2pMelZHLWxuby0xTnBFZ3kzWFl6SllHV19lSVpaMjdBdDlnSDd6d2tZVVV4bm5LWXZiU01McmVX?oc=5",
+      "source": "Business Wire",
+      "date": "Nov 10",
+      "timestamp": 1794312000000
     },
     {
       "title": "FDA approves first factor XIa inhibitor for certain stroke survivors\u2014but long-term bleeding risks remain unclear",
@@ -63,6 +105,13 @@
       "source": "U.S. Food and Drug Administration (.gov)",
       "date": "Oct 19",
       "timestamp": 1792393200000
+    },
+    {
+      "title": "Accelerating and Modernizing Early and Late-Stage Clinical Development",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQUTVWQ2ZBOVFlRnBfeUwxRG5CRUU3ZU1vYk44NXE2TVUweHYyY2FsTkJuck5vdXJHa21RemQweEVibDJ3N2NSZkkxOVNuVVN0TUU5TTR0RjZyQkYwbnZSd3B4VTdmZHB5T0MtbEN5LWxhUlN4cVc2aVRKdHEtOVB6dVFxYTBPZHFCTGZxWUI4Z3ptSTdoYi12TkRRdzJ5SEd3RlpjV1J6SEJ2cGM?oc=5",
+      "source": "U.S. Food and Drug Administration (.gov)",
+      "date": "Sep 21",
+      "timestamp": 1789974000000
     },
     {
       "title": "FDA expands Bayer lung cancer drug approval",
@@ -191,13 +240,6 @@
       "timestamp": 1747206000000
     },
     {
-      "title": "Exclusive | Drug Development Is Slowing Down After Cuts at the FDA",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWi1iZFExRC0yeS1LaHRDRlRDUHdCRXpid2lDWU5iOGhINzFRb04yZkNOd25sSFZBUnhwTTJGRklFX3N5c0o5VkRZeE1kMVpUcG9qdmhpS0lOVDdVaDlmY2M0YTZhN3JVWm94RVVyMUVOSWctZTlKSkJRUnRkWVlnWkFpMThFREpXWjlUamJlWkw1bFoyU3piUFNldUQ4dElmZlM0?oc=5",
-      "source": "WSJ",
-      "date": "Apr 17",
-      "timestamp": 1744873200000
-    },
-    {
       "title": "Understanding the FDA Approval Process and PDUFA Dates",
       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPNUpDdTNtWFliVVNlcEhHcU9VVzd5NE8yblhiR1J1TVV6em5ZNFZhZkQteTA1T2txb0pKOGlGd1ZseTBydkhodDZ1dU5wN3FwWHlWMFd1QW1xSy05N1FaUXZGSGlBby1PSUZtUHB1bTBWRHFQdzZjSnVQQkgtNElyWGZJWTMwVGxtM2Ricktlbm1rMlk?oc=5",
       "source": "Pharmacy Times",
@@ -273,6 +315,13 @@
       "source": "Fierce Pharma",
       "date": "Jan 3",
       "timestamp": 1672732800000
+    },
+    {
+      "title": "A biotech wins the first FDA drug approval in a rare type of eye cancer",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNQ3p2X0NSWGpwOVBPWDhoV2psb2FzWlZaTmxuM0dIaTJiSDM5cnlRRFVQSV9TWDdVZjRtei1WMFVJVWk2cmFoYlJ0NnIwTDZHNi1hME9fc20tYUM3VXFvMDZaTkNoZHhGbG40eGc1MzdjcW05Mm94N2Q2NFhWU0hPbHNWMXprbzhLa2FpVXFpb0U3Zw?oc=5",
+      "source": "BioPharma Dive",
+      "date": "Jan 26",
+      "timestamp": 1643184000000
     },
     {
       "title": "Important Patient and Consumer Information About Regenerative Medicine Therapies",
