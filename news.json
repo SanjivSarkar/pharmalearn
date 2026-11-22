@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-22T05:52:54Z",
+  "updated": "2026-11-22T14:19:38Z",
   "items": [
     {
       "title": "FDA Misses Sunday Savara Decision Date on Inhaled Lung Drug: No Rejection, No New Date",
@@ -65,13 +65,6 @@
       "timestamp": 1795193220000
     },
     {
-      "title": "FDA to miss deadline on Savara's rare lung disease drug approval",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQeHRjRzhscVBqZmg2dDN2UEd2ckVTaGZiVElQQXNhbklKVzE3REJyWGNXNWV0SldWQWstNnBCbDdyYWFOeDloRmNLWmxOMENjazhjcUo1WFBzdXVnTUxLdW5nYnVwZXpJTG9tV0hVTHNONUxCYXhKMEJzN1hCTGJUMEJKVU9tYVpseGJxVmNGcXFqMDZDVjR3VVJGakQ2bGV5bEJqRFZ1VFA0Nm1XMFVF?oc=5",
-      "source": "Reuters",
-      "date": "Nov 20",
-      "timestamp": 1795184892000
-    },
-    {
       "title": "Children\u2019s National among few regional sites with new FDA-approved NPC drug",
       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPSEIxN055ZHVUTlluV1BUb3NaZkdVT0Z1eG9fOHZfYTV5cEdRQTh1TUppd3EzZXY5Y2x0Xzg4SEpiTkdtWElReTl1aTkxZFY4S2NpblBxWEpBN29YQm5fYTJKV3l1MjRpLVlkV1hlZ0FKWnlRNUhCbzE0MXBHTmMzX2pSZU9xZWFUeWZrelRWeVU2bjBLWVM0eEZCTU5UVmdtSlIyU3hYX0czMmxWUXBxWlZiSnR6MTFxck1xb3JOSV8yQQ?oc=5",
       "source": "Children's National",
@@ -135,6 +128,13 @@
       "timestamp": 1795113911000
     },
     {
+      "title": "Regeneron breaks into neurology with FDA nod in crowded myasthenia gravis",
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxObV9VWXhRNzNobFZsNUY5czJPSVdMSHpEMXI5OWhRdFBkOGNkWjVMYk1JNzNyMDVSVVhrWDFYaWNHMVBGSmtlYkM4MEMzcXc4U1VZYS1OaFhldjFKSkxtM3paVG9pUnFLdE41dC1QbXowRmwyZ25nekdKazVpcDViVFpvUmVlNFVtSEVnckp4ZURmTUh1Smx3di0tZDFlMWZnRGZ1Ym1hNGxGOTByNGU0SzBB?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Nov 19",
+      "timestamp": 1795104984000
+    },
+    {
       "title": "FDA Grants Priority Review to Sonesitatug Vedotin for Advanced Gastric Cancer",
       "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFB1T0RVaVBSU2d4YnVKUXkycmlVTVhHY1p3YUNUNkNfMkNDN2dlZG9JcmxCdFQ2LUlWZXZGRFVCUHV3djVmUi1PdHVzWXppTVVveTUxQ1hyMkI4VDlXd1V0dEVKX3BZNGFEcEM5MFl3NlFENWZvblpDMkRvTC1lMEE?oc=5",
       "source": "Oncodaily",
@@ -149,11 +149,18 @@
       "timestamp": 1795091158000
     },
     {
-      "title": "Evotec and Bristol Myers Squibb: Second Molecular Glue Drug Candidate's IND Accepted by FDA, Shares Rise 2% Intraday",
-      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9yZ2p4bUJYMlhid0dBenR3TnZQVEdCTExfOW5BMW0tS2ROb0VBb2luOTh5YzU3Y1ZMZHVBYjNSMVc3UFFRVU9JV0loWHQ0c3p1YWxPMmgtNDVrWlRjVjRjdEV3OEFNQldHYWtFTU1FZk1tcnplUGc?oc=5",
-      "source": "finance.biggo.com",
+      "title": "FDA in Flux \u2014 November 2026 Newsletter",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNeF9sd3lqbXRlLW9COEZNYTZnUS11anpLTk1INEdPTEZaZGZ2N0x1V1dvd3ZtYS14RkVfWUlyaG1GU0VXN2k4bnJRa1Z2YjZma1RZR2x3OWQxMXBhWjZDSzZpbDNITHhGa1NmYjFXamw0UERQcGNxbXFEcmNwT291a1czTk5wZmszREZEdEpkTE5hLTdjaGtkQWs1Rk10clk?oc=5",
+      "source": "Mintz",
       "date": "Nov 19",
-      "timestamp": 1795079100000
+      "timestamp": 1795089600000
+    },
+    {
+      "title": "The Price of Time",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQMGs2SXlvRW5oaC16LWRwcXJRRFpEOWtvZE1RNUtYZnBxaHZ1NzlSc3NQb3phQzIxMUUtcmprOHRGb1Mxc1NsbXZZYUJ2bVdkRXBYQWhFOXl3eno5UmZYVnVENjE4bzVZRkw1Nk5LdnFxck5zWTg4dFZkVFAzaWwxWlRjMA?oc=5",
+      "source": "The Medicine Maker",
+      "date": "Nov 19",
+      "timestamp": 1795086400000
     },
     {
       "title": "The FDA needs stable leadership | Opinion",
@@ -168,6 +175,13 @@
       "source": "CASRAI",
       "date": "Nov 18",
       "timestamp": 1794988800000
+    },
+    {
+      "title": "Karyopharm Announces FDA Acceptance of Supplemental New Drug Application for XPOVIO\u00ae (selinexor) Plus Ruxolitinib for the Treatment of Patients with Myelofibrosis - Nov 17, 2026",
+      "url": "https://news.google.com/rss/articles/CBMirgJBVV95cUxPMEhZR3lQRmpEeVg0T3lfUGJBR0t6YjA1Q1lqTXFFYk1GZDJ1Z2N6QnYxUEI2Q0xWZjJLcmx1dFdvYkNXd054Z3pSckpiV1VxMDdsTDk5WkE2THpLTHZmLTMzMFRZTFdEZjNXM0FKS25ubHBpM253enBIOFprenJ6V2xiTnd2eC05RGxoNlZNU1FTVU5RSTRPUWVUTFZiOFZGcUtZdnJEV3BoZFFNcGYwczN1X185WVhUc0EyWnVZMm4tYjFpSEZ0SlJ5cVFsN1NHb1UwNTd2cG50U0lFbGtTaS01bmY2UWMxTTJjWEFEN04wb3NtWnp2MVNZMzR2MDZ0MXBMM25mSEphcUFkZnVDT19jeXZMT09WYzNsUTd1Rm9lU3M2Ny14S3ljUEFjdw?oc=5",
+      "source": "Karyopharm",
+      "date": "Nov 17",
+      "timestamp": 1794918622000
     },
     {
       "title": "Generic Competition and Drug Prices",
@@ -324,6 +338,13 @@
       "timestamp": 1735804800000
     },
     {
+      "title": "Drug Trials Snapshots: BRENZAVVY",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPMTBuanZyMVRnN2FCekxUcVNqXzl6TXFZWlQ0QlRqd3F4cDYyMnZuTElPa0NLOXhDdEl4bUlNeUdCUFg0cHRuaW42RWl6ZVJVYWdUR3NIYTJDc01fcHJ6Tl9lWkQwTjJjSzQ3WWEtVlcyMldSdjhTd1JBRkFlSFU4SkZUbDhFQQ?oc=5",
+      "source": "U.S. Food and Drug Administration (.gov)",
+      "date": "Feb 16",
+      "timestamp": 1708070400000
+    },
+    {
       "title": "Analysis of US Food and Drug Administration new drug and biologic approvals, regulatory pathways, and review times, 1980\u20132022",
       "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5KZFpOMENFcndMZFl0SkNiRmVyY2VEa01kazdSRHd6cDk5M0hEaGw4TWpRODh5QUc5cUI5QUEyZVJjd2J3SmZ3RjRaSV9LM0RVaEJGU0NHMHJ4M1ZST2J3?oc=5",
       "source": "Nature",
@@ -371,6 +392,13 @@
       "source": "Congressional Budget Office (.gov)",
       "date": "Apr 8",
       "timestamp": 1617865200000
+    },
+    {
+      "title": "'Hub-and-spoke' biotech BridgeBio scores first FDA approval with Alexion castoff",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNcUVya09nODdYTjlJUlhJbXhUcFE4ZW9oQWpBUVRNR2NSZDBfTnF5c3N0YUxacldLWFpIakhyYzZScWxtcERsb1FKVVNoVy1nYnZtOWVPWmUyYjhPQ1RvejlnVjhOaHJOSEtXNjc5bmstNTNXUlRzWXdTTFlFMzRSOGxzVHNZZWlZa1hoMVByOFpZNzc2VEpXYTZYQlJ5aDYtM09ncWVUTEltTHRvY0tZ?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Mar 1",
+      "timestamp": 1614585600000
     }
   ]
 }
