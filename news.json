@@ -1,13 +1,6 @@
 {
-  "updated": "2026-11-25T21:23:18Z",
+  "updated": "2026-11-26T07:36:22Z",
   "items": [
-    {
-      "title": "Recon: Bayer wins FDA approval for stroke prevention drug; Third Rock enters $2B partnership with AI-focused Chinese biotech",
-      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPTGlwTWVEN1ZHY2l3ZGdYTTJqT2tGQWFOSmVsWkZXMzZBMkxrZTgtNFJfVFJaek92TlFZMW90S0Z5N1JFWVRXLXBUSk1uaGJpaEVKLVBfSUNqdHpsZGVLZ0t0ZTFFT3pzNFZHVld0XzVrVS1udXVCdC1hbTdDaGN4aHJBRUtLeVlMZ05HalNicVRJOEFaSXZwQmJmVFkxQmM2WVhFZjNfNEtUalc1NFRXU3kzMWVHNGhBdG1zZ1hKbE9LWmtJcm1QcV93VENxNFl3Snp2WGlpQkpjWEZDU1ZUbGwyWEVFajBFU3JsbA?oc=5",
-      "source": "RAPS",
-      "date": "Nov 10",
-      "timestamp": 1794297600000
-    },
     {
       "title": "China expands role in manufacturing new FDA-approved drugs",
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQOHl3ZHd2ejMtcEN6bjlSX29TN2FzNVVsX3ZTc2NwVlBDYm9ab2NDa1lwRTFnS0ZSUFhYMzBkY2E5OTluUFZNaEhwY2dEaUdGWDgtc1hOSm5heGIxMFNjS2NiV0JhQzZRdXVZNWdXN1ZBVi1lMnFDWEVfWVZlR2VZdTdIR2lIS1VpZUpSdmttQlBqVWxmZnZsNkNnTDRGQWhBbzY0bTF3?oc=5",
@@ -107,16 +100,9 @@
       "timestamp": 1780470000000
     },
     {
-      "title": "China\u2019s Rise in Drug Development Looms Over U.S.",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNY3J2dFowWVY5NVM4QXpQVFBiOG9LeFkxZ0oxV291V1B2NXNEMEtIUVM2WWRuYTJzNEJwZHNGaXQySk9iMG0xMDJuM1d0YnV6b2NCUFc1UzlJYVNUV05rRUtMeVFEaHBVY2hSRjYycHpaVUtmU3RhUy1zWUJIY1hUVWs0RQ?oc=5",
-      "source": "The New York Times",
-      "date": "May 31",
-      "timestamp": 1780210800000
-    },
-    {
       "title": "Alembic Pharma gets FDA tentative nod for breast cancer drug",
-      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOc0JxVFFObGVYWTRheFNWbG5LalA2UkFPWkZxUjlWZHJpemFNelY2N3JGOVI2N0kwcE05ZXl1bjB4SDdDNnV4TDZLYVRtWXJGOEdIZXpfZVU5eEE3SC05U1RqdmEwNFhxb3MxcHNWSExRYW5RcWtuZXFtQW1WUkpVUVhWOXhIczR3TDN1ejdRajAybk42Ty1sX2F1eUFHN3dXTjhlcjFCZjdZQ2ozbDBhMWRoQ0tJUFp0UGhMS2loT1FlNjZMdlpWWUhEVTRGcjR0ZmJtTk9ZSVUxa2drV2pSetIB5AFBVV95cUxOYUh4VThENHFPbm8za2hTZ0V2ZXZGbmoxLVFMNXBPTHdwUWdhRDVXd3dSQ1ktQ0pBb3RvdWE4N0M2V2FZeXJSUkd1WWVHZm1WOF96SVZaQ2NlbDA2bDVyWkExTE5PakNIV3RVSjVmRkJ1UFJqazB5Z2MwN3hkZXduUktsLUZfcHhVbzdFT1lBWVJVYkJPUE9pNjFGc3ZtMDlrNjJwODRfM2VqTWdvOTNhdksyVk8yTTNtZF9hd201eVNPeEh4bTI4US1hUFVKbFI4TXdOOUNEMmo3cWM0bExwck80a1Q?oc=5",
-      "source": "pharma.economictimes.indiatimes.com",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOc0JxVFFObGVYWTRheFNWbG5LalA2UkFPWkZxUjlWZHJpemFNelY2N3JGOVI2N0kwcE05ZXl1bjB4SDdDNnV4TDZLYVRtWXJGOEdIZXpfZVU5eEE3SC05U1RqdmEwNFhxb3MxcHNWSExRYW5RcWtuZXFtQW1WUkpVUVhWOXhIczR3TDN1ejdRajAybk42Ty1sX2F1eUFHN3dXTjhlcjFCZjdZQ2ozbDBhMWRoQ0tJUFp0UGhMS2loT1FlNjZMdlpWWUhEVTRGcjR0ZmJtTk9ZSVUxa2drV2pSetIB5gFBVV95cUxObUtnRlVtTno3LVlEMkhqak1PUTZrLVhBazkwanhNNlppdFpWZk9WeE9vRHp4WEFJelVHRUpacHRudzhUQjNpN2s5VVIwUFBwWFVOd3F0amFNbXM5SThwY1FKV3NSRkRMSFVMZk9ka29NZmY3YjBQRjV0RHZqcWZ3bFlJYnkwczRLd2dPQTNOQjZmWm10VGZkYjVPd2JldlpWcG1qa2MwWGpnNTRHRG5WdXNJeXR4QW1oT2pmdm0xTV92emZrbGxUbXdSZzlRdzRZSFRPejhuX25Caldsd0p6OU9rS2hpQQ?oc=5",
+      "source": "ETPharma",
       "date": "May 19",
       "timestamp": 1779174000000
     },
@@ -168,6 +154,13 @@
       "source": "ing think",
       "date": "Jan 20",
       "timestamp": 1768896000000
+    },
+    {
+      "title": "US FDA delays two drug reviews in new voucher program after safety, efficacy concerns",
+      "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPS252TFBOTmJWa3NET184czNOZy1RSVktU0RYM1dvUWJuLXpYY3IxM1FIRTU5eHdYQWRUcmd3d1NOWFF5WXVBX19QUmQ0bTB3WHNkVWJ5TnA0dERyZDdCaHg2WVUtTmR2eUpqQ20zSkdFaGdtRjhnVWNZNWQwN09aMURWNGhaX2FNSkktQmVqZ01HTl9DdUpfYVJQaFlpam1MMHJ5YUYtTGtrbG9tRVRvLUx1SnNlOGpXWWY1cFVaQ1phd2VBYzBZV09xYkljQ20ycU5SMTVXTGxqcDlCTXFRX0EwR1RwWUxKcFRqZ1RKZUPSAfQBQVVfeXFMTnZWVG41MFZocUhrV3VlRXZpWmxuWnFNbzF5c0ZPNEc5VXE2bmFFTU1wX2p0WkNmaDFNTmxpOXNzMm1qbXR1NFBlRWJzU0JmN3JnR1o3NEFGV1dDTXo5ZmpIVTdnaHg1ZnFLdE5MaEZtZ25CUXVDa3VHV0x2S0ZBNmoydHE0eVlaS0Z3cDRENEl5Sk5wdzRJc25MckJ5TGpHTjdHbkF1UDEwZkVHTFFWYmdFWDQwbEw1UENGVlp0akFBRk9ZSEhuSHNiUWV5WE12UGM3TTBCbjNBR1V2Q0I2c2M5aGl3NnhndXF5QXlWVENhYThVRA?oc=5",
+      "source": "pharma.economictimes.indiatimes.com",
+      "date": "Jan 16",
+      "timestamp": 1768550400000
     },
     {
       "title": "Zydus rare disease drug Zycubo gains FDA nod",
@@ -245,6 +238,13 @@
       "source": "Fierce Pharma",
       "date": "Oct 3",
       "timestamp": 1759474800000
+    },
+    {
+      "title": "\u2018Weak\u2019 evidence and an \u2018unpleasant\u2019 odor: FDA sheds light on drug refusal process",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPT2VnQ2dpOVVYRjBlMnFvNG9HcTdPOHFfTUhYSV8tOVZ4LVpMUjRydUJYcS1obFdiS01ob2dac1F6akEyUFBEakZ6emc5U2RBQ05KQ1Bxd1Z0Y2UwYnpHV2YyQk5WMzZPRklHb2hrdHBCblNqRVZ4MENLYjhlMFRaLXFqbGF1VDFnc1FFUU9TYU52S2tUbzExaEtKcm5rRWVjcjRYYUxjUnBlSVk?oc=5",
+      "source": "Fierce Pharma",
+      "date": "Jul 11",
+      "timestamp": 1752217200000
     },
     {
       "title": "How will FDA changes reshape drug approval in 2025 and beyond?",
